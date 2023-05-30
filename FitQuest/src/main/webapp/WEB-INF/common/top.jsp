@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- top.jsp -->
 
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -111,8 +112,21 @@
     </div>
   </header><!-- End Header -->
 
-  
 
-  <main id="main">
+<!-- Vendor JS Files -->
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/aos/aos.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="<%=request.getContextPath()%>/resources/FlexStart/assets/js/main.js"></script>
+
+
+  <main id="main" style="margin-left: 0;">
     <section id="about" class="about">
+
 
