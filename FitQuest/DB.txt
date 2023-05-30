@@ -1,0 +1,304 @@
+
+-- 회원 정보
+drop table MEMBER cascade constraints;
+CREATE TABLE MEMBER (
+	ID	varchar2	primary key,
+	mtype	varchar2	NOT NULL,
+	name	varchar2	NOT NULL,
+	password	varchar2	NOT NULL,
+	nickname	varchar2	NOT NULL
+	birth	date,
+	mphone	number,
+	email	varchar2 NOT NULL,
+	maddr1	varchar2,
+	maddr2	varchar2
+);
+
+select * from MEMBER;
+commit;
+
+
+-- 게시판
+drop table BOARD cascade constraints;
+CREATE TABLE BOARD (
+	Bnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	btype	varchar2	NOT NULL,
+	bcategory	varchar2	NOT NULL,
+	Bsubject	varchar2	NOT NULL,
+	Bregdate	date	NOT NULL	DEFAULT sysdate,
+	Breadcount	number	NOT NULL	DEFAULT 0,
+	Bref	number,
+	Brestep	number,
+	Brelevel	number,
+	Bcontent	varchar2	NOT NULL,
+	Bimage	varchar2
+);
+
+select * from BOARD;
+commit;
+
+
+-- 책갈피
+drop table SCRAP cascade constraints;
+CREATE TABLE SCRAP (
+	Snum number	primary key, --책갈피 고유번호
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	Bnum number	NOT NULL -- 게시판번호
+);
+
+select * from SCRAP;
+commit;
+
+
+-- 댓글
+drop table COMMENT cascade constraints;
+CREATE TABLE COMMENT (
+	cnum number	primary key, --댓글 고유번호
+	Bnum varchar2 references BOARD(Bnum) on delete cascade, -- 게시판 번호
+	Bnum number	NOT NULL, --게시판 고유번호
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	cregdate date NOT NULL DEFAULT sysdate,
+	cref	number	NOT NULL,
+	crestep	number	NOT NULL,
+	crelevel	number	NOT NULL,
+	Ccontent	varchar2	NOT NULL
+);
+
+select * from COMMENT;
+commit;
+
+
+
+
+
+
+
+-- 트레이너
+drop table trainer cascade constraints;
+CREATE TABLE trainer (
+	tnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	activity	varchar2	NOT NULL,
+	purpose	varchar2	NOT NULL,
+	intro	varchar2	NOT NULL,
+	exp	varchar2	NOT NULL,
+	timage	varchar2
+);
+
+select * from trainer;
+commit;
+
+
+-- 헬스장
+drop table gym cascade constraints;
+CREATE TABLE gym (
+	gnum	varchar2	primary key,
+	tnum varchar2 references trainer(tnum) on delete cascade, -- 트레이너번호 
+	gname	varchar2	NOT NULL,
+	gaddr1	varchar2	NOT NULL,
+	gaddr2	varchar2	NOT NULL,
+	gphone	number	NOT NULL
+);
+
+select * from gym;
+commit;
+
+
+-- 상품
+drop table product cascade constraints;
+CREATE TABLE product (
+	pnum	number	primary key,
+	tnum varchar2 references trainer(tnum) on delete cascade, -- 트레이너번호 
+	price	number	NOT NULL,
+	months	number	NOT NULL,
+	pcount	number	NOT NULL,
+	people	number	NOT NULL,
+	ptype	varchar2	NOT NULL,
+	ptime	number	NOT NULL
+);
+
+select * from product;
+commit;
+
+
+-- 주문
+drop table order cascade constraints;
+CREATE TABLE order (
+	onum	number	primary key,
+	ID	varchar2	NOT NULL,
+	odate	date	NOT NULL,
+	Field	VARCHAR(255)	NULL
+);
+
+select * from order;
+commit;
+
+
+-- 주문내역
+drop table orderdetail cascade constraints;
+CREATE TABLE orderdetail (
+	odnum	number	primary key,
+	pnum	number	NOT NULL,
+	onum	number	NOT NULL
+);
+
+select * from orderdetail;
+commit;
+
+
+
+
+
+
+
+-- PT사용권
+drop table usage cascade constraints;
+CREATE TABLE usage (
+	unum	number	primary key,
+	pnum	number	NOT NULL,
+	tnum	number	NOT NULL,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	usage	number	NOT NULL
+);
+
+select * from usage;
+commit;
+
+
+
+-- pt 예약
+drop table reservation cascade constraints;
+CREATE TABLE reservation (
+	rnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	onum	number	NOT NULL,
+	unum	number	NOT NULL,
+	rdate	date	NULL
+);
+
+select * from reservation;
+commit;
+
+
+
+
+
+
+
+
+-- 회원별 운동정보
+drop table health cascade constraints;
+CREATE TABLE health (
+	hnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	hdate	date	NOT NULL,
+	hname	varchar2	NOT NULL,
+	starttime	time,
+	endtime	time
+);
+
+select * from health;
+commit;
+
+
+-- 회원별 식단 정보
+drop table nutrition cascade constraints;
+CREATE TABLE nutrition (
+	nnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	fnum	VARCHAR(255)	NOT NULL,
+	mealtype	VARCHAR(255),
+	nutritiondate	VARCHAR(255)
+);
+
+select * from nutrition;
+commit;
+
+
+-- 음식정보
+drop table food cascade constraints;
+CREATE TABLE food (
+	fnum	number primary key,
+	fname	varchar2,
+	calories	number,
+	carbohydrate	number,
+	protein	number,
+	fat	number,
+	saturatedfat	number,
+	sodium	number
+);
+
+select * from food;
+commit;
+
+
+-- 신체정보
+drop table physique cascade constraints;
+CREATE TABLE physique (
+	phnum	number	primary key,
+	ID	varchar2	NOT NULL,
+	height	double,
+	weight	double,
+	BMI	double,
+	phdate	date,
+	skeletalmuscle	double,
+	bodyfatper	double,
+	bmr	int
+);
+
+
+select * from physique;
+commit;
+
+
+
+
+
+
+
+
+
+--
+drop table Report cascade constraints;
+CREATE TABLE Report (
+	renum	number	primary key,
+	Bnum	number	NOT NULL,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	status	varchar2	NOT NULL,
+	content	varchar2	NOT NULL
+);
+
+select * from Report;
+commit;
+
+
+--
+drop table question cascade constraints;
+CREATE TABLE question (
+	qnum	number	primary key,
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	qdate	date	NOT NULL,
+	qcontent	varchar2	NOT NULL,
+	qsubject	varchar2	NOT NULL,
+	qstatus	varchar2	NOT NULL
+);
+
+select * from question;
+commit;
+
+
+--
+drop table QComment cascade constraints;
+CREATE TABLE QComment (
+	qcnum	number primary key,
+	qnum	number	NOT NULL,
+	qcomment	varchar2,
+	qcdate	date
+);
+
+select * from QComment;
+commit;
+
+
+
