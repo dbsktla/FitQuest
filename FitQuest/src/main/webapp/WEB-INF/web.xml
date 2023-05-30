@@ -134,6 +134,22 @@
 	</servlet-mapping>
 	
 	
+	<!-- 시작 처리 관련 요청 -->
+	<servlet>
+		<servlet-name>main</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/main-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>main</servlet-name>
+		<url-pattern>*.go</url-pattern>
+	</servlet-mapping>
+	
 	
 	<!-- 한글처리 -->
 	<filter>

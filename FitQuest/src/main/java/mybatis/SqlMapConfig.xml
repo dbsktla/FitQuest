@@ -6,6 +6,7 @@
   
 <configuration>
 	<mappers>
+		<mapper resource="mybatis/main.xml"/>
 		<mapper resource="mybatis/member.xml"/>
 		<mapper resource="mybatis/board.xml"/>
 		<mapper resource="mybatis/scrap.xml"/>

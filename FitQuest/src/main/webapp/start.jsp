@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
     
     
-<jsp:forward page="main.jsp"/>
+<jsp:forward page="main.go"/>
