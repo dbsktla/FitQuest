@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<mappers>
+		<mapper resource="mybatis/member.xml"/>
+		<mapper resource="mybatis/board.xml"/>
+		<mapper resource="mybatis/scrap.xml"/>
+		<mapper resource="mybatis/comment.xml"/>
+		<mapper resource="mybatis/trainer.xml"/>
+		<mapper resource="mybatis/gym.xml"/>
+		<mapper resource="mybatis/product.xml"/>
+		<mapper resource="mybatis/order.xml"/>
+		<mapper resource="mybatis/orderdetail.xml"/>
+		<mapper resource="mybatis/usage.xml"/>
+		<mapper resource="mybatis/reservation.xml"/>
+		<mapper resource="mybatis/health.xml"/>
+		<mapper resource="mybatis/nutrition.xml"/>
+		<mapper resource="mybatis/food.xml"/>
+		<mapper resource="mybatis/physique.xml"/>
+		<mapper resource="mybatis/report.xml"/>
+		<mapper resource="mybatis/question.xml"/>
+		<mapper resource="mybatis/qcomment.xml"/>
+		<mapper resource="mybatis/composite.xml"/> <!-- join -->
+	</mappers>
+	
+</configuration>
