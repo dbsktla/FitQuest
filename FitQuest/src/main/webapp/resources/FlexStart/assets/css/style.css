@@ -232,7 +232,7 @@ section {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
   font-weight: 700;
-  color: #013289;
+  color: #000000;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -248,7 +248,7 @@ section {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #4154f1;
+	color: #fac710;
 }
 
 .navbar .getstarted,
@@ -300,7 +300,7 @@ section {
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #4154f1;
+  color: #fac710;
 }
 
 .navbar .dropdown:hover>ul {
@@ -2235,7 +2235,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  background: #f6f9ff;
+  background: #f4f4f4;
   padding: 0 0 30px 0;
   font-size: 14px;
 }

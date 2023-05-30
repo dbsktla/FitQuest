@@ -1,14 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- bottom.jsp -->
+
+
+
 	</section>
   </main><!-- End #main -->
 
+	
+  <!-- Vendor CSS Files -->
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<%=request.getContextPath()%>/resources/FlexStart/assets/css/style.css" rel="stylesheet">
+	
+	
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer" style="margin-left: 0;">
 
 
-    <div class="footer-top">
+    <!-- <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
@@ -61,9 +77,9 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="container">
+    <div class="container" >
       <div class="copyright">
         &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
       </div>
