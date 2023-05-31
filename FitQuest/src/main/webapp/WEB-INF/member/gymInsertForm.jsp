@@ -12,6 +12,9 @@
 		color : #E04848;
 		font-size: 10pt;
 	}
+	textarea{
+		box-shadow .15s ease-in-out;
+	}
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -146,7 +149,7 @@ $(document).ready(function(){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">회원 가입</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">헬스장 등록</h5>
                   </div>
                   
                   <form:form commandName="gymBean" action="insertG.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
@@ -165,8 +168,8 @@ $(document).ready(function(){
                     </div>
                     
                     <div class="col-12">
-                    	 <label for="yourPassword" class="form-label">주소</label>
-						<input type="button" class="btn btn-light rounded-pill btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
+                    	 <label for="yourAddr" class="form-label">주소</label>
+						<input type="button" id="yourAddr" class="btn btn-light rounded-pill btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
 						<input type="text" name="gaddr1" class="form-control" id="sample4_jibunAddress" value="${ gymBean.gaddr1 }" placeholder="지번주소">
 						<input type="text" name="gaddr2" class="form-control" id="sample4_detailAddress" value="${ gymBean.gaddr2 }" placeholder="상세주소">
 						

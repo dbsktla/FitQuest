@@ -164,6 +164,7 @@ public class TrainerBean {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 		String fileName = upload.getOriginalFilename();
+		System.out.println("fileName : " + fileName);
 		this.timage = fileName;
 	}
 	
