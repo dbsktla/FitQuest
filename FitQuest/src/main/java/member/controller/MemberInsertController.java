@@ -24,7 +24,7 @@ public class MemberInsertController {
 	@RequestMapping(value=command,method=RequestMethod.GET)
 	public String insert() {
 		return getPage;
-	}
+	} 
 	
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid MemberBean memberBean, BindingResult result,HttpServletRequest request) {

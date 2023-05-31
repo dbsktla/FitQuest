@@ -263,7 +263,7 @@ $(document).ready(function(){
                     <div class="col-12">
                       <p class="small mb-0">계정이 있다면? <a href="login.mb">로그인</a></p>
                     </div>
-                  </form:form>
+                  </form:form> 
 
                 </div>
               </div>
