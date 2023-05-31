@@ -240,8 +240,8 @@ CREATE TABLE health (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    hdate   date   NOT NULL, --운동일자
    hname   varchar2(30)   NOT NULL, --운동명
-   starttime   time, --시작시간
-   endtime   time --종료시간
+   starttime   date, --시작시간
+   endtime   date --종료시간
 );
 
 select * from health;
