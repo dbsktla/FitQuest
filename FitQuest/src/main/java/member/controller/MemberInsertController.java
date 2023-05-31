@@ -16,6 +16,7 @@ import member.model.MemberDao;
 public class MemberInsertController {
 	private final String command = "/insert.mb";
 	private final String getPage = "memberInsertForm";
+	private final String gotoPage = "redirect:/login.mb";
 	
 	@Autowired
 	MemberDao memberDao;
@@ -45,8 +46,7 @@ public class MemberInsertController {
 		else {
 			int cnt = memberDao.insertMember(memberBean);
 			System.out.println("Insert cnt : " + cnt);
-			//return getPage;
-			return "";
+			return gotoPage;
 		}
 	}
 	
