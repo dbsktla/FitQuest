@@ -67,7 +67,7 @@
           
           <li><a class="nav-link scrollto" href="#">TIPS</a></li>
           
-          <li class="dropdown" ><a href="#"><span>TRAINERS</span><i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown" ><a href="list.pd"><span>TRAINERS</span><i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li><a href="#">Drop Down 2</a></li>
