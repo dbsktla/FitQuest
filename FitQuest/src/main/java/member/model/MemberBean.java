@@ -7,14 +7,15 @@ public class MemberBean {
 	private String mtype;
 	private String name;
 	
-	//@Pattern(regexp = "/^[a-zA-Z0-9`~!@#$%^&*()-_=+]{8,16}$/", message = "비밀번호 형식 맞게 작성해 주세요.")
-	//@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*0-9)(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,16}$", message = "비밀번호 형식 맞게 작성해 주세요.")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호 형식 맞게 작성해 주세요.")
 	private String password;
 	private String nickname;
 	private String birth;
+	
+	@Pattern(regexp = "^[0-9]+$", message = "숫자만 입력하세요.")
 	private String mphone;
 	private String email;
-	private String maddr1;
+	private String maddr1; 
 	private String maddr2;
 	
 	public MemberBean() {

@@ -76,57 +76,30 @@
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var use,nuse;
-	var isCheck = false, isCheckN = false;	
+	var use;
+	var isCheck = false;
 	
-	$('#idCheck').click(function(){
+	$('#GnameCheck').click(function(){
 		isCheck = true;
 		$.ajax({
-			url : "id_check.mb", 
+			url : "gname_check.mb", 
 			data : ({ 
-					id : $("input[name=id]").val()
+					gname : $("input[name=gname]").val()
 			}),
 			success : function(data){
-				if($("input[name=id]").val() == ""){
-					$('#idmessage').html("<font color=green>입력 누락되었습니다.</font>");
+				if($("input[name=gname]").val() == ""){
+					$('#gnamemessage').html("<font color=green>입력 누락되었습니다.</font>");
 					use = "missing";
-					$('#idmessage').show();
+					$('#gnamemessage').show();
 				}
 				else if(data == "YES"){
-					$('#idmessage').html("<font color=blue>등록 가능합니다.</font>");
+					$('#gnamemessage').html("<font color=blue>등록 가능합니다.</font>");
 					use = "possible";
-					$('#idmessage').show();
+					$('#gnamemessage').show();
 				}else{ 
-					$('#idmessage').html("<font color=red>이미 등록된 아이디입니다.</font>");
+					$('#gnamemessage').html("<font color=red>이미 등록된 헬스장입니다.</font>");
 					use = "impossible";
-					$('#idmessage').show();
-				}
-				
-			}
-		}); 
-	});
-	
-	$('#NicknameCheck').click(function(){ 
-		isCheckN = true;
-		$.ajax({
-			url : "nickname_check.mb", 
-			data : ({ 
-					nickname : $("input[name=nickname]").val()
-			}),
-			success : function(data){
-				if($("input[name=nickname]").val() == ""){
-					$('#NicknameMessage').html("<font color=green>입력 누락되었습니다.</font>");
-					nuse = "missing";
-					$('#NicknameMessage').show();
-				}
-				else if(data == "YES"){
-					$('#NicknameMessage').html("<font color=blue>사용 가능합니다.</font>");
-					nuse = "possible";
-					$('#NicknameMessage').show();
-				}else{ 
-					$('#NicknameMessage').html("<font color=red>이미 사용중인 별명입니다.</font>");
-					nuse = "impossible";
-					$('#NicknameMessage').show();
+					$('#gnamemessage').show();
 				}
 				
 			}
@@ -136,46 +109,27 @@ $(document).ready(function(){
 	$('#sub').click(function(){
 		if(use == "missing"){
 			alert("입력 누락되었습니다.");
-			$("input[name=id]").focus();
+			$("input[name=gname]").focus();
 			return false; 
 			
 		} else if(use == "impossible"){
-			alert("이미 등록된 아이디입니다.");
-			$("input[name=id]").select();
+			alert("이미 등록된 헬스장입니다.");
+			$("input[name=gname]").select();
 			return false;
 			
 		} else if(isCheck == false){
-			alert("아이디 중복확인 필수입니다.");
+			alert("헬스장 중복확인 필수입니다.");
 			return false;
 		}
 		
-		if(nuse == "missing"){
-			alert("입력 누락되었습니다.");
-			$("input[name=nickname]").focus();
-			return false; 
-			
-		} else if(nuse == "impossible"){
-			alert("이미 등록된 별명입니다.");
-			$("input[name=nickname]").select();
-			return false;
-			
-		} else if(isCheckN == false){
-			alert("별명 중복확인 필수입니다.");
-			return false;
-		}
 	}); 
 	
-	$("input[name=id]").keydown(function(){ 
-		$('#idmessage').css('display','none');
+	$("input[name=gname]").keydown(function(){ 
+		$('#gnamemessage').css('display','none');
 		use = "";
 		isCheck = false;
 	});
 	
-	$("input[name=nickname]").keydown(function(){ 
-		$('#NicknameMessage').css('display','none');
-		nuse = "";
-		isCheckN = false;
-	});
 });
 </script>
 
@@ -192,64 +146,29 @@ $(document).ready(function(){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">회원 가입(일반)</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">회원 가입</h5>
                   </div>
                   
-                  <form:form commandName="memberBean" action="insert.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
-                  	<input type="hidden" name="mtype" value="generic">
+                  <form:form commandName="gymBean" action="insertG.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
-                      <label for="yourName" class="form-label">아이디</label>
-                      <button type="button" id="idCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
-                      <input type="text" name="id" class="form-control" id="yourName" value="${ memberBean.id }" required>
-                      <div id="idmessage"></div>
-                      <div class="invalid-feedback">아이디를 입력해 주세요.</div>
+                      <label for="yourName" class="form-label">헬스장 이름</label>
+                      <button type="button" id="GnameCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
+                      <input type="text" name="gname" class="form-control" id="yourName" value="${ gymBean.gname }" required>
+                      <div id="gnamemessage"></div>
+                      <div class="invalid-feedback">헬스장을 입력해 주세요.</div>
                     </div>
                     
-                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">이름</label>
-                      <div class="input-group has-validation">
-                        <input type="text" name="name" class="form-control" id="yourUsername" value="${ memberBean.name }" required>
-                        <div class="invalid-feedback">이름을 입력해 주세요.</div>
-                      </div>
-                    </div>
-                    
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">비밀번호</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" value="${ memberBean.password }" placeholder="대소문자 특수문자 포함 8~16자" required>
-                      <div class="invalid-feedback">비밀번호를 입력해 주세요.</div>
-                      <form:errors cssClass="err" path="password" />
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourNickName" class="form-label">별명</label>
-                      <button type="button" id="NicknameCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
-                      <input type="text" name="nickname" class="form-control" id="yourNickName" value="${ memberBean.nickname }" required>
-                      <div id="NicknameMessage"></div>
-                      <div class="invalid-feedback">별명을 입력해 주세요.</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">이메일</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
-                      <div class="invalid-feedback">이메일 형식에 맞게 작성해 주세요.</div>
-                    </div>
-                    
-                    <div class="col-12">
-                      <label for="yourBirth" class="form-label">생년월일</label>
-                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${ memberBean.birth }">
-                    </div>
-                   
                    <div class="col-12">
                       <label for="yourPhone" class="form-label">전화번호</label>
-                      <input type="text" name="mphone" class="form-control" id="yourPhone" value="${ memberBean.mphone }" placeholder="숫자만 입력">
-                      <form:errors cssClass="err" path="mphone" />
+                      <input type="text" name="gphone" class="form-control" id="yourPhone" value="${ gymBean.gphone }" placeholder="숫자만 입력">
+                      <form:errors cssClass="err" path="gphone"/>
                     </div>
                     
                     <div class="col-12">
                     	 <label for="yourPassword" class="form-label">주소</label>
 						<input type="button" class="btn btn-light rounded-pill btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-						<input type="text" name="maddr1" class="form-control" id="sample4_jibunAddress" value="${ memberBean.maddr1 }" placeholder="지번주소">
-						<input type="text" name="maddr2" class="form-control" id="sample4_detailAddress" value="${ memberBean.maddr2 }" placeholder="상세주소">
+						<input type="text" name="gaddr1" class="form-control" id="sample4_jibunAddress" value="${ gymBean.gaddr1 }" placeholder="지번주소">
+						<input type="text" name="gaddr2" class="form-control" id="sample4_detailAddress" value="${ gymBean.gaddr2 }" placeholder="상세주소">
 						
 	                    <input type="hidden" id="sample4_postcode" placeholder="우편번호">
 						<input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">
@@ -259,14 +178,14 @@ $(document).ready(function(){
                     
                     
                     <div class="col-12">
-                    	<button type="submit" id="sub" class="btn btn-warning w-100">회원 가입</button>
+                    	<button type="submit" id="sub" class="btn btn-warning w-100">헬스장 등록</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">계정이 있다면? <a href="login.mb">로그인</a></p>
+                      <p class="small mb-0">이미 헬스장이 있다면? <a href="insertT.mb">트레이너 회원가입</a></p>
                     </div>
-                  </form:form> 
+                  </form:form>
 
-                </div> 
+                </div>
               </div>
 
               <div class="credits">

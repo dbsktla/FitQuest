@@ -29,24 +29,20 @@ public class MemberInsertController {
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid MemberBean memberBean, BindingResult result,HttpServletRequest request) {
 		
-		System.out.println("id : " + memberBean.getId());
-		System.out.println("name : " + memberBean.getName());
-		System.out.println("password : " + memberBean.getPassword());
-		System.out.println("nickname : " + memberBean.getNickname());
-		System.out.println("email : " + memberBean.getEmail());
-		System.out.println("birth : " + memberBean.getBirth());
-		System.out.println("mphone : " + memberBean.getMphone());
-		System.out.println("maddr1 : " + memberBean.getMaddr1());
-		System.out.println("maddr2 : " + memberBean.getMaddr2());
-		
 		if(result.hasErrors()) {
 			System.out.println("에러 발생");
 			return getPage; 
 		}
 		else {
 			int cnt = memberDao.insertMember(memberBean);
-			System.out.println("Insert cnt : " + cnt);
-			return gotoPage;
+			System.out.println("InsertMember cnt : " + cnt);
+			if(cnt != -1) {
+				return gotoPage;
+			}
+			else {
+				System.out.println("삽입 실패");
+				return getPage; 
+			}
 		}
 	}
 	
