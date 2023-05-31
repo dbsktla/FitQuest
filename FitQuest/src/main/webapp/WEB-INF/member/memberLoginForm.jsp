@@ -19,15 +19,7 @@
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div class="container">
-          <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-              <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <span class="d-none d-lg-block">로그인</span>
-                </a>
-              </div><!-- End Logo -->
-
               <div class="card mb-3">
 
                 <div class="card-body">
@@ -56,7 +48,10 @@
                       <button type="submit" class="btn btn-warning w-100">Login</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">계정이 없으시다면? <a href="insert.mb">회원가입</a></p>
+                      <p class="small mb-0">계정이 없으시다면? <br>
+                      	<a href="insert.mb">일반 회원가입</a>/
+                      	<a href="insertT.mb">트레이너 회원가입</a>
+                      </p>
                     </div>
                   </form>
 
@@ -73,7 +68,6 @@
 
             </div>
           </div>
-        </div>
 
       </section>
 

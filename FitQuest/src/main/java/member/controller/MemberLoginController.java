@@ -40,6 +40,7 @@ public class MemberLoginController {
 		try {
 			if(memberBean == null) {
 				response.getWriter().print("<script>alert('해당 아이디가 존재하지 않습니다.');history.go(-1);</script>");
+				//response.getWriter().print("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"> 가입하지 않은 회원입니다. </div>");
 				response.getWriter().flush();
 				return getPage;
 			}

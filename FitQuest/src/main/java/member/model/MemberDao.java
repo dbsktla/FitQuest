@@ -27,7 +27,6 @@ public class MemberDao {
 		if(cnt > 0) {
 			isCheck = true;
 		}
-		System.out.println(isCheck);
 		return isCheck;
 	}
 	
@@ -45,6 +44,16 @@ public class MemberDao {
 		MemberBean memberBean = null;
 		memberBean = sqlSessionTemplate.selectOne(namespace + ".SelectMemberById", id);
 		return memberBean;
+	}
+
+	public int insertMember(TrainerBean trainerBean) {
+		int cnt = -1;
+		try {
+			cnt = sqlSessionTemplate.insert(namespace + ".InsertMember", trainerBean);
+		} catch(DataAccessException e){
+			
+		}
+		return cnt;
 	}
 	
 	
