@@ -240,8 +240,8 @@ CREATE TABLE health (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    hdate   date   NOT NULL, --운동일자
    hname   varchar2(30)   NOT NULL, --운동명
-   starttime   time, --시작시간
-   endtime   time --종료시간
+   starttime   date, --시작시간
+   endtime   date --종료시간
 );
 
 select * from health;
@@ -267,6 +267,7 @@ drop table food cascade constraints;
 CREATE TABLE food (
    fnum   number primary key, --음식번호
    fname   varchar2(50), --음식이름
+   fweight number default 0.0, -- 음식무게
    calories   number, --칼로리
    carbohydrate   number, --탄수화물
    protein   number, --단백질
@@ -284,12 +285,12 @@ drop table physique cascade constraints;
 CREATE TABLE physique (
    phnum   number   primary key, --신체번호
    ID   varchar2(100)   NOT NULL, --아이디
-   height   double, --신장(cm)
-   weight   double, --체중(kg)
-   BMI   double, --bmi
+   height   number default 0.0, --신장(cm)
+   weight   number default 0.0, --체중(kg)
+   BMI   number default 0.0, --bmi
    phdate   date, --측정일
-   skeletalmuscle   double, --골격근량(kg)
-   bodyfatper   double, --체지방률(%)
+   skeletalmuscle   number default 0.0, --골격근량(kg)
+   bodyfatper   number default 0.0, --체지방률(%)
    bmr   int --기초대사량(kcal)
 );
 
