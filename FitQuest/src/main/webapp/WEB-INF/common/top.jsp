@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- top.jsp -->
-
+<%@ include file="../common/common.jsp" %>
 
 <head>
   <meta charset="utf-8">
@@ -85,19 +85,55 @@
             </ul>
           </li>
           
-          <li class="dropdown" ><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="health.ht">내 건강관리</a></li>
-              <li><a href="#">운동관리</a></li>
-              <li><a href="#">식단관리</a></li>
-              <li><a href="#">신체정보</a></li>
-            </ul>
-          </li>
+          <!-- 일반회원 메뉴 -->
+          <c:if test="${loginInfo.mtype eq 'member'}">
+	          <li class="dropdown" ><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="health.ht">내 건강관리</a></li>
+	              <li><a href="#">운동관리</a></li>
+	              <li><a href="#">식단관리</a></li>
+	              <li><a href="#">신체정보</a></li>
+	            </ul>
+	          </li>
+          </c:if>
+          <!-- 트레이너 메뉴 -->
+          <c:if test="${loginInfo.mtype eq 'trainer'}">
+	          <li class="dropdown" ><a href="#"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="#">회원목록</a></li>
+	              <li><a href="#">운동관리</a></li>
+	              <li><a href="#">식단관리</a></li>
+	              <li><a href="#">신체정보</a></li>
+	            </ul>
+	          </li>
+          </c:if>
           
           <!-- 내글보기, 회원정보수정 -->
           <li><a class="nav-link scrollto" href="#">MY PAGE</a></li>
           
-          <li><a class="scrollto"><button type="button" class="btn btn-warning scrollto" onclick="location.href='login.mb'">LOGIN</button></a></li>
+          <c:if test="${loginInfo != null}">
+          	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.id})</font></span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="#">마이페이지</a></li>
+	              <li><a href="#">개인정보수정</a></li>
+	              <li><a href="#">내 글보기</a></li>
+	            </ul>
+	          </li>
+           </c:if>
+          
+          <li>
+          	<a class="scrollto">
+          		<!-- 로그인 정보 없으면 login -->
+          		<c:if test="${loginInfo == null}">
+          		<button type="button" class="btn btn-warning scrollto" onclick="location.href='login.mb'">LOGIN</button>
+          		</c:if>
+          		
+          		<!-- 로그인 정보 있으면 logout -->
+          		<c:if test="${loginInfo != null}">
+          		<button type="button" class="btn btn-warning scrollto" onclick="location.href=''">LOGOUT</button>
+          		</c:if>
+          	</a>
+          </li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
