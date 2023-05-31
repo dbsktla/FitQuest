@@ -86,7 +86,7 @@
           
           <li><a class="nav-link scrollto" href="#">MY PAGE</a></li>
           
-          <li><a class="scrollto"><button type="button" class="btn btn-warning scrollto" onclick="">LOGIN</button></a></li>
+          <li><a class="scrollto"><button type="button" class="btn btn-warning scrollto" onclick="location.href='login.mb'">LOGIN</button></a></li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
