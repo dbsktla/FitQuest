@@ -12,6 +12,10 @@
 		color : #E04848;
 		font-size: 10pt;
 	}
+	input[type=checkbox]{
+		accent-color : #FAC710;
+	}
+}
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -192,15 +196,15 @@ $(document).ready(function(){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">회원 가입(일반)</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">회원 가입(트레이너)</h5>
                   </div>
                   
-                  <form:form commandName="memberBean" action="insert.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
-                  	<input type="hidden" name="mtype" value="generic">
+                  <form:form commandName="trainerBean" action="insertT.mb" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="novalidate">
+                  	<input type="hidden" name="mtype" value="trainer">
                     <div class="col-12">
                       <label for="yourName" class="form-label">아이디</label>
                       <button type="button" id="idCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
-                      <input type="text" name="id" class="form-control" id="yourName" value="${ memberBean.id }" required>
+                      <input type="text" name="id" class="form-control" id="yourName" value="${ trainerBean.id }" required>
                       <div id="idmessage"></div>
                       <div class="invalid-feedback">아이디를 입력해 주세요.</div>
                     </div>
@@ -208,14 +212,14 @@ $(document).ready(function(){
                      <div class="col-12">
                       <label for="yourUsername" class="form-label">이름</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="name" class="form-control" id="yourUsername" value="${ memberBean.name }" required>
+                        <input type="text" name="name" class="form-control" id="yourUsername" value="${ trainerBean.name }" required>
                         <div class="invalid-feedback">이름을 입력해 주세요.</div>
                       </div>
                     </div>
                     
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">비밀번호</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" value="${ memberBean.password }" placeholder="대소문자 특수문자 포함 8~16자" required>
+                      <input type="password" name="password" class="form-control" id="yourPassword" value="${ trainerBean.password }" placeholder="대소문자 특수문자 포함 8~16자" required>
                       <div class="invalid-feedback">비밀번호를 입력해 주세요.</div>
                       <form:errors cssClass="err" path="password" />
                     </div>
@@ -223,40 +227,90 @@ $(document).ready(function(){
                     <div class="col-12">
                       <label for="yourNickName" class="form-label">별명</label>
                       <button type="button" id="NicknameCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
-                      <input type="text" name="nickname" class="form-control" id="yourNickName" value="${ memberBean.nickname }" required>
+                      <input type="text" name="nickname" class="form-control" id="yourNickName" value="${ trainerBean.nickname }" required>
                       <div id="NicknameMessage"></div>
                       <div class="invalid-feedback">별명을 입력해 주세요.</div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">이메일</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
+                      <input type="email" name="email" class="form-control" id="yourEmail" value="${ trainerBean.email }" placeholder="ex) fitness@fitquest.com" required>
                       <div class="invalid-feedback">이메일 형식에 맞게 작성해 주세요.</div>
                     </div>
                     
                     <div class="col-12">
                       <label for="yourBirth" class="form-label">생년월일</label>
-                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${ memberBean.birth }">
+                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${ trainerBean.birth }">
                     </div>
                    
                    <div class="col-12">
                       <label for="yourPhone" class="form-label">전화번호</label>
-                      <input type="text" name="mphone" class="form-control" id="yourPhone" value="${ memberBean.mphone }" placeholder="숫자만 입력">
-                      <form:errors cssClass="err" path="mphone" />
+                      <input type="text" name="mphone" class="form-control" id="yourPhone" value="${ trainerBean.mphone }" placeholder="숫자만 입력">
+                      <form:errors cssClass="err" path="mphone"/>
                     </div>
                     
                     <div class="col-12">
                     	 <label for="yourAddr" class="form-label">주소</label>
 						<input type="button" id="yourAddr" class="btn btn-light rounded-pill btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-						<input type="text" name="maddr1" class="form-control" id="sample4_jibunAddress" value="${ memberBean.maddr1 }" placeholder="지번주소">
-						<input type="text" name="maddr2" class="form-control" id="sample4_detailAddress" value="${ memberBean.maddr2 }" placeholder="상세주소">
+						<input type="text" name="maddr1" class="form-control" id="sample4_jibunAddress" value="${ trainerBean.maddr1 }" placeholder="지번주소">
+						<input type="text" name="maddr2" class="form-control" id="sample4_detailAddress" value="${ trainerBean.maddr2 }" placeholder="상세주소">
 						
 	                    <input type="hidden" id="sample4_postcode" placeholder="우편번호">
 						<input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">
 						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
 						<span id="guide" style="color:#999;display:none"></span>
 					</div>
+					
+                    <div class="col-12">
+                      <label for="yourGym" class="form-label">헬스장</label>
+                       <button type="button" class="btn btn-warning btn-sm" onclick="location.href='insertG.mb'">등록하기</button>
+                      <select class="form-select" name="gnum" id="yourGym">
+                      	<option value="0">선택</option>
+	                    <c:forEach var="gymBean" items="${ glist }">
+	                    	<option value="${ gymBean.gnum }" <c:if test="${ trainerBean.gnum eq gymBean.gnum }">selected</c:if>>${ gymBean.gname }</option>  
+	                    </c:forEach>
+                      </select>
+                      <form:errors cssClass="err" path="gnum"/>
+                    </div>
                     
+                    <div class="col-12">
+                      <label for="activity" class="form-label">운동 종류</label>
+                      <select class="form-select" name="activity" id="activity">
+                      	<option value="">선택</option>
+	                    <c:forEach var="act" items="PT,필라테스,요가">
+	                    	<option value="${ act }" <c:if test="${ act eq trainerBean.activity }">selected</c:if>>${ act }</option>  
+	                    </c:forEach>
+                      </select>
+                      <form:errors cssClass="err" path="activity"/>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="purpose" class="form-label">운동 목적</label> <br>
+                      <c:forEach var="pur" items="체지방 감소, 근육량 증가, 재활, 체력 강화">
+                      	<label for="${ pur }">
+                      	<input type="checkbox" name="purpose" id="${ pur }" value="${ pur }">
+                      	${ pur } 
+                      </label>
+                      </c:forEach>
+                      <form:errors cssClass="err" path="purpose"/>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="intro" class="form-label">소개</label>
+                      <textarea id="intro" name="intro" class="form-control" style="height: 100px">${ trainerBean.intro }</textarea>
+                      <form:errors cssClass="err" path="intro"/>
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="exp" class="form-label">경력</label>
+                      <textarea id="exp" name="exp" class="form-control" style="height: 100px">${ trainerBean.exp }</textarea>
+                      <form:errors cssClass="err" path="exp"/>
+                    </div>
+                    
+                     <div class="col-12">
+                      <label for="upload" class="form-label">사진</label>
+                      <input type="file" name="upload" class="form-control" id="upload" value="${ trainerBean.upload }">
+                    </div>
                     
                     <div class="col-12">
                     	<button type="submit" id="sub" class="btn btn-warning w-100">회원 가입</button>
