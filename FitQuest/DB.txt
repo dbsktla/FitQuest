@@ -77,8 +77,8 @@ commit;
 -- 트레이너
 drop table trainer cascade constraints;
 CREATE TABLE trainer (
-	tnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+	ID varchar2 references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
+	gnum	varchar2 NOT NULL,
 	activity	varchar2	NOT NULL,
 	purpose	varchar2	NOT NULL,
 	intro	varchar2	NOT NULL,
@@ -94,7 +94,6 @@ commit;
 drop table gym cascade constraints;
 CREATE TABLE gym (
 	gnum	varchar2	primary key,
-	tnum varchar2 references trainer(tnum) on delete cascade, -- 트레이너번호 
 	gname	varchar2	NOT NULL,
 	gaddr1	varchar2	NOT NULL,
 	gaddr2	varchar2	NOT NULL,
@@ -109,7 +108,7 @@ commit;
 drop table product cascade constraints;
 CREATE TABLE product (
 	pnum	number	primary key,
-	tnum varchar2 references trainer(tnum) on delete cascade, -- 트레이너번호 
+	ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
 	price	number	NOT NULL,
 	months	number	NOT NULL,
 	pcount	number	NOT NULL,
