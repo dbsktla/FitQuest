@@ -223,7 +223,7 @@ CREATE TABLE reservation (
    ID varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
    onum   number   NOT NULL, --주문번호
    unum   number   NOT NULL,--사용권번호
-   rdate   date   NULL --예약 날짜
+   rdate   date   NULL, --예약 날짜
    rtime varchar2(15) NULL --예약 시간 "00:00am"
 );
 

@@ -18,9 +18,25 @@
 		</nav>
 	</div>
 
-	<div class="col-lg-12">
-	
-	</div>
+	<div class="row">
+		<div class="col-lg-4" >
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">일자 선택</h5>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-8">
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">식단 상세 정보</h5>
+				</div>
+			</div>
+		</div>
+	</div><!-- row -->
 
 </body>
 <%@ include file="myHealthBottom.jsp"%>
