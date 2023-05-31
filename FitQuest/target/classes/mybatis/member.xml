@@ -5,5 +5,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member.model.Member">
-
+	<select id="SearchId" resultType="int">
+		select count(*) from member
+		where id = #{id}
+	</select>
+	
+	<select id="SearchNickname" resultType="int">
+		select count(*) from member
+		where nickname = #{nickname}
+	</select>
+	
+	<insert id="InsertMember">
+		insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2)
+		values(#{id},#{mtype},#{name},#{password},#{nickname},#{birth},#{mphone},#{email},#{maddr1},#{maddr2})
+	</insert>
+	
+	<select id="SelectMemberById" resultType="member.model.MemberBean">
+		select * from member
+		where id = #{id}
+	</select>
 </mapper>
