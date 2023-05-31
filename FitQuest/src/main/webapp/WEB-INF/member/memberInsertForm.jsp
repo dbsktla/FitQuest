@@ -261,11 +261,11 @@ $(document).ready(function(){
                     	<button type="submit" id="sub" class="btn btn-warning w-100">회원 가입</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                      <p class="small mb-0">계정이 있다면? <a href="login.mb">로그인</a></p>
                     </div>
-                  </form:form>
+                  </form:form> 
 
-                </div>
+                </div> 
               </div>
 
               <div class="credits">

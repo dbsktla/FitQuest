@@ -16,6 +16,7 @@ import member.model.MemberDao;
 public class MemberInsertController {
 	private final String command = "/insert.mb";
 	private final String getPage = "memberInsertForm";
+	private final String gotoPage = "redirect:/login.mb";
 	
 	@Autowired
 	MemberDao memberDao;
@@ -23,7 +24,7 @@ public class MemberInsertController {
 	@RequestMapping(value=command,method=RequestMethod.GET)
 	public String insert() {
 		return getPage;
-	}
+	} 
 	
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid MemberBean memberBean, BindingResult result,HttpServletRequest request) {
@@ -40,13 +41,12 @@ public class MemberInsertController {
 		
 		if(result.hasErrors()) {
 			System.out.println("에러 발생");
-			return getPage;
+			return getPage; 
 		}
 		else {
 			int cnt = memberDao.insertMember(memberBean);
 			System.out.println("Insert cnt : " + cnt);
-			//return getPage;
-			return "";
+			return gotoPage;
 		}
 	}
 	
