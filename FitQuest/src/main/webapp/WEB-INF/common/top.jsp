@@ -64,7 +64,9 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
+          
           <li><a class="nav-link scrollto" href="#">TIPS</a></li>
+          
           <li class="dropdown" ><a href="#"><span>TRAINERS</span><i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -81,6 +83,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
+          
           <li><a class="nav-link scrollto" href="#">MY PAGE</a></li>
           
           <li><a class="scrollto"><button type="button" class="btn btn-warning scrollto" onclick="">LOGIN</button></a></li>
