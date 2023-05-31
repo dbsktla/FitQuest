@@ -7,12 +7,12 @@ public class MemberBean {
 	private String mtype;
 	private String name;
 	
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "ë¹„ë°€ë²ˆí˜¸ í˜•ì‹ ë§ê²Œ ì‘ì„±í•´ ì£¼ì„¸ìš”.")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "ºñ¹Ğ¹øÈ£ Çü½Ä ¸Â°Ô ÀÛ¼ºÇØ ÁÖ¼¼¿ä.")
 	private String password;
 	private String nickname;
 	private String birth;
 	
-	@Pattern(regexp = "^[0-9]+$", message = "ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”.")
+	@Pattern(regexp = "^[0-9]+$", message = "¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.")
 	private String mphone;
 	private String email;
 	private String maddr1; 
