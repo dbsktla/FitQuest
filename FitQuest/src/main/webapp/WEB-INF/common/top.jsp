@@ -75,6 +75,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li>
+          
           <li class="dropdown" ><a href="#"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -84,6 +85,16 @@
             </ul>
           </li>
           
+          <li class="dropdown" ><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="health.ht">내 건강관리</a></li>
+              <li><a href="#">운동관리</a></li>
+              <li><a href="#">식단관리</a></li>
+              <li><a href="#">신체정보</a></li>
+            </ul>
+          </li>
+          
+          <!-- 내글보기, 회원정보수정 -->
           <li><a class="nav-link scrollto" href="#">MY PAGE</a></li>
           
           <li><a class="scrollto"><button type="button" class="btn btn-warning scrollto" onclick="location.href='login.mb'">LOGIN</button></a></li>
