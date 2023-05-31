@@ -233,16 +233,15 @@ commit;
 
 
 
-
 -- 회원별 운동정보
 drop table health cascade constraints;
 CREATE TABLE health (
-   hnum   number   primary key,
-   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
-   hdate   date   NOT NULL,
-   hname   varchar2   NOT NULL,
-   starttime   time,
-   endtime   time
+   hnum   number   primary key, -- 운동정보 번호
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   hdate   date   NOT NULL, --운동일자
+   hname   varchar2(30)   NOT NULL, --운동명
+   starttime   time, --시작시간
+   endtime   time --종료시간
 );
 
 select * from health;
@@ -252,11 +251,11 @@ commit;
 -- 회원별 식단 정보
 drop table nutrition cascade constraints;
 CREATE TABLE nutrition (
-   nnum   number   primary key,
-   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
-   fnum   VARCHAR(255)   NOT NULL,
-   mealtype   VARCHAR(255),
-   nutritiondate   VARCHAR(255)
+   nnum   number   primary key, --식단번호
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   fnum   number   NOT NULL, --음식번호
+   mealtype   VARCHAR(10), -- 아침 점심 저녁 기타
+   nutritiondate   date --식사일자
 );
 
 select * from nutrition;
@@ -266,14 +265,14 @@ commit;
 -- 음식정보
 drop table food cascade constraints;
 CREATE TABLE food (
-   fnum   number primary key,
-   fname   varchar2,
-   calories   number,
-   carbohydrate   number,
-   protein   number,
-   fat   number,
-   saturatedfat   number,
-   sodium   number
+   fnum   number primary key, --음식번호
+   fname   varchar2(50), --음식이름
+   calories   number, --칼로리
+   carbohydrate   number, --탄수화물
+   protein   number, --단백질
+   fat   number, --지방
+   saturatedfat   number, --포화지방
+   sodium   number --나트륨
 );
 
 select * from food;
@@ -283,21 +282,20 @@ commit;
 -- 신체정보
 drop table physique cascade constraints;
 CREATE TABLE physique (
-   phnum   number   primary key,
-   ID   varchar2   NOT NULL,
-   height   double,
-   weight   double,
-   BMI   double,
-   phdate   date,
-   skeletalmuscle   double,
-   bodyfatper   double,
-   bmr   int
+   phnum   number   primary key, --신체번호
+   ID   varchar2(100)   NOT NULL, --아이디
+   height   double, --신장(cm)
+   weight   double, --체중(kg)
+   BMI   double, --bmi
+   phdate   date, --측정일
+   skeletalmuscle   double, --골격근량(kg)
+   bodyfatper   double, --체지방률(%)
+   bmr   int --기초대사량(kcal)
 );
 
 
 select * from physique;
 commit;
-
 
 
 
