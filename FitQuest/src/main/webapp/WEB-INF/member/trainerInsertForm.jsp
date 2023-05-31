@@ -286,7 +286,7 @@ $(document).ready(function(){
                     
                     <div class="col-12">
                       <label for="purpose" class="form-label">운동 목적</label> <br>
-                      <c:forEach var="pur" items="체지방 감소, 근육량 증가, 재활, 체력 강화">
+                      <c:forEach var="pur" items="체지방 감소,근육량 증가,재활,체력 강화">
                       	<label for="${ pur }">
                       	<input type="checkbox" name="purpose" id="${ pur }" value="${ pur }">
                       	${ pur } 
