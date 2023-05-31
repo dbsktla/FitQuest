@@ -5,5 +5,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="gym.model.Gym">
-
+	<select id="GetAllGym" resultType="member.model.GymBean">
+		select * from gym
+		order by gnum
+	</select>
+	
+	<insert id="InsertGym">
+		insert into gym(gnum,gname,gaddr1,gaddr2,gphone)
+		values(gseq.nextval,#{gname},#{gaddr1},#{gaddr2},#{gphone})
+	</insert>
+	
+	<select id="SearchGname" resultType="int">
+		select count(*) from gym
+		where gname = #{gname}
+	</select>
 </mapper>
