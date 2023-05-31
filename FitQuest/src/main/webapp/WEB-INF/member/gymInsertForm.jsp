@@ -2,18 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
 <%@ include file="../common/top.jsp" %>
+<%@ include file="../common/adminBootTop.jsp" %>
 
 <style>
-	body{
-		background-color: #FEF9E7;
-		color : black;
-	}
 	.err{
 		color : #E04848;
 		font-size: 10pt;
-	}
-	textarea{
-		box-shadow .15s ease-in-out;
 	}
 </style>
 
@@ -146,16 +140,16 @@ $(document).ready(function(){
 
               <div class="card mb-3">
 
-                <div class="card-body">
+                <div class="card-body" style="background-color : #FEF9E7;">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : black;">헬스장 등록</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">헬스장 등록</h5>
                   </div>
                   
                   <form:form commandName="gymBean" action="insertG.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
                       <label for="yourName" class="form-label">헬스장 이름</label>
-                      <button type="button" id="GnameCheck" class="btn btn-light rounded-pill btn-sm">중복확인</button>
+                      <button type="button" id="GnameCheck" class="btn btn-outline-warning btn-sm">중복확인</button>
                       <input type="text" name="gname" class="form-control" id="yourName" value="${ gymBean.gname }" required>
                       <div id="gnamemessage"></div>
                       <div class="invalid-feedback">헬스장을 입력해 주세요.</div>
@@ -207,5 +201,6 @@ $(document).ready(function(){
 
     </div>
   </main>
-  
+
+<%@ include file="../common/bottom.jsp" %>  
 <%@ include file="../common/adminBootBottom.jsp" %>  
