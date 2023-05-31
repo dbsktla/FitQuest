@@ -18,9 +18,43 @@
 		</nav>
 	</div>
 
-	<div class="col-lg-12">
-	
-	</div>
+	<div class="row">
+		<div class="col-lg-12" >
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">신체정보</h5>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-12" >
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">이번달 체중 변화</h5>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-12" >
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">이번달 골격근량 변화</h5>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-12" >
+			<!-- Default Card -->
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">이번달 체지방률 변화</h5>
+				</div>
+			</div>
+		</div>
+	</div><!-- row -->
 
 </body>
 <%@ include file="myHealthBottom.jsp"%>
