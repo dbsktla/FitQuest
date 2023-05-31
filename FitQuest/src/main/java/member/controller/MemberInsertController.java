@@ -41,7 +41,7 @@ public class MemberInsertController {
 		
 		if(result.hasErrors()) {
 			System.out.println("에러 발생");
-			return getPage;
+			return getPage; 
 		}
 		else {
 			int cnt = memberDao.insertMember(memberBean);

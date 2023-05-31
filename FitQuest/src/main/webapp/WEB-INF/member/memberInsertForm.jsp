@@ -265,7 +265,7 @@ $(document).ready(function(){
                     </div>
                   </form:form> 
 
-                </div>
+                </div> 
               </div>
 
               <div class="credits">
