@@ -1,68 +1,68 @@
 
--- ȸ�� ����
+-- 회원 정보
 drop table MEMBER cascade constraints;
 CREATE TABLE MEMBER (
-	ID	varchar2	primary key,
-	mtype	varchar2	NOT NULL,
-	name	varchar2	NOT NULL,
-	password	varchar2	NOT NULL,
-	nickname	varchar2	NOT NULL
-	birth	date,
-	mphone	number,
-	email	varchar2 NOT NULL,
-	maddr1	varchar2,
-	maddr2	varchar2
+   ID   varchar2   primary key,
+   mtype   varchar2   NOT NULL,
+   name   varchar2   NOT NULL,
+   password   varchar2   NOT NULL,
+   nickname   varchar2   NOT NULL
+   birth   date,
+   mphone   number,
+   email   varchar2 NOT NULL,
+   maddr1   varchar2,
+   maddr2   varchar2
 );
 
 select * from MEMBER;
 commit;
 
 
--- �Խ���
+-- 게시판
 drop table BOARD cascade constraints;
 CREATE TABLE BOARD (
-	Bnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	btype	varchar2	NOT NULL,
-	bcategory	varchar2	NOT NULL,
-	Bsubject	varchar2	NOT NULL,
-	Bregdate	date	NOT NULL	DEFAULT sysdate,
-	Breadcount	number	NOT NULL	DEFAULT 0,
-	Bref	number,
-	Brestep	number,
-	Brelevel	number,
-	Bcontent	varchar2	NOT NULL,
-	Bimage	varchar2
+   Bnum   number   primary key,
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   btype   varchar2   NOT NULL,
+   bcategory   varchar2   NOT NULL,
+   Bsubject   varchar2   NOT NULL,
+   Bregdate   date   NOT NULL   DEFAULT sysdate,
+   Breadcount   number   NOT NULL   DEFAULT 0,
+   Bref   number,
+   Brestep   number,
+   Brelevel   number,
+   Bcontent   varchar2   NOT NULL,
+   Bimage   varchar2
 );
 
 select * from BOARD;
 commit;
 
 
--- å����
+-- 책갈피
 drop table SCRAP cascade constraints;
 CREATE TABLE SCRAP (
-	Snum number	primary key, --å���� ������ȣ
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	Bnum number	NOT NULL -- �Խ��ǹ�ȣ
+   Snum number   primary key, --책갈피 고유번호
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   Bnum number   NOT NULL -- 게시판번호
 );
 
 select * from SCRAP;
 commit;
 
 
--- ���
+-- 댓글
 drop table COMMENT cascade constraints;
 CREATE TABLE COMMENT (
-	cnum number	primary key, --��� ������ȣ
-	Bnum varchar2 references BOARD(Bnum) on delete cascade, -- �Խ��� ��ȣ
-	Bnum number	NOT NULL, --�Խ��� ������ȣ
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	cregdate date NOT NULL DEFAULT sysdate,
-	cref	number	NOT NULL,
-	crestep	number	NOT NULL,
-	crelevel	number	NOT NULL,
-	Ccontent	varchar2	NOT NULL
+   cnum number   primary key, --댓글 고유번호
+   Bnum varchar2 references BOARD(Bnum) on delete cascade, -- 게시판 번호
+   Bnum number   NOT NULL, --게시판 고유번호
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   cregdate date NOT NULL DEFAULT sysdate,
+   cref   number   NOT NULL,
+   crestep   number   NOT NULL,
+   crelevel   number   NOT NULL,
+   Ccontent   varchar2   NOT NULL
 );
 
 select * from COMMENT;
@@ -74,72 +74,100 @@ commit;
 
 
 
--- Ʈ���̳�
+-- 트레이너 
 drop table trainer cascade constraints;
 CREATE TABLE trainer (
-	ID varchar2 references MEMBER(ID) on delete cascade primary key, -- ȸ�����̵� 
-	gnum	varchar2 NOT NULL,
-	activity	varchar2	NOT NULL,
-	purpose	varchar2	NOT NULL,
-	intro	varchar2	NOT NULL,
-	exp	varchar2	NOT NULL,
-	timage	varchar2
+   ID varchar2(30) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
+   gnum   number NOT NULL, --헬스장 번호
+   activity   varchar2(30)   NOT NULL, --운동 카테고리
+   purpose   varchar2(30)   NOT NULL, --운동 목적
+   intro   varchar2(500)   NOT NULL, -- 소개 내용
+   exp   varchar2(50)   NOT NULL, --경력
+   timage   varchar2(50) --트레이너 사진
 );
 
 select * from trainer;
 commit;
 
 
--- �ｺ��
+-- 헬스장 
+drop sequence gseq;
+create sequence gseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
 drop table gym cascade constraints;
 CREATE TABLE gym (
-	gnum	varchar2	primary key,
-	gname	varchar2	NOT NULL,
-	gaddr1	varchar2	NOT NULL,
-	gaddr2	varchar2	NOT NULL,
-	gphone	number	NOT NULL
+   gnum   number   primary key, --헬스장 번호
+   gname   varchar2(40)   NOT NULL, --헬스장명
+   gaddr1   varchar2(60)   NOT NULL, --헬스장 주소1
+   gaddr2   varchar2(60)   NOT NULL, --헬스장 주소2
+   gphone   number   NOT NULL --헬스장 전화번호
 );
 
 select * from gym;
 commit;
 
 
--- ��ǰ
+-- 상품
+drop sequence pseq;
+create sequence pseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
 drop table product cascade constraints;
 CREATE TABLE product (
-	pnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	price	number	NOT NULL,
-	months	number	NOT NULL,
-	pcount	number	NOT NULL,
-	people	number	NOT NULL,
-	ptype	varchar2	NOT NULL,
-	ptime	number	NOT NULL
+   pnum   number   primary key, --상품번호
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   price   number   NOT NULL, --상품 가격
+   months   number   NOT NULL, --회원권 사용기간
+   pcount   number   NOT NULL, --회원권 사용갯수
+   people   number   NOT NULL, --수업 참여 회원 갯수
+   ptype   varchar2(15)   NOT NULL, --개인, 그룹 수업 구분 "group"/"ind"
+   ptime   number   NOT NULL --수업 시간길이
 );
 
 select * from product;
 commit;
 
 
--- �ֹ�
+-- 주문
+drop sequence oseq;
+create sequence oseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
 drop table order cascade constraints;
 CREATE TABLE order (
-	onum	number	primary key,
-	ID	varchar2	NOT NULL,
-	odate	date	NOT NULL,
-	Field	VARCHAR(255)	NULL
+   onum   number   primary key, --주문번호
+   ID   varchar2(30)   NOT NULL, --주문한 회원 아이디
+   odate   date   NOT NULL, --주문 날짜
 );
 
 select * from order;
 commit;
 
 
--- �ֹ�����
+-- 주문내역
+drop sequence odseq;
+create sequence odseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
 drop table orderdetail cascade constraints;
 CREATE TABLE orderdetail (
-	odnum	number	primary key,
-	pnum	number	NOT NULL,
-	onum	number	NOT NULL
+   odnum   number   primary key, --주문내역 번호
+   pnum   number   NOT NULL, --상품 번호
+   onum   number   NOT NULL --주문번호
 );
 
 select * from orderdetail;
@@ -151,14 +179,22 @@ commit;
 
 
 
--- PT����
+-- PT사용권
+drop sequence useq;
+create sequence useq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
 drop table usage cascade constraints;
 CREATE TABLE usage (
-	unum	number	primary key,
-	pnum	number	NOT NULL,
-	tnum	number	NOT NULL,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	usage	number	NOT NULL
+   unum   number   primary key, --사용권번호
+   pnum   number   NOT NULL, --상품번호
+   tid(30) varchar2 references TRAINER(ID) on delete cascade, --트레이너 아이디
+   mid(30) varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   usage   number   NOT NULL --사용 횟수
 );
 
 select * from usage;
@@ -166,14 +202,23 @@ commit;
 
 
 
--- pt ����
+-- pt 예약
+drop sequence reseq;
+create sequence reseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
 drop table reservation cascade constraints;
 CREATE TABLE reservation (
-	rnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	onum	number	NOT NULL,
-	unum	number	NOT NULL,
-	rdate	date	NULL
+   rnum   number   primary key, --예약번호
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   onum   number   NOT NULL, --주문번호
+   unum   number   NOT NULL,--사용권번호
+   rdate   date   NULL --예약 날짜
+   rtime varchar2(15) NULL --예약 시간 "00:00am"
 );
 
 select * from reservation;
@@ -186,64 +231,64 @@ commit;
 
 
 
--- ȸ���� �����
+-- 회원별 운동정보
 drop table health cascade constraints;
 CREATE TABLE health (
-	hnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	hdate	date	NOT NULL,
-	hname	varchar2	NOT NULL,
-	starttime	time,
-	endtime	time
+   hnum   number   primary key,
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   hdate   date   NOT NULL,
+   hname   varchar2   NOT NULL,
+   starttime   time,
+   endtime   time
 );
 
 select * from health;
 commit;
 
 
--- ȸ���� �Ĵ� ����
+-- 회원별 식단 정보
 drop table nutrition cascade constraints;
 CREATE TABLE nutrition (
-	nnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	fnum	VARCHAR(255)	NOT NULL,
-	mealtype	VARCHAR(255),
-	nutritiondate	VARCHAR(255)
+   nnum   number   primary key,
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   fnum   VARCHAR(255)   NOT NULL,
+   mealtype   VARCHAR(255),
+   nutritiondate   VARCHAR(255)
 );
 
 select * from nutrition;
 commit;
 
 
--- ��������
+-- 음식정보
 drop table food cascade constraints;
 CREATE TABLE food (
-	fnum	number primary key,
-	fname	varchar2,
-	calories	number,
-	carbohydrate	number,
-	protein	number,
-	fat	number,
-	saturatedfat	number,
-	sodium	number
+   fnum   number primary key,
+   fname   varchar2,
+   calories   number,
+   carbohydrate   number,
+   protein   number,
+   fat   number,
+   saturatedfat   number,
+   sodium   number
 );
 
 select * from food;
 commit;
 
 
--- ��ü����
+-- 신체정보
 drop table physique cascade constraints;
 CREATE TABLE physique (
-	phnum	number	primary key,
-	ID	varchar2	NOT NULL,
-	height	double,
-	weight	double,
-	BMI	double,
-	phdate	date,
-	skeletalmuscle	double,
-	bodyfatper	double,
-	bmr	int
+   phnum   number   primary key,
+   ID   varchar2   NOT NULL,
+   height   double,
+   weight   double,
+   BMI   double,
+   phdate   date,
+   skeletalmuscle   double,
+   bodyfatper   double,
+   bmr   int
 );
 
 
@@ -261,43 +306,76 @@ commit;
 --
 drop table Report cascade constraints;
 CREATE TABLE Report (
-	renum	number	primary key,
-	Bnum	number	NOT NULL,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	status	varchar2	NOT NULL,
-	content	varchar2	NOT NULL
+   renum   number   primary key,
+   Bnum   number   NOT NULL,
+   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   status   varchar2   NOT NULL,
+   content   varchar2   NOT NULL
 );
 
 select * from Report;
 commit;
 
 
---
+--문의 테이블
+drop sequence qseq;
+create sequence qseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
 drop table question cascade constraints;
 CREATE TABLE question (
-	qnum	number	primary key,
-	ID varchar2 references MEMBER(ID) on delete cascade, -- ȸ�����̵� 
-	qdate	date	NOT NULL,
-	qcontent	varchar2	NOT NULL,
-	qsubject	varchar2	NOT NULL,
-	qstatus	varchar2	NOT NULL
+   qnum   number   primary key, --문의 번호
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   qdate   date   NOT NULL, --문의 날짜 
+   qcontent   varchar2(500)   NOT NULL, --문의 내용
+   qsubject   varchar2(60)   NOT NULL, --문의 제목
+   qstatus   varchar2(20)  NOT NULL --문의 답변 상태 "answered" / "unanswered"
 );
 
 select * from question;
 commit;
 
 
---
+--문의 답변
+drop sequence qcseq;
+create sequence qcseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+  
 drop table QComment cascade constraints;
 CREATE TABLE QComment (
-	qcnum	number primary key,
-	qnum	number	NOT NULL,
-	qcomment	varchar2,
-	qcdate	date
+   qcnum   number primary key,
+   qnum   number   NOT NULL,
+   qcomment   varchar2(500),
+   qcdate   date
 );
 
 select * from QComment;
 commit;
 
-
-
+--리뷰 테이블
+drop sequence rvseq;
+create sequence rvseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
+drop table review cascade constraints;
+CREATE TABLE review (
+	renum number primary key,
+	userid varchar2(30),
+	pnum number,
+	trainerid varchar2(30),
+	rating number,
+	rcontent varchar2(500),
+	rdate date default sysdate	
+);
+select * from review;
+commit;
