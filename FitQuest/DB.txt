@@ -1,5 +1,5 @@
 
--- È¸¿ø Á¤º¸
+-- íšŒì› ì •ë³´
 drop table MEMBER cascade constraints;
 
 create table member(
@@ -16,19 +16,19 @@ create table member(
 );
 
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2)
-		values('hong','member','È«±æµ¿','qwerty1!','È«½Ã','1990-09-09','01090909090','hong@fitquest.com','¼­¿ï Áß±¸ ºÏÃ¢µ¿ 136','1Ãş');
+		values('hong','member','í™ê¸¸ë™','qwerty1!','í™ì‹œ','1990-09-09','01090909090','hong@fitquest.com','ì„œìš¸ ì¤‘êµ¬ ë¶ì°½ë™ 136','1ì¸µ');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2)
-		values('kim','trainer','È«±æµ¿','1234','È«½Ã','1991-09-09','01090909090','kim@fitquest.com','¼­¿ï Áß±¸ ºÏÃ¢µ¿ 136','2Ãş');
+		values('kim','trainer','í™ê¸¸ë™','1234','í™ì‹œ','1991-09-09','01090909090','kim@fitquest.com','ì„œìš¸ ì¤‘êµ¬ ë¶ì°½ë™ 136','2ì¸µ');
 
 select * from MEMBER;
 commit;
 
  
--- °Ô½ÃÆÇ
+-- ê²Œì‹œíŒ
 drop table BOARD cascade constraints;
 CREATE TABLE BOARD (
    Bnum   number   primary key,
-   ID varchar2 references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
+   ID varchar2 references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
    btype   varchar2   NOT NULL,
    bcategory   varchar2   NOT NULL,
    Bsubject   varchar2   NOT NULL,
@@ -45,24 +45,24 @@ select * from BOARD;
 commit;
 
 
--- Ã¥°¥ÇÇ
+-- ì±…ê°ˆí”¼
 drop table SCRAP cascade constraints;
 CREATE TABLE SCRAP (
-   Snum number   primary key, --Ã¥°¥ÇÇ °íÀ¯¹øÈ£
-   ID varchar2 references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   Bnum number   NOT NULL -- °Ô½ÃÆÇ¹øÈ£
+   Snum number   primary key, --ì±…ê°ˆí”¼ ê³ ìœ ë²ˆí˜¸
+   ID varchar2 references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   Bnum number   NOT NULL -- ê²Œì‹œíŒë²ˆí˜¸
 );
 
 select * from SCRAP;
 commit;
 
--- ´ñ±Û
+-- ëŒ“ê¸€
 drop table COMMENT cascade constraints;
 CREATE TABLE COMMENT (
-   cnum number   primary key, --´ñ±Û °íÀ¯¹øÈ£
-   Bnum varchar2 references BOARD(Bnum) on delete cascade, -- °Ô½ÃÆÇ ¹øÈ£
-   Bnum number   NOT NULL, --°Ô½ÃÆÇ °íÀ¯¹øÈ£
-   ID varchar2 references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
+   cnum number   primary key, --ëŒ“ê¸€ ê³ ìœ ë²ˆí˜¸
+   Bnum varchar2 references BOARD(Bnum) on delete cascade, -- ê²Œì‹œíŒ ë²ˆí˜¸
+   Bnum number   NOT NULL, --ê²Œì‹œíŒ ê³ ìœ ë²ˆí˜¸
+   ID varchar2 references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
    cregdate date NOT NULL DEFAULT sysdate,
    cref   number   NOT NULL,
    crestep   number   NOT NULL,
@@ -79,24 +79,24 @@ commit;
 
 
 
--- Æ®·¹ÀÌ³Ê 
+-- íŠ¸ë ˆì´ë„ˆ 
 drop table trainer cascade constraints;
 CREATE TABLE trainer (
-   ID varchar2(30) references MEMBER(ID) on delete cascade primary key, -- È¸¿ø¾ÆÀÌµğ 
-   gnum   number NOT NULL, --Çï½ºÀå ¹øÈ£
-   activity   varchar2(30)   NOT NULL, --¿îµ¿ Ä«Å×°í¸®
-   purpose   varchar2(30)   NOT NULL, --¿îµ¿ ¸ñÀû
-   intro   varchar2(500)   NOT NULL, -- ¼Ò°³ ³»¿ë
-   exp   varchar2(50)   NOT NULL, --°æ·Â
-   timage   varchar2(50) --Æ®·¹ÀÌ³Ê »çÁø
+   ID varchar2(30) references MEMBER(ID) on delete cascade primary key, -- íšŒì›ì•„ì´ë”” 
+   gnum   number NOT NULL, --í—¬ìŠ¤ì¥ ë²ˆí˜¸
+   activity   varchar2(30)   NOT NULL, --ìš´ë™ ì¹´í…Œê³ ë¦¬
+   purpose   varchar2(30)   NOT NULL, --ìš´ë™ ëª©ì 
+   intro   varchar2(500)   NOT NULL, -- ì†Œê°œ ë‚´ìš©
+   exp   varchar2(50)   NOT NULL, --ê²½ë ¥
+   timage   varchar2(50) --íŠ¸ë ˆì´ë„ˆ ì‚¬ì§„
 );
 
-insert into trainer values('kim', 1, 'PT', 'Ã¼Áß', 'hi~','°³ÀÎ pt 30³â', '.');
+insert into trainer values('kim', 1, 'PT', 'ì²´ì¤‘', 'hi~','ê°œì¸ pt 30ë…„', '.');
 select * from trainer;
 commit;
 
 
--- Çï½ºÀå 
+-- í—¬ìŠ¤ì¥ 
 drop sequence gseq;
 create sequence gseq
   increment by 1
@@ -107,18 +107,18 @@ create sequence gseq
   
 drop table gym cascade constraints;
 CREATE TABLE gym (
-   gnum   number   primary key, --Çï½ºÀå ¹øÈ£
-   gname   varchar2(40)   NOT NULL, --Çï½ºÀå¸í
-   gaddr1   varchar2(60)   NOT NULL, --Çï½ºÀå ÁÖ¼Ò1
-   gaddr2   varchar2(60)   NOT NULL, --Çï½ºÀå ÁÖ¼Ò2
-   gphone   varchar2(60)   NOT NULL --Çï½ºÀå ÀüÈ­¹øÈ£
+   gnum   number   primary key, --í—¬ìŠ¤ì¥ ë²ˆí˜¸
+   gname   varchar2(40)   NOT NULL, --í—¬ìŠ¤ì¥ëª…
+   gaddr1   varchar2(60)   NOT NULL, --í—¬ìŠ¤ì¥ ì£¼ì†Œ1
+   gaddr2   varchar2(60)   NOT NULL, --í—¬ìŠ¤ì¥ ì£¼ì†Œ2
+   gphone   varchar2(60)   NOT NULL --í—¬ìŠ¤ì¥ ì „í™”ë²ˆí˜¸
 );
 
 select * from gym;
 commit;
 
 
--- »óÇ°
+-- ìƒí’ˆ
 drop sequence pseq;
 create sequence pseq
   increment by 1
@@ -129,21 +129,21 @@ create sequence pseq
   
 drop table product cascade constraints;
 CREATE TABLE product (
-   pnum   number   primary key, --»óÇ°¹øÈ£
-   ID varchar2(30) references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   price   number   NOT NULL, --»óÇ° °¡°İ
-   months   number   NOT NULL, --È¸¿ø±Ç »ç¿ë±â°£
-   pcount   number   NOT NULL, --È¸¿ø±Ç »ç¿ë°¹¼ö
-   people   number   NOT NULL, --¼ö¾÷ Âü¿© È¸¿ø °¹¼ö
-   ptype   varchar2(15)   NOT NULL, --°³ÀÎ, ±×·ì ¼ö¾÷ ±¸ºĞ "group"/"ind"
-   ptime   number   NOT NULL --¼ö¾÷ ½Ã°£±æÀÌ
+   pnum   number   primary key, --ìƒí’ˆë²ˆí˜¸
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   price   number   NOT NULL, --ìƒí’ˆ ê°€ê²©
+   months   number   NOT NULL, --íšŒì›ê¶Œ ì‚¬ìš©ê¸°ê°„
+   pcount   number   NOT NULL, --íšŒì›ê¶Œ ì‚¬ìš©ê°¯ìˆ˜
+   people   number   NOT NULL, --ìˆ˜ì—… ì°¸ì—¬ íšŒì› ê°¯ìˆ˜
+   ptype   varchar2(15)   NOT NULL, --ê°œì¸, ê·¸ë£¹ ìˆ˜ì—… êµ¬ë¶„ "group"/"ind"
+   ptime   number   NOT NULL --ìˆ˜ì—… ì‹œê°„ê¸¸ì´
 );
 
 select * from product;
 commit;
 
 
--- ÁÖ¹®
+-- ì£¼ë¬¸
 drop sequence oseq;
 create sequence oseq
   increment by 1
@@ -154,16 +154,16 @@ create sequence oseq
   
 drop table order cascade constraints;
 CREATE TABLE order (
-   onum   number   primary key, --ÁÖ¹®¹øÈ£
-   ID   varchar2(30)   NOT NULL, --ÁÖ¹®ÇÑ È¸¿ø ¾ÆÀÌµğ
-   odate   date   NOT NULL, --ÁÖ¹® ³¯Â¥
+   onum   number   primary key, --ì£¼ë¬¸ë²ˆí˜¸
+   ID   varchar2(30)   NOT NULL, --ì£¼ë¬¸í•œ íšŒì› ì•„ì´ë””
+   odate   date   NOT NULL, --ì£¼ë¬¸ ë‚ ì§œ
 );
 
 select * from order;
 commit;
 
 
--- ÁÖ¹®³»¿ª
+-- ì£¼ë¬¸ë‚´ì—­
 drop sequence odseq;
 create sequence odseq
   increment by 1
@@ -174,9 +174,9 @@ create sequence odseq
   
 drop table orderdetail cascade constraints;
 CREATE TABLE orderdetail (
-   odnum   number   primary key, --ÁÖ¹®³»¿ª ¹øÈ£
-   pnum   number   NOT NULL, --»óÇ° ¹øÈ£
-   onum   number   NOT NULL --ÁÖ¹®¹øÈ£
+   odnum   number   primary key, --ì£¼ë¬¸ë‚´ì—­ ë²ˆí˜¸
+   pnum   number   NOT NULL, --ìƒí’ˆ ë²ˆí˜¸
+   onum   number   NOT NULL --ì£¼ë¬¸ë²ˆí˜¸
 );
 
 select * from orderdetail;
@@ -188,7 +188,7 @@ commit;
 
 
 
--- PT»ç¿ë±Ç
+-- PTì‚¬ìš©ê¶Œ
 drop sequence useq;
 create sequence useq
   increment by 1
@@ -199,11 +199,11 @@ create sequence useq
   
 drop table usage cascade constraints;
 CREATE TABLE usage (
-   unum   number   primary key, --»ç¿ë±Ç¹øÈ£
-   pnum   number   NOT NULL, --»óÇ°¹øÈ£
-   tid(30) varchar2 references TRAINER(ID) on delete cascade, --Æ®·¹ÀÌ³Ê ¾ÆÀÌµğ
-   mid(30) varchar2 references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   usage   number   NOT NULL --³²Àº È½¼ö
+   unum   number   primary key, --ì‚¬ìš©ê¶Œë²ˆí˜¸
+   pnum   number   NOT NULL, --ìƒí’ˆë²ˆí˜¸
+   tid(30) varchar2 references TRAINER(ID) on delete cascade, --íŠ¸ë ˆì´ë„ˆ ì•„ì´ë””
+   mid(30) varchar2 references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   usage   number   NOT NULL --ë‚¨ì€ íšŸìˆ˜
 );
 
 select * from usage;
@@ -211,7 +211,7 @@ commit;
 
 
 
--- pt ¿¹¾à
+-- pt ì˜ˆì•½
 drop sequence reseq;
 create sequence reseq
   increment by 1
@@ -222,12 +222,12 @@ create sequence reseq
   
 drop table reservation cascade constraints;
 CREATE TABLE reservation (
-   rnum   number   primary key, --¿¹¾à¹øÈ£
-   ID varchar2(30) references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   onum   number   NOT NULL, --ÁÖ¹®¹øÈ£
-   unum   number   NOT NULL,--»ç¿ë±Ç¹øÈ£
-   rdate   date   NULL, --¿¹¾à ³¯Â¥
-   rtime varchar2(15) NULL --¿¹¾à ½Ã°£ "00:00am"
+   rnum   number   primary key, --ì˜ˆì•½ë²ˆí˜¸
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   onum   number   NOT NULL, --ì£¼ë¬¸ë²ˆí˜¸
+   unum   number   NOT NULL,--ì‚¬ìš©ê¶Œë²ˆí˜¸
+   rdate   date   NULL, --ì˜ˆì•½ ë‚ ì§œ
+   rtime varchar2(15) NULL --ì˜ˆì•½ ì‹œê°„ "00:00am"
 );
 
 select * from reservation;
@@ -239,7 +239,7 @@ commit;
 
 
 
--- È¸¿øº° ¿îµ¿Á¤º¸
+-- íšŒì›ë³„ ìš´ë™ì •ë³´
 drop sequence hseq;
 create sequence hseq
   increment by 1
@@ -249,19 +249,19 @@ create sequence hseq
 
 drop table health cascade constraints;
 CREATE TABLE health (
-   hnum   number   primary key, -- ¿îµ¿Á¤º¸ ¹øÈ£
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   hdate   date   NOT NULL, --¿îµ¿ÀÏÀÚ
-   hname   varchar2(30)   NOT NULL, --¿îµ¿¸í
-   starttime   date, --½ÃÀÛ½Ã°£
-   endtime   date --Á¾·á½Ã°£
+   hnum   number   primary key, -- ìš´ë™ì •ë³´ ë²ˆí˜¸
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   hdate   date   NOT NULL, --ìš´ë™ì¼ì
+   hname   varchar2(30)   NOT NULL, --ìš´ë™ëª…
+   starttime   date, --ì‹œì‘ì‹œê°„
+   endtime   date --ì¢…ë£Œì‹œê°„
 );
 
 select * from health;
 commit;
 
 
--- È¸¿øº° ½Ä´Ü Á¤º¸
+-- íšŒì›ë³„ ì‹ë‹¨ ì •ë³´
 drop sequence nseq;
 create sequence nseq
   increment by 1
@@ -271,18 +271,18 @@ create sequence nseq
   
 drop table nutrition cascade constraints;
 CREATE TABLE nutrition (
-   nnum   number   primary key, --½Ä´Ü¹øÈ£
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   fnum   number   NOT NULL, --À½½Ä¹øÈ£
-   mealtype   VARCHAR(10), -- ¾ÆÄ§ Á¡½É Àú³á ±âÅ¸
-   nutritiondate   date --½Ä»çÀÏÀÚ
+   nnum   number   primary key, --ì‹ë‹¨ë²ˆí˜¸
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   fnum   number   NOT NULL, --ìŒì‹ë²ˆí˜¸
+   mealtype   VARCHAR(10), -- ì•„ì¹¨ ì ì‹¬ ì €ë… ê¸°íƒ€
+   nutritiondate   date --ì‹ì‚¬ì¼ì
 );
 
 select * from nutrition;
 commit;
 
 
--- À½½ÄÁ¤º¸
+-- ìŒì‹ì •ë³´
 drop sequence fseq;
 create sequence fseq
   increment by 1
@@ -292,22 +292,22 @@ create sequence fseq
   
 drop table food cascade constraints;
 CREATE TABLE food (
-   fnum   number primary key, --À½½Ä¹øÈ£
-   fname   varchar2(50), --À½½ÄÀÌ¸§
-   fweight number default 0.0, -- À½½Ä¹«°Ô
-   calories   number, --Ä®·Î¸®
-   carbohydrate   number, --Åº¼öÈ­¹°
-   protein   number, --´Ü¹éÁú
-   fat   number, --Áö¹æ
-   saturatedfat   number, --Æ÷È­Áö¹æ
-   sodium   number --³ªÆ®·ı
+   fnum   number primary key, --ìŒì‹ë²ˆí˜¸
+   fname   varchar2(50), --ìŒì‹ì´ë¦„
+   fweight number default 0.0, -- ìŒì‹ë¬´ê²Œ
+   calories   number, --ì¹¼ë¡œë¦¬
+   carbohydrate   number, --íƒ„ìˆ˜í™”ë¬¼
+   protein   number, --ë‹¨ë°±ì§ˆ
+   fat   number, --ì§€ë°©
+   saturatedfat   number, --í¬í™”ì§€ë°©
+   sodium   number --ë‚˜íŠ¸ë¥¨
 );
 
 select * from food;
 commit;
 
 
--- ½ÅÃ¼Á¤º¸
+-- ì‹ ì²´ì •ë³´
 drop sequence phseq;
 create sequence phseq
   increment by 1
@@ -317,15 +317,15 @@ create sequence phseq
   
 drop table physique cascade constraints;
 CREATE TABLE physique (
-   phnum   number   primary key, --½ÅÃ¼¹øÈ£
-   ID   varchar2(100)   NOT NULL, --¾ÆÀÌµğ
-   height   number default 0.0, --½ÅÀå(cm)
-   weight   number default 0.0, --Ã¼Áß(kg)
+   phnum   number   primary key, --ì‹ ì²´ë²ˆí˜¸
+   ID   varchar2(100)   NOT NULL, --ì•„ì´ë””
+   height   number default 0.0, --ì‹ ì¥(cm)
+   weight   number default 0.0, --ì²´ì¤‘(kg)
    BMI   number default 0.0, --bmi
-   phdate   date, --ÃøÁ¤ÀÏ
-   skeletalmuscle   number default 0.0, --°ñ°İ±Ù·®(kg)
-   bodyfatper   number default 0.0, --Ã¼Áö¹æ·ü(%)
-   bmr   int --±âÃÊ´ë»ç·®(kcal)
+   phdate   date, --ì¸¡ì •ì¼
+   skeletalmuscle   number default 0.0, --ê³¨ê²©ê·¼ëŸ‰(kg)
+   bodyfatper   number default 0.0, --ì²´ì§€ë°©ë¥ (%)
+   bmr   int --ê¸°ì´ˆëŒ€ì‚¬ëŸ‰(kcal)
 );
 
 
@@ -339,12 +339,12 @@ commit;
 
 
 
--- ½Å°í Å×ÀÌºí
+-- ì‹ ê³  í…Œì´ë¸”
 drop table Report cascade constraints;
 CREATE TABLE Report (
    renum   number   primary key,
    Bnum   number   NOT NULL,
-   ID varchar2 references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
+   ID varchar2 references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
    status   varchar2   NOT NULL,
    content   varchar2   NOT NULL
 );
@@ -353,7 +353,7 @@ select * from Report;
 commit;
 
 
---¹®ÀÇ Å×ÀÌºí
+--ë¬¸ì˜ í…Œì´ë¸”
 drop sequence qseq;
 create sequence qseq
   increment by 1
@@ -364,19 +364,19 @@ create sequence qseq
   
 drop table question cascade constraints;
 CREATE TABLE question (
-   qnum   number   primary key, --¹®ÀÇ ¹øÈ£
-   ID varchar2(30) references MEMBER(ID) on delete cascade, -- È¸¿ø¾ÆÀÌµğ 
-   qdate   date   NOT NULL, --¹®ÀÇ ³¯Â¥ 
-   qcontent   varchar2(500)   NOT NULL, --¹®ÀÇ ³»¿ë
-   qsubject   varchar2(60)   NOT NULL, --¹®ÀÇ Á¦¸ñ
-   qstatus   varchar2(20)  NOT NULL --¹®ÀÇ ´äº¯ »óÅÂ "answered" / "unanswered"
+   qnum   number   primary key, --ë¬¸ì˜ ë²ˆí˜¸
+   ID varchar2(30) references MEMBER(ID) on delete cascade, -- íšŒì›ì•„ì´ë”” 
+   qdate   date   NOT NULL, --ë¬¸ì˜ ë‚ ì§œ 
+   qcontent   varchar2(500)   NOT NULL, --ë¬¸ì˜ ë‚´ìš©
+   qsubject   varchar2(60)   NOT NULL, --ë¬¸ì˜ ì œëª©
+   qstatus   varchar2(20)  NOT NULL --ë¬¸ì˜ ë‹µë³€ ìƒíƒœ "answered" / "unanswered"
 );
 
 select * from question;
 commit;
 
 
---¹®ÀÇ ´äº¯
+--ë¬¸ì˜ ë‹µë³€
 drop sequence qcseq;
 create sequence qcseq
   increment by 1
@@ -398,7 +398,7 @@ commit;
 
 
 
---¸®ºä Å×ÀÌºí
+--ë¦¬ë·° í…Œì´ë¸”
 drop sequence rvseq;
 create sequence rvseq
   increment by 1
@@ -406,7 +406,7 @@ create sequence rvseq
   minvalue 1
   maxvalue 10000
   nocache;
-  
+   
 drop table review cascade constraints;
 CREATE TABLE review (
 	renum number primary key,
