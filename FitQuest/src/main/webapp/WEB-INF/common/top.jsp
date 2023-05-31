@@ -44,7 +44,7 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top">
+  <header id="header" class="header fixed-top" style="height: 80px">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="main.go" class="logo d-flex align-items-center">
