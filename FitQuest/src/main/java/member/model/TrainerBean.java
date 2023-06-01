@@ -25,7 +25,7 @@ public class TrainerBean {
 	private String gender;
 	
 	@NotBlank(message = "헬스장을 선택해 주세요.")
-	private int gnum;
+	private String gnum;
 	
 	@NotBlank(message = "운동 종류를 선택해 주세요.")
 	private String activity;
@@ -41,6 +41,14 @@ public class TrainerBean {
 	private String timage;
 	
 	private MultipartFile upload;
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public String getId() {
 		return id;
@@ -122,11 +130,11 @@ public class TrainerBean {
 		this.maddr2 = maddr2;
 	}
 
-	public int getGnum() {
+	public String getGnum() {
 		return gnum;
 	}
 
-	public void setGnum(int gnum) {
+	public void setGnum(String gnum) {
 		this.gnum = gnum;
 	}
 
