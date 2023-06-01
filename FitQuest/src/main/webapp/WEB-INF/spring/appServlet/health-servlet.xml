@@ -22,5 +22,6 @@
 	<context:component-scan base-package="food"/>
 	<context:component-scan base-package="physique"/>
 	<context:component-scan base-package="reservation"/>
+	<context:component-scan base-package="gym"/>
 
 </beans>
