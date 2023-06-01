@@ -86,7 +86,7 @@
           </li>
           
           <!-- 일반회원 메뉴 -->
-          <c:if test="${loginInfo.mtype eq 'member'}">
+          <c:if test="${loginInfo.mtype eq 'generic'}">
 	          <li class="dropdown" ><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="health.ht">내 건강관리</a></li>

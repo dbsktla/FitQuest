@@ -31,7 +31,7 @@ commit;
 drop table BOARD cascade constraints;
 CREATE TABLE BOARD (
    Bnum   number   primary key,
-   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    btype   varchar2   NOT NULL,
    bcategory   varchar2   NOT NULL,
    Bsubject   varchar2   NOT NULL,
@@ -52,7 +52,7 @@ commit;
 drop table SCRAP cascade constraints;
 CREATE TABLE SCRAP (
    Snum number   primary key, --책갈피 고유번호
-   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    Bnum number   NOT NULL -- 게시판번호
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE COMMENT (
    cnum number   primary key, --댓글 고유번호
    Bnum varchar2 references BOARD(Bnum) on delete cascade, -- 게시판 번호
    Bnum number   NOT NULL, --게시판 고유번호
-   ID varchar2 references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    cregdate date NOT NULL DEFAULT sysdate,
    cref   number   NOT NULL,
    crestep   number   NOT NULL,
@@ -133,7 +133,7 @@ create sequence pseq
 drop table product cascade constraints;
 CREATE TABLE product (
    pnum   number   primary key, --상품번호
-   ID varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    price   number   NOT NULL, --상품 가격
    months   number   NOT NULL, --회원권 사용기간
    pcount   number   NOT NULL, --회원권 사용갯수
@@ -158,7 +158,7 @@ create sequence oseq
 drop table order cascade constraints;
 CREATE TABLE order (
    onum   number   primary key, --주문번호
-   ID   varchar2(30)   NOT NULL, --주문한 회원 아이디
+   ID   varchar2(100)   NOT NULL, --주문한 회원 아이디
    odate   date   NOT NULL, --주문 날짜
 );
 
@@ -204,8 +204,8 @@ drop table usage cascade constraints;
 CREATE TABLE usage (
    unum   number   primary key, --사용권번호
    pnum   number   NOT NULL, --상품번호
-   tid varchar2(30) references TRAINER(ID) on delete cascade, --트레이너 아이디
-   mid varchar2(30) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
+   mid varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    usage   number   NOT NULL --남은 횟수
 );
 
