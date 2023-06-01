@@ -84,14 +84,14 @@ drop table trainer cascade constraints;
 CREATE TABLE trainer (
    ID varchar2(100) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
    gnum   number NOT NULL, --헬스장 번호
-   activity   varchar2(30)   NOT NULL check(activity in('PT', '필라테스', '요가')), --운동 카테고리
+   activity   varchar2(30)   NOT NULL, --운동 카테고리
    purpose   varchar2(30)   NOT NULL, --운동 목적
    intro   varchar2(500)   NOT NULL, -- 소개 내용
    exp   varchar2(50)   NOT NULL, --경력
    timage   varchar2(50) --트레이너 사진
 );
 
-insert into trainer values('kim', 1, 'PT', '체중', 'hi~','개인 pt 30년', '.');
+insert into trainer values('kim', 1, 'PT', '체중', 'hi~','개인 pt 30년', 'tr1.jpg');
 select * from trainer;
 commit;
 
