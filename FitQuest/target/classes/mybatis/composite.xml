@@ -9,42 +9,70 @@
 		select count(*) from
 		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
 		from trainer join review
-		on id = trainerid
-		group by id, gnum, activity, purpose, intro, exp, timage
-		order by rating desc
-		)
+		on id = tid
+		group by id, gnum, activity, purpose, intro, exp, timage)
 		natural join  
-		(select id, name, maddr1 from trainer natural join member)
+		((select id, name from trainer natural join member)
+		natural join
+		(select id, gnum, gaddr1 from trainer natural join gym))
 		where rating >= 0
-		<if test = "activity != 'all'">
-			and activity = #{activity}
+ 		<if test = "activity == '%PT%' or activity == '%필라테스%' or activity = '%요가%' and activity != '%null%'">
+			and activity like #{activity}
 		</if>
 		<if test = "addressDo != '%null%'">
-			and maddr1 like #{addressDo}
+			and gaddr1 like #{addressDo}
 		</if>
 		<if test = "addressSiGunGu != '%null%'">
-			and maddr1 like #{addressSiGunGu}
+			and gaddr1 like #{addressSiGunGu}
 		</if>
-	</select>
-	<select id = "GetTrainerList" resultType = "product.model.MyTrainerList">
+		<if test = "purposeA != '%null%'">
+			and purpose like #{purposeA}
+		</if>
+		<if test = "purposeB != '%null%'">
+			and purpose like #{purposeB}
+		</if>
+		<if test = "purposeC != '%null%'">
+			and purpose like #{purposeC}
+		</if>
+		<if test = "purposeD != '%null%'">
+			and purpose like #{purposeD}
+		</if>
+    	</select>
+	<select id = "GetTrainerList" resultType = "composite.model.TrainerListBean">
 		select * from
 		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
 		from trainer join review
-		on id = trainerid
+		on id = tid
 		group by id, gnum, activity, purpose, intro, exp, timage
+		<if test = "ordering == 'review'">
 		order by rating desc
-		)
+		</if>
+		) 
 		natural join  
-		(select id, name, maddr1 from trainer natural join member)
+		((select id, name from trainer natural join member)
+		natural join
+		(select id, gnum, gaddr1 from trainer natural join gym))
 		where rating >= 0
-		<if test = "activity != 'all' or activity != null" >
-			and activity = #{activity, jdbcType=VARCHAR}
+ 		<if test = "activity == '%PT%' or activity == '%필라테스%' or activity = '%요가%' and activity != '%null%'">
+			and activity like #{activity}
 		</if>
-		<if test = "addressDo != '%null%' or addressDo != null">
-			and maddr1 like #{addressDo, jdbcType=VARCHAR}
+		<if test = "addressDo != '%null%'">
+			and gaddr1 like #{addressDo}
 		</if>
-		<if test = "addressSiGunGu != '%null%' or addressSiGunGu != null">
-			and maddr1 like #{addressSiGunGu, jdbcType=VARCHAR}
+		<if test = "addressSiGunGu != '%null%'">
+			and gaddr1 like #{addressSiGunGu}
+		</if>
+		<if test = "purposeA != '%null%'">
+			and purpose like #{purposeA}
+		</if>
+		<if test = "purposeB != '%null%'">
+			and purpose like #{purposeB}
+		</if>
+		<if test = "purposeC != '%null%'">
+			and purpose like #{purposeC}
+		</if>
+		<if test = "purposeD != '%null%'">
+			and purpose like #{purposeD}
 		</if>
 	</select>
 </mapper>
