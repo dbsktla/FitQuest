@@ -5,5 +5,46 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="composite.model.Composite">
-
+	<select id = "GetTrainerCount" resultType = "int">
+		select count(*) from
+		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+		from trainer join review
+		on id = trainerid
+		group by id, gnum, activity, purpose, intro, exp, timage
+		order by rating desc
+		)
+		natural join  
+		(select id, name, maddr1 from trainer natural join member)
+		where rating >= 0
+		<if test = "activity != 'all'">
+			and activity = #{activity}
+		</if>
+		<if test = "addressDo != '%null%'">
+			and maddr1 like #{addressDo}
+		</if>
+		<if test = "addressSiGunGu != '%null%'">
+			and maddr1 like #{addressSiGunGu}
+		</if>
+	</select>
+	<select id = "GetTrainerList" resultType = "product.model.MyTrainerList">
+		select * from
+		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+		from trainer join review
+		on id = trainerid
+		group by id, gnum, activity, purpose, intro, exp, timage
+		order by rating desc
+		)
+		natural join  
+		(select id, name, maddr1 from trainer natural join member)
+		where rating >= 0
+		<if test = "activity != 'all' or activity != null" >
+			and activity = #{activity, jdbcType=VARCHAR}
+		</if>
+		<if test = "addressDo != '%null%' or addressDo != null">
+			and maddr1 like #{addressDo, jdbcType=VARCHAR}
+		</if>
+		<if test = "addressSiGunGu != '%null%' or addressSiGunGu != null">
+			and maddr1 like #{addressSiGunGu, jdbcType=VARCHAR}
+		</if>
+	</select>
 </mapper>
