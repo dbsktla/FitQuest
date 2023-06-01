@@ -61,6 +61,12 @@ public class MemberLoginController {
 		return getPage;
 	}
 	
+	@RequestMapping(value="/logout.mb")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginInfo", null);
+		return "redirect:/main.go";
+	}
+	
 //	@RequestMapping(value="/naverLogin.mb")
 //	public String naver() {
 //		return "memberNaverLogin";
@@ -72,7 +78,7 @@ public class MemberLoginController {
 		
 		MemberBean memberBean = new MemberBean();
 		
-		String id = request.getParameter("id");
+		String id = "kakao" + request.getParameter("id");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String birthday = request.getParameter("birthday");
