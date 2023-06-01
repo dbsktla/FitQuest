@@ -84,7 +84,7 @@ drop table trainer cascade constraints;
 CREATE TABLE trainer (
    ID varchar2(100) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
    gnum   number NOT NULL, --헬스장 번호
-   activity   varchar2(30)   NOT NULL, --운동 카테고리
+   activity   varchar2(30)   NOT NULL check(activity in('PT', '필라테스', '요가')), --운동 카테고리
    purpose   varchar2(30)   NOT NULL, --운동 목적
    intro   varchar2(500)   NOT NULL, -- 소개 내용
    exp   varchar2(50)   NOT NULL, --경력
@@ -135,7 +135,7 @@ CREATE TABLE product (
    months   number   NOT NULL, --회원권 사용기간
    pcount   number   NOT NULL, --회원권 사용갯수
    people   number   NOT NULL, --수업 참여 회원 갯수
-   ptype   varchar2(15)   NOT NULL, --개인, 그룹 수업 구분 "group"/"ind"
+   ptype   varchar2(15)   NOT NULL check(ptype in('개인', '그룹')), --개인, 그룹 수업 구분 "group"/"ind"
    ptime   number   NOT NULL --수업 시간길이
 );
 
@@ -226,7 +226,7 @@ CREATE TABLE reservation (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    onum   number   NOT NULL, --주문번호
    unum   number   NOT NULL,--사용권번호
-   rdate   date   NULL, --예약 날짜
+   rdate   date   NULL default sysdate, --예약 날짜
    rtime varchar2(15) NULL --예약 시간 "00:00am"
 );
 
@@ -369,7 +369,7 @@ CREATE TABLE question (
    qdate   date   NOT NULL, --문의 날짜 
    qcontent   varchar2(500)   NOT NULL, --문의 내용
    qsubject   varchar2(60)   NOT NULL, --문의 제목
-   qstatus   varchar2(20)  NOT NULL --문의 답변 상태 "answered" / "unanswered"
+   qstatus   varchar2(20)  NOT NULL check(qstatus in('답변완료', '답변미완료'))--문의 답변 상태 "answered" / "unanswered"
 );
 
 select * from question;
@@ -413,7 +413,7 @@ CREATE TABLE review (
 	mid varchar2(100),
 	pnum number,
 	tid varchar2(100),
-	rating number,
+	rating number check(rating between 0 and 5),
 	rcontent varchar2(500),
 	rdate date default sysdate	
 );
