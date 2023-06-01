@@ -9,12 +9,12 @@ public class MemberBean {
 	private String mtype;
 	private String name;
 	
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "ºñ¹Ğ¹øÈ£ Çü½Ä ¸Â°Ô ÀÛ¼ºÇØ ÁÖ¼¼¿ä.")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "ï¿½ï¿½Ğ¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½.")
 	private String password;
 	private String nickname;
 	private String birth;
 	
-	@Pattern(regexp = "^[0-9]+$", message = "¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.")
+	@Pattern(regexp = "^[0-9]+$", message = "ìˆ«ìë§Œ ì…ë ¥ í•´ì£¼ì„¸ìš”.")
 	private String mphone;
 	private String email;
 	private String maddr1; 

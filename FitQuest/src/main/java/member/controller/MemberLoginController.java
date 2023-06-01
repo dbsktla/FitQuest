@@ -2,6 +2,7 @@ package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -40,7 +41,6 @@ public class MemberLoginController {
 		try {
 			if(memberBean == null) {
 				response.getWriter().print("<script>alert('해당 아이디가 존재하지 않습니다.');history.go(-1);</script>");
-				//response.getWriter().print("<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\"> 가입하지 않은 회원입니다. </div>");
 				response.getWriter().flush();
 				return getPage;
 			}
@@ -59,6 +59,61 @@ public class MemberLoginController {
 			e.printStackTrace();
 		}
 		return getPage;
+	}
+	
+//	@RequestMapping(value="/naverLogin.mb")
+//	public String naver() {
+//		return "memberNaverLogin";
+//	}
+	
+	@RequestMapping(value="/kakaoLogin.mb")
+	public String kakao(HttpServletRequest request, HttpSession session) {
+		MemberBean memberBean = new MemberBean();
+		
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String nickname = request.getParameter("nickname");
+		String birthday = request.getParameter("birthday");
+		String birthyear = request.getParameter("birthyear");
+		String phone = request.getParameter("mphone");
+		String email = request.getParameter("email");
+		String gender = request.getParameter("gender");
+		if(gender.equals("female")) {
+			gender = "여자";
+		}
+		else if(gender.equals("male")) {
+			gender = "남자";
+		}
+		
+		String birth = birthyear + "-" + birthday.substring(0, 2) + "-" + birthday.substring(2);
+		String[] mphoneArr = phone.substring(4).split("-");
+		String mphone = "0";
+		for(int i=0;i<mphoneArr.length;i++) {
+			mphone += mphoneArr[i];
+		}
+		
+		memberBean.setId(id);
+		memberBean.setMtype("generic");
+		memberBean.setName(name);
+		memberBean.setPassword("소셜 로그인");
+		memberBean.setNickname(nickname);
+		memberBean.setBirth(birth);
+		memberBean.setMphone(mphone);
+		memberBean.setGender(gender);
+		memberBean.setMaddr1("");
+		memberBean.setMaddr2("");
+		memberBean.setEmail(email);
+		
+		boolean login = memberDao.searchId(id);
+		if(login) {
+			session.setAttribute("loginInfo", memberBean);
+			return gotoPage;
+		}
+		else {
+			int cnt = memberDao.insertMember(memberBean);
+			System.out.println("InsertKaKao cnt : " + cnt);
+			return getPage;
+		}
 	}
 
 }

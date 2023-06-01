@@ -1,4 +1,4 @@
-package member.model;
+package gym.model;
 
 import javax.validation.constraints.Pattern;
 

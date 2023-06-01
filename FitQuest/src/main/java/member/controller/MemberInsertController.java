@@ -29,6 +29,8 @@ public class MemberInsertController {
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid MemberBean memberBean, BindingResult result, HttpServletRequest request) {
 		
+		System.out.println("gender : " + memberBean.getGender());
+		
 		if(result.hasErrors()) {
 			System.out.println("에러 발생");
 			return getPage; 

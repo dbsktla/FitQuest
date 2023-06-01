@@ -1,4 +1,4 @@
-package member.controller;
+package gym.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import member.model.GymBean;
-import member.model.GymDao;
+import gym.model.GymBean;
+import gym.model.GymDao;
 
 @Controller
 public class GymInsertController {
@@ -25,11 +25,6 @@ public class GymInsertController {
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(GymBean gymBean) {
-
-		System.out.println("gname : " + gymBean.getGname());
-		System.out.println("gaddr1 : " + gymBean.getGaddr1());
-		System.out.println("gaddr2 : " + gymBean.getGaddr2());
-		System.out.println("gphone : " + gymBean.getGphone());
 		
 		int cnt = gymDao.insertGym(gymBean);
 		System.out.println("InsertGym cnt : " + cnt);

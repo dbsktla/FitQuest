@@ -1,4 +1,4 @@
-package member.model;
+package trainer.model;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
