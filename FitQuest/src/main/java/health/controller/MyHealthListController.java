@@ -44,7 +44,7 @@ public class MyHealthListController {
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/myHealthList.ht");
 			try {
-				response.getWriter().print("<script>alert('·Î±×ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù.');</script>");
+				response.getWriter().print("<script>alert('ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.');</script>");
 				response.getWriter().flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -104,7 +104,7 @@ public class MyHealthListController {
 						answer = (format1.getTime() - format2.getTime())/60000;
 						
 					} catch (ParseException e) {
-						System.out.println("³¯Â¥ º¯°æ ¿À·ù");
+						System.out.println("ë‚ ì§œ ë³€ê²½ ì˜¤ë¥˜");
 						e.printStackTrace();
 					}
 					
@@ -115,7 +115,7 @@ public class MyHealthListController {
 //				allcal1.add(Calendar.HOUR_OF_DAY, (allcal2.get(Calendar.HOUR_OF_DAY)));
 //				System.out.println("allplay time : " + sdf.format(allcal1.getTime()));
 				
-				String playTime = String.valueOf(alltime)+"ºĞ";
+				String playTime = String.valueOf(alltime)+"ë¶„";
 				hd.setPlaytime(playTime);
 			}
 			mav.addObject("hdlist", hdlist);
