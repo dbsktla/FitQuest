@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HealthMainController {
 	private final String command = "health.ht";
-	// ÀÏ¹İÈ¸¿ø
+	// ì¼ë°˜íšŒì›
 	private final String getPage = "myHealthMain";
-	// Æ®·¹ÀÌ³Ê
+	// íŠ¸ë ˆì´ë„ˆ
 	private final String getPageT = "trainerHealthMain";
 	
-	// ³» ¿îµ¿ °ü¸® ÆäÀÌÁö·Î ÀÌµ¿
+	// ë‚´ ìš´ë™ ê´€ë¦¬ í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String doAction() {
 		

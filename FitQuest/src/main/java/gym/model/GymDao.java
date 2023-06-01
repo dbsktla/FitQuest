@@ -1,4 +1,4 @@
-package member.model;
+package gym.model;
 
 import java.util.ArrayList;
 import java.util.List;

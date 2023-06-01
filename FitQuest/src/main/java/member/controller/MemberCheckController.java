@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import member.model.GymDao;
+import gym.model.GymDao;
 import member.model.MemberDao;
 
 @Controller

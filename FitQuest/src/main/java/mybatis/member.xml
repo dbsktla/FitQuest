@@ -16,8 +16,8 @@
 	</select>
 	
 	<insert id="InsertMember">
-		insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2)
-		values(#{id},#{mtype},#{name},#{password},#{nickname},#{birth},#{mphone},#{email},#{maddr1},#{maddr2})
+		insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values(#{id},#{mtype},#{name},#{password},#{nickname},#{birth},#{mphone},#{email},#{maddr1},#{maddr2},#{gender})
 	</insert>
 	
 	<select id="SelectMemberById" resultType="member.model.MemberBean">

@@ -248,10 +248,10 @@ $(document).ready(function(){
                       <input type="date" name="birth" class="form-control" id="yourBirth" value="${ trainerBean.birth }">
                     </div>
                     
-                    <div class="col-12">
+                     <div class="col-12">
                       <label for="gender" class="form-label">성별</label> <br>
-                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자"> 남자</label>
-                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자"> 여자</label><br>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ memberBean.gender eq '남자' }">checked</c:if>> 남자</label>
+                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ memberBean.gender eq '여자' }">checked</c:if>> 여자</label><br>
                     <form:errors cssClass="err" path="gender" />
                     </div>
                    

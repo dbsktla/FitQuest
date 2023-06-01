@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import trainer.model.TrainerBean;
+
 @Component
 public class MemberDao {
 	private String namespace = "member.model.Member";

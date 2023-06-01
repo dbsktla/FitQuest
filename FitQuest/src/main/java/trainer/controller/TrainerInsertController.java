@@ -1,4 +1,4 @@
-package member.controller;
+package trainer.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,18 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import member.model.GymBean;
-import member.model.GymDao;
+import gym.model.GymBean;
+import gym.model.GymDao;
 import member.model.MemberDao;
-import member.model.TrainerBean;
-import member.model.TrainerDao;
+import trainer.model.TrainerBean;
+import trainer.model.TrainerDao;
+
 
 @Controller
 public class TrainerInsertController {
 	private final String command = "/insertT.mb";
 	private final String getPage = "trainerInsertForm";
 	private final String gotoPage = "redirect:/login.mb";
-
+	
 	@Autowired
 	MemberDao memberDao;
 
@@ -36,6 +37,7 @@ public class TrainerInsertController {
 
 	@Autowired
 	GymDao gymDao;
+
 
 	@Autowired
 	ServletContext servletContext;
@@ -49,8 +51,8 @@ public class TrainerInsertController {
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request) {
-		//String uploadPath = "/Users/songnayoung/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";
-		String uploadPath = "";
+		String uploadPath = "/Users/songnayoung/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";
+		//String uploadPath = "";
 		
 		File destination = new File(uploadPath + File.separator + trainerBean.getUpload().getOriginalFilename());
 		MultipartFile multi =  trainerBean.getUpload();
