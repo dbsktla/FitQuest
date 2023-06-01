@@ -142,10 +142,6 @@ var areaSelectMaker = function(target){
 	    document.getElementById("myform").appendChild(input);
 		//Resend request with filter ->
 	}
-	$("input['name=purpose']").click(function(){
-		
-		alert('test');
-	});
 </script>
 
 <!-- 운동 카테고리 선택.-->
@@ -156,89 +152,146 @@ var areaSelectMaker = function(target){
 	          <h2>FitQuest</h2>
 	          <p>트레이너 목록</p>
 	        </header>
-	      <form action = "list.pd" id = "myform">
+	      <form action = "trainerList.pd" id = "myform">
           <div class="col-lg-12 d-flex justify-content-center" style = "margin-bottom: 60px; align-items: center;">
             <select name="addressRegion" id="addressRegion1" class="form-select" size = "5" aria-label="multiple select example"></select>
 		    <select name="addressDo" id="addressDo1" class="form-select" size = "5" aria-label="multiple select example"></select>
 		    <select name="addressSiGunGu" id="addressSiGunGu1" class="form-select" size = "5" aria-label="multiple select example"></select>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters" class = "myDIV">
-          		<span class = "box">원하는 운동 : </span>
-              <li class = "filter filter-active" onClick = "filter('all')">전체보기</li>
-              <li class = "filter" id = "pt" onClick = "filter('PT')">PT</li> <!-- onCLick -> class = "filter-active" -->
-              <li class = "filter" id = "pilates" onClick = "filter('필라테스')">필라테스</li>
-              <li class = "filter" id = "yoga" onClick = "filter('요가')">요가</li>
-            </ul>
+          	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 운동 : </span>
+          	  <input type="radio" class="btn-check" value = "null" name="activity" id="option1" autocomplete="off"
+          	  <c:if test = "${empty activity }">
+          	  checked
+          	  </c:if>
+          	  >
+			  <label class="btn" for="option1">전체보기</label>
+          	  <input type="radio" class="btn-check" value = "PT" name="activity" id="option2" autocomplete="off"
+          	  <c:if test = "${activity eq 'PT' }">
+          	  checked
+          	  </c:if>
+          	  >
+			  <label class="btn" for="option2">PT</label>
+          	  <input type="radio" class="btn-check" value = "필라테스" name="activity" id="option3" autocomplete="off"
+          	  <c:if test = "${activity eq '필라테스' }">
+          	  checked
+          	  </c:if>
+          	  >
+			  <label class="btn" for="option3">필라테스</label>
+          	  <input type="radio" class="btn-check" value = "요가" name="activity" id="option4" autocomplete="off"
+          	  <c:if test = "${activity eq '요가' }">
+          	  checked
+          	  </c:if>
+          	  >
+			  <label class="btn" for="option4">요가</label>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
           	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 효과 : </span>
-	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체지방 감소" id="flexCheckDefault">
-			  <label class="form-check-label btn" for="flexCheckDefault">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체지방 감소" id="flexCheckDefault5"
+	          <c:if test = "${ purpose.contains('체지방 감소') }">
+          	  checked
+          	  </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault5">
 			    체지방 감소
 			  </label>
 			  <span class = "box">
-	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="근육량 증가" id="flexCheckDefault2">
-			  <label class="form-check-label btn" for="flexCheckDefault2">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="근육량 증가" id="flexCheckDefault6"
+	          <c:if test = "${ purpose.contains('근육량 증가') }">
+          	  checked
+          	  </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault6">
 			    근육량 증가
 			  </label>
 			  </span>
 			  <span class = "box">
-	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="재활" id="flexCheckDefault3">
-			  <label class="form-check-label btn" for="flexCheckDefault3">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="재활" id="flexCheckDefault7"
+	          <c:if test = "${ purpose.contains('재활') }">
+          	  checked
+          	  </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault7">
 			    재활
 			  </label>
 			  </span>
 			  <span class = "box">
-	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체력 강화" id="flexCheckDefault4">
-			  <label class="form-check-label btn" for="flexCheckDefault4">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체력 강화" id="flexCheckDefault8"
+	          <c:if test = "${ purpose.contains('체력 강화') }">
+          	  checked
+          	  </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault8">
 			    체력 강화
 			  </label>
 			  </span>
           </div>
-           <div class="col-lg-9 d-flex justify-content-center">
-           </div>
-           <div class = "col-lg-3 d-flex justify-content-center">
-	          <input class="form-check-input btn-check" type="radio" name = "order" value="all" id="flexCheckDefault5">
-			  <label class="form-check-label btn" for="flexCheckDefault5">
+           <div class = "col-lg-12 d-flex justify-content-space-between">
+			  <span class = "box" style = "line-height:40px; margin-right: 8px;">순서 선택 : </span>
+	          <input class="form-check-input btn-check" type="radio" name = "ordering" value="all" id="flexCheckDefault9"
+	          <c:if test = "${ordering eq 'all' }">
+	          checked
+	          </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault9">
 			    기본순
 			  </label>
-	          <input class="form-check-input btn-check" type="radio" name = "order" value="review" id="flexCheckDefault6">
-			  <label class="form-check-label btn" for="flexCheckDefault6">
+	          <input class="form-check-input btn-check" type="radio" name = "ordering" value="review" id="flexCheckDefault10"
+	          <c:if test = "${ordering eq 'review' }">
+	          checked
+	          </c:if>
+	          >
+			  <label class="form-check-label btn" for="flexCheckDefault10">
 			    인기순
 			  </label>
-			  <input type = "submit" class = "btn" value = "적용" for="flexCheckDefault7">
+			 <input type = "submit" class = "btn" value = "검색하기" style = "background-color: #FAC710; margin-left: auto;">
 		  </div>
-          <input type ="hidden" value = "all" id = "input" name = "activity">
           </form>
         </div>
-</div>
+	</div>
 </section>
  <section id="team" class="team">
 
       <div class="container" data-aos="fade-up">
-
-        
-
         <div class="row gy-4">
-		  <c:forEach var = "trainer" items = "tList">
+		  <c:forEach var = "trainer" items = "${tList }">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="member-img">
-                <img src="" class="img-fluid" alt="">
-              </div>
+                <a href = "trainerDetail.pd">
+             	 <div class="member-img">
+               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text"/>
+            	 </div>
+                </a>
               <div class="member-info">
-                <h4>${trainer.name}</h4>
-                <span>${trainer.activity }</span>
-                <p>${trainer.purpose }</p>
+                <h4 style = "margin-top:10px;">${trainer.name }</h4>
+                <span>${trainer.activity} : ${trainer.purpose }</span>
+				<span style = "color:black;">${trainer.gaddr1}</span>
+               	<fmt:formatNumber var = "rating1" value="${trainer.rating }" type="number" pattern="#.##"/>
+				<fmt:formatNumber var = "rating" value="${trainer.rating }" type="number" pattern="#"/>
+				<c:set var = "starCount" value = "0"/>
+				<div class="stars">
+				<c:forEach begin = "1" end = "${rating }" step="1" var="i">
+                  <i class="bi bi-star-fill"></i>
+                  <c:set var = "starCount" value = "${starCount + 1 }"/>
+				</c:forEach>
+				<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
+				<i class = "bi bi-star"></i>
+				</c:forEach>
+				(${rating1})
+				<br>
+                </div>
+                <p>
+                <input type = "button" value = "자세히 보기" class = "btn btn-warning" onclick= "location.href='trainerDetail.pd'">
+                </p>
               </div>
             </div>
           </div>	
 		  </c:forEach>
-        </div>
-	  ${pageInfo.pagingHtml }
+        </div>	
       </div>
-
+	<div align = "center">
+		${pageInfo.pagingHtml}
+	</div>
     </section><!-- End Team Section -->
 
   
