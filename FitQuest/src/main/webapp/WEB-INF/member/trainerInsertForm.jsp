@@ -16,6 +16,9 @@
 	input[type=checkbox]{
 		accent-color : #FAC710;
 	}
+	input[type=radio]{
+		accent-color : #FAC710;
+	}
 }
 </style>
 
@@ -184,6 +187,7 @@ $(document).ready(function(){
 });
 </script>
 
+<body style="background-color : #FEF9E7;">
  <main>
     <div class="container">
 
@@ -194,7 +198,7 @@ $(document).ready(function(){
 
               <div class="card mb-3">
 
-                <div class="card-body" style="background-color : #FEF9E7;">
+                <div class="card-body">
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">회원 가입(트레이너)</h5>
@@ -242,6 +246,13 @@ $(document).ready(function(){
                     <div class="col-12">
                       <label for="yourBirth" class="form-label">생년월일</label>
                       <input type="date" name="birth" class="form-control" id="yourBirth" value="${ trainerBean.birth }">
+                    </div>
+                    
+                    <div class="col-12">
+                      <label for="gender" class="form-label">성별</label> <br>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자"> 남자</label>
+                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자"> 여자</label><br>
+                    <form:errors cssClass="err" path="gender" />
                     </div>
                    
                    <div class="col-12">
@@ -340,6 +351,6 @@ $(document).ready(function(){
 
     </div>
   </main>
-  
+</body>  
 <%@ include file="../common/bottom.jsp" %>  
 <%@ include file="../common/adminBootBottom.jsp" %>  
