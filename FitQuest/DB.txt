@@ -253,10 +253,14 @@ CREATE TABLE health (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    hdate   date   NOT NULL, --운동일자
    hname   varchar2(30)   NOT NULL, --운동명
-   starttime   date, --시작시간
-   endtime   date --종료시간
+   starttime   timestamp, --시작시간
+   endtime   timestamp, --종료시간
+   hcount number default 0, --횟수 --세트
+   hset number default 0 
 );
 
+insert into health values(hseq.nextval, 'hong', '2023-06-01', '유산소','2023-06-01 11:00','2023-06-01 11:30',0,0);
+insert into health values(hseq.nextval, 'hong', '2023-06-01', '유산소','2023-06-01 11:30','2023-06-01 11:40',10,3);
 select * from health;
 commit;
 
