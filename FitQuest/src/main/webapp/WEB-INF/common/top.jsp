@@ -128,7 +128,7 @@
           		
           		<!-- 로그인 정보 있으면 logout -->
           		<c:if test="${loginInfo != null}">
-          		<button type="button" class="btn btn-warning scrollto" onclick="location.href=''">LOGOUT</button>
+          		<button type="button" class="btn btn-warning scrollto" onclick="location.href='logout.mb'">LOGOUT</button>
           		</c:if>
           	</a>
           </li>
