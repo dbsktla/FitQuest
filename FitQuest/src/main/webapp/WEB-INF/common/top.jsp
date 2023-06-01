@@ -109,8 +109,6 @@
           </c:if>
           
           <!-- 내글보기, 회원정보수정 -->
-          <li><a class="nav-link scrollto" href="#">MY PAGE</a></li>
-          
           <c:if test="${loginInfo != null}">
           	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.id})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
