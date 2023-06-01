@@ -129,7 +129,7 @@ $(document).ready(function(){
 	
 });
 </script>
-
+<body style="background-color : #FEF9E7;">
  <main>
     <div class="container">
 
@@ -140,7 +140,7 @@ $(document).ready(function(){
 
               <div class="card mb-3">
 
-                <div class="card-body" style="background-color : #FEF9E7;">
+                <div class="card-body">
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">헬스장 등록</h5>
@@ -201,6 +201,6 @@ $(document).ready(function(){
 
     </div>
   </main>
-
+</body>
 <%@ include file="../common/bottom.jsp" %>  
 <%@ include file="../common/adminBootBottom.jsp" %>  

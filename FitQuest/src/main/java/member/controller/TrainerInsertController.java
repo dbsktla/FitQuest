@@ -49,7 +49,8 @@ public class TrainerInsertController {
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request) {
-		String uploadPath = "c:/Image/TrainerImage";
+		//String uploadPath = "c:/Image/TrainerImage";
+		String uploadPath = "/Users/songnayoung/Image/TrainerImage";
 		
 		File destination = new File(uploadPath + File.separator + trainerBean.getUpload().getOriginalFilename());
 		MultipartFile multi =  trainerBean.getUpload();

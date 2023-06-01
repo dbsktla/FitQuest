@@ -2,6 +2,8 @@ package member.model;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class MemberBean {
 	private String id;
 	private String mtype;
@@ -18,8 +20,17 @@ public class MemberBean {
 	private String maddr1; 
 	private String maddr2;
 	
+	@NotBlank(message = "성별을 선택해 주세요.")
+	private String gender;
+	
 	public MemberBean() {
 			
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public MemberBean(String id, String mtype, String name, String password, String nickname, String birth, String mphone,
 			String email, String maddr1, String maddr2) {

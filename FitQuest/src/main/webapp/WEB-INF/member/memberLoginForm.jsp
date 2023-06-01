@@ -4,7 +4,7 @@
 <%@ include file="../common/top.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
 
-
+<body style="background-color : #FEF9E7;">
 <main>
     <div class="container">
 
@@ -13,7 +13,7 @@
          <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
               <div class="card mb-3">
-                <div class="card-body" style="background-color : #FEF9E7;">
+                <div class="card-body">
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">로그인</h5>
@@ -64,6 +64,6 @@
 
     </div>
   </main>
-
+</body>
 <%@ include file="../common/bottom.jsp" %>
 <%@ include file="../common/adminBootBottom.jsp" %>  

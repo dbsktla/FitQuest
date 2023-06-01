@@ -2,6 +2,7 @@ package member.model;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 public class TrainerBean {
@@ -20,10 +21,22 @@ public class TrainerBean {
 	private String maddr1;
 	private String maddr2;
 	
+	@NotBlank(message = "성별을 선택해 주세요.")
+	private String gender;
+	
+	@NotBlank(message = "헬스장을 선택해 주세요.")
 	private int gnum;
+	
+	@NotBlank(message = "운동 종류를 선택해 주세요.")
 	private String activity;
+	
+	@NotBlank(message = "운동 목적을 선택해 주세요.")
 	private String purpose;
+	
+	@NotBlank(message = "소개를 작성해 주세요.")
 	private String intro;
+	
+	@NotBlank(message = "경력을 작성해 주세요.")
 	private String exp;
 	private String timage;
 	

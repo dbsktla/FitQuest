@@ -9,6 +9,9 @@
 		color : #E04848;
 		font-size: 10pt;
 	}
+	input[type=radio]{
+		accent-color : #FAC710;
+	}
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -175,7 +178,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-
+<body style="background-color : #FEF9E7;">
  <main>
     <div class="container">
 
@@ -186,7 +189,7 @@ $(document).ready(function(){
 
               <div class="card mb-3">
 
-                <div class="card-body" style="background-color : #FEF9E7;">
+                <div class="card-body">
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">회원 가입(일반)</h5>
@@ -235,6 +238,13 @@ $(document).ready(function(){
                       <label for="yourBirth" class="form-label">생년월일</label>
                       <input type="date" name="birth" class="form-control" id="yourBirth" value="${ memberBean.birth }">
                     </div>
+                    
+                     <div class="col-12">
+                      <label for="gender" class="form-label">성별</label> <br>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자"> 남자</label>
+                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자"> 여자</label><br>
+                    <form:errors cssClass="err" path="gender" />
+                    </div>
                    
                    <div class="col-12">
                       <label for="yourPhone" class="form-label">전화번호</label>
@@ -282,6 +292,6 @@ $(document).ready(function(){
 
     </div>
   </main>
-
+</body>
 <%@ include file="../common/bottom.jsp" %>  
 <%@ include file="../common/adminBootBottom.jsp" %>  
