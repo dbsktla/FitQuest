@@ -2,9 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
 <%@ include file="../common/top.jsp" %>
+<style type = "text/css">
+	.btn:hover {
+		background-color:#FAC710 !important;
+	}
+	.btn-check:checked{
+		background-color:#FAC710 !important;
+		border: #FAC710 !important;
+	}
+	.btn {
+		border-radius: 25px !important;
+		color: #444444 !important;
+		font-size: 15px !important;
+		font-weight: 600 !important;
+		padding: 8px 20px 10px 20px !important;
+	}
+	.box {
+		color: #444444;
+		font-size: 15px;
+		font-weight: 600;
+	}
+</style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
-
+	
 $(function(){
     areaSelectMaker("select[name=addressRegion]");
 });
@@ -121,6 +142,10 @@ var areaSelectMaker = function(target){
 	    document.getElementById("myform").appendChild(input);
 		//Resend request with filter ->
 	}
+	$("input['name=purpose']").click(function(){
+		
+		alert('test');
+	});
 </script>
 
 <!-- 운동 카테고리 선택.-->
@@ -132,21 +157,58 @@ var areaSelectMaker = function(target){
 	          <p>트레이너 목록</p>
 	        </header>
 	      <form action = "list.pd" id = "myform">
-          <div class="col-lg-12 d-flex justify-content-center" style = "margin-bottom: 60px;">
-            <select name="addressRegion" id="addressRegion1" class="form-select" multiple aria-label="multiple select example"></select>
-		    <select name="addressDo" id="addressDo1" class="form-select" multiple aria-label="multiple select example"></select>
-		    <select name="addressSiGunGu" id="addressSiGunGu1" class="form-select" multiple aria-label="multiple select example"></select>
+          <div class="col-lg-12 d-flex justify-content-center" style = "margin-bottom: 60px; align-items: center;">
+            <select name="addressRegion" id="addressRegion1" class="form-select" size = "5" aria-label="multiple select example"></select>
+		    <select name="addressDo" id="addressDo1" class="form-select" size = "5" aria-label="multiple select example"></select>
+		    <select name="addressSiGunGu" id="addressSiGunGu1" class="form-select" size = "5" aria-label="multiple select example"></select>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters" class = "myDIV">
+          		<span class = "box">원하는 운동 : </span>
               <li class = "filter filter-active" onClick = "filter('all')">전체보기</li>
-              <li class = "filter" id = "pt" onClick = "filter('pt')">PT</li> <!-- onCLick -> class = "filter-active" -->
-              <li class = "filter" id = "pilates" onClick = "filter('pilates')">필라테스</li>
-              <li class = "filter" id = "yoga" onClick = "filter('yoga')">요가</li>
+              <li class = "filter" id = "pt" onClick = "filter('PT')">PT</li> <!-- onCLick -> class = "filter-active" -->
+              <li class = "filter" id = "pilates" onClick = "filter('필라테스')">필라테스</li>
+              <li class = "filter" id = "yoga" onClick = "filter('요가')">요가</li>
             </ul>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
+          	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 효과 : </span>
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체지방 감소" id="flexCheckDefault">
+			  <label class="form-check-label btn" for="flexCheckDefault">
+			    체지방 감소
+			  </label>
+			  <span class = "box">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="근육량 증가" id="flexCheckDefault2">
+			  <label class="form-check-label btn" for="flexCheckDefault2">
+			    근육량 증가
+			  </label>
+			  </span>
+			  <span class = "box">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="재활" id="flexCheckDefault3">
+			  <label class="form-check-label btn" for="flexCheckDefault3">
+			    재활
+			  </label>
+			  </span>
+			  <span class = "box">
+	          <input class="form-check-input btn-check" type="checkbox" name = "purpose" value="체력 강화" id="flexCheckDefault4">
+			  <label class="form-check-label btn" for="flexCheckDefault4">
+			    체력 강화
+			  </label>
+			  </span>
           </div>
+           <div class="col-lg-9 d-flex justify-content-center">
+           </div>
+           <div class = "col-lg-3 d-flex justify-content-center">
+	          <input class="form-check-input btn-check" type="radio" name = "order" value="all" id="flexCheckDefault5">
+			  <label class="form-check-label btn" for="flexCheckDefault5">
+			    기본순
+			  </label>
+	          <input class="form-check-input btn-check" type="radio" name = "order" value="review" id="flexCheckDefault6">
+			  <label class="form-check-label btn" for="flexCheckDefault6">
+			    인기순
+			  </label>
+			  <input type = "submit" class = "btn" value = "적용" for="flexCheckDefault7">
+		  </div>
           <input type ="hidden" value = "all" id = "input" name = "activity">
           </form>
         </div>
@@ -159,22 +221,22 @@ var areaSelectMaker = function(target){
         
 
         <div class="row gy-4">
-
+		  <c:forEach var = "trainer" items = "tList">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
               <div class="member-img">
                 <img src="" class="img-fluid" alt="">
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
+                <h4>${trainer.name}</h4>
+                <span>${trainer.activity }</span>
+                <p>${trainer.purpose }</p>
               </div>
             </div>
-          </div>
-
+          </div>	
+		  </c:forEach>
         </div>
-
+	  ${pageInfo.pagingHtml }
       </div>
 
     </section><!-- End Team Section -->
