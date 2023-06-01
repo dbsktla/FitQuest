@@ -247,11 +247,23 @@ create sequence hseq
   minvalue 1
   nocache;
 
-drop table health cascade constraints;
-CREATE TABLE health (
+drop table healthdate cascade constraints;
+CREATE TABLE healthdate (
    hnum   number   primary key, -- 운동정보 번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   hdate   date   NOT NULL, --운동일자
+   hdate   date   NOT NULL --운동일자
+);
+
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-01');
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-02');
+
+select * from healthdate;
+commit;
+
+
+drop table health cascade constraints;
+CREATE TABLE health (
+   hnum number references healthdate(hnum) on delete cascade, --운동정보 번호
    hname   varchar2(30)   NOT NULL, --운동명
    starttime   timestamp, --시작시간
    endtime   timestamp, --종료시간
@@ -259,10 +271,10 @@ CREATE TABLE health (
    hset number default 0 
 );
 
-insert into health values(hseq.nextval, 'hong', '2023-06-01', '유산소','2023-06-01 11:00','2023-06-01 11:30',0,0);
-insert into health values(hseq.nextval, 'hong', '2023-06-01', '벤치프레스','2023-06-01 11:30','2023-06-01 11:40',10,3);
-insert into health values(hseq.nextval, 'hong', '2023-06-02', '유산소','2023-06-02 11:00','2023-06-02 11:30',0,0);
-insert into health values(hseq.nextval, 'hong', '2023-06-02', '스쿼트','2023-06-02 11:30','2023-06-02 12:00',12,5);
+insert into health values(1, '유산소','2023-06-01 11:00','2023-06-01 11:30',0,0);
+insert into health values(1, '벤치프레스','2023-06-01 11:30','2023-06-01 11:40',10,3);
+insert into health values(2, '유산소','2023-06-02 11:00','2023-06-02 11:30',0,0);
+insert into health values(2, '스쿼트','2023-06-02 11:30','2023-06-02 12:00',12,5);
 select * from health;
 commit;
 
