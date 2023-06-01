@@ -21,5 +21,6 @@
 	<context:component-scan base-package="nutrition"/>
 	<context:component-scan base-package="food"/>
 	<context:component-scan base-package="physique"/>
+	<context:component-scan base-package="reservation"/>
 
 </beans>
