@@ -28,7 +28,7 @@ public class MemberLoginController {
 	public String login() {
 		return getPage;
 	}
-
+	
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String login(
 			@RequestParam("id") String id, 
@@ -67,7 +67,9 @@ public class MemberLoginController {
 //	}
 	
 	@RequestMapping(value="/kakaoLogin.mb")
-	public String kakao(HttpServletRequest request, HttpSession session) {
+	public String kakao(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=UTF-8");
+		
 		MemberBean memberBean = new MemberBean();
 		
 		String id = request.getParameter("id");
@@ -110,8 +112,14 @@ public class MemberLoginController {
 			return gotoPage;
 		}
 		else {
-			int cnt = memberDao.insertMember(memberBean);
-			System.out.println("InsertKaKao cnt : " + cnt);
+			try {
+				int cnt = memberDao.insertMember(memberBean);
+				System.out.println("InsertKaKao cnt : " + cnt);
+				response.getWriter().print("<script>alert('소셜 회원가입되었습니다.');history.go(-1);</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return getPage;
 		}
 	}
