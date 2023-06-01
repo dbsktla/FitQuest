@@ -1,14 +1,12 @@
 package health.model;
 
-import java.sql.Timestamp;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 public class HealthDateBean {
 
 	private int hnum;
 	private String id;
-	@NotBlank(message = "¿îµ¿ÀÏÀÚ ÇÊ¼ö ÀÛ¼º")
+	@NotBlank(message = "ìš´ë™ ë‚ ì§œ í•„ìˆ˜ ì…ë ¥")
 	private String hdate;
 	private String playtime;
 

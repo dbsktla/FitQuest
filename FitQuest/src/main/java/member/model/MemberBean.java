@@ -9,7 +9,7 @@ public class MemberBean {
 	private String mtype;
 	private String name;
 	
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "��й�ȣ ���� �°� �ۼ��� �ּ���.")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호 형식 맞게 작성해 주세요.")
 	private String password;
 	private String nickname;
 	private String birth;
