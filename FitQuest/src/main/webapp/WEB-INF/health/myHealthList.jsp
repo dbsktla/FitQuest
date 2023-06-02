@@ -4,6 +4,49 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
+
+<script type="text/javascript" src="resources/js/jquery.js" ></script>
+<script type="text/javascript">
+	/* 상세정보 띄우기 */
+	$(document).ready(function(){
+		
+	}); // document
+	
+		
+	function btnclick(hnum) {
+		//alert(hnum);
+		
+		$.ajax({
+			type : "POST",
+			url : "myHealthList.ht",
+			data : ({'hnum' : hnum}),
+			dataType : "json",
+			success : function (data) {
+				
+				$('#healthDetail').empty();
+				var msg = "<table class='table'><tr class='table-warning'>";
+				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
+				
+				for(var i=0; i<data.length; i++){
+					msg += "<tr><td>"+data[i].hname+"</td>";
+					msg += "<td>"+data[i].starttime+"</td>";
+					msg += "<td>"+data[i].endtime+"</td>";
+					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
+				}
+				
+				msg += "</table>";
+				
+				$("#healthDetail").append(msg);
+			},
+			error : function () {
+				alert("fail");
+			}
+		}); // ajax
+	}
+		
+
+</script>
+
 <body style="background-color: #FEF9E7">
 	<div class="pagetitle">
 		<h1>
@@ -34,12 +77,23 @@
 				<!-- 리스트보기 -->
 				<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 					<div class="row">
+						
+						<div class="col-lg-12">
+							<!-- Default Card -->
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">운동 정보</h5>
+									<!-- 선택한 날짜, 00 트레이너와 00일쨰 00중 -->
+								</div>
+							</div>
+						</div>
+					
 						<div class="col-lg-4">
 							<!-- Default Card -->
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">운동 목록</h5>
-
+									<h5 class="card-title">운동 목록 <button type="button" onclick="location.href='myHealthInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right;">추가</button></h5>
+									
 									<table class="table">
 										<thead>
 											<tr class="table-warning">
@@ -52,7 +106,7 @@
 										<tbody>
 											<c:if test="${empty hdlist}">
 												<tr>
-													<td colspan="3">등록된 운동내역이 없습니다.</td>
+													<td colspan="3">등록 된 운동내역이 없습니다.</td>
 												</tr>
 											</c:if>
 											<c:if test="${not empty hdlist}">
@@ -60,8 +114,8 @@
 												<tr>
 													<td>${status.index +1}</td>
 													<td>
-														<fmt:parseDate value="${hdlist.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"></fmt:parseDate>
-														<fmt:formatDate value="${day}" pattern="yyyy-MM-dd"></fmt:formatDate>
+														<fmt:parseDate value="${hdlist.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
+														<button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick('${hdlist.hnum}')"><fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/></button>
 													</td>
 													<td>${hdlist.playtime}</td>
 												</tr>
@@ -79,13 +133,11 @@
 							<!-- Default Card -->
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">상세 정보</h5>
-								</div>
-							</div>
-							<!-- Default Card -->
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">상세 정보</h5>
+									<h5 class="card-title">상세 정보 
+										<button type="button" class="btn btn-warning rounded-pill btn-sm" style="float: right;">삭제</button> 
+										<button type="button" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">수정</button>
+									</h5>
+									<div id="healthDetail"><span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span></div>
 								</div><!-- card body -->
 							</div>
 						</div><!-- col-lg-8 -->

@@ -1,10 +1,8 @@
 package health.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import health.model.HealthBean;
@@ -22,6 +22,8 @@ import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
 import member.model.MemberBean;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MyHealthListController {
@@ -35,13 +37,16 @@ public class MyHealthListController {
 	@Autowired
 	HealthDateDao healthDateDao;
 	
+	// 운동 목록 불러오기
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public ModelAndView doAction(HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/html; charset=UTF-8");
 		ModelAndView mav = new ModelAndView();
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
-		if(memberBean == null) {
+		
+		// 로그인 정보 확인
+		if(memberBean == null) { 
 			session.setAttribute("destination", "redirect:/myHealthList.ht");
 			try {
 				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
@@ -51,77 +56,76 @@ public class MyHealthListController {
 			}
 			mav.setViewName(gotoPage);
 		}else {
+			// 운동 날짜 불러옴
 			List<HealthDateBean> hdlist = healthDateDao.getMyHealthDateList(memberBean.getId());
 			
+			// 상세 운동 정보 불러와서 운동시간 합한뒤 운동 목록에 노출
 			for(HealthDateBean hd : hdlist) {
 				List<HealthBean> timelist = healthDao.getOneHealth(hd.getHnum());
 				
-//				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-//				Calendar allcal1 = Calendar.getInstance();
-//				Calendar allcal2 = Calendar.getInstance();
-//				int i = 0;
-				
-				
-				long alltime = 0;
+				long alltime = 0; // 일자별 전체 운동시간
 				for(HealthBean time : timelist) {
-//					System.out.println("hnum : " + time.getHnum());
-//					System.out.println("hname : " + time.getHname());
-//					System.out.println("stime : " + time.getStarttime());
-//					System.out.println("etime : " + time.getEndtime());
 					
-					String stime = time.getStarttime();
-					String etime = time.getEndtime();
+					String stime = time.getStarttime(); // 시작시간
+					String etime = time.getEndtime(); // 종료시간
 					
-//					Calendar cal1 = Calendar.getInstance();
-//					Calendar cal2 = Calendar.getInstance();
-//					
-//					cal1.setTime(etime); 
-//					cal2.setTime(stime);
-//					System.out.println("cal1 : " + cal1.getTime());
-//					System.out.println("cal2 : " + cal2.getTime());
-					
-//					cal1.add(Calendar.HOUR_OF_DAY, -(cal2.get(Calendar.HOUR_OF_DAY)));
-//					System.out.println("cal1-cal2 = " + cal1.getTime());
-//					
-//					System.out.println("play time : "+sdf.format(cal1.getTime()));
-//					if(i==0) {
-//						allcal1.setTime(cal1.getTime());
-//					}else {
-//						allcal2.setTime(cal1.getTime());
-//					}
-//					i++;
-					
-					//long re = sdf 
-					
-					System.out.println("stime : " + stime);
-					long answer = 0;
+					long answer = 0; // 운동 종류별 운동 시간
 					Date format1;
 					Date format2;
 					try {
+						// 시작시간과 끝시간 data 타입으로 바꿈
 						format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(etime);
 						format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(stime);
 						
+						// 시간 계산한 결과값을 분으로 변경
 						answer = (format1.getTime() - format2.getTime())/60000;
 						
 					} catch (ParseException e) {
 						System.out.println("날짜 변경 오류");
 						e.printStackTrace();
 					}
-					
+					// 운동일자별(번호) 합산
 					alltime += answer;
 				}
 				
-				
-//				allcal1.add(Calendar.HOUR_OF_DAY, (allcal2.get(Calendar.HOUR_OF_DAY)));
-//				System.out.println("allplay time : " + sdf.format(allcal1.getTime()));
-				
 				String playTime = String.valueOf(alltime)+"분";
-				hd.setPlaytime(playTime);
+				hd.setPlaytime(playTime); // 해당 결과 저장
 			}
 			mav.addObject("hdlist", hdlist);
 			mav.setViewName(getPage);
 		}
 		return mav;
 	} // doAction - list
+	
+	
+	// 상세목록 ajax
+	// produces = "application/text; charset=utf8" > ajax 한글처리
+	@RequestMapping(value = command, method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String doAction(HttpServletResponse response, @RequestParam("hnum") int hnum) {
+		response.setContentType("text/html; charset=UTF-8");
+		System.out.println("hnum : " + hnum);
+		List<HealthBean> hlist = healthDao.getOneHealth(hnum);
+		
+		JSONArray jsArr = new JSONArray();
+		int i =0;
+		for(HealthBean hb : hlist) {
+			JSONObject jsObject = new JSONObject();
+			
+			jsObject.put("hnum", hb.getHnum());
+			jsObject.put("hname", hb.getHname());
+			jsObject.put("starttime", hb.getStarttime());
+			jsObject.put("endtime", hb.getEndtime());
+			jsObject.put("hcount", hb.getHcount());
+			jsObject.put("hset", hb.getHset());
+			
+			jsArr.add(i, jsObject);
+			i++;
+		}
+		
+		System.out.println(jsArr);
+		
+		return jsArr.toString();
+	}
 	
 }
