@@ -275,7 +275,7 @@ $(document).ready(function(){
 					
                     <div class="col-12">
                       <label for="yourGym" class="form-label">헬스장</label>
-                       <button type="button" class="btn btn-warning btn-sm" onclick="location.href='insertG.mb'">등록하기</button>
+                       <button type="button" class="btn btn-warning btn-sm" onclick="location.href='gymInsert.mb'">등록하기</button>
                       <select class="form-select" name="gnum" id="yourGym">
                       	<option value="">선택</option>
 	                    <c:forEach var="gymBean" items="${ glist }">
