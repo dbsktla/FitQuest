@@ -117,8 +117,8 @@
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">계정이 없으시다면? <br>
-                      	<a href="insert.mb">일반 회원가입</a>/
-                      	<a href="insertT.mb">트레이너 회원가입</a>
+                      	<a href="memberInsert.mb">일반 회원가입</a>/
+                      	<a href="trainerInsert.mb">트레이너 회원가입</a>
                       </p>
                     </div>
                   </form>

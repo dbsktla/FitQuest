@@ -50,7 +50,8 @@ public class TrainerInsertController {
 	} 
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
-	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request) {
+	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request, Model model) {
+		List<GymBean> glist = gymDao.getAllGym();
 		String uploadPath = "/Users/songnayoung/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";
 		//String uploadPath = "";
 		
@@ -59,20 +60,27 @@ public class TrainerInsertController {
 
 		if(result.hasErrors()) {
 			System.out.println("에러 발생");
+			model.addAttribute("glist", glist);
 			return getPage; 
 		} 
 		else {
 			int cnt = memberDao.insertMember(trainerBean);
+			System.out.println("InsertMember cnt : " + cnt);
 			if(cnt != -1) {
 				try {
 					multi.transferTo(destination);
+					System.out.println("image : " + trainerBean.getTimage());
 					cnt = trainerDao.insertTrainer(trainerBean);
+					System.out.println("InsertTrainer cnt : " + cnt);
 					if(cnt != -1) {
-						System.out.println("삽입 실패");
-						return getPage; 
+						return gotoPage;
 					}
 					else {
-						return gotoPage;
+						System.out.println("Trainer 테이블 삽입 실패");
+						cnt = memberDao.deleteMember(trainerBean.getId());
+						System.out.println("DeleteMember cnt : " + cnt);
+						model.addAttribute("glist", glist);
+						return getPage; 
 					}
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -81,7 +89,8 @@ public class TrainerInsertController {
 				}
 			}
 			else {
-				System.out.println("삽입 실패");
+				System.out.println("Member 테이블 삽입 실패");
+				model.addAttribute("glist", glist);
 				return getPage; 
 			}
 		}

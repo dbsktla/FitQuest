@@ -250,8 +250,8 @@ $(document).ready(function(){
                     
                      <div class="col-12">
                       <label for="gender" class="form-label">성별</label> <br>
-                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ memberBean.gender eq '남자' }">checked</c:if>> 남자</label>
-                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ memberBean.gender eq '여자' }">checked</c:if>> 여자</label><br>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ trainerBean.gender eq '남자' }">checked</c:if>> 남자</label>
+                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ trainerBean.gender eq '여자' }">checked</c:if>> 여자</label><br>
                     <form:errors cssClass="err" path="gender" />
                     </div>
                    
@@ -290,7 +290,7 @@ $(document).ready(function(){
                       <select class="form-select" name="activity" id="activity">
                       	<option value="">선택</option>
 	                    <c:forEach var="act" items="PT,필라테스,요가">
-	                    	<option value="${ act }" <c:if test="${ act eq trainerBean.activity }">selected</c:if>>${ act }</option>  
+	                    	<option value="${ act }" <c:if test="${ trainerBean.activity eq act }">selected</c:if>>${ act }</option>  
 	                    </c:forEach>
                       </select>
                       <form:errors cssClass="err" path="activity"/>
@@ -300,7 +300,7 @@ $(document).ready(function(){
                       <label for="purpose" class="form-label">운동 목적</label> <br>
                       <c:forEach var="pur" items="체지방 감소,근육량 증가,재활,체력 강화">
                       	<label for="${ pur }">
-                      	<input type="checkbox" name="purpose" id="${ pur }" value="${ pur }">
+                      	<input type="checkbox" name="purpose" id="${ pur }" value="${ pur }" <c:if test="${ trainerBean.purpose.contains(pur) }">checked</c:if>>
                       	${ pur } 
                       </label>
                       </c:forEach>
