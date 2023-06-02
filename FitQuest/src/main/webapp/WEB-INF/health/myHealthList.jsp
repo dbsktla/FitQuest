@@ -17,18 +17,19 @@
 		//alert(hnum);
 		
 		$.ajax({
-			type : "POST",
-			url : "myHealthList.ht",
-			data : ({'hnum' : hnum}),
-			dataType : "json",
+			type : "POST", // 요청타입
+			url : "myHealthList.ht", // 요청 url
+			data : ({'hnum' : hnum}), // url로 넘길 데이터 설정
+			dataType : "json", // 받아올 데이터 타입설정
 			success : function (data) {
 				
-				$('#healthDetail').empty();
+				$('#healthDetail').empty(); // healthDetail div 내용 비우기
 				var msg = "<table class='table'><tr class='table-warning'>";
 				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
 				
+				// 현재 jsonArray 형태로 값이 넘어와서 data에 담긴상태	
 				for(var i=0; i<data.length; i++){
-					msg += "<tr><td>"+data[i].hname+"</td>";
+					msg += "<tr><td>"+data[i].hname+"<input type='hidden' name='hnum' value='"+data[i].hnum+"'></td>";
 					msg += "<td>"+data[i].starttime+"</td>";
 					msg += "<td>"+data[i].endtime+"</td>";
 					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
@@ -36,10 +37,11 @@
 				
 				msg += "</table>";
 				
+				// string값을 healthDetail div에 추가함!!
 				$("#healthDetail").append(msg);
 			},
 			error : function () {
-				alert("fail");
+				alert("fail"); // 실패
 			}
 		}); // ajax
 	}
