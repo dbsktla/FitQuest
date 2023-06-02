@@ -4,9 +4,7 @@
 <%@ include file="../common/top.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
         window.Kakao.init("3d70a452c3329afb28a7dfefc1825a3c");
@@ -34,15 +32,6 @@
 	                   var birthday = res.kakao_account.birthday;
 	                   var birthyear = res.kakao_account.birthyear;
 	                   
-	                  /*  alert(res.id);
-	                   alert(res.kakao_account.name);
-	                   alert(res.kakao_account.profile.nickname);
-	                   alert(res.kakao_account.email);
-	                   alert(res.kakao_account.gender);
-	                   alert(res.kakao_account.phone_number);
-	                   alert(res.kakao_account.birthday);
-	                   alert(res.kakao_account.birthyear); 
-	                  */
 	                  window.location.href='kakaoLogin.mb?id=' + id + '&email='+email + "&name=" + name + "&gender=" + gender + "&birthday=" + birthday + "&birthyear=" + birthyear + "&nickname=" + nickname + "&mphone=" + mphone; //리다이렉트 되는 코드
 	                        }
 	                    });
@@ -58,9 +47,6 @@
         		 	window.location.href = 'trainerInsert.mb'; 
         		}
         	}
-            
-            
-            
         }
 </script>
 
@@ -101,18 +87,29 @@
                       <button type="submit" class="btn btn-warning w-100">Login</button>
                     </div>
 					
-                    <div class="card-body" id="naver_id_login" style="text-align: center;">
-                 	<!-- <div style="height: 50px;" ></div>
-					  //네이버 로그인 버튼 노출 영역
-					  <script type="text/javascript">
-					  	var naver_id_login = new naver_id_login("5LAnxikAbCZNCyaKwbUp", "http://localhost:9001/ELTRUT/naverLogin");
+                    <div class="card-body" id="naverIdLogin" style="text-align: center;">
+                 	<div style="height: 50px;" ></div>
+					<!--   네이버 로그인 버튼 노출 영역 -->
+					 <!--  <script type="text/javascript">
+					  	var naver_id_login = new naver_id_login("KBhXUzgWQu6NpbT90un8", "http://localhost:8080/ex/naverLoginPopup.mb");
 					  	var state = naver_id_login.getUniqState();
 					  	naver_id_login.setButton("green",1);
 					  	naver_id_login.setState(state);	
 					  	naver_id_login.setPopup();
 					  	naver_id_login.init_naver_id_login();
 					   </script> -->
-					   <a href="javascript:kakaoLogin();"><img class="w-100" height="50" src="<%= request.getContextPath() %>/resources/Image/LoginImage/kakao_login_medium_wide.png" alt="카카오계정 로그인" /></a>
+					<script type="text/javascript">
+						var naverLogin = new naver.LoginWithNaverId({
+							clientId : "KBhXUzgWQu6NpbT90un8",
+							callbackUrl : "http://localhost:8080/ex/naverLoginPopup.mb", 
+							isPopup : true,
+							loginButton : {color : "green" , type : 1, height: 42}
+						});
+						
+						naverLogin.init();
+					</script>   
+					   	&nbsp;
+					   <a href="javascript:kakaoLogin();"><img height="42" src="<%= request.getContextPath() %>/resources/Image/LoginImage/kakaoLogin.png" alt="카카오계정 로그인" /></a>
 		
                     </div>
                     <div class="col-12">

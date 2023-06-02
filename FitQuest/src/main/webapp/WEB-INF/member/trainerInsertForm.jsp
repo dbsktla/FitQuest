@@ -250,7 +250,7 @@ $(document).ready(function(){
                     
                      <div class="col-12">
                       <label for="gender" class="form-label">성별</label> <br>
-                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ trainerBean.gender eq '남자' }">checked</c:if>> 남자</label>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ trainerBean.gender eq '남자' }">checked</c:if>> 남자</label> &nbsp;
                      <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ trainerBean.gender eq '여자' }">checked</c:if>> 여자</label><br>
                     <form:errors cssClass="err" path="gender" />
                     </div>
