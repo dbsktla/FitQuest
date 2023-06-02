@@ -146,7 +146,7 @@ $(document).ready(function(){
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">헬스장 등록</h5>
                   </div>
                   
-                  <form:form commandName="gymBean" action="insertG.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form:form commandName="gymBean" action="gymInsert.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
                       <label for="yourName" class="form-label">헬스장 이름</label>
                       <button type="button" id="GnameCheck" class="btn btn-outline-warning btn-sm">중복확인</button>

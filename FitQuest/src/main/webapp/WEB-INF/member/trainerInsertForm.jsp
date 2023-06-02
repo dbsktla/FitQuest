@@ -204,7 +204,7 @@ $(document).ready(function(){
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">회원 가입(트레이너)</h5>
                   </div>
                   
-                  <form:form commandName="trainerBean" action="insertT.mb" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form:form commandName="trainerBean" action="trainerInsert.mb" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate="novalidate">
                   	<input type="hidden" name="mtype" value="trainer">
                     <div class="col-12">
                       <label for="yourName" class="form-label">아이디</label>

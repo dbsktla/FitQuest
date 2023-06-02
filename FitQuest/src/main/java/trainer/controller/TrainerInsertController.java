@@ -25,7 +25,7 @@ import trainer.model.TrainerDao;
 
 @Controller
 public class TrainerInsertController {
-	private final String command = "/insertT.mb";
+	private final String command = "/trainerInsert.mb";
 	private final String getPage = "trainerInsertForm";
 	private final String gotoPage = "redirect:/login.mb";
 	

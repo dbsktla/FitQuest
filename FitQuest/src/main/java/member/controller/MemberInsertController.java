@@ -14,7 +14,7 @@ import member.model.MemberDao;
 
 @Controller
 public class MemberInsertController {
-	private final String command = "/insert.mb";
+	private final String command = "/memberInsert.mb";
 	private final String getPage = "memberInsertForm";
 	private final String gotoPage = "redirect:/login.mb";
 	

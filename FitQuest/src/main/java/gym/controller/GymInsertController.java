@@ -11,7 +11,7 @@ import gym.model.GymDao;
 
 @Controller
 public class GymInsertController {
-	private final String command = "/insertG.mb";
+	private final String command = "/gymInsert.mb";
 	private final String getPage = "gymInsertForm";
 	private final String gotoPage = "redirect:/insertT.mb";
 
