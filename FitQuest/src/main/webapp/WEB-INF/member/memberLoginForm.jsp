@@ -12,41 +12,54 @@
         window.Kakao.init("3d70a452c3329afb28a7dfefc1825a3c");
 
         function kakaoLogin() {
-            window.Kakao.Auth.login({
-                scope: 'name,profile_nickname,account_email,gender,birthday,birthyear,phone_number,shipping_address', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-                success: function(response) {
-                    console.log(response) // 로그인 성공하면 받아오는 데이터
-                    window.Kakao.API.request({ // 사용자 정보 가져오기 
-                        url: '/v2/user/me',
-                        success: (res) => {
-                            const kakao_account = res.kakao_account;
-                            console.log(kakao_account)
-                            
-                   var id = res.id;
-                   var name = res.kakao_account.name;
-                   var nickname = res.kakao_account.profile.nickname;
-                   var email = res.kakao_account.email;
-                   var gender = res.kakao_account.gender;
-                   var mphone = res.kakao_account.phone_number;
-                   var birthday = res.kakao_account.birthday;
-                   var birthyear = res.kakao_account.birthyear;
-                   
-                  /*  alert(res.id);
-                   alert(res.kakao_account.name);
-                   alert(res.kakao_account.profile.nickname);
-                   alert(res.kakao_account.email);
-                   alert(res.kakao_account.gender);
-                   alert(res.kakao_account.phone_number);
-                   alert(res.kakao_account.birthday);
-                   alert(res.kakao_account.birthyear); */
-                  window.location.href='kakaoLogin.mb?id=' + id + '&email='+email + "&name=" + name + "&gender=" + gender + "&birthday=" + birthday + "&birthyear=" + birthyear + "&nickname=" + nickname + "&mphone=" + mphone; //리다이렉트 되는 코드
-                        }
-                    });
-                },
-                fail: function(error) {
-                    console.log(error);
-                }
-            });
+        	var check = confirm('카카오 로그인(회원가입)은 일반 회원만 가능합니다.\n(트레이너 회원가입은 트레이너 회원가입 창을 이용해 주세요.)');
+        	//alert(check);
+        	if(check){
+	             window.Kakao.Auth.login({
+	                scope: 'name,profile_nickname,account_email,gender,birthday,birthyear,phone_number,shipping_address', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+	                success: function(response) {
+	                    console.log(response) // 로그인 성공하면 받아오는 데이터
+	                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+	                        url: '/v2/user/me',
+	                        success: (res) => {
+	                            const kakao_account = res.kakao_account;
+	                            console.log(kakao_account)
+	                            
+	                   var id = res.id;
+	                   var name = res.kakao_account.name;
+	                   var nickname = res.kakao_account.profile.nickname;
+	                   var email = res.kakao_account.email;
+	                   var gender = res.kakao_account.gender;
+	                   var mphone = res.kakao_account.phone_number;
+	                   var birthday = res.kakao_account.birthday;
+	                   var birthyear = res.kakao_account.birthyear;
+	                   
+	                  /*  alert(res.id);
+	                   alert(res.kakao_account.name);
+	                   alert(res.kakao_account.profile.nickname);
+	                   alert(res.kakao_account.email);
+	                   alert(res.kakao_account.gender);
+	                   alert(res.kakao_account.phone_number);
+	                   alert(res.kakao_account.birthday);
+	                   alert(res.kakao_account.birthyear); 
+	                  */
+	                  window.location.href='kakaoLogin.mb?id=' + id + '&email='+email + "&name=" + name + "&gender=" + gender + "&birthday=" + birthday + "&birthyear=" + birthyear + "&nickname=" + nickname + "&mphone=" + mphone; //리다이렉트 되는 코드
+	                        }
+	                    });
+	                },
+	                fail: function(error) {
+	                    console.log(error);
+	                }
+	            }); 
+        	}//if
+        	else{
+        		check = confirm('트레이너 회원가입 하시겠습니까?');
+        		if(check){
+        		 	window.location.href = 'trainerInsert.mb'; 
+        		}
+        	}
+            
+            
             
         }
 </script>
