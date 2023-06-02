@@ -13,7 +13,7 @@ import gym.model.GymDao;
 public class GymInsertController {
 	private final String command = "/gymInsert.mb";
 	private final String getPage = "gymInsertForm";
-	private final String gotoPage = "redirect:/insertT.mb";
+	private final String gotoPage = "redirect:/trainerInsert.mb";
 
 	@Autowired
 	GymDao gymDao;
