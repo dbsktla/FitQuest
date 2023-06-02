@@ -76,7 +76,7 @@
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var use,nuse;
+	var use,nuse,euse = "missing";;
 	var isCheck = false, isCheckN = false;	
 	
 	$('#idCheck').click(function(){
@@ -133,6 +133,40 @@ $(document).ready(function(){
 		}); 
 	});
 	
+	$('#emailCheck').click(function() {
+		const email = $('#email').val(); 
+		console.log('완성된 이메일 : ' + email); 
+		const checkInput = $('#emailCode') 
+		
+		$.ajax({
+			type : 'get',
+			url : 'email_check.mb?email='+email, 
+			success : function (data) {
+				console.log("data : " +  data);
+				checkInput.attr('disabled',false);
+				code = data;
+				alert('인증번호가 전송되었습니다.')
+			}			
+		}); 
+	}); 
+	
+	$('#emailCode').blur(function () {
+		const inputCode = $(this).val();
+		const $resultMsg = $('#mailMessage');
+		
+		if(inputCode === code){
+			$resultMsg.html('인증번호가 일치합니다.');
+			$resultMsg.css('color','green');
+			$('#emailCheck').attr('disabled',true);
+			$('#email').attr('readonly',true);
+			euse = "possible";
+		}else{
+			$resultMsg.html('인증번호가 불일치 합니다.');
+			$resultMsg.css('color','red');
+			euse = "impossible";
+		}
+	});
+	
 	$('#sub').click(function(){
 		if(use == "missing"){
 			alert("입력 누락되었습니다.");
@@ -161,6 +195,16 @@ $(document).ready(function(){
 			
 		} else if(isCheckN == false){
 			alert("별명 중복확인 필수입니다.");
+			return false;
+		}
+		if(euse == "missing"){
+			alert("이메일 인증 필수입니다.");
+			$("#emailMessage").focus();
+			return false; 
+			
+		} else if(euse == "impossible"){
+			alert("인증번호를 다시 확인해주세요.");
+			$("#emailMessage").select();
 			return false;
 		}
 	}); 
@@ -229,9 +273,12 @@ $(document).ready(function(){
                     </div>
 
                     <div class="col-12">
-                      <label for="yourEmail" class="form-label">이메일</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
+                      <label for="email" class="form-label">이메일</label>
+                      <button type="button" id="emailCheck" class="btn btn-outline-warning btn-sm">인증하기</button>
+                      <input type="email" name="email" class="form-control" id="email" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
+                      <input class="form-control" id="emailCode" placeholder="인증번호 6자리" disabled="disabled" maxlength="6">
                       <div class="invalid-feedback">이메일 형식에 맞게 작성해 주세요.</div>
+                       <div id="mailMessage"></div>
                     </div>
                     
                     <div class="col-12">
