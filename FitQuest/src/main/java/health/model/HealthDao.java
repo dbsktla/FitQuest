@@ -19,7 +19,5 @@ public class HealthDao {
 		timelist = sqlSessionTemplate.selectList(namespace + ".GetOneHealth", hnum);
 		return timelist;
 	}
-	
-	
-	
+
 }
