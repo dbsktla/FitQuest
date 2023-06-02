@@ -204,6 +204,7 @@ drop table usage cascade constraints;
 CREATE TABLE usage (
    unum   number   primary key, --사용권번호
    pnum   number   NOT NULL, --상품번호
+   onum   number   NOT NULL, --주문번호
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
    mid varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    usage   number   NOT NULL --남은 횟수
