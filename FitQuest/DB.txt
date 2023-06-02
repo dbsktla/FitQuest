@@ -133,7 +133,7 @@ create sequence pseq
 drop table product cascade constraints;
 CREATE TABLE product (
    pnum   number   primary key, --상품번호
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 트레이너 아이디 
    price   number   NOT NULL, --상품 가격
    months   number   NOT NULL, --회원권 사용기간
    pcount   number   NOT NULL, --회원권 사용갯수
