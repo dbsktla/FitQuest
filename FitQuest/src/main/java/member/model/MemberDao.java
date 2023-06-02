@@ -57,6 +57,12 @@ public class MemberDao {
 		}
 		return cnt;
 	}
+
+	public int deleteMember(String id) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace + ".DeleteMember", id);
+		return cnt;
+	}
 	
 	
 }
