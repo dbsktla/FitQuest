@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import gym.model.GymDao;
+import member.model.MailSendService;
 import member.model.MemberDao;
 
 @Controller
@@ -14,12 +15,16 @@ public class MemberCheckController {
 	private final String command_id = "/id_check.mb";
 	private final String command_nickname = "/nickname_check.mb";
 	private final String command_gname = "/gname_check.mb";
+	private final String command_email = "/email_check.mb";
 	
 	@Autowired
 	MemberDao memberDao;
 	
 	@Autowired
 	GymDao gymDao;
+	
+	@Autowired
+	MailSendService mailService;
 	
 	@RequestMapping(value=command_id)
 	@ResponseBody
@@ -55,6 +60,15 @@ public class MemberCheckController {
 		else {
 			return "YES";
 		}
+	}
+	
+	@RequestMapping(value=command_email)
+	@ResponseBody
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		
+		return mailService.joinEmail(email);
 	}
 	
 }
