@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.center{
+	text-align: center;	
+}
+.left{
+	text-align: left;
+}
+.right{
+	text-align: right;
+}
+.b{
+	font-weight: bold;
+}
+.m-size{
+	width: 40%;
+}
+.m-text{
+	font-size: 20px;
+}
+.margin5{
+	margin: 5px;
+}
