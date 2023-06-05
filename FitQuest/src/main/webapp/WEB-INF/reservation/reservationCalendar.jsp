@@ -41,7 +41,7 @@
    <!-- 예약 버튼 -->
    <div class="calendar-button-div">
       <span>
-      	<input type="button" class="btn btn-warning" onClick="location.href='reservationInsert.rv'" value="예약">
+      	<input type="button" class="btn btn-warning" onClick="location.href='reservationInsert.rv'" value="예약">  
       </span>
    </div>
 <!-- 달력  -->  
