@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import trainer.model.TrainerBean;
 import utility.Paging;
 
 @Component
@@ -26,6 +27,11 @@ public class CompositeDao {
 		List<TrainerListBean> tList = new ArrayList<TrainerListBean>();
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
 		tList = sqlSessionTemplate.selectList(namespace + ".GetTrainerList", map, rowBounds);
+		return tList;
+	}
+	public List<TrainerListBean> getSimilarTrainerList(TrainerBean trainerBean) {
+		List<TrainerListBean> tList = new ArrayList<TrainerListBean>();
+		tList = sqlSessionTemplate.selectList(namespace + ".GetSimilarTrainers", trainerBean);
 		return tList;
 	}
 }

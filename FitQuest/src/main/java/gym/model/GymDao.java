@@ -39,4 +39,9 @@ public class GymDao {
 		}
 		return isCheck;
 	}
+
+	public GymBean selectGym(String gnum) {
+		GymBean gymBean = sqlSessionTemplate.selectOne(namespace + ".GetGymByGnum", gnum);
+		return gymBean;
+	}
 }

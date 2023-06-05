@@ -7,17 +7,20 @@
 <mapper namespace="composite.model.Composite">
 	<select id = "GetTrainerCount" resultType = "int">
 		select count(*) from
-		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+		((select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
 		from trainer join review
 		on id = tid
-		group by id, gnum, activity, purpose, intro, exp, timage)
-		natural join  
+		group by id, gnum, activity, purpose, intro, exp, timage
+		order by rating desc)
+		natural join 
+		(select distinct tid as id, hasReview from review))
+		natural join
 		((select id, name from trainer natural join member)
 		natural join
 		(select id, gnum, gaddr1 from trainer natural join gym))
-		where rating >= 0
- 		<if test = "activity == '%PT%' or activity == '%필라테스%' or activity = '%요가%' and activity != '%null%'">
-			and activity like #{activity}
+		where id is not null
+		<if test = "activity != 'null'">
+			and activity = #{activity}
 		</if>
 		<if test = "addressDo != '%null%'">
 			and gaddr1 like #{addressDo}
@@ -40,21 +43,20 @@
     	</select>
 	<select id = "GetTrainerList" resultType = "composite.model.TrainerListBean">
 		select * from
-		(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+		((select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
 		from trainer join review
 		on id = tid
 		group by id, gnum, activity, purpose, intro, exp, timage
-		<if test = "ordering == 'review'">
-		order by rating desc
-		</if>
-		) 
-		natural join  
+		order by rating desc)
+		natural join 
+		(select distinct tid as id, hasReview from review))
+		natural join
 		((select id, name from trainer natural join member)
 		natural join
 		(select id, gnum, gaddr1 from trainer natural join gym))
-		where rating >= 0
- 		<if test = "activity == '%PT%' or activity == '%필라테스%' or activity = '%요가%' and activity != '%null%'">
-			and activity like #{activity}
+		where id is not null
+		<if test = "activity != 'null'">
+			and activity = #{activity}
 		</if>
 		<if test = "addressDo != '%null%'">
 			and gaddr1 like #{addressDo}
@@ -66,13 +68,31 @@
 			and purpose like #{purposeA}
 		</if>
 		<if test = "purposeB != '%null%'">
-			and purpose like #{purposeB}
+			or purpose like #{purposeB}
 		</if>
 		<if test = "purposeC != '%null%'">
-			and purpose like #{purposeC}
+			or purpose like #{purposeC}
 		</if>
 		<if test = "purposeD != '%null%'">
-			and purpose like #{purposeD}
+			or purpose like #{purposeD}
 		</if>
+		<if test = "ordering == 'review'">
+			order by hasReview desc, rating desc
+		</if>
+	</select>
+	<select id = "GetSimilarTrainers" resultType = "composite.model.TrainerListBean">
+		select * from
+		((select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+		from trainer join review
+		on id = tid
+		group by id, gnum, activity, purpose, intro, exp, timage
+		order by rating desc)
+		natural join 
+		(select distinct tid as id, hasReview from review))
+		natural join
+		((select id, name from trainer natural join member)
+		natural join
+		(select id, gnum, gaddr1 from trainer natural join gym))
+		where activity = #{activity}
 	</select>
 </mapper>
