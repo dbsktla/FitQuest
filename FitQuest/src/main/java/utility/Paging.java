@@ -23,7 +23,7 @@ public class Paging {
 	//////////////////////////////// 트레이너 목록
 	private String activity = "" ; //운동 카테고리
 	private String purpose = "" ; //운동 목적
-	private String order = ""; //순서
+	private String ordering = ""; //순서
 	private String addressDo = ""; //지역1
 	private String addressSiGunGu = ""; //지역2
 	
@@ -336,7 +336,7 @@ public class Paging {
 			String url,
 			String activity,
 			String purpose,
-			String order,
+			String ordering,
 			String addressDo,
 			String addressSiGunGu) {
 
@@ -414,7 +414,7 @@ public class Paging {
 		this.url = url ; //  /ex/list.ab
 		this.activity = activity;
 		this.purpose = purpose;
-		this.order = order;
+		this.ordering = ordering;
 		this.addressDo = addressDo;
 		this.addressSiGunGu = addressSiGunGu;
 		
@@ -430,7 +430,7 @@ public class Paging {
 		// getPagingHtml url:/ex/list.ab
 		
 		String result = "" ;
-		String added_param = "&activity=" + activity + "&purpose=" + purpose + "&order=" + order + "&addressDo=" + addressDo +"&addressSiGunGu" + addressSiGunGu ; // &whatColumn=singer&keyword=아
+		String added_param = "&activity=" + activity + "&purpose=" + purpose + "&ordering=" + ordering + "&addressDo=" + addressDo +"&addressSiGunGu" + addressSiGunGu ; // &whatColumn=singer&keyword=아
 		
 		// 시작페이지가 1이 아니면 이전으로 가는 페이지가 필요하다 따라서 해당되는 링크가 생김
 		if (this.beginPage != 1) { // 앞쪽, pageSize:한 화면에 보이는 레코드 수
