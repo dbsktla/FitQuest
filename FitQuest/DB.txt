@@ -237,6 +237,7 @@ select * from reservation;
 commit;
 
 
+
 -- 트레이너 스케줄
 drop table tschedule cascade constraints;
 CREATE TABLE tschedule (
