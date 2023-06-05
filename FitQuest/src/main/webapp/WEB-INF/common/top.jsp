@@ -48,7 +48,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="main.go" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="" alt="">
         <span>FlexStart</span>
       </a>
 
@@ -76,18 +76,32 @@
             </ul>
           </li>
           
-          <li class="dropdown" ><a href="#"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
+          <!-- 일반회원 메뉴 -->
+          <c:if test="${loginInfo.mtype eq 'generic'}">
+	          <li class="dropdown"><a href="genericCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="genericCalendar.rv">My PY</a></li>
+	              <li><a href="#">1</a></li>
+	              <li><a href="#">2</a></li>
+	              <li><a href="#">3</a></li>
+	            </ul>
+	          </li>
+          </c:if>
+           <!-- 트레이너 메뉴 -->
+          <c:if test="${loginInfo.mtype eq 'trainer'}">
+	          <li class="dropdown"><a href="trainerCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="trainerCalendar.rv">My PY</a></li>
+	              <li><a href="#">1</a></li>
+	              <li><a href="#">2</a></li>
+	              <li><a href="#">3</a></li>
+	            </ul>
+	          </li>
+          </c:if>
           
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
-	          <li class="dropdown" ><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+	          <li class="dropdown"><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="health.ht">내 건강관리</a></li>
 	              <li><a href="#">운동관리</a></li>
@@ -98,7 +112,7 @@
           </c:if>
           <!-- 트레이너 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'trainer'}">
-	          <li class="dropdown" ><a href="#"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+	          <li class="dropdown"><a href="#"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="#">회원목록</a></li>
 	              <li><a href="#">운동관리</a></li>

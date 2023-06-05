@@ -17,9 +17,9 @@ import reservation.model.CalendarBean;
 import reservation.model.ReservationDao;
 
 @Controller
-public class ReservationCalendarController {
-	private final String command = "/reservationCalendar.rv";
-	private final String getPage = "reservationCalendar";
+public class GenericCalendarController {
+	private final String command = "/genericCalendar.rv";
+	private final String getPage = "genericCalendar";
 
 	@Autowired
 	ReservationDao reservationDao;

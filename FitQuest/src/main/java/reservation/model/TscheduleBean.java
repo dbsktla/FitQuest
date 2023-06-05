@@ -1,6 +1,7 @@
 package reservation.model;
 
-import java.security.Timestamp;
+import java.sql.Date;
+
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -10,7 +11,7 @@ public class TscheduleBean {
 	private String tsday;
 	@NotBlank(message = "시간을 선택해 주세요")
 	private String tstime;
-	private Timestamp tsdate;
+	private Date tsdate;
 	public String getTid() {
 		return tid;
 	}
@@ -29,13 +30,13 @@ public class TscheduleBean {
 	public void setTstime(String tstime) {
 		this.tstime = tstime;
 	}
-	public Timestamp getTsdate() {
+	public Date getTsdate() {
 		return tsdate;
 	}
-	public void setTsdate(Timestamp tsdate) {
+	public void setTsdate(Date tsdate) {
 		this.tsdate = tsdate;
 	}
-	public TscheduleBean(String tid, String tsday, String tstime, Timestamp tsdate) {
+	public TscheduleBean(String tid, String tsday, String tstime, Date tsdate) {
 		super();
 		this.tid = tid;
 		this.tsday = tsday;

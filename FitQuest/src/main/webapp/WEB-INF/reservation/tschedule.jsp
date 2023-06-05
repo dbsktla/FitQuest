@@ -10,6 +10,7 @@
 	.err{
 		color : #E04848;
 		font-size: 10pt;
+		text-align: right;
 	}
 	input[type=checkbox]{
 		accent-color : #FAC710;
@@ -43,10 +44,11 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                   </div>
                   
                   <form:form commandName="tscheduleBean" action="tschedule.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
-                  	<input type="hidden" name="tid" value="${tid}">
                     <div class="col-12">
-                      <label for="yourDay" class="form-label">요일</label><br>
-                      	<div class="center">
+                      <label for="yourDay" class="form-label">요일
+                      <form:errors cssClass="err" path="tsday" /></label>
+                      <br>
+                      	<div class="center form-control">
                         <c:forEach var="tsd" items="<%=dayArr%>">
                       	<label for="${tsd}" class="margin5">
                       	<input type="checkbox" name="tsday" id="${tsd}" value="${tsd}" <c:if test="${tscheduleBean.tsday.contains(tsd)}">checked</c:if>>
@@ -54,29 +56,31 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                         </label>
                         </c:forEach>
                         </div>
-                      <div class="invalid-feedback">요일을 선택해 주세요.</div>
                     </div>
                     
                      <div class="col-12">
-                      <label for="yourTstime" class="form-label">시간</label> <br>
-                      <div class="center">
+                      <label for="yourTstime" class="form-label">시간
+                      <form:errors cssClass="err" path="tstime"/>
+                      </label> <br>
+                      <div class="center form-control">
                         <c:forEach var="tst" items="<%=tstimeArr%>">
-                      	<label for="${tst}" class="margin5">
+                      	<label for="${tst}" class="margin5 form-control">
                       	<input type="checkbox" name="tstime" id="${tst}" value="${tst}" <c:if test="${tscheduleBean.tstime.contains(tst)}">checked</c:if>>
                       	${tst} 
                         </label>
                         </c:forEach>
                        </div>
-                      <div class="invalid-feedback">시간을 선택해 주세요.</div>
                       </div>
                     
                     <div class="col-12">
                       <label for="yourTsdate" class="form-label">불가능한 날짜</label>
-                      <input type="date" name="tsdate" class="form-control" id="yourTsdate" value="${tscheduleBean.tsdate}">
+                      <input type="date" name="tsdate" class="form-control" id="yourTsdate" value="${tscheduleBean.tsdate}"><br>
                     </div>
                     
                     <div class="col-12 center">
-                    	<button type="submit" id="inertSub" class="btn btn-warning m-size">새로 등록</button>
+                    	<c:if test="${flag == false}">
+	                    	<button type="submit" id="inertSub" class="btn btn-warning m-size" onClick="location.href='tschedule.rv'">새로 등록</button>
+                    	</c:if>
                     	<button type="submit" id="updateSub" class="btn btn-warning m-size">수정</button>
                     </div>
                   </form:form> 
