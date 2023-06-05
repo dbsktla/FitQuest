@@ -214,7 +214,6 @@ select * from usage;
 commit;
 
 
-
 -- pt 예약
 drop sequence reseq;
 create sequence reseq
@@ -226,16 +225,30 @@ create sequence reseq
   
 drop table reservation cascade constraints;
 CREATE TABLE reservation (
-   rnum   number   primary key, --예약번호
+   rnum   number   primary key, --예약번호/시퀀스
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    onum   number   NOT NULL, --주문번호
    unum   number   NOT NULL,--사용권번호
-   rdate   date   NULL default sysdate, --예약 날짜
-   rtime varchar2(15) NULL --예약 시간 "00:00am"
+   rdate   date NOT NULL, --예약 날짜
+   rtime varchar2(15) NOT NULL, --예약 시간 "00:00am"
+   rstate varchar2(10) default 'false' --예약 상태 컬럼
 );
-
 select * from reservation;
 commit;
+
+
+
+-- 트레이너 스케줄
+drop table tschedule cascade constraints;
+CREATE TABLE tschedule (
+   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
+   tsday varchar2(30)   NOT NULL, --예약 가능 요일
+   tstime varchar2(100)   NOT NULL,--예약 가능 시간
+   tsdate date NOT NULL --예약 불가능 날짜
+);
+select * from tschedule;
+commit;
+
 
 
 
