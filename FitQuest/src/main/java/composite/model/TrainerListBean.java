@@ -11,6 +11,7 @@ public class TrainerListBean {
 	private String rating;
 	private String gaddr1;
 	private String name;
+	private String hasReview;
 	
 	public TrainerListBean() {
 		super();
@@ -87,6 +88,12 @@ public class TrainerListBean {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getHasReview() {
+		return hasReview;
+	}
+	public void setHasReview(String hasReview) {
+		this.hasReview = hasReview;
 	}
 	
 }

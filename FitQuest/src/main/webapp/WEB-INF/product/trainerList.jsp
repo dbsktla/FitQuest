@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp" %>
 <%@ include file="../common/top.jsp" %>
 <style type = "text/css">
 	.btn:hover {
@@ -161,7 +160,7 @@ var areaSelectMaker = function(target){
           <div class="col-lg-12 d-flex justify-content-center">
           	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 운동 : </span>
           	  <input type="radio" class="btn-check" value = "null" name="activity" id="option1" autocomplete="off"
-          	  <c:if test = "${empty activity }">
+          	  <c:if test = "${activity eq 'null'}">
           	  checked
           	  </c:if>
           	  >
@@ -257,7 +256,7 @@ var areaSelectMaker = function(target){
 		  <c:forEach var = "trainer" items = "${tList }">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-                <a href = "trainerDetail.pd">
+                <a href = "trainerDetail.pd?id=${trainer.id }&pageNumber=${pageInfo.pageNumber}&hasReview=${trainer.hasReview}">
              	 <div class="member-img">
                	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text"/>
             	 </div>
@@ -277,7 +276,12 @@ var areaSelectMaker = function(target){
 				<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
 				<i class = "bi bi-star"></i>
 				</c:forEach>
+				<c:if test = "${ trainer.hasReview eq 'Y' }">
 				(${rating1})
+				</c:if>
+				<c:if test = "${ trainer.hasReview eq 'N' }">
+				<br>(작성된 리뷰 없습니다)
+				</c:if>
 				<br>
                 </div>
                 <p>
@@ -289,7 +293,7 @@ var areaSelectMaker = function(target){
 		  </c:forEach>
         </div>	
       </div>
-	<div align = "center">
+	<div align = "center" style = "margin-top:20px;">
 		${pageInfo.pagingHtml}
 	</div>
     </section><!-- End Team Section -->

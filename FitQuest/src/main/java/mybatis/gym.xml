@@ -19,4 +19,8 @@
 		select count(*) from gym
 		where gname = #{gname}
 	</select>
+	<select id = "GetGymByGnum" resultType = "gym.model.GymBean">
+		select * from gym 
+		where gnum = #{gnum}
+	</select>
 </mapper>
