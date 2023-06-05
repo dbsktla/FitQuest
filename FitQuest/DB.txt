@@ -245,7 +245,7 @@ CREATE TABLE tschedule (
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
    tsday varchar2(30)   NOT NULL, --예약 가능 요일
    tstime varchar2(100)   NOT NULL,--예약 가능 시간
-   tsdate date NOT NULL --예약 불가능 날짜
+   tsdate date null --예약 불가능 날짜
 );
 select * from tschedule;
 commit;
