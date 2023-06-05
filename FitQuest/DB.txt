@@ -255,6 +255,7 @@ commit;
 
 
 
+
 -- 회원별 운동정보
 drop sequence hseq;
 create sequence hseq
