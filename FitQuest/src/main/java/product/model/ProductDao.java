@@ -17,4 +17,12 @@ public class ProductDao {
 		pList = sqlSessionTemplate.selectList(namespace + ".GetProductListById", id);
 		return pList;
 	}
+	public String getIdByPnum(int pnum) {
+		String id = sqlSessionTemplate.selectOne(namespace + ".GetIdByPnum", pnum);
+		return id;
+	}
+	public ProductBean getProductByPnum(int pnum) {
+		ProductBean productBean = sqlSessionTemplate.selectOne(namespace + ".GetProductByPnum", pnum);
+		return productBean;
+	}
 }
