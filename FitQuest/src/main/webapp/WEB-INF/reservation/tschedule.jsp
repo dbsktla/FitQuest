@@ -78,10 +78,13 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                     </div>
                     
                     <div class="col-12 center">
+                    	<!-- 처음 스케줄 등록할때 -->
                     	<c:if test="${flag == false}">
 	                    	<button type="submit" id="inertSub" class="btn btn-warning m-size" onClick="location.href='tschedule.rv'">새로 등록</button>
                     	</c:if>
+                    	<c:if test="${flag == true}">
                     	<button type="submit" id="updateSub" class="btn btn-warning m-size">수정</button>
+                   		</c:if>
                     </div>
                   </form:form> 
 
