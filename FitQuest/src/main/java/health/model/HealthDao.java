@@ -2,6 +2,7 @@ package health.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,15 @@ public class HealthDao {
 		cnt = sqlSessionTemplate.insert(namespace + ".InsertHealth", healthBean);
 		return cnt;
 	}
+
+
+	public int deleteHealth(Map<String, String> map) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace + ".DeleteHealth", map);
+		return cnt;
+	}
+
+
+	
 
 }

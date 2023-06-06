@@ -29,4 +29,10 @@ public class HealthDateDao {
 		cnt = sqlSessionTemplate.insert(namespace + ".InsertHealthDate", healthDateBean);
 		return cnt;
 	}
+
+	public void deleteHealthDate(String hnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace + ".DeleteHealthDate" , hnum);
+		System.out.println("healthDelete cnt : " + cnt);
+	}
 }

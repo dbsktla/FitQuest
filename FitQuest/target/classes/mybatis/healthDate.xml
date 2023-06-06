@@ -14,7 +14,11 @@
 		select * from healthDate where hdate=#{hdate}
 	</select>
 	
-	<select id="InsertHealthDate">
+	<insert id="InsertHealthDate">
 		insert into healthDate values(hseq.nextval, #{id}, #{hdate})
-	</select>
+	</insert>
+	
+	<delete id="DeleteHealthDate">
+		delete healthDate where hnum=#{hnum}
+	</delete>
 </mapper>

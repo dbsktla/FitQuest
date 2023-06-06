@@ -6,10 +6,14 @@
 
 <mapper namespace="health.model.Health">
 	<select id="GetOneHealth" resultType="health.model.HealthBean">
-		select * from health where hnum = #{hnum}
+		select * from health where hnum = #{hnum} order by starttime
 	</select>
 	
 	<insert id="InsertHealth">
 		insert into health values(#{hnum}, #{hname}, #{starttime}, #{endtime}, #{hcount}, #{hset})
 	</insert>
+	
+	<delete id="DeleteHealth">
+		delete health where hnum=#{hnum} and hname=#{hname} and starttime=#{starttime}
+	</delete>
 </mapper>
