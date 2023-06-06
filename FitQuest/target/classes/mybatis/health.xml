@@ -6,6 +6,10 @@
 
 <mapper namespace="health.model.Health">
 	<select id="GetOneHealth" resultType="health.model.HealthBean">
-	select * from health where hnum = #{hnum}
+		select * from health where hnum = #{hnum}
 	</select>
+	
+	<insert id="InsertHealth">
+		insert into health values(#{hnum}, #{hname}, #{starttime}, #{endtime}, #{hcount}, #{hset})
+	</insert>
 </mapper>

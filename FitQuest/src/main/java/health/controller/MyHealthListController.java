@@ -29,7 +29,7 @@ import net.sf.json.JSONObject;
 public class MyHealthListController {
 	private final String command = "myHealthList.ht";
 	private final String getPage = "myHealthList";
-	private final String gotoPage = "redirect:/loginForm.mb";
+	private final String gotoPage = "redirect:/login.mb";
 	
 	@Autowired
 	HealthDao healthDao;
@@ -49,12 +49,12 @@ public class MyHealthListController {
 		if(memberBean == null) { 
 			session.setAttribute("destination", "redirect:/myHealthList.ht");
 			try {
-				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');location.href='login.mb'</script>");
 				response.getWriter().flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			mav.setViewName(gotoPage);
+			//mav.setViewName(gotoPage);
 		}else {
 			// 운동 날짜 불러옴
 			List<HealthDateBean> hdlist = healthDateDao.getMyHealthDateList(memberBean.getId());

@@ -5,6 +5,35 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<script type="text/javascript" src="resources/js/jquery.js" ></script>
+<script>
+	var classcount
+	function inputScope() {
+		document.getElementById('healthScope').innerHTML += '<div id="healthScopePlus" class="row g-3">'
+		+ '<div class="col-md-12"><label for="hname" class="form-label">운동명</label><input type="text" class="form-control" id="hname" name="hname"></div>'
+		+ '<div class="col-md-6"><label for="starthour" class="form-label" style="display: block;">시작시간</label><select id="starthour" name="starthour" class="form-select" style="width: 40%; display: inline;"><c:forEach var="hour" begin="0" end="23"><option value="${hour}">${hour}</option></c:forEach></select><font style="margin-left: 5;margin-right: 15;">시</font><select id="startminute" name="startminute" class="form-select" style="width: 40%; display: inline;"><c:forEach var="minute" begin="0" end="59"><option value="${minute}">${minute}</option></c:forEach></select><font style="margin-left: 5;">분</font></div>'
+		+ '<div class="col-md-6"><label for="endhour" class="form-label" style="display: block;">종료시간</label><select id="endhour" name="endhour" class="form-select" style="width: 40%; display: inline;"><c:forEach var="hour" begin="0" end="23"><option value="${hour}">${hour}</option></c:forEach></select><font style="margin-left: 5;margin-right: 15;">시</font><select id="endminute" name="endminute" class="form-select" style="width: 40%; display: inline;"><c:forEach var="minute" begin="0" end="59"><option value="${minute}">${minute}</option></c:forEach></select><font style="margin-left: 5;">분</font></div>'
+		+ '<div class="col-md-6"><label for="hcount" class="form-label">횟수</label><input type="number" class="form-control" id="hcount" name="hcount" value="0"></div>'
+		+ '<div class="col-md-6"><label for="hset" class="form-label">세트</label><input type="number" class="form-control" id="hset" name="hset" value="0"></div><div style="height: 10"></div>'
+		+ '</div>';
+	}
+	
+	function deleteScope() {
+		var f = $('#healthScopePlus').length;
+		
+		if(f == 0){
+			alert("영역 최소 한개는 작성해야 합니다.");
+		}else{
+			var slen = $('#healthScopePlus').length;
+			
+			$('#healthScopePlus').eq(slen-1).remove();
+			
+			flug--;
+		}
+	}
+
+</script>
+
 <body style="background-color: #FEF9E7">
 	<div class="pagetitle">
 		<h1>
@@ -24,9 +53,13 @@
 			<!-- <div class="card"> -->
 			<div class="card mb-3">
 				<div class="card-body">
-					<h5 class="card-title">운동 정보 추가</h5><br>
+					<h5 class="card-title">
+						운동 정보 추가
+						<button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">운동삭제</button> 
+						<button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">운동추가</button>
+					</h5><br>
 					
-					<form class="row g-3">
+					<form class="row g-3" action="myHealthInsert.ht" method="post">
 						<div class="col-md-12">
 							<label for="hdate" class="form-label">운동일자</label> 
 							<input type="date" class="form-control" id="hdate" name="hdate">
@@ -40,15 +73,15 @@
 						</div>
 						
 						<div class="col-md-6">
-							<label for="starttime" class="form-label" style="display: block;">시작시간</label>
-							<select id="starttime" name="starthour" class="form-select" style="width: 40%; display: inline;">
+							<label for="starthour" class="form-label" style="display: block;">시작시간</label>
+							<select id="starthour" name="starthour" class="form-select" style="width: 40%; display: inline;">
 								<c:forEach var="hour" begin="0" end="23">
 									<option value="${hour}">${hour}</option>
 								</c:forEach>
 							</select>
 							<font style="margin-left: 5;margin-right: 15;">시</font>
 							
-							<select id="starttime" name="startminute" class="form-select" style="width: 40%; display: inline;">
+							<select id="startminute" name="startminute" class="form-select" style="width: 40%; display: inline;">
 								<c:forEach var="minute" begin="0" end="59">
 									<option value="${minute}">${minute}</option>
 								</c:forEach>
@@ -57,15 +90,15 @@
 						</div>
 						
 						<div class="col-md-6">
-							<label for="endtime" class="form-label" style="display: block;">종료시간</label>
-							<select id="endtime" name="endhour" class="form-select" style="width: 40%; display: inline;">
+							<label for="endhour" class="form-label" style="display: block;">종료시간</label>
+							<select id="endhour" name="endhour" class="form-select" style="width: 40%; display: inline;">
 								<c:forEach var="hour" begin="0" end="23">
 									<option value="${hour}">${hour}</option>
 								</c:forEach>
 							</select>
 							<font style="margin-left: 5;margin-right: 15;">시</font>
 							
-							<select id="endtime" name="endminute" class="form-select" style="width: 40%; display: inline;">
+							<select id="endminute" name="endminute" class="form-select" style="width: 40%; display: inline;">
 								<c:forEach var="minute" begin="0" end="59">
 									<option value="${minute}">${minute}</option>
 								</c:forEach>
@@ -74,15 +107,18 @@
 						</div>
 						
 						<div class="col-md-6">
-							<label for="inputEmail5" class="form-label">횟수</label>
-							<input type="number" class="form-control" id="inputEmail5" value="0">
+							<label for="hcount" class="form-label">횟수</label>
+							<input type="number" class="form-control" id="hcount" name="hcount" value="0">
 						</div>
 						
 						<div class="col-md-6">
-							<label for="inputPassword5" class="form-label">세트</label>
-							<input type="number" class="form-control" id="inputPassword5" value="0">
+							<label for="hset" class="form-label">세트</label>
+							<input type="number" class="form-control" id="hset" name="hset" value="0">
 						</div>
 						<div style="height: 10"></div>
+						
+						<!-- 추가영역 -->
+						<div id="healthScope"></div>
 						
 						<div class="text-center">
 						<button type="submit" class="btn btn-warning" onclick="location.href='myHealthInsert.ht'">추가하기</button>
