@@ -12,13 +12,14 @@
 	
 	/* 상세정보 띄우기 */
 	$(document).ready(function(){
-		
+		$('#showbutton').css("display","none");
 	}); // document
 	
 	// 상세정보
 	function btnclick(hnum) {
 		//alert(hnum);
 		clickHnum = hnum;
+		$('#showbutton').show();
 		
 		$.ajax({
 			type : "POST", // 요청타입
@@ -181,8 +182,10 @@
 									<form action='myHealthDelete.ht' name="hdform">
 									
 									<h5 class="card-title">상세 정보 
+										<span id="showbutton">
 										<button type="button" onclick="deleteHnum()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">삭제</button> 
 										<button type="button" onclick="updateHnum()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">수정</button>
+										</span>
 									</h5>
 									<div id="healthDetail"><span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span></div>
 									
