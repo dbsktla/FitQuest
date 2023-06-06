@@ -35,7 +35,7 @@
 				
 				// 현재 jsonArray 형태로 값이 넘어와서 data에 담긴상태	
 				for(var i=0; i<data.length; i++){
-					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "+" + data[i].starttime + "'></td>";
+					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "@" + data[i].starttime + "@" + clickHnum + "'></td>";
 					msg += "<td>"+data[i].hname+"</td>";
 					msg += "<td>"+data[i].starttime+"</td>";
 					msg += "<td>"+data[i].endtime+"</td>";
@@ -68,7 +68,7 @@
 			return;
 		}
 		
-		document.f.submit();
+		document.hdform.submit();
 	}
 		
 	function updateHnum() {
@@ -78,7 +78,7 @@
 	function allcheck() {
 		//alert(1);
 		
-		var check = hdform.allchk.checked;
+		var check = document.hdform.allchk.checked;
 		
 		var rowschk = document.getElementsByName("rowchk");
 		if(check){
