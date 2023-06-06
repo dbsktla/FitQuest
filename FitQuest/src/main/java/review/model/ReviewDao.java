@@ -23,4 +23,8 @@ public class ReviewDao {
 		double avgScore = sqlSessionTemplate.selectOne(namespace + ".GetAverageReview", id);
 		return avgScore;
 	}
+	public String getHasReviewById(String tid) {
+		String hasReview = sqlSessionTemplate.selectOne(namespace + ".GetHasReviewById", tid);
+		return hasReview;
+	}
 }

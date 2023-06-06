@@ -13,4 +13,8 @@
 	select avg(rating) from review
 	where tid = #{id}
 	</select>
+	<select id = "GetHasReviewById" resultType = "String">
+		select distinct hasReview from review
+		where tid = #{id}	
+	</select>
 </mapper>

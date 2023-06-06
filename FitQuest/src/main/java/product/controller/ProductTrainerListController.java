@@ -67,7 +67,6 @@ public class ProductTrainerListController {
 		model.addAttribute("addressDo", addressDo);
 		model.addAttribute("addressSiGunGu", addressSiGunGu);
 		System.out.println("size:" + tList.size());
-		session.setAttribute("destination", getPage);
 		return getPage;
 	}
 }

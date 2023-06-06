@@ -27,7 +27,6 @@ import trainer.model.TrainerDao;
 public class ProductDetailController {
 	private final String command = "trainerDetail.pd";
 	private final String getPage = "trainerDetail";
-	
 	@Autowired
 	TrainerDao trainerDao;
 	@Autowired
@@ -43,7 +42,7 @@ public class ProductDetailController {
 	
 	@RequestMapping(value = command)
 	public String doAction(@RequestParam("id") String id, 
-						   @RequestParam("pageNumber") String pageNumber,
+						   @RequestParam(value = "pageNumber", required = false) String pageNumber,
 						   @RequestParam("hasReview") String hasReview,
 						   Model model) {
 		TrainerBean trainerBean = trainerDao.getTrainer(id);

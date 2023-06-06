@@ -60,7 +60,7 @@
               </div>
 				
             </article><!-- End blog entry -->
-            <h4 class="comments-count">수업 회원권 상품 : </h4><br>
+            <h4 class="comments-count">수업 회원권 : </h4><br>
 			<c:forEach var = "product" items = "${pList }">
             <div class="blog-author d-flex align-items-center" style = "justify-content: space-between;">
 			  <i class="bi bi-cart-plus" style="font-size: 30px"></i>
@@ -68,7 +68,8 @@
                 <h5 style = "color: #FAC710">${ product.months }개월 회원권 = ${product.ptype}레슨(${product.people}명 수업) ${product.pcount }회 : ${product.price }만원</h5>
               </div>
               <div>
-              	<input type = "button" class ="btn btn-warning" value = "카트 추가하기">
+              	<input type = "button" class ="btn btn-warning" value = "카트 추가하기" onclick = "location.href='cartInsert.pd?pnum=${product.pnum}&id=${trainerBean.id }'">
+              	
               </div>
             </div><!-- End blog author bio -->
             </c:forEach>
@@ -93,7 +94,7 @@
               <div id="comment-1" class="comment">
                 <div class="d-flex">
                   <div class = "reviewComment">
-                  	<h5 style = "font-weight: bold; ">${review.mid }회원님 : ${review.rtitle }</h5>
+                  	<h5 style = "font-weight: bold; ">${review.mid }회원님 : "${review.rtitle }"</h5>
                   	<h5>
                   	<fmt:formatNumber var = "rating3" value="${review.rating }" type="number" pattern="#.0"/>
 					<fmt:formatNumber var = "rating2" value="${review.rating}" type="number" pattern="#"/>

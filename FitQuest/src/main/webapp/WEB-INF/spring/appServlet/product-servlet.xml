@@ -22,4 +22,5 @@
 	<context:component-scan base-package="trainer"/>
 	<context:component-scan base-package="review"/>
 	<context:component-scan base-package="gym"/>
+	<context:component-scan base-package="usage"/>
 </beans>
