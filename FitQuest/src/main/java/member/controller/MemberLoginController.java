@@ -47,7 +47,17 @@ public class MemberLoginController {
 			else {
 				if(memberBean.getPassword().equals(password)) {
 					session.setAttribute("loginInfo", memberBean);
-					return gotoPage;
+					
+					String destination = (String)session.getAttribute("destination");
+					// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
+					if(destination != null) {
+						return destination;
+					}
+					// 이전 페이지 정보가 없으면 메인페이지로 이동함.
+					else {
+						return gotoPage;
+					}
+					
 				}
 				else {
 					response.getWriter().print("<script>alert('비밀번호가 일치하지 않습니다.');history.go(-1);</script>");
