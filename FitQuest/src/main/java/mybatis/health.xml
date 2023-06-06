@@ -16,4 +16,8 @@
 	<delete id="DeleteHealth">
 		delete health where hnum=#{hnum} and hname=#{hname} and starttime=#{starttime}
 	</delete>
+	
+	<delete id="DeleteHealthByHnum">
+		delete health where hnum=#{hnum}
+	</delete>
 </mapper>

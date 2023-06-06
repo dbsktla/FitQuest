@@ -23,6 +23,12 @@ public class HealthDateDao {
 		HealthDateBean hdb = sqlSessionTemplate.selectOne(namespace + ".GetHealthByHdate", hdate);
 		return hdb;
 	}
+	
+	public HealthDateBean getOneHealthDate(int hnum) {
+		HealthDateBean healthDateBean = new HealthDateBean(); 
+		healthDateBean = sqlSessionTemplate.selectOne(namespace + ".GetOneHealthDate", hnum);
+		return healthDateBean;
+	}
 
 	public int insertHealthDate(HealthDateBean healthDateBean) {
 		int cnt = -1;
@@ -35,4 +41,14 @@ public class HealthDateDao {
 		cnt = sqlSessionTemplate.delete(namespace + ".DeleteHealthDate" , hnum);
 		System.out.println("healthDelete cnt : " + cnt);
 	}
+
+	public int updateHealthDate(int hnum, String hdate) {
+		int cnt = -1;
+		HealthDateBean hdb = new HealthDateBean();
+		hdb.setHnum(hnum);
+		hdb.setHdate(hdate);
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateHealthDate" , hdb);
+		return 0;
+	}
+
 }

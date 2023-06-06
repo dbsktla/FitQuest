@@ -14,6 +14,10 @@
 		select * from healthDate where hdate=#{hdate}
 	</select>
 	
+	<select id="GetOneHealthDate" resultType="health.model.HealthDateBean">
+		select * from healthDate where hnum=#{hnum}
+	</select>
+	
 	<insert id="InsertHealthDate">
 		insert into healthDate values(hseq.nextval, #{id}, #{hdate})
 	</insert>
@@ -21,4 +25,8 @@
 	<delete id="DeleteHealthDate">
 		delete healthDate where hnum=#{hnum}
 	</delete>
+	
+	<update id="UpdateHealthDate">
+		update healthDate set hdate=#{hdate} where hnum=#{hnum}
+	</update>
 </mapper>
