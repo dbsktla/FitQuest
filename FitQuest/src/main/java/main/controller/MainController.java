@@ -1,5 +1,7 @@
 package main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,7 +11,8 @@ public class MainController {
 	private final String getPage = "main";
 	
 	@RequestMapping(command)
-	public String doAction() {
+	public String doAction(HttpSession session) {
+		session.setAttribute("destination", "redirect:/main.go");
 		return getPage;
 	}
 }
