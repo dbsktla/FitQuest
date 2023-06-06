@@ -36,6 +36,12 @@ public class HealthDao {
 	}
 
 
+	public void deleteHealthByHnum(int hnum) {
+		sqlSessionTemplate.delete(namespace + ".DeleteHealthByHnum", hnum);
+		
+	}
+
+
 	
 
 }

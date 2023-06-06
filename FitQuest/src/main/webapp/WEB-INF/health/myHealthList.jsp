@@ -73,6 +73,7 @@
 		
 	function updateHnum() {
 		//alert("u " + clickHnum);
+		location.href='myHealthUpdate.ht?hnum=' + clickHnum;
 	}
 	
 	function allcheck() {

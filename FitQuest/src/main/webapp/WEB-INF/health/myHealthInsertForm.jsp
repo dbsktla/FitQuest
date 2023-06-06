@@ -9,7 +9,7 @@
 <script>
 	var classcount
 	function inputScope() {
-		document.getElementById('healthScope').innerHTML += '<div id="healthScopePlus" class="row g-3">'
+		document.getElementById('healthScope').innerHTML += '<div class="row g-3 healthScopePlus">'
 		+ '<div class="col-md-12"><label for="hname" class="form-label">운동명</label><input type="text" class="form-control" id="hname" name="hname"></div>'
 		+ '<div class="col-md-6"><label for="starthour" class="form-label" style="display: block;">시작시간</label><select id="starthour" name="starthour" class="form-select" style="width: 40%; display: inline;"><c:forEach var="hour" begin="0" end="23"><option value="${hour}">${hour}</option></c:forEach></select><font style="margin-left: 5;margin-right: 15;">시</font><select id="startminute" name="startminute" class="form-select" style="width: 40%; display: inline;"><c:forEach var="minute" begin="0" end="59"><option value="${minute}">${minute}</option></c:forEach></select><font style="margin-left: 5;">분</font></div>'
 		+ '<div class="col-md-6"><label for="endhour" class="form-label" style="display: block;">종료시간</label><select id="endhour" name="endhour" class="form-select" style="width: 40%; display: inline;"><c:forEach var="hour" begin="0" end="23"><option value="${hour}">${hour}</option></c:forEach></select><font style="margin-left: 5;margin-right: 15;">시</font><select id="endminute" name="endminute" class="form-select" style="width: 40%; display: inline;"><c:forEach var="minute" begin="0" end="59"><option value="${minute}">${minute}</option></c:forEach></select><font style="margin-left: 5;">분</font></div>'
@@ -19,14 +19,14 @@
 	}
 	
 	function deleteScope() {
-		var f = $('#healthScopePlus').length;
+		var f = $('.healthScopePlus').length;
 		
 		if(f == 0){
-			alert("영역 최소 한개는 작성해야 합니다.");
+			alert("운동 최소 한개는 작성해야 합니다.");
 		}else{
-			var slen = $('#healthScopePlus').length;
+			var slen = $('.healthScopePlus').length;
 			
-			$('#healthScopePlus').eq(slen-1).remove();
+			$('.healthScopePlus').eq(slen-1).remove();
 			
 			flug--;
 		}
