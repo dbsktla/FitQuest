@@ -124,11 +124,12 @@
           
           <!-- 내글보기, 회원정보수정 -->
           <c:if test="${loginInfo != null}">
-          	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.id})</font></span><i class="bi bi-chevron-down"></i></a>
+          	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="#">마이페이지</a></li>
 	              <li><a href="#">개인정보수정</a></li>
 	              <li><a href="#">내 글보기</a></li>
+	              <li><a href="#">스크랩</a></li>
 	            </ul>
 	          </li>
            </c:if>
