@@ -20,4 +20,11 @@ public class HealthDao {
 		return timelist;
 	}
 
+
+	public int insertHealth(HealthBean healthBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertHealth", healthBean);
+		return cnt;
+	}
+
 }

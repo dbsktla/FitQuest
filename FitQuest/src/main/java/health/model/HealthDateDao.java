@@ -18,4 +18,15 @@ public class HealthDateDao {
 		hdlist = sqlSessionTemplate.selectList(namespace + ".GetMyHealthDateList", id);
 		return hdlist;
 	}
+
+	public HealthDateBean getHealthByHdate(String hdate) {
+		HealthDateBean hdb = sqlSessionTemplate.selectOne(namespace + ".GetHealthByHdate", hdate);
+		return hdb;
+	}
+
+	public int insertHealthDate(HealthDateBean healthDateBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertHealthDate", healthDateBean);
+		return cnt;
+	}
 }

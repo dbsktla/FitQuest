@@ -7,14 +7,18 @@
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
+	
+	var clickHnum = 0;
+	
 	/* 상세정보 띄우기 */
 	$(document).ready(function(){
 		
 	}); // document
 	
-		
+	// 상세정보
 	function btnclick(hnum) {
 		//alert(hnum);
+		clickHnum = hnum;
 		
 		$.ajax({
 			type : "POST", // 요청타입
@@ -25,11 +29,13 @@
 				
 				$('#healthDetail').empty(); // healthDetail div 내용 비우기
 				var msg = "<table class='table'><tr class='table-warning'>";
+				msg += "<th><input type='checkbox' name='allchk' class='form-check-input' onclick='allcheck()'></th>";
 				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
 				
 				// 현재 jsonArray 형태로 값이 넘어와서 data에 담긴상태	
 				for(var i=0; i<data.length; i++){
-					msg += "<tr><td>"+data[i].hname+"<input type='hidden' name='hnum' value='"+data[i].hnum+"'></td>";
+					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "+" + data[i].starttime + "'></td>";
+					msg += "<td>"+data[i].hname+"</td>";
 					msg += "<td>"+data[i].starttime+"</td>";
 					msg += "<td>"+data[i].endtime+"</td>";
 					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
@@ -45,8 +51,45 @@
 			}
 		}); // ajax
 	}
+	
+	function deleteHnum() {
+		flag = false;
+		var chkObj = document.getElementsByName("rowchk");
+		for(i=0; i<chkObj.length; i++){
+			if(chkObj[i].checked){
+				flag = true;
+				break;
+			}
+		}
 		
-
+		if(!flag){
+			alert('삭제 할 체크박스를 하나 이상 선택하세요');
+			return;
+		}
+		
+		document.f.submit();
+	}
+		
+	function updateHnum() {
+		//alert("u " + clickHnum);
+	}
+	
+	function allcheck() {
+		//alert(1);
+		
+		var check = hdform.allchk.checked;
+		
+		var rowschk = document.getElementsByName("rowchk");
+		if(check){
+			for(var i=0; i<rowschk.length; i++){
+				rowschk[i].checked = true;
+			}
+		}else{
+			for(var i=0; i<rowschk.length; i++){
+				rowschk[i].checked = false;
+			}
+		}
+	}
 </script>
 
 <body style="background-color: #FEF9E7">
@@ -135,11 +178,15 @@
 							<!-- Default Card -->
 							<div class="card">
 								<div class="card-body">
+									<form action='myHealthDelete.ht' name="hdform">
+									
 									<h5 class="card-title">상세 정보 
-										<button type="button" class="btn btn-warning rounded-pill btn-sm" style="float: right;">삭제</button> 
-										<button type="button" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">수정</button>
+										<button type="button" onclick="deleteHnum()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">삭제</button> 
+										<button type="button" onclick="updateHnum()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">수정</button>
 									</h5>
 									<div id="healthDetail"><span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span></div>
+									
+									</form>
 								</div><!-- card body -->
 							</div>
 						</div><!-- col-lg-8 -->

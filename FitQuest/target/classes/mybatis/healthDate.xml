@@ -9,4 +9,12 @@
 		select * from healthDate where id=#{id}
 		order by hdate desc
 	</select>
+	
+	<select id="GetHealthByHdate" resultType="health.model.HealthDateBean">
+		select * from healthDate where hdate=#{hdate}
+	</select>
+	
+	<select id="InsertHealthDate">
+		insert into healthDate values(hseq.nextval, #{id}, #{hdate})
+	</select>
 </mapper>
