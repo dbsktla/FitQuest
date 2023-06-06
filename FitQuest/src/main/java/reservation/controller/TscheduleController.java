@@ -28,6 +28,7 @@ public class TscheduleController {
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(HttpSession session,Model model,
 			@RequestParam("flag") boolean flag) {
+		//스케줄 이미 등록한게 있는지 확인용 flag
 		model.addAttribute("flag",flag);
 		System.out.println("스케줄 설정 페이지 직전:"+flag);
 		return getPage;
