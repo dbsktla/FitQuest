@@ -131,7 +131,11 @@
 	            </ul>
 	          </li>
            </c:if>
-          
+          <li>
+          	<a href = "cartList.pd">
+          		<i class="bi bi-cart" style="font-size: 30px;"></i>
+          	</a>
+          </li>
           <li>
           	<a class="scrollto">
           		<!-- 로그인 정보 없으면 login -->
