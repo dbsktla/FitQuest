@@ -70,7 +70,7 @@ insert into scrap values(sseq.nextval,'hong',1);
 
 select * from SCRAP;
 commit;
-
+ 
 drop sequence bcseq;
 create sequence bcseq
   increment by 1
