@@ -469,7 +469,7 @@ create sequence rvseq
   minvalue 1
   maxvalue 10000
   nocache;
-   
+  
 drop table review cascade constraints;
 CREATE TABLE review (
 	renum number primary key,
@@ -477,9 +477,10 @@ CREATE TABLE review (
 	pnum number,
 	tid varchar2(100),
 	rating number check(rating between 0 and 5),
+	rtitle varchar2(100),
 	rcontent varchar2(500),
-	rdate date default sysdate, --리뷰 작성 날짜
-	hasReview varchar2(10) check(hasReview in('Y', 'N')) --트레이너가 리뷰 하나라도 있는지 상태 말해주는것. 목록보기 때문에 추가됨.
+	rdate date default sysdate,
+	hasReview varchar2(10) check(hasReview in('Y', 'N'))
 );
 select * from review;
 commit;

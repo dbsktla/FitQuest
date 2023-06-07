@@ -71,7 +71,7 @@
                 <h5 style = "color: #FAC710">${ product.months }개월 회원권 = ${product.ptype}레슨(${product.people}명 수업) ${product.pcount }회 : ${product.price }만원</h5>
               </div>
               <div>
-              	<input type = "button" class ="btn btn-warning" value = "카트 추가하기" onclick = "location.href='cartInsert.pd?pnum=${product.pnum}&id=${trainerBean.id }'">
+              	<input type = "button" class ="btn btn-warning" value = "카트 추가하기" onclick = "location.href='cartInsert.od?pnum=${product.pnum}&id=${trainerBean.id }'">
               	
               </div>
             </div><!-- End blog author bio -->
