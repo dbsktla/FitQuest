@@ -388,10 +388,10 @@ CREATE TABLE physique (
 );
 
 insert into physique values(phseq.nextval, 'hong', 170.5, 90.0, 30.9, '2023-04-30', 29.3, 33.2, 1607, null);
-insert into physique values(phseq.nextval, 'hong', 170.5, 85.0, 29.2, '2023-05-10', 30.3, 30.5, 1570, 'inbody1.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 80.1, 27.5, '2023-05-23', 31.5, 29.8, 1540, 'inbody2.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 75.4, 25.9, '2023-06-01', 32.9, 28.1, 1580, 'inbody3.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-07', 33.1, 27.5, 1607, 'inbody4.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 85.0, 29.2, '2023-05-10', 30.3, 30.5, 1570, 'hong_inbody1.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 80.1, 27.5, '2023-05-23', 31.5, 29.8, 1540, 'hong_inbody2.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 75.4, 25.9, '2023-06-01', 32.9, 28.1, 1580, 'hong_inbody3.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-07', 33.1, 27.5, 1607, 'hong_inbody4.jpg');
 
 select * from physique;
 commit;
