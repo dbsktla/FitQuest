@@ -3,6 +3,25 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
 
+<script type="text/javascript" src="resources/js/jquery.js" ></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#reservationCheck').click(function(){
+		alert(2);
+		
+	    if (confirm('예약 하시겠습니까?')) { //확인
+	        
+	        alert('예약이 완료되었습니다.');
+	    } else { //취소
+	        
+	        alert('예약이 취소되었습니다.'); // 예약이 취소되었다는 메시지를 띄웁니다.
+	    }
+	});
+	
+});
+</script>
+
 <br><br>
 <center>
 <form action="" method="GET">
@@ -42,7 +61,7 @@
 <!-- 달력  -->  
 <table class="calendar_body">
 <thead>
-   <tr bgcolor="#FEF9E7">
+   <tr class="day-area">
       <td class="day sun" width="14%">
          일
       </td>
@@ -174,9 +193,9 @@
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
-		                     <span>${time}</span>
-		                     </a>
+			                    <a href="reservationDetail.rv" class="calender-text">
+			                    <span>${time}</span>
+			                    </a>
 	                     	</div>
 	                     	</c:forEach>
 	                     	
@@ -192,10 +211,10 @@
 		                  
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
-		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
-		                     <span>${time}</span>
-		                     </a>
+			                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+			                    <a href="reservationInsert.rv" id="reservationCheck" class="calender-text">
+			                    <span>${time}</span>
+			                    </a>
 	                     	</div>
 	                     	</c:forEach>
 	                     	
