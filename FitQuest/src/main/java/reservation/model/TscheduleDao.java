@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TscheduleDao {
-private final String namespace = "reservation.model.Reservation";
+	private final String namespace = "reservation.model.Reservation";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;

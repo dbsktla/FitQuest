@@ -13,4 +13,5 @@
 		select * from tschedule
 		where tid = #{tid}
 	</select>
+
 </mapper>
