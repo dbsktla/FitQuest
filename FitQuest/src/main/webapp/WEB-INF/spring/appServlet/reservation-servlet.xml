@@ -17,5 +17,11 @@
 	</bean>
 	
 	<context:component-scan base-package="reservation"/>
-
+	<context:component-scan base-package="member"/>
+	<context:component-scan base-package="product"/>
+	<context:component-scan base-package="composite"/>
+	<context:component-scan base-package="trainer"/>
+	<context:component-scan base-package="review"/>
+	<context:component-scan base-package="gym"/>
+	<context:component-scan base-package="usage"/>
 </beans>

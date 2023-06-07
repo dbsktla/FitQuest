@@ -14,4 +14,12 @@
 		insert into usage
 		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage})
 	</insert>
+	<select id = "GetOneUsage" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid}
+	</select>
+	<select id="GetTid" resultType="String">
+		select tid from usage
+		where mid = #{mid}
+	</select>
 </mapper>

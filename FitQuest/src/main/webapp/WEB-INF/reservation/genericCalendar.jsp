@@ -1,8 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
-<script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
+<!-- 
+<script type="text/javascript" src="resources/js/jquery.js" ></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var usageCount = ${usage};
+	
+	$('#usageCheck').click(function(){
+		alert(2);
+		 if (usageCount > 0) {
+			// 사용권이 없는 경우
+             alert("남은 사용권이 없습니다.");
+             return;
+         }
+	});
+	
+});
+</script>
+ -->
 
 <br><br>
 <center>
@@ -41,7 +58,7 @@
    <!-- 예약 버튼 -->
    <div class="calendar-button-div">
       <span>
-      	<input type="button" class="btn btn-warning" onClick="location.href='reservationInsert.rv'" value="예약">  
+      	<input type="button" class="btn btn-warning" id="usageCheck" onClick="location.href='genericReservation.rv'" value="예약">  
       </span>
    </div>
 <!-- 달력  -->  
