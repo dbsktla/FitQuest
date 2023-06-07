@@ -17,4 +17,7 @@
 		select distinct hasReview from review
 		where tid = #{id}	
 	</select>
+	<insert id = "InsertBaseValue">
+		insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', #{id}, 'N')
+	</insert>
 </mapper>

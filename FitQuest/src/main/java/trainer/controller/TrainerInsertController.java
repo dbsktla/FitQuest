@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import gym.model.GymBean;
 import gym.model.GymDao;
 import member.model.MemberDao;
+import review.model.ReviewDao;
 import trainer.model.TrainerBean;
 import trainer.model.TrainerDao;
 
@@ -28,20 +29,17 @@ public class TrainerInsertController {
 	private final String command = "/trainerInsert.mb";
 	private final String getPage = "trainerInsertForm";
 	private final String gotoPage = "redirect:/login.mb";
-	
 	@Autowired
 	MemberDao memberDao;
-
 	@Autowired
 	TrainerDao trainerDao;
-
 	@Autowired
 	GymDao gymDao;
-
-
 	@Autowired
 	ServletContext servletContext;
-
+	@Autowired
+	ReviewDao reviewDao;
+	
 	@RequestMapping(value=command,method=RequestMethod.GET)
 	public String insert(Model model) {
 		List<GymBean> glist = gymDao.getAllGym();
@@ -52,8 +50,7 @@ public class TrainerInsertController {
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request, Model model) {
 		List<GymBean> glist = gymDao.getAllGym();
-		String uploadPath = "/Users/songnayoung/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";
-		//String uploadPath = "";
+		String uploadPath = "/Users/jm215/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";		//String uploadPath = "";
 		
 		File destination = new File(uploadPath + File.separator + trainerBean.getUpload().getOriginalFilename());
 		MultipartFile multi =  trainerBean.getUpload();
@@ -73,6 +70,7 @@ public class TrainerInsertController {
 					cnt = trainerDao.insertTrainer(trainerBean);
 					System.out.println("InsertTrainer cnt : " + cnt);
 					if(cnt != -1) {
+						reviewDao.insertBaseValue(trainerBean.getId());
 						return gotoPage;
 					}
 					else {
@@ -80,7 +78,7 @@ public class TrainerInsertController {
 						cnt = memberDao.deleteMember(trainerBean.getId());
 						System.out.println("DeleteMember cnt : " + cnt);
 						model.addAttribute("glist", glist);
-						return getPage; 
+						return getPage;
 					}
 				} catch (IllegalStateException e) {
 					e.printStackTrace();

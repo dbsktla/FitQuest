@@ -27,4 +27,7 @@ public class ReviewDao {
 		String hasReview = sqlSessionTemplate.selectOne(namespace + ".GetHasReviewById", tid);
 		return hasReview;
 	}
+	public void insertBaseValue(String id) {
+		sqlSessionTemplate.insert(namespace + ".InsertBaseValue", id);
+	}
 }

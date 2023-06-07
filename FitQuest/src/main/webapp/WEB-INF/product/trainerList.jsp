@@ -285,7 +285,7 @@ var areaSelectMaker = function(target){
 				<br>
                 </div>
                 <p>
-                <input type = "button" value = "자세히 보기" class = "btn btn-warning" onclick= "location.href='trainerDetail.pd'">
+                <input type = "button" value = "자세히 보기" class = "btn btn-warning" onclick= "location.href='trainerDetail.pd?id=${trainer.id }&pageNumber=${pageInfo.pageNumber}&hasReview=${trainer.hasReview}'">
                 </p>
               </div>
             </div>

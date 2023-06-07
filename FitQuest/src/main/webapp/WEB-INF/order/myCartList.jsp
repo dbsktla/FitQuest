@@ -14,7 +14,7 @@
 		$('#checkAll').click(function(){
 			$(".checkItem").prop("checked", !clicked);
 			clicked = !clicked;
-			this.innerHTML = clicked ? '모든상품 선택안하기' : '모든상품 선택하기';
+			this.innerHTML = clicked ? '전체상품 선택안하기' : '전체상품 선택하기';
 			})
 	}) //ready
 	function cartCheck(){
@@ -114,7 +114,7 @@
 			                </table>
 			            </div>
 			            <div class="btn-group btns-cart">
-			                <button type="button" class="btn btn-warning" id = "checkAll" style = "width: 180px;"><i class="fa fa-arrow-circle-left"></i>모든상품 선택하기</button>
+			                <button type="button" class="btn btn-warning" id = "checkAll" style = "width: 180px;"><i class="fa fa-arrow-circle-left"></i>전체상품 선택하기</button>
 			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'"><i class="fa fa-arrow-circle-left"></i>트레이너 목록보기</button>
 			                <button type="submit" class="btn btn-warning" onClick = "return cartCheck()"><i class="fa fa-arrow-circle-right"></i>주문하기</button>
 			            </div>
