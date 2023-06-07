@@ -89,8 +89,8 @@
           <c:if test="${loginInfo.mtype eq 'trainer'}">
 	          <li class="dropdown"><a href="trainerCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="trainerCalendar.rv">My PY</a></li>
-	              <li><a href="#">1</a></li>
+	              <li><a href="trainerCalendar.rv">My PT</a></li>
+	              <li><a href="trainerReviewList.mb">My Reviews</a></li>
 	              <li><a href="#">2</a></li>
 	              <li><a href="#">3</a></li>
 	            </ul>
@@ -132,7 +132,7 @@
 	          </li>
            </c:if>
           <li>
-          	<a href = "cartList.pd">
+          	<a href = "cartList.od">
           		<i class="bi bi-cart" style="font-size: 30px;"></i>
           	</a>
           </li>
