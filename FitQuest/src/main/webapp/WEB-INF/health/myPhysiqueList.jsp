@@ -37,6 +37,12 @@
 	.dayCheck{
 		background-color: #FEF9E7;
 	}
+	.topMar{
+		margin-top: 20px;
+	}
+	.inbodyBtnDiv{
+		float: right;
+	}
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -133,7 +139,7 @@
 		//alert(day);
 		var sYear = $('#selectYear option:selected').val();
 		var sMon = $('#selectMon option:selected').val();
-		
+		//var sday = day;
 		
 		$.ajax({
 			type : "POST",
@@ -144,7 +150,8 @@
 				// alert(data);
 				
 				var msg = "";
-				var phdate = sYear + "-" + sMon + "-" day;
+				var phdate = "";
+				//alert(sYear + "-" + sMon+ "-" day);
 				
 				if(data.returnData == 'idNull'){
 					$('#detailDiv').empty();
@@ -152,7 +159,7 @@
 					location.href='login.mb';
 				}else if(data.returnData == 'BeanNull'){
 					$('#detailDiv').empty();
-					msg = "<h5 align='center'>등록된 신체 정보가 없습니다.<input type='button' onclick='insertPhysique("+phdate+")' value='추가하기' class='btn btn-warning rounded-pill btn-sm' style='float:right;'></h5>";
+					msg = "<h5 align='center'>등록된 신체 정보가 없습니다.<input type='button' onclick='insertPhysique("+sYear+","+sMon+","+day+")' value='추가하기' class='btn btn-warning rounded-pill btn-sm' style='float:right;'></h5>";
 				}else{
 					$('#detailDiv').empty();
 					msg += "<h5>" + data.phdate + "<input type='button' value='삭제' onclick='deletePhysique("+data.phnum+")' class='btn btn-warning rounded-pill btn-sm' style='float:right;'>";
@@ -178,7 +185,8 @@
 					msg += '<div class="col-lg-3 col-md-4">' + data.bodyfatper + ' %</div>';
 					msg += '<div class="col-lg-3 col-md-4 label ">기초대사량</div>';
 					msg += '<div class="col-lg-3 col-md-4">' + data.bmr + ' kcal</div>';
-					msg += '</div>';
+					msg += '</div><div class="topMar">';
+					msg += '<input type="button" value="인바디 정보" onclick="" class="btn btn-outline-warning rounded-pill btn-sm inbodyBtnDiv"></div>';
 				}
 				
 				$("#detailDiv").append(msg);
@@ -187,16 +195,21 @@
 		}); // ajax
 	}
 	
-	function insertPhysique(phdate) {
+	function insertPhysique(y, m, d) {
+		//alert(y + "," + m + "," + d);
+		var phdate = y + "," + m + "," + d; 
+		//alert(phdate);
 		location.href="myPhysiqueInsert.ht?phdate=" + phdate;
 	}
 	
 	function deletePhysique(phnum) {
-		location.href="";
+		alert(phnum);
+		//location.href="";
 	}
 	
 	function updatePhysique(phnum) {
-		location.href="";
+		alert(phnum);
+		//location.href="";
 	}
 </script>
 
