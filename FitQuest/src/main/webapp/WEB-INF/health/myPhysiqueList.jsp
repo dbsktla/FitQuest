@@ -13,6 +13,7 @@
 <style>
 	table{
 		text-align: center;
+		margin: auto;
 	}
 	td, tr{
 		height: 40px;
@@ -23,6 +24,18 @@
 	}
 	.daySat{
 		color: blue;
+	}
+	.dayOn:hover{
+		background-color: #FAC710 ;
+	}
+	.dayOn:active{
+		background-color: #f9a61a ;
+	}
+	.dayOn:visited{
+		background-color: #FAC710 ;
+	}
+	.dayCheck{
+		background-color: #FEF9E7;
 	}
 </style>
 
@@ -42,10 +55,13 @@
 			dataType : "json",
 			success : function (data) {
 				$('#calenderTable').empty(); // calenderTable div 내용 비우기
+
 				var msg = '<table><tr><td class="daySun">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="daySat">토</td></tr>';
 				
+				
+				
 				//alert(data[0].date);
-				for(var i=0; i<data.length; i++){
+				for(var i=0; i<data.length -1; i++){
 					if(i == 0){
 						for(var j=0; j<data[i].date; j++){
 							msg += '<td> </td>';
@@ -57,14 +73,49 @@
 						msg += '</tr><tr>';
 					}
 					
-					
-					if(data[i].date == 0){
-						msg += "<td class='daySun'>" + (i+1) + "</td>";
-					}else if(data[i].date == 6){
-						msg += "<td class='daySat'>" + (i+1) + "</td>";
+					var strDate = "";
+					if(i+1 < 10){
+						strDate = "0" + (i+1);
 					}else{
-						msg += "<td>" + (i+1) + "</td>";
+						strDate = (i+1);
 					}
+					//alert(strDate);
+					//alert(data[data.length -1].dateList);
+					var dateL = data[data.length -1].dateList;
+					
+					//alert(dateL);
+					
+					if(dateL == 'noData'){
+						if(data[i].date == 0){
+							msg += "<td class='daySun dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}else if(data[i].date == 6){
+							msg += "<td class='daySat dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}else{
+							msg += "<td class='dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}
+					}else{
+						//alert("strDate : " + strDate + " dateList: " + dateL + "con? : " + dateL.indexOf(strDate));
+						
+						if(dateL.indexOf(strDate) != -1){
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}else{
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}
+					}
+					
+					
 					
 				}// for
 				
@@ -74,6 +125,78 @@
 				$("#calenderTable").append(msg);
 			}
 		}); // ajax
+	}
+	
+	
+	function dateClick(day){
+		
+		//alert(day);
+		var sYear = $('#selectYear option:selected').val();
+		var sMon = $('#selectMon option:selected').val();
+		
+		
+		$.ajax({
+			type : "POST",
+			url : "myPhysiqueDetail.ht",
+			data : ({"selectDay" : day, "selectYear" : sYear, "selectMon" : sMon}),
+			dataType : "json",
+			success : function (data) {
+				// alert(data);
+				
+				var msg = "";
+				var phdate = sYear + "-" + sMon + "-" day;
+				
+				if(data.returnData == 'idNull'){
+					$('#detailDiv').empty();
+					alert('로그인이 필요합니다.');
+					location.href='login.mb';
+				}else if(data.returnData == 'BeanNull'){
+					$('#detailDiv').empty();
+					msg = "<h5 align='center'>등록된 신체 정보가 없습니다.<input type='button' onclick='insertPhysique("+phdate+")' value='추가하기' class='btn btn-warning rounded-pill btn-sm' style='float:right;'></h5>";
+				}else{
+					$('#detailDiv').empty();
+					msg += "<h5>" + data.phdate + "<input type='button' value='삭제' onclick='deletePhysique("+data.phnum+")' class='btn btn-warning rounded-pill btn-sm' style='float:right;'>";
+					msg += "<input type='button' value='수정' onclick='updatePhysique("+data.phnum+")' class='btn btn-warning rounded-pill btn-sm' style='float:right; margin-right: 10;'></h5>";
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">이름</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.name + ' 님</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">신장</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.height + ' cm</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">체중</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.weight + ' kg</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">BMI</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bmi + '</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">골격근량</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.skeletalmuscle + ' kg</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">체지방률</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bodyfatper + ' %</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">기초대사량</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bmr + ' kcal</div>';
+					msg += '</div>';
+				}
+				
+				$("#detailDiv").append(msg);
+			}
+			
+		}); // ajax
+	}
+	
+	function insertPhysique(phdate) {
+		location.href="myPhysiqueInsert.ht?phdate=" + phdate;
+	}
+	
+	function deletePhysique(phnum) {
+		location.href="";
+	}
+	
+	function updatePhysique(phnum) {
+		location.href="";
 	}
 </script>
 
@@ -100,10 +223,12 @@
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">신체정보</h5>
-
+					
+					<div class="row">
+					
 					<div class="col-lg-5">
 						
-						<div>
+						<div style="margin: auto; text-align: center;">
 							<select name="selectYear" id="selectYear">
 								<c:forEach var="i" begin="<%=now.getYear() + 1890%>" end="<%=now.getYear() + 1900%>">
 									<option value="${i}" <c:if test="${i == selectYear}">selected</c:if>>${i}</option>
@@ -116,7 +241,7 @@
 								</c:forEach>
 							</select> 월
 							
-							<input type="button" value="조회" onclick="calenderLookup()">
+							<input type="button" value="조회" onclick="calenderLookup()" class="btn btn-warning rounded-pill btn-sm">
 						</div>
 						
 						<div id="calenderTable">
@@ -143,13 +268,13 @@
 										</c:if>
 										
 										<c:if test="${i.value == 0}">
-											<td class="daySun">${i.key}</td>
+											<td class='daySun dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
 										</c:if>
 										<c:if test="${i.value == 6}">
-											<td class="daySat">${i.key}</td>
+											<td class='daySat dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
 										</c:if>
 										<c:if test="${i.value != 0 and i.value != 6}">
-											<td>${i.key}</td>
+											<td class='dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
 										</c:if>
 										
 									</c:forEach>
@@ -158,8 +283,16 @@
 						</div>
 						
 					</div>
-
-					<div class="col-lg-7"></div>
+					
+					
+					<!-- 상세정보 -->
+					<div class="col-lg-7">
+						<div id="detailDiv">
+							<div  style="text-align: center;">조회할 날짜를 클릭하세요</div>
+						</div><!-- detailDiv -->
+					</div><!-- 8 -->
+					
+					</div><!-- row -->
 				</div>
 			</div>
 		</div>
