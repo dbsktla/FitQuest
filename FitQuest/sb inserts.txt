@@ -1,0 +1,75 @@
+--member
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('hong','generic','홍길동','qwerty1!','홍시','1990-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim','trainer','홍길동','1234','홍시','1991-09-09','01090909090','kim@fitquest.com','서울 중구 북창동 136','2층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('lee','trainer','이준영','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('park','trainer','박영진','1234','홍시','1992-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('jin','trainer','진이','1234','홍시','1991-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moon','trainer','문지영','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moon2','trainer','문주','1234','홍시','1991-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim2','trainer','김주영','1234','홍시','1993-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim3','trainer','김준','1234','홍시','1994-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('lee2','trainer','이보영','1234','홍시','1984-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moon3','trainer','문하나','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('admin','admin','관리자','1234','관리자','1991-09-09','01090909090','admin@fitquest.com','서울 중구 북창동 136','2층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('park2','trainer','박정은','1234','홍시','1983-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+--gym
+insert into gym values(gseq.nextval, '골드짐', '서울 마포구 서교동 125', '1층', '0212345678');
+insert into gym values(gseq.nextval, '고피티', '서울 중구 북창동 136', '1층', '0212345678');
+insert into gym values(gseq.nextval, '필라테스틱', '부산 동구 한동', '1층', '0212345678');
+insert into gym values(gseq.nextval, '요가하루', '서울 마포구 서교동 125', '1층', '0212345678');
+
+--trainer
+
+insert into trainer values('kim', 1, 'PT', '체지방 감소, 근육량 증가, 재활', 'hi~','개인 pt 30년', 'tr1.jpg');
+insert into trainer values('lee', 3, '필라테스', '체력 강화', 'hi~','개인 pt 30년', 'tr2.jpg');
+insert into trainer values('park', 4, '요가', '체지방 감소,근육량 증가,재활,체력 강화', 'hi~','개인 pt 30년', 'tr3.jpg');
+insert into trainer values('jin', 2, 'PT', '체지방 감소,근육량 증가,재활', 'hi~','개인 pt 30년', 'tr4.jpg');
+insert into trainer values('moon', 3, '필라테스', '재활,체력 강화', 'hi~','개인 pt 30년', 'tr5.jpg');
+insert into trainer values('moon2', 4, '요가', '근육량 증가,재활', 'hi~','개인 pt 30년', 'tr6.jpg');
+insert into trainer values('kim2', 3, '필라테스', '체지방 감소,근육량 증가', 'hihihihihihihihihihihihih 소개 내용','개인 pt 30년', 'tr7.jpg');
+insert into trainer values('kim3', 1, 'PT', '근육량 증가,재활,체력 강화', 'hi~','개인 pt 30년', 'tr8.jpg');
+insert into trainer values('lee2', 4, '요가', '근육량 증가,재활', 'hi~','개인 pt 30년', 'tr9.jpg');
+insert into trainer values('moon3', 2, 'PT', '체력 강화', 'hi~ 트레이너 소개입니다!!!!!!!','개인 pt 30년', 'tr10.jpg');
+insert into trainer values('park2', 1, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다!!!!!!! 13년 경력11111','PT수업 Since 2010', 'tr11.jpg');
+
+--상품
+insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인', '1');
+insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인', '1');
+insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인', '1');
+insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'park', 14, 1, 11, 1, '개인', '1');
+insert into product values(pseq.nextval, 'park', 28, 2, 19, 1, '개인', '1');
+insert into product values(pseq.nextval, 'park', 39, 3, 30, 1, '개인', '1');
+
+
+--review
+insert into review values(rvseq.nextval, 'hong', 2, 'kim', 4, '추천합니다', '굳', sysdate, 'Y');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'jin', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'moon', 'N');
+insert into review values(rvseq.nextval, 'hong', 2, 'kim', 3, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'moon2', 3, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'kim2', 4, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'kim2', 2, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'kim3', 4, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'lee', 4.2, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'moon3', 3.4,  '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'lee2', 3.0, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'lee2', 3.0, '추천합니다', '굳', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'kim', 5, 'PT 수업 굿 예시 리뷰 타이틀', '리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.', sysdate, 'Y');
+insert into review values(rvseq.nextval, 'hong', 2, 'park2', 3.8, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
