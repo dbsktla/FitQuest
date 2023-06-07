@@ -5,5 +5,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="order.model.Order">
-
+	<insert id = "InsertOrder">
+		insert into orders 
+		values(oseq.nextval, #{id}, sysdate)
+	</insert>
+	<select id = "SelectOrderNum" resultType = "int">
+		select max(onum)
+		from orders
+		where id = #{id}
+	</select>
 </mapper>

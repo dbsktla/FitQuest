@@ -7,6 +7,31 @@
 		margin: auto !important;
 	}
 </style>
+<script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
+<script type = "text/javascript">
+	var clicked = false;
+	$(document).ready(function() {
+		$('#checkAll').click(function(){
+			$(".checkItem").prop("checked", !clicked);
+			clicked = !clicked;
+			this.innerHTML = clicked ? '모든상품 선택안하기' : '모든상품 선택하기';
+			})
+	}) //ready
+	function cartCheck(){
+		var chkObj = document.getElementsByName("pnum");
+		var flag = false;
+		for(i = 0; i < chkObj.length; i++){
+			if(chkObj[i].checked == true){
+				flag = true;
+			}
+		}
+		if(flag == false){
+			alert("주문할 선택을 하나라도 선택하세요.");
+			return false; //밑에 submit호출을 못 만나게 한다.
+		}
+		document.myform.submit();
+	}//selectDelete
+</script>
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
 
@@ -19,68 +44,83 @@
    			<article class="entry entry-single">
    			 <div class="col-lg-12">
 			        <div class="col-lg-12 col-sm-12 hero-feature">
-			            <form action = "cartCalculate.pd">
+			            <form action = "cartOrder.pd" name = "myform">
 			            <div class="table-responsive">
 			                <table class="table table-bordered tbl-cart">
 			                    <thead>
 			                        <tr class = "table-warning">
-			                        	<td>선택</td>
-			                            <td colspan = "2">트레이너</td>
-			                            <td>헬스장</td>
-			                            <td>수업</td>
-			                            <td>회원권</td>
-			                            <td class="td-qty">가격</td>
-			                            <td>리뷰 평균</td>
-			                            <td>삭제</td>
+			                        	<td valign = "middle" align = "center">선택</td>
+			                            <td valign = "middle" align = "center">삭제</td>
+			                            <td colspan = "2" valign = "middle" align = "center">트레이너</td>
+			                            <td valign = "middle" align = "center">헬스장</td>
+			                            <td valign = "middle" align = "center">수업</td>
+			                            <td valign = "middle" align = "center">회원권</td>
+			                            <td valign = "middle" align = "center">리뷰 평균</td>
+			                            <td valign = "middle" align = "center">가격</td>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
 						   			<c:forEach var= "item" items = "${sList }">
 			                        <tr style = "height: 80px;">
-			                        	<td>
-										<input class="form-check-input" type="checkbox" value="${item.pnum }" name = "pnum">
+			                        	<td valign = "middle" align = "center">
+										<input class="form-check-input checkItem" type="checkbox" value="${item.pnum }" name = "pnum">
 										</td>
-			                            <td class="hidden-xs" style = "width : 120px;">
-			                                <a href="trainerDetail.pd?id=${item.tid }&hasReview=${item.hasReview}">
-			                                    <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${item.timage}" width="100" height="100">
-			                                </a>
-			                            </td>
-			                            <td style = "width:75px;"><a href="trainerDetail.pd?id=${item.tid }&hasReview=${item.hasReview}">${item.tname}</a>
-			                            </td>
-			                            <td>
-			                               ${ item.gname } - ${item.gaddr1 } ${item.gaddr2 }
-			                            </td>
-			                            <td>${item.ptype }(${ item.people}명) ${item.activity }수업</td>
-			                            <td>
-			                            	${item.months }개월 : ${item.ptime }시간 레슨 ${item.pcount }회
-			                            </td>
-			                            <td class="price"><b>&#8361;${item.price }만원</b></td>
-			                            <td>${item.rating } / 5</td>
-			                            <td class="text-center">
+			                            <td class="text-center" valign = "middle" align = "center">
 			                                <a href="cartDelete.pd?pnum=${item.pnum }" class="remove_cart" rel="2">
 			                                    <i class="fa bi-trash"></i>
 			                                </a>
 			                            </td>
+			                            <td class="hidden-xs" style = "width : 120px;" valign = "middle" align = "center">
+			                                <a href="trainerDetail.pd?id=${item.tid }&hasReview=${item.hasReview}">
+			                                    <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${item.timage}" width="100" height="100">
+			                                </a>
+			                            </td>
+			                            <td style = "width:75px;" valign = "middle" align = "center"><a href="trainerDetail.pd?id=${item.tid }&hasReview=${item.hasReview}">${item.tname}</a>
+			                            </td>
+			                            <td valign = "middle" align = "center">
+			                               ${ item.gname } - ${item.gaddr1 } ${item.gaddr2 }
+			                            </td>
+			                            <td valign = "middle" align = "center"> ${item.ptype }(${ item.people}명) ${item.activity }수업</td>
+			                            <td valign = "middle" align = "center">
+			                            	${item.months }개월 : ${item.ptime }시간 레슨 ${item.pcount }회
+			                            </td>
+			                            <td valign = "middle" align = "center">
+			                            	<c:if test = "${item.hasReview eq 'Y'}">
+			                            	${item.rating } / 5
+			                            	</c:if>
+			                            	<c:if test = "${item.hasReview eq 'N' }">
+			                            	리뷰 없습니다
+			                            	</c:if>
+			                            </td>
+			                            <td class="price" valign = "middle" align = "center">
+			                            <c:if test = "${minPrice != maxPrice }">
+				                            <c:if test="${item.price == minPrice}">
+				                            <span style = "color:red; font-style:italic;">최저가!</span><br>
+				                            </c:if>
+				                            <c:if test="${item.price == maxPrice}">
+				                            <span style = "color:red; font-style:italic;">최대가!</span><br>
+				                            </c:if>
+			                            </c:if>
+			                            <b>&#8361;${item.price }만원</b>
+			                            </td>
 			                        </tr>
 									</c:forEach>
 			                        <tr>
-			                            <td colspan="6" align="right">Total</td>
-			                            <td class="total" colspan="2"><b>&#8361;${totalAmount }만원</b>
+			                            <td colspan="8" valign = "middle" align="right">총 가격</td>
+			                            <td class="total" colspan="2" valign = "middle" align = "center"><b>&#8361;${totalAmount }만원</b>
 			                            </td>
 			                        </tr>
 			                    </tbody>
 			                </table>
 			            </div>
 			            <div class="btn-group btns-cart">
+			                <button type="button" class="btn btn-warning" id = "checkAll" style = "width: 180px;"><i class="fa fa-arrow-circle-left"></i>모든상품 선택하기</button>
 			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'"><i class="fa fa-arrow-circle-left"></i>트레이너 목록보기</button>
-			                <button type="submit" class="btn btn-warning"><i class="fa fa-arrow-circle-right"></i>결제하기</button>
+			                <button type="submit" class="btn btn-warning" onClick = "return cartCheck()"><i class="fa fa-arrow-circle-right"></i>주문하기</button>
 			            </div>
 			            </form>
-			
 			        </div>
 			    </div>
-   			
-   			
    			</article>
    		  </div>
    		  </div>

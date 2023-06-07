@@ -10,4 +10,8 @@
 		where tid = #{tid}
 		and mid = #{mid}
 	</select>
+	<insert id = "InsertUsage">
+		insert into usage
+		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage})
+	</insert>
 </mapper>

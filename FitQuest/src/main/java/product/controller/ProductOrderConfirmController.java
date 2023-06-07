@@ -2,6 +2,8 @@ package product.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,8 @@ import trainer.model.TrainerDao;
 
 @Controller
 public class ProductOrderConfirmController {
-	private final String command = "cartCalculate.pd";
-	private final String getPage = "orderConfirm";
+	private final String command = "cartOrder.pd";
+	private final String getPage = "orderConfirmForm";
 	private final String gotoPage = "redirect:/cartList.pd";
 	@Autowired
 	MemberDao memberDao;
@@ -36,9 +38,10 @@ public class ProductOrderConfirmController {
 	ReviewDao reviewDao;
 	
 	@RequestMapping(value = command)
-	public String doAction(Model model,
+	public String doAction(Model model, HttpSession session,
 						   @RequestParam("pnum") int[] pnumArr) {
 		ArrayList<MyShoppingBean> sList = new ArrayList<MyShoppingBean>();
+		int totalAmount = 0;
 		for(int pnum : pnumArr) {
 			String tid = productDao.getIdByPnum(pnum);
 			TrainerBean trainerBean = trainerDao.getTrainer(tid);
@@ -69,9 +72,11 @@ public class ProductOrderConfirmController {
 			msBean.setRating(rating);
 			msBean.setHasReview(hasReview);
 			sList.add(msBean);
-
+			
+			totalAmount += productBean.getPrice();
 		}
 		model.addAttribute("sList", sList);
-		return command;
+		model.addAttribute("totalAmount", totalAmount);
+		return getPage;
 	}
 }

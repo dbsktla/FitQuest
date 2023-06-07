@@ -35,47 +35,61 @@ public class ProductCartListController {
 	GymDao gymDao;
 	@Autowired
 	ReviewDao reviewDao;
-	
+
 	@RequestMapping(value = command)
 	public String doAction(HttpSession session, Model model) {
 		ArrayList<MyShoppingBean> sList = new ArrayList<MyShoppingBean>();
 		MyCartList cartList = (MyCartList)session.getAttribute("cartList");
-		List<Integer> pnumList = cartList.getOrderList();
-		int totalAmount = 0;
-		for(int pnum : pnumList) {
-			String tid = productDao.getIdByPnum(pnum);
-			TrainerBean trainerBean = trainerDao.getTrainer(tid);
-			MemberBean memberBean = memberDao.selectMemberById(tid);
-			GymBean gymBean = gymDao.selectGym(trainerBean.getGnum());
-			ProductBean productBean = productDao.getProductByPnum(pnum);
-			String hasReview = reviewDao.getHasReviewById(tid);
-			double rating = 0.0;
-			if(hasReview.equals("Y")) {
-				rating = reviewDao.getAverageReviewScore(tid);
+		if(cartList != null) {
+			List<Integer> pnumList = cartList.getOrderList();
+			int totalAmount = 0;
+			int minPrice = 9999;
+			int maxPrice = 0;
+			for(int pnum : pnumList) {
+				String tid = productDao.getIdByPnum(pnum);
+				TrainerBean trainerBean = trainerDao.getTrainer(tid);
+				MemberBean memberBean = memberDao.selectMemberById(tid);
+				GymBean gymBean = gymDao.selectGym(trainerBean.getGnum());
+				ProductBean productBean = productDao.getProductByPnum(pnum);
+				String hasReview = reviewDao.getHasReviewById(tid);
+				double rating = 0.0;
+				if(hasReview.equals("Y")) {
+					rating = reviewDao.getAverageReviewScore(tid);
+				}
+				MyShoppingBean msBean = new MyShoppingBean();
+				msBean.setTid(tid);
+				msBean.setTname(memberBean.getName());
+				msBean.setActivity(trainerBean.getActivity());
+				msBean.setPurpose(trainerBean.getPurpose());
+				msBean.setTimage(trainerBean.getTimage());
+				msBean.setGname(gymBean.getGname());
+				msBean.setGaddr1(gymBean.getGaddr1());
+				msBean.setGaddr2(gymBean.getGaddr2());
+				msBean.setPnum(productBean.getPnum());
+				msBean.setPrice(productBean.getPrice());
+				msBean.setMonths(productBean.getMonths());
+				msBean.setPcount(productBean.getPcount());
+				msBean.setPtype(productBean.getPtype());
+				msBean.setPtime(productBean.getPtime());
+				msBean.setPeople(productBean.getPeople());
+				msBean.setRating(rating);
+				msBean.setHasReview(hasReview);
+				sList.add(msBean);
+				totalAmount += productBean.getPrice();
+				
+				int currPrice = productBean.getPrice();
+				if(currPrice > maxPrice) {
+					maxPrice = currPrice;
+				} 
+				if(currPrice < minPrice) {
+					minPrice = currPrice;
+				}
 			}
-			MyShoppingBean msBean = new MyShoppingBean();
-			msBean.setTid(tid);
-			msBean.setTname(memberBean.getName());
-			msBean.setActivity(trainerBean.getActivity());
-			msBean.setPurpose(trainerBean.getPurpose());
-			msBean.setTimage(trainerBean.getTimage());
-			msBean.setGname(gymBean.getGname());
-			msBean.setGaddr1(gymBean.getGaddr1());
-			msBean.setGaddr2(gymBean.getGaddr2());
-			msBean.setPnum(productBean.getPnum());
-			msBean.setPrice(productBean.getPrice());
-			msBean.setMonths(productBean.getMonths());
-			msBean.setPcount(productBean.getPcount());
-			msBean.setPtype(productBean.getPtype());
-			msBean.setPtime(productBean.getPtime());
-			msBean.setPeople(productBean.getPeople());
-			msBean.setRating(rating);
-			msBean.setHasReview(hasReview);
-			sList.add(msBean);
-			totalAmount += productBean.getPrice();
+			model.addAttribute("sList", sList);
+			model.addAttribute("totalAmount", totalAmount);
+			model.addAttribute("minPrice", minPrice);
+			model.addAttribute("maxPrice", maxPrice);
 		}
-		model.addAttribute("sList", sList);
-		model.addAttribute("totalAmount", totalAmount);
 		return getPage;
 	}
 }

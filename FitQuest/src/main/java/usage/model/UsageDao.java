@@ -16,4 +16,9 @@ public class UsageDao {
 		cnt = sqlSessionTemplate.selectOne(namespace + ".GetUsageCount", map);
 		return cnt;
 	}
+	public int insertUsage(UsageBean usageBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertUsage", usageBean);
+		return cnt;
+	}
 }
