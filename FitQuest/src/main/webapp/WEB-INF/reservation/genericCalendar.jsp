@@ -18,11 +18,11 @@
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
-      <a class="calendar_year" href="reservationCalendar.rv?year=${today_info.search_year-1}&month=${today_info.search_month-1}">
+      <a class="calendar_year" href="genericCalendar.rv?year=${today_info.search_year-1}&month=${today_info.search_month-1}">
          &lt;&lt;
       </a> 
       <!-- 이전달 -->
-      <a class="calendar_month" href="reservationCalendar.rv?year=${today_info.before_year}&month=${today_info.before_month}">
+      <a class="calendar_month" href="genericCalendar.rv?year=${today_info.before_year}&month=${today_info.before_month}">
          &lt;
       </a> 
       <span class="this_month">
@@ -30,11 +30,11 @@
          <c:if test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
       </span>
       <!-- 다음달 -->
-      <a class="calendar_month" href="reservationCalendar.rv?year=${today_info.after_year}&month=${today_info.after_month}">
+      <a class="calendar_month" href="genericCalendar.rv?year=${today_info.after_year}&month=${today_info.after_month}">
          &gt;
       </a> 
          <!-- 다음년 -->
-      <a class="calendar_year" href="reservationCalendar.rv?year=${today_info.search_year+1}&month=${today_info.search_month-1}">
+      <a class="calendar_year" href="genericCalendar.rv?year=${today_info.search_year+1}&month=${today_info.search_month-1}">
          &gt;&gt;
       </a>
    </div>

@@ -10,4 +10,12 @@
 		where id = #{id}
 		order by months asc
 	</select>
+	<select id = "GetIdByPnum" resultType = "String">
+		select id from product
+		where pnum = #{pnum}
+	</select>
+	<select id = "GetProductByPnum" resultType = "product.model.ProductBean">
+		select * from product where
+		pnum = #{pnum}
+	</select>
 </mapper>
