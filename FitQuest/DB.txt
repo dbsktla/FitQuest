@@ -377,7 +377,7 @@ drop table physique cascade constraints;
 CREATE TABLE physique (
    phnum   number   primary key, --신체번호
    ID   varchar2(100)   NOT NULL, --아이디
-   height   number default 0.0, --신장(cm)
+   height   number default 0.0, --신장(cm) 
    weight   number default 0.0, --체중(kg)
    BMI   number default 0.0, --bmi
    phdate   date, --측정일
@@ -386,6 +386,11 @@ CREATE TABLE physique (
    bmr   int --기초대사량(kcal)
 );
 
+insert into physique values(phseq.nextval, 'hong', 170.5, 90.0, 30.9, '2023-04-30', 29.3, 33.2, 1607);
+insert into physique values(phseq.nextval, 'hong', 170.5, 85.0, 29.2, '2023-05-10', 30.3, 30.5, 1570);
+insert into physique values(phseq.nextval, 'hong', 170.5, 80.1, 27.5, '2023-05-23', 31.5, 29.8, 1540);
+insert into physique values(phseq.nextval, 'hong', 170.5, 75.4, 25.9, '2023-06-01', 32.9, 28.1, 1580);
+insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-07', 33.1, 27.5, 1607);
 
 select * from physique;
 commit;
