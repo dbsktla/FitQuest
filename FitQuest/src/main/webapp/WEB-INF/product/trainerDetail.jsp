@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
+<%
+	session.setAttribute("flag1", true); 
+%>
  <section class="breadcrumbs">
       <div class="container">
         <ol>
@@ -11,7 +14,7 @@
 </section><!-- End Breadcrumbs -->
  <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
-
+		
         <div class="row" style = "justify-contents: center;">
 		  <div class ="col-lg-2"></div>
           <div class="col-lg-8 entries">
