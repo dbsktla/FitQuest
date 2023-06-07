@@ -29,54 +29,74 @@ commit;
  
 -- 게시판
 drop table BOARD cascade constraints;
-CREATE TABLE BOARD (
-   Bnum   number   primary key,
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   btype   varchar2   NOT NULL,
-   bcategory   varchar2   NOT NULL,
-   Bsubject   varchar2   NOT NULL,
-   Bregdate   date   NOT NULL   DEFAULT sysdate,
-   Breadcount   number   NOT NULL   DEFAULT 0,
-   Bref   number,
-   Brestep   number,
-   Brelevel   number,
-   Bcontent   varchar2   NOT NULL,
-   Bimage   varchar2
+create table board (
+   Bnum number primary key,
+   id varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   btype   varchar2(10)   NOT NULL check(btype in('자유','건강')),
+   bcategory   varchar2(30)   NOT NULL, --카테고리
+   Bsubject   varchar2(100)   NOT NULL, --제목
+   Bregdate   date  default sysdate, --작성일
+   Breadcount   number DEFAULT 0, --조회수
+   Bref   number, --같은 글 그룹
+   Brestep   number, --몇번째 글(글, 답글,답답글)
+   Brelevel   number, --글의 순서(오래된건 후순위)
+   Bcontent   varchar2(4000)   NOT NULL, --내용
+   Bimage   varchar2(300) --건강 정보 게시판의 이미지
 );
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
+values(bseq.nextval,'hong','자유','일반','테스트 글',1,0,0,'테스트 글 내용입니다.');
 
 select * from BOARD;
 commit;
 
+drop sequence sseq;
+create sequence sseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;  
 
 -- 책갈피
 drop table SCRAP cascade constraints;
 CREATE TABLE SCRAP (
    Snum number   primary key, --책갈피 고유번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   Bnum number   NOT NULL -- 게시판번호
+   Bnum number NOT NULL references BOARD(Bnum) on delete cascade -- 게시판번호
 );
+
+insert into scrap values(sseq.nextval,'hong',1);
 
 select * from SCRAP;
 commit;
+ 
+drop sequence bcseq;
+create sequence bcseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;  
 
 -- 댓글
-drop table COMMENT cascade constraints;
-CREATE TABLE COMMENT (
+drop table BCOMMENT cascade constraints;
+CREATE TABLE BCOMMENT (
    cnum number   primary key, --댓글 고유번호
-   Bnum varchar2 references BOARD(Bnum) on delete cascade, -- 게시판 번호
-   Bnum number   NOT NULL, --게시판 고유번호
+   Bnum number references BOARD(Bnum) on delete cascade, -- 게시판 번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   cregdate date NOT NULL DEFAULT sysdate,
-   cref   number   NOT NULL,
-   crestep   number   NOT NULL,
-   crelevel   number   NOT NULL,
-   Ccontent   varchar2   NOT NULL
+   cregdate date DEFAULT sysdate, --작성일
+   cref   number   NOT NULL, --같은 댓글 그룹
+   crestep   number   NOT NULL, --몇번째 글(댓글, 대댓글)
+   crelevel   number   NOT NULL, --글의 순서
+   Ccontent   varchar2(2000)   NOT NULL --내용
 );
 
-select * from COMMENT;
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent)
+values(bcseq.nextval,1,'hong',1,0,0,'테스트 댓글');
+
+select * from BCOMMENT;
 commit;
-
-
 
 
 
@@ -116,6 +136,8 @@ CREATE TABLE gym (
    gaddr2   varchar2(60)   NOT NULL, --헬스장 주소2
    gphone   varchar2(60)   NOT NULL --헬스장 전화번호
 );
+
+insert into gym values(gseq.nextval,'헬스장1','경기 성남시 분당구 판교동 649','2층','0222223333');
 
 select * from gym;
 commit;
