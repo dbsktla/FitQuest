@@ -4,6 +4,11 @@ a{
 	text-decoration: none;
 	color: black;
 }
+.day-area{
+	background-color: #FEF9E7;
+	border-top: 1.5px solid gray;
+	border-bottom: 1px solid lightgray;
+}
 .calendar{
 	margin: 50px 0px;
 }
