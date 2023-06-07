@@ -178,14 +178,14 @@ create sequence oseq
   maxvalue 10000
   nocache;
   
-drop table order cascade constraints;
-CREATE TABLE order (
+drop table orders cascade constraints;
+CREATE TABLE orders(
    onum   number   primary key, --주문번호
    ID   varchar2(100)   NOT NULL, --주문한 회원 아이디
-   odate   date   NOT NULL, --주문 날짜
+   odate   date   NOT NULL --주문 날짜
 );
 
-select * from order;
+select * from orders;
 commit;
 
 
