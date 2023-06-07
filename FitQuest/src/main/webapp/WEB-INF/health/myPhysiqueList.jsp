@@ -10,6 +10,22 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<style>
+	table{
+		text-align: center;
+	}
+	td, tr{
+		height: 40px;
+		width: 40px;
+	}
+	.daySun{
+		color: red;
+	}
+	.daySat{
+		color: blue;
+	}
+</style>
+
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script>
 	function calenderLookup() {
@@ -19,14 +35,43 @@
 		//alert(sYear);
 		//alert(sMon);
 		
-		
 		$.ajax({
-			type : "GET",
-			url : "myHealthList.ht",
+			type : "POST",
+			url : "myPhysiqueList.ht",
 			data : ({'selectYear' : sYear, 'selectMon' : sMon}),
 			dataType : "json",
 			success : function (data) {
+				$('#calenderTable').empty(); // calenderTable div 내용 비우기
+				var msg = '<table><tr><td class="daySun">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="daySat">토</td></tr>';
 				
+				//alert(data[0].date);
+				for(var i=0; i<data.length; i++){
+					if(i == 0){
+						for(var j=0; j<data[i].date; j++){
+							msg += '<td> </td>';
+						}
+					}
+					
+					//alert(data[i].i);
+					if(data[i].date == 0){
+						msg += '</tr><tr>';
+					}
+					
+					
+					if(data[i].date == 0){
+						msg += "<td class='daySun'>" + (i+1) + "</td>";
+					}else if(data[i].date == 6){
+						msg += "<td class='daySat'>" + (i+1) + "</td>";
+					}else{
+						msg += "<td>" + (i+1) + "</td>";
+					}
+					
+				}// for
+				
+				msg += '</tr></table>';
+				
+				
+				$("#calenderTable").append(msg);
 			}
 		}); // ajax
 	}
@@ -77,13 +122,13 @@
 						<div id="calenderTable">
 							<table>
 								<tr>
-									<td>일</td>
+									<td class="daySun">일</td>
 									<td>월</td>
 									<td>화</td>
 									<td>수</td>
 									<td>목</td>
 									<td>금</td>
-									<td>토</td>
+									<td class="daySat">토</td>
 								</tr>
 								<tr>
 									<c:forEach var="i" items="${dateMap}" varStatus="status">
@@ -96,7 +141,17 @@
 											</tr>
 											<tr>
 										</c:if>
-										<td>${i.key}</td>
+										
+										<c:if test="${i.value == 0}">
+											<td class="daySun">${i.key}</td>
+										</c:if>
+										<c:if test="${i.value == 6}">
+											<td class="daySat">${i.key}</td>
+										</c:if>
+										<c:if test="${i.value != 0 and i.value != 6}">
+											<td>${i.key}</td>
+										</c:if>
+										
 									</c:forEach>
 								</tr>
 							</table>
