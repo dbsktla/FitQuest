@@ -1,9 +1,12 @@
+<%@page import="java.util.Base64"%>
+<%@page import="java.util.Base64.Decoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!-- myNutritionList.jsp -->
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
+
 <body style="background-color: #FEF9E7">
 	<div class="pagetitle">
 		<h1>
@@ -16,7 +19,7 @@
 			</ol>
 		</nav>
 	</div>
-
+	
 	<div class="row">
 		<div class="col-lg-4" >
 			<!-- Default Card -->
