@@ -89,15 +89,6 @@
 					
                     <div class="card-body" id="naverIdLogin" style="text-align: center;">
                  	<div style="height: 50px;" ></div>
-					<!--   네이버 로그인 버튼 노출 영역 -->
-					 <!--  <script type="text/javascript">
-					  	var naver_id_login = new naver_id_login("KBhXUzgWQu6NpbT90un8", "http://localhost:8080/ex/naverLoginPopup.mb");
-					  	var state = naver_id_login.getUniqState();
-					  	naver_id_login.setButton("green",1);
-					  	naver_id_login.setState(state);	
-					  	naver_id_login.setPopup();
-					  	naver_id_login.init_naver_id_login();
-					   </script> -->
 					<script type="text/javascript">
 						var naverLogin = new naver.LoginWithNaverId({
 							clientId : "KBhXUzgWQu6NpbT90un8",

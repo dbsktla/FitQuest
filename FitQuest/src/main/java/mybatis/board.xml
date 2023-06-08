@@ -5,5 +5,68 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board.model.Board">
-
+	<select id="GetFreeBoardCount" resultType="int">
+		select count(*) 
+		from board inner join member
+		on board.id = member.id
+		<if test="bcategory != ''">
+		where btype = '자유' and bcategory = #{bcategory}
+			<if test="whatColumn=='bsubject'">
+				and lower(bsubject) like lower(#{keyword})
+			</if>
+			<if test="whatColumn=='name'">
+				and lower(name) like lower(#{keyword})
+			</if>
+			<if test="whatColumn == ''">
+				<if test="keyword != ''">
+					and (lower(bsubject) like lower(#{keyword}) 
+					or lower(name) like lower(#{keyword}))
+				</if>
+			</if>
+		</if>
+	</select>
+	
+	<select id="GetFreeBoardList" resultType="community.model.BoardBean">
+		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from board inner join member on board.id = member.id order by bref desc, brestep asc) board) board
+		<if test="bcategory != ''">
+			where btype = '자유' and bcategory = #{bcategory}
+			<if test="whatColumn=='bsubject'">
+				and lower(bsubject) like lower(#{keyword})
+			</if>
+			<if test="whatColumn=='name'">
+				and lower(name) like lower(#{keyword})
+			</if>
+			<if test="whatColumn == ''">
+				<if test="keyword != ''">
+					and (lower(bsubject) like lower(#{keyword}) 
+					or lower(name) like lower(#{keyword}))
+				</if>
+			</if>
+		</if>
+	</select>
+	
+	<update id="UpdateBreadcount">
+		update board set breadcount = breadcount + 1
+		where bnum = #{bnum}
+	</update>
+	
+	<select id="GetOneFreeBoard" resultType="community.model.BoardBean">
+		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from board inner join member
+		on board.id = member.id
+		where bnum = #{bnum}
+	</select>
+	
+	<insert id="InsertFreeBoard">
+		insert into board(bnum,id,btype,bcategory,bsubject,bref,brestep,brelevel,bcontent)
+		values(bseq.nextval,#{id},#{btype},#{bcategory},#{bsubject},bseq.currval,#{brestep},#{brelevel},#{bcontent})
+	</insert>
+	
+	<delete id="DeleteFreeBoard">
+		delete from board
+		where bnum = #{bnum}
+	</delete>
 </mapper>
