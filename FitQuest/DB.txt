@@ -249,7 +249,8 @@ create sequence reseq
 drop table reservation cascade constraints;
 CREATE TABLE reservation (
    rnum   number   primary key, --예약번호/시퀀스
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   mid varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디
+   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디 
    onum   number   NOT NULL, --주문번호
    unum   number   NOT NULL,--사용권번호
    rdate   date NOT NULL, --예약 날짜
