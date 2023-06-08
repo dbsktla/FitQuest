@@ -1,5 +1,7 @@
 package reservation.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -36,7 +38,7 @@ public class TscheduleController {
 	
 	@RequestMapping(value=command,method = RequestMethod.POST)
 	public String doAction(@Valid TscheduleBean tscheduleBean, BindingResult result,HttpServletRequest request, Model model,
-			HttpSession session) {
+			HttpSession session,@RequestParam("tsdate") List<String> tsdateList) {
 		System.out.println("오나 확인 test");
 		System.out.println("오나 확인 오류시/tsdate:"+tscheduleBean.getTsdate());
 		
@@ -47,14 +49,26 @@ public class TscheduleController {
 			System.out.println("오나 확인 오류 없을때");
 			String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 			tscheduleBean.setTid(tid);
-			System.out.println("tsdate:"+tscheduleBean.getTsdate());
 			
+			String tsdate = ""; 
+			
+			if(tsdateList.size() > 1) {
+				for(int i=0;i<tsdateList.size();i++) {
+					tsdate += tsdateList.get(i);
+			        if (i < tsdateList.size() - 1) {
+			            tsdate += ",";
+			        }
+				}
+			}
+			tscheduleBean.setTsdate(tsdate);
 			int cnt = tscheduleDao.insertTschedule(tscheduleBean);
+			
 			if(cnt != -1) {
 				return gotoPage;
 			}else {
 				return getPage;
 			}
+			
 		}
 	}
 }

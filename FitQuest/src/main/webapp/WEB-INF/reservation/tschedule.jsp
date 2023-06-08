@@ -20,6 +20,23 @@
 	}
 }
 </style>
+
+<script type="text/javascript" src="resources/js/jquery.js" ></script>
+<script>
+	var classcount
+	function inputScope() {
+		document.getElementById('healthScope').innerHTML += '<div class="col-md-12 healthScopePlus margin-bottom">'
+		+ '<div class="col-md-12"><input type="date" name="tsdate" class="form-control" id="tsdate"></div>'
+		+ '</div>';
+	}
+	
+	function deleteScope() {
+		var slen = $('.healthScopePlus').length;
+		$('.healthScopePlus').eq(slen-1).remove();
+	}
+
+</script>
+
 <%
 String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","10:00~11:00","12:00~13:00","13:00~14:00","15:00~16:00","16:00~17:00","18:00~19:00",
 		"19:00~20:00","20:00~21:00","21:00~22:00"}; 
@@ -45,7 +62,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                   
                   <form:form commandName="tscheduleBean" action="tschedule.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
-                      <label for="yourDay" class="form-label">요일
+                      <label for="yourDay" class="form-label b margin-bottom">요일
                       <form:errors cssClass="err" path="tsday" /></label>
                       <br>
                       	<div class="center form-control">
@@ -59,7 +76,8 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                     </div>
                     
                      <div class="col-12">
-                      <label for="yourTstime" class="form-label">시간
+                      <div class="margin-top"></div>
+                      <label for="yourTstime" class="form-label b">시간
                       <form:errors cssClass="err" path="tstime"/>
                       </label> <br>
                       <div class="center form-control">
@@ -72,11 +90,18 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                        </div>
                       </div>
                     
-                    <div class="col-12">
-                      <label for="yourTsdate" class="form-label">불가능한 날짜</label>
-                      <input type="date" name="tsdate" class="form-control" id="yourTsdate" value="${tscheduleBean.tsdate}"><br>
+                    <div class="col-12 margin-top">
+                      <div class="margin-top"></div>
+                      <label for="yourTsdate" class="form-label b">불가능한 날짜</label>
+                      <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">날짜삭제</button> 
+						<button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜추가</button><br><br>
+						
+                      <input type="date" name="tsdate" class="form-control" id="tsdate">
                     </div>
                     
+                    <!-- 추가영역 -->
+					<div id="healthScope"></div>
+						
                     <div class="col-12 center">
                     	<!-- 처음 스케줄 등록할때 -->
                     	<c:if test="${flag == false}">
