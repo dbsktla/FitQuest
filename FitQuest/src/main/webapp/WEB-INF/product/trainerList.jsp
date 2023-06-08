@@ -24,11 +24,9 @@
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
-	
 $(function(){
     areaSelectMaker("select[name=addressRegion]");
 });
-
 var areaSelectMaker = function(target){
     if(target == null || $(target).length == 0){
         console.warn("Unknown Area Tag");
@@ -112,7 +110,6 @@ var areaSelectMaker = function(target){
         } 
     }
 }
-    
 	function filter(sport){
 		// Get all buttons with class="btn" inside the container
 		var btns = document.getElementsByClassName("filter");
@@ -142,7 +139,6 @@ var areaSelectMaker = function(target){
 		//Resend request with filter ->
 	}
 </script>
-
 <!-- 운동 카테고리 선택.-->
  <section id="portfolio" class="portfolio"> 
       <div class="container" data-aos="fade-up">
@@ -297,6 +293,4 @@ var areaSelectMaker = function(target){
 		${pageInfo.pagingHtml}
 	</div>
     </section><!-- End Team Section -->
-
-  
 <%@ include file="../common/bottom.jsp" %>
