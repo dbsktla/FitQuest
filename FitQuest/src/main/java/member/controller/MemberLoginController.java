@@ -125,7 +125,16 @@ public class MemberLoginController {
 		boolean login = memberDao.searchId(id);
 		if(login) {
 			session.setAttribute("loginInfo", memberBean);
-			return gotoPage;
+			
+			String destination = (String)session.getAttribute("destination");
+			// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
+			if(destination != null) {
+				return destination;
+			}
+			// 이전 페이지 정보가 없으면 메인페이지로 이동함.
+			else {
+				return gotoPage;
+			}
 		}
 		else {
 			try {
@@ -184,7 +193,15 @@ public class MemberLoginController {
 		boolean login = memberDao.searchId(id);
 		if(login) {
 			session.setAttribute("loginInfo", memberBean);
-			return gotoPage;
+			String destination = (String)session.getAttribute("destination");
+			// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
+			if(destination != null) {
+				return destination;
+			}
+			// 이전 페이지 정보가 없으면 메인페이지로 이동함.
+			else {
+				return gotoPage;
+			}
 		}
 		else {
 			try {
