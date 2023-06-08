@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import member.model.MemberBean;
 import physique.model.PhysiqueBean;
 import physique.model.PhysiqueDao;
+import utility.FitQuestUtil;
 
 @Controller
 public class MyPhysiqueInsertController {
@@ -65,27 +66,10 @@ public class MyPhysiqueInsertController {
 								HttpServletRequest request, HttpSession session,
 								HttpServletResponse response) {
 		
-//		String uploadPath = request.getContextPath() + "/resources/image/InbodyImage";
-//		System.out.println("uploadPath : " + uploadPath);
-//		
-//		ClassPathResource repath = new ClassPathResource("/resources");
-//		System.out.println("repath : " + repath.getPath());
-//		
-//		URL upath = this.getClass().getResource("/");
-//		String path = upath.getPath();
-//		
-//		System.out.println("upath : " + upath.toString());
-//		System.out.println("path : " + path);
-		
-		
-		String uploadPath = "C:/Users/user/git/FitQuest/FitQuest/src/main/webapp/resources/Image/InbodyImage";
-		//String uploadPath = "./src/main/webapp/resources/Image/InbodyImage";
-		
-		//String uploadPath = repath.getPath();
+		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/InbodyImage";
+		System.out.println("uploadPath : " + uploadPath);
 		
 		File destination = new File(uploadPath + File.separator + physiqueBean.getUpload().getOriginalFilename());
-//		File destination = new File(request.getRealPath("resources") + File.separator + physiqueBean.getUpload().getOriginalFilename());
-		
 		
 		MultipartFile multi =  physiqueBean.getUpload();
 		

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import physique.model.PhysiqueBean;
 import physique.model.PhysiqueDao;
+import utility.FitQuestUtil;
 
 @Controller
 public class MyPhysiqueUpdateController {
@@ -44,9 +45,7 @@ public class MyPhysiqueUpdateController {
 		ModelAndView mav = new ModelAndView();
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String uploadPath = "C:\\Users\\user\\git\\FitQuest\\FitQuest\\src\\main\\webapp\\resources\\Image\\InbodyImage";
-		
-		//String uploadPath = "src/main/webapp/resources/Image/InbodyImage";
+		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/InbodyImage";
 		
 		File destination = new File(uploadPath + File.separator + physiqueBean.getUpload().getOriginalFilename());
 		File delFile = new File(uploadPath + File.separator + physiqueBean.getUpload2());
@@ -57,7 +56,6 @@ public class MyPhysiqueUpdateController {
 		System.out.println("up1 Img : " + physiqueBean.getPhimage());
 		
 		if(physiqueBean.getPhimage().equals("")) { // 기존파일
-			//System.out.println("test");
 			physiqueBean.setPhimage(physiqueBean.getUpload2());
 		}
 		
