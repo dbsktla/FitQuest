@@ -27,25 +27,6 @@
 <div class="calendarTitle">
 	<div class="calendarTitle-font">예약</div>
 	<div class="calendarSubtitle-font">김려원 트레이너님 스케줄</div>
-	<div>
-	<c:choose>
-            
-			<c:when test="${not empty tsyear}">  
-				<c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
-               		<td class="calendar-box">
-						<div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-						<c:if test="${tsyear[i] eq today_info.search_year && tsmonth[i] eq today_info.search_month}">
-							<div class="reservation-area">
-							<span class="calender-text">휴무</span>
-							</div>
-						</c:if>
-				   	</td>
-				</c:forEach>
-            </c:when>
-	</c:choose>
-	
-	</div>
-			
 </div> 
 
 
@@ -104,21 +85,21 @@
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
          <c:choose>
-            
-			<c:when test="${not empty tsyear}">  
-				<c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
-               		<td class="calendar-box">
-						<div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-						<c:if test="${tsyear[i] eq today_info.search_year && tsmonth[i] eq today_info.search_month && tsday[i] eq  dateList.date}">
+         
+         	<c:when test="${not empty tsyear}">  
+           		<td class="calendar-box">
+					<div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
+					<c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
+						<c:if test="${tsyear[i] == today_info.search_year && tsmonth[i] == today_info.search_month && tsday[i] == dateList.date}">
 							<div class="reservation-area">
 							<img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
 							<span class="calender-text">휴무</span>
 							</div>
 						</c:if>
-				   	</td>
-				</c:forEach>
+					</c:forEach>
+			   	</td>
             </c:when>
-			
+            
             <c:when test="${date_status.index%7==6}">
                <td class="calendar-box">
      				<div class="calendar-margin"><div class="calendar-num sat">${dateList.date}</div></div>
@@ -142,8 +123,8 @@
             </c:when>
             
             <c:when test="${date_status.index%7==0}">
-		    </tr>
-		    <tr>
+    </tr>
+    <tr>
 		      <td class="calendar-box">
      				<div class="calendar-margin"><div class="calendar-num sun">${dateList.date}</div></div>
     				<c:forEach var="day" items="${tsdayArr}">
@@ -164,15 +145,10 @@
 		            </c:forEach>
                </td>
             </c:when>
+            
       <c:otherwise>
-      	<td class="calendar-box">
-         	<div class="date">
-                <div class="calendar-num">${dateList.date}</div>
-                <a href = "reservationDetail.rv">
-                </a>
-         </div>
-         
-      <div> 
+	  <td class="calendar-box">
+      	<div> 
 		<c:choose>
            <c:when test="${date_status.index%7==1}">
          	  <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
