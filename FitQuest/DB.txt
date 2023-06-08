@@ -27,13 +27,36 @@ select * from MEMBER;
 commit;
 
  
--- 게시판
+
+
+
+
+-- 트레이너 
+drop table trainer cascade constraints;
+CREATE TABLE trainer (
+   ID varchar2(100) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
+   gnum   number NOT NULL, --헬스장 번호
+   activity   varchar2(30)   NOT NULL, --운동 카테고리
+   purpose   varchar2(100)   NOT NULL, --운동 목적
+   intro   varchar2(500)   NOT NULL, -- 소개 내용
+   exp   varchar2(50)   NOT NULL, --경력
+   timage   varchar2(50) --트레이너 사진
+);
+
+insert into trainer values('kim', 1, 'PT', '체중', 'hi~','개인 pt 30년', 'tr1.jpg');
+select * from trainer;
+commit;
+
+
+-- 헬스장 
+drop sequence gseq;
+create sequence gseq-- 게시판
 drop table BOARD cascade constraints;
 create table board (
    Bnum number primary key,
    id varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    btype   varchar2(10)   NOT NULL check(btype in('자유','건강')),
-   bcategory   varchar2(30)   NOT NULL, --카테고리
+   bcategory   varchar2(30)   NOT NULL, --카테고리 (자유-일반/운동인증, 건강 정보-운동/식단/기타)
    Bsubject   varchar2(100)   NOT NULL, --제목
    Bregdate   date  default sysdate, --작성일
    Breadcount   number DEFAULT 0, --조회수
@@ -47,8 +70,14 @@ create table board (
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
 values(bseq.nextval,'hong','자유','일반','테스트 글',1,0,0,'테스트 글 내용입니다.');
 
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
+values(bseq.nextval,'hong','자유','운동인증','운동인증 글',2,0,0,'운동인증 글 내용입니다.');
+
+
 select * from BOARD;
 commit;
+
+
 
 drop sequence sseq;
 create sequence sseq
@@ -70,7 +99,7 @@ insert into scrap values(sseq.nextval,'hong',1);
 
 select * from SCRAP;
 commit;
- 
+
 drop sequence bcseq;
 create sequence bcseq
   increment by 1
@@ -100,28 +129,6 @@ commit;
 
 
 
-
-
--- 트레이너 
-drop table trainer cascade constraints;
-CREATE TABLE trainer (
-   ID varchar2(100) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
-   gnum   number NOT NULL, --헬스장 번호
-   activity   varchar2(30)   NOT NULL, --운동 카테고리
-   purpose   varchar2(100)   NOT NULL, --운동 목적
-   intro   varchar2(500)   NOT NULL, -- 소개 내용
-   exp   varchar2(50)   NOT NULL, --경력
-   timage   varchar2(50) --트레이너 사진
-);
-
-insert into trainer values('kim', 1, 'PT', '체중', 'hi~','개인 pt 30년', 'tr1.jpg');
-select * from trainer;
-commit;
-
-
--- 헬스장 
-drop sequence gseq;
-create sequence gseq
   increment by 1
   start with 1
   minvalue 1

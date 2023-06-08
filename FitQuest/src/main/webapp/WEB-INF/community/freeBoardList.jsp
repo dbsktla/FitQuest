@@ -3,66 +3,112 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 
-<body style="background-color: #FEF9E7;">
-	<main>
-		<div class="card">
-			<div class="card-body">
-				<h5 class="card-title">Table with hoverable rows</h5>
+<%
+	session.setAttribute("freeBoardListFlag", "true");
+%>
 
+<body style="background-color: #FEF9E7; text-align: center;">
+	<main>
+		<div class="card" style="width: 70%; margin: auto;">
+			<div class="card-body">
+				<div align="right">
+					<c:if test="${ sessionScope.loginInfo.id != null }">
+						<input type="button" value="작성하기" class="btn btn-warning btn-sm" onclick="location.href='freeBoardInsert.co'">
+					</c:if>
+				</div>
+				<h5 class="card-title">자유 게시판</h5>
+				<div class="col-md-12" align="right">
+					<a style="color : #FAC710;" href="freeBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
+					<font color="#FAC710"> | </font>
+					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=일반&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">일반</a>
+					<font color="#FAC710"> | </font>
+					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=운동인증&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">운동인증</a>
+				 </div>
+				 <div class="col-md-5" align="left">
+				 	
+				 </div>
 				<!-- Table with hoverable rows -->
 				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Name</th>
-							<th scope="col">Position</th>
-							<th scope="col">Age</th>
-							<th scope="col">Start Date</th>
+						<tr align="center">
+							<th scope="col">번호</th>
+							<th scope="col" width="50%">제목</th>
+							<th scope="col">카테고리</th>
+							<th scope="col">작성자</th>
+							<th scope="col">조회수</th>
+							<th scope="col">작성일</th>
 						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Brandon Jacob</td>
-							<td>Designer</td>
-							<td>28</td>
-							<td>2016-05-25</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Bridie Kessler</td>
-							<td>Developer</td>
-							<td>35</td>
-							<td>2014-12-05</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Ashleigh Langosh</td>
-							<td>Finance</td>
-							<td>45</td>
-							<td>2011-08-12</td>
-						</tr>
-						<tr>
-							<th scope="row">4</th>
-							<td>Angus Grady</td>
-							<td>HR</td>
-							<td>34</td>
-							<td>2012-06-11</td>
-						</tr>
-						<tr>
-							<th scope="row">5</th>
-							<td>Raheem Lehner</td>
-							<td>Dynamic Division Officer</td>
-							<td>47</td>
-							<td>2011-04-19</td>
-						</tr>
-					</tbody>
+						<c:forEach var="board" items="${ freeBoardList }" varStatus="status">
+							<tr align="center">
+								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
+								<td><a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a></td>
+								<td>${ board.bcategory }</td>
+								<td>${ board.name }</td>
+								<td>${ board.breadcount }</td>
+								<td>
+									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
+									<fmt:formatDate value="${ parseDate }" pattern="yyyy-MM-dd HH:mm"/>
+								</td>
+							</tr>
+						</c:forEach>
 				</table>
 				<!-- End Table with hoverable rows -->
-
+				
+				<div class="col-md-6">
+			      <form method="get" class="search-form d-flex align-items-center" action="freeBoardList.co">
+				      <c:if test="${ bcategory != '' }">
+				      	<input type="hidden" name="bcategory" value="${ bcategory }">
+				      	<input type="hidden" name="pageNumber" value="1">
+				      </c:if>
+				      <div class="col-md-3">
+				      <select name="whatColumn" class="form-select">
+	                    <option value="">전체 검색</option>
+	                    <option value="bsubject">제목</option>
+						<option value="name">작성자</option>
+	                  </select>
+	                  </div>
+			        <input type="text" name="keyword" class="form-control" placeholder="Search">
+			        &nbsp;<button type="submit" class="btn btn-warning">
+			        	<i class="bi bi-search"></i>
+			        </button>
+			      </form>
+			    </div>
 			</div>
+			
+			
+			
+			<div style=" display: inline-block; margin: auto;">
+				<nav aria-label="Page navigation example">
+	                <ul class="pagination">
+	                <c:if test="${ pageInfo.beginPage != 1 }">
+	                  <li class="page-item">
+	                    <a style="color : #FAC710;" class="page-link" href="${ pageInfo.url }?pageNumber=${ pageInfo.beginPage - 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }" aria-label="Previous">
+	                      <span aria-hidden="true">&laquo;</span>
+	                    </a>
+	                  </li>
+	                 </c:if> 
+	                 
+	                <c:forEach begin="${ pageInfo.beginPage }" end="${ pageInfo.endPage }" var="page">
+	                	<c:if test="${ page == pageNumber }">
+	                		<li class="page-item disabled"><a class="page-link" href="#">${ page }</a></li>
+	                	</c:if>
+	                	<c:if test="${ page != pageNumber }">
+	                		<li class="page-item"><a style="color : #FAC710;" class="page-link" href="${ pageInfo.url }?pageNumber=${ page }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }">${ page }</a></li>
+	                	</c:if>
+	                </c:forEach>
+	                
+	                <c:if test="${ pageInfo.endPage != pageInfo.totalPage }">
+	                  <li class="page-item">
+	                    <a style="color : #FAC710;" class="page-link" href="${ pageInfo.url }?pageNumber=${ pageInfo.endPage + 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }" aria-label="Next">
+	                      <span aria-hidden="true">&raquo;</span>
+	                    </a>
+	                  </li>
+	                </c:if> 
+	                </ul>
+	              </nav>
+			</div>        
 		</div>
 	</main>
+	
 </body>
 <%@ include file="../common/bottom.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
