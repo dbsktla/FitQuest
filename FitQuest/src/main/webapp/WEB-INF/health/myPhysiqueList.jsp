@@ -203,12 +203,12 @@
 	}
 	
 	function deletePhysique(phnum) {
-		alert(phnum);
+		//alert(phnum);
 		location.href="myPhysiqueDelete.ht?phnum=" + phnum;
 	}
 	
 	function updatePhysique(phnum) {
-		alert(phnum);
+		//alert(phnum);
 		location.href="myPhysiqueUpdate.ht?phnum=" + phnum;
 	}
 	

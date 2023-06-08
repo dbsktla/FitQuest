@@ -15,7 +15,17 @@ public class PhysiqueBean {
 	private int bmr; // 기초대사량
 	private String phimage; //인바디 이미지
 	private MultipartFile upload;
+	private String upload2; //기존이미지
 	
+	
+	public String getUpload2() {
+		return upload2;
+	}
+
+	public void setUpload2(String upload2) {
+		this.upload2 = upload2;
+	}
+
 	public MultipartFile getUpload() {
 		return upload;
 	}
@@ -25,6 +35,7 @@ public class PhysiqueBean {
 		this.upload = upload;
 		
 		String fileName = upload.getOriginalFilename();
+		System.out.println("fileName : " + fileName);
 		this.phimage = fileName;
 		
 	}
