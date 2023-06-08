@@ -2,10 +2,14 @@ package review.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import utility.ReviewPaging;
 
 @Component
 public class ReviewDao {
@@ -13,7 +17,7 @@ public class ReviewDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-
+	
 	public List<ReviewBean> getReviewListByTid(String id) {
 		List<ReviewBean> rList = new ArrayList<ReviewBean>();
 		rList = sqlSessionTemplate.selectList(namespace + ".GetReviewByTid", id);
@@ -29,5 +33,25 @@ public class ReviewDao {
 	}
 	public void insertBaseValue(String id) {
 		sqlSessionTemplate.insert(namespace + ".InsertBaseValue", id);
+	}
+	public int getReviewCount(Map<String, String> map) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".GetReviewCount", map);
+		return cnt;
+	}
+	public List<ReviewBean> getReviewList(Map<String, String> map, ReviewPaging pageInfo) {
+		List<ReviewBean> rList = new ArrayList<ReviewBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		rList = sqlSessionTemplate.selectList(namespace + ".GetReviewList", map, rowBounds);
+		return rList;
+	}
+	public ReviewBean getReviewByRenum(int renum) {
+		ReviewBean reviewBean = new ReviewBean();
+		reviewBean = sqlSessionTemplate.selectOne(namespace + ".GetReviewByRenum", renum);
+		return reviewBean;
+	}
+	public int insertReport(int renum) {
+		int cnt = sqlSessionTemplate.update(namespace + ".InsertReport", renum);
+		return cnt;
 	}
 }
