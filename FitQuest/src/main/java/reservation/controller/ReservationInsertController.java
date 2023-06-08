@@ -72,7 +72,7 @@ public class ReservationInsertController {
 		if(cnt != -1) {
 			System.out.println("예약 성공");
 			//사용권 차감
-			int cnt = usageDao.decreaseUsage();
+			//int cnt = usageDao.decreaseUsage();
 			
 		}else {
 			System.out.println("예약 실패");

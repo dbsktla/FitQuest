@@ -22,6 +22,7 @@ import member.model.MemberDao;
 import review.model.ReviewDao;
 import trainer.model.TrainerBean;
 import trainer.model.TrainerDao;
+import utility.FitQuestUtil;
 
 
 @Controller
@@ -50,7 +51,7 @@ public class TrainerInsertController {
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request, Model model) {
 		List<GymBean> glist = gymDao.getAllGym();
-		String uploadPath = "/Users/songnayoung/git/FitQuest/FitQuest/src/main/webapp/resources/Image/TrainerImage";
+		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/TrainerImage";
 		//String uploadPath = "";
 		
 		File destination = new File(uploadPath + File.separator + trainerBean.getUpload().getOriginalFilename());

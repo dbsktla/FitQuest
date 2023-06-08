@@ -128,7 +128,7 @@
 		  </c:if>
 		  
 		  <div style = "font-weight:bold;font-size:14px;">
-		  <input type = "button" class ="btn btn-warning" value = "리뷰 작성하기" onclick="location.href='reviewInsert.pd'">
+		  <input type = "button" class ="btn btn-warning" value = "리뷰 작성하기" onclick="location.href='reviewWrite.pd?id=${trainerBean.id}'">
  			${memberBean.name } 선생님에게 수업 3번 이상 받으시면 리뷰 작성 가능합니다!
 		  </div>
           <!-- 비슷한 트레이너 보기 : -->

@@ -1,6 +1,7 @@
 package reservation.model;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ReservationDao {
 		return cnt;
 	}
 	
-	
+	public int getReservationCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetReservationCount", map);
+		return cnt;
+	}
 	
 }
