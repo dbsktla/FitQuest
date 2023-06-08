@@ -10,6 +10,9 @@
 			location.href='freeBoardDelete.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }';
 		}
 	}
+	function freeBoardUpdate(){
+		location.href='freeBoardUpdate.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }';
+	}
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
@@ -19,10 +22,10 @@
 				<div align="right">
 					<input type="button" value="목록보기" class="btn btn-warning btn-sm" onclick="location.href='freeBoardList.co'">
 					<c:if test="${ sessionScope.loginInfo.id eq boardBean.id }">
-						<input type="button" value="수정하기" class="btn btn-warning btn-sm" onclick="location.href='#">
+						<input type="button" value="수정하기" class="btn btn-warning btn-sm" onclick="freeBoardUpdate()">
 						<input type="button" value="삭제하기" class="btn btn-warning btn-sm" onclick="freeBoardDelete()">
 					</c:if>
-					<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='#'">
+					<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='freeBoardReply.co?bref=${ boardBean.bref }&brestep=${ boardBean.brestep }&brelevel=${ boardBean.brelevel }&bcategory=${ boardBean.bcategory }'">
 				</div>
 			
 				<h2 class="card-title">${ boardBean.bsubject }</h2>

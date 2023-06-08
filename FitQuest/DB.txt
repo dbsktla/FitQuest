@@ -27,14 +27,33 @@ select * from MEMBER;
 commit;
 
  
+--헬스장
+drop sequence gseq;
+create sequence gseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;  
+  
+drop table gym cascade constraints;
+CREATE TABLE gym (
+   gnum   number   primary key, --헬스장 번호
+   gname   varchar2(40)   NOT NULL, --헬스장명
+   gaddr1   varchar2(500)   NOT NULL, --헬스장 주소1
+   gaddr2   varchar2(60)   NOT NULL, --헬스장 주소2
+   gphone   varchar2(60)   NOT NULL --헬스장 전화번호
+);
 
+insert into gym values(gseq.nextval,'헬스장1','경기 성남시 분당구 판교동 649','2층','0222223333');
 
-
+select * from gym;
+commit;
 
 -- 트레이너 
 drop table trainer cascade constraints;
 CREATE TABLE trainer (
-   ID varchar2(100) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
+   ID varchar2(30) references MEMBER(ID) on delete cascade primary key, -- 회원아이디 
    gnum   number NOT NULL, --헬스장 번호
    activity   varchar2(30)   NOT NULL, --운동 카테고리
    purpose   varchar2(100)   NOT NULL, --운동 목적
@@ -44,11 +63,17 @@ CREATE TABLE trainer (
 );
 
 insert into trainer values('kim', 1, 'PT', '체중', 'hi~','개인 pt 30년', 'tr1.jpg');
+
 select * from trainer;
 commit;
 
-
-
+drop sequence bseq;
+create sequence bseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;  
 
 -- 게시판
 drop table BOARD cascade constraints;
@@ -61,14 +86,23 @@ create table board (
    Bregdate   date  default sysdate, --작성일
    Breadcount   number DEFAULT 0, --조회수
    Bref   number, --같은 글 그룹
-   Brestep   number, --몇번째 글(글, 답글,답답글)
-   Brelevel   number, --글의 순서(오래된건 후순위)
+   Brestep   number, --글의 순서(오래된건 후순위)
+   Brelevel   number, --몇번째 글(글, 답글,답답글)
    Bcontent   varchar2(4000)   NOT NULL, --내용
    Bimage   varchar2(300) --건강 정보 게시판의 이미지
 );
 
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
 values(bseq.nextval,'hong','자유','일반','테스트 글',1,0,0,'테스트 글 내용입니다.');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
+values(bseq.nextval,'hong','자유','일반','테스트 글',1,1,1,'테스트 글 내용입니다.');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
+values(bseq.nextval,'hong','자유','일반','테스트 글',1,2,2,'테스트 글 내용입니다.');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
+values(bseq.nextval,'hong','자유','일반','테스트 글',1,3,1,'테스트 글 내용입니다.');
 
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
 values(bseq.nextval,'hong','자유','운동인증','운동인증 글',2,0,0,'운동인증 글 내용입니다.');
@@ -116,8 +150,8 @@ CREATE TABLE BCOMMENT (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    cregdate date DEFAULT sysdate, --작성일
    cref   number   NOT NULL, --같은 댓글 그룹
-   crestep   number   NOT NULL, --몇번째 글(댓글, 대댓글)
-   crelevel   number   NOT NULL, --글의 순서
+   crestep   number   NOT NULL, --글의 순서(오래된건 후순위)
+   crelevel   number   NOT NULL, --몇번째 글(댓글, 대댓글)
    Ccontent   varchar2(2000)   NOT NULL --내용
 );
 
@@ -126,31 +160,6 @@ values(bcseq.nextval,1,'hong',1,0,0,'테스트 댓글');
 
 select * from BCOMMENT;
 commit;
-
-
--- 헬스장 
-drop sequence gseq;
-create sequence gseq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;  
-  
-drop table gym cascade constraints;
-CREATE TABLE gym (
-   gnum   number   primary key, --헬스장 번호
-   gname   varchar2(40)   NOT NULL, --헬스장명
-   gaddr1   varchar2(60)   NOT NULL, --헬스장 주소1
-   gaddr2   varchar2(60)   NOT NULL, --헬스장 주소2
-   gphone   varchar2(60)   NOT NULL --헬스장 전화번호
-);
-
-insert into gym values(gseq.nextval,'헬스장1','경기 성남시 분당구 판교동 649','2층','0222223333');
-
-select * from gym;
-commit;
-
 
 -- 상품
 drop sequence pseq;
