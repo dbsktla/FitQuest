@@ -22,5 +22,15 @@
 		delete physique where phnum=#{phnum}
 	</delete>
 	
+	<select id="GetPhysiqueByPhnum" resultType="physique.model.PhysiqueBean">
+		select * from physique where phnum=#{phnum}
+	</select>
+	
+	<update id="UpdatePhysique">
+		update physique 
+		set height=#{height}, weight=#{weight}, bmi=#{bmi}, phdate=#{phdate}, skeletalmuscle=#{skeletalmuscle}, bodyfatper=#{bodyfatper}, bmr=#{bmr}, phimage=#{phimage}
+		where phnum=#{phnum}
+	</update>
+	
 </mapper>
  
