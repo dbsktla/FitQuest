@@ -3,6 +3,7 @@ package physique.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import physique.model.PhysiqueBean;
 import physique.model.PhysiqueDao;
+import utility.FitQuestUtil;
 
 @Controller
 public class MyPhysiqueUpdateController {
@@ -39,24 +41,30 @@ public class MyPhysiqueUpdateController {
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
 	public ModelAndView doAction(@ModelAttribute("physiqueBean") PhysiqueBean physiqueBean,
-								HttpServletResponse response) {
+								HttpServletResponse response, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		response.setContentType("text/html; charset=UTF-8");
 		
-		String uploadPath = "C:\\Users\\user\\git\\FitQuest\\FitQuest\\src\\main\\webapp\\resources\\Image\\InbodyImage";
+		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/InbodyImage";
+		
 		File destination = new File(uploadPath + File.separator + physiqueBean.getUpload().getOriginalFilename());
 		File delFile = new File(uploadPath + File.separator + physiqueBean.getUpload2());
 		
 		
 		System.out.println("up1 : " + physiqueBean.getUpload().getOriginalFilename());
 		System.out.println("up2 : " + physiqueBean.getUpload2());
+		System.out.println("up1 Img : " + physiqueBean.getPhimage());
 		
+		if(physiqueBean.getPhimage().equals("")) { // 기존파일
+			physiqueBean.setPhimage(physiqueBean.getUpload2());
+		}
 		
 		int cnt = physiqueDao.updatePhysique(physiqueBean);
 		
+		
 		if(cnt != -1) {
 			
-			if(physiqueBean.getUpload().getOriginalFilename() == null || physiqueBean.getUpload().getOriginalFilename().equals(physiqueBean.getUpload2())) {
+			if(physiqueBean.getPhimage().equals(physiqueBean.getUpload2())) {
 				mav.setViewName(gotoPage);
 			} else {
 				MultipartFile multi = physiqueBean.getUpload();
