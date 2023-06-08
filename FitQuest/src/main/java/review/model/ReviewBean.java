@@ -10,11 +10,12 @@ public class ReviewBean {
 	private String rcontent;
 	private String rdate;
 	private String hasReview;
+	private String report;
 	public ReviewBean() {
 		
 	}
 	public ReviewBean(int renum, String mid, int pnum, String tid, double rating, String rtitle, String rcontent,
-			String rdate, String hasReview) {
+			String rdate, String hasReview, String report) {
 		super();
 		this.renum = renum;
 		this.mid = mid;
@@ -25,6 +26,7 @@ public class ReviewBean {
 		this.rcontent = rcontent;
 		this.rdate = rdate;
 		this.hasReview = hasReview;
+		this.report = report;
 	}
 	public int getRenum() {
 		return renum;
@@ -80,4 +82,11 @@ public class ReviewBean {
 	public void setHasReview(String hasReview) {
 		this.hasReview = hasReview;
 	}
+	public String getReport() {
+		return report;
+	}
+	public void setReport(String report) {
+		this.report = report;
+	}
+	
 }

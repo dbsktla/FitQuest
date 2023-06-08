@@ -48,9 +48,9 @@ select * from trainer;
 commit;
 
 
--- 헬스장 
-drop sequence gseq;
-create sequence gseq-- 게시판
+
+
+-- 게시판
 drop table BOARD cascade constraints;
 create table board (
    Bnum number primary key,
@@ -128,7 +128,9 @@ select * from BCOMMENT;
 commit;
 
 
-
+-- 헬스장 
+drop sequence gseq;
+create sequence gseq
   increment by 1
   start with 1
   minvalue 1
