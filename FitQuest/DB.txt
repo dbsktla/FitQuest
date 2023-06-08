@@ -482,7 +482,8 @@ CREATE TABLE review (
 	rtitle varchar2(100),
 	rcontent varchar2(500),
 	rdate date default sysdate,
-	hasReview varchar2(10) check(hasReview in('Y', 'N'))
+	hasReview varchar2(10) check(hasReview in('Y', 'N')),
+	report varchar2(10) check(report in('Y', 'N'))
 );
 select * from review;
 commit;
