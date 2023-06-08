@@ -3,6 +3,7 @@ package physique.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import member.model.MemberBean;
@@ -65,7 +67,7 @@ public class MyPhysiqueInsertController {
 		
 //		String uploadPath = request.getContextPath() + "/resources/image/InbodyImage";
 //		System.out.println("uploadPath : " + uploadPath);
-		
+//		
 //		ClassPathResource repath = new ClassPathResource("/resources");
 //		System.out.println("repath : " + repath.getPath());
 //		
@@ -74,12 +76,17 @@ public class MyPhysiqueInsertController {
 //		
 //		System.out.println("upath : " + upath.toString());
 //		System.out.println("path : " + path);
-//		System.out.println("path2 : " + request.getRealPath("/"));
 		
-		String uploadPath = "C:\\Users\\user\\git\\FitQuest\\FitQuest\\src\\main\\webapp\\resources\\Image\\InbodyImage";
 		
+		String uploadPath = "C:/Users/user/git/FitQuest/FitQuest/src/main/webapp/resources/Image/InbodyImage";
+		//String uploadPath = "./src/main/webapp/resources/Image/InbodyImage";
+		
+		//String uploadPath = repath.getPath();
 		
 		File destination = new File(uploadPath + File.separator + physiqueBean.getUpload().getOriginalFilename());
+//		File destination = new File(request.getRealPath("resources") + File.separator + physiqueBean.getUpload().getOriginalFilename());
+		
+		
 		MultipartFile multi =  physiqueBean.getUpload();
 		
 		physiqueBean.setId(((MemberBean)session.getAttribute("loginInfo")).getId());
