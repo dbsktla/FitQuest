@@ -80,6 +80,7 @@ public class MyPhysiqueDetailController {
 				jsObject.put("skeletalmuscle", physiqueBean.getSkeletalmuscle());
 				jsObject.put("bodyfatper", physiqueBean.getBodyfatper());
 				jsObject.put("bmr", physiqueBean.getBmr());
+				jsObject.put("phimage", physiqueBean.getPhimage());
 				
 				System.out.println("jsObject : " + jsObject.toString());
 				

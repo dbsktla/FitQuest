@@ -28,7 +28,6 @@
 			
 			$('.healthScopePlus').eq(slen-1).remove();
 			
-			flug--;
 		}
 	}
 

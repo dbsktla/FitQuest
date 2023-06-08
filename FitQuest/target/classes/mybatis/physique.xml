@@ -14,5 +14,13 @@
 		select phdate from physique where id=#{id} and (phdate between #{smon} and #{emon})
 	</select>
 	
+	<insert id="InsertPhysique">
+		insert into physique values(phseq.nextval, #{id}, #{height}, #{weight}, #{bmi}, #{phdate}, #{skeletalmuscle}, #{bodyfatper}, #{bmr}, #{phimage})
+	</insert>
+	
+	<delete id="DeletePhysique">
+		delete physique where phnum=#{phnum}
+	</delete>
+	
 </mapper>
  

@@ -24,4 +24,14 @@ public class PhysiqueDao {
 		dateList = sqlSessionTemplate.selectList(namespace + ".GetPhysiqueByDate", map);
 		return dateList;
 	}
+	public int insertPhysique(PhysiqueBean physiqueBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertPhysique", physiqueBean);
+		return cnt;
+	}
+	public int deletePhysique(int phnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace + ".DeletePhysique", phnum);
+		return cnt;
+	}
 }

@@ -185,8 +185,8 @@
 					msg += '<div class="col-lg-3 col-md-4">' + data.bodyfatper + ' %</div>';
 					msg += '<div class="col-lg-3 col-md-4 label ">기초대사량</div>';
 					msg += '<div class="col-lg-3 col-md-4">' + data.bmr + ' kcal</div>';
-					msg += '</div><div class="topMar">';
-					msg += '<input type="button" value="인바디 정보" onclick="" class="btn btn-outline-warning rounded-pill btn-sm inbodyBtnDiv"></div>';
+					msg += '</div><div class="topMar"><input type="hidden" id="phimage" name="phimage" value="'+data.phimage+'">';
+					msg += '<input type="button" value="인바디 정보" onclick="showImg()" class="btn btn-outline-warning rounded-pill btn-sm inbodyBtnDiv"></div>';
 				}
 				
 				$("#detailDiv").append(msg);
@@ -204,12 +204,21 @@
 	
 	function deletePhysique(phnum) {
 		alert(phnum);
-		//location.href="";
+		location.href="myPhysiqueDelete.ht?phnum=" + phnum;
 	}
 	
 	function updatePhysique(phnum) {
 		alert(phnum);
-		//location.href="";
+		location.href="myPhysiqueUpdate.ht?phnum=" + phnum;
+	}
+	
+	function showImg() {
+		var phimage = $('#phimage').val();
+		//alert(phimage);
+		
+		// undefined
+		window.open('pop.ht?phimage=' + phimage,'팝업','width=500,height=700');
+		
 	}
 </script>
 

@@ -1,5 +1,7 @@
 package physique.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class PhysiqueBean {
 
 	private int phnum;
@@ -11,6 +13,29 @@ public class PhysiqueBean {
 	private double skeletalmuscle; // 골격근량
 	private double bodyfatper; // 체지방률
 	private int bmr; // 기초대사량
+	private String phimage; //인바디 이미지
+	private MultipartFile upload;
+	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		
+		this.upload = upload;
+		
+		String fileName = upload.getOriginalFilename();
+		this.phimage = fileName;
+		
+	}
+
+	public String getPhimage() {
+		return phimage;
+	}
+
+	public void setPhimage(String phimage) {
+		this.phimage = phimage;
+	}
 
 	public int getPhnum() {
 		return phnum;
