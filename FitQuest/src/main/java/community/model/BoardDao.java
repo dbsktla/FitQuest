@@ -59,4 +59,29 @@ public class BoardDao {
 		cnt = sqlSessionTemplate.delete(namespace + ".DeleteFreeBoard", bnum);
 		return cnt;
 	}
+
+	public int updateFreeBoard(BoardBean boardBean) {
+		int cnt = -1;
+		try {
+			cnt = sqlSessionTemplate.update(namespace + ".UpdateFreeBoard", boardBean);
+		} catch(DataAccessException e){
+			
+		}
+		return cnt;
+	}
+	public int replyFreeBoard(BoardBean boardBean) {
+		int up_cnt = -1, cnt = -1;
+		up_cnt = sqlSessionTemplate.update(namespace + ".UpdateBrestep", boardBean);
+		System.out.println("up_cnt : " + up_cnt);
+		if(up_cnt != -1) {
+			boardBean.setBrestep(boardBean.getBrestep() + 1);
+			boardBean.setBrelevel(boardBean.getBrelevel() + 1);
+			try {
+				cnt = sqlSessionTemplate.insert(namespace + ".ReplyFreeBoard", boardBean);
+			} catch(Exception e){
+				
+			}
+		}
+		return cnt;
+	}
 }

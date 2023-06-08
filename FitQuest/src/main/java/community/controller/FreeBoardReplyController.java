@@ -14,16 +14,16 @@ import community.model.BoardDao;
 import member.model.MemberBean;
 
 @Controller
-public class FreeBoardInsertController {
-	private final String command = "/freeBoardInsert.co";
-	private final String getPage = "freeBoardInsertForm";
+public class FreeBoardReplyController {
+	private final String command = "/freeBoardReply.co";
+	private final String getPage = "freeBoardReplyForm";
 	private final String gotoPage = "redirect:/freeBoardList.co";
 
 	@Autowired
 	BoardDao boardDao;
 
 	@RequestMapping(value = command, method=RequestMethod.GET)
-	public String insert(HttpSession session) {
+	public String reply(HttpSession session) {
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
@@ -34,9 +34,8 @@ public class FreeBoardInsertController {
 	}
 
 	@RequestMapping(value = command, method=RequestMethod.POST)
-	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
-		
-		session.setAttribute("destination", "redirect:/freeBoardInsert.co");
+	public String reply(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
+		session.setAttribute("destination", "redirect:/freeBoardReply.co?bref=" + boardBean.getBref() + "&brestep=" + boardBean.getBrestep() + "&brelevel=" + boardBean.getBrelevel());
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
@@ -49,11 +48,9 @@ public class FreeBoardInsertController {
 				MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 				boardBean.setId(memberBean.getId());
 				boardBean.setBtype("자유");
-				boardBean.setBrestep(0);
-				boardBean.setBrelevel(0);
 
-				int cnt = boardDao.insertFreeBoard(boardBean);
-				System.out.println("InsertFreeBoard cnt : " + cnt);
+				int cnt = boardDao.replyFreeBoard(boardBean);
+				System.out.println("ReplyFreeBoard cnt : " + cnt);
 				if(cnt != -1) {
 					System.out.println("삽입 성공");
 					return "redirect:/freeBoardList.co";
