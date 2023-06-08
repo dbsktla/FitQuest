@@ -13,5 +13,8 @@
 		select * from tschedule
 		where tid = #{tid}
 	</select>
-
+	<insert id="InsertReservation">
+		insert into reservation
+		values(reseq.nextval,#{mid},#{tid},#{onum},#{unum},#{rdate},#{rtime},'false')
+	</insert>
 </mapper>

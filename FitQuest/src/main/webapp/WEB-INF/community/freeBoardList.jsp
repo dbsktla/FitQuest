@@ -27,7 +27,6 @@
 				 <div class="col-md-5" align="left">
 				 	
 				 </div>
-				<!-- Table with hoverable rows -->
 				<table class="table table-hover">
 						<tr align="center">
 							<th scope="col">번호</th>
@@ -40,7 +39,15 @@
 						<c:forEach var="board" items="${ freeBoardList }" varStatus="status">
 							<tr align="center">
 								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
-								<td><a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a></td>
+								<td align="left">
+									<c:set var="wid" value="20" />
+									<c:if test="${ board.brelevel > 0 }">
+										<c:set var="wid" value="${ board.brelevel * 20 }" />
+										<img height="42" src="<%= request.getContextPath() %>/resources/Image/CommunityImage/level.png" width="${ wid }" height="15" />
+										<i style="color : #FAC710;" class="bi bi-arrow-return-right"></i>
+									</c:if>
+									<a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+								</td>
 								<td>${ board.bcategory }</td>
 								<td>${ board.name }</td>
 								<td>${ board.breadcount }</td>
@@ -51,7 +58,6 @@
 							</tr>
 						</c:forEach>
 				</table>
-				<!-- End Table with hoverable rows -->
 				
 				<div class="col-md-6">
 			      <form method="get" class="search-form d-flex align-items-center" action="freeBoardList.co">

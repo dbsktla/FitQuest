@@ -13,11 +13,11 @@
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	// 글자 바이트 체크
 	function validateMaxByte(size){	
 		$("#divTest").keyup(function (e){
 		    var str = document.getElementsByClassName('ql-editor')[0].innerText;
-		    	$(this).val();	    
 		    var str_len = str.length;
 		    
 		    var rbyte = 0;
@@ -69,7 +69,9 @@ $(document).ready(function(){
 				<h2 align="center" class="card-title">게시글 작성</h2>
 
 				<form:form commandName="boardBean" method="post" class="row g-3"
-					action="freeBoardInsert.co">
+					action="freeBoardUpdate.co">
+					<input type="hidden" name="bnum" value="${ boardBean.bnum }">
+					<input type="hidden" name="id" value="${ boardBean.id }">
 					<div class="col-md-9" align="left">
 						<label for="bsubject" class="form-label">제목</label> <input
 							type="text" name="bsubject" class="form-control" id="bsubject" value="${ boardBean.bsubject }">
@@ -95,9 +97,8 @@ $(document).ready(function(){
 						<span id="checkByte">0</span>/3000bytes
 					</div>
 					<input type="hidden" name="bcontent" id="bcontent">
-					<div class="err"></div>
 					<div class="text-center">
-						<button type="submit" id="sub" class="btn btn-warning btn-sm">작성하기</button>
+						<button type="submit" id="sub" class="btn btn-warning btn-sm">수정하기</button>
 					</div>
 				</form:form>
 			</div>

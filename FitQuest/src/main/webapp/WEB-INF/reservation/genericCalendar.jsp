@@ -58,7 +58,7 @@ $(document).ready(function(){
    <!-- 예약 버튼 -->
    <div class="calendar-button-div">
       <span>
-      	<input type="button" class="btn btn-warning" id="usageCheck" onClick="location.href='genericReservation.rv'" value="예약">  
+      	<input type="button" class="btn btn-warning" id="usageCheck" onClick="location.href='genericTChoose.rv'" value="예약">  
       </span>
    </div>
 <!-- 달력  -->  
