@@ -20,4 +20,45 @@
 	<insert id = "InsertBaseValue">
 		insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', #{id}, 'N')
 	</insert>
+	<select id = "GetReviewCount" resultType = "int">
+		select count(*)
+		from review
+		where tid = #{tid}
+		<if test = "whatColumn == 'tname'">
+			and mid in (select id from member where name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'rtitle'">
+			and rtitle like #{keyword}
+		</if>
+	</select>
+	<select id = "GetReviewList" resultType = "review.model.ReviewBean">
+		select *
+		from review
+		where tid = #{tid}
+		<if test = "whatColumn == 'tname'">
+			and mid in (select id from member where name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'rtitle'">
+			and rtitle like #{keyword}
+		</if>
+		<if test = 'ordering == "1"'>
+		</if>
+		<if test = 'ordering == "2"'>
+			order by rating desc
+		</if>
+		<if test = 'ordering == "3"'>
+			order by rating asc
+		</if>
+		<if test = 'ordering == "4"'>
+			order by rdate desc
+		</if>
+	</select>
+	<select id = "GetReviewByRenum" resultType = "review.model.ReviewBean">
+		select * from review
+		where renum = #{renum}
+	</select>
+	<update id = "InsertReport">
+		update review set report = 'Y'
+		where renum = #{renum}
+	</update>
 </mapper>

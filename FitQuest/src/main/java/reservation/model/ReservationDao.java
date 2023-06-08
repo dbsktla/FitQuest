@@ -1,7 +1,6 @@
 package reservation.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,12 @@ public class ReservationDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+
+	public int insertReservation(ReservationBean reservationBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace+".InsertReservation",reservationBean);
+		return cnt;
+	}
 	
 	
 	

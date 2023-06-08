@@ -5,21 +5,17 @@
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	
-	$('#reservationCheck').click(function(){
-		alert(2);
+	$(document).ready(function(){
 		
-	    if (confirm('예약 하시겠습니까?')) { //확인
-	        
-	        alert('예약이 완료되었습니다.');
-	    } else { //취소
-	        
-	        alert('예약이 취소되었습니다.'); // 예약이 취소되었다는 메시지를 띄웁니다.
-	    }
 	});
-	
-});
+	function reservationCheck(date,time,year,month){
+		if (confirm('예약 하시겠습니까?')) { //확인
+			location.href='reservationInsert.rv?date='+date+'&time='+time+'&year='+year+'&month='+month;
+		    alert('예약 완료되었습니다.');
+		} else { //취소
+		    alert('예약 취소되었습니다.');
+		}
+	}
 </script>
 
 <br><br>
@@ -29,9 +25,28 @@ $(document).ready(function(){
 
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
-	<div class="calendarTitle-font">My PT</div>
-	<div class="calendarSubtitle-font">예약하기</div>
-</div>
+	<div class="calendarTitle-font">예약</div>
+	<div class="calendarSubtitle-font">김려원 트레이너님 스케줄</div>
+	<div>
+	<c:choose>
+            
+			<c:when test="${not empty tsyear}">  
+				<c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
+               		<td class="calendar-box">
+						<div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
+						<c:if test="${tsyear[i] eq today_info.search_year && tsmonth[i] eq today_info.search_month}">
+							<div class="reservation-area">
+							<span class="calender-text">휴무</span>
+							</div>
+						</c:if>
+				   	</td>
+				</c:forEach>
+            </c:when>
+	</c:choose>
+	
+	</div>
+			
+</div> 
 
 
 <div class="calendar" >
@@ -85,12 +100,25 @@ $(document).ready(function(){
       </td>
    </tr>
 </thead>
-
 <tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
          <c:choose>
             
+			<c:when test="${not empty tsyear}">  
+				<c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
+               		<td class="calendar-box">
+						<div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
+						<c:if test="${tsyear[i] eq today_info.search_year && tsmonth[i] eq today_info.search_month && tsday[i] eq  dateList.date}">
+							<div class="reservation-area">
+							<img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+							<span class="calender-text">휴무</span>
+							</div>
+						</c:if>
+				   	</td>
+				</c:forEach>
+            </c:when>
+			
             <c:when test="${date_status.index%7==6}">
                <td class="calendar-box">
      				<div class="calendar-margin"><div class="calendar-num sat">${dateList.date}</div></div>
@@ -101,9 +129,9 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area">
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
-		                     <span>${time}</span>
-		                     </a>
+		                  	<a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
+		                    	<span>${time}</span>
+		                    </a>
 	                     	</div>
 	                     	</c:forEach>
 	                     	
@@ -125,7 +153,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
+		                     <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 		                     <span>${time}</span> 
 		                     </a>
 	                     	</div>
@@ -155,7 +183,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
+		                     <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 		                     <span>${time}</span>
 		                     </a>
 	                     	</div>
@@ -174,7 +202,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
+		                     <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 		                     <span>${time}</span>
 		                     </a>
 	                     	</div>
@@ -193,7 +221,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-			                    <a href="reservationDetail.rv" class="calender-text">
+			                    <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 			                    <span>${time}</span>
 			                    </a>
 	                     	</div>
@@ -212,7 +240,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 			                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-			                    <a href="reservationInsert.rv" id="reservationCheck" class="calender-text">
+			                    <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 			                    <span>${time}</span>
 			                    </a>
 	                     	</div>
@@ -231,7 +259,7 @@ $(document).ready(function(){
 		                  	<c:forEach var="time" items="${tstimeArr}">
 		                  	<div class="reservation-area"> 
 		                  	<img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-		                     <a href="reservationDetail.rv" class="calender-text">
+		                     <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}')">
 		                     <span>${time}</span>
 		                     </a>
 	                     	</div>

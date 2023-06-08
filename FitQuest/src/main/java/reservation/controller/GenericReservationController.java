@@ -81,22 +81,53 @@ public class GenericReservationController {
 		String tid = usageDao.getTid(mid);
 				
 		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
-		String tsdateString = tscheduleBean.getTsdate().toString();
 		
+		//끊어주기
 		String[] tsdayArr = tscheduleBean.getTsday().split(",");
 		String[] tstimeArr = tscheduleBean.getTstime().split(",");
-		String[] tsdateArr = tsdateString.split("/");
-
-		System.out.println(Arrays.toString(tsdayArr));
-		System.out.println(Arrays.toString(tstimeArr));
-		System.out.println(Arrays.toString(tsdateArr));
+		String[] tsdateArrL = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
 		
-		for(int i=0;i<tsdayArr.length;i++) {
-			System.out.println(tsdayArr[i]);
+		String[] tsdateArrS;
+		List<String> yearList = new ArrayList<String>();
+		List<String> monthList = new ArrayList<String>();
+		List<String> dayList = new ArrayList<String>();
+
+		for (int i = 0; i < tsdateArrL.length; i++) {
+		    tsdateArrS = tsdateArrL[i].split("-"); //2023 06 23 2023 06 24
+		    
+	        yearList.add(tsdateArrS[0]);
+	        monthList.add(tsdateArrS[1]);
+	        dayList.add(tsdateArrS[2]);
 		}
+		
+		String[] year = yearList.toArray(new String[0]);
+		String[] month = monthList.toArray(new String[0]);
+		String[] day = dayList.toArray(new String[0]);
+		
+		// 숫자로 변환
+		int[] yearNum = new int[year.length];
+		int[] monthNum = new int[month.length];
+		int[] dayNum = new int[day.length];
+
+		for (int i = 0; i < year.length; i++) {
+		    yearNum[i] = Integer.parseInt(year[i]);
+		}
+
+		for (int i = 0; i < month.length; i++) {
+		    monthNum[i] = Integer.parseInt(month[i]);
+		}
+
+		for (int i = 0; i < day.length; i++) {
+		    dayNum[i] = Integer.parseInt(day[i]);
+		}
+		
+		model.addAttribute("tsyear",yearNum);
+		model.addAttribute("tsmonth",monthNum);
+		model.addAttribute("tsday",dayNum);
 		
 		model.addAttribute("tsdayArr",tsdayArr);
 		model.addAttribute("tstimeArr",tstimeArr);
+		model.addAttribute("tsdateArrL",tsdateArrL);
 		model.addAttribute("tscheduleBean",tscheduleBean);
 		
 		return getPage;
