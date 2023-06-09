@@ -26,5 +26,11 @@ public class TrainerDao {
 		}
 		return cnt;
 	}
+
+	public TrainerBean getTrainer(String tid) {
+		TrainerBean trainerBean = sqlSessionTemplate.selectOne(namespace+".GetTrainer",tid);
+		return trainerBean;
+	}
+	
 	
 }
