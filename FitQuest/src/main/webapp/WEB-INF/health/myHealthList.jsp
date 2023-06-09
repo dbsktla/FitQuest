@@ -145,6 +145,7 @@
 										<thead>
 											<tr class="table-warning">
 												<th scope="col" align="center">NO</th>
+												<th scope="col" align="center">트레이너</th>
 												<th scope="col" align="center">날짜</th>
 												<th scope="col" align="center">운동시간</th>
 											</tr>
@@ -160,6 +161,11 @@
 											<c:forEach var="hdlist" items="${hdlist}" varStatus="status">
 												<tr>
 													<td>${status.index +1}</td>
+													<td>
+														<c:forEach var="tlist" items="${tlist}">
+															<c:if test="${hdlist.tid == tlist.id}">${tlist.name}(${tlist.activity})</c:if>
+														</c:forEach>
+													</td>
 													<td>
 														<fmt:parseDate value="${hdlist.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
 														<button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick('${hdlist.hnum}')"><fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/></button>
