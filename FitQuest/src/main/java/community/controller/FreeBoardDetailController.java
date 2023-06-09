@@ -33,7 +33,9 @@ public class FreeBoardDetailController {
 		ModelAndView mav = new ModelAndView();
 		BoardBean boardBean = null;
 		List<BcommentBean> bcommentList = null;
-
+		if((String)session.getAttribute("freeBoardListFlag") == null) {
+			session.setAttribute("freeBoardListFlag", "true");
+		}
 		String freeBoardListFlag = (String)session.getAttribute("freeBoardListFlag");
 		if(freeBoardListFlag.equals("true")) { //상세보기에서 새로고침 누르면 조회수 count + 1 방지
 			int cnt = boardDao.updateBreadcount(bnum);
