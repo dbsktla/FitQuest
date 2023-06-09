@@ -23,7 +23,7 @@
 		
 		$.ajax({
 			type : "POST", // 요청타입
-			url : "myHealthList.ht", // 요청 url
+			url : "myHealthDetail.ht", // 요청 url
 			data : ({'hnum' : hnum}), // url로 넘길 데이터 설정
 			dataType : "json", // 받아올 데이터 타입설정
 			success : function (data) {
@@ -92,6 +92,10 @@
 			}
 		}
 	}
+	
+	function listup() {
+		alert(1);
+	}
 </script>
 
 <body style="background-color: #FEF9E7">
@@ -140,6 +144,13 @@
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">운동 목록 <button type="button" onclick="location.href='myHealthInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right;">추가</button></h5>
+									
+									<select id="whatCategory" onchange="listup()" class="form-select" aria-label="Default select example" style="margin-bottom: 20">
+										<option value="all">전체보기</option>
+										<c:forEach var="tlist" items="${tlist}">
+											<option value="${tlist.id}">${tlist.name}(${tlist.activity})</option>
+										</c:forEach>
+									</select>
 									
 									<table class="table">
 										<thead>

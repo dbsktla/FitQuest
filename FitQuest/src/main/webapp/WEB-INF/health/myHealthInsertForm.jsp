@@ -60,8 +60,22 @@
 					
 					<form class="row g-3" action="myHealthInsert.ht" method="post">
 						<div class="col-md-12">
+							
+						</div>
+						
+						<div class="col-md-6">
 							<label for="hdate" class="form-label">운동일자</label> 
 							<input type="date" class="form-control" id="hdate" name="hdate">
+						</div>
+						
+						<div class="col-md-6">
+							<label for="tid" class="form-label">담당 트레이너</label>
+							<select id="tid" name="tid" class="form-select">
+								<option value="notrainer">선택안함</option>
+								<c:forEach var="tlist" items="${tlist}">
+									<option value="${tlist.id}">${tlist.name}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div style="height: 10"></div>
 						

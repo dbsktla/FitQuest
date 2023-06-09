@@ -90,10 +90,19 @@
 					<fmt:parseDate value="${healthDateBean.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
 					
 						<input type = "hidden" name="hnum" value="${healthDateBean.hnum}">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<label for="hdate" class="form-label">운동일자</label> 
 							<input type="date" class="form-control" id="hdate" name="hdate" value='<fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/>'>
 							<input type="hidden" name="olddate" value="<fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/>">
+						</div>
+						<div class="col-md-6">
+							<label for="tid" class="form-label">담당 트레이너</label>
+							<select id="tid" name="tid" class="form-select">
+								<option value="notrainer">선택안함</option>
+								<c:forEach var="tlist" items="${tlist}">
+									<option value="${tlist.id}" <c:if test="${tlist.id eq healthDateBean.tid}">selected</c:if> >${tlist.name}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div style="height: 10"></div>
 						

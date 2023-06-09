@@ -19,7 +19,7 @@
 	</select>
 	
 	<insert id="InsertHealthDate">
-		insert into healthDate values(hseq.nextval, #{id}, #{hdate})
+		insert into healthDate values(hseq.nextval, #{id}, #{hdate}, #{tid})
 	</insert>
 	
 	<delete id="DeleteHealthDate">
@@ -27,6 +27,10 @@
 	</delete>
 	
 	<update id="UpdateHealthDate">
-		update healthDate set hdate=#{hdate} where hnum=#{hnum}
+		update healthDate set hdate=#{hdate}, tid=#{tid} where hnum=#{hnum}
+	</update>
+	
+	<update id="UpdateHealthTid">
+		update healthDate set tid=#{tid} where hnum=#{hnum}
 	</update>
 </mapper>
