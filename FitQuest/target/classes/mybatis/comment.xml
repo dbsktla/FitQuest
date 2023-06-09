@@ -5,5 +5,34 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="comment.model.Comment">
-
+	<select id="GetBcommentList" resultType="community.model.BcommentBean">
+		select cnum, bnum, bcomment.id, cregdate, cref, crestep, crelevel, Ccontent, name
+		from (select rownum as rank, cnum, bnum, bcomment.id, name, cregdate, cref, crestep, crelevel, ccontent
+		from (select cnum, bnum, bcomment.id, name, cregdate, cref, crestep, crelevel, ccontent
+		from bcomment inner join member on bcomment.id = member.id order by cref desc, crestep asc) bcomment) bcomment
+		where bnum = #{bnum}
+		
+	</select>
+	
+	<insert id="InsertBcomment">
+		insert into bcomment(cnum,bnum,id,cref,crestep,crelevel,ccontent)
+		values(bcseq.nextval,#{bnum},#{id},bcseq.currval,#{crestep},#{crelevel},#{ccontent})
+	</insert>
+	
+	<delete id="DeleteBcomment">
+		delete from bcomment
+		where cnum=#{cnum}
+	</delete>
+	
+	<update id="UpdateCrestep">
+		update bcomment 
+		set crestep = crestep+1 
+		where cref=#{cref} and crestep > #{crestep}
+	</update>
+	
+	<insert id="ReplyBcomment">
+		insert into bcomment(cnum,bnum,id,cref,crestep,crelevel,ccontent)
+		values(bcseq.nextval,#{bnum},#{id},#{cref},#{crestep},#{crelevel},#{ccontent})
+	</insert>
+	
 </mapper>
