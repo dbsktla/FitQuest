@@ -1,7 +1,6 @@
 package reservation.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import member.model.MemberBean;
+import member.model.MemberDao;
 import reservation.model.CalendarBean;
+import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 import reservation.model.TscheduleBean;
 import reservation.model.TscheduleDao;
 import usage.model.UsageDao;
 
 @Controller
-public class GenericReservationController {
-	private final String command = "/genericReservation.rv";
-	private final String getPage = "genericReservation";
+public class TrainerReservationController {
+	private final String command = "/trainerReservation.rv";
+	private final String getPage = "trainerReservation";
 
 	@Autowired
 	ReservationDao reservationDao;
@@ -36,10 +37,12 @@ public class GenericReservationController {
 	@Autowired
 	UsageDao usageDao;
 	
+	@Autowired
+	MemberDao memberDao;
+	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
-			HttpSession session){
-
+			HttpSession session) {
 		//달력 띄우기
 		Calendar cal = Calendar.getInstance();
 		CalendarBean calendarData;
@@ -73,33 +76,44 @@ public class GenericReservationController {
 		dateList.add(calendarData);
 		}
 		}
+		
+		String tname = ((MemberBean)session.getAttribute("loginInfo")).getName();
+		
+		model.addAttribute("tname", tname);
 		model.addAttribute("dateList", dateList); //날짜 데이터 배열
 		model.addAttribute("today_info", today_info);
-			
-		//트레이너 스케줄 가져가기
-		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		String tid = usageDao.getTid(mid);
-				
-		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
 		
-		//끊어주기
-		String[] tsdayArr = tscheduleBean.getTsday().split(","); //월 수 금
-		String[] tstimeArr = tscheduleBean.getTstime().split(","); //13:00~14:00 14:00~15:00
-		String[] tsdateArrL = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
+		//예약 내역 가져오기
+		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
+		List<ReservationBean> rList = reservationDao.getReservationList(tid);
 		
-		String[] tsdateArrS;
+		for(int i=0;i<rList.size();i++) {
+			System.out.println("회원 이름 테스트2:"+rList.get(i).getRtime());
+		}
+		
+		//rtime  13:00~14:00
+		//rdate   2023-06-01
+		//년,월,일로 쪼개서 배열에 담는 과정 
+		List<String> rdateList = new ArrayList<String>();
+		
+		for (ReservationBean reservationBean : rList) {
+		    rdateList.add(reservationBean.getRdate());
+		}
+
+		String[] rdateArrL = rdateList.toArray(new String[0]);
+		
 		List<String> yearList = new ArrayList<String>();
 		List<String> monthList = new ArrayList<String>();
 		List<String> dayList = new ArrayList<String>();
-
-		for (int i = 0; i < tsdateArrL.length; i++) {
-		    tsdateArrS = tsdateArrL[i].split("-"); //2023 06 23 2023 06 24
-		    
-	        yearList.add(tsdateArrS[0]);
-	        monthList.add(tsdateArrS[1]);
-	        dayList.add(tsdateArrS[2]);
-		}
 		
+		String[] rdateArrS;
+		for (int i = 0; i < rdateArrL.length; i++) {
+			rdateArrS = rdateArrL[i].split("-"); //2023 06 23 2023 06 24
+		    
+	        yearList.add(rdateArrS[0]);
+	        monthList.add(rdateArrS[1]);
+	        dayList.add(rdateArrS[2]);
+		}
 		String[] year = yearList.toArray(new String[0]);
 		String[] month = monthList.toArray(new String[0]);
 		String[] day = dayList.toArray(new String[0]);
@@ -112,25 +126,21 @@ public class GenericReservationController {
 		for (int i = 0; i < year.length; i++) {
 		    yearNum[i] = Integer.parseInt(year[i]);
 		}
-
 		for (int i = 0; i < month.length; i++) {
 		    monthNum[i] = Integer.parseInt(month[i]);
 		}
-
 		for (int i = 0; i < day.length; i++) {
 		    dayNum[i] = Integer.parseInt(day[i]);
 		}
 		
-		model.addAttribute("tsyear",yearNum);
-		model.addAttribute("tsmonth",monthNum);
-		model.addAttribute("tsday",dayNum);
+		model.addAttribute("ryear",yearNum);
+		model.addAttribute("rmonth",monthNum);
+		model.addAttribute("rday",dayNum);
+		model.addAttribute("rList", rList);
 		
-		model.addAttribute("tsdayArr",tsdayArr);
-		model.addAttribute("tstimeArr",tstimeArr);
-		model.addAttribute("tsdateArrL",tsdateArrL);
-		model.addAttribute("tscheduleBean",tscheduleBean);
+		//회원 이름 가져오기
+		//model.addAttribute();
 		
 		return getPage;
 	}
-	
 }

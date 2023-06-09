@@ -5,10 +5,11 @@ import java.sql.Date;
 public class ReservationBean {
 	private int rnum;
 	private String mid;
+	private String mname;
 	private String tid;
 	private int onum;
 	private int unum;
-	private Date rdate;
+	private String rdate;
 	private String rtime;
 	private String rstate;
 	
@@ -16,11 +17,12 @@ public class ReservationBean {
 		
 	}
 
-	public ReservationBean(int rnum, String mid, String tid, int onum, int unum, Date rdate, String rtime,
-			String rstate) {
+	public ReservationBean(int rnum, String mid, String mname, String tid, int onum, int unum, String rdate,
+			String rtime, String rstate) {
 		super();
 		this.rnum = rnum;
 		this.mid = mid;
+		this.mname = mname;
 		this.tid = tid;
 		this.onum = onum;
 		this.unum = unum;
@@ -28,7 +30,6 @@ public class ReservationBean {
 		this.rtime = rtime;
 		this.rstate = rstate;
 	}
-
 
 	public int getRnum() {
 		return rnum;
@@ -44,6 +45,14 @@ public class ReservationBean {
 
 	public void setMid(String mid) {
 		this.mid = mid;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public String getTid() {
@@ -70,11 +79,11 @@ public class ReservationBean {
 		this.unum = unum;
 	}
 
-	public Date getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
 
-	public void setRdate(Date rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 
@@ -93,6 +102,8 @@ public class ReservationBean {
 	public void setRstate(String rstate) {
 		this.rstate = rstate;
 	}
+
+	
 	
 	
 }

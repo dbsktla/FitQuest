@@ -29,4 +29,9 @@
 		delete from member
 		where id = #{id}
 	</delete>
+	
+	<select id="GetName" resultType="String">
+		select name from member
+		where id = #{mid}
+	</select>
 </mapper>

@@ -18,6 +18,7 @@ public class CompositeDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
 	public int getTrainerCount(Map<String, String> map) {
 		int cnt = -1;
 		cnt = sqlSessionTemplate.selectOne(namespace + ".GetTrainerCount", map);

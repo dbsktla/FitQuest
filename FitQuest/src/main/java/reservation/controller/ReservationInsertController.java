@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
+import member.model.MemberDao;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 import reservation.model.TscheduleDao;
@@ -33,6 +34,9 @@ public class ReservationInsertController {
 	@Autowired
 	UsageDao usageDao;
 	
+	@Autowired
+	MemberDao memberDao;
+	
 	@RequestMapping(command)
 	public String doAction(
 			@RequestParam("year") String year,
@@ -47,26 +51,34 @@ public class ReservationInsertController {
 		int onum = usageBean.getOnum(); //주문 번호
 		int unum = usageBean.getUnum(); //사용권 번호
 		String tid = usageBean.getTid(); //트레이너 아이디
+		System.out.println("사용권 정보 테스트:"+onum);
+		System.out.println("사용권 정보 테스트:"+unum);
+		System.out.println("사용권 정보 테스트:"+tid);
 		
 		//날짜 조립
-		Date rdate = null;
-		String dateString = year + "-" + month + "-" + date;
-	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-        	java.util.Date utilDate = format.parse(dateString);
-            rdate = new java.sql.Date(utilDate.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+		String rdate = year + "-" + month + "-" + date;
+		System.out.println("rdateTest:"+rdate);
+		/*
+		 * Date rdate = null; SimpleDateFormat format = new
+		 * SimpleDateFormat("yyyy-MM-dd"); try { java.util.Date utilDate =
+		 * format.parse(dateString); rdate = new java.sql.Date(utilDate.getTime()); }
+		 * catch (ParseException e) { e.printStackTrace(); }
+		 */
+		
+		//이름 가져오기
+		String mname = memberDao.getName(mid);
 		
 		//예약 테이블에 삽입
         ReservationBean reservationBean = new ReservationBean();
         reservationBean.setMid(mid);
+        reservationBean.setMname(mname);
         reservationBean.setTid(tid);
         reservationBean.setOnum(onum);
         reservationBean.setUnum(unum);
         reservationBean.setRdate(rdate);
+        System.out.println(reservationBean.getRdate());
         reservationBean.setRtime(rtime);
+        System.out.println(reservationBean.getRtime());
 		int cnt = reservationDao.insertReservation(reservationBean);
 		
 		if(cnt != -1) {
