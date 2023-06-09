@@ -10,6 +10,7 @@
 		from (select rownum as rank, cnum, bnum, bcomment.id, name, cregdate, cref, crestep, crelevel, ccontent
 		from (select cnum, bnum, bcomment.id, name, cregdate, cref, crestep, crelevel, ccontent
 		from bcomment inner join member on bcomment.id = member.id order by cref desc, crestep asc) bcomment) bcomment
+		where bnum = #{bnum}
 	</select>
 	
 	<insert id="InsertBcomment">
