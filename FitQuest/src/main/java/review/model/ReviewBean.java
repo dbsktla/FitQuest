@@ -1,12 +1,19 @@
 package review.model;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ReviewBean {
 	private int renum;
 	private String mid;
 	private int pnum;
 	private String tid;
+	@NotNull(message = "별점 선택하세요")
 	private double rating;
+	@NotBlank(message = "제목 입력하세요")
 	private String rtitle;
+	@NotBlank(message = "리뷰 내용 입력하세요")
 	private String rcontent;
 	private String rdate;
 	private String hasReview;

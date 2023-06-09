@@ -54,4 +54,12 @@ public class ReviewDao {
 		int cnt = sqlSessionTemplate.update(namespace + ".InsertReport", renum);
 		return cnt;
 	}
+	public int reviewCountCheck(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".ReviewCountCheck", map);
+		return cnt;
+	}
+	public int insertReview(ReviewBean reviewBean) {
+		int cnt = sqlSessionTemplate.insert(namespace + ".InsertReview", reviewBean);
+		return cnt;
+	}
 }
