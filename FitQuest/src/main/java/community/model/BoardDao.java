@@ -31,6 +31,12 @@ public class BoardDao {
 		freeBoardList = sqlSessionTemplate.selectList(namespace + ".GetFreeBoardList", map, rowBounds);
 		return freeBoardList;
 	}
+	
+	public List<BoardBean> getHotFreeBoardList() {
+		List<BoardBean> hotFreeBoardList = new ArrayList<BoardBean>();
+		hotFreeBoardList = sqlSessionTemplate.selectList(namespace + ".GetHotFreeBoardList");
+		return hotFreeBoardList;
+	}
 
 	public int updateBreadcount(int bnum) {
 		int cnt = -1;

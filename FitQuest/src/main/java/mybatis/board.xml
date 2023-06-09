@@ -26,6 +26,14 @@
 		</if>
 	</select>
 	
+	<select id="GetHotFreeBoardList" resultType="community.model.BoardBean">
+		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		from board inner join member on board.id = member.id where brelevel = 0 order by breadcount desc) board) board
+        where btype = '자유' and rank between 1 and 3
+	</select>
+	
 	<select id="GetFreeBoardList" resultType="community.model.BoardBean">
 		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
 		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
@@ -69,4 +77,20 @@
 		delete from board
 		where bnum = #{bnum}
 	</delete>
+	
+	<update id="UpdateFreeBoard">
+		update board set bsubject = #{bsubject}, bcategory=#{bcategory}, bcontent=#{bcontent}
+		where bnum = #{bnum}
+	</update>
+	
+	<update id="UpdateBrestep">
+		update board 
+		set brestep = brestep+1 
+		where bref=#{bref} and brestep > #{brestep}
+	</update>
+	
+	<insert id="ReplyFreeBoard">
+		insert into board(bnum,id,btype,bcategory,bsubject,bref,brestep,brelevel,bcontent)
+		values(bseq.nextval,#{id},#{btype},#{bcategory},#{bsubject},#{bref},#{brestep},#{brelevel},#{bcontent})
+	</insert>
 </mapper>

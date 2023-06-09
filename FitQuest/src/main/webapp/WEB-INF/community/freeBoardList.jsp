@@ -36,6 +36,28 @@
 							<th scope="col">조회수</th>
 							<th scope="col">작성일</th>
 						</tr>
+						<c:forEach var="board" items="${ hotFreeBoardList }" varStatus="status">
+							<tr align="center" >
+								<th scope="row" style="background-color: #FEF9E7">인기</th>
+								<td align="left" style="background-color: #FEF9E7">
+									<c:if test="${ board.brelevel > 0 }">
+										<c:forEach var="i" begin="0" end="${ board.brelevel }">
+											&emsp;
+										</c:forEach>
+										<i style="color : #FAC710;" class="bi bi-arrow-return-right"></i>
+									</c:if>
+									<a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+								</td>
+								<td style="background-color: #FEF9E7">${ board.bcategory }</td>
+								<td style="background-color: #FEF9E7">${ board.name }</td>
+								<td style="background-color: #FEF9E7">${ board.breadcount }</td>
+								<td style="background-color: #FEF9E7">
+									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
+									<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
+								</td>
+							</tr>
+						</c:forEach>
+						<tr><td height="30" style="border: white;"></td><tr>
 						<c:forEach var="board" items="${ freeBoardList }" varStatus="status">
 							<tr align="center">
 								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
@@ -53,7 +75,7 @@
 								<td>${ board.breadcount }</td>
 								<td>
 									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
-									<fmt:formatDate value="${ parseDate }" pattern="yyyy-MM-dd HH:mm"/>
+									<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
 								</td>
 							</tr>
 						</c:forEach>
