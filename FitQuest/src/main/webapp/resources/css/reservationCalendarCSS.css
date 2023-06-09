@@ -103,3 +103,55 @@ a{
 	text-decoration: none;
 	margin-left: 10px;
 }
+.calender-text-id{
+	color: gray;
+	margin-left: 5px;
+}
+
+.rstate-area{
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+	margin: 10px 0px;
+	text-align: center;
+}
+.rstate-y{
+	background-color: #FEF9E7;
+	padding: 8px 0px;
+	font-weight: bold;
+}
+.rstate-g{
+	background-color: #F7F7F8;
+	padding: 5px 0px;
+}
+.rstate-btn-area{
+	margin-top: 3px;
+	padding: 5px 0px;
+	display: flex;
+	background-color: #FEF9E7;
+}
+.left-btn{
+	flex: 1;
+}
+.right-btn{
+	flex: 1;
+}
+.rstate-btn-blue{
+	background-color: #FEF9E7;
+	width: 100%;
+	height: 100%;
+	color: #2C55A2;
+	font-weight: bold;
+	border: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.rstate-btn-red{
+	background-color: #FEF9E7;
+	width: 100%;
+	height: 100%;
+	color: #F92E61;
+	font-weight: bold;
+	border: none;
+}
+.rstate-btn-blue:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

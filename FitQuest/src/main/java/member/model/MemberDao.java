@@ -63,6 +63,12 @@ public class MemberDao {
 		cnt = sqlSessionTemplate.delete(namespace + ".DeleteMember", id);
 		return cnt;
 	}
+
+	public String getName(String mid) {
+		String mname = "";
+		mname = sqlSessionTemplate.selectOne(namespace+".GetName",mid);
+		return mname;
+	}
 	
 	
 }

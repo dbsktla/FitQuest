@@ -15,11 +15,15 @@
 	</select>
 	<insert id="InsertReservation">
 		insert into reservation
-		values(reseq.nextval,#{mid},#{tid},#{onum},#{unum},#{rdate},#{rtime},'false')
+		values(reseq.nextval,#{mid},#{mname},#{tid},#{onum},#{unum},#{rdate},#{rtime},'false')
 	</insert>
 	<select id = "GetReservationCount" resultType = "int">
 		<![CDATA[select count(*) from reservation
 		where mid = #{mid} and tid = #{tid}
 		and rdate < sysdate and rstate = 'true']]>
+	</select>
+	<select id="GetReservationList" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where tid = #{tid} and rstate = 'false']]>
 	</select>
 </mapper>

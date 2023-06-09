@@ -11,9 +11,9 @@
 	function reservationCheck(date,time,year,month){
 		if (confirm('예약 하시겠습니까?')) { //확인
 			location.href='reservationInsert.rv?date='+date+'&time='+time+'&year='+year+'&month='+month;
-		    alert('예약 완료되었습니다.');
+		    alert('예약 신청 완료되었습니다.');
 		} else { //취소
-		    alert('예약 취소되었습니다.');
+		    alert('예약 신청 취소되었습니다.');
 		}
 	}
 </script>
@@ -25,7 +25,7 @@
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
 	<div class="calendarTitle-font">예약</div>
-	<div class="calendarSubtitle-font">김려원 트레이너님 스케줄</div>
+	<div class="calendarSubtitle-font"><span>님 스케줄</span></div>
 </div> 
 
 

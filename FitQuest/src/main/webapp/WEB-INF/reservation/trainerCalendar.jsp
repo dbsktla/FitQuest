@@ -41,7 +41,7 @@
    <!-- 예약 버튼 -->
    <div class="calendar-button-div">
       <span>
-      	<input type="button" class="btn btn-warning" onClick="location.href='reservationInsert.rv'" value="예약 신청 내역">
+      	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 보기">
       	<input type="button" class="btn btn-warning" onClick="location.href='tschedule.rv?flag=${flag}'" value="스케줄 설정">
       </span>
    </div>
