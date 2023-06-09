@@ -9,6 +9,15 @@ public class HealthDateBean {
 	@NotBlank(message = "운동 날짜 필수 입력")
 	private String hdate;
 	private String playtime;
+	private String tid;
+	
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
 
 	public String getPlaytime() {
 		return playtime;

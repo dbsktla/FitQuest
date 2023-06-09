@@ -32,5 +32,10 @@ public class TrainerDao {
 		return trainerBean;
 	}
 	
+	public TrainerBean getTrainerMember(String id) {
+		TrainerBean trainerBean = sqlSessionTemplate.selectOne(namespace+".GetTrainerMember",id);
+		return trainerBean;
+	}
+	
 	
 }

@@ -3,6 +3,7 @@ package health.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,14 @@ import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
 import member.model.MemberBean;
+import member.model.MemberDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import trainer.model.TrainerBean;
+import trainer.model.TrainerDao;
+import usage.model.UsageBean;
+import usage.model.UsageDao;
+import utility.NullUtil;
 
 @Controller
 public class MyHealthListController {
@@ -37,6 +44,15 @@ public class MyHealthListController {
 	@Autowired
 	HealthDateDao healthDateDao;
 	
+	@Autowired
+	TrainerDao trainerDao;
+	
+	@Autowired
+	UsageDao usageDao;
+	
+	@Autowired
+	MemberDao memberDao;
+	
 	// 운동 목록 불러오기
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public ModelAndView doAction(HttpSession session, HttpServletResponse response) {
@@ -44,6 +60,7 @@ public class MyHealthListController {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
 		
 		// 로그인 정보 확인
 		if(memberBean == null) { 
@@ -56,8 +73,28 @@ public class MyHealthListController {
 			}
 			//mav.setViewName(gotoPage);
 		}else {
+			String mid = memberBean.getId();
+			
 			// 운동 날짜 불러옴
-			List<HealthDateBean> hdlist = healthDateDao.getMyHealthDateList(memberBean.getId());
+			List<HealthDateBean> hdlist = healthDateDao.getMyHealthDateList(mid);
+			
+			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
+			List<UsageBean> ulist = usageDao.getTListByMid(mid);
+			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
+			
+			System.out.println("ulist : " + ulist);
+			if(ulist != null) { // 사용권 잇으면 데이터 넣기
+				for(UsageBean ub : ulist) {
+					System.out.println("ulist tid : " + ub.getTid());
+					TrainerBean trainerBean = trainerDao.getTrainerMember(ub.getTid());
+					
+					System.out.println("trainerBean id : " + trainerBean.getId());
+					System.out.println("trainerBean name : " + trainerBean.getName());
+					tlist.add(trainerBean);
+				}
+			}
+			mav.addObject("tlist", tlist);
+			
 			
 			// 상세 운동 정보 불러와서 운동시간 합한뒤 운동 목록에 노출
 			for(HealthDateBean hd : hdlist) {
