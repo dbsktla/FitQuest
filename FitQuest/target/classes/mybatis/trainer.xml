@@ -9,4 +9,8 @@
 		insert into trainer(id,gnum,activity,purpose,intro,exp,timage)
 		values(#{id},#{gnum},#{activity},#{purpose},#{intro},#{exp},#{timage})
 	</insert>
+	<select id="GetTrainer" resultType="trainer.model.TrainerBean">
+		select * from trainer
+		where id=#{tid}
+	</select>
 </mapper>

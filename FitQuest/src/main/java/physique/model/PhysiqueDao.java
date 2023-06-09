@@ -48,4 +48,10 @@ public class PhysiqueDao {
 		cnt = sqlSessionTemplate.update(namespace + ".UpdatePhysique", physiqueBean);
 		return cnt;
 	}
+
+	public List<PhysiqueBean> getPhysiqueList(String id) {
+		List<PhysiqueBean> phlist = new ArrayList<PhysiqueBean>();
+		phlist = sqlSessionTemplate.selectList(namespace + ".GetPhysiqueList", id);
+		return phlist;
+	}
 }
