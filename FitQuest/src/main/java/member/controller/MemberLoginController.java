@@ -87,7 +87,7 @@ public class MemberLoginController {
 		response.setContentType("text/html; charset=UTF-8");
 		MemberBean memberBean = new MemberBean();
 		
-		String id = "naver" + request.getParameter("id").substring(0,10);
+		String id = "naver" + (request.getParameter("id").replace("_", "")).substring(0,10);
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String birthday = request.getParameter("birthday");
