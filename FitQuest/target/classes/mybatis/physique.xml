@@ -32,5 +32,9 @@
 		where phnum=#{phnum}
 	</update>
 	
+	<select id="GetPhysiqueList" resultType="physique.model.PhysiqueBean">
+		select * from physique where id=#{id}
+	</select>
+	
 </mapper>
  

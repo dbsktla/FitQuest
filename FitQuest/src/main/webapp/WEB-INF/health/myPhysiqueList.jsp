@@ -42,10 +42,26 @@
 	.inbodyBtnDiv{
 		float: right;
 	}
+	.fe {
+	    position: absolute;
+	    right: 0px;
+	    top: 15px;
+	}
+	.ie {
+	    color: #aab7cf;
+	    padding-right: 20px;
+	    padding-bottom: 5px;
+	    transition: 0.3s;
+	    font-size: 16px;
+	}
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script>
+	$(document).ready(function(){
+		getGraphAll();
+	});
+
 	function calenderLookup() {
 		var sYear = $('#selectYear option:selected').val();
 		var sMon = $('#selectMon option:selected').val();
@@ -217,7 +233,267 @@
 		
 		// undefined
 		window.open('pop.ht?phimage=' + phimage,'팝업','width=500,height=700');
+	}
+	
+	function getGraphAll(){
 		
+		var weightData = [];
+		var skmuscleData = [];
+		var bodyfatperData = [];
+		var Date = [];
+		
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					weightData.push(data[i].weight);
+					skmuscleData.push(data[i].skeletalmuscle);
+					bodyfatperData.push(data[i].bodyfatper);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체중(kg)",
+						data: weightData
+					}, {
+						name: "골격근량(kg)",
+						data: skmuscleData
+					}, {
+						name: "체지방률(%)",
+						data: bodyfatperData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+		
+	} //getGraphAll
+	
+	function getGraphWeight(){
+		
+		var weightData = [];
+		var Date = [];
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					weightData.push(data[i].weight);
+					Date.push(data[i].phdate);
+				}
+
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체중(kg)",
+						data: weightData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphWeight
+	
+	function getGraphSkmuscle(){
+		var skmuscleData = [];
+		var Date = [];
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					skmuscleData.push(data[i].skeletalmuscle);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "골격근량(kg)",
+						data: skmuscleData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphSkmuscle
+	
+	function getGraphBodyfatper(){
+		var bodyfatperData = [];
+		var Date = [];
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					bodyfatperData.push(data[i].bodyfatper);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체지방률(%)",
+						data: bodyfatperData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphBodyfatper
+	
+	
+	function graphAll() {
+		//alert(1);
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">전체보기</h5><div id="lineChart"></div>');
+		getGraphAll();
+	}
+	
+	function graphW() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">체중 변화</h5><div id="lineChart"></div>');
+		getGraphWeight();
+	}
+	
+	function graphS() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">골격근량 변화</h5><div id="lineChart"></div>');
+		getGraphSkmuscle();
+	}
+	
+	function graphB() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">체지방률 변화</h5><div id="lineChart"></div>');
+		getGraphBodyfatper();
 	}
 </script>
 
@@ -318,32 +594,34 @@
 			</div>
 		</div>
 
-		<div class="col-lg-12">
+		<div class="col-12">
 			<!-- Default Card -->
 			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">이번달 체중 변화</h5>
+			
+				<!-- 버튼 -->
+				 
+				<div class="filter fe">
+					<a class="icon ie" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+						<li class="dropdown-header text-start">
+							<h6>필터선택</h6>
+						</li>
+						<li><a class="dropdown-item" href="javascript:graphAll()">전체보기</a></li>
+						<li><a class="dropdown-item" href="javascript:graphW()">체중 변화</a></li>
+						<li><a class="dropdown-item" href="javascript:graphS()">골격근량 변화</a></li>
+						<li><a class="dropdown-item" href="javascript:graphB()">체지방률 변화</a></li>
+					</ul>
+				</div>
+				
+				
+				<div class="card-body" id="my-graph">
+					<h5 class="card-title">전체보기</h5>
+					<!-- chart -->
+					<div id="lineChart"></div>
 				</div>
 			</div>
 		</div>
 
-		<div class="col-lg-12">
-			<!-- Default Card -->
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">이번달 골격근량 변화</h5>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-12">
-			<!-- Default Card -->
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">이번달 체지방률 변화</h5>
-				</div>
-			</div>
-		</div>
 	</div>
 	<!-- row -->
 

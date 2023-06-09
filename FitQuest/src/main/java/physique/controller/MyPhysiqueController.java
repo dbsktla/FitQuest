@@ -86,7 +86,6 @@ public class MyPhysiqueController {
 					dateList += s.substring(8, 10) + "-";
 				}
 				
-				
 				mav.addObject("dateList", dateList);
 				mav.addObject("selectYear", selectYear);
 				mav.addObject("selectMon", selectMon);
