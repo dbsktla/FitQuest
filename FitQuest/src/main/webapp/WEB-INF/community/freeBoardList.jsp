@@ -40,10 +40,10 @@
 							<tr align="center">
 								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
 								<td align="left">
-									<c:set var="wid" value="20" />
 									<c:if test="${ board.brelevel > 0 }">
-										<c:set var="wid" value="${ board.brelevel * 20 }" />
-										<img height="42" src="<%= request.getContextPath() %>/resources/Image/CommunityImage/level.png" width="${ wid }" height="15" />
+										<c:forEach var="i" begin="0" end="${ board.brelevel }">
+											&emsp;
+										</c:forEach>
 										<i style="color : #FAC710;" class="bi bi-arrow-return-right"></i>
 									</c:if>
 									<a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>

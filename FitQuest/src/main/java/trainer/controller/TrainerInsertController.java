@@ -52,7 +52,6 @@ public class TrainerInsertController {
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request, Model model) {
 		List<GymBean> glist = gymDao.getAllGym();
 		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/TrainerImage";
-		//String uploadPath = "";
 		
 		File destination = new File(uploadPath + File.separator + trainerBean.getUpload().getOriginalFilename());
 		MultipartFile multi =  trainerBean.getUpload();
