@@ -18,7 +18,7 @@
 		values(reseq.nextval,#{mid},#{tid},#{onum},#{unum},#{rdate},#{rtime},'false')
 	</insert>
 	<select id = "GetReservationCount" resultType = "int">
-		<![CDATA[select count(*) from reservations
+		<![CDATA[select count(*) from reservation
 		where mid = #{mid} and tid = #{tid}
 		and rdate < sysdate and rstate = 'true']]>
 	</select>

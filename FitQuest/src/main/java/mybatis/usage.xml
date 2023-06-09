@@ -22,4 +22,8 @@
 		select tid from usage
 		where mid = #{mid}
 	</select>
+	<select id="GetTListByMid" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid}
+	</select>
 </mapper>

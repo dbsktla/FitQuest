@@ -1,5 +1,7 @@
 package usage.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,5 +33,10 @@ public class UsageDao {
 		String tid = "";
 		tid = sqlSessionTemplate.selectOne(namespace + ".GetTid",mid);
 		return tid;
+	}
+	public List<UsageBean> getTListByMid(String mid) {
+		List<UsageBean> tidList = new ArrayList<UsageBean>();
+		tidList = sqlSessionTemplate.selectList(namespace+".GetTListByMid",mid);
+		return tidList;
 	}
 }
