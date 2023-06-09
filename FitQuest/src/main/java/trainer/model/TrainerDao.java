@@ -1,9 +1,14 @@
 package trainer.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
+
+import usage.model.UsageBean;
 
 @Component
 public class TrainerDao {
@@ -20,11 +25,6 @@ public class TrainerDao {
 			
 		}
 		return cnt;
-	}
-
-	public TrainerBean getTrainer(String id) {
-		TrainerBean trainerBean = sqlSessionTemplate.selectOne(namespace + ".GetTrainerById", id);
-		return trainerBean;
 	}
 	
 }

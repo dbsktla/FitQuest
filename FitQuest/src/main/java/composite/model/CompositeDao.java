@@ -34,4 +34,8 @@ public class CompositeDao {
 		tList = sqlSessionTemplate.selectList(namespace + ".GetSimilarTrainers", trainerBean);
 		return tList;
 	}
+	public TrainerListSBean getTrainerListByTid(String tid) {
+		TrainerListSBean trainers = sqlSessionTemplate.selectOne(namespace + ".GetTrainerListByTid", tid);
+		return trainers;
+	}
 }

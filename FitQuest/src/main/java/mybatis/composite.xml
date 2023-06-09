@@ -95,4 +95,8 @@
 		(select id, gnum, gaddr1 from trainer natural join gym))
 		where activity = #{activity}
 	</select>
+	<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
+		select t.activity, t.purpose, t.timage, m.name from trainer t,member m
+		where t.id=m.id and t.id=#{tid}
+	</select>
 </mapper>
