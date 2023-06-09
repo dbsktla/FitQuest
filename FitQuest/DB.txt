@@ -497,7 +497,6 @@ drop table review cascade constraints;
 CREATE TABLE review (
 	renum number primary key,
 	mid varchar2(100),
-	pnum number,
 	tid varchar2(100),
 	rating number check(rating between 0 and 5),
 	rtitle varchar2(100),
