@@ -78,7 +78,7 @@
           <c:if test="${loginInfo.mtype eq 'generic'}">
 	          <li class="dropdown"><a href="genericCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="genericCalendar.rv">My PY</a></li>
+	              <li><a href="genericCalendar.rv">My PT</a></li>
 	              <li><a href="#">1</a></li>
 	              <li><a href="#">2</a></li>
 	              <li><a href="#">3</a></li>
@@ -90,7 +90,7 @@
 	          <li class="dropdown"><a href="trainerCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="trainerCalendar.rv">My PT</a></li>
-	              <li><a href="trainerReviewList.mb">My Reviews</a></li>
+	              <li><a href="#">1</a></li>
 	              <li><a href="#">2</a></li>
 	              <li><a href="#">3</a></li>
 	            </ul>
@@ -120,14 +120,25 @@
 	          </li>
           </c:if>
           
-          <!-- 내글보기, 회원정보수정 -->
-          <c:if test="${loginInfo != null}">
+          <!-- 내글보기, 회원정보수정 등 - 트레이너  -->
+          <c:if test="${loginInfo.mtype eq 'trainer'}">
           	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="#">마이페이지</a></li>
-	              <li><a href="#">개인정보수정</a></li>
+	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
+	              <li><a href="viewProductList.pd">상품관리</a></li>
 	              <li><a href="#">내 글보기</a></li>
-	              <li><a href="#">스크랩</a></li>
+	            </ul>
+	          </li>
+           </c:if>
+          <!-- 내글보기, 회원정보수정 등 - 회원  -->
+          <c:if test="${loginInfo.mtype eq 'generic'}">
+          	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="#">마이페이지</a></li>
+	              <li><a href="#">리뷰관리</a></li>
+	              <li><a href="#">구매관리</a></li>
+	              <li><a href="#">내 글보기</a></li>
 	            </ul>
 	          </li>
            </c:if>
