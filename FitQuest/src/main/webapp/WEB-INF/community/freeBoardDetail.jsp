@@ -8,6 +8,9 @@
 		color : #E04848;
 		font-size: 10pt;
 	}
+	#report:hover{
+		cursor: pointer;
+	}
 </style>
 
 <script>
@@ -64,6 +67,11 @@
 			alert('이미 답글창이 추가되었습니다.');
 		}
 	}
+	function commentReportInsert(cnum,bnum){
+		var openWin = window.open("reportInsertForm.co?bcnum=" + cnum + "&rtype=bcomment&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+		openWin.submit();
+		openWin.close();
+	}
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
@@ -89,12 +97,12 @@
 							<td>${ boardBean.name }</td>
 						</tr>
 						<tr align="center">
-							<th width="10%">카테고리</th>
+							<th width="20%">카테고리</th>
 							<td>${ boardBean.bcategory }</td>
 							<th>작성일</th>
 							<td>
 								<fmt:parseDate var="parseDate" value="${ boardBean.bregdate }" pattern="yyyy-MM-dd HH:mm" />
-								<fmt:formatDate value="${ parseDate }" pattern="yyyy-MM-dd HH:mm"/>
+								<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
 							</td>
 						</tr>
 						<tr align="left">
@@ -107,13 +115,13 @@
 					<table class="table" id="bcommentTable">
 						<tr align="left" style="border: white;">
 							<th>댓글</th>
-							<td colspan="5" align="right">
+							<td colspan="7" align="right">
 								<input type="button" value="추가" class="btn btn-outline-warning btn-sm" onclick="bcommentInsert('')">
 							</td>
 						</tr>
 						<c:forEach var="bcomment" items="${ bcommentList }"> 
 						<tr align="left">
-							<td colspan="2" width="50%">
+							<td colspan="3" width="50%">
 								<c:if test="${ bcomment.crelevel > 0 }">
 									<c:forEach var="i" begin="0" end="${ bcomment.crelevel }">
 										&emsp;
@@ -122,17 +130,21 @@
 								</c:if>
 								${ bcomment.ccontent }
 							</td>
-							<td>${ bcomment.name }</td>
-							<td>
-								<fmt:parseDate var="parseDate" value="${ bcomment.cregdate }" pattern="yyyy-MM-dd HH:mm" />
-								<fmt:formatDate value="${ parseDate }" pattern="yyyy-MM-dd HH:mm"/>
-							</td>
+							<td align="right">${ bcomment.name }</td>
 							<td align="right">
+								<fmt:parseDate var="parseDate" value="${ bcomment.cregdate }" pattern="yyyy-MM-dd HH:mm" />
+								<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
+							</td>
+							<c:if test="${ sessionScope.loginInfo != null }">
+								<td align="right" width="7%">
 									<a style="color : #FAC710;" href="javascript:bcommentReply('${ bcomment.bnum }','${ bcomment.cref }','${ bcomment.crestep }','${ bcomment.crelevel }')">답글</a>
-									<!-- <a style="color : #FAC710;" href="javascript:bcommentReply()">답글</a> -->
 								</td>
+								<td align="right" width="7%">
+									<a id="report" href="javascript:commentReportInsert('${ bcomment.cnum }','${ boardBean.bnum }')" style="color : red;">신고</a>
+								</td>
+							</c:if>
 							<c:if test="${ sessionScope.loginInfo.id eq bcomment.id }">
-								<td align="right">
+								<td align="right" width="7%">
 									<a style="color : #FAC710;" href="bcommentDelete.co?cnum=${ bcomment.cnum }&id=${ bcomment.id }&bnum=${ bcomment.bnum }">삭제</a>
 								</td>
 							</c:if>

@@ -161,6 +161,25 @@ values(bcseq.nextval,1,'hong',1,0,0,'테스트 댓글');
 select * from BCOMMENT;
 commit;
 
+
+-- 신고 테이블
+drop table report cascade constraints;
+CREATE TABLE Report (
+   renum   number   primary key, --신고번호
+   bcnum   number   NOT NULL, --댓글 or 게시판 번호
+   ID varchar2(100) not null, -- 회원아이디 
+   rtype varchar2(10) not null check(rtype in('board','bcomment')), --댓글인지 게시판인지
+   status   varchar2(50)  NOT NULL, --신고 상태(게시글이나 댓글 삭제 시 처리 완료)
+   rcontent   varchar2(1000)   NOT NULL -- 신고 내용
+);
+
+insert into report
+values(reseq.nextval,1,'hong','bcomment','처리 준비','신고 테스트');
+
+select * from Report;
+commit;
+
+
 -- 상품
 drop sequence pseq;
 create sequence pseq
@@ -426,27 +445,6 @@ insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-
 
 select * from physique;
 commit;
-
-
-
-
-
-
-
-
--- 신고 테이블
-drop table Report cascade constraints;
-CREATE TABLE Report (
-   renum   number   primary key,
-   Bnum   number   NOT NULL,
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   status   varchar2   NOT NULL,
-   content   varchar2   NOT NULL
-);
-
-select * from Report;
-commit;
-
 
 --문의 테이블
 drop sequence qseq;
