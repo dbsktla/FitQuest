@@ -33,4 +33,8 @@
 	<update id="UpdateHealthTid">
 		update healthDate set tid=#{tid} where hnum=#{hnum}
 	</update>
+	
+	<select id="GetComp" resultType="String">
+		select odate from orders where onum=#{onum}
+	</select>
 </mapper>

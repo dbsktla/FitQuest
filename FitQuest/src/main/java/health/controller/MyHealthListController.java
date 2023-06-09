@@ -22,6 +22,8 @@ import health.model.HealthDateBean;
 import health.model.HealthDateDao;
 import member.model.MemberBean;
 import member.model.MemberDao;
+import order.model.OrderBean;
+import order.model.OrderDao;
 import trainer.model.TrainerBean;
 import trainer.model.TrainerDao;
 import usage.model.UsageBean;
@@ -79,8 +81,30 @@ public class MyHealthListController {
 			System.out.println("ulist : " + ulist);
 			if(ulist != null) { // 사용권 잇으면 데이터 넣기
 				for(UsageBean ub : ulist) {
-					System.out.println("ulist tid : " + ub.getTid());
+					
 					TrainerBean trainerBean = trainerDao.getTrainerMember(ub.getTid());
+					String odate = healthDateDao.getComp(ub.getOnum());
+					
+					odate = odate.substring(0, 10);
+					
+					try {
+						Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(odate);
+						Date d2 = new Date();
+						
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						sdf.format(d2);
+						long diffSec = (d1.getTime() - d2.getTime()) / 1000;
+						long diffDays = diffSec / (24*60*60);
+						
+						odate = String.valueOf(diffDays);
+						
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+					
+					trainerBean.setIntro(odate);
+					//ub.getOnum();
 					
 					tlist.add(trainerBean);
 				}
