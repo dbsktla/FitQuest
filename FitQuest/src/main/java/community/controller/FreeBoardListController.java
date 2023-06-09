@@ -61,10 +61,12 @@ public class FreeBoardListController {
 		Paging pageInfo = new Paging(pageNumber,"5",totalCount,url,whatColumn,keyword,null);
 
 		List<BoardBean> freeBoardList = boardDao.getFreeBoardList(pageInfo,map);
-
+		List<BoardBean> hotFreeBoardList = boardDao.getHotFreeBoardList();
+		
 		mav.addObject("totalCount", totalCount);
 		mav.addObject("pageNumber", pageNumber);
 		mav.addObject("freeBoardList", freeBoardList);
+		mav.addObject("hotFreeBoardList", hotFreeBoardList);
 		mav.addObject("pageInfo", pageInfo);
 		mav.addObject("bcategory", bcategory);
 		mav.setViewName(getPage);

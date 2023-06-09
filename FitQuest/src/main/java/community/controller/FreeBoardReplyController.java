@@ -17,14 +17,13 @@ import member.model.MemberBean;
 public class FreeBoardReplyController {
 	private final String command = "/freeBoardReply.co";
 	private final String getPage = "freeBoardReplyForm";
-	private final String gotoPage = "redirect:/freeBoardList.co";
 
 	@Autowired
 	BoardDao boardDao;
 
 	@RequestMapping(value = command, method=RequestMethod.GET)
-	public String reply(HttpSession session) {
-		session.setAttribute("destination", gotoPage);
+	public String reply(BoardBean boardBean, HttpSession session) {
+		session.setAttribute("destination", "redirect:/freeBoardReply.co?bref=" + boardBean.getBref() + "&brestep=" + boardBean.getBrestep() + "&brelevel=" + boardBean.getBrelevel() + "&bcategory=" + boardBean.getBcategory());
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
@@ -35,7 +34,7 @@ public class FreeBoardReplyController {
 
 	@RequestMapping(value = command, method=RequestMethod.POST)
 	public String reply(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
-		session.setAttribute("destination", "redirect:/freeBoardReply.co?bref=" + boardBean.getBref() + "&brestep=" + boardBean.getBrestep() + "&brelevel=" + boardBean.getBrelevel());
+		session.setAttribute("destination", "redirect:/freeBoardReply.co?bref=" + boardBean.getBref() + "&brestep=" + boardBean.getBrestep() + "&brelevel=" + boardBean.getBrelevel() + "&bcategory=" + boardBean.getBcategory());
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
