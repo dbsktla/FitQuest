@@ -60,4 +60,9 @@ public class HealthDateDao {
 		
 	}
 
+	public String getComp(int onum) {
+		String str = sqlSessionTemplate.selectOne(namespace + ".GetComp", onum);
+		return str;
+	}
+
 }
