@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import community.model.ReportBean;
 import community.model.ReportDao;
@@ -30,7 +29,12 @@ public class ReportInsertController {
 		response.setContentType("text/html;charset=UTF-8");
 		session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + reportBean.getBnum());
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인 후 이용해주세요.');opener.parent.location.href='login.mb';window.close();</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
@@ -55,8 +59,8 @@ public class ReportInsertController {
 				}
 			}
 			
-			return "";
 		}
+		return "";
 		
 	}
 }
