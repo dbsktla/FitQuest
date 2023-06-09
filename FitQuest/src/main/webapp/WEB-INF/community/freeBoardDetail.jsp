@@ -72,6 +72,11 @@
 		openWin.submit();
 		openWin.close();
 	}
+	function boardReportInsert(bnum){
+		var openWin = window.open("reportInsertForm.co?bcnum=" + bnum + "&rtype=bcomment&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+		openWin.submit();
+		openWin.close();
+	}
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
@@ -85,6 +90,7 @@
 						<input type="button" value="삭제하기" class="btn btn-warning btn-sm" onclick="freeBoardDelete()">
 					</c:if>
 					<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='freeBoardReply.co?bref=${ boardBean.bref }&brestep=${ boardBean.brestep }&brelevel=${ boardBean.brelevel }&bcategory=${ boardBean.bcategory }'">
+					<input type="button" value="신고하기" class="btn btn-danger btn-sm" onclick="boardReportInsert('${ boardBean.bnum }')">
 				</div>
 			
 				<h2 class="card-title">${ boardBean.bsubject }</h2>
