@@ -1,10 +1,12 @@
 package health.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,11 @@ import health.model.HealthBean;
 import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
+import member.model.MemberBean;
+import trainer.model.TrainerBean;
+import trainer.model.TrainerDao;
+import usage.model.UsageBean;
+import usage.model.UsageDao;
 
 @Controller
 public class MyHealthUpdateController {
@@ -29,25 +36,59 @@ public class MyHealthUpdateController {
 	HealthDateDao healthDateDao;
 	@Autowired
 	HealthDao healthDao;
+	@Autowired
+	TrainerDao trainerDao;
+	@Autowired
+	UsageDao usageDao;
 
 	// updateForm 으로 이동
 	@RequestMapping(value = command, method = RequestMethod.GET)
-	public ModelAndView doAction(@RequestParam("hnum") int hnum, Model model) {
+	public ModelAndView doAction(@RequestParam("hnum") int hnum, Model model, 
+								HttpSession session, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
+		
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
+		if(memberBean == null) { // 로그인 정보 없을 때
+			session.setAttribute("destination", "redirect:/myHealthList.ht");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/loginForm.mb");
+		} else {
+			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
+			List<UsageBean> ulist = usageDao.getTListByMid(memberBean.getId());
+			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
+			
+			System.out.println("ulist : " + ulist);
+			if(ulist != null) { // 사용권 잇으면 데이터 넣기
+				for(UsageBean ub : ulist) {
+					System.out.println("ulist tid : " + ub.getTid());
+					TrainerBean trainerBean = trainerDao.getTrainerMember(ub.getTid());
+					
+					System.out.println("trainerBean id : " + trainerBean.getId());
+					System.out.println("trainerBean name : " + trainerBean.getName());
+					tlist.add(trainerBean);
+				}
+			}
+			
+			mav.addObject("tlist", tlist);
+						
+			HealthDateBean healthDateBean = healthDateDao.getOneHealthDate(hnum);
+			List<HealthBean> hlist = healthDao.getOneHealth(hnum);
 
-		HealthDateBean healthDateBean = healthDateDao.getOneHealthDate(hnum);
-		List<HealthBean> hlist = healthDao.getOneHealth(hnum);
 
-		// mav.addObject("healthDateBean", healthDateBean);
-		// mav.addObject("hlist", hlist);
+			System.out.println(healthDateBean.getHdate());
 
-		System.out.println(healthDateBean.getHdate());
+			model.addAttribute("healthDateBean", healthDateBean);
+			model.addAttribute("hlist", hlist);
 
-		model.addAttribute("healthDateBean", healthDateBean);
-		model.addAttribute("hlist", hlist);
-
-		mav.setViewName(getPage);
-
+			mav.setViewName(getPage);
+		}
+		
 		return mav;
 	}
 
@@ -59,8 +100,12 @@ public class MyHealthUpdateController {
 		int hnum = Integer.parseInt(request.getParameter("hnum"));
 		String hdate = request.getParameter("hdate");
 		String olddate = request.getParameter("olddate");
-
+		String tid = request.getParameter("tid");
+		
 		if (hdate.equals(olddate)) { // 운동날짜 변경 안함
+			
+			healthDateDao.updateHealthTid(hnum, tid);
+			
 			healthDao.deleteHealthByHnum(hnum);
 			updateHealthRequest(request, hdate, hnum);
 
@@ -81,7 +126,7 @@ public class MyHealthUpdateController {
 
 			} else {
 				healthDao.deleteHealthByHnum(hnum);
-				int cnt = healthDateDao.updateHealthDate(hnum, hdate);
+				int cnt = healthDateDao.updateHealthDate(hnum, hdate, tid);
 				if (cnt != -1) {
 					updateHealthRequest(request, hdate, hnum);
 				} else {

@@ -42,13 +42,22 @@ public class HealthDateDao {
 		System.out.println("healthDelete cnt : " + cnt);
 	}
 
-	public int updateHealthDate(int hnum, String hdate) {
+	public int updateHealthDate(int hnum, String hdate, String tid) {
 		int cnt = -1;
 		HealthDateBean hdb = new HealthDateBean();
 		hdb.setHnum(hnum);
 		hdb.setHdate(hdate);
+		hdb.setTid(tid);
 		cnt = sqlSessionTemplate.update(namespace + ".UpdateHealthDate" , hdb);
 		return 0;
+	}
+
+	public void updateHealthTid(int hnum, String tid) {
+		HealthDateBean hdb = new HealthDateBean();
+		hdb.setHnum(hnum);
+		hdb.setTid(tid);
+		sqlSessionTemplate.update(namespace + ".UpdateHealthTid" , hdb);
+		
 	}
 
 }
