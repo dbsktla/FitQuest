@@ -348,22 +348,22 @@ drop table health cascade constraints;
 CREATE TABLE health (
    hnum number references healthdate(hnum) on delete cascade, --운동정보 번호
    hname   varchar2(30)   NOT NULL, --운동명
-   starttime   timestamp, --시작시간
-   endtime   timestamp, --종료시간
+   starttime   date, --시작시간
+   endtime   date, --종료시간
    hcount number default 0, --횟수 --세트
    hset number default 0
 );
 
-insert into health values(1, '유산소','2023-06-01 11:00','2023-06-01 11:30',0,0);
-insert into health values(1, '벤치프레스','2023-06-01 11:30','2023-06-01 11:40',10,3);
-insert into health values(2, '유산소','2023-06-02 11:00','2023-06-02 11:30',0,0);
-insert into health values(2, '스쿼트','2023-06-02 11:30','2023-06-02 12:00',12,5);
-insert into health values(3, '캐딜락','2023-06-01 16:30','2023-06-01 17:00',17,3);
-insert into health values(3, '리포머','2023-06-01 17:20','2023-06-01 17:50',15,3);
-insert into health values(4, '래더바렐','2023-06-03 15:30','2023-06-03 16:00',12,5);
-insert into health values(4, '스프링보드','2023-06-03 16:30','2023-06-03 17:00',19,5);
-insert into health values(4, '캐딜락','2023-06-03 17:00','2023-06-03 17:20',20,5);
-insert into health values(5, '스쿼트','2023-06-03 17:00','2023-06-03 17:20',20,5);
+insert into health values(1, '유산소',TO_DATE('2023-06-01 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(1, '벤치프레스',TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:40','YYYY-MM-DD HH24:MI'),10,3);
+insert into health values(2, '유산소',TO_DATE('2023-06-02 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(2, '스쿼트',TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 12:00','YYYY-MM-DD HH24:MI'),12,5);
+insert into health values(3, '캐딜락',TO_DATE('2023-06-01 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),17,3);
+insert into health values(3, '리포머',TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:50','YYYY-MM-DD HH24:MI'),15,3);
+insert into health values(4, '래더바렐',TO_DATE('2023-06-03 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 16:00','YYYY-MM-DD HH24:MI'),12,5);
+insert into health values(4, '스프링보드',TO_DATE('2023-06-03 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),19,5);
+insert into health values(4, '캐딜락',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(5, '스쿼트',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
 
 
 select * from health;
