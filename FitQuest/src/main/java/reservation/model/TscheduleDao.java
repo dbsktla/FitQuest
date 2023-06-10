@@ -22,6 +22,12 @@ public class TscheduleDao {
 		tscheduleBean = sqlSessionTemplate.selectOne(namespace+".FindTschedule",tid);
 		return tscheduleBean;
 	}
+
+	public int updateTschedule(TscheduleBean tscheduleBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".UpdateTschedule",tscheduleBean);
+		return cnt;
+	}
 	
 	
 }

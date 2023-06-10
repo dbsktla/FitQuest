@@ -34,5 +34,14 @@ public class ReservationDao {
 		rList = sqlSessionTemplate.selectList(namespace+".GetReservationList",tid);
 		return rList;
 	}
+
+	public int updateState(int rnum,String rstate) {
+		int cnt = -1;
+		ReservationBean reservationBean = new ReservationBean();
+		reservationBean.setRnum(rnum);
+		reservationBean.setRstate(rstate);
+		cnt = sqlSessionTemplate.update(namespace+".UpdateState",reservationBean);
+		return cnt;
+	}
 	
 }
