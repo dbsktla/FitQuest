@@ -39,4 +39,8 @@ public class CompositeDao {
 		TrainerListSBean trainers = sqlSessionTemplate.selectOne(namespace + ".GetTrainerListByTid", tid);
 		return trainers;
 	}
+	public ReservationDetailBean getReservationDetail(int rnum) {
+		ReservationDetailBean reservationDetailBean = sqlSessionTemplate.selectOne(namespace+".ReservationDetailBean",rnum);
+		return reservationDetailBean;
+	}
 }

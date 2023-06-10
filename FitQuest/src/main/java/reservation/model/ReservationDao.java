@@ -29,9 +29,9 @@ public class ReservationDao {
 		return cnt;
 	}
 
-	public List<ReservationBean> getReservationList(String tid) {
+	public List<ReservationBean> getReservationFList(String tid) {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
-		rList = sqlSessionTemplate.selectList(namespace+".GetReservationList",tid);
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationFList",tid);
 		return rList;
 	}
 
@@ -42,6 +42,12 @@ public class ReservationDao {
 		reservationBean.setRstate(rstate);
 		cnt = sqlSessionTemplate.update(namespace+".UpdateState",reservationBean);
 		return cnt;
+	}
+
+	public List<ReservationBean> getReservationTList(String tid) {
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTList",tid);
+		return rList;
 	}
 	
 }

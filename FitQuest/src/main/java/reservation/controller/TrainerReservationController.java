@@ -85,15 +85,10 @@ public class TrainerReservationController {
 		
 		//예약 내역 가져오기
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		List<ReservationBean> rList = reservationDao.getReservationList(tid);
+		List<ReservationBean> rList = reservationDao.getReservationFList(tid);
 		
-		for(int i=0;i<rList.size();i++) {
-			System.out.println("회원 이름 테스트2:"+rList.get(i).getRtime());
-		}
-		
-		//rtime  13:00~14:00
-		//rdate   2023-06-01
 		//년,월,일로 쪼개서 배열에 담는 과정 
+		//rtime : 13:00~14:00 | rdate : 2023-06-01
 		List<String> rdateList = new ArrayList<String>();
 		
 		for (ReservationBean reservationBean : rList) {
@@ -137,9 +132,6 @@ public class TrainerReservationController {
 		model.addAttribute("rmonth",monthNum);
 		model.addAttribute("rday",dayNum);
 		model.addAttribute("rList", rList);
-		
-		//회원 이름 가져오기
-		//model.addAttribute();
 		
 		return getPage;
 	}

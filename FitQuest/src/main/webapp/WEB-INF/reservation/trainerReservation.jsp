@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
-
-<script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -24,21 +22,12 @@
 		    alert('예약 거절 취소되었습니다.');
 		}
 	}
-	
 </script>
-
-<br><br>
-<center>
-<form action="" method="GET">
-<%
-	
-%>
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
 	<div class="calendarTitle-font">예약 신청 내역</div>
 </div> 
-
-
+<center>
 <div class="calendar" >
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
@@ -64,7 +53,6 @@
       </a>
    </div>
 <!-- 달력  -->  
-
 <table class="calendar_body">
 <thead>
    <tr class="day-area">
@@ -396,11 +384,10 @@
       </c:choose>
 	</c:forEach>
 </tbody>
-	</c:otherwise>
+</c:otherwise>
 </c:choose>
 </table>
 </div>
-</form>
 </center>
 
 <%@ include file="../common/bottom.jsp" %>
