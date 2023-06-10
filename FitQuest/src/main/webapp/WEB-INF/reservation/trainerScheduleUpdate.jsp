@@ -15,9 +15,6 @@
 	input[type=checkbox]{
 		accent-color : #FAC710;
 	}
-	input[type=radio]{
-		accent-color : #FAC710;
-	}
 }
 </style>
 
@@ -57,10 +54,10 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">스케줄 설정</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">스케줄 수정</h5>
                   </div>
                   
-                  <form:form commandName="tscheduleBean" action="tschedule.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form:form commandName="tscheduleBean" action="tScheduleUpdate.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
                       <label for="yourDay" class="form-label b margin-bottom">요일
                       <form:errors cssClass="err" path="tsday" /></label>
@@ -93,23 +90,22 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                     <div class="col-12 margin-top">
                       <div class="margin-top"></div>
                       <label for="yourTsdate" class="form-label b">불가능한 날짜</label>
-                      <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">날짜삭제</button> 
-						<button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜추가</button><br><br>
+                      <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">추가날짜 삭제</button> 
+					  <button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜 추가</button><br><br>
 						
-                      <input type="date" name="tsdate" class="form-control" id="tsdate">
+						
+					  <c:forEach var="date" items="${dateList}">
+						  <div class="col-md-12 margin-bottom">
+	                      	<input type="date" name="tsdate" class="form-control" id="tsdate" value="${date}">
+	                      </div>
+                      </c:forEach>
                     </div>
                     
                     <!-- 추가영역 -->
 					<div id="healthScope"></div>
 						
                     <div class="col-12 center">
-                    	<!-- 처음 스케줄 등록할때 -->
-                    	<c:if test="${flag == false}">
-	                    	<button type="submit" id="inertSub" class="btn btn-warning m-size" onClick="location.href='tschedule.rv'">새로 등록</button>
-                    	</c:if>
-                    	<c:if test="${flag == true}">
-                    	<button type="submit" id="updateSub" class="btn btn-warning m-size">수정</button>
-                   		</c:if>
+                    	<button type="submit" id="updateSub" class="btn btn-warning m-size" onClick="location.href='tScheduleUpdate.rv'">수정</button>
                     </div>
                   </form:form> 
 

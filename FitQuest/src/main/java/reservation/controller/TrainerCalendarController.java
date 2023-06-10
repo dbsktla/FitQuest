@@ -76,7 +76,6 @@ public class TrainerCalendarController {
 			if(tscheduleBean != null) {
 				flag = true;
 			}
-			System.out.println("falg:"+flag);
 			model.addAttribute("flag",flag);
 			
 			//배열에 담음

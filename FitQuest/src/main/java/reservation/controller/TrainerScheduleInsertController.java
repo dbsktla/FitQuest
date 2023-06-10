@@ -19,34 +19,27 @@ import reservation.model.TscheduleBean;
 import reservation.model.TscheduleDao;
 
 @Controller
-public class TscheduleController {
-	private final String command = "/tschedule.rv";
-	private final String getPage = "tschedule";
+public class TrainerScheduleInsertController {
+	private final String command = "/tScheduleInsert.rv";
+	private final String getPage = "trainerScheduleInsert";
 	private final String gotoPage = "redirect:/trainerCalendar.rv";
 
 	@Autowired
 	TscheduleDao tscheduleDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
-	public String doAction(HttpSession session,Model model,
-			@RequestParam("flag") boolean flag) {
-		//스케줄 이미 등록한게 있는지 확인용 flag
-		model.addAttribute("flag",flag);
-		System.out.println("스케줄 설정 페이지 직전:"+flag);
+	public String doAction(HttpSession session,Model model) {
 		return getPage;
 	}
 	
 	@RequestMapping(value=command,method = RequestMethod.POST)
 	public String doAction(@Valid TscheduleBean tscheduleBean, BindingResult result,HttpServletRequest request, Model model,
 			HttpSession session,@RequestParam("tsdate") List<String> tsdateList) {
-		System.out.println("오나 확인 test");
 		System.out.println("오나 확인 오류시/tsdate:"+tscheduleBean.getTsdate());
 		
 		if(result.hasErrors()) {
-			System.out.println("오나 확인 오류시");
 			return getPage;
 		}else {
-			System.out.println("오나 확인 오류 없을때");
 			String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 			tscheduleBean.setTid(tid);
 			

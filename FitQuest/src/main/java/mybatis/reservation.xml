@@ -13,6 +13,11 @@
 		select * from tschedule
 		where tid = #{tid}
 	</select>
+	<update id="UpdateTschedule">
+		update tschedule set
+		tsday=#{tsday}, tstime=#{tstime}, tsdate=#{tsdate}
+		where tid = #{tid}
+	</update>
 	<insert id="InsertReservation">
 		insert into reservation
 		values(reseq.nextval,#{mid},#{mname},#{tid},#{onum},#{unum},#{rdate},#{rtime},'false')
@@ -26,4 +31,9 @@
 		<![CDATA[select * from reservation
 		where tid = #{tid} and rstate = 'false']]>
 	</select>
+	<update id="UpdateState">
+		update reservation set
+		rstate = #{rstate}
+		where rnum = #{rnum}
+	</update>
 </mapper>

@@ -4,6 +4,10 @@ a{
 	text-decoration: none;
 	color: black;
 }
+.calendar-none{
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
 .day-area{
 	background-color: #FEF9E7;
 	border-top: 1.5px solid gray;
@@ -64,6 +68,7 @@ a{
 	padding: 5px;
 	border-bottom: 1px solid lightgray;
 	position: relative;
+	height: 250px;
 }
 .day{
 	color: black;
@@ -74,7 +79,7 @@ a{
 	color: red;
 }
 .sat{
-	color: blue;
+	color: #1660EA;
 }
 .calendar-margin{
 	margin-bottom: 50px;
@@ -109,22 +114,25 @@ a{
 }
 
 .rstate-area{
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	margin: 10px 0px;
 	text-align: center;
+	transition: transform 0.3s;
+}
+.rstate-area:hover{
+	transform: scale(1.05);
 }
 .rstate-y{
-	background-color: #FEF9E7;
-	padding: 8px 0px;
+	background-color: #F7F7F8;
+	padding: 4px 0px;
 	font-weight: bold;
 }
 .rstate-g{
-	background-color: #F7F7F8;
-	padding: 5px 0px;
+	background-color: #Ffffff; 
+	padding: 2px 0px;
 }
 .rstate-btn-area{
-	margin-top: 3px;
-	padding: 5px 0px;
+	padding: 3px 0px;
 	display: flex;
 	background-color: #FEF9E7;
 }
@@ -138,11 +146,9 @@ a{
 	background-color: #FEF9E7;
 	width: 100%;
 	height: 100%;
-	color: #2C55A2;
+	color: #1660EA;
 	font-weight: bold;
 	border: none;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease-in-out;
 }
 .rstate-btn-red{
 	background-color: #FEF9E7;
@@ -153,5 +159,8 @@ a{
 	border: none;
 }
 .rstate-btn-blue:hover {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+	color: #FAC710;
+}
+.rstate-btn-red:hover {
+	color: #FAC710;
 }

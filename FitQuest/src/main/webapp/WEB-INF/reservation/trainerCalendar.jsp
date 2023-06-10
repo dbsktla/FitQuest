@@ -42,7 +42,12 @@
    <div class="calendar-button-div">
       <span>
       	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 보기">
-      	<input type="button" class="btn btn-warning" onClick="location.href='tschedule.rv?flag=${flag}'" value="스케줄 설정">
+      	<c:if test="${flag == 'true'}">
+	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleUpdate.rv'" value="스케줄 수정">
+      	</c:if>
+      	<c:if test="${flag == 'false'}">
+	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">
+      	</c:if>
       </span>
    </div>
 <!-- 달력  -->  

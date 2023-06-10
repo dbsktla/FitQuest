@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
 	});
-	function reservationCheck(date,time,year,month){
-		if (confirm('예약 하시겠습니까?')) { //확인
-			location.href='reservationInsert.rv?date='+date+'&time='+time+'&year='+year+'&month='+month;
-		    alert('예약 신청 완료되었습니다.');
+	function stateYes(rnum){
+		if (confirm('예약 승인 하시겠습니까?')) { //확인
+			location.href='reservationState.rv?rnum='+rnum+'&rstate=true';
+		    alert('예약 승인 완료되었습니다.');
 		} else { //취소
-		    alert('예약 신청 취소되었습니다.');
+		    alert('예약 승인 취소되었습니다.');
 		}
 	}
+	function stateNo(rnum){
+		if (confirm('예약 거절 하시겠습니까?')) { //확인
+			location.href='reservationState.rv?rnum='+rnum+'&rstate=reject';
+		    alert('예약 거절 완료되었습니다.');
+		} else { //취소
+		    alert('예약 거절 취소되었습니다.');
+		}
+	}
+	
 </script>
 
 <br><br>
@@ -55,6 +64,7 @@
       </a>
    </div>
 <!-- 달력  -->  
+
 <table class="calendar_body">
 <thead>
    <tr class="day-area">
@@ -81,22 +91,75 @@
       </td>
    </tr>
 </thead>
+<c:choose>
+<c:when test="${empty rList}">
+   <tr>
+	 <td colspan="7" class="calendar-none">
+	   <div>
+	    <span>예약 신청 내역이 없습니다.</span>
+	   </div>
+	 </td>
+   </tr>
+</c:when>
+<c:otherwise>
 <tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
          <c:choose>
-         
             
            <c:when test="${date_status.index % 7 == 6}">
 			    <td class="calendar-box">
+			        <div class="calendar-margin"><div class="calendar-num sat">${dateList.date}</div></div>
+			        <c:if test="${dateList.date <= date_status.last}">
+			            <c:if test="${not empty rList}">
+			            
+			            
+	                        <c:set var="check" value="출력전"/>
+			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
+			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
+			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
+			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
+			                                <c:if test="${reservation.rdate == reservationDay}">
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
+				                                        <span class="calender-text">${reservation.rtime}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button></div>
+				                                    </div>
+						                        </div>
+			                                </c:if>
+			                            </c:forEach>
+		                              </c:if>
+			                        
+			                    </c:if>
+			                </c:forEach>
+			                
+			                
+			            </c:if>
+			        </c:if>
+			    </td>
+			</c:when>
+            
+            <c:when test="${date_status.index%7==0}">
+    </tr>
+    <tr>
+		      <td class="calendar-box">
 			        <div class="calendar-margin">
-			            <div class="calendar-num sat">${dateList.date}</div>
+			            <div class="calendar-num sun">${dateList.date}</div>
 			        </div>
 			        <c:if test="${dateList.date <= date_status.last}">
 			            <c:if test="${not empty ryear}">
 			            
 			            
-	                        <c:set var="check" value="출력전"/>
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
@@ -128,43 +191,6 @@
 			            </c:if>
 			        </c:if>
 			    </td>
-			</c:when>
-            
-            <c:when test="${date_status.index%7==0}">
-    </tr>
-    <tr>
-		      <td class="calendar-box">
-			        <div class="calendar-margin">
-			            <div class="calendar-num sun">${dateList.date}</div>
-			        </div>
-			        <c:if test="${dateList.date <= date_status.last}">
-			            <c:if test="${not empty ryear}">
-			            
-			            
-			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
-			                            <c:forEach var="reservation" items="${rList}">
-			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
-				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
-				                                    </div>
-						                        </div>
-			                                </c:if>
-			                            </c:forEach>
-			                            <span class="calender-text">예약알림1</span>
-			                        
-			                    </c:if>
-			                </c:forEach>
-			                
-			                
-			            </c:if>
-			        </c:if>
-			    </td>
             </c:when>
             
       <c:otherwise>
@@ -177,22 +203,30 @@
 			            <c:if test="${not empty ryear}">
 			            
 			            
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
 			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
 				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="">거절</button></div>
 				                                    </div>
 						                        </div>
 			                                </c:if>
 			                            </c:forEach>
-			                            <span class="calender-text">예약알림1</span>
+		                              </c:if>
 			                        
 			                    </c:if>
 			                </c:forEach>
@@ -207,22 +241,30 @@
 			            <c:if test="${not empty ryear}">
 			            
 			            
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
 			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
 				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="">거절</button></div>
 				                                    </div>
 						                        </div>
 			                                </c:if>
 			                            </c:forEach>
-			                            <span class="calender-text">예약알림1</span>
+		                              </c:if>
 			                        
 			                    </c:if>
 			                </c:forEach>
@@ -237,22 +279,30 @@
 			            <c:if test="${not empty ryear}">
 			            
 			            
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
 			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
 				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="">거절</button></div>
 				                                    </div>
 						                        </div>
 			                                </c:if>
 			                            </c:forEach>
-			                            <span class="calender-text">예약알림1</span>
+		                              </c:if>
 			                        
 			                    </c:if>
 			                </c:forEach>
@@ -267,22 +317,30 @@
 			            <c:if test="${not empty ryear}">
 			            
 			            
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
 			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
 				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="">거절</button></div>
 				                                    </div>
 						                        </div>
 			                                </c:if>
 			                            </c:forEach>
-			                            <span class="calender-text">예약알림1</span>
+		                              </c:if>
 			                        
 			                    </c:if>
 			                </c:forEach>
@@ -297,21 +355,30 @@
 			            <c:if test="${not empty ryear}">
 			            
 			            
+			                <c:set var="check" value="출력전"/>
 			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
 			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
 			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-			                        
+			                        	
+		                        	  <c:if test="${check == '출력전'}">
 			                            <c:forEach var="reservation" items="${rList}">
+				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-						                        <div class="reservation-area">
-				                                    <div class="reservation-item">
-				                                        <span class="calender-text">${reservation.mid}</span>
+						                        <div class="rstate-area">
+				                                    <div class="rstate-y">
+				                                        <span class="calender-text">${reservation.mname}</span><span class="calender-text-id">(${reservation.mid})</span>
+				                                    </div>
+				                                    <div class="rstate-g">
 				                                        <span class="calender-text">${reservation.rtime}</span>
-				                                        <span class="calender-text">${reservation.rdate}</span>
+				                                    </div>
+				                                    <div class="rstate-btn-area">
+				                                    	<div class="left-btn"><button class="rstate-btn-blue" onClick="">승인</button></div>
+				                                    	<div class="right-btn"><button class="rstate-btn-red" onClick="">거절</button></div>
 				                                    </div>
 						                        </div>
-			                                </c:if>  
+			                                </c:if>
 			                            </c:forEach>
+		                              </c:if>
 			                        
 			                    </c:if>
 			                </c:forEach>
@@ -329,6 +396,8 @@
       </c:choose>
 	</c:forEach>
 </tbody>
+	</c:otherwise>
+</c:choose>
 </table>
 </div>
 </form>
