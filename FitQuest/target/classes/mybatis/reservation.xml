@@ -27,9 +27,14 @@
 		where mid = #{mid} and tid = #{tid}
 		and rdate < sysdate and rstate = 'true']]>
 	</select>
-	<select id="GetReservationList" resultType="reservation.model.ReservationBean">
+	<select id="GetReservationFList" resultType="reservation.model.ReservationBean">
 		<![CDATA[select * from reservation
 		where tid = #{tid} and rstate = 'false']]>
+	</select>
+	<select id="GetReservationTList" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where tid = #{tid} and rstate = 'true'
+		order by rtime]]>
 	</select>
 	<update id="UpdateState">
 		update reservation set

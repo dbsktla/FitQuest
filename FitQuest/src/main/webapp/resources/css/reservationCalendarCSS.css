@@ -4,6 +4,9 @@ a{
 	text-decoration: none;
 	color: black;
 }
+.b{
+	font-weight: bold;
+}
 .calendar-none{
 	text-align: center;
 	border-bottom: 1px solid gray;
@@ -17,7 +20,8 @@ a{
 	margin: 50px 0px;
 }
 .calendarTitle{
-	margin-top: 50px;
+	margin-top: 100px;
+	text-align: center;
 }
 .calendarTitle-font{
 	font-size: 30px;
@@ -108,6 +112,10 @@ a{
 	text-decoration: none;
 	margin-left: 10px;
 }
+.calender-text-s{
+	color: black;
+	font-size: 15px;
+}
 .calender-text-id{
 	color: gray;
 	margin-left: 5px;
@@ -122,6 +130,15 @@ a{
 .rstate-area:hover{
 	transform: scale(1.05);
 }
+.rstate-container{
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	margin: 5px 0px;
+	text-align: center;
+	transition: transform 0.3s;
+}
+.rstate-container:hover{
+	transform: scale(1.05);
+}
 .rstate-y{
 	background-color: #F7F7F8;
 	padding: 4px 0px;
@@ -130,6 +147,15 @@ a{
 .rstate-g{
 	background-color: #Ffffff; 
 	padding: 2px 0px;
+}
+.rstate-n{
+	background-color: #FEF9E7; 
+	padding: 4px 0px;
+	font-weight: bold;
+}
+.rstate-box{
+	background-color: #FEF9E7; 
+	padding: 4px 0px;
 }
 .rstate-btn-area{
 	padding: 3px 0px;
