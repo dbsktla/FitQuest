@@ -13,6 +13,8 @@
 	/* 상세정보 띄우기 */
 	$(document).ready(function(){
 		$('#showbutton').css("display","none");
+		
+		calenderLookup();
 	}); // document
 	
 	// 상세정보
@@ -21,7 +23,7 @@
 		clickHnum = hnum;
 		$('#showbutton').show();
 		
-		$.ajax({
+		$.ajax({	
 			type : "POST", // 요청타입
 			url : "myHealthDetail.ht", // 요청 url
 			data : ({'hnum' : hnum}), // url로 넘길 데이터 설정
@@ -126,7 +128,7 @@
 						msg += '<td>';
 						msg += '<button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick(' + data[i].hnum + ')">' + (data[i].hdate).substring(0,10) + '</button>';
 						msg += '</td>';
-						msg += '<td>' + data[i].playtime + '</td>';
+						msg += '<td>' + data[i].playtime + '  분</td>';
 						msg += '</tr>';
 					}
 				}
@@ -134,6 +136,51 @@
 			}//success
 		});//ajax
 		
+	}
+	
+	function calanderLookup() {
+		
+		// request: 년, 월 정보 . 트레이너 이름, 목록.  
+		// 데이터 비교 -> 운동 데이터가 있는날은 따로 체크(이미지 띄우기)
+		$.ajax({
+			
+		});
+		
+		/* <table>
+		<tr>
+			<td class="daySun">일</td>
+			<td>월</td>
+			<td>화</td>
+			<td>수</td>
+			<td>목</td>
+			<td>금</td>
+			<td class="daySat">토</td>
+		</tr>
+		<tr>
+			<c:forEach var="i" items="${dateMap}" varStatus="status">
+				<c:if test="${status.index == 0}">
+					<c:forEach var="j" begin="0" end="${i.value - 1}">
+						<td></td>
+					</c:forEach>
+				</c:if>
+				<c:if test="${i.value == 0}">
+					</tr>
+					<tr>
+				</c:if>
+				
+				<c:if test="${i.value == 0}">
+					<td class='daySun dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
+				</c:if>
+				<c:if test="${i.value == 6}">
+					<td class='daySat dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
+				</c:if>
+				<c:if test="${i.value != 0 and i.value != 6}">
+					<td class='dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
+				</c:if>
+				
+			</c:forEach>
+		</tr>
+	</table> */
 	}
 </script>
 
@@ -226,7 +273,7 @@
 														<fmt:parseDate value="${hdlist.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
 														<button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick('${hdlist.hnum}')"><fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/></button>
 													</td>
-													<td>${hdlist.playtime}</td>
+													<td>${hdlist.playtime} 분</td>
 												</tr>
 											</c:forEach>
 											</c:if>
@@ -261,7 +308,9 @@
 				
 				<!-- 캘린더보기 -->
 				<div class="tab-pane fade" id="cal" role="tabpanel"	aria-labelledby="cal-tab">
-					Nesciunt totam et. Consequun
+					<div id="calenderTable">
+						
+					</div>
 				</div><!-- cal -->
 				<!-- End Default Tabs -->
 			</div>
