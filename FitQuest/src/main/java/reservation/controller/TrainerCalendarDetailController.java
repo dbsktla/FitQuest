@@ -32,6 +32,17 @@ public class TrainerCalendarDetailController {
 			@RequestParam("rnum") int rnum) {
 		
 		ReservationDetailBean reservationDetailBean= compositeDao.getReservationDetail(rnum);
+		
+		// 전화번호 변환
+		String phone = reservationDetailBean.getMphone();
+		String mphone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
+
+		// 생년월일 변환
+		String birth = reservationDetailBean.getBirth();
+		String birthday = birth.substring(0, 10);
+		
+		model.addAttribute("mphone",mphone);
+		model.addAttribute("birthday",birthday);
 		model.addAttribute("reservationDetailBean",reservationDetailBean);
 		return getPage;
 	}
