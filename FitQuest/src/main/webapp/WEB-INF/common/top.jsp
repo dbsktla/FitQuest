@@ -102,9 +102,9 @@
 	          <li class="dropdown"><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="health.ht">내 건강관리</a></li>
-	              <li><a href="#">운동관리</a></li>
+	              <li><a href="myHealthList.ht">운동관리</a></li>
 	              <li><a href="#">식단관리</a></li>
-	              <li><a href="#">신체정보</a></li>
+	              <li><a href="myPhysiqueList.ht">신체정보</a></li>
 	            </ul>
 	          </li>
           </c:if>
