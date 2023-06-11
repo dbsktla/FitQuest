@@ -26,7 +26,7 @@
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="productSalesDetail.pd">
-          <i class="bi bi-layout-text-window-reverse"></i><span>수입보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+          <i class="bi bi-layout-text-window-reverse"></i><span>수익보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       <li class="nav-item">

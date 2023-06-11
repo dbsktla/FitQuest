@@ -102,7 +102,7 @@ section{
 	font-weight:bold;
 }
 </style>
-    <section class="section"  style = "height: 80%;">
+    <section class="section"  style = "height: 90%;">
 	
     <div class="pagetitle" style = "margin-bottom:60px;">
       <h1>상품 자세히보기</h1>
