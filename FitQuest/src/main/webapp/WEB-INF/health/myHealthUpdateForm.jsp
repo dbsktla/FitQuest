@@ -97,12 +97,7 @@
 						</div>
 						<div class="col-md-6">
 							<label for="tid" class="form-label">담당 트레이너</label>
-							<select id="tid" name="tid" class="form-select">
-								<option value="notrainer">선택안함</option>
-								<c:forEach var="tlist" items="${tlist}">
-									<option value="${tlist.id}" <c:if test="${tlist.id eq healthDateBean.tid}">selected</c:if> >${tlist.name}</option>
-								</c:forEach>
-							</select>
+							<input type="text" class="form-control" id="tid" name="tid" value="${healthDateBean.tname}" readonly="readonly">
 						</div>
 						<div style="height: 10"></div>
 						

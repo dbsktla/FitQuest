@@ -2,7 +2,9 @@ package health.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,7 @@ import trainer.model.TrainerBean;
 import trainer.model.TrainerDao;
 import usage.model.UsageBean;
 import usage.model.UsageDao;
+import utility.NullUtil;
 
 @Controller
 public class MyHealthInsertController {
@@ -93,13 +96,18 @@ public class MyHealthInsertController {
 		ModelAndView mav = new ModelAndView();
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		
-		System.out.println("date:" + hdb.getHdate());
-		System.out.println("tid:" + hdb.getTid());
+		List<HealthDateBean> oldlist = healthDateDao.getHealthByHdate(hdb.getHdate());
 		
+		boolean flag = false;
+		HealthDateBean oldhdbean = new HealthDateBean();
+		for(HealthDateBean oldhb : oldlist) {
+			if(oldhb.getTid().equals(hdb.getTid())) { // 있으면 true
+				flag = true;
+				oldhdbean = oldhb;
+			}
+		}
 		
-		HealthDateBean healthDateBean = healthDateDao.getHealthByHdate(hdb.getHdate());
-		
-		if(healthDateBean == null) { // 날짜가 없으면 insert
+		if(NullUtil.isNull(oldlist) || !flag) { // 날짜가 없거나 해당날짜에 트레이너정보가 없을때. insert
 			hdb.setId(memberBean.getId());
 			int cnt = healthDateDao.insertHealthDate(hdb);
 			
@@ -108,13 +116,18 @@ public class MyHealthInsertController {
 				mav.setViewName(getPage);
 			} else {
 				// 삽입 성공하면 해당 날짜 번호 시퀀스를 얻기 위해서 날짜를 다시 가져온다.
-				healthDateBean = healthDateDao.getHealthByHdate(hdb.getHdate());
+				Map<String, Object> map = new HashMap<String, Object>();
+				
+				map.put("hdate", hdb.getHdate());
+				map.put("tid", hdb.getTid());
+				
+				HealthDateBean healthDateBean = healthDateDao.getHealthByHdateTid(map);
 				
 				insertHealthRequest(request, healthDateBean, hdb.getHdate());
 				mav.setViewName(gotoPage); // 리스트
 			}
 		} else {
-			insertHealthRequest(request, healthDateBean, hdb.getHdate());
+			insertHealthRequest(request, oldhdbean, hdb.getHdate());
 			mav.setViewName(gotoPage); // 리스트
 		}
 		

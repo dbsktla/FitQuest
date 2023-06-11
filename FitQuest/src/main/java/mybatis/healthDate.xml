@@ -6,35 +6,92 @@
 
 <mapper namespace="health.model.HealthDate">
 	<select id="GetMyHealthDateList" resultType="health.model.HealthDateBean">
-		select * from healthDate where id=#{id}
-		order by hdate desc
+		SELECT	hd.hnum
+			   ,hd.id
+			   ,hd.hdate
+			   ,hd.tid
+			   ,h.playtime
+			   ,m.name AS tname
+			   ,t.activity AS tactivity
+		FROM	HEALTHDATE hd
+		INNER JOIN	(
+		            	SELECT	hnum
+		            		   ,SUM(playtime) AS playtime
+		            	FROM	(
+		            				SELECT	hnum
+		            					   ,ROUND((endtime - starttime) * 24 * 60) AS playtime
+		                  			FROM	HEALTH
+		                  		)
+		            	GROUP BY hnum
+					) h
+		ON hd.hnum = h.hnum
+		LEFT OUTER JOIN MEMBER m
+		ON hd.tid = m.id
+		LEFT OUTER JOIN TRAINER t
+		ON hd.tid = t.id
+		WHERE	hd.id  = #{id}
+		<if test = "tid != null and tid != 'all'">
+			AND	hd.tid = #{tid}
+		</if>
+		ORDER BY hd.hdate DESC
 	</select>
 	
 	<select id="GetHealthByHdate" resultType="health.model.HealthDateBean">
-		select * from healthDate where hdate=#{hdate}
+		SELECT 	* 
+		FROM 	HEALTHDATE 
+		WHERE 	hdate = #{hdate}
 	</select>
 	
 	<select id="GetOneHealthDate" resultType="health.model.HealthDateBean">
-		select * from healthDate where hnum=#{hnum}
+		SELECT	h.*
+			   ,m.name AS tname
+		FROM   (
+		      	 SELECT	* 
+		      	 FROM 	HEALTHDATE 
+		      	 WHERE	hnum = #{hnum}
+		       ) h
+		LEFT OUTER JOIN 
+		MEMBER 	m
+		ON 		h.tid = m.id 
 	</select>
 	
 	<insert id="InsertHealthDate">
-		insert into healthDate values(hseq.nextval, #{id}, #{hdate}, #{tid})
+		INSERT INTO HEALTHDATE 
+		VALUES(
+				hseq.NEXTVAL
+				,#{id}
+				,#{hdate}
+				,#{tid})
 	</insert>
 	
 	<delete id="DeleteHealthDate">
-		delete healthDate where hnum=#{hnum}
+		DELETE 	HEALTHDATE 
+		WHERE 	hnum = #{hnum}
 	</delete>
 	
 	<update id="UpdateHealthDate">
-		update healthDate set hdate=#{hdate}, tid=#{tid} where hnum=#{hnum}
+		UPDATE 	HEALTHDATE 
+		SET 	hdate = #{hdate}
+			   ,tid   = #{tid} 
+		WHERE 	hnum = #{hnum}
 	</update>
 	
 	<update id="UpdateHealthTid">
-		update healthDate set tid=#{tid} where hnum=#{hnum}
+		UPDATE	HEALTHDATE 
+		SET 	tid = #{tid} 
+		WHERE 	hnum = #{hnum}
 	</update>
 	
 	<select id="GetComp" resultType="String">
-		select odate from orders where onum=#{onum}
+		SELECT 	odate 
+		FROM 	ORDERS 
+		WHERE 	onum = #{onum}
+	</select>
+	
+	<select id="GetHealthByHdateTid" resultType="health.model.HealthDateBean">
+		SELECT	*
+		FROM	HEALTHDATE
+		WHERE 	hdate = #{hdate}
+		AND		tid   = #{tid}
 	</select>
 </mapper>

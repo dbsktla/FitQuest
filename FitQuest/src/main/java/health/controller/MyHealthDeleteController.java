@@ -31,7 +31,7 @@ public class MyHealthDeleteController {
 			// System.out.println("delecheck : " + x[0] + " / " + x[1] + " / " + x[2]); // 이름/시작시간/hnum
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("hname", x[0]);
-			map.put("starttime", x[1]);
+			map.put("starttime", x[1].substring(0, 16));
 			map.put("hnum", x[2]);
 			
 			int cnt = healthDao.deleteHealth(map);

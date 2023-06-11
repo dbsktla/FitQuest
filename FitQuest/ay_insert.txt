@@ -1,9 +1,12 @@
-insert into orders values(oseq.nextval, 'hong', '23-06-09');
+insert into orders values(oseq.nextval, 'hong', '23-04-01');
+insert into orders values(oseq.nextval, 'hong', '23-06-01');
 
 insert into orderdetail values(odseq.nextval, 2, 1);
+insert into orderdetail values(odseq.nextval, 7, 2);
 
 insert into usage values(useq.nextval, 2, 1, 'kim', 'hong', 18);
 insert into usage values(useq.nextval, 5, 1, 'lee', 'hong', 18);
+insert into usage values(useq.nextval, 7, 2, 'park', 'hong', 11);
 
 commit;
 

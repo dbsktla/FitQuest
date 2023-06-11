@@ -7,33 +7,62 @@
 <mapper namespace="physique.model.Physique">
 	
 	<select id="GetOnePhysique" resultType="physique.model.PhysiqueBean">
-		select * from physique where id=#{id} and phdate=#{phdate}
+		SELECT 	* 
+		FROM 	PHYSIQUE 
+		WHERE 	id     = #{id} 
+		AND   	phdate = #{phdate}
 	</select>
 	
 	<select id="GetPhysiqueByDate" resultType="String">
-		select phdate from physique where id=#{id} and (phdate between #{smon} and #{emon})
+		SELECT 	phdate 
+		FROM 	PHYSIQUE 
+		WHERE 	id = #{id} 
+		AND 	(phdate BETWEEN #{smon} AND #{emon})
 	</select>
 	
 	<insert id="InsertPhysique">
-		insert into physique values(phseq.nextval, #{id}, #{height}, #{weight}, #{bmi}, #{phdate}, #{skeletalmuscle}, #{bodyfatper}, #{bmr}, #{phimage})
+		INSERT INTO PHYSIQUE 
+		VALUES(
+				phseq.NEXTVAL
+				,#{id}
+				,#{height}
+				,#{weight}
+				,#{bmi}
+				,#{phdate}
+				,#{skeletalmuscle}
+				,#{bodyfatper}
+				,#{bmr}
+				,#{phimage})
 	</insert>
 	
 	<delete id="DeletePhysique">
-		delete physique where phnum=#{phnum}
+		DELETE 	PHYSIQUE 
+		WHERE 	phnum = #{phnum}
 	</delete>
 	
 	<select id="GetPhysiqueByPhnum" resultType="physique.model.PhysiqueBean">
-		select * from physique where phnum=#{phnum}
+		SELECT 	* 
+		FROM 	PHYSIQUE 
+		WHERE 	phnum = #{phnum}
 	</select>
 	
 	<update id="UpdatePhysique">
-		update physique 
-		set height=#{height}, weight=#{weight}, bmi=#{bmi}, phdate=#{phdate}, skeletalmuscle=#{skeletalmuscle}, bodyfatper=#{bodyfatper}, bmr=#{bmr}, phimage=#{phimage}
-		where phnum=#{phnum}
+		UPDATE 	PHYSIQUE 
+		SET		height 		   = #{height}
+			   ,weight 		   = #{weight}
+			   ,bmi 		   = #{bmi}
+			   ,phdate 		   = #{phdate}
+			   ,skeletalmuscle = #{skeletalmuscle}
+			   ,bodyfatper 	   = #{bodyfatper}
+			   ,bmr		 	   = #{bmr}
+			   ,phimage 	   = #{phimage}
+		WHERE 	phnum = #{phnum}
 	</update>
 	
 	<select id="GetPhysiqueList" resultType="physique.model.PhysiqueBean">
-		select * from physique where id=#{id}
+		SELECT 	* 
+		FROM 	PHYSIQUE 
+		WHERE 	id = #{id}
 	</select>
 	
 </mapper>
