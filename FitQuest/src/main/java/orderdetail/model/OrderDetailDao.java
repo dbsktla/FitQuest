@@ -23,5 +23,9 @@ public class OrderDetailDao {
 		pnumList = sqlSessionTemplate.selectList(namespace + ".GetPnumList", onum);
 		return pnumList;
 	}
+	public int getOrderCountByPnum(int pnum) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetOrderCountByPnum", pnum);
+		return cnt;
+	}
 	
 }

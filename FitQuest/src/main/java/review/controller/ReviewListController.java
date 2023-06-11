@@ -1,10 +1,12 @@
 package review.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,20 @@ public class ReviewListController {
 						   @RequestParam(value = "ordering", required = false) String ordering,
 						   @RequestParam(value = "pageNumber", required = false) String pageNumber,
 						   @RequestParam(value = "whatColumn", required = false) String whatColumn,
-						   @RequestParam(value = "keyword", required = false) String keyword) {
+						   @RequestParam(value = "keyword", required = false) String keyword,
+						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
-		//트레이너로 로그인 안되어있으면 아예 링크 안 보여서 조건문은 생략.
+		response.setContentType("text/html; charset=utf-8");
+		if(memberBean == null) {
+			session.setAttribute("destination", "redirect:/trainerReviewList.mb");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
+		}
 		TrainerBean trainerBean = trainerDao.getTrainer(memberBean.getId());
 		String hasReview = reviewDao.getHasReviewById(trainerBean.getId());
 		double avgScore = 0.0;
@@ -56,7 +69,7 @@ public class ReviewListController {
 		map.put("tid", trainerBean.getId());
 		int totalCount = reviewDao.getReviewCount(map);
 		String url = request.getContextPath() + command;
-		ReviewPaging pageInfo = new ReviewPaging(pageNumber, "8", totalCount, url, whatColumn, keyword, ordering);
+		ReviewPaging pageInfo = new ReviewPaging(pageNumber, "6", totalCount, url, whatColumn, keyword, ordering);
 		List<ReviewBean> rList = reviewDao.getReviewList(map, pageInfo);
 		model.addAttribute("ordering", ordering);
 		model.addAttribute("pageNumber", pageNumber);

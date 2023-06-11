@@ -25,4 +25,16 @@ public class ProductDao {
 		ProductBean productBean = sqlSessionTemplate.selectOne(namespace + ".GetProductByPnum", pnum);
 		return productBean;
 	}
+	public int deleteProduct(int pnum) {
+		int cnt = sqlSessionTemplate.delete(namespace+ ".DeleteProduct", pnum);
+		return cnt;
+	}
+	public int updateProduct(ProductBean productBean) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdateProduct", productBean);
+		return cnt;
+	}
+	public int insertProduct(ProductBean productBean) {
+		int cnt = sqlSessionTemplate.insert(namespace + ".InsertProduct", productBean);
+		return cnt;
+	}
 }

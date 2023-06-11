@@ -13,4 +13,8 @@
 	select pnum from orderdetail 
 	where onum = #{onum}
 </select>
+<select id = "GetOrderCountByPnum" resultType = "int">
+	select count(*) from orderdetail
+	where pnum = #{pnum}
+</select>
 </mapper>

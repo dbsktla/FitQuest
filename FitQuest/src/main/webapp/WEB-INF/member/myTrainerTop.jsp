@@ -19,22 +19,22 @@
       </li><!-- End Tables Nav -->
 	
       <li class="nav-item">
-        <a class="nav-link collapsed" href="trainerReviewList.mb">
+        <a class="nav-link collapsed" href="viewProductList.pd">
           <i class="bi bi-layout-text-window-reverse"></i><span>상품관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="productSalesDetail.pd">
+          <i class="bi bi-layout-text-window-reverse"></i><span>수입보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+        </a>
+      </li><!-- End Tables Nav -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="">
           <i class="bi bi-layout-text-window-reverse"></i><span>트레이너 정보관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-layout-text-window-reverse"></i><span>수입보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-        </a>
-      </li><!-- End Tables Nav -->
 
 
   </aside><!-- End Sidebar-->

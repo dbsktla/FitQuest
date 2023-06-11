@@ -50,18 +50,6 @@ insert into trainer values('lee2', 4, '요가', '근육량 증가,재활', 'hi~'
 insert into trainer values('moon3', 2, 'PT', '체력 강화', 'hi~ 트레이너 소개입니다!!!!!!!','개인 pt 30년', 'tr10.jpg');
 insert into trainer values('park2', 1, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다!!!!!!! 13년 경력11111','PT수업 Since 2010', 'tr11.jpg');
 
---상품
-insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인', '1');
-insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'park', 14, 1, 11, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park', 28, 2, 19, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park', 39, 3, 30, 1, '개인', '1');
-
-
 --review
 insert into review values(rvseq.nextval, 'hong', 2, 'kim', 4, '추천합니다', '굳', sysdate, 'Y', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N');
@@ -92,3 +80,71 @@ insert into review values(rvseq.nextval, 'hong', 'kim', 4, '추천합니다', '�
 insert into review values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '굳', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'parkjay', 'kim', 2, '추천합니다', '굳', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'parkjay', 'kim', 3, '추천합니다', '굳', sysdate, 'Y', 'N');
+
+--상품
+insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인', '1');
+insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인', '1');
+insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인', '1');
+insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹', '1');
+insert into product values(pseq.nextval, 'park', 14, 1, 11, 1, '개인', '1');
+insert into product values(pseq.nextval, 'park', 28, 2, 19, 1, '개인', '1');
+insert into product values(pseq.nextval, 'park', 39, 3, 30, 1, '개인', '1');
+
+
+--orders
+insert into orders values(oseq.nextval, 'hong', '2023-05-02');
+insert into orders values(oseq.nextval, 'hong', '2023-04-02');
+insert into orders values(oseq.nextval, 'hong', '2023-03-02');
+insert into orders values(oseq.nextval, 'hong', '2023-02-02');
+insert into orders values(oseq.nextval, 'hong', '2023-01-02');
+insert into orders values(oseq.nextval, 'hong', '2022-12-02');
+insert into orders values(oseq.nextval, 'hong', '2021-12-02');
+insert into orders values(oseq.nextval, 'hong', sysdate);
+insert into orders values(oseq.nextval, 'hong', sysdate - 1 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 2 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 3 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 4 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 5 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 6 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 7 );
+
+--orderdetail
+insert into orderdetail values(odseq.nextval, 1, 1);
+insert into orderdetail values(odseq.nextval, 1, 1);
+insert into orderdetail values(odseq.nextval, 1, 2);
+insert into orderdetail values(odseq.nextval, 1, 2);
+insert into orderdetail values(odseq.nextval, 1, 3);
+insert into orderdetail values(odseq.nextval, 1, 3);
+insert into orderdetail values(odseq.nextval, 1, 4);
+insert into orderdetail values(odseq.nextval, 1, 5);
+insert into orderdetail values(odseq.nextval, 1, 5);
+insert into orderdetail values(odseq.nextval, 1, 5);
+insert into orderdetail values(odseq.nextval, 1, 6);
+insert into orderdetail values(odseq.nextval, 1, 6);
+insert into orderdetail values(odseq.nextval, 1, 7);
+insert into orderdetail values(odseq.nextval, 1, 7);
+insert into orderdetail values(odseq.nextval, 1, 7);
+insert into orderdetail values(odseq.nextval, 1, 8);
+insert into orderdetail values(odseq.nextval, 1, 8);
+insert into orderdetail values(odseq.nextval, 2, 9);
+insert into orderdetail values(odseq.nextval, 2, 10);
+insert into orderdetail values(odseq.nextval, 2, 10);
+insert into orderdetail values(odseq.nextval, 2, 11);
+insert into orderdetail values(odseq.nextval, 3, 11);
+insert into orderdetail values(odseq.nextval, 2, 12);
+insert into orderdetail values(odseq.nextval, 2, 12);
+insert into orderdetail values(odseq.nextval, 3, 12);
+insert into orderdetail values(odseq.nextval, 2, 13);
+insert into orderdetail values(odseq.nextval, 3, 14);
+insert into orderdetail values(odseq.nextval, 2, 15);
+insert into orderdetail values(odseq.nextval, 3, 15);
+
+insert into orderdetail values(odseq.nextval, 4, 12);
+insert into orderdetail values(odseq.nextval, 4, 12);
+insert into orderdetail values(odseq.nextval, 5, 13);
+insert into orderdetail values(odseq.nextval, 6, 14);
+insert into orderdetail values(odseq.nextval, 6, 15);
+insert into orderdetail values(odseq.nextval, 6, 15);
+
