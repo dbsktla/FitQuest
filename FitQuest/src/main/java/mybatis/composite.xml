@@ -42,16 +42,20 @@
 		</if>
     	</select>
 	<select id = "GetTrainerList" resultType = "composite.model.TrainerListBean">
-		select *
-		from   (
-				(select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
-				 from trainer join review
-				 				on id = tid
-				 group by id, gnum, activity, purpose, intro, exp, timage
-				 order by rating desc)
-				 natural join
-				(select distinct tid as id, hasReview from review)
-			   )
+		select * from(
+					  select t.id, t.gnum, t.activity, t.purpose, t.intro, t.exp, t.timage, t.rating, r.hasreview
+					  from   (
+							  (select id, gnum, activity, purpose, intro, exp, timage, avg(rating) as rating
+							   from trainer join review
+							 				  on id = tid
+							   group by id, gnum, activity, purpose, intro, exp, timage
+							   order by rating desc) t
+							   left outer join
+							  (select distinct tid as id, hasReview from review) r
+						     on t.id = r.id
+						   )
+						   order by rating desc
+			   		   )
 			   natural join
 			   (
 			    (select id, name from trainer natural join member)
