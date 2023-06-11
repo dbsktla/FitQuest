@@ -100,6 +100,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 					<div id="healthScope"></div>
 						
                     <div class="col-12 center">
+                    	<button type="button" class="btn btn-warning m-size" onClick="javascript:history.go(-1)">취소</button>
                     	<button type="submit" id="inertSub" class="btn btn-warning m-size" onClick="location.href='tScheduleInsert.rv'">등록</button>
                     </div>
                   </form:form> 

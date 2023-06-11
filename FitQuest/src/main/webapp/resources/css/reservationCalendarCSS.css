@@ -27,6 +27,14 @@ a{
 	font-size: 30px;
 	font-weight: bold;
 }
+.detail-title{
+	margin-top: 50px;
+	text-align: center;
+}
+.detail-title-font{
+	font-size: 23px;
+	font-weight: bold;
+}
 .calendarSubtitle-font{
 	font-size: 18px;
 	font-weight: bold;
@@ -73,6 +81,13 @@ a{
 	border-bottom: 1px solid lightgray;
 	position: relative;
 	height: 250px;
+}
+.t-calendar-box{
+	padding: 5px;
+	position: relative;
+	height: 250px;
+	background-color: #F5FAFF;
+	border-bottom: 1px solid lightgray;
 }
 .day{
 	color: black;
@@ -131,13 +146,20 @@ a{
 	transform: scale(1.05);
 }
 .rstate-container{
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
 	margin: 5px 0px;
 	text-align: center;
 	transition: transform 0.3s;
+	border-radius: 10px;
 }
 .rstate-container:hover{
 	transform: scale(1.05);
+}
+.rstate-dot{
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	margin: 10px 0px;
+	text-align: center;
+	background-color: #FEF9E7; 
 }
 .rstate-y{
 	background-color: #F7F7F8;
@@ -189,4 +211,58 @@ a{
 }
 .rstate-btn-red:hover {
 	color: #FAC710;
+}
+
+
+.detail-body{
+	background-color: #FEF9E7;
+	text-align: center;
+}
+.detail-container{
+	background-color: #ffffff;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); 
+	text-align: center;
+	width: 80%;
+	margin-top: 20px;
+}
+.detail-name-box{
+	width: 80%;
+	text-align: right;
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 20px;
+}
+.tr{
+	text-align: center;
+}
+.sub-title{
+	font-weight: bold;
+	padding: 10px 5px;
+	border-bottom: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+}
+.sub-title-last{
+	font-weight: bold;
+	padding: 10px 5px;
+	border-right: 1px solid lightgray;
+}
+.sub-text{
+	padding: 10px 5px;
+	border-bottom: 1px solid lightgray;
+}
+.sub-text-last{
+	padding: 10px 5px;
+}
+button.close-button {
+	margin-top: 40px;
+	background-color: #FAC710;
+	border: none;
+	outline: none;
+	border-radius: 8px; 
+	padding: 8px 25px;
+	font-weight: bold;
+	font-size: 15px;
+}
+button.close-button:hover {
+	background-color: #FFCA2C;
 }
