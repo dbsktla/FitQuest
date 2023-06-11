@@ -28,7 +28,7 @@ section{
     <section class="section">
 	
     <div class="pagetitle">
-      <h1 style = "margin: 50px 0px;">수입 보기</h1>
+      <h1 style = "margin: 50px 0px;">수익 보기</h1>
     </div><!-- End Page Title -->
 
       <div class="row">
@@ -36,7 +36,7 @@ section{
       <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-            <h5 class="card-title">최근 7일 수입</h5>
+            <h5 class="card-title">최근 7일 수익</h5>
               <!-- Line Chart -->
               <canvas id="lineChart" style="max-height: 400px;"></canvas>
               <script>
@@ -46,7 +46,7 @@ section{
                     data: {
                       labels: [<c:forEach var = "day" items = "${days}" varStatus = "status">'${day}'<c:if test = "${!status.last}">,</c:if></c:forEach>],
                       datasets: [{
-                        label: '수입 금액 (만원)',
+                        label: '수익 금액 (만원)',
                         data:[<c:forEach var = "sale" items = "${weeklySales}" varStatus = "status">${sale}<c:if test = "${!status.last}">,</c:if></c:forEach>],
                         fill: false,
                         borderColor: 'rgb(67, 116, 217)',
@@ -71,7 +71,7 @@ section{
        <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-            <h5 class="card-title">최근 6개월 수입</h5>
+            <h5 class="card-title">최근 6개월 수익</h5>
               <!-- Line Chart -->
               <canvas id="lineChart2" style="max-height: 400px;"></canvas>
               <script>
@@ -81,7 +81,7 @@ section{
                     data: {
                       labels: [<c:forEach var = "month" items = "${months}" varStatus = "status">'${month}'<c:if test = "${!status.last}">,</c:if></c:forEach>],
                       datasets: [{
-                        label: '수입 금액 (만원)',
+                        label: '수익 금액 (만원)',
                         data:[<c:forEach var = "mSale" items = "${monthlySales}" varStatus = "status">${mSale}<c:if test = "${!status.last}">,</c:if></c:forEach>],
                         fill: false,
                         borderColor: 'rgb(29, 219, 22)',
@@ -107,7 +107,7 @@ section{
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">상품 별 수입</h5>
+              <h5 class="card-title">상품 별 수익</h5>
 
               <!-- Pie Chart -->
               <canvas id="pieChart" style="max-height: 400px;"></canvas>
@@ -118,7 +118,7 @@ section{
                     data: {
                       labels: [<c:forEach var = "product" items = "${products}" varStatus = "status">'${product}'<c:if test = "${!status.last}">,</c:if></c:forEach>],
                       datasets: [{
-                        label: '수입(만원)',
+                        label: '수익(만원)',
                         data: [<c:forEach var = "pSale" items = "${productSales}" varStatus = "status">${pSale}<c:if test = "${!status.last}">,</c:if></c:forEach>],
                         backgroundColor: [
                           'rgb(255, 99, 132)',
@@ -141,7 +141,7 @@ section{
       	 <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">총 수입 금액</h5>
+              <h5 class="card-title">총 수익 금액</h5>
 
               <!-- Bar Chart -->
               <canvas id="barChart" style="max-height: 400px;"></canvas>
@@ -150,9 +150,9 @@ section{
                   new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['본인 총 금액', '전체 ${activity}트레이너 평균 총 수입 금액'],
+                      labels: ['본인 총 금액', '전체 ${activity}트레이너 평균 총 수익 금액'],
                       datasets: [{
-                        label: '수입(만원)',
+                        label: '수익(만원)',
                         data: [${totalAmount}, ${avgScore}],
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
