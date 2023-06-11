@@ -9,7 +9,7 @@ public class NullUtil {
 
 	public static boolean isNone(String value) { return value == null || value.length() == 0; }
 
-	public static boolean notNone(String value) { return value != null || value.length() > 0; }
+	public static boolean notNone(String value) { return value != null && value.length() > 0; }
 
 	public static boolean isNone(List value) { return value == null || value.size() > 0; }
 
