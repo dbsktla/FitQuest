@@ -2,6 +2,7 @@ package health.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,15 @@ public class HealthDateDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private String namespace = "health.model.HealthDate";
 	
-	public List<HealthDateBean> getMyHealthDateList(String id) {
+	public List<HealthDateBean> getMyHealthDateList(Map<String, Object> map) {
 		List<HealthDateBean> hdlist = new ArrayList<HealthDateBean>();
-		hdlist = sqlSessionTemplate.selectList(namespace + ".GetMyHealthDateList", id);
+		hdlist = sqlSessionTemplate.selectList(namespace + ".GetMyHealthDateList", map);
 		return hdlist;
 	}
 
-	public HealthDateBean getHealthByHdate(String hdate) {
-		HealthDateBean hdb = sqlSessionTemplate.selectOne(namespace + ".GetHealthByHdate", hdate);
-		return hdb;
+	public List<HealthDateBean> getHealthByHdate(String hdate) {
+		List<HealthDateBean> oldList = sqlSessionTemplate.selectList(namespace + ".GetHealthByHdate", hdate);
+		return oldList;
 	}
 	
 	public HealthDateBean getOneHealthDate(int hnum) {
@@ -63,6 +64,11 @@ public class HealthDateDao {
 	public String getComp(int onum) {
 		String str = sqlSessionTemplate.selectOne(namespace + ".GetComp", onum);
 		return str;
+	}
+
+	public HealthDateBean getHealthByHdateTid(Map<String, Object> map) {
+		HealthDateBean hdb = sqlSessionTemplate.selectOne(namespace + ".GetHealthByHdateTid", map);
+		return hdb;
 	}
 
 }

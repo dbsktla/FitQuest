@@ -76,7 +76,7 @@ public class MyHealthUpdateController {
 			}
 			
 			mav.addObject("tlist", tlist);
-						
+			
 			HealthDateBean healthDateBean = healthDateDao.getOneHealthDate(hnum);
 			List<HealthBean> hlist = healthDao.getOneHealth(hnum);
 
@@ -112,9 +112,9 @@ public class MyHealthUpdateController {
 		} else { // 운동날짜 변경함
 
 			// 운동날짜가 이미 있으면
-			HealthDateBean healthDateBean = healthDateDao.getHealthByHdate(hdate);
+			List<HealthDateBean> hlist = healthDateDao.getHealthByHdate(hdate);
 
-			if (healthDateBean != null) {
+			if (hlist != null) {
 				try {
 					response.getWriter()
 							.print("<script>alert('선택하신 일자는 이미 운동이 등록되어있습니다. 다른 날짜를 선택해주세요');history.go(-1);</script>");

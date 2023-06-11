@@ -37,8 +37,8 @@
 				for(var i=0; i<data.length; i++){
 					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "@" + data[i].starttime + "@" + clickHnum + "'></td>";
 					msg += "<td>"+data[i].hname+"</td>";
-					msg += "<td>"+data[i].starttime+"</td>";
-					msg += "<td>"+data[i].endtime+"</td>";
+					msg += "<td>"+(data[i].starttime).substring(0,16)+"</td>";
+					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
 					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
 				}
 				
@@ -94,7 +94,46 @@
 	}
 	
 	function listup() {
-		alert(1);
+		$('#showbutton').css("display","none");
+		$("#healthDetail").empty();
+		$("#healthDetail").append('<span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span>');
+		
+		var tid = $('#tid').val();
+		//alert(tid);
+		
+		$.ajax({
+			url : "myHealthList.ht",
+			type : "POST",
+			data : {'tid' : tid},
+			dataType : "json",
+			success : function (data) {
+				$('#healthList').empty();
+				
+				var msg = "";
+				if(data.length == 0){
+					msg += '<tr><td colspan="4" align="center">등록 된 운동내역이 없습니다.</td></tr>';
+				}else{
+					for(var i=0; i<data.length; i++){
+						msg += '<tr>';
+						msg += '<td>'+ (i+1) +'</td>';
+						
+						if(data[i].tid != "notrainer"){
+							msg += '<td>'+ data[i].tname +'(' + data[i].tactivity +')</td>';
+						}else{
+							msg += '<td>없음</td>';
+						}
+						
+						msg += '<td>';
+						msg += '<button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick(' + data[i].hnum + ')">' + (data[i].hdate).substring(0,10) + '</button>';
+						msg += '</td>';
+						msg += '<td>' + data[i].playtime + '</td>';
+						msg += '</tr>';
+					}
+				}
+				$("#healthList").append(msg);
+			}//success
+		});//ajax
+		
 	}
 </script>
 
@@ -148,7 +187,7 @@
 								<div class="card-body">
 									<h5 class="card-title">운동 목록 <button type="button" onclick="location.href='myHealthInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right;">추가</button></h5>
 									
-									<select id="whatCategory" onchange="listup()" class="form-select" aria-label="Default select example" style="margin-bottom: 20">
+									<select name="tid" id="tid" onchange="listup()" class="form-select" aria-label="Default select example" style="margin-bottom: 20">
 										<option value="all">전체보기</option>
 										<c:forEach var="tlist" items="${tlist}">
 											<option value="${tlist.id}">${tlist.name}(${tlist.activity})</option>
@@ -165,10 +204,10 @@
 											</tr>
 										</thead>
 
-										<tbody>
+										<tbody id="healthList">
 											<c:if test="${empty hdlist}">
 												<tr>
-													<td colspan="3">등록 된 운동내역이 없습니다.</td>
+													<td colspan="4" align="center">등록 된 운동내역이 없습니다.</td>
 												</tr>
 											</c:if>
 											<c:if test="${not empty hdlist}">
@@ -176,9 +215,12 @@
 												<tr>
 													<td>${status.index +1}</td>
 													<td>
-														<c:forEach var="tlist" items="${tlist}">
-															<c:if test="${hdlist.tid == tlist.id}">${tlist.name}(${tlist.activity})</c:if>
-														</c:forEach>
+														<c:if test="${not empty hdlist.tname}">
+															${hdlist.tname}(${hdlist.tactivity})
+														</c:if>
+														<c:if test="${empty hdlist.tname}">
+															없음
+														</c:if>
 													</td>
 													<td>
 														<fmt:parseDate value="${hdlist.hdate}" var="day" pattern="yyyy-MM-dd" scope="page"/>

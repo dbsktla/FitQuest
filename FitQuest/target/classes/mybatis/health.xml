@@ -6,18 +6,33 @@
 
 <mapper namespace="health.model.Health">
 	<select id="GetOneHealth" resultType="health.model.HealthBean">
-		select * from health where hnum = #{hnum} order by starttime
+		SELECT 	* 
+		FROM 	HEALTH 
+		WHERE 	hnum = #{hnum} 
+		ORDER BY starttime
 	</select>
 	
 	<insert id="InsertHealth">
-		insert into health values(#{hnum}, #{hname}, #{starttime}, #{endtime}, #{hcount}, #{hset})
+		INSERT INTO HEALTH 
+		VALUES(
+				#{hnum}
+			   ,#{hname}
+			   ,TO_DATE(#{starttime},'YYYY-MM-DD HH24:MI')
+			   ,TO_DATE(#{endtime},'YYYY-MM-DD HH24:MI')
+			   ,#{hcount}
+			   ,#{hset}
+			   )
 	</insert>
 	
 	<delete id="DeleteHealth">
-		delete health where hnum=#{hnum} and hname=#{hname} and starttime=#{starttime}
+		DELETE 	HEALTH 
+		WHERE 	hnum 	  = #{hnum} 
+		AND 	hname	  = #{hname} 
+		AND 	starttime = TO_DATE(#{starttime},'YYYY-MM-DD HH24:MI')
 	</delete>
 	
 	<delete id="DeleteHealthByHnum">
-		delete health where hnum=#{hnum}
+		DELETE 	HEALTH 
+		WHERE 	hnum = #{hnum}
 	</delete>
 </mapper>
