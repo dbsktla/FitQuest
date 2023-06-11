@@ -18,4 +18,17 @@
 		select * from product where
 		pnum = #{pnum}
 	</select>
+	<delete id="DeleteProduct">
+		delete product
+		where pnum = #{pnum}
+	</delete>
+	<update id="UpdateProduct">
+		update product
+		set price = #{price}, months = #{months}, pcount = #{pcount}, people = #{people}, ptype = #{ptype}, ptime = #{ptime}
+		where pnum = #{pnum}
+	</update>
+	<insert id = "InsertProduct">
+		insert into product 
+		values(pseq.nextval, #{id}, #{price}, #{months}, #{pcount}, #{people}, #{ptype}, #{ptime})
+	</insert>
 </mapper>

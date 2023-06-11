@@ -28,7 +28,7 @@ section{
   }
 
 </style>
-    <section class="section"  style = "height: 80%;">
+    <section class="section">
 	
     <div class="pagetitle">
       <h1>리뷰관리</h1>
@@ -101,8 +101,8 @@ section{
             </div>
           </div>
       </div>
-        <div class="col-lg-12" style = "min-height: 80%;">
-          <div class="card">
+        <div class="col-lg-12">
+          <div class="card" style = "height: 100%; min-height: 350px;">
             <div class="card-body">
               <c:if test = "${hasReview eq 'Y' }">
              	 <h5 class="card-title">

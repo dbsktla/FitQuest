@@ -80,6 +80,10 @@ public class OrderCartInsertController {
 							e.printStackTrace();
 						}
 					}
+				} else {
+					response.getWriter().print("<script>alert('일반 회원만 구매 가능합니다.');</script>");
+					response.getWriter().flush();
+					return "forward:/trainerList.pd";
 				}
 
 			}

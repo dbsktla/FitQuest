@@ -43,4 +43,20 @@ public class CompositeDao {
 		ReservationDetailBean reservationDetailBean = sqlSessionTemplate.selectOne(namespace+".ReservationDetailBean",rnum);
 		return reservationDetailBean;
 	}
+	public List<SalesBean> getWeeklySales(String id) {
+		List<SalesBean> weeklySalesList = sqlSessionTemplate.selectList(namespace + ".GetWeeklySales", id);
+		return weeklySalesList;
+	}
+	public List<SalesBean> getMonthlySales(String id) {
+		List<SalesBean> monthlySalesList = sqlSessionTemplate.selectList(namespace+".GetMonthlySales", id);
+		return monthlySalesList;
+	}
+	public List<SalesBean> getTotalSales(String id) {
+		List<SalesBean> totalSalesList = sqlSessionTemplate.selectList(namespace + ".GetTotalSales", id);
+		return totalSalesList;
+	}
+	public double getAverageSaleByActivity(String activity) {
+		double avgSale = sqlSessionTemplate.selectOne(namespace+ ".GetAverageSale", activity);
+		return avgSale;
+	}
 }
