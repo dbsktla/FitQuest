@@ -23,9 +23,11 @@ public class UsageDao {
 		cnt = sqlSessionTemplate.insert(namespace + ".InsertUsage", usageBean);
 		return cnt;
 	}
-	public UsageBean getOneUsage(String mid) {
-		UsageBean usageBean = null;
-		usageBean = sqlSessionTemplate.selectOne(namespace + ".GetOneUsage", mid);
+	public UsageBean getOneUsage(String mid,String tid) {
+		UsageBean ub = new UsageBean();
+		ub.setMid(mid);
+		ub.setTid(tid);
+		UsageBean usageBean = sqlSessionTemplate.selectOne(namespace + ".GetOneUsage", ub);
 		return usageBean;
 	}
 

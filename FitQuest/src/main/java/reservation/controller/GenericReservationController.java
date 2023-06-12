@@ -9,17 +9,21 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.org.eclipse.jdt.internal.compiler.AbstractAnnotationProcessorManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
 import reservation.model.CalendarBean;
+import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 import reservation.model.TscheduleBean;
 import reservation.model.TscheduleDao;
+import usage.model.UsageBean;
 import usage.model.UsageDao;
 
 @Controller
@@ -39,7 +43,14 @@ public class GenericReservationController {
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
 			HttpSession session){
-
+		//get방식 써주기
+		return getPage;
+	}
+	
+	@RequestMapping(value=command,method = RequestMethod.POST)
+	public String doAction1(Model model, HttpServletRequest request, CalendarBean dateData,
+			HttpSession session,@RequestParam("tid") String tid,@RequestParam("tname") String tname){
+		
 		//달력 띄우기
 		Calendar cal = Calendar.getInstance();
 		CalendarBean calendarData;
@@ -77,12 +88,9 @@ public class GenericReservationController {
 		model.addAttribute("today_info", today_info);
 			
 		//트레이너 스케줄 가져가기
-		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		String tid = usageDao.getTid(mid);
-				
 		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
 		
-		//끊어주기
+		//트레이너 스케줄 - 끊어주기
 		String[] tsdayArr = tscheduleBean.getTsday().split(","); //월 수 금
 		String[] tstimeArr = tscheduleBean.getTstime().split(","); //13:00~14:00 14:00~15:00
 		String[] tsdateArrL = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
@@ -112,19 +120,66 @@ public class GenericReservationController {
 		for (int i = 0; i < year.length; i++) {
 		    yearNum[i] = Integer.parseInt(year[i]);
 		}
-
 		for (int i = 0; i < month.length; i++) {
 		    monthNum[i] = Integer.parseInt(month[i]);
 		}
-
 		for (int i = 0; i < day.length; i++) {
 		    dayNum[i] = Integer.parseInt(day[i]);
 		}
 		
+		//트레이너 스케줄 연/월/일
 		model.addAttribute("tsyear",yearNum);
 		model.addAttribute("tsmonth",monthNum);
 		model.addAttribute("tsday",dayNum);
 		
+		//이미 예약된 날짜 가져오기
+		List<ReservationBean> rList = reservationDao.getReservationTList(tid);
+		System.out.println("rList 넘어오나 체크"+rList);
+		for(ReservationBean rb : rList) {
+			System.out.println("타임:"+rb.getRtime());
+			System.out.println("날짜:"+rb.getRdate());
+		}
+		
+		//이미 예약된 날짜 - 끊어주기
+		String[] rtimeArr = new String[rList.size()]; //크기가 rList의 크기와 같은 배열 생성
+		String[] rdateArrL = new String[rList.size()];
+		int rindex = 0; //인덱스 변수 초기화
+		for(ReservationBean reservationBean : rList) {
+		    rtimeArr[rindex] = reservationBean.getRtime(); //배열에 값 추가
+		    rdateArrL[rindex] = reservationBean.getRdate(); 
+		    rindex++; //인덱스 증가
+		}
+		
+		String[] rdateArrS;
+		List<String> ryearList = new ArrayList<String>();
+		List<String> rmonthList = new ArrayList<String>();
+		List<String> rdayList = new ArrayList<String>();
+
+		for (int i = 0; i < rdateArrL.length; i++) {
+			rdateArrS = rdateArrL[i].split("-"); //2023 06 23 2023 06 24
+		    
+			ryearList.add(rdateArrS[0]);
+			rmonthList.add(rdateArrS[1]);
+			rdayList.add(rdateArrS[2]);
+		}
+		String[] ryear = ryearList.toArray(new String[0]);
+		String[] rmonth = rmonthList.toArray(new String[0]);
+		String[] rday = rdayList.toArray(new String[0]);
+		
+		//이미 예약된 날짜 연/월/일
+		model.addAttribute("ryear",ryear);
+		model.addAttribute("rmonth",rmonth);
+		model.addAttribute("rday",rday);
+		//이미 예약된 날짜 시간
+		model.addAttribute("rtimeArr",rtimeArr);
+		
+		// 트레이너 목록에 쓸 아이디 갖고오기(사용권이 존재하는)
+		String mid = ((MemberBean) session.getAttribute("loginInfo")).getId();
+		int usageCount = usageDao.getUsageCount(mid);
+		
+		
+		model.addAttribute("tid",tid);
+		model.addAttribute("tname",tname);
 		model.addAttribute("tsdayArr",tsdayArr);
 		model.addAttribute("tstimeArr",tstimeArr);
 		model.addAttribute("tsdateArrL",tsdateArrL);
@@ -132,5 +187,4 @@ public class GenericReservationController {
 		
 		return getPage;
 	}
-	
 }
