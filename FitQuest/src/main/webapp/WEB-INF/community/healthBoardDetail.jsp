@@ -79,14 +79,6 @@
 		openWin.submit();
 		openWin.close();
 	}
-	function scrapInsert(id,bnum){
-		alert(1);
-		location.href= 'scrapInsert.co?id=' + id + '&bnum=' = bnum;
-	}
-	function scrapDelete(id,bnum,snum){
-		alert(1);
-		location.href= 'scrapDelete.co?id=' + id + '&bnum=' = bnum + '&bnum=' + bnum;
-	}
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
