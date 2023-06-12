@@ -16,7 +16,7 @@ import product.model.ProductDao;
 @Controller
 public class ProductListController {
 	private final String command = "viewProductList.pd";
-	private final String getPage = "productList";
+	private final String getPage = "myProductList";
 	
 	@Autowired
 	ProductDao productDao;

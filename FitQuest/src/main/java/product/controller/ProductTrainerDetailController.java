@@ -22,7 +22,7 @@ import trainer.model.TrainerDao;
 @Controller
 public class ProductTrainerDetailController {
 	private final String command = "productDetail.pd";
-	private final String getPage = "productDetail";
+	private final String getPage = "myProductDetail";
 	@Autowired
 	OrderDetailDao orderDetailDao;
 	@Autowired
