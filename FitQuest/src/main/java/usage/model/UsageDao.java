@@ -41,4 +41,8 @@ public class UsageDao {
 		tidList = sqlSessionTemplate.selectList(namespace+".GetTListByMid",mid);
 		return tidList;
 	}
+	public int getUsageCount(String mid) {
+		int cnt = sqlSessionTemplate.selectOne(namespace+".GetUsageCount",mid);
+		return cnt;
+	}
 }

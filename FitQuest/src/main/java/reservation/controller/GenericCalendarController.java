@@ -71,11 +71,7 @@ public class GenericCalendarController {
 
 			//사용권 남았는지 유효성 확인용
 			String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-			System.out.println("아이디:"+mid);
-			UsageBean usageBean = usageDao.getOneUsage(mid);
 			
-			System.out.println("usage:"+usageBean.getTid());
-			System.out.println("usage:"+usageBean.getUsage());
 			//int usage = usageBean.getUsage();
 			
 			//배열에 담음
