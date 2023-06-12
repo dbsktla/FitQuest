@@ -71,13 +71,9 @@
 	}
 	function commentReportInsert(cnum,bnum){
 		var openWin = window.open("reportInsertForm.co?bcnum=" + cnum + "&rtype=bcomment&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
-		openWin.submit();
-		openWin.close();
 	}
 	function boardReportInsert(bnum){
 		var openWin = window.open("reportInsertForm.co?bcnum=" + bnum + "&rtype=board&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
-		openWin.submit();
-		openWin.close();
 	}
 </script>
 
