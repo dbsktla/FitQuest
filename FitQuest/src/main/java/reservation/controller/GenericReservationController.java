@@ -178,6 +178,7 @@ public class GenericReservationController {
 		int usageCount = usageDao.getUsageCount(mid);
 		
 		
+		model.addAttribute("usageCount",usageCount);
 		model.addAttribute("tid",tid);
 		model.addAttribute("tname",tname);
 		model.addAttribute("tsdayArr",tsdayArr);

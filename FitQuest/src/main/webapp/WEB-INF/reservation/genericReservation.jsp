@@ -51,11 +51,8 @@
    <div class="calendar-button-div">
       <span>
       	<input type="button" class="btn btn-warning" onClick="location.href='genericCalendar.rv'" value="My PT">
-      	<c:if test="${flag == 'true'}">
-	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleUpdate.rv'" value="스케줄 수정">
-      	</c:if>
-      	<c:if test="${flag == 'false'}">
-	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">
+      	<c:if test="${usageCount >= 2}">
+	      	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="트레이너 선택">
       	</c:if>
       </span>
    </div>
