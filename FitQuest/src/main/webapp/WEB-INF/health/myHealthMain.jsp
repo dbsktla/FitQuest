@@ -1,9 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
+
+<script type="text/javascript" src="resources/js/jquery.js"></script>
+<script>
+	$(document).ready(function(){
+		//alert(1);
+		getHealthTime();
+	});
+	
+	function getHealthTime() {
+		//alert(2);
+		var weekdate = [];
+		
+		$.ajax({
+			url : 'health.ht',
+			type : 'POST',
+			datatype : 'json',
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					weekdate.push(data[i].playtime);
+				} //for
+				
+				new Chart(document.querySelector('#barChart'), {
+					type: 'bar',
+					data: {
+						labels: ['월', '화', '수', '목', '금', '토', '일'],
+						datasets: [{
+							label: '운동 시간(분)',
+							data: weekdate,
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(255, 159, 64, 0.2)',
+								'rgba(255, 205, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(201, 203, 207, 0.2)'
+							],
+							borderColor: [
+								'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)',
+								'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)',
+								'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)',
+								'rgb(201, 203, 207)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							y: {
+								beginAtZero: true
+							}
+						}
+					}
+				});
+			} //success
+		}); // ajax
+	}
+
+</script>
+
+
 <body style="background-color: #FEF9E7">
 	<div class="pagetitle">
 		<h1>
@@ -127,24 +191,40 @@
 										</tr>
 									</c:if>
 									<tr>
-										<td style="width: 50%;"><font style="color: gray; font-size: 16px">목표일자</font></td>
+										<td style="width: 60%;"><font style="color: gray; font-size: 16px">목표일자</font></td>
 										<td>${fn:substring(goalBean.gpdate,0,10)}</td>
 									</tr>
 									<tr>
-										<td colspan="2">목표일까지 <b>일</b> 남았습니다.</td>
+										<td style="width: 60%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
+										<td>
+											<fmt:formatNumber var="w" value="${goalBean.weight - phsiqueBean.weight}" pattern=".00"/>
+											${goalBean.weight} (${w})
+											
+										</td>
 									</tr>
 									<tr>
-										<td style="width: 50%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
-										<td>${goalBean.weight}</td>
+										<td style="width: 60%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
+										<td>
+											<fmt:formatNumber var="b" value="${goalBean.bodyfatper - phsiqueBean.bodyfatper}" pattern=".00"/>
+											${goalBean.bodyfatper} (${b})
+											
+										</td>
 									</tr>
 									<tr>
-										<td style="width: 50%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
-										<td>${goalBean.bodyfatper}</td>
+										<td colspan="2">
+											<fmt:parseDate var="gpdate" value="${goalBean.gpdate}" pattern="yyyy-MM-dd"/>
+											<jsp:useBean id="now" class="java.util.Date" />
+											<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowTime" scope="request"/>
+											<fmt:parseNumber value="${gpdate.time / (1000*60*60*24)}" integerOnly="true" var="gpdateTime" scope="request"/>
+											<font style="font-size: 13px">목표일까지 <b>${gpdateTime - nowTime}일</b> 남았습니다.</font>
+										</td>
 									</tr>
 								</table>
 							</div>
 							<div class="col-xxl-4">
 								<font style="font-size: 18px; color: #FAC710;"><b>이번주 운동시간</b></font><br><br>
+								<canvas id="barChart" style="max-height: 400px;"></canvas>
+								
 							</div>
 							<div class="col-xxl-2">
 								<font style="font-size: 18px; color: #FAC710;"><b>목표 운동 시간 (달성 여부)</b></font><br><br>

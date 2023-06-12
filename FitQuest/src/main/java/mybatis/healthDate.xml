@@ -123,4 +123,24 @@
 		ON o.tid	= t.id
 		AND o.mid 	= #{id}
 	</select>
+	
+	<select id="GetWeekPlaytime" resultType="health.model.HealthDateBean">
+		SELECT	SUM(playtime) AS playtime
+			   ,hdate
+		FROM 	(
+			      SELECT	hnum
+			               ,SUM(playtime) AS playtime
+			      FROM	(
+			             SELECT		hnum
+			                  	   ,ROUND((endtime - starttime) * 24 * 60) AS playtime
+			             FROM		HEALTH
+			             )
+			      GROUP BY hnum
+			     ) h
+		INNER JOIN HEALTHDATE hd
+		ON 		h.hnum = hd.hnum
+		AND 	hdate  = #{date}
+		AND		id	   = #{id}
+		GROUP BY hdate
+	</select>
 </mapper>

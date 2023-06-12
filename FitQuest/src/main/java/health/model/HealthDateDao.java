@@ -76,4 +76,9 @@ public class HealthDateDao {
 		return mainlist;
 	}
 
+	public HealthDateBean getWeekPlaytime(Map<String, Object> map) {
+		HealthDateBean healthDateBean = sqlSessionTemplate.selectOne(namespace + ".GetWeekPlaytime", map);
+		return healthDateBean;
+	}
+
 }
