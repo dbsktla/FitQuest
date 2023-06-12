@@ -427,7 +427,7 @@ create sequence phseq
 drop table physique cascade constraints;
 CREATE TABLE physique (
    phnum   number   primary key, --신체번호
-   ID   varchar2(100)   NOT NULL, --아이디
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    height   number default 0.0, --신장(cm) 
    weight   number default 0.0, --체중(kg)
    BMI   number default 0.0, --bmi
@@ -446,6 +446,29 @@ insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-
 
 select * from physique;
 commit;
+
+
+-- 신체 정보 목표 시퀀스
+drop sequence gpseq;
+create sequence gpseq
+  increment by 1
+  start with 1
+  minvalue 1
+  nocache;
+  
+-- 신체 정보 목표 테이블
+-- 회원당 하나의 레코드만 존재. 이미 있으면 수정
+drop table goalphysique cascade constraints;
+CREATE TABLE goalphysique (
+	ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디, primarykey
+	gpdate date, -- 목표 일자 생성
+	weight number default 0.0, -- 목표 체중(kg)
+	bodyfatper number default 0.0, -- 목표 체지방률(%)
+	goaltime number default 0.0 -- 이번주 목표 운동시간
+);
+
+
+
 
 --문의 테이블
 drop sequence qseq;
