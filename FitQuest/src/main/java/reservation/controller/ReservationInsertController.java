@@ -46,26 +46,17 @@ public class ReservationInsertController {
 			@RequestParam("time") String rtime,
 			@RequestParam("tid") String tid,
 			@RequestParam("tname") String tname,
+			@RequestParam("usageNum") int usageNum,
 			HttpSession session) {
-		System.out.println("인서트로 오나 체크");
-		//사용권 정보 가져오기 트레이너 누군지 해야함...
+		
+		//사용권 정보 가져오기
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 		UsageBean usageBean = usageDao.getOneUsage(mid,tid);
 		int onum = usageBean.getOnum(); //주문 번호
 		int unum = usageBean.getUnum(); //사용권 번호
-		System.out.println("사용권 정보 테스트:"+onum);
-		System.out.println("사용권 정보 테스트:"+unum);
-		System.out.println("사용권 정보 테스트:"+tid);
 		
 		//날짜 조립
 		String rdate = year + "-" + month + "-" + date;
-		System.out.println("rdateTest:"+rdate);
-		/*
-		 * Date rdate = null; SimpleDateFormat format = new
-		 * SimpleDateFormat("yyyy-MM-dd"); try { java.util.Date utilDate =
-		 * format.parse(dateString); rdate = new java.sql.Date(utilDate.getTime()); }
-		 * catch (ParseException e) { e.printStackTrace(); }
-		 */
 		
 		//이름 가져오기
 		String mname = memberDao.getName(mid);
@@ -78,16 +69,20 @@ public class ReservationInsertController {
         reservationBean.setOnum(onum);
         reservationBean.setUnum(unum);
         reservationBean.setRdate(rdate);
-        System.out.println(reservationBean.getRdate());
         reservationBean.setRtime(rtime);
-        System.out.println(reservationBean.getRtime());
 		int cnt = reservationDao.insertReservation(reservationBean);
 		
 		if(cnt != -1) {
 			System.out.println("예약 성공");
-			//사용권 차감
-			//int cnt = usageDao.decreaseUsage();
-			
+			//남은 횟수 차감
+			usageDao.decreaseUsage(unum);
+			//남은 횟수 0일때 사용권 삭제
+			UsageBean ub = usageDao.getOneUsage(mid,tid);
+			int usageNumber = ub.getUsage();
+			if(usageNumber <= 0) {
+				//사용권 삭제
+				int cnt1 = usageDao.deleteUsage(unum);
+			}
 		}else {
 			System.out.println("예약 실패");
 		}

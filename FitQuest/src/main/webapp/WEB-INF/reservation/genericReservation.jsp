@@ -2,14 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
-
 <script type="text/javascript">
-	function reservationCheck(date,time,year,month,tid,tname){
-		if (confirm('예약 하시겠습니까?')) { //확인
-			location.href='reservationInsert.rv?date='+date+'&time='+time+'&year='+year+'&month='+month+'&tid='+tid+'&tname='+tname;
-		    alert('예약 신청 완료되었습니다.');
-		} else { //취소
-		    alert('예약 신청 취소되었습니다.');
+	function reservationCheck(date, time, year, month, tid, tname, usageNum) {
+		if (confirm('예약 하시겠습니까?')) { // 확인
+			location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum;
+			
+			if (confirm('계속 예약 하시겠습니까?')) { // 확인
+				location.href = 'redirect:/genericReservation.rv?tid=' + tid + '&tname=' + tname; // 예약 페이지
+			} else { // 취소
+				location.href = 'genericCalendar.rv'; // My PT 페이지
+			}
+			
+		} else { // 취소
+		    alert('예약 신청이 취소되었습니다.');
 		}
 	}
 </script>
@@ -23,7 +28,7 @@
 </div> 
 
 
-<div class="calendar" >
+<div>
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
@@ -49,14 +54,18 @@
    </div>
 <!-- 버튼 -->
    <div class="calendar-button-div">
-      <span>
+      <div class="left">
+      	<span class="usage-area">남은 사용권 횟수 : ${usageNum}번</span>
+      </div>
+      <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericCalendar.rv'" value="My PT">
       	<c:if test="${usageCount >= 2}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="트레이너 선택">
       	</c:if>
-      </span>
+      </div>
    </div>
 <!-- 달력  -->  
+
 <table class="calendar_body">
 <thead>
    <tr class="day-area">
@@ -83,6 +92,17 @@
       </td>
    </tr>
 </thead>
+<c:choose>
+<c:when test="${tscheduleBean.tsday == ''}">
+   <tr>
+	 <td colspan="7" class="calendar-none">
+	   <div>
+	    <span>죄송합니다. 트레이너님의 스케줄이 설정되지 않았습니다.</span>
+	   </div>
+	 </td>
+   </tr>
+</c:when>
+<c:otherwise>
 <tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
@@ -150,7 +170,7 @@
 										    <c:if test="${not isMatch}">
 										        <div class="reservation-area">
 										            <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-										            <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}')">
+										            <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
 										                <span>${time}</span>
 										            </a>
 										        </div>
@@ -165,7 +185,7 @@
 										<c:forEach var="time" items="${tstimeArr}">
 								            <div class="reservation-area">
 								                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-								                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}')">
+								                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
 								                    <span>${time}</span>
 								                </a>
 								            </div>
@@ -182,7 +202,7 @@
 			          	 <c:forEach var="time" items="${tstimeArr}">
                             <div class="reservation-area">
                               <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-                              <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}')">
+                              <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
                                <span>${time}</span>
                               </a>
                             </div>
@@ -420,6 +440,8 @@
       </c:choose>
 	</c:forEach>
 </tbody>
+</c:otherwise>
+</c:choose>
 </table>
 </div>
 </center>
