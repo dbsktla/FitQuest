@@ -7,6 +7,12 @@
 	session.setAttribute("healthBoardListFlag", "true");
 %>
 
+<script type="text/javascript">
+	function writerInfo(id){
+		var openWin = window.open("trainerInfoPopup.co?" + "id=" + id, "_blank", "width=550, height=500, left=500");
+	}
+</script>
+
 <body style="background-color: #FEF9E7; text-align: center;">
 	<main>
 		<div class="card" style="width: 70%; margin: auto;">
@@ -45,7 +51,7 @@
 									<a style="color : #FAC710;" href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
 								</td>
 								<td style="background-color: #FEF9E7">${ board.bcategory }</td>
-								<td style="background-color: #FEF9E7">${ board.name }</td>
+								<td style="background-color: #FEF9E7"><a style="color : #FAC710;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
 								<td style="background-color: #FEF9E7">${ board.breadcount }</td>
 								<td style="background-color: #FEF9E7">
 									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
@@ -62,7 +68,7 @@
 									<a style="color : #FAC710;" href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
 								</td>
 								<td>${ board.bcategory }</td>
-								<td>${ board.name }</td>
+								<td><a style="color : #FAC710;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
 								<td>${ board.breadcount }</td>
 								<td>
 									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
