@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import health.model.HealthBean;
@@ -109,12 +110,32 @@ public class HealthMainController {
 			List<PhysiqueBean> phlist = physiqueDao.getPhysiqueList(memberBean.getId());
 			mav.addObject("phlist", phlist);
 			
+			
+			// 주별 운동 시간 데이터 합산
+			Calendar scal = Calendar.getInstance();
+			Calendar ecal = Calendar.getInstance();
+			scal.setTime(nowDate);
+			scal.add(Calendar.DATE, 2 - scal.get(Calendar.DAY_OF_WEEK));
+			ecal.setTime(nowDate);
+			ecal.add(Calendar.DATE, 8 - ecal.get(Calendar.DAY_OF_WEEK));
+			
+			Map<String, Object> datemap = new HashMap<String, Object>();
+			datemap.put("id", mid);
+			datemap.put("sdate", sdf.format(scal.getTime()));
+			datemap.put("edate", sdf.format(ecal.getTime()));
+			
+			String weekPlaytime = healthDateDao.allWeekPlaytime(datemap);
+			if(weekPlaytime == null) {
+				weekPlaytime = "0";
+			}
+			mav.addObject("weekPlaytime", weekPlaytime);
 		}
 		mav.setViewName(getPage);
 		return mav;
 	}
 	
 	@RequestMapping(value = command, method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	@ResponseBody
 	public String doActionJS(HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/html; charset=UTF-8");
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
@@ -136,27 +157,24 @@ public class HealthMainController {
 			// 주 운동시간
 			// 오늘 날짜 기준으로 월화수목금토일 가져오기
 			Calendar scal = Calendar.getInstance();
-			Calendar ecal = Calendar.getInstance();
 			scal.setTime(nowDate);
 			scal.add(Calendar.DATE, 2 - scal.get(Calendar.DAY_OF_WEEK));
-			ecal.setTime(nowDate);
-			ecal.add(Calendar.DATE, 8 - ecal.get(Calendar.DAY_OF_WEEK));
-			
-			System.out.println("시작 " + sdf.format(scal.getTime()));
-			System.out.println("끝 " + sdf.format(ecal.getTime()));
 			
 			// 오늘 날짜 기준 이번 주 데이터 가져오기
 			// 운동 시간이 없는 날짜는 0 삽입하기
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", id);
-			
 			for(int i=0; i<7; i++) {
 				JSONObject jsObject = new JSONObject();
 				
-				map.put("date", sdf.format(scal.getTime()));
+				String dat = sdf.format(scal.getTime());
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", id);
+				map.put("date", dat);
+				
 				HealthDateBean hdb = healthDateDao.getWeekPlaytime(map);
 				
-				jsObject.put("hdate", sdf.format(scal.getTime()));
+				jsObject.put("hdate", dat);
+				
 				if(hdb == null) {
 					jsObject.put("playtime", "0");
 				}else {
@@ -166,7 +184,6 @@ public class HealthMainController {
 				jsArr.add(jsObject);
 			}
 		}
-		System.out.println("json : " + jsArr.toString());
 		return jsArr.toString();
 	}
 }

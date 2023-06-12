@@ -143,4 +143,27 @@
 		AND		id	   = #{id}
 		GROUP BY hdate
 	</select>
+	
+	<select id="AllWeekPlaytime" resultType="String">
+		SELECT 	SUM(playtime)
+		FROM	(
+			    SELECT	SUM(playtime) AS playtime
+			             ,hdate
+			    FROM 	(
+			             SELECT		hnum
+			                   	   ,SUM(playtime) AS playtime
+			             FROM	   (
+			                        SELECT	hnum
+			                               ,ROUND((endtime - starttime) * 24 * 60) AS playtime
+			                        FROM	HEALTH
+			                       )
+			             GROUP BY hnum
+			             ) h
+			    INNER JOIN HEALTHDATE hd
+			    ON 		h.hnum = hd.hnum
+			    AND 	(hdate  BETWEEN #{sdate} AND #{edate})
+			    AND		id	   = #{id}
+			    GROUP BY hdate
+		      )
+	</select>
 </mapper>

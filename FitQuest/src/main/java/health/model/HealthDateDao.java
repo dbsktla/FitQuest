@@ -81,4 +81,9 @@ public class HealthDateDao {
 		return healthDateBean;
 	}
 
+	public String allWeekPlaytime(Map<String, Object> datemap) {
+		String sum = sqlSessionTemplate.selectOne(namespace + ".AllWeekPlaytime", datemap);
+		return sum;
+	}
+
 }
