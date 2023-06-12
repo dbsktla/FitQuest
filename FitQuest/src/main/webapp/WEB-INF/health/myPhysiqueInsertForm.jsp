@@ -192,6 +192,7 @@
 								<label for="bmi" class="col-form-label col-md-3 col-lg-2 col-form-label">BMI</label>
 								<div class="col-md-8 col-lg-4">
 									<input name="bmi" type="text" class="form-control" id="bmi" value="0.0" readonly="readonly">
+									<br><font style="color: gray; font-size: 12px">*BMI는 신장과 체중을 입력하면 자동계산됩니다.</font>
 								</div>
 							
 								<label for="skeletalmuscle" class="col-form-label col-md-3 col-lg-2 col-form-label">골격근량(kg)</label>

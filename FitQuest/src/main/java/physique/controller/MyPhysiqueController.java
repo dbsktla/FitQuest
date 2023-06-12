@@ -96,9 +96,6 @@ public class MyPhysiqueController {
 			mav.setViewName(getPage);
 		}
 		
-		
-		
-		
 		return mav;
 	}
 	
@@ -151,8 +148,6 @@ public class MyPhysiqueController {
 			jsArr.add(jsObject); 
 		}
 		
-		
-		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", memberBean.getId());
@@ -185,12 +180,6 @@ public class MyPhysiqueController {
 			
 			jsArr.add(jsObject);
 		}
-		
-		
-		
-		
-		
-		System.out.println(jsArr.toString());
 		
 		return jsArr.toString();
 	}

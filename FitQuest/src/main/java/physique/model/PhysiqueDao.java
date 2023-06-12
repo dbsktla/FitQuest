@@ -54,4 +54,9 @@ public class PhysiqueDao {
 		phlist = sqlSessionTemplate.selectList(namespace + ".GetPhysiqueList", id);
 		return phlist;
 	}
+
+	public PhysiqueBean getOnePhysiqueByMaxdate(String id) {
+		PhysiqueBean physiqueBean = sqlSessionTemplate.selectOne(namespace + ".GetOnePhysiqueByMaxdate", id);
+		return physiqueBean;
+	}
 }

@@ -96,7 +96,10 @@ public class MyHealthInsertController {
 		ModelAndView mav = new ModelAndView();
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		
-		List<HealthDateBean> oldlist = healthDateDao.getHealthByHdate(hdb.getHdate());
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("hdate", hdb.getHdate());
+		map.put("id", memberBean.getId());
+		List<HealthDateBean> oldlist = healthDateDao.getHealthByHdate(map);
 		
 		boolean flag = false;
 		HealthDateBean oldhdbean = new HealthDateBean();
@@ -116,8 +119,6 @@ public class MyHealthInsertController {
 				mav.setViewName(getPage);
 			} else {
 				// 삽입 성공하면 해당 날짜 번호 시퀀스를 얻기 위해서 날짜를 다시 가져온다.
-				Map<String, Object> map = new HashMap<String, Object>();
-				
 				map.put("hdate", hdb.getHdate());
 				map.put("tid", hdb.getTid());
 				

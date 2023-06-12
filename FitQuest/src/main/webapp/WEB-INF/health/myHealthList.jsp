@@ -215,19 +215,6 @@
 				<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
 					<div class="row">
 						
-						<div class="col-lg-12">
-							<!-- Default Card -->
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">운동 정보</h5>
-									<!-- 선택한 날짜, 00 트레이너와 00일쨰 00중 -->
-									<c:forEach var="tlist" items="${tlist}">
-										<b>${tlist.name}</b> 트레이너와 <b>${tlist.intro}</b>일 째 <b>${tlist.activity}</b> 중<br>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					
 						<div class="col-lg-4">
 							<!-- Default Card -->
 							<div class="card">
