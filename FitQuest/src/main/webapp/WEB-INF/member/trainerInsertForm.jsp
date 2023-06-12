@@ -252,7 +252,7 @@ $(document).ready(function(){
                   	<input type="hidden" name="mtype" value="trainer">
                     <div class="col-12">
                       <label for="yourName" class="form-label">아이디</label>
-                      <button type="button" id="idCheck" class="btn btn-outline-warning btn-sm">중복확인</button>
+                      <button type="button" id="idCheck" class="btn btn-warning btn-sm">중복확인</button>
                       <input type="text" name="id" class="form-control" id="yourName" value="${ trainerBean.id }" required>
                       <div id="idmessage"></div>
                       <div class="invalid-feedback">아이디를 입력해 주세요.</div>
@@ -275,7 +275,7 @@ $(document).ready(function(){
 
                     <div class="col-12">
                       <label for="yourNickName" class="form-label">별명</label>
-                      <button type="button" id="NicknameCheck" class="btn btn-outline-warning btn-sm">중복확인</button>
+                      <button type="button" id="NicknameCheck" class="btn btn-warning btn-sm">중복확인</button>
                       <input type="text" name="nickname" class="form-control" id="yourNickName" value="${ trainerBean.nickname }" required>
                       <div id="NicknameMessage"></div>
                       <div class="invalid-feedback">별명을 입력해 주세요.</div>
@@ -283,7 +283,7 @@ $(document).ready(function(){
 
                     <div class="col-12">
                       <label for="email" class="form-label">이메일</label>
-                      <button type="button" id="emailCheck" class="btn btn-outline-warning btn-sm">인증하기</button>
+                      <button type="button" id="emailCheck" class="btn btn-warning btn-sm">인증하기</button>
                       <input type="email" name="email" class="form-control" id="email" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
                       <input class="form-control" id="emailCode" placeholder="인증번호 6자리" disabled="disabled" maxlength="6">
                       <div class="invalid-feedback">이메일 형식에 맞게 작성해 주세요.</div>
@@ -310,7 +310,7 @@ $(document).ready(function(){
                     
                     <div class="col-12">
                     	 <label for="yourAddr" class="form-label">주소</label>
-						<input type="button" id="yourAddr" class="btn btn-outline-warning btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
+						<input type="button" id="yourAddr" class="btn btn-warning btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
 						<input type="text" name="maddr1" class="form-control" id="sample4_jibunAddress" value="${ trainerBean.maddr1 }" placeholder="지번주소">
 						<input type="text" name="maddr2" class="form-control" id="sample4_detailAddress" value="${ trainerBean.maddr2 }" placeholder="상세주소">
 						
