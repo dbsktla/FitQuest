@@ -334,12 +334,6 @@ CREATE TABLE healthdate (
    tid varchar2(100) default 'notrainer' --담당 트레이너 아이디 트레이너 정보가 없을 시 notrainer 삽입
 );
 
-insert into healthdate values(hseq.nextval, 'hong', '2023-06-01','kim');
-insert into healthdate values(hseq.nextval, 'hong', '2023-06-02','kim');
-insert into healthdate values(hseq.nextval, 'hong', '2023-06-01','lee');
-insert into healthdate values(hseq.nextval, 'hong', '2023-06-03','lee');
-insert into healthdate values(hseq.nextval, 'hong', '2023-06-05','notrainer');
-
 select * from healthdate;
 commit;
 
@@ -353,18 +347,6 @@ CREATE TABLE health (
    hcount number default 0, --횟수 --세트
    hset number default 0
 );
-
-insert into health values(1, '유산소',TO_DATE('2023-06-01 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),0,0);
-insert into health values(1, '벤치프레스',TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:40','YYYY-MM-DD HH24:MI'),10,3);
-insert into health values(2, '유산소',TO_DATE('2023-06-02 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),0,0);
-insert into health values(2, '스쿼트',TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 12:00','YYYY-MM-DD HH24:MI'),12,5);
-insert into health values(3, '캐딜락',TO_DATE('2023-06-01 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),17,3);
-insert into health values(3, '리포머',TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:50','YYYY-MM-DD HH24:MI'),15,3);
-insert into health values(4, '래더바렐',TO_DATE('2023-06-03 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 16:00','YYYY-MM-DD HH24:MI'),12,5);
-insert into health values(4, '스프링보드',TO_DATE('2023-06-03 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),19,5);
-insert into health values(4, '캐딜락',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
-insert into health values(5, '스쿼트',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
-
 
 select * from health;
 commit;
@@ -438,23 +420,9 @@ CREATE TABLE physique (
    phimage varchar2(300) -- 인바디 이미지
 );
 
-insert into physique values(phseq.nextval, 'hong', 170.5, 90.0, 30.9, '2023-04-30', 29.3, 33.2, 1607, null);
-insert into physique values(phseq.nextval, 'hong', 170.5, 85.0, 29.2, '2023-05-10', 30.3, 30.5, 1570, 'hong_inbody1.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 80.1, 27.5, '2023-05-23', 31.5, 29.8, 1540, 'hong_inbody2.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 75.4, 25.9, '2023-06-01', 32.9, 28.1, 1580, 'hong_inbody3.jpg');
-insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-07', 33.1, 27.5, 1607, 'hong_inbody4.jpg');
-
 select * from physique;
 commit;
 
-
--- 신체 정보 목표 시퀀스
-drop sequence gpseq;
-create sequence gpseq
-  increment by 1
-  start with 1
-  minvalue 1
-  nocache;
   
 -- 신체 정보 목표 테이블
 -- 회원당 하나의 레코드만 존재. 이미 있으면 수정
@@ -467,6 +435,8 @@ CREATE TABLE goalphysique (
 	goaltime number default 0.0 -- 이번주 목표 운동시간
 );
 
+select * from goalphysique;
+commit;
 
 
 
