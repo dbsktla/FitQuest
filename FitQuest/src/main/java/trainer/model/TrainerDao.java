@@ -36,6 +36,16 @@ public class TrainerDao {
 		TrainerBean trainerBean = sqlSessionTemplate.selectOne(namespace+".GetTrainerMember",id);
 		return trainerBean;
 	}
+
+	public int updateTrainer(TrainerBean trainerBean) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdateTrainer", trainerBean);
+		return cnt;
+	}
+
+	public int updateTimage(TrainerBean trainerBean) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdateImage", trainerBean);
+		return cnt;
+	}
 	
 	
 }

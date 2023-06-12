@@ -124,7 +124,7 @@
           <c:if test="${loginInfo.mtype eq 'trainer'}">
           	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="#">마이페이지</a></li>
+	              <li><a href="trainerDetail.mb">마이페이지</a></li>
 	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
 	              <li><a href="viewProductList.pd">상품관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>

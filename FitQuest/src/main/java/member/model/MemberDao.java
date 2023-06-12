@@ -1,5 +1,7 @@
 package member.model;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -68,6 +70,16 @@ public class MemberDao {
 		String mname = "";
 		mname = sqlSessionTemplate.selectOne(namespace+".GetName",mid);
 		return mname;
+	}
+
+	public int updateTrainerMember(MemberBean memberBean) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdateTrainerMember", memberBean);
+		return cnt;
+	}
+
+	public int updatePassword(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.update(namespace + ".UpdatePassword", map);
+		return cnt;
 	}
 	
 	
