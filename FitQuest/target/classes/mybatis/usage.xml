@@ -26,8 +26,4 @@
 		select * from usage
 		where mid = #{mid}
 	</select>
-	<select id="GetUsageCount" resultType="int">
-		select count(*) from usage
-		where mid = #{mid}
-	</select>
 </mapper>

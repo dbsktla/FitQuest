@@ -173,11 +173,15 @@ public class GenericReservationController {
 		//이미 예약된 날짜 시간
 		model.addAttribute("rtimeArr",rtimeArr);
 		
-		// 트레이너 목록에 쓸 아이디 갖고오기(사용권이 존재하는)
+		//사용권 개수(트레이너 몇명인지)
 		String mid = ((MemberBean) session.getAttribute("loginInfo")).getId();
-		int usageCount = usageDao.getUsageCount(mid);
+		List<UsageBean> tidList = usageDao.getTListByMid(mid);
 		
-		
+		int usageCount = 0;
+		for(UsageBean ub : tidList) {
+			usageCount += ub.getUnum();
+		}
+
 		model.addAttribute("usageCount",usageCount);
 		model.addAttribute("tid",tid);
 		model.addAttribute("tname",tname);
