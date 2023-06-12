@@ -2,6 +2,8 @@ package health.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +23,8 @@ import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
 import member.model.MemberBean;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import physique.model.GoalphysiqueBean;
 import physique.model.GoalphysiqueDao;
 import physique.model.PhysiqueBean;
@@ -104,8 +108,65 @@ public class HealthMainController {
 			// 이달의 변화 - 신체정보 불러오기
 			List<PhysiqueBean> phlist = physiqueDao.getPhysiqueList(memberBean.getId());
 			mav.addObject("phlist", phlist);
+			
 		}
 		mav.setViewName(getPage);
 		return mav;
+	}
+	
+	@RequestMapping(value = command, method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String doActionJS(HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=UTF-8");
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
+		Date nowDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		JSONArray jsArr = new JSONArray();
+		
+		if(memberBean == null) {
+			session.setAttribute("destination", "redirect:/health.ht");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');location.href='login.mb'</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			String id = memberBean.getId();
+			// 주 운동시간
+			// 오늘 날짜 기준으로 월화수목금토일 가져오기
+			Calendar scal = Calendar.getInstance();
+			Calendar ecal = Calendar.getInstance();
+			scal.setTime(nowDate);
+			scal.add(Calendar.DATE, 2 - scal.get(Calendar.DAY_OF_WEEK));
+			ecal.setTime(nowDate);
+			ecal.add(Calendar.DATE, 8 - ecal.get(Calendar.DAY_OF_WEEK));
+			
+			System.out.println("시작 " + sdf.format(scal.getTime()));
+			System.out.println("끝 " + sdf.format(ecal.getTime()));
+			
+			// 오늘 날짜 기준 이번 주 데이터 가져오기
+			// 운동 시간이 없는 날짜는 0 삽입하기
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			
+			for(int i=0; i<7; i++) {
+				JSONObject jsObject = new JSONObject();
+				
+				map.put("date", sdf.format(scal.getTime()));
+				HealthDateBean hdb = healthDateDao.getWeekPlaytime(map);
+				
+				jsObject.put("hdate", sdf.format(scal.getTime()));
+				if(hdb == null) {
+					jsObject.put("playtime", "0");
+				}else {
+					jsObject.put("playtime", hdb.getPlaytime());
+				}
+				scal.add(Calendar.DATE, +1);
+				jsArr.add(jsObject);
+			}
+		}
+		System.out.println("json : " + jsArr.toString());
+		return jsArr.toString();
 	}
 }

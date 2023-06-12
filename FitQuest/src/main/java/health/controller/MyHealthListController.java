@@ -161,7 +161,6 @@ public class MyHealthListController {
 				i++;
 			}
 		}	
-		System.out.println("jsArr : " + jsArr);
 		return jsArr.toString();
 	}
 }
