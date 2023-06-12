@@ -65,5 +65,15 @@
 		WHERE 	id = #{id}
 	</select>
 	
+	<select id="GetOnePhysiqueByMaxdate" resultType="physique.model.PhysiqueBean">
+		SELECT 	* 
+		FROM 	PHYSIQUE 
+		WHERE 	phdate = (
+						  SELECT MAX(phdate) 
+						  FROM PHYSIQUE
+						 ) 
+		AND 	id 	   = #{id}
+	</select>
+	
 </mapper>
  

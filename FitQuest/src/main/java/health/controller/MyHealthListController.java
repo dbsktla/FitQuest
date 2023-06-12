@@ -20,21 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import health.model.HealthBean;
 import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
 import member.model.MemberBean;
-import member.model.MemberDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import order.model.OrderBean;
-import order.model.OrderDao;
 import trainer.model.TrainerBean;
 import trainer.model.TrainerDao;
 import usage.model.UsageBean;
 import usage.model.UsageDao;
-import utility.NullUtil;
 
 @Controller
 public class MyHealthListController {
@@ -46,9 +41,6 @@ public class MyHealthListController {
 	
 	@Autowired
 	HealthDateDao healthDateDao;
-	
-	@Autowired
-	MemberDao memberDao;
 	
 	@Autowired
 	TrainerDao trainerDao;

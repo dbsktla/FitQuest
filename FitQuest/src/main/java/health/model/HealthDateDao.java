@@ -20,8 +20,8 @@ public class HealthDateDao {
 		return hdlist;
 	}
 
-	public List<HealthDateBean> getHealthByHdate(String hdate) {
-		List<HealthDateBean> oldList = sqlSessionTemplate.selectList(namespace + ".GetHealthByHdate", hdate);
+	public List<HealthDateBean> getHealthByHdate(Map<String, Object> map) {
+		List<HealthDateBean> oldList = sqlSessionTemplate.selectList(namespace + ".GetHealthByHdate", map);
 		return oldList;
 	}
 	
@@ -69,6 +69,11 @@ public class HealthDateDao {
 	public HealthDateBean getHealthByHdateTid(Map<String, Object> map) {
 		HealthDateBean hdb = sqlSessionTemplate.selectOne(namespace + ".GetHealthByHdateTid", map);
 		return hdb;
+	}
+
+	public List<HealthDateBean> getMainHealthList(String id) {
+		List<HealthDateBean> mainlist = sqlSessionTemplate.selectList(namespace + ".GetMainHealthList", id);
+		return mainlist;
 	}
 
 }
