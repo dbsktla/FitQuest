@@ -29,9 +29,12 @@
 		ON hd.tid = m.id
 		LEFT OUTER JOIN TRAINER t
 		ON hd.tid = t.id
-		WHERE	hd.id  = #{id}
+		WHERE	hd.id    = #{id}
+		<if test = "nowDate != null">
+			AND hd.hdate = #{nowDate}
+		</if>
 		<if test = "tid != null and tid != 'all'">
-			AND	hd.tid = #{tid}
+			AND	hd.tid   = #{tid}
 		</if>
 		ORDER BY hd.hdate DESC
 	</select>
@@ -40,6 +43,7 @@
 		SELECT 	* 
 		FROM 	HEALTHDATE 
 		WHERE 	hdate = #{hdate}
+		AND		id 	  = #{id}
 	</select>
 	
 	<select id="GetOneHealthDate" resultType="health.model.HealthDateBean">
@@ -93,5 +97,30 @@
 		FROM	HEALTHDATE
 		WHERE 	hdate = #{hdate}
 		AND		tid   = #{tid}
+	</select>
+	
+	<select id="GetMainHealthList" resultType="health.model.HealthDateBean">
+		SELECT	o.tid
+			   ,o.mid as id
+			   ,o.name AS tname
+			   ,TO_DATE(SYSDATE, 'yyyy-MM-dd') - to_date(o.odate, 'yyyy-MM-dd') AS hdate
+			   ,t.activity AS tactivity
+		FROM 	(
+			      SELECT	*
+			      FROM 		(
+			            	 SELECT	*
+			            	 FROM	(
+			                  		 SELECT	*
+			                  		 FROM 	USAGE
+			                  		 ) u
+			           		 INNER JOIN ORDERS o
+			            	 ON u.onum = o.onum
+			            ) o
+			      INNER JOIN MEMBER m
+			      ON o.tid = m.id
+			    ) o
+		INNER JOIN TRAINER t
+		ON o.tid	= t.id
+		AND o.mid 	= #{id}
 	</select>
 </mapper>

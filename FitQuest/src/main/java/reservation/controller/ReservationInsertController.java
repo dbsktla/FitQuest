@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
@@ -37,20 +38,21 @@ public class ReservationInsertController {
 	@Autowired
 	MemberDao memberDao;
 	
-	@RequestMapping(command)
+	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(
 			@RequestParam("year") String year,
 			@RequestParam("month") String month,
 			@RequestParam("date") String date,
 			@RequestParam("time") String rtime,
+			@RequestParam("tid") String tid,
+			@RequestParam("tname") String tname,
 			HttpSession session) {
-		
+		System.out.println("인서트로 오나 체크");
 		//사용권 정보 가져오기 트레이너 누군지 해야함...
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		UsageBean usageBean = usageDao.getOneUsage(mid);
+		UsageBean usageBean = usageDao.getOneUsage(mid,tid);
 		int onum = usageBean.getOnum(); //주문 번호
 		int unum = usageBean.getUnum(); //사용권 번호
-		String tid = usageBean.getTid(); //트레이너 아이디
 		System.out.println("사용권 정보 테스트:"+onum);
 		System.out.println("사용권 정보 테스트:"+unum);
 		System.out.println("사용권 정보 테스트:"+tid);
@@ -96,7 +98,7 @@ public class ReservationInsertController {
 		
 		
 		
-		return gotoPage;
+		return "genericReservation?tname="+tname+"&tid="+tid;
 	}
 	
 	

@@ -103,8 +103,8 @@
 		(select id, gnum, gaddr1 from trainer natural join gym))
 		where activity = #{activity}
 	</select>
-	<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
-		select t.activity, t.purpose, t.timage, m.name from trainer t,member m
+		<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
+		select t.activity, t.purpose, t.timage, m.name, m.id from trainer t,member m
 		where t.id=m.id and t.id=#{tid}
 	</select>
 	<select id="ReservationDetailBean" resultType = "composite.model.ReservationDetailBean">
@@ -113,33 +113,53 @@
 	</select>
 	<select id = "GetWeeklySales" resultType = "composite.model.SalesBean">
 		select pnum, odate, id, sum(price) as price from
-		(select odate, pnum
-		from orders natural join orderdetail)
-		natural join product
-		where id = #{id}
-		and odate >= sysdate - 7
-		group by pnum, odate, id
+			(select odate, pnum
+			from orders natural join orderdetail)
+				natural join product
+				where id = #{id}
+				and odate >= sysdate - 7
+				group by pnum, odate, id
 	</select>
 	<select id = "GetMonthlySales" resultType = "composite.model.SalesBean">
 		select pnum, to_char(odate, 'YYYY-MM') as odate, id, sum(price) as price from
-		(select odate, pnum
-		from orders natural join orderdetail)
-		natural join product
-		where id = #{id}
-		and odate between add_months(trunc(sysdate, 'MM'), -5) and trunc(sysdate)
-		group by pnum, odate, id
+				(select odate, pnum
+				from orders natural join orderdetail)
+					natural join product
+					where id = #{id}
+					and odate between add_months(trunc(sysdate, 'MM'), -5) 
+					and trunc(sysdate)
+					group by pnum, odate, id
 	</select>
 	<select id = "GetTotalSales" resultType = "composite.model.SalesBean">
 		select pnum, id, sum(price) as price from
-		(select odate, pnum
-		from orders natural join orderdetail)
-		natural join product
-		where id = #{id}
-		group by pnum, id
+			(select odate, pnum
+			from orders natural join orderdetail)
+				natural join product
+				where id = #{id}
+				group by pnum, id
 	</select>
 	<select id = "GetAverageSale" resultType = "double">
 		select avg(price) as price from
-		(select sum(price) as price, id from (select * from product natural join trainer
-		where activity = #{activity}) natural join orderdetail group by id)
+			(select sum(price) as price, id from 
+				(select * from product natural join trainer
+				where activity = #{activity}) natural join orderdetail group by id)
+	</select>
+	<select id = "GetWeeklyCount" resultType = "composite.model.SalesBean">
+		select count(odnum) as pnum, odate from 
+			(select odnum, pnum, onum from 
+				orderdetail natural join product
+					where id = #{id}) 
+					natural join orders 
+					where odate >= sysdate - 7 
+					group by odate
+	</select>
+	<select id = "GetMonthlyCount" resultType = "composite.model.SalesBean">
+		select sum(pnum) as pnum, odate from (
+			select count(odnum) as pnum, to_char(odate, 'YYYY-MM') as odate from 
+				(select odnum, onum from orderdetail natural join product where id = #{id}) 
+				natural join orders 
+					where odate between add_months(trunc(sysdate, 'MM'), -5) and trunc(sysdate) 
+					group by odate)
+				group by odate
 	</select>
 </mapper>

@@ -16,7 +16,7 @@
 	</insert>
 	<select id = "GetOneUsage" resultType = "usage.model.UsageBean">
 		select * from usage
-		where mid = #{mid}
+		where mid = #{mid} and tid = #{tid}
 	</select>
 	<select id="GetTid" resultType="String">
 		select tid from usage

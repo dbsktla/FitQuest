@@ -5,5 +5,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="scrap.model.Scrap">
-
+	<select id="GetScrapByIdAndBnum" resultType="community.model.ScrapBean">
+		select * from scrap
+		where id=#{id} and bnum=#{bnum}
+	</select>
+	
+	<insert id="InsertScrap">
+		insert into scrap
+		values(sseq.nextval,#{id},#{bnum})
+	</insert>
+	
+	<delete id="DeleteScrap">
+		delete from scrap
+		where snum = #{snum}
+	</delete>
 </mapper>
