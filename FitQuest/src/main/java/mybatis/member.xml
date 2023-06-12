@@ -34,4 +34,12 @@
 		select name from member
 		where id = #{mid}
 	</select>
+	<update id="UpdateTrainerMember">
+		update member set name = #{name}, nickname = #{nickname}, birth = #{birth}, mphone = #{mphone}, email = #{email}, maddr1 = #{maddr1}, maddr2 = #{maddr2}, gender = #{gender}
+		where id = #{id}
+	</update>
+	<update id = "UpdatePassword">
+		update member set password = #{password}
+		where id = #{id}
+	</update>
 </mapper>

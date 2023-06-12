@@ -148,7 +148,18 @@ section{
     // override for the checkbox/radio buttons
     background-color: #ffc107 !important;
   }
-
+.fe {
+	    position: absolute;
+	    right: 0px;
+	    top: 15px;
+	}
+.ie {
+	    color: #aab7cf;
+	    padding-right: 20px;
+	    padding-bottom: 5px;
+	    transition: 0.3s;
+	    font-size: 16px;
+	}
 </style>
     <section class="section">
 	
