@@ -75,7 +75,7 @@
 									<c:forEach var="board" items="${ myBoardList }"
 										varStatus="status">
 										<tr align="center">
-											<th scope="row">${ fn:length(myBoardList) - status.index }</th>
+											<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
 											<td align="left"><c:if test="${ board.btype == '자유' }">
 													<a style="color: #FAC710;"
 														href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>

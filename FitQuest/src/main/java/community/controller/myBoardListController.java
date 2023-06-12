@@ -67,7 +67,7 @@ public class myBoardListController {
 			List<BoardBean> myBoardList = boardDao.getMyBoardList(pageInfo,map);
 			List<ScrapBean> myScrapList = scrapDao.getMyScrapList(map);
 
-			model.addAttribute("Count", totalCount);
+			model.addAttribute("totalCount", totalCount);
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("myBoardList", myBoardList);
 			model.addAttribute("myScrapList", myScrapList);

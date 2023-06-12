@@ -62,8 +62,7 @@
 						<tr><td height="30" style="border: white;"></td><tr>
 						<c:forEach var="board" items="${ healthBoardList }" varStatus="status">
 							<tr align="center">
-								<%-- <th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th> --%>
-								<th scope="row">${ fn:length(healthBoardList) - status.index }</th>
+								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
 								<td align="left">
 									<a style="color : #FAC710;" href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
 								</td>
