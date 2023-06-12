@@ -4,63 +4,158 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<style>
+	.fe {
+	    position: absolute;
+	    right: 0px;
+	    top: 15px;
+	}
+	.ie {
+	    color: #aab7cf;
+	    padding-right: 20px;
+	    padding-bottom: 5px;
+	    transition: 0.3s;
+	    font-size: 16px;
+	}
+</style>
+
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script>
 	$(document).ready(function(){
 		//alert(1);
 		getHealthTime();
+		getGraphAll();
 	});
 	
+	// 신체정보 그래프
+	function getGraphAll(){
+		
+		var weightData = [];
+		var skmuscleData = [];
+		var bodyfatperData = [];
+		var Date = [];
+		
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				if(data == ""){
+					$('#lineChart').empty();
+					$('#lineChart').append("등록된 신체 정보가 없습니다.");
+				} else {
+					for(i=0; i<data.length; i++){
+						weightData.push(data[i].weight);
+						skmuscleData.push(data[i].skeletalmuscle);
+						bodyfatperData.push(data[i].bodyfatper);
+						Date.push(data[i].phdate);
+					}
+					
+					new ApexCharts(document.querySelector("#lineChart"), {
+						series: [{
+							name: "체중(kg)",
+							data: weightData
+						}, {
+							name: "골격근량(kg)",
+							data: skmuscleData
+						}, {
+							name: "체지방률(%)",
+							data: bodyfatperData
+						}],
+						chart: {
+							height: 350,
+							type: 'area',
+							toolbar: {
+								show: false
+							},
+						},
+						markers: {
+							size: 4
+						},
+						colors: ['#4154f1', '#2eca6a', '#ff771d'],
+						fill: {
+							type: "gradient",
+							gradient: {
+								shadeIntensity: 1,
+								opacityFrom: 0.3,
+								opacityTo: 0.4,
+								stops: [0, 90, 100]
+							}
+						},
+						dataLabels: {
+							enabled: false
+						},
+						stroke: {
+							curve: 'smooth',
+							width: 2
+						},
+						xaxis: {
+							categories: Date,
+						}
+					}).render();
+				}
+				
+			} //success
+		}); //ajax
+		
+	} //getGraphAll
+	
+	
+	// 주별 운동시간 그래프
 	function getHealthTime() {
 		//alert(2);
 		var weekdate = [];
 		
 		$.ajax({
-			url : 'health.ht',
-			type : 'POST',
-			datatype : 'json',
+			url : "health.ht",
+			type : "POST",
+			dataType : "json",
 			success : function (data) {
+				//alert(data);
 				
-				for(i=0; i<data.length; i++){
+				for(i=0; i<data.length-1; i++){
 					weekdate.push(data[i].playtime);
+					//alert(data[i].playtime);
 				} //for
 				
-				new Chart(document.querySelector('#barChart'), {
-					type: 'bar',
-					data: {
-						labels: ['월', '화', '수', '목', '금', '토', '일'],
-						datasets: [{
-							label: '운동 시간(분)',
-							data: weekdate,
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(255, 159, 64, 0.2)',
-								'rgba(255, 205, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(201, 203, 207, 0.2)'
-							],
-							borderColor: [
-								'rgb(255, 99, 132)',
-								'rgb(255, 159, 64)',
-								'rgb(255, 205, 86)',
-								'rgb(75, 192, 192)',
-								'rgb(54, 162, 235)',
-								'rgb(153, 102, 255)',
-								'rgb(201, 203, 207)'
-							],
-							borderWidth: 1
-						}]
-					},
-					options: {
-						scales: {
-							y: {
-								beginAtZero: true
+					new Chart(document.querySelector('#barChart'), {
+						type: 'bar',
+						data: {
+							labels: ['월', '화', '수', '목', '금', '토', '일'],
+							datasets: [{
+								label: '운동 시간(분)',
+								data: weekdate,
+								backgroundColor: [
+									'rgba(255, 99, 132, 0.2)',
+									'rgba(255, 159, 64, 0.2)',
+									'rgba(255, 205, 86, 0.2)',
+									'rgba(75, 192, 192, 0.2)',
+									'rgba(54, 162, 235, 0.2)',
+									'rgba(153, 102, 255, 0.2)',
+									'rgba(201, 203, 207, 0.2)'
+								],
+								borderColor: [
+									'rgb(255, 99, 132)',
+									'rgb(255, 159, 64)',
+									'rgb(255, 205, 86)',
+									'rgb(75, 192, 192)',
+									'rgb(54, 162, 235)',
+									'rgb(153, 102, 255)',
+									'rgb(201, 203, 207)'
+								],
+								borderWidth: 1
+							}]
+						},
+						options: {
+							scales: {
+								y: {
+									beginAtZero: true
+								}
 							}
 						}
-					}
-				});
+				}); 
 			} //success
 		}); // ajax
 	}
@@ -92,7 +187,9 @@
 						<div class="ps-3" style="text-align: center">
 							<c:if test="${empty hblist}">
 								오늘의 운동 내역이 없습니다.<br><br>
-							<a href="myHealthList.ht">운동 등록하러 가기</a>
+							<div class="text-center">
+								<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myHealthList.ht'">운동 등록하러 가기</button>
+							</div>
 							</c:if>
 							<c:if test="${not empty hblist}">
 								<table>
@@ -115,7 +212,9 @@
 									</c:if>
 									</c:forEach>
 								</table>
-							<a href="myHealthList.ht">운동 상세정보 보러가기</a>
+							<div class="text-center">
+								<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myHealthList.ht'">운동 상세정보 보러가기</button>
+							</div>
 							</c:if>
 						</div><!-- ps-3 -->
 					</div><!-- card-body -->
@@ -140,10 +239,15 @@
 					<div class="card-body">
 					<h5 class="card-title">함께하는 트레이너</h5>
 						<div class="ps-3">
+							<c:if test="${empty mainHealthList}">
+								함께하는 트레이너 정보가 없습니다.
+							</c:if>
 							<!-- 선택한 날짜, 00 트레이너와 00일쨰 00중 -->
-							<c:forEach var="hlist" items="${mainHealthList}">
-								<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate}</b>일 째 <b>${hlist.tactivity}</b> 중<br>
-							</c:forEach>
+							<c:if test="${not empty mainHealthList}">
+								<c:forEach var="hlist" items="${mainHealthList}">
+									<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate}</b>일 째 <b>${hlist.tactivity}</b> 중<br>
+								</c:forEach>
+							</c:if>
 						</div><!-- ps-3 -->
 					 </div><!-- card-body -->
 				</div>
@@ -164,24 +268,31 @@
 											<td colspan="2">등록된 신체정보가 없습니다.</td>
 										</tr>
 									</c:if>
-									<tr>
-										<td style="width: 80%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
-										<td>${phsiqueBean.weight}</td>
-									</tr>
-									<tr>
-										<td style="width: 80%;"><font style="color: gray; font-size: 16px">BMI</font></td>
-										<td>${phsiqueBean.bmi}</td>
-									</tr>
-									<tr>
-										<td style="width: 80%;"><font style="color: gray; font-size: 16px">골격근량(kg)</font></td>
-										<td>${phsiqueBean.skeletalmuscle}</td>
-									</tr>
-									<tr>
-										<td style="width: 80%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
-										<td>${phsiqueBean.bodyfatper}</td>
-									</tr>
+									
+									<c:if test="${not empty phsiqueBean}">
+										<tr>
+											<td style="width: 80%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
+											<td>${phsiqueBean.weight}</td>
+										</tr>
+										<tr>
+											<td style="width: 80%;"><font style="color: gray; font-size: 16px">BMI</font></td>
+											<td>${phsiqueBean.bmi}</td>
+										</tr>
+										<tr>
+											<td style="width: 80%;"><font style="color: gray; font-size: 16px">골격근량(kg)</font></td>
+											<td>${phsiqueBean.skeletalmuscle}</td>
+										</tr>
+										<tr>
+											<td style="width: 80%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
+											<td>${phsiqueBean.bodyfatper}</td>
+										</tr>
+									</c:if>
 								</table>
-							</div>
+								<div class="text-center" style="padding-top: 10%">
+									<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myPhysiqueList.ht'">신체정보 등록하기</button>
+								</div>
+							</div><!-- col-xxl-3 -->
+							
 							<div class="col-xxl-3">
 								<font style="font-size: 18px; color: #FAC710;"><b>목표 체중</b></font><br><br>
 								<table>
@@ -190,46 +301,103 @@
 											<td colspan="2">등록된 목표체중이 없습니다.</td>
 										</tr>
 									</c:if>
-									<tr>
-										<td style="width: 60%;"><font style="color: gray; font-size: 16px">목표일자</font></td>
-										<td>${fn:substring(goalBean.gpdate,0,10)}</td>
-									</tr>
-									<tr>
-										<td style="width: 60%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
-										<td>
-											<fmt:formatNumber var="w" value="${goalBean.weight - phsiqueBean.weight}" pattern=".00"/>
-											${goalBean.weight} (${w})
-											
-										</td>
-									</tr>
-									<tr>
-										<td style="width: 60%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
-										<td>
-											<fmt:formatNumber var="b" value="${goalBean.bodyfatper - phsiqueBean.bodyfatper}" pattern=".00"/>
-											${goalBean.bodyfatper} (${b})
-											
-										</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<fmt:parseDate var="gpdate" value="${goalBean.gpdate}" pattern="yyyy-MM-dd"/>
-											<jsp:useBean id="now" class="java.util.Date" />
-											<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowTime" scope="request"/>
-											<fmt:parseNumber value="${gpdate.time / (1000*60*60*24)}" integerOnly="true" var="gpdateTime" scope="request"/>
-											<font style="font-size: 13px">목표일까지 <b>${gpdateTime - nowTime}일</b> 남았습니다.</font>
-										</td>
-									</tr>
+									
+									<c:if test="${not empty goalBean}">
+										<tr>
+											<td style="width: 60%;"><font style="color: gray; font-size: 16px">목표일자</font></td>
+											<td>${fn:substring(goalBean.gpdate,0,10)}</td>
+										</tr>
+										<tr>
+											<td style="width: 60%;"><font style="color: gray; font-size: 16px">체중(kg)</font></td>
+											<td>
+												<fmt:formatNumber var="w" value="${goalBean.weight - phsiqueBean.weight}" pattern=".00"/>
+												${goalBean.weight} (${w})
+												
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 60%;"><font style="color: gray; font-size: 16px">체지방률(%)</font></td>
+											<td>
+												<fmt:formatNumber var="b" value="${goalBean.bodyfatper - phsiqueBean.bodyfatper}" pattern=".00"/>
+												${goalBean.bodyfatper} (${b})
+												
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<fmt:parseDate var="gpdate" value="${goalBean.gpdate}" pattern="yyyy-MM-dd"/>
+												<jsp:useBean id="now" class="java.util.Date" />
+												<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowTime" scope="request"/>
+												<fmt:parseNumber value="${gpdate.time / (1000*60*60*24)}" integerOnly="true" var="gpdateTime" scope="request"/>
+												<font style="font-size: 13px">목표일까지 <b>${gpdateTime - nowTime}일</b> 남았습니다.</font>
+											</td>
+										</tr>
+									</c:if>
 								</table>
-							</div>
-							<div class="col-xxl-4">
+								<div class="text-center" style="padding-top: 10%">
+									<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href=''">목표체중 등록하기</button>
+								</div>
+							</div><!-- col-xxl-3 -->
+							
+							<div class="col-xxl-3">
 								<font style="font-size: 18px; color: #FAC710;"><b>이번주 운동시간</b></font><br><br>
 								<canvas id="barChart" style="max-height: 400px;"></canvas>
 								
-							</div>
-							<div class="col-xxl-2">
+							</div><!-- col-xxl-3 -->
+							
+							<div class="col-xxl-3" style="text-align: center;">
 								<font style="font-size: 18px; color: #FAC710;"><b>목표 운동 시간 (달성 여부)</b></font><br><br>
-								- 30% 조금만 더 노력 50% 이제절반! 80% 고지가 코앞! 100% 달성! 
-							</div>
+								<c:set var="wtime" value="${weekPlaytime / 60}"/>
+								<c:set var="per" value="${(wtime / goalBean.goaltime) * 100 }"/>
+								<font style="color: gray; font-size: 16px">이번주 총 운동 시간 </font> ${weekPlaytime} 분<br>
+								<font style="color: gray; font-size: 16px">이번주 총 목표 시간 </font> ${goalBean.goaltime } 시간<br>
+								
+								<c:if test="${empty goalBean}">
+									등록된 운동 목표 시간이 없습니다.
+								</c:if>
+								<c:if test="${not empty goalBean}">
+									<font style="font-size: 18px;"><b><fmt:formatNumber value="${per}" pattern=".00"/> % 달성!</b></font>
+									
+									<canvas id="doughnutChart" style="max-height: 180px;"></canvas>
+						              <script>
+						                document.addEventListener("DOMContentLoaded", () => {
+						                  new Chart(document.querySelector('#doughnutChart'), {
+						                    type: 'doughnut',
+						                    data: {
+					                    	  labels: [
+					                            '달성',
+					                            '미달성'
+					                          ],
+						                      datasets: [{
+						                        data: [${per}, ${100 - per}],
+						                        backgroundColor: [
+						                          'rgb(255, 205, 86)',
+						                          'rgb(255, 99, 132)'
+						                        ],
+						                        hoverOffset: 4
+						                      }]
+						                    }
+						                  });
+						                });
+						              </script>
+						              <!-- End Doughnut CHart -->
+									<c:if test="${per >= 100}">
+										<font style="color: green;">목표를 달성했습니다.</font>
+									</c:if>
+									<c:if test="${per < 100 and per >=80}">
+										<font style="color: blue;">거의 다왔어요!</font>
+									</c:if>
+									<c:if test="${per < 80 and per >=50}">
+										<font style="color: blue;">이제 절반!</font>
+									</c:if>
+									<c:if test="${per < 50 and per > 0}">
+										<font style="color: red;">조금만 더 노력해볼까요?</font>
+									</c:if>
+									<!-- - 30% 조금만 더 노력 50% 이제절반! 80% 고지가 코앞! 100% 달성! -->
+									
+								</c:if> 
+							</div><!-- col-xxl-3 -->
+							
 						</div><!-- row -->
 						</div><!-- ps-3 -->
 					 </div><!-- card-body -->
@@ -240,84 +408,16 @@
             <div class="col-12">
               <div class="card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body">
                   <h5 class="card-title">이번달 체중 변화 <span>/Today</span></h5>
 
                   <!-- Line Chart -->
-                  <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
+                  <div id="lineChart"></div>
 
                 </div>
 
               </div>
             </div><!-- End Reports -->
-			
 			
 		</div>
 	</div>

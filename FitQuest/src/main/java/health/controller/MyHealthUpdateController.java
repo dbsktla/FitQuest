@@ -2,7 +2,9 @@ package health.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,9 +96,10 @@ public class MyHealthUpdateController {
 
 	// update작업
 	@RequestMapping(value = command)
-	public String doAction(HttpServletRequest request, HttpServletResponse response) {
+	public String doAction(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		response.setContentType("text/html; charset=UTF-8");
-
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
 		int hnum = Integer.parseInt(request.getParameter("hnum"));
 		String hdate = request.getParameter("hdate");
 		String olddate = request.getParameter("olddate");
@@ -112,8 +115,11 @@ public class MyHealthUpdateController {
 		} else { // 운동날짜 변경함
 
 			// 운동날짜가 이미 있으면
-			List<HealthDateBean> hlist = healthDateDao.getHealthByHdate(hdate);
-
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("hdate", hdate);
+			map.put("id", memberBean.getId());
+			List<HealthDateBean> hlist = healthDateDao.getHealthByHdate(map);
+			
 			if (hlist != null) {
 				try {
 					response.getWriter()
