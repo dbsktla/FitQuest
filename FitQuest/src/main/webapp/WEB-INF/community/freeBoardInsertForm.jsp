@@ -84,9 +84,6 @@ $(document).ready(function(){
 						</select>
 						<form:errors cssClass="err" path="bcategory" />
 					</div>
-					<!-- <div class="col-12" align="left">
-						<label for="inputAddress5" class="form-label">내용</label>
-					</div> -->
 
 					<div class="quill-editor-default" id="divTest">
 						${ boardBean.bcontent }

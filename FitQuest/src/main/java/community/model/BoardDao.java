@@ -60,9 +60,9 @@ public class BoardDao {
 		return cnt;
 	}
 
-	public int deleteFreeBoard(int bnum) {
+	public int deleteBoard(int bnum) {
 		int cnt = -1;
-		cnt = sqlSessionTemplate.delete(namespace + ".DeleteFreeBoard", bnum);
+		cnt = sqlSessionTemplate.delete(namespace + ".DeleteBoard", bnum);
 		return cnt;
 	}
 
@@ -87,6 +87,45 @@ public class BoardDao {
 			} catch(Exception e){
 				
 			}
+		}
+		return cnt;
+	}
+	
+	public List<BoardBean> getHealthBoardList(Paging pageInfo, Map<String, String> map) {
+		List<BoardBean> healthBoardList = new ArrayList<BoardBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		healthBoardList = sqlSessionTemplate.selectList(namespace + ".GetHealthBoardList", map, rowBounds);
+		return healthBoardList;
+	}
+	
+	public List<BoardBean> getHotHealthBoardList() {
+		List<BoardBean> hotHealthBoardList = new ArrayList<BoardBean>();
+		hotHealthBoardList = sqlSessionTemplate.selectList(namespace + ".GetHotHealthBoardList");
+		return hotHealthBoardList;
+	}
+
+	public BoardBean getOnehealthBoard(int bnum) {
+		BoardBean boardBean = null;
+		boardBean = sqlSessionTemplate.selectOne(namespace + ".GetOneHealthBoard", bnum);
+		return boardBean;
+	}
+
+	public int insertHealthBoard(BoardBean boardBean) {
+		int cnt = -1;
+		try {
+			cnt = sqlSessionTemplate.insert(namespace + ".InsertHealthBoard", boardBean);
+		} catch(DataAccessException e){
+			
+		}
+		return cnt;
+	}
+
+	public int updateHealthBoard(BoardBean boardBean) {
+		int cnt = -1;
+		try {
+			cnt = sqlSessionTemplate.update(namespace + ".UpdateHealthBoard", boardBean);
+		} catch(DataAccessException e){
+			
 		}
 		return cnt;
 	}

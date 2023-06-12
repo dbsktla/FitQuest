@@ -17,11 +17,11 @@
 	function freeBoardDelete(){
 		var check = confirm('삭제하시겠습니까?');
 		if(check){
-			location.href='boardDelete.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }&btype${ boardBean.btype }';
+			location.href='boardDelete.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }&btype=${ boardBean.btype }';
 		}
 	}
 	function freeBoardUpdate(){
-		location.href='freeBoardUpdate.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }';
+		location.href='healthBoardUpdate.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }';
 	}
 	function bcommentInsert(){
 				
@@ -79,17 +79,37 @@
 		openWin.submit();
 		openWin.close();
 	}
+	function scrapInsert(id,bnum){
+		alert(1);
+		location.href= 'scrapInsert.co?id=' + id + '&bnum=' = bnum;
+	}
+	function scrapDelete(id,bnum,snum){
+		alert(1);
+		location.href= 'scrapDelete.co?id=' + id + '&bnum=' = bnum + '&bnum=' + bnum;
+	}
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
 	<main>
 		<div class="card" style="width: 55%; margin: auto;">
 			<div class="card-body">
+				<div align="left">
+					<c:if test="${ scrapBean == null }">
+						<a href="scrapInsert.co?id=${ sessionScope.loginInfo.id }&bnum=${ boardBean.bnum }">
+							<h1><i style="color : #FAC710;" class="bi bi-bookmark-star"></i></h1>
+						</a>
+					</c:if>
+					<c:if test="${ scrapBean != null }">
+						<a href="scrapDelete.co?id=${ sessionScope.loginInfo.id }&bnum=${ boardBean.bnum }&snum=${ scrapBean.snum }">
+							<h1><i style="color : #FAC710;" class="bi bi-bookmark-star-fill"></i></h1>
+						</a>
+					</c:if>
+				</div>
 				<div align="right">
-					<input type="button" value="목록보기" class="btn btn-warning btn-sm" onclick="location.href='freeBoardList.co'">
+					<input type="button" value="목록보기" class="btn btn-warning btn-sm" onclick="location.href='healthBoardList.co'">
 					<c:if test="${ sessionScope.loginInfo != null }">
 						<input type="button" value="신고하기" class="btn btn-danger btn-sm" onclick="boardReportInsert('${ boardBean.bnum }')">
-					</c:if>	
+					</c:if>				
 				</div>
 				<h2 class="card-title">${ boardBean.bsubject }</h2>
 				
@@ -109,8 +129,18 @@
 								<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
 							</td>
 						</tr>
+						<tr style="border : white;">
+							<td height="30"></td>
+						</tr>
+						<c:if test="${ boardBean.bimage != null }">
+							<tr style="border : white;">
+								<td colspan="4">
+									<img width="100%" src="<%= request.getContextPath() %>/resources/Image/CommunityImage/${ boardBean.bimage }">
+								</td>
+							</tr>
+						</c:if>
 						<tr align="left" style="border:white;">
-							<td style="padding-left: 3em;" colspan="4" align="justify">${ boardBean.bcontent }</td>
+							<td style="padding-left: 1em;" colspan="4" align="justify">${ boardBean.bcontent }</td>
 						</tr>
 						<tr height="50"><td colspan="4">
 							<div align="right">
@@ -118,7 +148,6 @@
 									<input type="button" value="수정하기" class="btn btn-warning btn-sm" onclick="freeBoardUpdate()">
 									<input type="button" value="삭제하기" class="btn btn-warning btn-sm" onclick="freeBoardDelete()">
 								</c:if>
-								<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='freeBoardReply.co?bref=${ boardBean.bref }&brestep=${ boardBean.brestep }&brelevel=${ boardBean.brelevel }&bcategory=${ boardBean.bcategory }'">
 							</div>
 						</td></tr>
 				</table>
@@ -129,7 +158,7 @@
 						<tr align="left" style="border: white;">
 							<th>댓글</th>
 							<td colspan="7" align="right">
-								<input type="button" value="추가" class="btn btn-outline-warning btn-sm" onclick="bcommentInsert('')">
+								<input type="button" value="추가" class="btn btn-warning btn-sm" onclick="bcommentInsert('')">
 							</td>
 						</tr>
 						<c:forEach var="bcomment" items="${ bcommentList }"> 
@@ -149,9 +178,11 @@
 								<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
 							</td>
 							<c:if test="${ sessionScope.loginInfo != null }">
-								<td align="right">
-									<a style="color : #FAC710;" href="javascript:bcommentReply('${ boardBean.btype }','${ boardBean.bnum }','${ bcomment.cref }','${ bcomment.crestep }','${ bcomment.crelevel }')">답글</a>
-								</td>
+								<c:if test="${ sessionScope.loginInfo.id eq boardBean.id }">
+									<td align="right">
+										<a style="color : #FAC710;" href="javascript:bcommentReply('${ boardBean.btype }','${ bcomment.bnum }','${ bcomment.cref }','${ bcomment.crestep }','${ bcomment.crelevel }')">답글</a>
+									</td>
+								</c:if>
 								<td align="right">
 									<a id="report" href="javascript:commentReportInsert('${ bcomment.cnum }','${ boardBean.bnum }')" style="color : red;">신고</a>
 								</td>

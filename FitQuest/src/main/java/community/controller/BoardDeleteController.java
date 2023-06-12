@@ -7,23 +7,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import community.model.BcommentDao;
+import community.model.BoardDao;
 import member.model.MemberBean;
 
 @Controller
-public class BcommentDeleteController {
-	private final String command = "/bcommentDelete.co";
+public class BoardDeleteController {
+	private final String command = "/boardDelete.co";
+	private final String getPageFree = "redirect:/freeBoardList.co";
+	private final String getPageHealth = "redirect:/healthBoardList.co";
 	
 	@Autowired
-	BcommentDao bcommentDao;
+	BoardDao boardDao;
 	
 	@RequestMapping(command)
-	public String delete(@RequestParam("cnum") int cnum, @RequestParam("bnum") int bnum ,@RequestParam("id") String id, @RequestParam("btype") String btype ,HttpSession session) {
+	public String delete(@RequestParam("bnum") int bnum, @RequestParam("id") String id, @RequestParam("btype") String btype,HttpSession session) {
 		if(btype.equals("자유")) {
 			session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bnum);
 		}
 		else {
-			session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + bnum);
+			session.setAttribute("destination", "redirect:/healthBoardList.co?bnum=" + bnum);
 		}
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
@@ -31,8 +33,8 @@ public class BcommentDeleteController {
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 			if(memberBean.getId().equals(id)) {
-				int cnt = bcommentDao.deleteBcomment(cnum);
-				System.out.println("DeleteBcomment cnt : " + cnt);
+				int cnt = boardDao.deleteBoard(bnum);
+				System.out.println("DeleteBoard cnt : " + cnt);
 				if(cnt != -1) {
 					System.out.println("삭제 성공");
 				}
@@ -42,10 +44,10 @@ public class BcommentDeleteController {
 			}
 		}
 		if(btype.equals("자유")) {
-			return "redirect:/freeBoardDetail.co?bnum=" + bnum;
+			return getPageFree;
 		}
 		else {
-			return "redirect:/healthBoardDetail.co?bnum=" + bnum;
+			return getPageHealth;
 		}
 	}
 }

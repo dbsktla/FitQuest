@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import community.model.BcommentBean;
 import community.model.BcommentDao;
@@ -18,8 +19,13 @@ public class BcommentReplyController {
 	BcommentDao bcommentDao;
 
 	@RequestMapping(value = command)
-	public String reply(BcommentBean bcommentBean, HttpSession session) {
-		session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum());
+	public String reply(BcommentBean bcommentBean, @RequestParam("btype") String btype ,HttpSession session) {
+		if(btype.equals("자유")) {
+			session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum());
+		}
+		else {
+			session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + bcommentBean.getBnum());
+		}
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
@@ -31,11 +37,15 @@ public class BcommentReplyController {
 			System.out.println("ReplyBcomment cnt : " + cnt);
 			if(cnt != -1) {
 				System.out.println("삽입 성공");
-				return  "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum();
 			}
 			else {
 				System.out.println("삽입 실패");
-				return  "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum();
+			}
+			if(btype.equals("자유")) {
+				return "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum();
+			}
+			else {
+				return "redirect:/healthBoardDetail.co?bnum=" + bcommentBean.getBnum();
 			}
 		}
 

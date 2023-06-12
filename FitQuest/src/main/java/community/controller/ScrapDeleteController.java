@@ -5,30 +5,28 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import community.model.BoardDao;
+import community.model.ScrapBean;
+import community.model.ScrapDao;
 import member.model.MemberBean;
 
 @Controller
-public class FreeBoardDeleteController {
-	private final String command = "/freeBoardDelete.co";
-	private final String getPage = "redirect:/freeBoardList.co";
+public class ScrapDeleteController {
+	private final String command = "/scrapDelete.co";
 	
 	@Autowired
-	BoardDao boardDao;
+	ScrapDao scrapDao;
 	
 	@RequestMapping(command)
-	public String delete(@RequestParam("bnum") int bnum, @RequestParam("id") String id, HttpSession session) {
-		session.setAttribute("destination", "redirect:/freeBoardInsert.co");
+	public String insert(ScrapBean scrapBean, HttpSession session) {
+		session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + scrapBean.getBnum());
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
-			if(memberBean.getId().equals(id)) {
-				int cnt = boardDao.deleteFreeBoard(bnum);
-				System.out.println("DeleteFreeBoard cnt : " + cnt);
+			if(memberBean.getId().equals(scrapBean.getId())) {
+				int cnt = scrapDao.deleteScrap(scrapBean.getSnum());
 				if(cnt != -1) {
 					System.out.println("삭제 성공");
 				}
@@ -37,7 +35,6 @@ public class FreeBoardDeleteController {
 				}
 			}
 		}
-		
-		return getPage;
+		return "redirect:/healthBoardDetail.co?bnum=" + scrapBean.getBnum();
 	}
 }

@@ -56,7 +56,7 @@ public class FreeBoardInsertController {
 				System.out.println("InsertFreeBoard cnt : " + cnt);
 				if(cnt != -1) {
 					System.out.println("삽입 성공");
-					return "redirect:/freeBoardList.co";
+					return gotoPage;
 				}
 				else {
 					System.out.println("삽입 실패");
