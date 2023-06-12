@@ -143,7 +143,12 @@
 		// request: 년, 월 정보 . 트레이너 이름, 목록.  
 		// 데이터 비교 -> 운동 데이터가 있는날은 따로 체크(이미지 띄우기)
 		$.ajax({
-			
+			url : "myHealthCalList.ht",
+			type : "POST",
+			dataType : "json",
+			success : function () {
+				
+			}
 		});
 		
 		/* <table>

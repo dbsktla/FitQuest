@@ -97,7 +97,8 @@
 						</div>
 						<div class="col-md-6">
 							<label for="tid" class="form-label">담당 트레이너</label>
-							<input type="text" class="form-control" id="tid" name="tid" value="${healthDateBean.tname}" readonly="readonly">
+							<input type="text" class="form-control" id="tname" name="tname" value="${healthDateBean.tname}" readonly="readonly">
+							<input type="hidden" name="tid" value="${healthDateBean.tid}">
 						</div>
 						<div style="height: 10"></div>
 						
