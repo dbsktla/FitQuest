@@ -54,7 +54,7 @@ public class HealthBoardListController {
 		System.out.println("whatColumn : " + whatColumn);
 		System.out.println("bcategory : " + bcategory);
 
-		int totalCount = boardDao.getFreeBoardCount(map);
+		int totalCount = boardDao.getHealthBoardCount(map);
 		System.out.println("totalCount : " + totalCount);
 		String url = request.getContextPath() + command;
 

@@ -58,7 +58,7 @@ public class HealthBoardInsertController {
 				boardBean.setBtype("건강");
 				
 				try {
-					if(boardBean.getUpload() != null) {
+					if(!boardBean.getUpload().isEmpty()) {
 						File destination = new File(uploadPath + File.separator + boardBean.getUpload().getOriginalFilename());
 						MultipartFile multi =  boardBean.getUpload();
 						multi.transferTo(destination);

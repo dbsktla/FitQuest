@@ -91,6 +91,12 @@ public class BoardDao {
 		return cnt;
 	}
 	
+	public int getHealthBoardCount(Map<String, String> map) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".GetHealthBoardCount",map);
+		return cnt;
+	}
+	
 	public List<BoardBean> getHealthBoardList(Paging pageInfo, Map<String, String> map) {
 		List<BoardBean> healthBoardList = new ArrayList<BoardBean>();
 		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
@@ -127,6 +133,19 @@ public class BoardDao {
 		} catch(DataAccessException e){
 			
 		}
+		return cnt;
+	}
+
+	public List<BoardBean> getMyBoardList(Paging pageInfo, Map<String, String> map) {
+		List<BoardBean> myBoardList = new ArrayList<BoardBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		myBoardList = sqlSessionTemplate.selectList(namespace + ".GetMyBoardList", map, rowBounds);
+		return myBoardList;
+	}
+
+	public int getMyBoardCount(Map<String, String> map) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".GetMyBoardCount",map);
 		return cnt;
 	}
 }
