@@ -7,6 +7,9 @@ a{
 .b{
 	font-weight: bold;
 }
+.calendar{
+	text-align: center;
+}
 .calendar-none{
 	text-align: center;
 	border-bottom: 1px solid gray;
@@ -66,10 +69,23 @@ a{
 .calendar_month:hover {
 	color: #FAC710;
 }
-.calendar-button-div{
-	width: 68%;
-	text-align: right;
+.calendar-button-div {
 	margin: 10px 0px;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	width: 68%;
+}
+
+.calendar-button-div .left {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: left;
+}
+
+.calendar-button-div .right {
+	text-align: right;
 }
 .calendar_body{
 	width: 68%;
@@ -265,4 +281,10 @@ button.close-button {
 }
 button.close-button:hover {
 	background-color: #FFCA2C;
+}
+
+.usage-area{
+	padding: 8px 12px;
+	background-color: #F7F7F8;
+	border-radius: 8px; 
 }

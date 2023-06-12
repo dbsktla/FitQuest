@@ -222,4 +222,25 @@
 		where bnum = #{bnum}
 	</update>
 	
+	<select id="GetMyBoardCount" resultType="int">
+		select count(*) 
+		from board inner join member
+		on board.id = member.id
+		where board.id = #{id}
+		<if test="btype != ''">
+			and btype = #{btype}
+		</if>
+	</select>
+	
+	<select id="GetMyBoardList" resultType="community.model.BoardBean">
+		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
+		from board inner join member on board.id = member.id order by bref desc, brestep asc) board) board
+		where board.id = #{id}
+		<if test="btype != ''">
+			and btype = #{btype}
+		</if>
+	</select>
+	
 </mapper>

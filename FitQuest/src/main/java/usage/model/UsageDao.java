@@ -13,6 +13,7 @@ public class UsageDao {
 	private final String namespace = "usage.model.Usage";
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
 	public int getUsageCount(Map<String, String> map) {
 		int cnt = -1;
 		cnt = sqlSessionTemplate.selectOne(namespace + ".GetUsageCount", map);
@@ -40,5 +41,15 @@ public class UsageDao {
 		List<UsageBean> tidList = new ArrayList<UsageBean>();
 		tidList = sqlSessionTemplate.selectList(namespace+".GetTListByMid",mid);
 		return tidList;
+	}
+	public int decreaseUsage(int unum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".DecreaseUsage",unum);
+		return cnt;
+	}
+	public int deleteUsage(int unum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace+".DeleteUsage",unum);
+		return cnt;
 	}
 }

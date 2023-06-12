@@ -26,4 +26,13 @@
 		select * from usage
 		where mid = #{mid}
 	</select>
+	<update id="DecreaseUsage">
+		update usage set
+		usage = usage -1
+		where unum = #{unum}
+	</update>
+	<delete id="DeleteUsage">
+		delete usage
+		where unum = #{unum}
+	</delete>
 </mapper>
