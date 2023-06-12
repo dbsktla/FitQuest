@@ -26,8 +26,6 @@ public class BoardBean {
 	private String bimage;
 	
 	private MultipartFile upload;
-	
-	
 
 	public String getName() {
 		return name;

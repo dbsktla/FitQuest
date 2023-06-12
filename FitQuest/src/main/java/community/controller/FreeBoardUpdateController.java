@@ -26,7 +26,7 @@ public class FreeBoardUpdateController {
 
 	@RequestMapping(value=command, method = RequestMethod.GET)
 	public String update(@RequestParam("bnum") int bnum, @RequestParam("id") String id, HttpSession session, Model model) {
-		session.setAttribute("destination", gotoPage);
+		session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bnum);
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
@@ -45,7 +45,7 @@ public class FreeBoardUpdateController {
 	@RequestMapping(value = command, method=RequestMethod.POST)
 	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
 
-		session.setAttribute("destination", gotoPage);
+		session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + boardBean.getBnum());
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
