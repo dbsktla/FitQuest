@@ -5,6 +5,131 @@
 <%@ include file="../member/myTrainerTop.jsp"%>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
+$(document).ready(function(){
+	graphA();
+});
+	function graphA() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">회원권 구매 갯수(최근 7일)</h5><div id="lineChart3"></div>');
+		getGraphDays();
+	}
+	
+	function graphB() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">회원권 구매 갯수(최근 6개월)</h5><div id="lineChart3"></div>');
+		getGraphMonthly();
+	}
+function getGraphDays(){
+		
+		var salesData = [];
+		var Date = [];
+		
+		$.ajax({
+			url : "mySalesGraph.pd",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					salesData.push(data[i].count);
+					Date.push(data[i].date);
+				}
+
+				
+				new ApexCharts(document.querySelector("#lineChart3"), {
+					series: [{
+						name: "회원권 구매 수",
+						data: salesData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphWeight
+	
+	function getGraphMonthly(){
+		var monthData = [];
+		var Date = [];
+		
+		$.ajax({
+			url : "mySalesGraph2.pd",
+			type : "GET",
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					monthData.push(data[i].mcount);
+					Date.push(data[i].mdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart3"), {
+					series: [{
+						name: "회원권 구매 수",
+						data: monthData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphSkmuscle
 </script>
 <style>
 section{
@@ -28,11 +153,36 @@ section{
     <section class="section">
 	
     <div class="pagetitle">
-      <h1 style = "margin: 50px 0px;">수익 보기</h1>
+      <h1 style = "margin: 50px 0px;">수익보기</h1>
     </div><!-- End Page Title -->
-
       <div class="row">
-      
+			<div class="col-12">
+			<!-- Default Card -->
+			<div class="card">
+			
+				<!-- 버튼 -->
+				 
+				<div class="filter fe" style = "margin:15px;">
+					<a class="icon ie" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+						<li class="dropdown-header text-start">
+							<h6>필터선택</h6>
+						</li>
+						<li><a class="dropdown-item" href="javascript:graphA()">회원권 구매 갯수(최근 7일)</a></li>
+						<li><a class="dropdown-item" href="javascript:graphB()">회원권 구매 갯수(최근 6개월)</a></li>
+					</ul>
+				</div>
+				
+				
+				<div class="card-body" id="my-graph">
+					<h5 class="card-title"></h5>
+					<!-- chart -->
+					<div id="lineChart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+      <div class="row">
       <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
@@ -104,7 +254,7 @@ section{
       </div>
       
       
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">상품 별 수익</h5>
@@ -138,7 +288,7 @@ section{
         </div>
       
       
-      	 <div class="col-lg-6">
+      	 <div class="col-lg-8">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">총 수익 금액</h5>
@@ -150,10 +300,10 @@ section{
                   new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['본인 총 금액', '전체 ${activity}트레이너 평균 총 수익 금액'],
+                      labels: ['총 금액 수수료', '수수료 재외 총 수익','총 수익', '${activity}트레이너 평균 총 수익'],
                       datasets: [{
                         label: '수익(만원)',
-                        data: [${totalAmount}, ${avgScore}],
+                        data: [${totalAmount * 0.04}, ${totalAmount - (totalAmount * 0.04)}, ${totalAmount}, ${avgScore}],
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(255, 159, 64, 0.2)',
@@ -190,11 +340,11 @@ section{
             </div>
           </div>
         </div>
-
+	</div>
       
       
     </section>
-    
+
 <%@ include file="../member/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

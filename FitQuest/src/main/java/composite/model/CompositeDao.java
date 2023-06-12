@@ -59,4 +59,12 @@ public class CompositeDao {
 		double avgSale = sqlSessionTemplate.selectOne(namespace+ ".GetAverageSale", activity);
 		return avgSale;
 	}
+	public List<SalesBean> getWeeklyCount(String id) {
+		List<SalesBean> weeklyList = sqlSessionTemplate.selectList(namespace + ".GetWeeklyCount", id);
+		return weeklyList;
+	}
+	public List<SalesBean> getMonthlyCount(String id) {
+		List<SalesBean> monthlyList = sqlSessionTemplate.selectList(namespace + ".GetMonthlyCount", id);
+		return monthlyList;
+	}
 }
