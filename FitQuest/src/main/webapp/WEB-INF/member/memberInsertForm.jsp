@@ -75,7 +75,7 @@
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var use,nuse,euse = "missing";;
+	var use,nuse,euse = "missing";
 	var isCheck = false, isCheckN = false;	
 	
 	$('#idCheck').click(function(){

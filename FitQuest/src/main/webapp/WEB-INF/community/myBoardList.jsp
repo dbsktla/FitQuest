@@ -72,26 +72,34 @@
 										<th scope="col">조회수</th>
 										<th scope="col">작성일</th>
 									</tr>
-									<c:forEach var="board" items="${ myBoardList }"
-										varStatus="status">
+									<c:if test="${ empty myBoardList }">
 										<tr align="center">
-											<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
-											<td align="left"><c:if test="${ board.btype == '자유' }">
-													<a style="color: #FAC710;"
-														href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
-												</c:if> <c:if test="${ board.btype == '건강' }">
-													<a style="color: #FAC710;"
-														href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
-												</c:if></td>
-											<td>${ board.bcategory }</td>
-											<td>${ board.name }</td>
-											<td>${ board.breadcount }</td>
-											<td><fmt:parseDate var="parseDate"
-													value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
-												<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm" />
-											</td>
+											<td colspan="6">작성한 글이 없습니다.</td>
 										</tr>
-									</c:forEach>
+									</c:if>
+									
+									<c:if test="${ !empty myBoardList }">
+										<c:forEach var="board" items="${ myBoardList }"
+											varStatus="status">
+											<tr align="center">
+												<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
+												<td align="left"><c:if test="${ board.btype == '자유' }">
+														<a style="color: #FAC710;"
+															href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+													</c:if> <c:if test="${ board.btype == '건강' }">
+														<a style="color: #FAC710;"
+															href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+													</c:if></td>
+												<td>${ board.bcategory }</td>
+												<td>${ board.name }</td>
+												<td>${ board.breadcount }</td>
+												<td><fmt:parseDate var="parseDate"
+														value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
+													<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm" />
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</table>
 							</div>
 
@@ -148,20 +156,27 @@
 										<th scope="col" width="50%">제목</th>
 										<th scope="col">작성자</th>
 									</tr>
-									<c:forEach var="scrap" items="${ myScrapList }"
-										varStatus="status">
+									<c:if test="${ empty myScrapList }">
 										<tr align="center">
-											<th scope="row">${ status.count }</th>
-											<td align="left"><c:if test="${ scrap.btype == '자유' }">
-													<a style="color: #FAC710;"
-														href="freeBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
-												</c:if> <c:if test="${ scrap.btype == '건강' }">
-													<a style="color: #FAC710;"
-														href="healthBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
-												</c:if></td>
-											<td>${ scrap.name }</td>
+											<td colspan="3">스크랩한 글이 없습니다.</td>
 										</tr>
-									</c:forEach>
+									</c:if>
+									<c:if test="${ not empty myScrapList }">
+										<c:forEach var="scrap" items="${ myScrapList }"
+											varStatus="status">
+											<tr align="center">
+												<th scope="row">${ status.count }</th>
+												<td align="left"><c:if test="${ scrap.btype == '자유' }">
+														<a style="color: #FAC710;"
+															href="freeBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
+													</c:if> <c:if test="${ scrap.btype == '건강' }">
+														<a style="color: #FAC710;"
+															href="healthBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
+													</c:if></td>
+												<td>${ scrap.name }</td>
+											</tr>
+										</c:forEach>
+									</c:if>
 								</table>
 							</div>
 						</div>
