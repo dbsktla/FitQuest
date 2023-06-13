@@ -1,67 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
-<%@ include file="../common/adminBootTop.jsp"%>	
+<%@ include file="../common/adminBootTop.jsp"%>
 
 <aside id="sidebar" class="sidebar">
 	<ul class="sidebar-nav" id="sidebar-nav" style="padding-top: 20px;">
 		<c:if test="${ sessionScope.loginInfo.mtype == 'trainer' }">
-			<li class="nav-item">
-	        <a class="nav-link collapsed" href="trainerDetail.mb">
-	          <i class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-	        </a>
-	      </li><!-- End Tables Nav -->
-	      	
-		 <li class="nav-item">
-	        <a class="nav-link collapsed" href="trainerReviewList.mb">
-	          <i class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-	        </a>
-	      </li><!-- End Tables Nav -->
-		
-	      <li class="nav-item">
-	        <a class="nav-link collapsed" href="viewProductList.pd">
-	          <i class="bi bi-layout-text-window-reverse"></i><span>상품관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-	        </a>
-	      </li><!-- End Tables Nav -->
-	      
-	      <li class="nav-item">
-	        <a class="nav-link collapsed" href="productSalesDetail.pd">
-	          <i class="bi bi-layout-text-window-reverse"></i><span>수익보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-	        </a>
-	      </li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="trainerDetail.mb"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="trainerReviewList.mb"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="viewProductList.pd"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>상품관리</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="productSalesDetail.pd"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>수익보기</span>
+			</a></li>
 		</c:if>
 
 		<c:if test="${ sessionScope.loginInfo.mtype == 'generic' }">
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="genericMemberDetail.mb">
-          <i class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-        </a>
-      </li><!-- End Tables Nav -->
-      	
-	 <li class="nav-item">
-        <a class="nav-link collapsed" href="viewMyReviewList.mb">
-          <i class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-        </a>
-      </li><!-- End Tables Nav -->
-	
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-        </a>
-      </li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="genericMemberDetail.mb"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="viewMyReviewList.mb"> <i
+					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
+			</a></li>
+
+			<li class="nav-item"><a class="nav-link collapsed" href="">
+					<i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span>
+			</a></li>
 		</c:if>
-		
-		<li class="nav-item"><a class="nav-link"
-			href="myBoardList.co"> <i
-				class="bi bi-layout-text-window-reverse"></i><span>내 글보기</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+
+		<li class="nav-item"><a class="nav-link" href="myBoardList.co">
+				<i class="bi bi-layout-text-window-reverse"></i><span>내 글보기</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
 		</a></li>
 	</ul>
 </aside>
-<main id="main" class="main" style="margin-top: 5px">
 
-	<body style="background-color: #FEF9E7; text-align: center;">
+<body style="background-color: #FEF9E7; text-align: center;">
+	<main id="main" class="main" style="margin-top: 5px">
 		<main>
 			<div class="col-lg-12">
+				<div class="pagetitle" style="text-align: left;">
+					<h1>
+						<i class="bi bi-list toggle-sidebar-btn"></i>내 글보기
+					</h1>
+				</div>
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
 						<button class="nav-link active" id="list-tab" data-bs-toggle="tab"
@@ -109,7 +105,7 @@
 											<td colspan="6">작성한 글이 없습니다.</td>
 										</tr>
 									</c:if>
-									
+
 									<c:if test="${ !empty myBoardList }">
 										<c:forEach var="board" items="${ myBoardList }"
 											varStatus="status">
@@ -127,8 +123,8 @@
 												<td>${ board.breadcount }</td>
 												<td><fmt:parseDate var="parseDate"
 														value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
-													<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm" />
-												</td>
+													<fmt:formatDate value="${ parseDate }"
+														pattern="MM-dd HH:mm" /></td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -216,8 +212,7 @@
 				</div>
 			</div>
 		</main>
-
-	</body>
-</main>
+	</main>
+</body>
 <%@ include file="../common/bottom.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
