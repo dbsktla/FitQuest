@@ -41,6 +41,21 @@
 		where mid = #{mid} and rstate = 'true'
 		order by rtime]]>
 	</select>
+	<select id="GetReservationFListByMid" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'false'
+		order by rtime]]>
+	</select>
+	<select id="GetReservationJListByMid" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'reject'
+		order by rtime]]>
+	</select>
+	<select id="GetReservationAllList" resultType="reservation.model.ReservationBean">
+		select * from reservation
+		where mid = #{mid}
+		order by rdate
+	</select>
 	<update id="UpdateState">
 		update reservation set
 		rstate = #{rstate}

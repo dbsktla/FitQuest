@@ -54,9 +54,28 @@ public class ReservationDao {
 	}
 
 	public List<ReservationBean> getReservationTListByMid(String mid) {
+		List<ReservationBean> tList = new ArrayList<ReservationBean>();
+		tList = sqlSessionTemplate.selectList(namespace+".GetReservationTListByMid",mid);
+		return tList;
+	}
+	
+	public List<ReservationBean> getReservationFListByMid(String mid) {
+		List<ReservationBean> fList = new ArrayList<ReservationBean>();
+		fList = sqlSessionTemplate.selectList(namespace+".GetReservationFListByMid",mid);
+		return fList;
+	}
+	
+	public List<ReservationBean> getReservationJListByMid(String mid) {
+		List<ReservationBean> jList = new ArrayList<ReservationBean>();
+		jList = sqlSessionTemplate.selectList(namespace+".GetReservationJListByMid",mid);
+		return jList;
+	}
+
+	public List<ReservationBean> getReservationAllList(String mid) {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
-		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTListByMid",mid);
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationAllList",mid);
 		return rList;
 	}
+
 	
 }

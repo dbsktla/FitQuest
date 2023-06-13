@@ -136,7 +136,12 @@ a{
 	margin: 10px 0px;
 	color : black;
 	padding: 5px 0px;
-	padding-left: 10px;
+	border-radius: 10px;
+	
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .calender-text{
 	color: black;
@@ -287,4 +292,7 @@ button.close-button:hover {
 	padding: 8px 12px;
 	background-color: #F7F7F8;
 	border-radius: 8px; 
+}
+.day-area td {
+  text-align: left;
 }
