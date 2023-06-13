@@ -5,9 +5,32 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<style>
+
+  body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .fc-event-time{
+  	display: none;
+  }
+
+</style>
+
+<script type="text/javascript" src="resources/dist/index.global.js" ></script>
+<script type="text/javascript" src="resources/dist/index.global.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
-	
+
 	var clickHnum = 0;
 	
 	/* 상세정보 띄우기 */
@@ -139,7 +162,7 @@
 	}
 	
 	function calanderLookup() {
-		
+		alert(2);
 		// request: 년, 월 정보 . 트레이너 이름, 목록.  
 		// 데이터 비교 -> 운동 데이터가 있는날은 따로 체크(이미지 띄우기)
 		$.ajax({
@@ -147,45 +170,10 @@
 			type : "POST",
 			dataType : "json",
 			success : function () {
-				
+				alert(1);
 			}
 		});
 		
-		/* <table>
-		<tr>
-			<td class="daySun">일</td>
-			<td>월</td>
-			<td>화</td>
-			<td>수</td>
-			<td>목</td>
-			<td>금</td>
-			<td class="daySat">토</td>
-		</tr>
-		<tr>
-			<c:forEach var="i" items="${dateMap}" varStatus="status">
-				<c:if test="${status.index == 0}">
-					<c:forEach var="j" begin="0" end="${i.value - 1}">
-						<td></td>
-					</c:forEach>
-				</c:if>
-				<c:if test="${i.value == 0}">
-					</tr>
-					<tr>
-				</c:if>
-				
-				<c:if test="${i.value == 0}">
-					<td class='daySun dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
-				</c:if>
-				<c:if test="${i.value == 6}">
-					<td class='daySat dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
-				</c:if>
-				<c:if test="${i.value != 0 and i.value != 6}">
-					<td class='dayOn <c:if test="${fn:contains(dateList, i.key)}">dayCheck</c:if>' onclick="dateClick('${i.key}')">${i.key}</td>
-				</c:if>
-				
-			</c:forEach>
-		</tr>
-	</table> */
 	}
 </script>
 
@@ -208,11 +196,11 @@
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" 
-					type="button" role="tab" ,aria-controls="list" aria-selected="true">리스트보기</button>
+					type="button" role="tab" aria-controls="list" aria-selected="true">리스트보기</button>
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="cal-tab" data-bs-toggle="tab" data-bs-target="#cal" 
-					type="button" role="tab" aria-controls="cal" aria-selected="false">캘린더보기</button>
+					type="button" role="tab" aria-controls="cal" aria-selected="false" onclick="test()">캘린더보기</button>
 				</li>
 			</ul>
 			<div class="tab-content pt-2" id="myTabContent">
@@ -300,10 +288,21 @@
 				
 				<!-- 캘린더보기 -->
 				<div class="tab-pane fade" id="cal" role="tabpanel"	aria-labelledby="cal-tab">
-					<div id="calenderTable">
+					<div class="row">
 						
-					</div>
-				</div><!-- cal -->
+						<div class="col-lg-7">
+							<!-- Default Card -->
+							<div class="card">
+								<div class="card-body">
+						
+									<div id='calendar'></div>
+									
+								</div>
+							</div>
+						</div>
+						
+					</div><!-- row -->	
+				</div>
 				<!-- End Default Tabs -->
 			</div>
 			
@@ -311,6 +310,43 @@
 	</div><!-- row -->
 
 </body>
+
+
+
+
+
+
+
+<script>
+
+function test() {
+	//alert('test');
+	
+	var calendarEl = document.getElementById('calendar');
+
+	   var calendar = new FullCalendar.Calendar(calendarEl, {
+	     //initialDate: '2023-01-12',
+	     editable: true,
+	     selectable: true,
+	     businessHours: true,
+	     dayMaxEvents: true, // allow "more" link when too many events
+	     events: [
+	    	 <c:forEach var="hdlist" items="${hdlist}" varStatus="status">
+	    		{
+	    		  title: <c:if test="${hdlist.tname != null}">'${hdlist.tname}(${hdlist.tactivity})'</c:if><c:if test="${hdlist.tname == null}">'개인운동'</c:if>,
+	    		  start: '${hdlist.hdate}'
+	    		}
+	    		<c:if test="${!status.last}">,</c:if>
+	    	</c:forEach>
+
+	     ]
+	   });
+
+	   calendar.render();
+}
+
+</script>
+
 <%@ include file="myHealthBottom.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>
