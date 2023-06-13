@@ -45,8 +45,8 @@
 		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
 		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
 		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
-		from board inner join member on board.id = member.id where brelevel = 0 order by breadcount desc) board) board
-        where btype = '자유' and rank between 1 and 3
+		from board inner join member on board.id = member.id where btype = '자유' and brelevel = 0 order by breadcount desc) board) board
+        where rank between 1 and 3
 	</select>
 	
 	<select id="GetFreeBoardList" resultType="community.model.BoardBean">
@@ -201,13 +201,13 @@
 		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
 		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
 		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from board inner join member on board.id = member.id order by breadcount desc) board) board
-        where btype = '건강' and rank between 1 and 3
+		from board inner join member on board.id = member.id  where btype = '건강' order by breadcount desc) board) board
+        where rank between 1 and 3
 	</select>
 	
 	<select id="GetOneHealthBoard" resultType="community.model.BoardBean">
 		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bcontent, bimage
-		from board inner join member
+		from board inner join member 
 		on board.id = member.id
 		where bnum = #{bnum}
 	</select>
