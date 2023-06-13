@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
-<%@ include file="../common/myTrainerTop.jsp"%>
-
+<%@ include file="../common/myMemberTop.jsp"%>
 <style>
+
 	body{
 		background-color: #FEF9E7;
 		color : black;
@@ -247,24 +247,7 @@ $(document).ready(function(){
       <h1>마이 페이지</h1>
     </div><!-- End Page Title -->
       <div class="row">
-        <div class="col-xl-4">
-
-          <div class="card">
-          <form action = "trainerUpdateImage.mb" method = "post" enctype="multipart/form-data">
-            <div class="card-body pt-4 d-flex flex-column align-items-center">
-              <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainerBean.timage}" class="rounded-circle" style = "width = 180px !important; height:220px; margin-bottom: 25px;">
-              <h2>${memberBean.name }</h2>
-              <h3>${trainerBean.activity} 트레이너</h3>
-              <h3>운동 목적: ${trainerBean.purpose}</h3>
-              <input type = "hidden" name = "id" value = "${trainerBean.id }">
-              <p style = "display:flex;"><input class="form-control" type="file" name="upload" id="upload" value = "사진 올리기"/>
-			  <input type = "submit" value = "사진 수정" class = "btn btn-warning">
-              <input name = "oldtimage" value = "${trainerBean.timage }" type = "hidden"></p>
-            </div>
-            </form>
-          </div>
-
-        </div>
+        <div class="col-xl-2"></div>
 
         <div class="col-xl-8">
 
@@ -280,11 +263,6 @@ $(document).ready(function(){
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">개인 정보 수정</button>
                 </li>
-
-                <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">트레이너 정보 수정</button>
-                </li>
-
                 <li class="nav-item">
                   <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">비밀번호 수정</button>
                 </li>
@@ -294,9 +272,7 @@ $(document).ready(function(){
              <!--  정보 보기 탭 -->
               <div class="tab-content pt-2">
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                  <h5 class="card-title">자기소개</h5>
-                  <p class="large fst-italic">${trainerBean.intro }</p>
-                  <h5 class="card-title">프로필 정보</h5>
+                  <h5 class="card-title">계정 정보</h5>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">아이디</div>
                     <div class="col-lg-9 col-md-8">${memberBean.id}</div>
@@ -305,53 +281,34 @@ $(document).ready(function(){
                     <div class="col-lg-3 col-md-4 label ">이름 / 별명</div>
                     <div class="col-lg-9 col-md-8">${memberBean.name } / ${memberBean.nickname }</div>
                   </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">경력</div>
-                    <div class="col-lg-9 col-md-8">${trainerBean.exp}</div>
-                  </div>
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">생년월일</div>
-                    <div class="col-lg-9 col-md-8">${memberBean.birth }</div>
+                    <fmt:parseDate var = "date" value = "${memberBean.birth }" pattern = "YYYY-MM-dd"/>
+                    <fmt:formatDate value="${date }" var = "date" pattern = "YYYY-MM-dd"/>
+                    <div class="col-lg-9 col-md-8">${date }</div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">개인 이메일</div>
+                    <div class="col-lg-3 col-md-4 label">이메일</div>
                     <div class="col-lg-9 col-md-8">${memberBean.email }</div>
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">개인 주소</div>
+                    <div class="col-lg-3 col-md-4 label">주소</div>
                     <div class="col-lg-9 col-md-8">${memberBean.maddr1 }, ${memberBean.maddr2 }</div>
                   </div>
                   
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">개인 전화번호</div>
+                    <div class="col-lg-3 col-md-4 label">전화번호</div>
                     <div class="col-lg-9 col-md-8">${memberBean.mphone}</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">헬스장</div>
-                    <div class="col-lg-9 col-md-8">${gymBean.gname }</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">헬스장 주소</div>
-                    <div class="col-lg-9 col-md-8">${gymBean.gaddr1 }, ${gymBean.gaddr2 }</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-lg-3 col-md-4 label">헬스장 전화번호</div>
-                    <div class="col-lg-9 col-md-8">${gymBean.gphone}</div>
                   </div>
                 </div>
 				
 				<!-- 트레이너 정보 수정 form -->
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 					
-                  <form:form commandName="memberBean" action="trainerMemberUpdate.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form:form commandName="memberBean" action="genericMemberUpdate.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                   	<input type="hidden" name="id" value="${memberBean.id }">
-                  	<input type="hidden" name="mtype" value="trainer">
                     
                      <div class="col-12">
                       <label for="yourUsername" class="form-label">이름</label>
@@ -378,9 +335,8 @@ $(document).ready(function(){
                     
                     <div class="col-12">
                       <label for="yourBirth" class="form-label">생년월일</label>
-                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${memberBean.birth}">
+                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${date}">
                     </div>
-                    
                      <div class="col-12">
                       <label for="gender" class="form-label">성별</label> <br>
                      <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ memberBean.gender eq '남자' }">checked</c:if>> 남자</label> &nbsp;
@@ -390,7 +346,7 @@ $(document).ready(function(){
                    
                    <div class="col-12">
                       <label for="yourPhone" class="form-label">전화번호</label>
-                      <input type="text" name="mphone" class="form-control" id="yourPhone" value="${ memberBean.mphone }" placeholder="숫자만 입력">
+                      <input type="text" name="mphone" class="form-control" id="yourPhone" value="${ memberBean.mphone}" placeholder="숫자만 입력">
                       <form:errors cssClass="err" path="mphone"/>
                     </div>
                     <div class="col-12">
@@ -409,51 +365,6 @@ $(document).ready(function(){
 					</div>
                   </form:form>
                 </div>
-
-
-				<!-- 회원 정보 수정 form -->
-                <div class="tab-pane fade pt-3" id="profile-settings">
-
-                  <!-- Settings Form -->
-                  <form action="trainerInfoUpdate.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
-						<input type = "hidden" name = "id" value = "${trainerBean.id }"/>
-						<div class="col-12">
-                      <label for="activity" class="form-label">운동 종류</label>
-                      <select class="form-select" name="activity" id="activity">
-                      	<option value="">선택</option>
-	                    <c:forEach var="act" items="PT,필라테스,요가">
-	                    	<option value="${ act }" <c:if test="${ trainerBean.activity eq act }">selected</c:if>>${ act }</option>  
-	                    </c:forEach>
-                      </select>
-                    </div>
-                    
-                    <div class="col-12">
-                      <label for="purpose" class="form-label">운동 목적</label> <br>
-                      <c:forEach var="pur" items="체지방 감소,근육량 증가,재활,체력 강화">
-                      	<label for="${ pur }">
-                      	<input type="checkbox" name="purpose" id="${pur}" value="${pur}" <c:if test="${ trainerBean.purpose.contains(pur) }">checked</c:if>>
-                      	${ pur } 
-                      </label>
-                      </c:forEach>
-                    </div>
-                    
-                    <div class="col-12">
-                      <label for="intro" class="form-label">소개</label>
-                      <textarea id="intro" name="intro" class="form-control" style="height: 100px">${ trainerBean.intro }</textarea>
-                    </div>
-                    
-                    <div class="col-12">
-                      <label for="exp" class="form-label">경력</label>
-                      <textarea id="exp" name="exp" class="form-control" style="height: 100px">${ trainerBean.exp }</textarea>
-                    </div>
-                    
-                    <div class = "col-12">
-						<input type = "submit" class = "btn btn-warning" id = "trSub" value = "수정">
-						<input type = "reset" class = "btn btn-primary" value = "초기화">
-					</div>
-					</form>
-                </div>
-				
 				<!-- 비밀번호 수정 form -->
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
@@ -493,11 +404,14 @@ $(document).ready(function(){
           </div>
 
         </div>
+		<div class="col-xl-2"></div>
       </div>
     </section>
       
     </section>
     
-<%@ include file="../common/myTrainerBot.jsp"%>
+
+
+<%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>
