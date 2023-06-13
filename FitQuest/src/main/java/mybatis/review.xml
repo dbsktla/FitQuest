@@ -140,4 +140,18 @@
 		delete review
 		where renum = #{renum}
 	</delete>
+	<delete id = "DeleteBaseValue">
+		delete review 
+		where tid = #{tid}
+		and hasReview = 'N'
+	</delete>
+	<select id = "GetTrainerReviewCount" resultType = "int">
+		select count(*) from review
+		where tid = #{tid}
+	</select>
+	<update id = "UpdateReview">
+		update review
+		set rating = #{rating}, rtitle = #{rtitle}, rcontent = #{rcontent}, rdate = sysdate 
+		where renum = #{renum}
+	</update>
 </mapper>

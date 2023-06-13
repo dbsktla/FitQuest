@@ -22,7 +22,7 @@ import utility.ReviewPaging;
 
 @Controller
 public class GenericReviewListController {
-	private final String command = "viewMyReviewList.mb";
+	private final String command = "/viewMyReviewList.mb";
 	private final String getPage = "memberReviewList";
 	@Autowired
 	ReviewDao reviewDao;

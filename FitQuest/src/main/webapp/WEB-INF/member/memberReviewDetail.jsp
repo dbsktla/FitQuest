@@ -80,7 +80,7 @@ section{
                     </div>
                   </div>
                   <button type="submit" class="btn btn-danger" onclick = "return submitCheck()">삭제</button>
-                  <button type="button" class="btn btn-warning" onClick = "location.href='updateMyReview.mb?renum=${reviewBean.renum}'">리뷰 수정</button>
+                  <button type="button" class="btn btn-warning" onClick = "location.href='updateMyReview.mb?renum=${reviewBean.renum}&mid=${mid}'">리뷰 수정</button>
                   <button type="button" class="btn btn-warning" onClick = "location.href='viewMyReviewList.mb'">리뷰 목록</button>
                 </form>
 				

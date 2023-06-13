@@ -51,6 +51,7 @@ public class GenericReviewDetailController {
 	model.addAttribute("reviewBean", reviewBean);
 	model.addAttribute("trainerBean", trainerBean);
 	model.addAttribute("memberBean", memberDao.selectMemberById(tid));
+	model.addAttribute("mid", memberBean.getId());
 	return getPage;
 	}
 }
