@@ -135,7 +135,7 @@
           <c:if test="${loginInfo.mtype eq 'generic'}">
           	<li class="dropdown" ><a href="#"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="#">마이페이지</a></li>
+	              <li><a href="genericMemberDetail.mb">마이페이지</a></li>
 	              <li><a href="#">리뷰관리</a></li>
 	              <li><a href="#">구매관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
