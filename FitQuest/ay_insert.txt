@@ -74,12 +74,14 @@ commit;
 insert into nutrition values(nseq.nextval, 'hong', '2023-06-12');
 insert into nutrition values(nseq.nextval, 'hong', '2023-06-13');
 insert into nutrition values(nseq.nextval, 'jkim', '2023-06-13');
+
 -- 식사정보
 insert into meal values(mealseq.nextval, 1, 'food1.jpg', '아침');
 insert into meal values(mealseq.nextval, 1, 'food2.jpg', '점심');
-insert into meal values(mealseq.nextval, 2, 'food3.jpg', '아침');
+insert into meal values(mealseq.nextval, 2, 'no_img.jpg', '아침');
 insert into meal values(mealseq.nextval, 2, 'food4.jpg', '점심');
 insert into meal values(mealseq.nextval, 3, 'food1.jpg', '점심');
+
 -- 식사정보
 insert into food values(fseq.nextval, 1, 1, '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
 insert into food values(fseq.nextval, 1, 2, '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);

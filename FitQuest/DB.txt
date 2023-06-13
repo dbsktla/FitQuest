@@ -391,7 +391,7 @@ drop table meal cascade constraints;
 CREATE TABLE meal (
 	mnum number primary key, -- 식사번호
 	nnum   number, -- 식단번호
-	fimage varchar2(300), -- 음식 이미지
+	fimage varchar2(300) default 'no_img.jpg', -- 음식 이미지
 	mealtype   VARCHAR2(10) -- 아침, 점심, 저녁, 간식 
 );
 
