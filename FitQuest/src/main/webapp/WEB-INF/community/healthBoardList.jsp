@@ -23,6 +23,7 @@
 					</c:if>
 				</div>
 				<h5 class="card-title">건강 정보 게시판</h5>
+				<c:if test="${ !empty healthBoardList }">
 				<div class="col-md-12" align="right">
 					<a style="color : #FAC710;" href="healthBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
 					<font color="#FAC710"> | </font>
@@ -32,6 +33,7 @@
 					<font color="#FAC710"> | </font>
 					<a style="color : #FAC710;" href="healthBoardList.co?bcategory=기타&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">기타</a>
 				 </div>
+				 </c:if>
 				 <div class="col-md-5" align="left">
 				 	
 				 </div>
@@ -44,6 +46,14 @@
 							<th scope="col">조회수</th>
 							<th scope="col">작성일</th>
 						</tr>
+						<c:if test="${ empty healthBoardList }">
+							<tr align="center">
+								<td colspan="6">
+									작성된 게시글이 없습니다.
+								</td>
+							</tr>
+						</c:if>
+						<c:if test="${ !empty healthBoardList }">
 						<c:forEach var="board" items="${ hotHealthBoardList }" varStatus="status">
 							<tr align="center" >
 								<th scope="row" style="background-color: #FEF9E7">인기</th>
@@ -75,8 +85,10 @@
 								</td>
 							</tr>
 						</c:forEach>
+						</c:if>
 				</table>
 				
+				<c:if test="${ !empty healthBoardList }">
 				<div class="col-md-6">
 			      <form method="get" class="search-form d-flex align-items-center" action="healthBoardList.co">
 				      <c:if test="${ bcategory != '' }">
@@ -96,6 +108,7 @@
 			        </button>
 			      </form>
 			    </div>
+			    </c:if>
 			</div>
 			
 			

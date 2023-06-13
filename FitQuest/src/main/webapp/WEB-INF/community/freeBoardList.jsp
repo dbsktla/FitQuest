@@ -23,6 +23,7 @@
 					</c:if>
 				</div>
 				<h5 class="card-title">자유 게시판</h5>
+				<c:if test="${ not empty freeBoardList }">
 				<div class="col-md-12" align="right">
 					<a style="color : #FAC710;" href="freeBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
 					<font color="#FAC710"> | </font>
@@ -30,6 +31,7 @@
 					<font color="#FAC710"> | </font>
 					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=운동인증&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">운동인증</a>
 				 </div>
+				 </c:if>
 				 <div class="col-md-5" align="left">
 				 	
 				 </div>
@@ -42,6 +44,14 @@
 							<th scope="col">조회수</th>
 							<th scope="col">작성일</th>
 						</tr>
+						<c:if test="${ empty freeBoardList }">
+							<tr align="center">
+								<td colspan="6">
+									작성된 게시글이 없습니다.
+								</td>
+							</tr>
+						</c:if>
+						<c:if test="${ not empty freeBoardList }">
 						<c:forEach var="board" items="${ hotFreeBoardList }" varStatus="status">
 							<tr align="center" >
 								<th scope="row" style="background-color: #FEF9E7">인기</th>
@@ -85,8 +95,10 @@
 								</td>
 							</tr>
 						</c:forEach>
+						</c:if>
 				</table>
 				
+			<c:if test="${ not empty freeBoardList }">
 				<div class="col-md-6">
 			      <form method="get" class="search-form d-flex align-items-center" action="freeBoardList.co">
 				      <c:if test="${ bcategory != '' }">
@@ -106,8 +118,8 @@
 			        </button>
 			      </form>
 			    </div>
+			</c:if>
 			</div>
-			
 			
 			
 			<div style=" display: inline-block; margin: auto;">
@@ -139,7 +151,7 @@
 	                </c:if> 
 	                </ul>
 	              </nav>
-			</div>        
+			</div>    
 		</div>
 	</main>
 	
