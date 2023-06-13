@@ -148,3 +148,15 @@ insert into orderdetail values(odseq.nextval, 6, 14);
 insert into orderdetail values(odseq.nextval, 6, 15);
 insert into orderdetail values(odseq.nextval, 6, 15);
 
+
+
+
+--reservation
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-12', '09:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-16', '08:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-17', '11:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-20', '10:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-12', '09:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-16', '08:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-17', '11:00am', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-20', '10:00am', 'true');
