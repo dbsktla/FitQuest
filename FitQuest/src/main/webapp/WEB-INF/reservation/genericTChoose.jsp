@@ -54,7 +54,7 @@
             	 </div>
                 </a>
               <div class="member-info">
-              	<form action="genericReservation.rv" method="post">
+              	<form action="genericReservation.rv" method="get">
               	  <input type="hidden" name="tid" value="${trainer.id}">
               	  <input type="hidden" name="tname" value="${trainer.name}">
 	                <div><h4 style = "margin-top:10px;">${trainer.name}</h4></div>

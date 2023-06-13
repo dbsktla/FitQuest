@@ -36,9 +36,18 @@
 		where tid = #{tid} and rstate = 'true'
 		order by rtime]]>
 	</select>
+	<select id="GetReservationTListByMid" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'true'
+		order by rtime]]>
+	</select>
 	<update id="UpdateState">
 		update reservation set
 		rstate = #{rstate}
 		where rnum = #{rnum}
 	</update>
+	<select id="GetOneByRnum" resultType="reservation.model.ReservationBean">
+		select * from reservation
+		where rnum = #{rnum}
+	</select>
 </mapper>

@@ -23,12 +23,13 @@
 		}
 	}
 </script>
+<br><br>
+<center>
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
 	<div class="calendarTitle-font">예약 신청 내역</div>
 </div> 
-<center>
-<div class="calendar" >
+<div>
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
@@ -54,9 +55,10 @@
    </div>
 <!-- 버튼 -->
    <div class="calendar-button-div">
-      <span>
+      <div class="left"></div>
+      <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='trainerCalendar.rv'" value="My PT">
-      </span>
+      </div>
    </div>
 <!-- 달력  -->  
 <table class="calendar_body">

@@ -35,4 +35,9 @@
 		delete usage
 		where unum = #{unum}
 	</delete>
+	<update id="IncreaseUsage">
+		update usage set
+		usage = usage +1
+		where unum = #{unum}
+	</update>
 </mapper>

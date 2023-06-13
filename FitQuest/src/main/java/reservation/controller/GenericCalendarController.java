@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import member.model.MemberBean;
 import reservation.model.CalendarBean;
+import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
+import reservation.model.TscheduleBean;
 import usage.model.UsageBean;
 import usage.model.UsageDao;
 
@@ -29,7 +31,7 @@ public class GenericCalendarController {
 	ReservationDao reservationDao;
 	
 	@Autowired
-	UsageDao usageDao;
+	UsageDao usageDao; 
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -67,23 +69,58 @@ public class GenericCalendarController {
 			dateList.add(calendarData);
 			}
 			}
-			System.out.println(dateList);
-
-			//사용권 남았는지 유효성 확인용
-			String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 			
-			//int usage = usageBean.getUsage();
-			
-			//배열에 담음
-			//model.addAttribute("usage", usage); //사용권 횟수
 			model.addAttribute("dateList", dateList); //날짜 데이터 배열
 			model.addAttribute("today_info", today_info);
-			return getPage;
-	}
-	
-	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doAction() {
+			
+			//예약 완료된 내역 가져오기 (true)
+			String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
+			List<ReservationBean> rList = reservationDao.getReservationTListByMid(mid);
+			
+			//년,월,일로 쪼개서 배열에 담는 과정 
+			//rtime : 13:00~14:00 | rdate : 2023-06-01
+			List<String> rdateList = new ArrayList<String>();
+			
+			for (ReservationBean reservationBean : rList) {
+			    rdateList.add(reservationBean.getRdate());
+			}
 
-		return "";
+			String[] rdateArrL = rdateList.toArray(new String[0]);
+			
+			List<String> yearList = new ArrayList<String>();
+			List<String> monthList = new ArrayList<String>();
+			List<String> dayList = new ArrayList<String>();
+			
+			String[] rdateArrS;
+			for (int i = 0; i < rdateArrL.length; i++) {
+				rdateArrS = rdateArrL[i].split("-"); //2023 06 23 2023 06 24
+			    
+		        yearList.add(rdateArrS[0]);
+		        monthList.add(rdateArrS[1]);
+		        dayList.add(rdateArrS[2]);
+			}
+			String[] year = yearList.toArray(new String[0]);
+			String[] month = monthList.toArray(new String[0]);
+			String[] day = dayList.toArray(new String[0]);
+			
+			// 숫자로 변환
+			int[] yearNum = new int[year.length];
+			int[] monthNum = new int[month.length];
+			int[] dayNum = new int[day.length];
+
+			for (int i = 0; i < year.length; i++) {
+			    yearNum[i] = Integer.parseInt(year[i]);
+			}
+			for (int i = 0; i < month.length; i++) {
+			    monthNum[i] = Integer.parseInt(month[i]);
+			}
+			for (int i = 0; i < day.length; i++) {
+			    dayNum[i] = Integer.parseInt(day[i]);
+			}
+			model.addAttribute("ryear",yearNum);
+			model.addAttribute("rmonth",monthNum);
+			model.addAttribute("rday",dayNum);
+			model.addAttribute("rList", rList);
+			return getPage; 
 	}
 }

@@ -23,8 +23,6 @@ import usage.model.UsageDao;
 @Controller
 public class ReservationInsertController {
 	private final String command = "/reservationInsert.rv";
-	private final String getPage = "genericReservation";
-	private final String gotoPage = "redirect:/genericCalendar.rv";
 
 	@Autowired
 	ReservationDao reservationDao;
@@ -87,13 +85,7 @@ public class ReservationInsertController {
 			System.out.println("예약 실패");
 		}
 		
-		//예약한 날짜 트레이너 스케줄에서 제하기
-		
-		
-		
-		
-		
-		return "genericReservation?tname="+tname+"&tid="+tid;
+		return "genericReservation?tid="+tid+"&tname="+tname;
 	}
 	
 	
