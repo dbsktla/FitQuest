@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
-<%@ include file="../common/myTrainerTop.jsp"%>
+<%@ include file="../common/myMemberTop.jsp"%>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 	function submitCheck(){
-		var answer = confirm("리뷰 신고하시겠습니까?");
+		var answer = confirm("리뷰 삭제하시겠습니까?");
 		if(answer == false){
 			return false;
 		}
@@ -59,11 +59,11 @@ section{
 					${rating1 }
              	 </h5>
              	 <div class="reply-form">
-                <form action="reportReview.mb" name = "myform">
+                <form action="deleteReview.mb" name = "myform">
                 <input type = "hidden" value = "${reviewBean.renum }" name = "renum">
                   <div class="row">
                     <div class="col-md-3 form-group">
-                      <input name="email" type="text" class="form-control" value = "작성자:  ${memberBean.name } (${memberBean.id})회원님" disabled>
+                      <input name="email" type="text" class="form-control" value = "트레이너:  ${memberBean.name } ${trainerBean.activity} 선생님" disabled>
                     </div>
                     <div class="col-md-3 form-group">
                       <fmt:parseDate value = "${reviewBean.rdate }" pattern = "yyyy-MM-dd" var = "date"/>
@@ -79,9 +79,9 @@ section{
                       <textarea name="comment" class="form-control" disabled>${reviewBean.rcontent }</textarea>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-danger" onclick = "return submitCheck()">신고하기</button>
-                  <button type="button" class="btn btn-warning" onClick = "location.href='trainerReviewList.mb'">리뷰 목록</button>
-			      <p>*악의적인 리뷰인 경우에만 신고하세요<p>
+                  <button type="submit" class="btn btn-danger" onclick = "return submitCheck()">삭제</button>
+                  <button type="button" class="btn btn-warning" onClick = "location.href='updateMyReview.mb?renum=${reviewBean.renum}'">리뷰 수정</button>
+                  <button type="button" class="btn btn-warning" onClick = "location.href='viewMyReviewList.mb'">리뷰 목록</button>
                 </form>
 				
               </div>
@@ -92,6 +92,6 @@ section{
       
     </section>
     
-<%@ include file="../common/myTrainerBot.jsp"%>
+<%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

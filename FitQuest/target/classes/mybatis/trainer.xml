@@ -21,4 +21,12 @@
 		natural join
 		(select * from trainer where id=#{id})
 	</select>
+	<update id = "UpdateTrainer">
+		update trainer set activity = #{activity}, purpose = #{purpose}, intro = #{intro}, exp = #{exp}
+		where id = #{id}
+	</update>
+	<update id = "UpdateImage">
+		update trainer set timage = #{timage}
+		where id = #{id}
+	</update>
 </mapper>

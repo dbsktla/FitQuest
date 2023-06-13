@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
-<%@ include file="../member/myTrainerTop.jsp"%>
+<%@ include file="../common/myTrainerTop.jsp"%>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 	function numCheck(){
@@ -234,6 +234,6 @@ section{
       
     </section>
     
-<%@ include file="../member/myTrainerBot.jsp"%>
+<%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>
