@@ -372,8 +372,6 @@ drop table nutrition cascade constraints;
 CREATE TABLE nutrition (
    nnum   number   primary key, --식단번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   fnum   number   NOT NULL, --음식번호
-   mealtype   VARCHAR(10), -- 아침 점심 저녁 기타
    nutritiondate   date --식사일자
 );
 
@@ -392,6 +390,8 @@ create sequence fseq
 drop table food cascade constraints;
 CREATE TABLE food (
    fnum   number primary key, --음식번호
+   nnum   number   primary key, --식단번호
+   mealtype   VARCHAR(10), -- 아침 점심 저녁 기타
    fname   varchar2(50), --음식이름
    fweight number default 0.0, -- 음식무게
    calories   number, --칼로리
