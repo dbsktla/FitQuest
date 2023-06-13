@@ -410,12 +410,12 @@
 				</div>
 			</div>
 			
-			<!-- 이번달 체중 변화 -->
+			<!-- 이번달 신체 변화 -->
             <div class="col-12">
               <div class="card">
 
                 <div class="card-body">
-                  <h5 class="card-title">이번달 체중 변화 <span>/Today</span></h5>
+                  <h5 class="card-title">이번달 신체 변화 <span>/Today</span></h5>
 
                   <!-- Line Chart -->
                   <div id="lineChart"></div>

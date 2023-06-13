@@ -59,6 +59,7 @@
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script>
 	$(document).ready(function(){
+		calenderLookup();
 		getGraphAll();
 	});
 
@@ -79,9 +80,6 @@
 
 				var msg = '<table><tr><td class="daySun">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="daySat">토</td></tr>';
 				
-				
-				
-				//alert(data[0].date);
 				for(var i=0; i<data.length -1; i++){
 					if(i == 0){
 						for(var j=0; j<data[i].date; j++){
@@ -89,7 +87,6 @@
 						}
 					}
 					
-					//alert(data[i].i);
 					if(data[i].date == 0){
 						msg += '</tr><tr>';
 					}
@@ -100,11 +97,9 @@
 					}else{
 						strDate = (i+1);
 					}
-					//alert(strDate);
-					//alert(data[data.length -1].dateList);
-					var dateL = data[data.length -1].dateList;
 					
-					//alert(dateL);
+					
+					var dateL = data[data.length -1].dateList;
 					
 					if(dateL == 'noData'){
 						if(data[i].date == 0){
@@ -115,7 +110,6 @@
 							msg += "<td class='dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
 						}
 					}else{
-						//alert("strDate : " + strDate + " dateList: " + dateL + "con? : " + dateL.indexOf(strDate));
 						
 						if(dateL.indexOf(strDate) != -1){
 							if(data[i].date == 0){
@@ -136,12 +130,9 @@
 						}
 					}
 					
-					
-					
 				}// for
 				
 				msg += '</tr></table>';
-				
 				
 				$("#calenderTable").append(msg);
 			}
@@ -149,6 +140,7 @@
 	}
 	
 	
+	/* 날짜 상세 정보*/
 	function dateClick(day){
 		
 		//alert(day);

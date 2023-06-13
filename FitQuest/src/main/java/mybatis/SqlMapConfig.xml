@@ -21,6 +21,7 @@
 		<mapper resource="mybatis/health.xml"/>
 		<mapper resource="mybatis/healthDate.xml"/>
 		<mapper resource="mybatis/nutrition.xml"/>
+		<mapper resource="mybatis/meal.xml"/>
 		<mapper resource="mybatis/food.xml"/>
 		<mapper resource="mybatis/physique.xml"/>
 		<mapper resource="mybatis/goal.xml"/>

@@ -200,7 +200,7 @@
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link" id="cal-tab" data-bs-toggle="tab" data-bs-target="#cal" 
-					type="button" role="tab" aria-controls="cal" aria-selected="false" onclick="test()">캘린더보기</button>
+					type="button" role="tab" aria-controls="cal" aria-selected="false" onclick="cal_lookup()">캘린더보기</button>
 				</li>
 			</ul>
 			<div class="tab-content pt-2" id="myTabContent">
@@ -312,14 +312,9 @@
 </body>
 
 
-
-
-
-
-
 <script>
 
-function test() {
+function cal_lookup() {
 	//alert('test');
 	
 	var calendarEl = document.getElementById('calendar');

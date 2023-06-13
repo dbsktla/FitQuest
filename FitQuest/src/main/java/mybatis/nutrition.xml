@@ -5,5 +5,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nutrition.model.Nutrition">
-
+	<select id="GetNutritionDate" resultType="String">
+		SELECT 	nudate 
+		FROM 	NUTRITION 
+		WHERE 	id = #{id} 
+		AND 	(nudate BETWEEN #{smon} AND #{emon})
+	</select>
 </mapper>
