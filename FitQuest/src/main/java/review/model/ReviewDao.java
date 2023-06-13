@@ -62,4 +62,18 @@ public class ReviewDao {
 		int cnt = sqlSessionTemplate.insert(namespace + ".InsertReview", reviewBean);
 		return cnt;
 	}
+	public int getMyReviewCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetMyReviewCount", map);
+		return cnt;
+	}
+	public List<ReviewBean> getMyReviewList(Map<String, String> map, ReviewPaging pageInfo) {
+		List<ReviewBean> rList = new ArrayList<ReviewBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		rList = sqlSessionTemplate.selectList(namespace + ".GetMyReviewList", map, rowBounds);
+		return rList;
+	}
+	public int deleteReview(int renum) {
+		int cnt = sqlSessionTemplate.delete(namespace + ".DeleteReview", renum);
+		return cnt;
+	}
 }

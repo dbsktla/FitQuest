@@ -36,6 +36,10 @@ public class MemberPasswordChangeController {
 		}
 		memberBean.setPassword(password);
 		session.setAttribute("loginInfo", memberBean);
-		return getPage;
+		if(memberBean.getMtype().equals("trainer")) {
+			return getPage;
+		} else {
+			return "redirect:/genericMemberDetail.mb";
+		}
 	}
 }

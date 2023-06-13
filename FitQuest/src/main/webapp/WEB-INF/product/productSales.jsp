@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
-<%@ include file="../member/myTrainerTop.jsp"%>
+<%@ include file="../common/myTrainerTop.jsp"%>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 $(document).ready(function(){
@@ -125,6 +125,9 @@ function getGraphDays(){
 					},
 					xaxis: {
 						categories: Date,
+					},
+					yaxis: {
+						min: 0
 					}
 				}).render();
 			} //success
@@ -311,10 +314,10 @@ section{
                   new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['총 금액 수수료', '수수료 재외 총 수익','총 수익', '${activity}트레이너 평균 총 수익'],
+                      labels: ['총 금액 수수료', '수수료 재외 총 수익','총 수익'],
                       datasets: [{
                         label: '수익(만원)',
-                        data: [${totalAmount * 0.04}, ${totalAmount - (totalAmount * 0.04)}, ${totalAmount}, ${avgScore}],
+                        data: [${totalAmount * 0.1}, ${totalAmount - (totalAmount * 0.1)}, ${totalAmount}],
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
                           'rgba(255, 159, 64, 0.2)',
@@ -356,6 +359,6 @@ section{
       
     </section>
 
-<%@ include file="../member/myTrainerBot.jsp"%>
+<%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>
