@@ -350,7 +350,7 @@
 								<c:set var="wtime" value="${weekPlaytime / 60}"/>
 								<c:set var="per" value="${(wtime / goalBean.goaltime) * 100 }"/>
 								<font style="color: gray; font-size: 16px">이번주 총 운동 시간 </font> ${weekPlaytime} 분<br>
-								<font style="color: gray; font-size: 16px">이번주 총 목표 시간 </font> ${goalBean.goaltime } 시간<br>
+								<font style="color: gray; font-size: 16px">이번주 총 목표 시간 </font> ${goalBean.goaltime * 60} 분<br>
 								
 								<c:if test="${empty goalBean}">
 									등록된 운동 목표 시간이 없습니다.
@@ -360,6 +360,12 @@
 									
 									<canvas id="doughnutChart" style="max-height: 180px;"></canvas>
 						              <script>
+						              	var p = ${per};
+						              	var mp = 100 - p;
+						              	if(mp<0){
+						              		mp = 0;
+						              	}
+						              	
 						                document.addEventListener("DOMContentLoaded", () => {
 						                  new Chart(document.querySelector('#doughnutChart'), {
 						                    type: 'doughnut',
@@ -369,7 +375,7 @@
 					                            '미달성'
 					                          ],
 						                      datasets: [{
-						                        data: [${per}, ${100 - per}],
+						                        data: [p, mp],
 						                        backgroundColor: [
 						                          'rgb(255, 205, 86)',
 						                          'rgb(255, 99, 132)'

@@ -57,7 +57,7 @@ public class MyHealthCalListController {
 			
 			Calendar cal = Calendar.getInstance();
 			
-			if(selectYear == null) {
+			if(selectYear == null || selectMon == null) { // 선택 년도, 월이 없을 때 
 				Date now = new Date();
 				
 				cal.setTime(now);
@@ -84,20 +84,20 @@ public class MyHealthCalListController {
 				for(HealthDateBean hdb : datelist) {
 					JSONObject jsObject = new JSONObject();
 					
-					jsObject.put("dateList", datelist);
+					jsObject.put("dateList", hdb);
+					jsArr.add(jsObject);
 				}
-				mav.addObject("dateList", dateList);
-				mav.addObject("selectYear", selectYear);
-				mav.addObject("selectMon", selectMon);
 				
+				JSONObject jsObject = new JSONObject();
+				jsObject.put("selectYear", selectYear);
+				jsObject.put("selectMon", selectMon);
+				jsObject.put("dateMap", dateMap);
+				
+				jsArr.add(jsObject);
 			}
 			
-			mav.addObject("dateMap", dateMap);
-			mav.setViewName(getPage);
-			
-			
-			
 		}
+		System.out.println("jsArr : " + jsArr.toString());
 		return jsArr.toString();
 	}
 }
