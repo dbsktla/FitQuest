@@ -24,7 +24,16 @@ public class BoardBean {
 	@NotBlank(message = "내용을 작성해 주세요.")
 	private String bcontent;
 	private String bimage;
+	private String bimageOld;
 	
+	public String getBimageOld() {
+		return bimageOld;
+	}
+
+	public void setBimageOld(String bimageOld) {
+		this.bimageOld = bimageOld;
+	}
+
 	private MultipartFile upload;
 
 	public String getName() {

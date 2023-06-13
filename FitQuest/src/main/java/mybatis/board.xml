@@ -243,4 +243,8 @@
 		</if>
 	</select>
 	
+	<select id="SelectBimageCount" resultType="int">
+	 	select count(*) from board
+	 	where bimage = #{bimage}
+	</select>
 </mapper>
