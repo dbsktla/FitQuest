@@ -70,4 +70,74 @@
 		insert into review
 		values(rvseq.nextval, #{mid}, #{tid}, #{rating}, #{rtitle}, #{rcontent}, sysdate, #{hasReview}, #{report})
 	</insert>
+	<select id = "GetMyReviewCount" resultType = "int">
+		select count(*) from review
+			where mid = #{mid}
+		<if test = "whatColumn == 'tname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'nickname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and nickname like #{keyword})
+		</if>
+		<if test = 'ordering == "1"'>
+		</if>
+		<if test = 'ordering == "2"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%PT%')
+		</if>
+		<if test = 'ordering == "3"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%필라테스%')
+		</if>
+		<if test = 'ordering == "4"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%요가%')
+		</if>
+	</select>
+	<select id = "GetMyReviewList" resultType = "review.model.ReviewBean">
+		select * from review
+			where mid = #{mid}
+		<if test = "whatColumn == 'tname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'nickname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and nickname like #{keyword})
+		</if>
+		<if test = 'ordering == "1"'>
+		</if>
+		<if test = 'ordering == "2"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%PT%')
+		</if>
+		<if test = 'ordering == "3"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%필라테스%')
+		</if>
+		<if test = 'ordering == "4"'>
+			and tid in 
+				(select id from trainer 
+					where activity like '%요가%')
+		</if>
+	</select>
+	<delete id = "DeleteReview">
+		delete review
+		where renum = #{renum}
+	</delete>
 </mapper>

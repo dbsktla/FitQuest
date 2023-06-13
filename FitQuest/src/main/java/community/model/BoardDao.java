@@ -148,4 +148,10 @@ public class BoardDao {
 		cnt = sqlSessionTemplate.selectOne(namespace + ".GetMyBoardCount",map);
 		return cnt;
 	}
+
+	public int selectBimageCount(String bimage) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".SelectBimageCount", bimage);
+		return cnt;
+	}
 }

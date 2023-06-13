@@ -24,7 +24,6 @@ import utility.FitQuestUtil;
 public class HealthBoardUpdateController {
 	private final String command = "/healthBoardUpdate.co";
 	private final String getPage = "healthBoardUpdateForm";
-	private final String gotoPage = "redirect:/healthBoardList.co";
 
 	@Autowired
 	BoardDao boardDao;
@@ -44,7 +43,7 @@ public class HealthBoardUpdateController {
 			}
 		}
 
-		return gotoPage;
+		return "";
 	}
 
 	@RequestMapping(value = command, method=RequestMethod.POST)
@@ -61,10 +60,29 @@ public class HealthBoardUpdateController {
 			else {
 				try {
 					if(boardBean.getUpload() != null) {
+						if(boardBean.getBimageOld() != null) {
+							int bimageCount = boardDao.selectBimageCount(boardBean.getBimageOld());
+							if(bimageCount == 1) {
+								File deleteFile = new File(uploadPath + File.separator + boardBean.getBimageOld());
+								if(deleteFile.exists()) {
+									if(deleteFile.delete()) {
+										System.out.println("이전 이미지 삭제 성공");
+									}
+								}	
+							}
+							else {
+								System.out.println("동일한 이미지를 사용하는 칼럼 존재");
+							}
+						}
 						File destination = new File(uploadPath + File.separator + boardBean.getUpload().getOriginalFilename());
 						MultipartFile multi =  boardBean.getUpload();
 						multi.transferTo(destination);
 						System.out.println("image : " + boardBean.getBimage());
+					}
+					else {
+						if(boardBean.getBimageOld() != null) {
+							boardBean.setBimage(boardBean.getBimageOld());
+						}
 					}
 					MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 					if(memberBean.getId().equals(boardBean.getId())) {
@@ -74,7 +92,7 @@ public class HealthBoardUpdateController {
 						System.out.println("UpdateHealthBoard cnt : " + cnt);
 						if(cnt != -1) {
 							System.out.println("수정 성공");
-							return gotoPage;
+							return "redirect:/healthBoardDetail.co?bnum=" + boardBean.getBnum();
 						}
 						else {
 							System.out.println("수정 실패");
@@ -89,5 +107,10 @@ public class HealthBoardUpdateController {
 			}
 			return getPage;
 		}
+	}
+
+	@RequestMapping("showBimage.co")
+	public String showBimage() {
+		return "showBimage";
 	}
 }
