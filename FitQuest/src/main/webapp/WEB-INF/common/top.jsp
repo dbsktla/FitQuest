@@ -137,11 +137,22 @@
           	<li class="dropdown" ><a href="genericMemberDetail.mb"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="genericMemberDetail.mb">마이페이지</a></li>
-	              <li><a href="#">리뷰관리</a></li>
+	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
 	              <li><a href="#">구매관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
 	            </ul>
 	          </li>
+           </c:if>
+           <c:if test = "${loginInfo.mtype eq 'admin' }">
+           <li class="dropdown" ><a href=""><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
+	            <ul>
+	              <li><a href="questionList">문의 관리</a></li>
+	              <li><a href="reviewDeleteRequestList.mb">리뷰삭제 신청 관리</a></li>
+	              <li><a href=""></a></li>
+	              <li><a href=""></a></li>
+	            </ul>
+	          </li>
+           
            </c:if>
           <li>
           	<a href = "cartList.od">
