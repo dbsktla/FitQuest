@@ -81,6 +81,18 @@ public class MemberDao {
 		int cnt = sqlSessionTemplate.update(namespace + ".UpdatePassword", map);
 		return cnt;
 	}
+
+	public MemberBean selectMemberByNameAndEmail(MemberBean memberBean) {
+		MemberBean memberBeanId = null;
+		memberBeanId = sqlSessionTemplate.selectOne(namespace + ".SelectMemberByNameAndEmail", memberBean);
+		return memberBeanId;
+	}
+
+	public MemberBean selectMemberByIdAndEmail(MemberBean memberBean) {
+		MemberBean memberBeanPw = null;
+		memberBeanPw = sqlSessionTemplate.selectOne(namespace + ".SelectMemberByIdAndEmail", memberBean);
+		return memberBeanPw;
+	}
 	
 	
 }

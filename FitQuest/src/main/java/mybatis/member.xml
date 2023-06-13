@@ -42,4 +42,14 @@
 		update member set password = #{password}
 		where id = #{id}
 	</update>
+	
+	<select id="SelectMemberByNameAndEmail" resultType="member.model.MemberBean">
+		select * from member
+		where name = #{name} and email = #{email}
+	</select>
+	
+	<select id="SelectMemberByIdAndEmail" resultType="member.model.MemberBean">
+		select * from member
+		where id = #{id} and email = #{email}
+	</select>
 </mapper>

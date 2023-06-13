@@ -48,6 +48,12 @@
         		}
         	}
         }
+function findId(){
+	var openWin = window.open("memberFindId.mb", "_blank", "width=500, height=500, left=300");
+}        
+function findPw(){
+	var openWin = window.open("memberFindPw.mb", "_blank", "width=500, height=500, left=300");
+}        
 </script>
 
 
@@ -86,6 +92,11 @@
 					<div class="col-12">
                       <button type="submit" class="btn btn-warning w-100">Login</button>
                     </div>
+                    
+					<div class="col-12">
+						<a style="color:#FAC710;" href="javascript:findId()">아이디 찾기</a> <font color="#FAC710">|</font>
+                      	<a style="color:#FAC710;" href="javascript:findPw()">비밀번호 찾기</a>
+					</div>
 					
                     <div class="card-body" id="naverIdLogin" style="text-align: center;">
                  	<div style="height: 50px;" ></div>
@@ -105,8 +116,8 @@
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">계정이 없으시다면? <br>
-                      	<a href="memberInsert.mb">일반 회원가입</a>/
-                      	<a href="trainerInsert.mb">트레이너 회원가입</a>
+                      	<a style="color:#FAC710;" href="memberInsert.mb">일반 회원가입</a> <font color="#FAC710">|</font>
+                      	<a style="color:#FAC710;" href="trainerInsert.mb">트레이너 회원가입</a>
                       </p>
                     </div>
                   </form>
