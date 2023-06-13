@@ -415,7 +415,7 @@ CREATE TABLE food (
    carbohydrate   number, --탄수화물
    protein   number, --단백질
    fat   number, --지방
-   saturatedfat   number, --포화지방
+   sugar   number, --당
    sodium   number --나트륨
 );
 
