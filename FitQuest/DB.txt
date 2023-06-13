@@ -390,7 +390,7 @@ create sequence fseq
 drop table food cascade constraints;
 CREATE TABLE food (
    fnum   number primary key, --음식번호
-   nnum   number   primary key, --식단번호
+   nnum   number , --식단번호
    mealtype   VARCHAR(10), -- 아침 점심 저녁 기타
    fname   varchar2(50), --음식이름
    fweight number default 0.0, -- 음식무게
