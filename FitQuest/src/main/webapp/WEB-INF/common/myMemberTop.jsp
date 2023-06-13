@@ -7,14 +7,10 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav" style="padding-top: 20px;">
 
-      <li class="nav-item">
-          <i class="bi bi-grid"></i>
-          <span style = "font-weight: bold;">회원 프로필 관리</span>
-      </li><!-- End Dashboard Nav -->
 	
       <li class="nav-item">
         <a class="nav-link collapsed" href="genericMemberDetail.mb">
-          <i class="bi bi-layout-text-window-reverse"></i><span>정보관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+          <i class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       	
