@@ -5,8 +5,9 @@ import java.sql.Date;
 public class ReservationBean {
 	private int rnum;
 	private String mid;
-	private String mname;
 	private String tid;
+	private String mname;
+	private String tname;
 	private int onum;
 	private int unum;
 	private String rdate;
@@ -17,13 +18,14 @@ public class ReservationBean {
 		
 	}
 
-	public ReservationBean(int rnum, String mid, String mname, String tid, int onum, int unum, String rdate,
-			String rtime, String rstate) {
+	public ReservationBean(int rnum, String mid, String tid, String mname, String tname, int onum, int unum,
+			String rdate, String rtime, String rstate) {
 		super();
 		this.rnum = rnum;
 		this.mid = mid;
-		this.mname = mname;
 		this.tid = tid;
+		this.mname = mname;
+		this.tname = tname;
 		this.onum = onum;
 		this.unum = unum;
 		this.rdate = rdate;
@@ -47,6 +49,14 @@ public class ReservationBean {
 		this.mid = mid;
 	}
 
+	public String getTid() {
+		return tid;
+	}
+
+	public void setTid(String tid) {
+		this.tid = tid;
+	}
+
 	public String getMname() {
 		return mname;
 	}
@@ -55,12 +65,12 @@ public class ReservationBean {
 		this.mname = mname;
 	}
 
-	public String getTid() {
-		return tid;
+	public String getTname() {
+		return tname;
 	}
 
-	public void setTid(String tid) {
-		this.tid = tid;
+	public void setTname(String tname) {
+		this.tname = tname;
 	}
 
 	public int getOnum() {

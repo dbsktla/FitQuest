@@ -29,7 +29,7 @@ import usage.model.UsageDao;
 @Controller
 public class GenericReservationController {
 	private final String command = "/genericReservation.rv";
-	private final String getPage = "test1";
+	private final String getPage = "genericReservation";
 
 	@Autowired
 	ReservationDao reservationDao;

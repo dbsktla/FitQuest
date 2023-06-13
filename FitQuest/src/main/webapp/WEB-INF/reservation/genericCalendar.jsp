@@ -5,7 +5,7 @@
 <script type="text/javascript">
 	function openPopup(rnum) { //팝업창 설정
 		// 팝업 창의 URL과 창의 속성을 설정
-	 	 var url = "trainerCalendarDetail.rv?rnum="+rnum;
+	 	 var url = "genericCalendarDetail.rv?rnum="+rnum;
 		 var width = 700; // 팝업 창의 너비
 	 	 var height = 500; // 팝업 창의 높이
  		 var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
@@ -62,7 +62,7 @@
    <div class="calendar-button-div">
   	  <div class="left"></div> 
       <div class="right">
-      	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
+      	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="예약하러 가기">
       </div>
    </div>
@@ -129,7 +129,7 @@
 			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
 						                        <div class="rstate-container">
 				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
+				                                        <span class="calender-text-s b">${reservation.tname} 트레이너님</span>  <span class="calender-text-s">${reservation.rtime}</span>
 				                                    </div>
 						                        </div>
 						                       </a> 
