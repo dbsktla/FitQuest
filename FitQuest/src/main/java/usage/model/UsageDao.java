@@ -52,4 +52,9 @@ public class UsageDao {
 		cnt = sqlSessionTemplate.delete(namespace+".DeleteUsage",unum);
 		return cnt;
 	}
+	public int increaseUsage(int unum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".IncreaseUsage",unum);
+		return cnt;
+	}
 }

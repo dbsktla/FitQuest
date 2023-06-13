@@ -75,9 +75,6 @@ public class CalendarBean {
 
 		Map<String, Integer> before_after_calendar = before_after_calendar(search_year,search_month);
 
-
-		System.out.println("search_month : " + search_month);
-
 		today_Data.put("start", start);
 		today_Data.put("startDay", startDay);
 		today_Data.put("endDay", endDay);

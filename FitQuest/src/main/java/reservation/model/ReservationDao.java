@@ -18,9 +18,7 @@ public class ReservationDao {
 
 	public int insertReservation(ReservationBean reservationBean) {
 		int cnt = -1;
-		System.out.println("넘어오나 확인");
 		cnt = sqlSessionTemplate.insert(namespace+".InsertReservation",reservationBean);
-		System.out.println("넘어오나 확인"+cnt);
 		return cnt;
 	}
 	
@@ -47,6 +45,17 @@ public class ReservationDao {
 	public List<ReservationBean> getReservationTList(String tid) {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
 		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTList",tid);
+		return rList;
+	}
+
+	public ReservationBean getOneByRnum(int rnum) {
+		ReservationBean reservationBean = sqlSessionTemplate.selectOne(namespace+".GetOneByRnum",rnum);
+		return reservationBean;
+	}
+
+	public List<ReservationBean> getReservationTListByMid(String mid) {
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTListByMid",mid);
 		return rList;
 	}
 	

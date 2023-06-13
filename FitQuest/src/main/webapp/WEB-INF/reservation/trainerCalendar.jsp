@@ -3,25 +3,6 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
-	function stateYes(rnum){
-		if (confirm('예약 승인 하시겠습니까?')) { //확인
-			location.href='reservationState.rv?rnum='+rnum+'&rstate=true';
-		    alert('예약 승인 완료되었습니다.');
-		} else { //취소
-		    alert('예약 승인 취소되었습니다.');
-		}
-	}
-	function stateNo(rnum){
-		if (confirm('예약 거절 하시겠습니까?')) { //확인
-			location.href='reservationState.rv?rnum='+rnum+'&rstate=reject';
-		    alert('예약 거절 완료되었습니다.');
-		} else { //취소
-		    alert('예약 거절 취소되었습니다.');
-		}
-	}
 	function openPopup(rnum) { //팝업창 설정
 		// 팝업 창의 URL과 창의 속성을 설정
 	 	 var url = "trainerCalendarDetail.rv?rnum="+rnum;
@@ -47,12 +28,13 @@
 	 	  };
 	}
 </script>
+<br><br>
+<center>
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
 	<div class="calendarTitle-font">My PT</div>
 </div> 
-<center>
-<div class="calendar" >
+<div>
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
@@ -78,7 +60,8 @@
    </div>
 <!-- 버튼 -->
    <div class="calendar-button-div">
-      <span>
+  	  <div class="left"></div>
+      <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
       	<c:if test="${flag == 'true'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleUpdate.rv'" value="스케줄 수정">
@@ -86,7 +69,7 @@
       	<c:if test="${flag == 'false'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">
       	</c:if>
-      </span>
+      </div>
    </div>
 <!-- 달력  -->  
 <table class="calendar_body">
