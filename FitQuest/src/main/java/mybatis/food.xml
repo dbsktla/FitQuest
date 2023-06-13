@@ -4,6 +4,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="food.model.Food">
-
+<mapper namespace="nutrition.model.Food">
+	<select id="GetAllDetailByDate" resultType="nutrition.model.FoodBean">
+		SELECT	nnum
+			   ,mnum
+			   ,id
+			   ,nudate
+			   ,mealtype
+			   ,LISTAGG(fname, '   ') WITHIN GROUP(order by fname) AS fname
+			   ,fimage
+			   ,SUM(fweight)	  AS fweight
+			   ,SUM(calories)	  AS calories
+			   ,SUM(carbohydrate) AS carbohydrate
+			   ,SUM(protein)	  AS protein
+			   ,SUM(fat)		  AS fat
+			   ,SUM(sugar)		  AS sugar
+			   ,SUM(sodium)		  AS sodium
+		FROM 	(
+				 SELECT	n.nnum
+				 	   ,n.mnum
+				 	   ,id
+				 	   ,nudate
+				 	   ,mealtype
+				 	   ,fimage
+				 	   ,fname
+				 	   ,fweight
+				 	   ,calories
+				 	   ,carbohydrate
+				 	   ,protein, fat
+				 	   ,sugar
+				 	   ,sodium
+				 FROM  	(
+					     SELECT	*
+					     FROM 	(
+							     SELECT	* 
+							     FROM 	NUTRITION
+							     )
+					     NATURAL JOIN MEAL
+					   	) n
+				 INNER JOIN FOOD f
+				 ON n.nnum  = f.nnum
+				 AND n.mnum = f.mnum
+				)
+		GROUP BY mealtype
+				,fimage
+				,nnum
+				,mnum
+				,id
+				,nudate
+		HAVING 	id = #{id}
+		AND nudate = #{selectDate}
+	</select>
 </mapper>

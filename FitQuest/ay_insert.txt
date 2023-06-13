@@ -70,3 +70,23 @@ insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-
 commit;
 
 
+-- 식단
+insert into nutrition values(nseq.nextval, 'hong', '2023-06-12');
+insert into nutrition values(nseq.nextval, 'hong', '2023-06-13');
+insert into nutrition values(nseq.nextval, 'jkim', '2023-06-13');
+-- 식사정보
+insert into meal values(mealseq.nextval, 1, 'food1.jpg', '아침');
+insert into meal values(mealseq.nextval, 1, 'food2.jpg', '점심');
+insert into meal values(mealseq.nextval, 2, 'food3.jpg', '아침');
+insert into meal values(mealseq.nextval, 2, 'food4.jpg', '점심');
+insert into meal values(mealseq.nextval, 3, 'food1.jpg', '점심');
+-- 식사정보
+insert into food values(fseq.nextval, 1, 1, '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into food values(fseq.nextval, 1, 2, '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
+insert into food values(fseq.nextval, 1, 2, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+insert into food values(fseq.nextval, 2, 3, '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into food values(fseq.nextval, 2, 3, '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
+insert into food values(fseq.nextval, 2, 4, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+insert into food values(fseq.nextval, 3, 5, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+
+commit;
