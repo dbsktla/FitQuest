@@ -294,8 +294,9 @@ drop table reservation cascade constraints;
 CREATE TABLE reservation (
    rnum   number   primary key, --예약번호/시퀀스
    mid varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디
-   mname varchar2(100) NOT NULL, -- 회원 이름
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디 
+   mname varchar2(100) NOT NULL, -- 회원 이름
+   tname varchar2(100) NOT NULL, -- 트레이너 이름
    onum   number   NOT NULL, --주문번호
    unum   number   NOT NULL,--사용권번호
    rdate varchar2(15) NOT NULL, --예약 날짜
