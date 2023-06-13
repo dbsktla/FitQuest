@@ -372,7 +372,7 @@ drop table nutrition cascade constraints;
 CREATE TABLE nutrition (
    nnum   number   primary key, --식단번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   nutritiondate   date --식사일자
+   nudate   date --식사일자
 );
 
 select * from nutrition;
