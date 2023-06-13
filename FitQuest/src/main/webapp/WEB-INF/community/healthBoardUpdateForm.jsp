@@ -8,6 +8,9 @@
 		color : #E04848;
 		font-size: 10pt;
 	}
+	#bimage:hover{
+		cursor: pointer;
+	}
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
@@ -61,12 +64,18 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+	function showImg(){
+		window.open('showBimage.co?bimage=${ boardBean.bimage }','_blank','width=500,height=400');
+	}
+</script>
+
 <body style="background-color: #FEF9E7;">
 	<main>
 		<div class="card" style="width: 55%; margin: auto; text-align: center;">
 
 			<div class="card-body">
-				<h2 align="center" class="card-title">게시글 작성</h2>
+				<h2 align="center" class="card-title">게시글 수정</h2>
 
 				<form:form commandName="boardBean" method="post" enctype="multipart/form-data" class="row g-3"
 					action="healthBoardUpdate.co">
@@ -90,6 +99,12 @@ $(document).ready(function(){
 					
 					<div class="col-md-6">
 						<input type="file" name="upload" class="form-control" id="upload">
+						<input type="hidden" name="bimageOld" value="${ boardBean.bimage }">
+					</div>
+					<div class="col-md-6" style="text-align: left;">
+						<c:if test="${ !empty boardBean.bimage }">
+							<img id="bimage" width="60" src="<%= request.getContextPath() %>/resources/Image/CommunityImage/${ boardBean.bimage }" onclick="showImg()">
+						</c:if>
 					</div>
 					
 					<div class="quill-editor-default" id="divTest">
@@ -102,7 +117,7 @@ $(document).ready(function(){
 					<div class="err"></div>
 					
 					<div class="text-center">
-						<button type="submit" id="sub" class="btn btn-warning btn-sm">작성하기</button>
+						<button type="submit" id="sub" class="btn btn-warning btn-sm">수정하기</button>
 					</div>
 				</form:form>
 			</div>
