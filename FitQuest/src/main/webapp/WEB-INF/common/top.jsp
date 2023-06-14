@@ -74,6 +74,7 @@
             </ul>
           </li>
           
+          
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
 	          <li class="dropdown"><a href="genericCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
@@ -97,13 +98,14 @@
 	          </li>
           </c:if>
           
+          
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
 	          <li class="dropdown"><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="health.ht">내 건강관리</a></li>
 	              <li><a href="myHealthList.ht">운동관리</a></li>
-	              <li><a href="#">식단관리</a></li>
+	              <li><a href="myNutritionList.ht">식단관리</a></li>
 	              <li><a href="myPhysiqueList.ht">신체정보</a></li>
 	            </ul>
 	          </li>
@@ -119,6 +121,7 @@
 	            </ul>
 	          </li>
           </c:if>
+          
           
           <!-- 내글보기, 회원정보수정 등 - 트레이너  -->
           <c:if test="${loginInfo.mtype eq 'trainer'}">
