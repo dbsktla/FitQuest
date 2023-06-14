@@ -26,4 +26,5 @@
 	<context:component-scan base-package="trainer"/>
 	<context:component-scan base-package="review"/>
 	<context:component-scan base-package="community"/>
+	<context:component-scan base-package="admin"/>
 </beans>

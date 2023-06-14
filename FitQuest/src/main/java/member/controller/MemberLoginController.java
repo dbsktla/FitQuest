@@ -47,7 +47,9 @@ public class MemberLoginController {
 			else {
 				if(memberBean.getPassword().equals(password)) {
 					session.setAttribute("loginInfo", memberBean);
-					
+					if(id.equals("admin")) {
+						return "redirect:/adminMain.ad";
+					}
 					String destination = (String)session.getAttribute("destination");
 					// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
 					if(destination != null) {
