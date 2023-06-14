@@ -175,4 +175,13 @@
 		inner join gym on trainer.gnum = gym.gnum
 		where reservation.rnum = #{rnum}
 	</select>
+	<select id = "GetOrderList" resultType = "composite.model.MyOrderBean">
+		select count(pnum) as orderCount, sum(price) as totalPrice, odate, onum from
+			(select odate, onum, price, pnum from product 
+			natural join
+				(select odate, onum, pnum from orders 
+					natural join 
+				orderdetail where id = #{id}))
+		group by odate, onum
+	</select>
 </mapper>

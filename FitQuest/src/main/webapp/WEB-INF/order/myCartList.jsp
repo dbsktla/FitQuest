@@ -86,7 +86,8 @@
 			                            </td>
 			                            <td valign = "middle" align = "center">
 			                            	<c:if test = "${item.hasReview eq 'Y'}">
-			                            	${item.rating } / 5
+			                            	<fmt:formatNumber var = "avgScore1" value="${item.rating  }" type="number" pattern="#.0"/>
+			                            	${avgScore1 } / 5
 			                            	</c:if>
 			                            	<c:if test = "${item.hasReview eq 'N' }">
 			                            	리뷰 없습니다

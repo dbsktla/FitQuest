@@ -31,8 +31,8 @@ public class ReviewDeleteController {
 		if(reviewCount == 0) { //만약에 초기 값을 넣는다. 리뷰 없는 상태로 설정하는것.
 			reviewDao.insertBaseValue(reviewBean.getTid());
 		}
-		if(memberBean.getMtype().equals("admin")) {
-			return "redirect:/reviewDeleteRequestList.mb";
+		if(memberBean.getMtype().equals("admin")) { //만약 관리자로 로그인 된거면 다시 로그인 요청으로
+			return "redirect:/adminReviewReportList.ad";
 		}
 		return getPage;
 	}
