@@ -18,7 +18,7 @@
 		where tid = #{id}	
 	</select>
 	<insert id = "InsertBaseValue">
-		insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', #{id}, 'N')
+		insert into review(renum, mid, tid, hasReview, report) values(rvseq.nextval, 'admin', #{id}, 'N', 'N')
 	</insert>
 	<select id = "GetReviewCount" resultType = "int">
 		select count(*)
@@ -154,4 +154,55 @@
 		set rating = #{rating}, rtitle = #{rtitle}, rcontent = #{rcontent}, rdate = sysdate 
 		where renum = #{renum}
 	</update>
+	<select id = "GetAdminCount" resultType = "int">
+		select count(*) from review
+			where report != 'N'
+		<if test = "whatColumn == 'tname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'nickname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and nickname like #{keyword})
+		</if>
+		<if test = 'ordering == "1"'>
+		</if>
+		<if test = 'ordering == "2"'>
+			and report = 'approve'
+		</if>
+		<if test = 'ordering == "3"'>
+			and report = 'unapprove'
+		</if>
+		<if test = 'ordering == "4"'>
+			and report = 'Y'
+		</if>
+	</select>
+	<select id = "DeleteRequestList" resultType = "review.model.ReviewBean">
+		select * from review
+			where report != 'N'
+		<if test = "whatColumn == 'tname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and name like #{keyword})
+		</if>
+		<if test = "whatColumn == 'nickname'">
+			and tid in 
+				(select id from member 
+					where mtype = 'trainer' 
+						and nickname like #{keyword})
+		</if>
+		<if test = 'ordering == "1"'>
+		</if>
+		<if test = 'ordering == "2"'>
+			and report = 'unapprove'
+		</if>
+		<if test = 'ordering == "3"'>
+			and report = 'Y'
+		</if>
+	</select>
 </mapper>

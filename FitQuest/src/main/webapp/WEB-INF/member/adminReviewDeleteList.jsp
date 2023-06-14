@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
-<%@ include file="../common/myTrainerTop.jsp"%>
+<%@ include file="../common/myAdminTop.jsp"%>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 	function sendForm(){
@@ -10,23 +10,7 @@
 	}
 </script>
 <style>
-section{
-	padding: 0px !important;
-}
-.btn:checked{
-	background-color: #ffc107 !important;
-}
-.btn:hover {
-		background-color:#FAC710 !important;
-	}
-.btn-check{
-	border-radius:20px !important;
-}
-.btn-check + &:hover {
-    // override for the checkbox/radio buttons
-    background-color: #ffc107 !important;
-  }
-section{
+	section{
 		padding: 0px !important;
 		}
 	.pageTitle{
@@ -34,17 +18,17 @@ section{
 		margin-bottom: 50px;
 	}
 </style>
-    <section class="section">
+ <section class="section">
 	
     <div class="pagetitle">
-      <h1>리뷰관리</h1>
+      <h1>리뷰삭제 신청 관리</h1>
     </div><!-- End Page Title -->
 
       <div class="row">
       <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-            	<form action = "trainerReviewList.mb" name = "myform" style = "display:flex; align-items:center; justify-content: space-between; margin-bottom: 0px;">
+            	<form action = "reviewDeleteRequestList.mb" name = "myform" style = "display:flex; align-items:center; justify-content: space-between; margin-bottom: 0px;">
             		<div class = "col-lg-6">
             			 <input class="form-check-input btn-check" type="radio" name = "ordering" value="1" id="flexCheckDefault" onClick = "sendForm()"
 				          <c:if test = "${ordering eq '1' }">
@@ -53,7 +37,7 @@ section{
 				          checked
 				          >
 						  <label class="form-check-label btn" for="flexCheckDefault">
-						    기본순
+						    전체
 						  </label>
             			 <input class="form-check-input btn-check" type="radio" name = "ordering" value="2" id="flexCheckDefault2" onClick = "sendForm()"
 				          <c:if test = "${ordering eq '2'}">
@@ -61,7 +45,7 @@ section{
 				          </c:if>
 				          >
 						  <label class="form-check-label btn" for="flexCheckDefault2">
-						    별점 높은순
+						    거절된 신청
 						  </label>
             			 <input class="form-check-input btn-check" type="radio" name = "ordering" value="3" id="flexCheckDefault3" onClick = "sendForm()"
 				          <c:if test = "${ordering eq '3' }">
@@ -69,15 +53,7 @@ section{
 				          </c:if>
 				          >
 						  <label class="form-check-label btn" for="flexCheckDefault3">
-						    별점 낮은순
-						  </label>
-            			 <input class="form-check-input btn-check" type="radio" name = "ordering" value="4" id="flexCheckDefault4" onClick = "sendForm()"
-				          <c:if test = "${ordering eq '4' }">
-				          checked
-				          </c:if>
-				          >
-						  <label class="form-check-label btn" for="flexCheckDefault4">
-						    최신순
+						    미확인 신청
 						  </label>
             		</div>
             		<div class = "col-lg-6" align="right" style = "vertical-align:center;">
@@ -87,12 +63,12 @@ section{
             			<c:if test = "${whatColumn eq 'tname' }">
 				          selected
 				          </c:if>
-            			>회원 이름</option>
-            			<option value = "rtitle"
-            			<c:if test = "${whatColumn eq 'rtitle' }">
+            			>트레이너 이름</option>
+            			<option value = "nickname"
+            			<c:if test = "${whatColumn eq 'nickname' }">
 				          selected
 				          </c:if>
-            			>리뷰 제목</option>
+            			>트레이너 별명</option>
             		</select>
             		<input type = "text" name = "keyword" value = 
             		<c:if test = "${keyword != 'null' }">	
@@ -110,29 +86,18 @@ section{
         <div class="col-lg-12">
           <div class="card" style = "height: 100%; min-height: 350px;">
             <div class="card-body">
-              <c:if test = "${hasReview eq 'Y' }">
-             	 <h5 class="card-title">
-	             	<fmt:formatNumber var = "rating1" value="${avgScore }" type="number" pattern="#.0"/>
-					<fmt:formatNumber var = "rating" value="${avgScore}" type="number" pattern="#"/>
-	                평균 별점 : 
-					<c:set var = "starCount" value = "0"/>
-					<c:forEach begin = "1" end = "${rating }" step="1" var="i">
-	                  <i class="bi bi-star-fill"></i>
-	                  <c:set var = "starCount" value = "${starCount + 1 }"/>
-					</c:forEach>
-					<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
-					<i class = "bi bi-star"></i>
-					</c:forEach>
-					${rating1 }
+               <c:if test = "${not empty rList }">
+              	 <h5 class="card-title">
              	 </h5>
              	 <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">리뷰 작성 날짜</th>
                     <th scope="col">리뷰 작성자 아이디</th>
+                    <th scope="col">트레이너 아이디</th>
+                    <th scope="col">리뷰 작성날짜</th>
                     <th scope="col">리뷰 제목</th>
-                    <th scope="col">리뷰 별점</th>
-                    <th scope="col">리뷰 내용보기</th>
+                    <th scope="col">확인 상태</th>
+                    <th scope="col">자세히 보기</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,22 +105,30 @@ section{
                 	<tr>
                 		<fmt:parseDate value = "${review.rdate }" pattern = "yyyy-MM-dd" var = "date"/>
                     	<fmt:formatDate value = "${date }" var = "date" pattern = "yyyy-MM-dd"/>
-	                	<td>${date}</td>
-	                	<td>${review.mid }</td>
+	                	<td>${review.mid}</td>
+	                	<td>${review.tid }</td>
+	                	<td>${review.rdate}</td>
 	                	<td>${review.rtitle }</td>
-	                	<td>${review.rating }</td>
-	                	<td><a href = "reviewDetail.mb?renum=${review.renum }&mid=${review.mid}"><i class="bi bi-blockquote-left"></i>내용보기</a></td>
+	                	<c:if test = "${review.report eq 'Y'}">
+	                	<td>미확인</td>
+	                	</c:if>
+	                	<c:if test = "${review.report eq 'approve'}">
+	                	<td>수락(삭제)</td>
+	                	</c:if>
+	                	<c:if test = "${review.report eq 'unapprove'}">
+	                	<td>거절</td>
+	                	</c:if>
+	                	<td><a href = "reviewDeleteRequestDetail.mb?renum=${review.renum }"><i class="bi bi-blockquote-left"></i>내용보기</a></td>
                 	</tr>
                 	</c:forEach>
              	</tbody>
               </table>
               </c:if>
-			  <c:if test = "${hasReview eq 'N' }">
+			    <c:if test = "${empty rList}">
 			  	<h5 class="card-title">
-			  		아직 작성된 리뷰 없습니다.
+		  		해당되는 신청이 없습니다.
 			  	</h5>
               </c:if>
-			  
             </div>
             <div align = "center" style= "margin-bottom:12px;">
 	            ${pageInfo.pagingHtml }
@@ -164,6 +137,6 @@ section{
         </div>
       </div>
     </section>
-<%@ include file="../common/myTrainerBot.jsp"%>
+<%@ include file="../common/myAdminBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

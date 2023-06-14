@@ -127,7 +127,6 @@
 	              <li><a href="trainerDetail.mb">마이페이지</a></li>
 	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
 	              <li><a href="viewProductList.pd">상품관리</a></li>
-	              <li><a href="productSalesDetail.pd">수익관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
 	            </ul>
 	          </li>
@@ -138,7 +137,7 @@
 	            <ul>
 	              <li><a href="genericMemberDetail.mb">마이페이지</a></li>
 	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
-	              <li><a href="#">구매관리</a></li>
+	              <li><a href="viewMyOrderList.od">구매관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
 	            </ul>
 	          </li>
