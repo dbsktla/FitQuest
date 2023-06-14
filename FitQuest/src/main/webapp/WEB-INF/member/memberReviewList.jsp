@@ -73,7 +73,7 @@
 				          </c:if>
             			>트레이너 이름</option>
             			<option value = "activity"
-            			<c:if test = "${whatColumn eq 'rtitle' }">
+            			<c:if test = "${whatColumn eq 'activity' }">
 				          selected
 				          </c:if>
             			>트레이너 별명</option>

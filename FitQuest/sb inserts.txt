@@ -52,8 +52,8 @@ insert into trainer values('park2', 1, 'PT', '체지방 감소,근육량 증가,
 
 --review
 insert into review values(rvseq.nextval, 'hong', 2, 'kim', 4, '추천합니다', '굳', sysdate, 'Y', 'N');
-insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N');
-insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'jin', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'jin', 'N', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'moon', 'N');
 insert into review values(rvseq.nextval, 'hong', 'kim', 3, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'hong', 'moon2', 3, '추천합니다', '굳', sysdate, 'Y', 'N');
@@ -70,9 +70,9 @@ insert into review values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '�
 insert into review values(rvseq.nextval, 'hong', 'kim', 1, '추천 안합니다', '리뷰 내용 입니다', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'jkim', 'kim', 5, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'N');
-insert into review values(rvseq.nextval, 'hong', 'kim', 3, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'N');
-insert into review values(rvseq.nextval, 'parkjay', 'kim', 4, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'N');
-insert into review values(rvseq.nextval, 'jkim', 'kim', 2, '추천합니다', '굳리뷰 내용 입니다', sysdate, 'Y', 'N');
+insert into review values(rvseq.nextval, 'hong', 'kim', 3, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'Y');
+insert into review values(rvseq.nextval, 'parkjay', 'kim', 4, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', 'Y');
+insert into review values(rvseq.nextval, 'jkim', 'kim', 2, '추천합니다', '굳리뷰 내용 입니다', sysdate, 'Y', 'Y');
 insert into review values(rvseq.nextval, 'hong', 'kim', 4, '추천합니다', '굳', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '굳', sysdate, 'Y', 'N');
 insert into review values(rvseq.nextval, 'hong', 'kim', 4, '추천합니다', '굳', sysdate, 'Y', 'N');

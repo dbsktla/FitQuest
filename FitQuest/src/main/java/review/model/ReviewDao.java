@@ -88,4 +88,14 @@ public class ReviewDao {
 		int cnt = sqlSessionTemplate.update(namespace + ".UpdateReview", reviewBean);
 		return cnt;
 	}
+	public int getAdminReviewCount(Map<String, String> map) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetAdminCount", map);
+		return cnt;
+	}
+	public List<ReviewBean> getReviewDeleteRequestList(Map<String, String> map, ReviewPaging pageInfo) {
+		List<ReviewBean> rList = new ArrayList<ReviewBean>();
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		rList = sqlSessionTemplate.selectList(namespace+ ".DeleteRequestList", map, rowBounds);
+		return rList;
+	}
 }
