@@ -423,6 +423,23 @@ select * from food;
 commit;
 
 
+-- 식단 북마크
+drop sequence fmseq;
+create sequence fmseq
+  increment by 1
+  start with 1
+  minvalue 1
+  nocache;
+  
+drop table foodmark cascade constraints;
+CREATE TABLE foodmark (
+   fnum   number primary key, --음식번호
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   fmnum number -- 북마크 번호
+);
+
+
+
 -- 신체정보
 drop sequence phseq;
 create sequence phseq
