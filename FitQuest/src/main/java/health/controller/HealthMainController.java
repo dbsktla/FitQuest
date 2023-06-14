@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import health.model.HealthBean;
 import health.model.HealthDao;
 import health.model.HealthDateBean;
 import health.model.HealthDateDao;
@@ -32,7 +31,6 @@ import physique.model.PhysiqueBean;
 import physique.model.PhysiqueDao;
 import trainer.model.TrainerDao;
 import usage.model.UsageDao;
-import utility.NullUtil;
 
 @Controller
 public class HealthMainController {
@@ -124,7 +122,11 @@ public class HealthMainController {
 			datemap.put("sdate", sdf.format(scal.getTime()));
 			datemap.put("edate", sdf.format(ecal.getTime()));
 			
+			System.out.println("sdate : " + datemap.get("sdate"));
+			System.out.println("edate : " + datemap.get("edate"));
+			
 			String weekPlaytime = healthDateDao.allWeekPlaytime(datemap);
+			System.out.println("weekPlaytime : " + weekPlaytime);
 			if(weekPlaytime == null) {
 				weekPlaytime = "0";
 			}

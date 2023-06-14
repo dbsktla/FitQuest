@@ -156,7 +156,7 @@
 					$('#detailDiv').empty();
 					msg += '<div style="text-align: center; min-height: 60;">';
 					msg += '등록된 데이터가 없습니다.';
-					msg += '<input type="button" value="추가" onclick="location.href=' + "myNutritionInsert.ht" + '" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
+					msg += '<input type="button" value="추가" onclick="goInsert('+ "'" + selectDate + "'" +')" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
 					msg += '</div>';
 				}
 				// 데이터정보가 있을 때
@@ -166,12 +166,12 @@
 						var x = data[i].flist.carbohydrate + data[i].flist.protein + data[i].flist.fat;
 						
 						msg += '<div class="row"><div class="col-4" style="padding: 10;">';
-						msg += '<img class="imgs" src="/ex/resources/Image/FoodImage/'+data[i].flist.fimage+'" style="margin: auto; width: 100%;">';
+						msg += '<img class="imgs" onerror="this.src='+ "'/ex/resources/Image/FoodImage/no_img.jpg'" +'" src="/ex/resources/Image/FoodImage/'+data[i].flist.fimage+'" style="margin: auto; width: 100%;">';
 						msg += '</div><div class="col-8">';
 						msg += '<div style="padding: 10;">';
 						msg += '<input type="button" value="수정" onclick="" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
 						msg += '</div>';
-						msg += '<h5>'+ data[i].flist.mealtype +'</h5><div>먹은 음식</div><hr>';
+						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식</div><hr>';
 						msg += '<div>' + data[i].flist.fname + ' ' + data[i].flist.fweight + 'g</div><div>';
 						msg += '<ul class="list-group" style="padding-top: 20; padding-bottom: 20;">';
 						msg += '<li class="list-group-item list-group-item-warning">';
@@ -236,6 +236,11 @@
 			}
 		}); // ajax
 	} //dateClick()
+	
+	
+	function goInsert(selectDate) {
+		location.href="myNutritionInsert.ht?selectDate=" + selectDate;
+	}// goInsert
 </script>
 <%
 	Date now = new Date();
@@ -258,9 +263,7 @@
 		<div class="col-lg-4" >
 			<div class="card">
 				<div class="card-body">
-					<h5 style="padding-bottom: 20;">오늘의 총 섭취 영양정보
-					<input type="button" value="추가" onclick="location.href='myNutritionInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">
-					</h5>
+					<h5 style="padding-bottom: 20;">오늘의 총 섭취 영양정보</h5>
 					<div id="today-all-sum" style="margin: auto; text-align: center; min-height: 40;">조회할 날짜를 클릭하세요</div>
 				</div>
 			</div>
