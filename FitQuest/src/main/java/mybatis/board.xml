@@ -45,14 +45,14 @@
 		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
 		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
 		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
-		from board inner join member on board.id = member.id where btype = '자유' and brelevel = 0 order by breadcount desc) board) board
+		from board inner join member on board.id = member.id where btype = '자유' and brelevel = 0 and bstatus is null order by breadcount desc) board) board
         where rank between 1 and 3
 	</select>
 	
 	<select id="GetFreeBoardList" resultType="community.model.BoardBean">
-		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
-		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
-		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bstatus
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bstatus
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bstatus
 		from board inner join member on board.id = member.id order by bref desc, brestep asc) board) board
 		<if test="bcategory != ''">
 			where btype = '자유' and bcategory = #{bcategory}
@@ -161,9 +161,9 @@
 	</select>
 	
 	<select id="GetHealthBoardList" resultType="community.model.BoardBean">
-		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
+		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
 		from board inner join member on board.id = member.id order by bnum desc) board) board
 		<if test="bcategory != ''">
 			where btype = '건강' and bcategory = #{bcategory}
@@ -198,10 +198,10 @@
 	</select>
 	
 	<select id="GetHotHealthBoardList" resultType="community.model.BoardBean">
-		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage
-		from board inner join member on board.id = member.id  where btype = '건강' order by breadcount desc) board) board
+		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from board inner join member on board.id = member.id  where btype = '건강' and bstatus is null order by breadcount desc) board) board
         where rank between 1 and 3
 	</select>
 	
@@ -233,9 +233,9 @@
 	</select>
 	
 	<select id="GetMyBoardList" resultType="community.model.BoardBean">
-		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
-		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
-		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage
+		select bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage, bstatus
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage, bstatus
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bref, brestep, brelevel, bcontent, bimage, bstatus
 		from board inner join member on board.id = member.id order by bref desc, brestep asc) board) board
 		where board.id = #{id}
 		<if test="btype != ''">
@@ -247,4 +247,9 @@
 	 	select count(*) from board
 	 	where bimage = #{bimage}
 	</select>
+	
+	<update id="UpdateBoard">
+		<![CDATA[update board set bsubject = '관리자에 의해 가려졌습니다.', bstatus = '신고'
+		where bnum = #{bcnum}]]>
+	</update>
 </mapper>

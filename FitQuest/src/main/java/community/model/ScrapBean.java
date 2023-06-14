@@ -7,7 +7,14 @@ public class ScrapBean {
 	private String bsubject;
 	private String name;
 	private String btype;
+	private String bstatus;
 	
+	public String getBstatus() {
+		return bstatus;
+	}
+	public void setBstatus(String bstatus) {
+		this.bstatus = bstatus;
+	}
 	public String getBtype() {
 		return btype;
 	}

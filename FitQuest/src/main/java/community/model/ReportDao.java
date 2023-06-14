@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import admin.model.AdminReportBean;
+
 @Component
 public class ReportDao {
 	private String namespace = "report.model.Report";
@@ -19,6 +21,12 @@ public class ReportDao {
 		} catch(DataAccessException e){
 			
 		}
+		return cnt;
+	}
+	
+	public int updateReport(AdminReportBean adminReportBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateReport", adminReportBean);
 		return cnt;
 	}
 }

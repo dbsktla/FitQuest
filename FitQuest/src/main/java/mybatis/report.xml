@@ -7,6 +7,11 @@
 <mapper namespace="report.model.Report">
 	<insert id="InsertReport">
 		insert into report
-		values(reseq.nextval,#{bcnum},#{id},#{rtype},'신고 접수',#{rcontent})
+		values(rpseq.nextval,#{bcnum},#{id},#{rtype},'신고 접수',#{rcontent})
 	</insert>
+	
+	<update id="UpdateReport">
+		update report set status = #{status}
+		where rpnum = #{rpnum}
+	</update>
 </mapper>

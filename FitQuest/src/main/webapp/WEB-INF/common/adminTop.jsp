@@ -124,7 +124,7 @@
         </ul>
       </li>
        <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="adminReviewReportList.ad">
         <i class="bi bi-x-octagon-fill"></i>
           <span>리뷰 삭제 요청</span>
         </a>

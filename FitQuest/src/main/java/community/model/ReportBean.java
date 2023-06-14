@@ -1,7 +1,7 @@
 package community.model;
 
 public class ReportBean {
-	private int renum;
+	private int rpnum;
 	private int bcnum;
 	private int bnum;
 	private String id;
@@ -14,11 +14,11 @@ public class ReportBean {
 	public void setBnum(int bnum) {
 		this.bnum = bnum;
 	}
-	public int getRenum() {
-		return renum;
+	public int getRpnum() {
+		return rpnum;
 	}
-	public void setRenum(int renum) {
-		this.renum = renum;
+	public void setRpnum(int renum) {
+		this.rpnum = renum;
 	}
 	public int getBcnum() {
 		return bcnum;

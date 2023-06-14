@@ -10,6 +10,14 @@ public class BcommentBean {
 	private int crelevel;
 	private String ccontent;
 	private String name;
+	private String cstatus;
+	
+	public String getCstatus() {
+		return cstatus;
+	}
+	public void setCstatus(String cstatus) {
+		this.cstatus = cstatus;
+	}
 	public String getName() {
 		return name;
 	}

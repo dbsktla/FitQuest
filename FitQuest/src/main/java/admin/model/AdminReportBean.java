@@ -1,7 +1,7 @@
 package admin.model;
 
 public class AdminReportBean {
-	private int renum;
+	private int rpnum;
 	private int bcnum;
 	private int bnum;
 	private String id;
@@ -12,11 +12,11 @@ public class AdminReportBean {
 	private String bsubject;
 	private String ccontent;
 	
-	public int getRenum() {
-		return renum;
+	public int getRpnum() {
+		return rpnum;
 	}
-	public void setRenum(int renum) {
-		this.renum = renum;
+	public void setRpnum(int renum) {
+		this.rpnum = renum;
 	}
 	public int getBcnum() {
 		return bcnum;

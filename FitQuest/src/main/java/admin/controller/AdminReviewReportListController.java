@@ -11,35 +11,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import admin.model.AdminDao;
-import admin.model.AdminReportBean;
 import member.model.MemberBean;
+import review.model.ReviewBean;
+import review.model.ReviewDao;
 
 @Controller
-public class AdminCommunityReportListController {
-	private final String command = "/adminCommunityReportList.ad";
-	private final String getPage = "adminCommunityReportList";
+public class AdminReviewReportListController {
+	private final String command = "/adminReviewReportList.ad";
+	private final String getPage = "adminReviewReportList";
 	
 	@Autowired
 	AdminDao adminDao;
 	
+	@Autowired
+	ReviewDao reviewDao;
+	
 	@RequestMapping(command)
 	public String reportList(Model model, HttpSession session) {
-		session.setAttribute("destination", "redirect:/adminCommunityReportList.ad");
+		session.setAttribute("destination", "redirect:/adminReviewReportList.ad");
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 			if(memberBean.getId().equals("admin")) {
-				List<AdminReportBean> reportBoardList = new ArrayList<AdminReportBean>();
-				List<AdminReportBean> reportBcommentList = new ArrayList<AdminReportBean>();
-				reportBoardList = adminDao.getReportBoardList();
-				reportBcommentList = adminDao.getReportBCommnerList();
-				model.addAttribute("reportBoardList",reportBoardList);
-				model.addAttribute("reportBcommentList",reportBcommentList);
+				List<ReviewBean> reportReviewList = new ArrayList<ReviewBean>();
+				reportReviewList = reviewDao.getReviewReport();
+				model.addAttribute("reportReviewList",reportReviewList);
 				return getPage;
-			}
-			else {
+			}else {
 				return "redirect:/login.mb";
 			}
 		}

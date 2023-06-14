@@ -28,8 +28,8 @@
 	</select>
 	
 	<select id="GetMyScrapList" resultType="community.model.ScrapBean">
-		select snum, scrap.bnum, scrap.id, bm.bsubject, bm.name, bm.btype
-		from (select board.id, board.bnum, board.bsubject, board.btype, name from board inner join member on board.id = member.id) bm inner join scrap
+		select snum, scrap.bnum, scrap.id, bm.bsubject, bm.name, bm.btype, bstatus
+		from (select board.id, board.bnum, board.bsubject, board.btype, bstatus,name from board inner join member on board.id = member.id) bm inner join scrap
 		on scrap.bnum = bm.bnum
 		where scrap.id = #{id}
 	</select>

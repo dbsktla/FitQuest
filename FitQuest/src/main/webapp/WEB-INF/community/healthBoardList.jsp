@@ -74,7 +74,12 @@
 							<tr align="center">
 								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
 								<td align="left">
-									<a style="color : #FAC710;" href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+									<c:if test="${ board.bstatus eq '신고' }">
+										${ board.bsubject }
+									</c:if>
+									<c:if test="${ board.bstatus != '신고' }">
+										<a style="color : #FAC710;" href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+									</c:if>
 								</td>
 								<td>${ board.bcategory }</td>
 								<td><a style="color : #FAC710;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>

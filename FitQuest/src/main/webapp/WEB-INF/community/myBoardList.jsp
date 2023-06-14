@@ -111,13 +111,20 @@
 											varStatus="status">
 											<tr align="center">
 												<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
-												<td align="left"><c:if test="${ board.btype == '자유' }">
-														<a style="color: #FAC710;"
-															href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
-													</c:if> <c:if test="${ board.btype == '건강' }">
-														<a style="color: #FAC710;"
-															href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
-													</c:if></td>
+												<td align="left">
+													<c:if test="${ board.bstatus eq '신고' }">
+														${ board.bsubject }
+													</c:if>
+													<c:if test="${ board.bstatus != '신고' }">
+														<c:if test="${ board.btype == '자유' }">
+															<a style="color: #FAC710;"
+																href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+														</c:if> <c:if test="${ board.btype == '건강' }">
+															<a style="color: #FAC710;"
+																href="healthBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+														</c:if>
+													</c:if>
+													</td>
 												<td>${ board.bcategory }</td>
 												<td>${ board.name }</td>
 												<td>${ board.breadcount }</td>
@@ -194,13 +201,20 @@
 											varStatus="status">
 											<tr align="center">
 												<th scope="row">${ status.count }</th>
-												<td align="left"><c:if test="${ scrap.btype == '자유' }">
-														<a style="color: #FAC710;"
-															href="freeBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
-													</c:if> <c:if test="${ scrap.btype == '건강' }">
-														<a style="color: #FAC710;"
-															href="healthBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
-													</c:if></td>
+												<td>
+													<c:if test="${ scrap.bstatus == '신고' }">
+														${ scrap.bsubject }
+													</c:if>
+													<c:if test="${ scrap.bstatus != '신고' }">
+														<c:if test="${ scrap.btype == '자유' }">
+															<a style="color: #FAC710;"
+																href="freeBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
+														</c:if> <c:if test="${ scrap.btype == '건강' }">
+															<a style="color: #FAC710;"
+																href="healthBoardDetail.co?bnum=${ scrap.bnum }">${ scrap.bsubject }</a>
+														</c:if>
+													</c:if>
+												</td>
 												<td>${ scrap.name }</td>
 											</tr>
 										</c:forEach>
