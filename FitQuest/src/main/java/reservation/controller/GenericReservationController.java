@@ -188,6 +188,7 @@ public class GenericReservationController {
 			model.addAttribute("rday",rday);
 			//이미 예약된 날짜 시간
 			model.addAttribute("rtimeArr",rtimeArr);
+			model.addAttribute("rList",rList);
 	
 			model.addAttribute("tsdayArr",tsdayArr);
 			model.addAttribute("tstimeArr",tstimeArr);
