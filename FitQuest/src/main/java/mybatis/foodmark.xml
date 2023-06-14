@@ -5,5 +5,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nutrition.model.Foodmark">
-
+	<insert id="InsertFoodmark">
+		INSERT INTO FOODMARK 
+		VALUES(
+				fkseq.nextval
+			   ,#{fnum}
+			   ,#{id}
+			  )
+	</insert>
+	
+	<select id="GetFoodMarkList" resultType="nutrition.model.FoodBean">
+		SELECT	fknum AS fnum
+			   ,fname
+			   ,fweight
+			   ,calories
+			   ,carbohydrate
+			   ,protein
+			   ,fat
+			   ,sugar
+			   ,sodium
+		FROM 	FOODMARK
+		NATURAL JOIN FOOD 
+		WHERE id = #{id}
+		ORDER BY fknum
+	</select>
+	
+	<delete id="DeleteFoodmark">
+		DELETE FOODMARK
+		WHERE  fknum = #{fknum}
+	</delete>
 </mapper>

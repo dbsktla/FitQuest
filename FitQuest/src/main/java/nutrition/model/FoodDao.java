@@ -18,4 +18,15 @@ public class FoodDao {
 		List<FoodBean> flist = sqlSessionTemplate.selectList(namespace + ".GetAllDetailByDate", map);
 		return flist;
 	}
+
+	public int insertFood(FoodBean foodBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertFood", foodBean);
+		return cnt;
+	}
+
+	public int getMaxFnum() {
+		int fnum = sqlSessionTemplate.selectOne(namespace + ".GetMaxFnum");
+		return fnum;
+	}
 }

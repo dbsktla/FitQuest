@@ -22,11 +22,11 @@ public class NutritionBean {
 		this.id = id;
 	}
 
-	public String getNdate() {
+	public String getNudate() {
 		return nudate;
 	}
 
-	public void setNdate(String nudate) {
+	public void setNudate(String nudate) {
 		this.nudate = nudate;
 	}
 

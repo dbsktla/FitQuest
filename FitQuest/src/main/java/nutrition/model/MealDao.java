@@ -10,4 +10,15 @@ public class MealDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	private String namespace = "nutrition.model.Meal";
+
+	public int insertMeal(MealBean mealBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertMeal", mealBean);
+		return cnt;
+	}
+
+	public int getMaxMnum() {
+		int mnum = sqlSessionTemplate.selectOne(namespace + ".GetMaxMnum");
+		return mnum;
+	}
 }

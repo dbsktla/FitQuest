@@ -48,10 +48,10 @@
 						
 						<div class="row mb-3">
 							<div class="row mb-3">
-								<label for="ndate" class="col-form-label col-md-3 col-lg-2 col-form-label" style="color: gray;"><b>섭취일</b></label>
+								<label for="nudate" class="col-form-label col-md-3 col-lg-2 col-form-label" style="color: gray;"><b>섭취일</b></label>
 								<div class="col-md-8 col-lg-4">
 									<fmt:parseDate value="${param.selectDate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
-									<input name="ndate" type="date" class="form-control" id="ndate" value="<fmt:formatDate value='${day}' pattern='yyyy-MM-dd'/>" >
+									<input name="nudate" type="date" class="form-control" id="nudate" value="<fmt:formatDate value='${day}' pattern='yyyy-MM-dd'/>" >
 									<span class="errmsg derrmsg"></span>
 								</div><!-- 섭취일 -->
 							
@@ -77,45 +77,15 @@
 							</div>
 						</div>
 						
-						<!-- <hr>
-						
-						<div class="col-md-12">
-							<label for="hdate" class="form-label" style="color: gray;"><b>식단 종합 영양성분</b></label> 
-							
-							<div class="row mb-12">
-								<div class="row mb-3">
-									<p class="col-md-2 col-lg-2">칼로리</p>
-									<p class="col-md-2 col-lg-2" id="sumcal">0.0 kcal</p>
-									
-									<p class="col-md-2 col-lg-2">탄수화물</p>
-									<p class="col-md-2 col-lg-2" id="sumbo">0.0 g</p>
-									
-									<p class="col-md-2 col-lg-2">단백질</p>
-									<p class="col-md-2 col-lg-2" id="sumpro">0.0 g</p>
-								</div>
-							</div>
-							
-							<div class="row mb-12">
-								<div class="row mb-3">
-									<p class="col-md-2 col-lg-2">지방</p>
-									<p class="col-md-2 col-lg-2" id="sumfat">0.0 g</p>
-									
-									<p class="col-md-2 col-lg-2">당</p>
-									<p class="col-md-2 col-lg-2" id="sumsu">0.0 g</p>
-									
-									<p class="col-md-2 col-lg-2">나트륨</p>
-									<p class="col-md-2 col-lg-2" id="sumso">0.0 g</p>
-								</div>
-							</div>
-							
-						</div>식단 종합 영양성분 -->
-						
 						<hr>
 						
 						<div class="col-md-12">
 							<label class="form-label" style="color: gray;"><b>추가한 음식</b></label><br>
 							<a href="javascript: openFood()">
 								<i class="ri-add-circle-fill" style="color : #FAC710;"> <b>음식 추가하기</b></i>
+							</a>
+							<a href="javascript: openMark()">
+								<i class="ri-add-circle-fill" style="color : #6ec5b8;"> <b>저장한 식단 불러오기</b></i>
 							</a>
 							
 							<!-- 추가된 음식 정보 -->
@@ -161,6 +131,12 @@
 		windowObj = window.open("openFoodList.ht", "childForm", "width=500, height=600, resizable");
 	}
 	
+	function openMark() {
+		window.name = "parentForm";
+		
+		windowObj = window.open("openFoodMark.ht", "childForm", "width=500, height=600, resizable");
+	}
+	
 	function delFood(num) {
 		alert(num);
 		var sel = '#foodplus' + num;
@@ -172,8 +148,7 @@
 		
 		var fs0 = document.getElementById('foodplus0')
 		
-		alert(fs0);
-		if($('#ndate').val() == ""){
+		if($('#nudate').val() == ""){
 			$('.derrmsg').append('일자를 선택하세요');
 			return false;
 		}
