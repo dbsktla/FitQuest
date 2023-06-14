@@ -167,4 +167,12 @@
 		on r.tid = t.id
 		where r.mid = #{mid}
 	</select>
+	<select id="GetReservationDetailG" resultType = "composite.model.ReservationDetailGBean">
+		select
+		reservation.rdate, reservation.rtime, member.name, member.mphone, gym.gname, gym.gaddr1, gym.gaddr2, gym.gphone
+		from reservation inner join member on reservation.tid = member.id
+		inner join trainer on trainer.id = member.id
+		inner join gym on trainer.gnum = gym.gnum
+		where reservation.rnum = #{rnum}
+	</select>
 </mapper>

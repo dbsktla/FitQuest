@@ -72,4 +72,8 @@ public class CompositeDao {
 		rList = sqlSessionTemplate.selectList(namespace + ".GetReservationListAct", mid);
 		return rList;
 	}
+	public ReservationDetailGBean getReservationDetailG(int rnum) {
+		ReservationDetailGBean reservationDetailGBean = sqlSessionTemplate.selectOne(namespace+".GetReservationDetailG",rnum);
+		return reservationDetailGBean;
+	}
 }
