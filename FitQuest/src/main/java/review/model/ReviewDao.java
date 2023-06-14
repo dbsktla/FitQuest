@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import utility.Paging;
 import utility.ReviewPaging;
 
 @Component
@@ -98,9 +99,21 @@ public class ReviewDao {
 		rList = sqlSessionTemplate.selectList(namespace+ ".DeleteRequestList", map, rowBounds);
 		return rList;
 	}
-	public List<ReviewBean> getReviewReport() {
+	public List<ReviewBean> getReviewReport(Paging pageInfo, Map<String, String> map) {
 		List<ReviewBean> reportReviewList = new ArrayList<ReviewBean>();
-		reportReviewList = sqlSessionTemplate.selectList(namespace + ".GetReviewReport");
+		RowBounds rowBounds = new RowBounds(pageInfo.getOffset(), pageInfo.getLimit());
+		reportReviewList = sqlSessionTemplate.selectList(namespace + ".GetReviewReport", map, rowBounds);
 		return reportReviewList;
+	}
+	
+	public int getReviewReportCount() {
+		int count = -1;
+		count = sqlSessionTemplate.selectOne(namespace + ".GetReviewReportCount");
+		return count;
+	}
+	public int updateReviewReport(int renum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateReviewReport", renum);
+		return cnt;
 	}
 }

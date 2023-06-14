@@ -15,7 +15,7 @@ import member.model.MemberBean;
 @Controller
 public class AdminCommunityReportDeleteController {
 	private final String command = "/adminCommunityReportDelete.ad";
-	private final String gotoPoage = "redirect:/adminCommunityReportList.ad";
+	private final String gotoPage = "redirect:/adminCommunityReportList.ad";
 	
 	@Autowired
 	ReportDao reportDao;
@@ -28,7 +28,7 @@ public class AdminCommunityReportDeleteController {
 	
 	@RequestMapping(command)
 	public String delete(HttpSession session, AdminReportBean adminReportBean) {
-		
+		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") != null) {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 			if(memberBean.getId().equals("admin")) {
@@ -39,6 +39,7 @@ public class AdminCommunityReportDeleteController {
 						cnt = reportDao.updateReport(adminReportBean);
 						if(cnt != -1) {
 							System.out.println("수정 성공");
+							return gotoPage;
 						}
 						else {
 							System.out.println("수정 실패");
@@ -67,6 +68,6 @@ public class AdminCommunityReportDeleteController {
 		else {
 			return "redirect:/login.mb";
 		}
-		return gotoPoage;
+		return gotoPage;
 	}
 }
