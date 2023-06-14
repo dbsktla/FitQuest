@@ -420,8 +420,8 @@ create sequence fseq
 drop table food cascade constraints;
 CREATE TABLE food (
    fnum   number primary key, --음식번호
-   nnum   number, -- 식단번호
-   mnum   number , --식사번호
+   nnum number references nutrition(nnum) on delete cascade, -- 식단번호
+   mnum number references meal(mnum) on delete cascade, -- 식사번호
    fname   varchar2(50), --음식이름
    fweight number default 0.0, -- 음식무게
    calories   number, --칼로리
