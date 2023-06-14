@@ -2,16 +2,16 @@ package nutrition.model;
 
 public class FoodmarkBean {
 
-	private int fnum;
+	private int fknum;
 	private String id;
-	private int fmnum;
+	private int fnum;
 
-	public int getFnum() {
-		return fnum;
+	public int getFknum() {
+		return fknum;
 	}
 
-	public void setFnum(int fnum) {
-		this.fnum = fnum;
+	public void setFknum(int fknum) {
+		this.fknum = fknum;
 	}
 
 	public String getId() {
@@ -22,12 +22,12 @@ public class FoodmarkBean {
 		this.id = id;
 	}
 
-	public int getFmnum() {
-		return fmnum;
+	public int getFnum() {
+		return fnum;
 	}
 
-	public void setFmnum(int fmnum) {
-		this.fmnum = fmnum;
+	public void setFnum(int fnum) {
+		this.fnum = fnum;
 	}
 
 }

@@ -5,10 +5,32 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nutrition.model.Nutrition">
+
 	<select id="GetNutritionDate" resultType="String">
 		SELECT 	nudate 
 		FROM 	NUTRITION 
 		WHERE 	id = #{id} 
 		AND 	(nudate BETWEEN #{smon} AND #{emon})
+	</select>
+	
+	<select id="GetNutritionDateOne" resultType="nutrition.model.NutritionBean">
+		SELECT *
+		FROM   NUTRITION
+		WHERE  id    = #{id}
+		AND    nudate = #{nudate}
+	</select>
+	
+	<insert id="InsertNutrition">
+		INSERT INTO NUTRITION 
+		VALUES (
+				 nseq.NEXTVAL
+				,#{id}
+				,#{nudate}
+				)
+	</insert>
+	
+	<select id="GetMaxNnum" resultType="int">
+		SELECT MAX(nnum) 
+		FROM   NUTRITION
 	</select>
 </mapper>

@@ -263,7 +263,10 @@
 		<div class="col-lg-4" >
 			<div class="card">
 				<div class="card-body">
-					<h5 style="padding-bottom: 20;">오늘의 총 섭취 영양정보</h5>
+					<h5 style="padding-bottom: 20;">
+						오늘의 총 섭취 영양정보
+						<input type="button" value="추가" onclick="location.href='myNutritionInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">
+					</h5>
 					<div id="today-all-sum" style="margin: auto; text-align: center; min-height: 40;">조회할 날짜를 클릭하세요</div>
 				</div>
 			</div>

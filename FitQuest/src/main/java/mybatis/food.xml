@@ -55,4 +55,27 @@
 		HAVING 	id = #{id}
 		AND nudate = #{selectDate}
 	</select>
+	
+	<insert id="InsertFood">
+		INSERT INTO FOOD 
+		VALUES (
+				fseq.nextval
+				,#{nnum}
+				,#{mnum}
+				,#{fname}
+				,#{fweight}
+				,#{calories}
+				,#{carbohydrate}
+				,#{protein}
+				,#{fat}
+				,#{sugar}
+				,#{sodium}
+			   )
+	</insert>
+	
+	<select id="GetMaxFnum" resultType="int">
+		SELECT MAX(fnum) 
+		FROM   FOOD
+	</select>
+	
 </mapper>
