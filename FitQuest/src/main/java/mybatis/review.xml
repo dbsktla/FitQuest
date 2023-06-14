@@ -205,6 +205,12 @@
 			and report = 'Y'
 		</if>
 	</select>
+	<select id="GetReviewReportCount" resultType="int">
+		select count(*)
+		from review inner join member
+		on review.tid = member.id
+		where report is not null
+	</select>
 	<select id="GetReviewReport" resultType="review.model.ReviewBean">
 		select renum, tid, rtitle, report, name
 		from review inner join member
@@ -212,4 +218,8 @@
 		where report is not null
 		order by report, renum
 	</select>
+	<update id="UpdateReviewReport">
+		update review set report='신고거절'
+		where renum = #{renum}
+	</update>
 </mapper>

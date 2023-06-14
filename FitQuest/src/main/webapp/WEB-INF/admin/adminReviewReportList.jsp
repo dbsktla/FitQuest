@@ -57,52 +57,36 @@
 									</c:if>
 								</table>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="cal" role="tabpanel"
-					aria-labelledby="cal-tab">
-					<div id="scrap">
-						<div class="card" style="width: 70%; margin: auto;">
-							<div class="card-body">
-								<div align="right"></div>
-								<h5 class="card-title">댓글 신고</h5>
-								<div class="col-md-5" align="left"></div>
-								<table class="table table-hover">
-									<tr align="center">
-										<th scope="col">번호</th>
-										<th scope="col">댓글 내용</th>
-										<th scope="col">신고내용</th>
-										<th scope="col">신고한 회원</th>
-										<th scope="col">상태</th>
-										<th scope="col">처리</th>
-									</tr>
-									<c:if test="${ empty reportBcommentList }">
-										<tr align="center">
-											<td colspan="6">신고된 댓글이 없습니다.</td>
-										</tr>
-									</c:if>
-
-									<c:if test="${ !empty reportBcommentList }">
-										<c:forEach var="report" items="${ reportBcommentList }"
-											varStatus="status">
-											<tr align="center">
-												<th scope="row">${ status.count }</th>
-												<td>${ report.ccontent }</td>
-												<td>${ report.rcontent }</td>
-												<td>${ report.name }</td>
-												<td>${ report.status }</td>
-												<td>
-													<c:if test="${ report.status != '처리 완료' && report.status != '신고 거절' }">
-														<input type="button" value="신고거절" class="btn btn-danger btn-sm" onclick="location.href='adminCommunityReportUpdate.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
-														<input type="button" value="처리완료" class="btn btn-success btn-sm" onclick="location.href='adminCommunityReportDelete.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
-													</c:if>
-												</td>
-											</tr>
-										</c:forEach>
-									</c:if>
-								</table>
-							</div>
+							<div style=" display: inline-block; margin: auto;">
+													<nav aria-label="Page navigation example">
+										                <ul class="pagination">
+										                <c:if test="${ pageInfo.beginPage != 1 }">
+										                  <li class="page-item">
+										                    <a class="page-link" href="${ pageInfo.url }?pageNumber=${ pageInfo.beginPage - 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }" aria-label="Previous">
+										                      <span aria-hidden="true">&laquo;</span>
+										                    </a>
+										                  </li>
+										                 </c:if> 
+										                 
+										                <c:forEach begin="${ pageInfo.beginPage }" end="${ pageInfo.endPage }" var="page">
+										                	<c:if test="${ page == pageNumber }">
+										                		<li class="page-item disabled"><a class="page-link" href="#">${ page }</a></li>
+										                	</c:if>
+										                	<c:if test="${ page != pageNumber }">
+										                		<li class="page-item"><a class="page-link" href="${ pageInfo.url }?pageNumber=${ page }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }">${ page }</a></li>
+										                	</c:if>
+										                </c:forEach>
+										                
+										                <c:if test="${ pageInfo.endPage != pageInfo.totalPage }">
+										                  <li class="page-item">
+										                    <a class="page-link" href="${ pageInfo.url }?pageNumber=${ pageInfo.endPage + 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }" aria-label="Next">
+										                      <span aria-hidden="true">&raquo;</span>
+										                    </a>
+										                  </li>
+										                </c:if> 
+										                </ul>
+										              </nav>
+												</div>
 						</div>
 					</div>
 				</div>

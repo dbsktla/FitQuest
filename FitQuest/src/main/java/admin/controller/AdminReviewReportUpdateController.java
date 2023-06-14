@@ -5,29 +5,30 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import admin.model.AdminReportBean;
 import community.model.BcommentDao;
 import community.model.BoardDao;
 import community.model.ReportDao;
 import member.model.MemberBean;
+import review.model.ReviewDao;
 
 @Controller
-public class AdminCommunityReportUpdateController {
-	private final String command = "/adminCommunityReportUpdate.ad";
-	private final String gotoPage = "redirect:/adminCommunityReportList.ad";
+public class AdminReviewReportUpdateController {
+	private final String command = "/adminReviewReportUpdate.ad";
+	private final String gotoPage = "redirect:/adminReviewReportList.ad";
 	
 	@Autowired
-	ReportDao reportDao;
+	ReviewDao reviewDao;
 	
 	@RequestMapping(command)
-	public String update(HttpSession session, AdminReportBean adminReportBean) {
+	public String update(HttpSession session, @RequestParam("renum") int renum) {
 		session.setAttribute("destination", "redirect:/adminCommunityReportList.ad");
 		if(session.getAttribute("loginInfo") != null) {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 			if(memberBean.getId().equals("admin")) {
-				adminReportBean.setStatus("신고 거절");
-				int cnt = reportDao.updateReport(adminReportBean);
+				int cnt = reviewDao.updateReviewReport(renum);
 				if(cnt != -1) {
 					System.out.println("수정 성공");
 					return gotoPage;
