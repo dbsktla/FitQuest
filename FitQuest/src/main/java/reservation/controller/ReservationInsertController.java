@@ -62,8 +62,9 @@ public class ReservationInsertController {
 		//예약 테이블에 삽입
         ReservationBean reservationBean = new ReservationBean();
         reservationBean.setMid(mid);
-        reservationBean.setMname(mname);
         reservationBean.setTid(tid);
+        reservationBean.setMname(mname);
+        reservationBean.setTname(tname);
         reservationBean.setOnum(onum);
         reservationBean.setUnum(unum);
         reservationBean.setRdate(rdate);

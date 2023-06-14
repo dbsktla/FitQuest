@@ -21,7 +21,7 @@
 <br><br>
 <center>
 <!-- 타이틀 폰트 -->
-<div class="calendarTitle">
+<div class="calendarTitle">  
 	<div class="calendarTitle-font">예약</div>
 	<div class="calendarSubtitle-font"><span><span>${tname}</span> 트레이너님 스케줄</span></div>
 </div> 
@@ -115,11 +115,14 @@
 		     <div class="calendar-margin">
 		       <div class="calendar-num sat">${dateList.date}</div>
 		     </div>
+		      <c:set var="check1" value="휴무아님"/>
+	       	  <c:set var="print1" value="출력전"/>
+	       	  <c:set var="print2" value="출력전"/>
+			  <c:set var="hasReservation" value="예약없음"/>
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq '토'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
-			        
-		         	  <c:set var="check1" value="휴무아님"/>
+		         	  
 				      <c:if test="${not empty tsyear}">
 				        <c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
 				           <c:if test="${tsyear[i] == today_info.search_year && tsmonth[i] == today_info.search_month && tsday[i] == dateList.date}">
@@ -131,66 +134,55 @@
 				            </c:if>
 				         </c:forEach>
 				       </c:if>
-				        
-			       	   <c:set var="print" value="출력전"/>
-			       	   <c:set var="print1" value="출력전"/>
+				      
 				       <c:if test="${check1 eq '휴무아님'}">    
 				       	<c:if test="${not empty ryear}">
 						    <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-						    
-						    	<c:set var="hasReservation" value="false" />
 						        <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-						            <c:set var="hasReservation" value="true" />
-						            <c:forEach var="rtime" items="${rtimeArr}">
-							            <c:set var="reservedTimes" value="${rtime}" />
-						            </c:forEach>
-						            
-						            <c:if test="${print == '출력전'}">
-									<c:set var="reservedTimes" value="" />
-										<c:forEach var="rtime" items="${rtimeArr}">
-										    <c:set var="reservedTimes" value="${reservedTimes},${rtime}" />
-										</c:forEach>
-										
-										<c:forEach var="time" items="${tstimeArr}">
-										    <c:set var="isMatch" value="false" />
-										    <c:forEach var="rtime" items="${fn:split(reservedTimes, ',')}">
-										        <c:if test="${fn:contains(time, rtime)}">
-										            <c:set var="isMatch" value="true" />
-										            <div class="reservation-area">
-										                <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
-										                <span class="calender-text">${rtime}</span>
-										            </div>
-										        </c:if>
-										    </c:forEach>
-										
-										    <c:if test="${not isMatch}">
-										        <div class="reservation-area">
-										            <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-										            <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-										                <span>${time}</span>
-										            </a>
-										        </div>
-										    </c:if>
-										<c:set var="print" value="출력후"/>
-										</c:forEach>
-						            </c:if>	
-						        </c:if>
-						        
-						        <c:if test="${hasReservation == 'false'}">
+						            <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
 						            <c:if test="${print1 == '출력전'}">
+										
+										<c:set var="reserved" value="false" />
 										<c:forEach var="time" items="${tstimeArr}">
-								            <div class="reservation-area">
-								                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-								                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-								                    <span>${time}</span>
-								                </a>
-								            </div>
-											<c:set var="print1" value="출력후"/>
+										  <c:forEach var="rList" items="${rList}">
+										    <c:if test="${rList.rdate == reservationDay && rList.rtime == time}">
+										      <div class="reservation-area">
+										        <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+										        <span class="calender-text">${time}</span>
+										      </div>
+										      <c:set var="reserved" value="true" />
+										    </c:if>
+										  </c:forEach>
+										  <c:if test="${!reserved}">
+										    <div class="reservation-area">
+										      <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+										      <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+										        <span>${time}</span>
+										      </a>
+										    </div>
+										  </c:if>
+										  <c:set var="reserved" value="false" />
 										</c:forEach>
+										<c:set var="print1" value="출력후"/>
 						            </c:if>	
+						            <c:set var="hasReservation" value="예약있음" />
 						        </c:if>
-						        
 						    </c:forEach>
+						         
+					        <c:if test="${hasReservation == '예약없음'}">
+					            <c:if test="${print2 == '출력전'}">
+									<c:forEach var="time" items="${tstimeArr}">
+							            <div class="reservation-area">
+							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+							                    <span>${time}3</span>
+							                </a>
+							            </div>
+										<c:set var="print2" value="출력후"/>
+									</c:forEach>
+					            </c:if>	
+					        </c:if>
+						        
 						</c:if>
 				       
 			           <c:if test="${empty ryear}"> 
@@ -223,82 +215,74 @@
 		     <div class="calendar-margin">
 		       <div class="calendar-num sun">${dateList.date}</div>
 		     </div>
+		      <c:set var="check1" value="휴무아님"/>
+	       	  <c:set var="print1" value="출력전"/>
+	       	  <c:set var="print2" value="출력전"/>
+			  <c:set var="hasReservation" value="예약없음"/>
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq '일'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
-			        
-		         	  <c:set var="check1" value="휴무아님"/>
+		         	  
 				      <c:if test="${not empty tsyear}">
 				        <c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
 				           <c:if test="${tsyear[i] == today_info.search_year && tsmonth[i] == today_info.search_month && tsday[i] == dateList.date}">
 				               <div class="reservation-area">
-				                  <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+				                  <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px" class="icon">
 				                  <span class="calender-text">휴무</span>
 				                </div>
 						        <c:set var="check1" value="휴무"/>
 				            </c:if>
 				         </c:forEach>
 				       </c:if>
-				        
-			       	   <c:set var="print" value="출력전"/>
-			       	   <c:set var="print1" value="출력전"/>
+				      
 				       <c:if test="${check1 eq '휴무아님'}">    
 				       	<c:if test="${not empty ryear}">
 						    <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-						    
-						    	<c:set var="hasReservation" value="false" />
 						        <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-						            <c:set var="hasReservation" value="true" />
-						            <c:forEach var="rtime" items="${rtimeArr}">
-							            <c:set var="reservedTimes" value="${rtime}" />
-						            </c:forEach>
-						            
-						            <c:if test="${print == '출력전'}">
-									<c:set var="reservedTimes" value="" />
-										<c:forEach var="rtime" items="${rtimeArr}">
-										    <c:set var="reservedTimes" value="${reservedTimes},${rtime}" />
-										</c:forEach>
-										
-										<c:forEach var="time" items="${tstimeArr}">
-										    <c:set var="isMatch" value="false" />
-										    <c:forEach var="rtime" items="${fn:split(reservedTimes, ',')}">
-										        <c:if test="${fn:contains(time, rtime)}">
-										            <c:set var="isMatch" value="true" />
-										            <div class="reservation-area">
-										                <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
-										                <span class="calender-text">${rtime}</span>
-										            </div>
-										        </c:if>
-										    </c:forEach>
-										
-										    <c:if test="${not isMatch}">
-										        <div class="reservation-area">
-										            <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-										            <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-										                <span>${time}</span>
-										            </a>
-										        </div>
-										    </c:if>
-										<c:set var="print" value="출력후"/>
-										</c:forEach>
-						            </c:if>	
-						        </c:if>
-						        
-						        <c:if test="${hasReservation == 'false'}">
+						            <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
 						            <c:if test="${print1 == '출력전'}">
+										
+										<c:set var="reserved" value="false" />
 										<c:forEach var="time" items="${tstimeArr}">
-								            <div class="reservation-area">
-								                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-								                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-								                    <span>${time}</span>
-								                </a>
-								            </div>
-											<c:set var="print1" value="출력후"/>
+										  <c:forEach var="rList" items="${rList}">
+										    <c:if test="${rList.rdate == reservationDay && rList.rtime == time}">
+										      <div class="reservation-area">
+										        <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+										        <span class="calender-text">${time}</span>
+										      </div>
+										      <c:set var="reserved" value="true" />
+										    </c:if>
+										  </c:forEach>
+										  <c:if test="${!reserved}">
+										    <div class="reservation-area">
+										      <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+										      <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+										        <span>${time}</span>
+										      </a>
+										    </div>
+										  </c:if>
+										  <c:set var="reserved" value="false" />
 										</c:forEach>
+										<c:set var="print1" value="출력후"/>
 						            </c:if>	
+						            <c:set var="hasReservation" value="예약있음" />
 						        </c:if>
-						        
 						    </c:forEach>
+						         
+					        <c:if test="${hasReservation == '예약없음'}">
+					            <c:if test="${print2 == '출력전'}">
+									<c:forEach var="time" items="${tstimeArr}">
+							            <div class="reservation-area">
+							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+							                    <span>${time}3</span>
+							                </a>
+							            </div>
+										<c:set var="print2" value="출력후"/>
+									</c:forEach>
+					            </c:if>	
+					        </c:if>
+						        
 						</c:if>
 				       
 			           <c:if test="${empty ryear}"> 
@@ -327,85 +311,79 @@
        	<td class="calendar-box">
       </c:if>
       	<div> 
-			<c:forEach var="dayIndex" items="월,화,수,목,금" varStatus="status">
-		<c:if test="${date_status.index%7 == status.count}">
-		     <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
+		 <c:forEach var="dayIndex" items="월,화,수,목,금" varStatus="status">
+		  <c:if test="${date_status.index%7 == status.count}">
+			<div class="calendar-margin">
+			   <div class="calendar-num">${dateList.date}</div>
+			</div>
+			  <c:set var="check1" value="휴무아님"/>
+	       	  <c:set var="print1" value="출력전"/>
+	       	  <c:set var="print2" value="출력전"/>
+			  <c:set var="hasReservation" value="예약없음"/>
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq dayIndex}">  
 			        <c:if test="${dateList.date <= date_status.last}">
-			        
-		         	  <c:set var="check1" value="휴무아님"/>
+		         	  
 				      <c:if test="${not empty tsyear}">
 				        <c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
 				           <c:if test="${tsyear[i] == today_info.search_year && tsmonth[i] == today_info.search_month && tsday[i] == dateList.date}">
 				               <div class="reservation-area">
-				                  <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+				                  <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px" class="icon">
 				                  <span class="calender-text">휴무</span>
 				                </div>
 						        <c:set var="check1" value="휴무"/>
 				            </c:if>
 				         </c:forEach>
 				       </c:if>
-				        
-			       	   <c:set var="print" value="출력전"/>
-			       	   <c:set var="print1" value="출력전"/>
+				      
 				       <c:if test="${check1 eq '휴무아님'}">    
 				       	<c:if test="${not empty ryear}">
 						    <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-						    
-						    	<c:set var="hasReservation" value="false" />
 						        <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-						            <c:set var="hasReservation" value="true" />
-						            <c:forEach var="rtime" items="${rtimeArr}">
-							            <c:set var="reservedTimes" value="${rtime}" />
-						            </c:forEach>
-						            
-						            <c:if test="${print == '출력전'}">
-									<c:set var="reservedTimes" value="" />
-										<c:forEach var="rtime" items="${rtimeArr}">
-										    <c:set var="reservedTimes" value="${reservedTimes},${rtime}" />
-										</c:forEach>
-										
-										<c:forEach var="time" items="${tstimeArr}">
-										    <c:set var="isMatch" value="false" />
-										    <c:forEach var="rtime" items="${fn:split(reservedTimes, ',')}">
-										        <c:if test="${fn:contains(time, rtime)}">
-										            <c:set var="isMatch" value="true" />
-										            <div class="reservation-area">
-										                <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
-										                <span class="calender-text">${rtime}</span>
-										            </div>
-										        </c:if>
-										    </c:forEach>
-										
-										    <c:if test="${not isMatch}">
-										        <div class="reservation-area">
-										            <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-										            <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-										                <span>${time}</span>
-										            </a>
-										        </div>
-										    </c:if>
-										<c:set var="print" value="출력후"/>
-										</c:forEach>
-						            </c:if>	
-						        </c:if>
-						        
-						        <c:if test="${hasReservation == 'false'}">
+						            <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
 						            <c:if test="${print1 == '출력전'}">
+										
+										<c:set var="reserved" value="false" />
 										<c:forEach var="time" items="${tstimeArr}">
-								            <div class="reservation-area">
-								                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-								                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-								                    <span>${time}</span>
-								                </a>
-								            </div>
-											<c:set var="print1" value="출력후"/>
+										  <c:forEach var="rList" items="${rList}">
+										    <c:if test="${rList.rdate == reservationDay && rList.rtime == time}">
+										      <div class="reservation-area">
+										        <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px">
+										        <span class="calender-text">${time}</span>
+										      </div>
+										      <c:set var="reserved" value="true" />
+										    </c:if>
+										  </c:forEach>
+										  <c:if test="${!reserved}">
+										    <div class="reservation-area">
+										      <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+										      <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+										        <span>${time}</span>
+										      </a>
+										    </div>
+										  </c:if>
+										  <c:set var="reserved" value="false" />
 										</c:forEach>
+										<c:set var="print1" value="출력후"/>
 						            </c:if>	
+						            <c:set var="hasReservation" value="예약있음" />
 						        </c:if>
-						        
 						    </c:forEach>
+						         
+					        <c:if test="${hasReservation == '예약없음'}">
+					            <c:if test="${print2 == '출력전'}">
+									<c:forEach var="time" items="${tstimeArr}">
+							            <div class="reservation-area">
+							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
+							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+							                    <span>${time}3</span>
+							                </a>
+							            </div>
+										<c:set var="print2" value="출력후"/>
+									</c:forEach>
+					            </c:if>	
+					        </c:if>
+						        
 						</c:if>
 				       
 			           <c:if test="${empty ryear}"> 
@@ -419,16 +397,16 @@
                          </c:forEach>
                        </c:if>
 			          
-			          </c:if>
+			         </c:if>
 			        </c:if>
 			      </c:if>
 			    </c:forEach>
-          		 </c:if>
-		</c:forEach>
-       </div>
-      </td>
+          	</c:if>
+		  </c:forEach>
+        </div>
+       </td>
       </c:if>
-      </c:forEach>
+     </c:forEach>
 </tbody>
 </c:if>
 </table>
