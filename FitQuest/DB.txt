@@ -89,7 +89,8 @@ create table board (
    Brestep   number, --글의 순서(오래된건 후순위)
    Brelevel   number, --몇번째 글(글, 답글,답답글)
    Bcontent   varchar2(4000)   NOT NULL, --내용
-   Bimage   varchar2(300) --건강 정보 게시판의 이미지
+   Bimage   varchar2(300), --건강 정보 게시판의 이미지
+   Bstatus varchar2(10) --신고 여부
 );
 
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
@@ -107,12 +108,12 @@ values(bseq.nextval,'hong','자유','일반','테스트 글',1,3,1,'테스트 �
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent)
 values(bseq.nextval,'hong','자유','운동인증','운동인증 글',2,0,0,'운동인증 글 내용입니다.');
 
+
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage)
 values(bseq.nextval,'kim','건강','운동','스쿼트','스쿼트는 하체 근력 향상에 좋은 운동입니다. <br> 하지만, 잘못된 자세는 무릎 부상을 야기할 수 있으니 주의하셔야 합니다!', 'squat.jpg');
 
 insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage)
 values(bseq.nextval,'moon','건강','식단','브로콜리','<h1>브로콜리의 효능</h1><p><span style="color: rgb(64, 64, 64);">브로콜리는 샐러드, 수프, 스튜 등 서양음식에 가장 많이 사용하는 채소 중 하나다.</span></p><p><span style="color: rgb(102, 102, 102);">세계 10대 푸드중 하나로 소염, 항암 성분 및 강력한 알칼리화 작용으로 유명하다. 미국 국립암연구소에서 선정한 최고의 암예방 식품 중 하나로 선정되기도 했는데 비타민-C 함유량이 레몬의 약 2배로 채소 중 가장 많으며 B1, B2, 칼슘, 인, 칼륨 등의 미네랄 성분도 듬뿍 들어 있다. 이밖에도 베타카로틴, 플라보노이드, 이소티오시안산, 황, 식이섬유, 루테인이 풍부하면서도 칼로리가 낮아 다이어트 식품으로도 훌륭하다. 풍부한 섬유질은 장내 미생물총에 대한 영양분 공급 및 면역기능 강화와 소화 및 배변에도 도움이 된다.</span></p>', 'broccoli.jpg');
-
 
 select * from BOARD;
 commit;
@@ -131,7 +132,7 @@ create sequence sseq
 drop table SCRAP cascade constraints;
 CREATE TABLE SCRAP (
    Snum number   primary key, --책갈피 고유번호
-   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   ID varchar2(100)  not null references MEMBER(ID) on delete cascade, -- 회원아이디 
    Bnum number NOT NULL references BOARD(Bnum) on delete cascade -- 게시판번호
 );
 
@@ -153,35 +154,47 @@ create sequence bcseq
 drop table BCOMMENT cascade constraints;
 CREATE TABLE BCOMMENT (
    cnum number   primary key, --댓글 고유번호
-   Bnum number references BOARD(Bnum) on delete cascade, -- 게시판 번호
+   Bnum number references board(bnum) on delete cascade, -- 게시판 번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    cregdate date DEFAULT sysdate, --작성일
    cref   number   NOT NULL, --같은 댓글 그룹
    crestep   number   NOT NULL, --글의 순서(오래된건 후순위)
    crelevel   number   NOT NULL, --몇번째 글(댓글, 대댓글)
-   Ccontent   varchar2(2000)   NOT NULL --내용
+   Ccontent   varchar2(2000)   NOT NULL, --내용
+   Cstatus varchar2(10) --신고 여부
 );
 
+
 insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent)
-values(bcseq.nextval,1,'hong',1,0,0,'테스트 댓글');
+values(bcseq.nextval,2,'hong',2,0,0,'테스트 댓글');
+
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent)
+values(bcseq.nextval,6,'hong',6,0,0,'스쿼트는 하루에 몇 개 하면 좋나요?');
 
 select * from BCOMMENT;
 commit;
 
+drop sequence rpseq;
+create sequence rpseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache; 
 
 -- 신고 테이블
 drop table report cascade constraints;
 CREATE TABLE Report (
-   renum   number   primary key, --신고번호
+   rpnum   number   primary key, --신고번호
    bcnum   number   NOT NULL, --댓글 or 게시판 번호
    ID varchar2(100) not null, -- 회원아이디 
    rtype varchar2(10) not null check(rtype in('board','bcomment')), --댓글인지 게시판인지
-   status   varchar2(50) check(status in('신고접수', '신고거절')), --신고 상태(게시글이나 댓글 삭제 시 처리 완료)
+   status   varchar2(50)  NOT NULL, --신고 상태(게시글이나 댓글 삭제 시 처리 완료)
    rcontent   varchar2(1000)   NOT NULL -- 신고 내용
 );
 
 insert into report
-values(reseq.nextval,1,'hong','bcomment','신고접수','신고 테스트');
+values(rpseq.nextval,1,'hong','bcomment','처리 준비','신고 테스트');
 
 select * from Report;
 commit;
