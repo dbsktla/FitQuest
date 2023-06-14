@@ -144,7 +144,7 @@
 		GROUP BY hdate
 	</select>
 	
-	<select id="AllWeekPlaytime" resultType="String">
+	<select id="GetAllWeekPlaytime" resultType="String">
 		SELECT 	SUM(playtime)
 		FROM	(
 			    SELECT	SUM(playtime) AS playtime
