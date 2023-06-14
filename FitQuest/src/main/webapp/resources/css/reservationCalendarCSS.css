@@ -15,7 +15,7 @@ a{
 	border-bottom: 1px solid gray;
 }
 .day-area{
-	background-color: #FEF9E7;
+	background-color: #F9F7F4;
 	border-top: 1.5px solid gray;
 	border-bottom: 1px solid lightgray;
 }
@@ -137,11 +137,15 @@ a{
 	color : black;
 	padding: 5px 0px;
 	border-radius: 10px;
-	
 	display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.reservation-area:hover{
+	transform: scale(1.05);
 }
 .calender-text{
 	color: black;
@@ -150,7 +154,8 @@ a{
 }
 .calender-text-s{
 	color: black;
-	font-size: 15px;
+	font-size: 14px;
+	text-align: center;
 }
 .calender-text-id{
 	color: gray;
@@ -173,7 +178,27 @@ a{
 	transition: transform 0.3s;
 	border-radius: 10px;
 }
+.rstate-container-gc{
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
+	margin: 5px 0px;
+	text-align: center;
+	transition: transform 0.3s;
+	border-radius: 10px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FEF9E7; 
+	padding: 10px 7px;
+}
+.center{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .rstate-container:hover{
+	transform: scale(1.05);
+}
+.rstate-container-gc:hover{
 	transform: scale(1.05);
 }
 .rstate-dot{
@@ -198,7 +223,7 @@ a{
 }
 .rstate-box{
 	background-color: #FEF9E7; 
-	padding: 4px 0px;
+	padding: 10px 5px;
 }
 .rstate-btn-area{
 	padding: 3px 0px;

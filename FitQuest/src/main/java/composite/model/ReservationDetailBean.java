@@ -8,6 +8,8 @@ public class ReservationDetailBean {
 	private String mphone;
 	private String email;
 	private String name;
+	
+	
 	public String getRdate() {
 		return rdate;
 	}

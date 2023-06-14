@@ -9,6 +9,7 @@ public class ReservationDetailGBean {
 	private String gaddr1;
 	private String gaddr2;
 	private String gphone;
+	
 	public String getName() {
 		return name;
 	}

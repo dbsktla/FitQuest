@@ -114,44 +114,49 @@ public class GenericReservationController {
 			//트레이너 스케줄 - 끊어주기
 			String[] tsdayArr = tscheduleBean.getTsday().split(","); //월 수 금
 			String[] tstimeArr = tscheduleBean.getTstime().split(","); //13:00~14:00 14:00~15:00
-			String[] tsdateArrL = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
 			
-			String[] tsdateArrS;
-			List<String> yearList = new ArrayList<String>();
-			List<String> monthList = new ArrayList<String>();
-			List<String> dayList = new ArrayList<String>();
-	
-			for (int i = 0; i < tsdateArrL.length; i++) {
-			    tsdateArrS = tsdateArrL[i].split("-"); //2023 06 23 2023 06 24
-			    
-		        yearList.add(tsdateArrS[0]);
-		        monthList.add(tsdateArrS[1]);
-		        dayList.add(tsdateArrS[2]);
+			String[] tsdateArrL;
+			if(tscheduleBean.getTsdate() != null) {
+				tsdateArrL = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
+				String[] tsdateArrS;
+				List<String> yearList = new ArrayList<String>();
+				List<String> monthList = new ArrayList<String>();
+				List<String> dayList = new ArrayList<String>();
+		
+				for (int i = 0; i < tsdateArrL.length; i++) {
+				    tsdateArrS = tsdateArrL[i].split("-"); //2023 06 23 2023 06 24
+				    
+			        yearList.add(tsdateArrS[0]);
+			        monthList.add(tsdateArrS[1]);
+			        dayList.add(tsdateArrS[2]);
+				}
+				
+				String[] year = yearList.toArray(new String[0]);
+				String[] month = monthList.toArray(new String[0]);
+				String[] day = dayList.toArray(new String[0]);
+				
+				// 숫자로 변환
+				int[] yearNum = new int[year.length];
+				int[] monthNum = new int[month.length];
+				int[] dayNum = new int[day.length];
+		
+				for (int i = 0; i < year.length; i++) {
+				    yearNum[i] = Integer.parseInt(year[i]);
+				}
+				for (int i = 0; i < month.length; i++) {
+				    monthNum[i] = Integer.parseInt(month[i]);
+				}
+				for (int i = 0; i < day.length; i++) {
+				    dayNum[i] = Integer.parseInt(day[i]);
+				}
+				
+				//트레이너 스케줄 연/월/일
+				model.addAttribute("tsyear",yearNum);
+				model.addAttribute("tsmonth",monthNum);
+				model.addAttribute("tsday",dayNum);
+				model.addAttribute("tsdateArrL",tsdateArrL);
 			}
 			
-			String[] year = yearList.toArray(new String[0]);
-			String[] month = monthList.toArray(new String[0]);
-			String[] day = dayList.toArray(new String[0]);
-			
-			// 숫자로 변환
-			int[] yearNum = new int[year.length];
-			int[] monthNum = new int[month.length];
-			int[] dayNum = new int[day.length];
-	
-			for (int i = 0; i < year.length; i++) {
-			    yearNum[i] = Integer.parseInt(year[i]);
-			}
-			for (int i = 0; i < month.length; i++) {
-			    monthNum[i] = Integer.parseInt(month[i]);
-			}
-			for (int i = 0; i < day.length; i++) {
-			    dayNum[i] = Integer.parseInt(day[i]);
-			}
-			
-			//트레이너 스케줄 연/월/일
-			model.addAttribute("tsyear",yearNum);
-			model.addAttribute("tsmonth",monthNum);
-			model.addAttribute("tsday",dayNum);
 			
 			//이미 예약된 날짜 가져오기
 			List<ReservationBean> rList = reservationDao.getReservationTList(tid);
@@ -192,7 +197,6 @@ public class GenericReservationController {
 	
 			model.addAttribute("tsdayArr",tsdayArr);
 			model.addAttribute("tstimeArr",tstimeArr);
-			model.addAttribute("tsdateArrL",tsdateArrL);
 			model.addAttribute("tscheduleBean",tscheduleBean);
 		}//else
 		return getPage;

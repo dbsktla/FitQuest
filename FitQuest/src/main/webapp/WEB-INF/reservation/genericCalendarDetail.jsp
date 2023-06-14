@@ -7,37 +7,36 @@
 		<div class="detail-title-font">예약 상세 내역</div>
 	</div> 
 	<div class="detail-name-box">
-		 <span class="calender-text">${reservationDetailBean.name} 트레이너님</span><span class="calender-text-id">(${reservationDetailBean.id})</span>
+		 <span class="calender-text">${reservationDetailGBean.name} 트레이너님</span>
 	</div>
 		<div class="detail-container">
 			<table width="100%" align="center" border="0">
 				<tr class="tr">
 					<td class="sub-title">예약 날짜</td>
-					<td class="sub-text"><span>${reservationDetailBean.rdate}</span></td>
+					<td class="sub-text"><span>${reservationDetailGBean.rdate}</span></td>
 				</tr>
 				<tr class="tr">
 					<td class="sub-title">예약 시간</td>
-					<td class="sub-text"><span>${reservationDetailBean.rtime}</span></td>
+					<td class="sub-text"><span>${reservationDetailGBean.rtime}</span></td>
 				</tr>
 				<tr class="tr">
 					<td class="sub-title">전화번호</td>
-					<td class="sub-text"><span>${birthday}</span></td>
-				</tr>
-				<tr class="tr">
-					<td class="sub-title">운동 종류</td>
 					<td class="sub-text"><span>${mphone}</span></td>
 				</tr>
 				<tr class="tr">
 					<td class="sub-title">헬스장</td>
-					<td class="sub-text"><span>${mphone}</span></td>
+					<td class="sub-text"><span>${reservationDetailGBean.gname}</span></td>
 				</tr>
 				<tr class="tr">
 					<td class="sub-title">헬스장 번호</td>
-					<td class="sub-text"><span>${mphone}</span></td>
+					<td class="sub-text"><span>${gphone}</span></td>
 				</tr>
 				<tr class="tr">
 					<td class="sub-title-last">헬스장 주소</td>
-					<td class="sub-text-last"><span>${reservationDetailBean.email}</span></td>
+					<td class="sub-text-last">
+						<span>${reservationDetailGBean.gaddr1}</span>
+						<span>${reservationDetailGBean.gaddr2}</span>
+					</td>
 				</tr>
 			
 			</table>
