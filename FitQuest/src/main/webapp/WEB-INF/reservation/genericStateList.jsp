@@ -15,12 +15,15 @@
 			<td>날짜</td>
 			<td>시간</td>
 			<td>트레이너</td>
+			<td>상태</td>
 		</tr>
 		<c:forEach var="tList" items="${tList}">
 		  <tr>
 			<td>${tList.rdate}</td>
 			<td>${tList.rtime}</td>
 			<td>${tList.tname}</td>
+			<td>	
+			</td>
 		  </tr>
 		</c:forEach>
 	</table>

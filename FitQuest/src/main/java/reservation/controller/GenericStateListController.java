@@ -48,6 +48,19 @@ public class GenericStateListController {
 			System.out.println("날짜:"+rb.getRdate());
 			System.out.println("시간:"+rb.getRtime());
 		}
+		for (ReservationBean rb : tList) {
+		    LocalDate reservationDate = LocalDate.parse(rb.getRdate());
+		    
+		    if (reservationDate.isAfter(today)) {
+		        System.out.println("예약 날짜가 오늘을 넘었습니다.");
+		    } else if (reservationDate.isEqual(today)) {
+		        System.out.println("예약 날짜가 오늘과 동일합니다.");
+		    } else {
+		        System.out.println("예약 날짜가 아직 오지 않았습니다.");
+		    }
+		}
+		
+		model.addAttribute("today",today);
 		model.addAttribute("tList",tList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("jList",jList);

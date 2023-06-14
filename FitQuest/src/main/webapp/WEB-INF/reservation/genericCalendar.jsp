@@ -7,7 +7,7 @@
 		// 팝업 창의 URL과 창의 속성을 설정
 	 	 var url = "genericCalendarDetail.rv?rnum="+rnum;
 		 var width = 700; // 팝업 창의 너비
-	 	 var height = 500; // 팝업 창의 높이
+	 	 var height = 550; // 팝업 창의 높이
  		 var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
 	 	 var top = (window.screen.availHeight - height) / 2;
 
@@ -93,8 +93,7 @@
       </td>
    </tr>
 </thead>
-<c:choose>
-<c:when test="${empty rList}">
+<c:if test="${empty rList}">
    <tr>
 	 <td colspan="7" class="calendar-none">
 	   <div>
@@ -102,8 +101,8 @@
 	   </div>
 	 </td>
    </tr>
-</c:when>
-<c:otherwise>
+</c:if>
+<c:if test="${not empty rList}">
 <tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
@@ -127,10 +126,21 @@
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
 			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.tname} 트레이너님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
+						                        <div class="rstate-container-gc">
+				                                    <div class="center">
+					                                   	 <c:if test="${reservation.activity == 'PT'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/PT-icon.png" width="34px" class="icon">
+					                                   	 </c:if>
+					                                   	 <c:if test="${reservation.activity == '필라테스'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Pilates-icon.png" width="35px" class="icon">
+					                                     </c:if>
+					                                   	 <c:if test="${reservation.activity == '요가'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Yoga-icon.png" width="35px" class="icon">
+					                                     </c:if>
+				                                     </div> 
+				                                     <div>
+				                                        <span class="calender-text-s b">${reservation.tname} 트레이너</span>  <span class="calender-text-s">${reservation.rtime}</span>
+				                                     </div>
 						                        </div>
 						                       </a> 
 			                                </c:if>
@@ -141,10 +151,10 @@
 			            </c:if>
 			        </c:if>
 			    </td>
+    </tr>
 			</c:when>
             
             <c:when test="${date_status.index%7==0}">
-    </tr>
     <tr>
     		<c:if test="${dateList.value == 'today'}">
 		       <td class="t-calendar-box">
@@ -164,10 +174,21 @@
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
 			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
+						                        <div class="rstate-container-gc">
+				                                    <div class="center">
+					                                   	 <c:if test="${reservation.activity == 'PT'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/PT-icon.png" width="34px" class="icon">
+					                                   	 </c:if>
+					                                   	 <c:if test="${reservation.activity == '필라테스'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Pilates-icon.png" width="35px" class="icon">
+					                                     </c:if>
+					                                   	 <c:if test="${reservation.activity == '요가'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Yoga-icon.png" width="35px" class="icon">
+					                                     </c:if>
+				                                     </div> 
+				                                     <div>
+				                                        <span class="calender-text-s b">${reservation.tname} 트레이너</span>  <span class="calender-text-s">${reservation.rtime}</span>
+				                                     </div>
 						                        </div>
 						                       </a> 
 			                                </c:if>
@@ -179,8 +200,9 @@
 			        </c:if>
 			    </td>
             </c:when>
-            
-      <c:otherwise>
+      </c:choose> 
+      
+      <c:if test="${ date_status.index % 7 != 6 && date_status.index % 7 != 0 }">  
 	  <c:if test="${dateList.value == 'today'}">
         <td class="t-calendar-box">
       </c:if>
@@ -188,8 +210,8 @@
         <td class="calendar-box">
 	  </c:if>
       	<div> 
-		<c:choose>
-           <c:when test="${date_status.index%7==1}">
+           <c:forEach var="dayIndex" items="월,화,수,목,금" varStatus="status">
+		  	<c:if test="${date_status.index%7 == status.count}">
          	 
 		        <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
 		          <c:if test="${dateList.date <= date_status.last}">
@@ -203,10 +225,21 @@
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
 			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
+						                        <div class="rstate-container-gc">
+				                                    <div class="center">
+					                                   	 <c:if test="${reservation.activity == 'PT'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/PT-icon.png" width="34px" class="icon">
+					                                   	 </c:if>
+					                                   	 <c:if test="${reservation.activity == '필라테스'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Pilates-icon.png" width="35px" class="icon">
+					                                     </c:if>
+					                                   	 <c:if test="${reservation.activity == '요가'}">
+					                                    	<img src="<%=request.getContextPath()%>/resources/Icon/Yoga-icon.png" width="35px" class="icon">
+					                                     </c:if>
+				                                     </div> 
+				                                     <div>
+				                                        <span class="calender-text-s b">${reservation.tname} 트레이너</span>  <span class="calender-text-s">${reservation.rtime}</span>
+				                                     </div>
 						                        </div>
 						                       </a> 
 			                                </c:if>
@@ -216,124 +249,17 @@
 			                </c:forEach>
 			            </c:if>
 			        </c:if>
-           </c:when>
-           <c:when test="${date_status.index%7==2}">
-         	   <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-		          <c:if test="${dateList.date <= date_status.last}">
-			            <c:if test="${not empty rList}">
-	                        <c:set var="check" value="출력전"/>
-			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-		                        	  <c:if test="${check == '출력전'}">
-			                            <c:forEach var="reservation" items="${rList}">
-				                         <c:set var="check" value="출력완료"/>
-			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
-						                        </div>
-						                       </a> 
-			                                </c:if>
-			                            </c:forEach>
-		                              </c:if>
-			                    </c:if>
-			                </c:forEach>
-			            </c:if>
-			        </c:if>
-           </c:when>
-           <c:when test="${date_status.index%7==3}">
-         	   <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-		          <c:if test="${dateList.date <= date_status.last}">
-			            <c:if test="${not empty rList}">
-	                        <c:set var="check" value="출력전"/>
-			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-		                        	  <c:if test="${check == '출력전'}">
-			                            <c:forEach var="reservation" items="${rList}">
-				                         <c:set var="check" value="출력완료"/>
-			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
-						                        </div>
-						                       </a> 
-			                                </c:if>
-			                            </c:forEach>
-		                              </c:if>
-			                    </c:if>
-			                </c:forEach>
-			            </c:if>
-			        </c:if>
-           </c:when>
-           <c:when test="${date_status.index%7==4}">
-         	   <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-		          <c:if test="${dateList.date <= date_status.last}">
-			            <c:if test="${not empty rList}">
-	                        <c:set var="check" value="출력전"/>
-			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-		                        	  <c:if test="${check == '출력전'}">
-			                            <c:forEach var="reservation" items="${rList}">
-				                         <c:set var="check" value="출력완료"/>
-			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
-						                        </div>
-						                       </a> 
-			                                </c:if>
-			                            </c:forEach>
-		                              </c:if>
-			                    </c:if>
-			                </c:forEach>
-			            </c:if>
-			        </c:if>
-           </c:when>
-           <c:when test="${date_status.index%7==5}">
-         	   <div class="calendar-margin"><div class="calendar-num">${dateList.date}</div></div>
-		          <c:if test="${dateList.date <= date_status.last}">
-			            <c:if test="${not empty rList}">
-	                        <c:set var="check" value="출력전"/>
-			                <c:forEach var="i" begin="0" end="${fn:length(ryear)-1}">
-			                    <c:if test="${ryear[i] == today_info.search_year && rmonth[i] == today_info.search_month && rday[i] == dateList.date}">
-			                        <c:set var="reservationDay" value="${ryear[i]}-${rmonth[i]}-${rday[i]}"/>
-		                        	  <c:if test="${check == '출력전'}">
-			                            <c:forEach var="reservation" items="${rList}">
-				                         <c:set var="check" value="출력완료"/>
-			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
-						                        <div class="rstate-container">
-				                                    <div class="rstate-box">
-				                                        <span class="calender-text-s b">${reservation.mname}님</span>  <span class="calender-text-s">${reservation.rtime}</span>
-				                                    </div>
-						                        </div>
-						                       </a> 
-			                                </c:if>
-			                            </c:forEach>
-		                              </c:if>
-			                    </c:if>
-			                </c:forEach>
-			            </c:if>
-			        </c:if>
-           </c:when>
-     	</c:choose>
-       </div>
-      </td>
-      </c:otherwise>
-      </c:choose>
-	</c:forEach>
+           		</c:if>
+           	</c:forEach>
+	       </div>
+	      </td>
+         </c:if>
+           
+     </c:forEach>
 </tbody>
-</c:otherwise>
-</c:choose>
+</c:if>
+
+
 </table>
 </div>
 </center>

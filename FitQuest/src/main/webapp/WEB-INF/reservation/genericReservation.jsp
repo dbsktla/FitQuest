@@ -5,7 +5,11 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
 <script type="text/javascript">
 	function reservationCheck(date, time, year, month, tid, tname, usageNum) {
-		if (confirm('예약 하시겠습니까?')) { // 확인
+		if (confirm(
+				'날짜 : '+year+'-'+month+'-'+date+'\n'
+			   +'시간 : '+time+'\n'
+			   +'예약 하시겠습니까?'
+						)) { // 확인
 			location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum;
 			
 			if (confirm('계속 예약 하시겠습니까?')) { // 확인
@@ -175,7 +179,7 @@
 							            <div class="reservation-area">
 							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
 							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-							                    <span>${time}3</span>
+							                    <span>${time}</span>
 							                </a>
 							            </div>
 										<c:set var="print2" value="출력후"/>
@@ -275,7 +279,7 @@
 							            <div class="reservation-area">
 							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
 							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-							                    <span>${time}3</span>
+							                    <span>${time}</span>
 							                </a>
 							            </div>
 										<c:set var="print2" value="출력후"/>
@@ -376,7 +380,7 @@
 							            <div class="reservation-area">
 							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
 							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
-							                    <span>${time}3</span>
+							                    <span>${time}</span>
 							                </a>
 							            </div>
 										<c:set var="print2" value="출력후"/>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import composite.model.CompositeDao;
 import composite.model.ReservationDetailBean;
+import composite.model.ReservationDetailGBean;
 import reservation.model.ReservationDao;
 import reservation.model.TscheduleDao;
 import usage.model.UsageDao;
@@ -31,19 +32,19 @@ public class GenericCalendarDetailController {
 	public String doAction(Model model,
 			@RequestParam("rnum") int rnum) {
 		
-		ReservationDetailBean reservationDetailBean= compositeDao.getReservationDetail(rnum);
+		ReservationDetailGBean reservationDetailGBean= compositeDao.getReservationDetailG(rnum);
 		
 		// 전화번호 변환
-		String phone = reservationDetailBean.getMphone();
-		String mphone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
+		String mphoneNum = reservationDetailGBean.getMphone();
+		String gphoneNum = reservationDetailGBean.getGphone();
+		String mphone = mphoneNum.substring(0, 3) + "-" + mphoneNum.substring(3, 7) + "-" + mphoneNum.substring(7);
+		String gphone = gphoneNum.substring(0, 3) + "-" + gphoneNum.substring(3, 7) + "-" + gphoneNum.substring(7);
 
 		// 생년월일 변환
-		String birth = reservationDetailBean.getBirth();
-		String birthday = birth.substring(0, 10);
 		
 		model.addAttribute("mphone",mphone);
-		model.addAttribute("birthday",birthday);
-		model.addAttribute("reservationDetailBean",reservationDetailBean);
+		model.addAttribute("gphone",gphone);
+		model.addAttribute("reservationDetailGBean",reservationDetailGBean);
 		return getPage;
 	}
 }
