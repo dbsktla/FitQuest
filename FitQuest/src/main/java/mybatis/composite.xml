@@ -162,4 +162,9 @@
 					group by odate)
 				group by odate
 	</select>
+	<select id="GetReservationListAct" resultType = "composite.model.ReservationListActBean">
+		select r.*, t.activity from reservation r join trainer t 
+		on r.tid = t.id
+		where r.mid = #{mid}
+	</select>
 </mapper>

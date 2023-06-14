@@ -67,4 +67,9 @@ public class CompositeDao {
 		List<SalesBean> monthlyList = sqlSessionTemplate.selectList(namespace + ".GetMonthlyCount", id);
 		return monthlyList;
 	}
+	public List<ReservationListActBean> getReservationListAct(String mid) {
+		List<ReservationListActBean> rList = new ArrayList<ReservationListActBean>();
+		rList = sqlSessionTemplate.selectList(namespace + ".GetReservationListAct", mid);
+		return rList;
+	}
 }
