@@ -18,7 +18,7 @@
 		where tid = #{id}	
 	</select>
 	<insert id = "InsertBaseValue">
-		insert into review(renum, mid, tid, hasReview, report) values(rvseq.nextval, 'admin', #{id}, 'N', 'N')
+		insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', #{id}, 'N')
 	</insert>
 	<select id = "GetReviewCount" resultType = "int">
 		select count(*)
@@ -205,7 +205,6 @@
 			and report = 'Y'
 		</if>
 	</select>
-	
 	<select id="GetReviewReport" resultType="review.model.ReviewBean">
 		select renum, tid, rtitle, report, name
 		from review inner join member

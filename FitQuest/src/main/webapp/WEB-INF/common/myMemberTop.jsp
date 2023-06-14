@@ -21,7 +21,7 @@
       </li><!-- End Tables Nav -->
 	
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="viewMyOrderList.od">
           <i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->

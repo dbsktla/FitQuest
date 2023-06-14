@@ -76,4 +76,9 @@ public class CompositeDao {
 		ReservationDetailGBean reservationDetailGBean = sqlSessionTemplate.selectOne(namespace+".GetReservationDetailG",rnum);
 		return reservationDetailGBean;
 	}
+	public List<MyOrderBean> getMyOrderList(String id) {
+		List<MyOrderBean> mList = new ArrayList<MyOrderBean>();
+		mList = sqlSessionTemplate.selectList(namespace + ".GetOrderList", id);
+		return mList;
+	}
 }
