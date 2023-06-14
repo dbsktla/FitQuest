@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin.model.Admin">
+	<select id="GetReportBoardList" resultType="admin.model.AdminReportBean">
+		select renum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name
+		from(select renum,bcnum, report.id, rtype, status, rcontent, board.bsubject
+		from report inner join board
+		on report.bcnum = board.bnum
+		where rtype='board') rb inner join member
+		on rb.id = member.id
+		order by bcnum
+	</select>
+	
+	<select id="GetReportBCommnerList" resultType="admin.model.AdminReportBean">
+		select renum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name
+		from(select renum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject
+		from(select renum, bcnum, report.id, rtype, status, rcontent, bcomment.bnum, ccontent
+		from report inner join bcomment
+		on report.bcnum = bcomment.cnum
+		where rtype='bcomment') rc inner join board 
+		on rc.bnum = board.bnum) rbc inner join member
+		on rbc.id = member.id
+		order by bcnum
+	</select>
+</mapper>

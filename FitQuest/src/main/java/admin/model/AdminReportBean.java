@@ -1,6 +1,6 @@
-package community.model;
+package admin.model;
 
-public class ReportBean {
+public class AdminReportBean {
 	private int renum;
 	private int bcnum;
 	private int bnum;
@@ -8,12 +8,10 @@ public class ReportBean {
 	private String rtype;
 	private String status;
 	private String rcontent;
-	public int getBnum() {
-		return bnum;
-	}
-	public void setBnum(int bnum) {
-		this.bnum = bnum;
-	}
+	private String name;
+	private String bsubject;
+	private String ccontent;
+	
 	public int getRenum() {
 		return renum;
 	}
@@ -25,6 +23,12 @@ public class ReportBean {
 	}
 	public void setBcnum(int bcnum) {
 		this.bcnum = bcnum;
+	}
+	public int getBnum() {
+		return bnum;
+	}
+	public void setBnum(int bnum) {
+		this.bnum = bnum;
 	}
 	public String getId() {
 		return id;
@@ -50,6 +54,22 @@ public class ReportBean {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getBsubject() {
+		return bsubject;
+	}
+	public void setBsubject(String bsubject) {
+		this.bsubject = bsubject;
+	}
+	public String getCcontent() {
+		return ccontent;
+	}
+	public void setCcontent(String ccontent) {
+		this.ccontent = ccontent;
+	}
 }
