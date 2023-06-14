@@ -63,6 +63,7 @@
 </style>
 
 <!-- <script type="text/javascript" src="resources/js/jquery.js" ></script> -->
+<!-- isNumeric 사용으로 인한 버전 -->
 <script src="http://code.jquery.com/jquery-1.7.min.js" type="text/javascript"></script>
 <script>
 

@@ -11,7 +11,7 @@
 			   ,id
 			   ,nudate
 			   ,mealtype
-			   ,LISTAGG(fname, '   ') WITHIN GROUP(order by fname) AS fname
+			   ,LISTAGG(fname, ' ㆍ ') WITHIN GROUP(order by fname) AS fname
 			   ,fimage
 			   ,SUM(fweight)	  AS fweight
 			   ,SUM(calories)	  AS calories
