@@ -176,12 +176,12 @@ CREATE TABLE Report (
    bcnum   number   NOT NULL, --댓글 or 게시판 번호
    ID varchar2(100) not null, -- 회원아이디 
    rtype varchar2(10) not null check(rtype in('board','bcomment')), --댓글인지 게시판인지
-   status   varchar2(50)  NOT NULL, --신고 상태(게시글이나 댓글 삭제 시 처리 완료)
+   status   varchar2(50)  NOT NULL check(status in('신고접수', '신고거절')), --신고 상태(게시글이나 댓글 삭제 시 처리 완료)
    rcontent   varchar2(1000)   NOT NULL -- 신고 내용
 );
 
 insert into report
-values(reseq.nextval,1,'hong','bcomment','처리 준비','신고 테스트');
+values(reseq.nextval,1,'hong','bcomment','신고접수','신고 테스트');
 
 select * from Report;
 commit;
@@ -546,7 +546,7 @@ CREATE TABLE review (
 	rcontent varchar2(500),
 	rdate date default sysdate,
 	hasReview varchar2(10) check(hasReview in('Y', 'N')),
-	report varchar2(10) check(report in('Y', 'N', 'approve', 'unapprove'))
+	report varchar2(10) check(report in('신고접수', '신고거절'))
 );
 select * from review;
 commit;
