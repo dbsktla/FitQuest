@@ -34,4 +34,8 @@
 		values(bcseq.nextval,#{bnum},#{id},#{cref},#{crestep},#{crelevel},#{ccontent})
 	</insert>
 	
+	<update id="UpdateBcomment">
+		<![CDATA[update bcomment set ccontent = '관리자에 의해 가려졌습니다.', cstatus = '신고'
+		where cnum = #{bcnum}]]>
+	</update>
 </mapper>

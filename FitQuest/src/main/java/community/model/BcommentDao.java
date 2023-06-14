@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import admin.model.AdminReportBean;
+
 
 @Component
 public class BcommentDao {
@@ -51,6 +53,12 @@ public class BcommentDao {
 				
 			}
 		}
+		return cnt;
+	}
+	
+	public int updateBcomment(AdminReportBean adminReportBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateBcomment",adminReportBean);
 		return cnt;
 	}
 	

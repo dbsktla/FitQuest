@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import admin.model.AdminReportBean;
 import utility.Paging;
 
 @Component
@@ -152,6 +153,12 @@ public class BoardDao {
 	public int selectBimageCount(String bimage) {
 		int cnt = -1;
 		cnt = sqlSessionTemplate.selectOne(namespace + ".SelectBimageCount", bimage);
+		return cnt;
+	}
+
+	public int updateBoard(AdminReportBean adminReportBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateBoard", adminReportBean);
 		return cnt;
 	}
 }

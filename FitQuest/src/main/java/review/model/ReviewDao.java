@@ -98,4 +98,9 @@ public class ReviewDao {
 		rList = sqlSessionTemplate.selectList(namespace+ ".DeleteRequestList", map, rowBounds);
 		return rList;
 	}
+	public List<ReviewBean> getReviewReport() {
+		List<ReviewBean> reportReviewList = new ArrayList<ReviewBean>();
+		reportReviewList = sqlSessionTemplate.selectList(namespace + ".GetReviewReport");
+		return reportReviewList;
+	}
 }

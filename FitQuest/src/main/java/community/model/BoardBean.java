@@ -25,7 +25,16 @@ public class BoardBean {
 	private String bcontent;
 	private String bimage;
 	private String bimageOld;
+	private String bstatus;
 	
+	public String getBstatus() {
+		return bstatus;
+	}
+
+	public void setBstatus(String bstatus) {
+		this.bstatus = bstatus;
+	}
+
 	public String getBimageOld() {
 		return bimageOld;
 	}
