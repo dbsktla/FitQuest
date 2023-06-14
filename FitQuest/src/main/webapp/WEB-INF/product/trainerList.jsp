@@ -21,6 +21,10 @@
 		font-size: 15px;
 		font-weight: 600;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
@@ -140,7 +144,9 @@ var areaSelectMaker = function(target){
 	}
 </script>
 <!-- 운동 카테고리 선택.-->
- <section id="portfolio" class="portfolio"> 
+<body style="background-color : #FEF9E7;">
+<div height = "80px"></div>
+ <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important;"> 
       <div class="container" data-aos="fade-up">
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 	        <header class="section-header" style = "margin-top:60px;">
@@ -245,7 +251,7 @@ var areaSelectMaker = function(target){
         </div>
 	</div>
 </section>
- <section id="team" class="team">
+ <section id="team" class="team" style = "background-color: #FEF9E7 !important;">
 
       <div class="container" data-aos="fade-up">
         <div class="row gy-4">
@@ -293,4 +299,5 @@ var areaSelectMaker = function(target){
 		${pageInfo.pagingHtml}
 	</div>
     </section><!-- End Team Section -->
+    </body>
 <%@ include file="../common/bottom.jsp" %>
