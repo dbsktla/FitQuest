@@ -26,5 +26,9 @@ public class NullUtil {
 	}
 
 	public static String print(Object o) { return o == null ? "" : o.toString(); }
+	
+	public static double nvlNA(String originalStr, double defaultStr) {
+		return originalStr.equals("N/A") ? defaultStr : Double.parseDouble(originalStr);
+	}
 
 }
