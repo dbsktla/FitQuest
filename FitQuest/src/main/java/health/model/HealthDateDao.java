@@ -82,7 +82,17 @@ public class HealthDateDao {
 	}
 
 	public String allWeekPlaytime(Map<String, Object> datemap) {
-		String sum = sqlSessionTemplate.selectOne(namespace + ".AllWeekPlaytime", datemap);
+		String sum = null;
+		System.out.println("id" + datemap.get("id"));
+		System.out.println("sdate" + datemap.get("sdate"));
+		System.out.println("edate" + datemap.get("edate"));
+		try {
+			sum = sqlSessionTemplate.selectOne(namespace + ".GetAllWeekPlaytime", datemap);
+		}catch(Exception e) {
+			e.printStackTrace() ;
+			System.out.println("Exception");
+		}
+		System.out.println("weekPlaytime sum : " + sum);
 		return sum;
 	}
 
