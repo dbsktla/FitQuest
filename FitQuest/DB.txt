@@ -437,8 +437,8 @@ commit;
 
 
 -- 식단 북마크
-drop sequence fmseq;
-create sequence fmseq
+drop sequence fkseq;
+create sequence fkseq
   increment by 1
   start with 1
   minvalue 1
@@ -446,8 +446,8 @@ create sequence fmseq
   
 drop table foodmark cascade constraints;
 CREATE TABLE foodmark (
-   fmnum number, -- 북마크 번호
-   fnum number references food(fnum) on delete cascade, --음식번호
+   fknum number, -- 북마크 번호
+   mnum number references meal(mnum) on delete cascade, --음식번호
    ID varchar2(100) references MEMBER(ID) on delete cascade -- 회원아이디 
 );
 
