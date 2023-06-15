@@ -310,15 +310,20 @@ CREATE TABLE reservation (
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디 
    mname varchar2(100) NOT NULL, -- 회원 이름
    tname varchar2(100) NOT NULL, -- 트레이너 이름
-   onum   number   NOT NULL, --주문번호
-   unum   number   NOT NULL,--사용권번호
-   rdate varchar2(15) NOT NULL, --예약 날짜
-   rtime varchar2(15) NOT NULL, --예약 시간 "00:00am"
-   rstate varchar2(10) default 'false' --예약 상태 컬럼
+   onum   number   NOT NULL, --주문 번호
+   unum   number   NOT NULL,--사용권 번호
+   rdate varchar2(15) NOT NULL, --예약 날짜 2023-6-23
+   rtime varchar2(15) NOT NULL, --예약 시간 "13:00~14:00"
+   rstate varchar2(10) default 'false' --상태
 );
 select * from reservation;
 commit;
 
+-- rstate: false = 승인 전(예약 신청만 된 상태)
+		-- true = 승인 완료(예약 승인 완료)
+		-- reject = 승인 거절(예약 승인 거절)
+		-- cancel = 예약 취소
+		-- complete = 운동 완료(3회 이상 완료시 리뷰 작성 가능하게 하기 위함)
 
 
 -- 트레이너 스케줄
