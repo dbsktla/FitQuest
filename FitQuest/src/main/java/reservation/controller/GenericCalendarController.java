@@ -1,7 +1,10 @@
 package reservation.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +130,57 @@ public class GenericCalendarController {
 			model.addAttribute("rmonth",monthNum);
 			model.addAttribute("rday",dayNum);
 			model.addAttribute("rList", rList);
+			
+			//날짜 변환해서 오늘 날짜와 비교하고 넘었으면 rstate 상태 complete로 바꿔주기
+			LocalDate today = LocalDate.now(); //오늘 날짜
+			
+			DateTimeFormatter formatter;
+			for (ReservationListActBean rb : rList) {
+				//2023-6-11 / 2023-11-12 이런식으로 유동적이기 때문에 때에 따라 변환
+			    if (rb.getRdate().matches("\\d{4}-\\d{1,2}-\\d{1,2}")) {
+			        formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+			    } else {
+			        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			    }
+			    LocalDate reservationDate = LocalDate.parse(rb.getRdate(), formatter);
+			    
+			    if (reservationDate.isBefore(today)) { //지난 날짜
+			    	if(rb.getRstate().equals("true")) { //업데이트 전
+			    		int cnt = reservationDao.updateStateComplete(rb.getRnum());
+			    		if(cnt != -1) {
+			    			System.out.println("날짜 지나서 상태 업데이트:"+reservationDate);
+			    		}
+			    	}
+			    }
+			}//for
+			
+			//완료 3회 이상이면 리뷰작성 가능하도록 완료된 리스트 가져오기  
+			List<ReservationBean> cList = reservationDao.getReservationCList(mid);
+			Map<String, Integer> trainerCountMap = new HashMap<String, Integer>();
+			Map<String, String> trainerNameMap = new HashMap<String, String>();
+
+			// 트레이너 아이디 별로 카운트를 세어서 맵에 저장
+			for (ReservationBean rb : cList) {
+			    String trainerId = rb.getTid();
+			    trainerCountMap.put(trainerId, trainerCountMap.getOrDefault(trainerId, 0) + 1);
+			    trainerNameMap.put(trainerId, rb.getTname());
+			}
+
+			// 맵을 순회하면서 3번 이상인 경우 출력
+			for (Map.Entry<String, Integer> entry : trainerCountMap.entrySet()) {
+			    String trainerId = entry.getKey();
+			    int count = entry.getValue();
+			    
+			    if (count >= 3) {
+			        String trainerName = trainerNameMap.get(trainerId);
+			        System.out.println(trainerId + " (" + trainerName + ") : 3번 이상");
+			        model.addAttribute("reviewTid",trainerId);
+			        model.addAttribute("reviewTname",trainerName);
+			    } else {
+			        System.out.println(trainerId + " : " + count + "번");
+			    }
+			}
+			
 			return getPage; 
 	}
 }

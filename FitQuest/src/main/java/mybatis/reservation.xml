@@ -25,7 +25,7 @@
 	<select id = "GetReservationCount" resultType = "int">
 		<![CDATA[select count(*) from reservation
 		where mid = #{mid} and tid = #{tid}
-		and rdate < sysdate and rstate = 'true']]>
+		and rdate < sysdate and rstate = 'complete']]>
 	</select>
 	<select id="GetReservationFList" resultType="reservation.model.ReservationBean">
 		<![CDATA[select * from reservation
@@ -64,5 +64,14 @@
 	<select id="GetOneByRnum" resultType="reservation.model.ReservationBean">
 		select * from reservation
 		where rnum = #{rnum}
+	</select>
+	<update id="UpdateStateComplete">
+		<![CDATA[update reservation set
+		rstate = 'complete'
+		where rnum = #{rnum}]]>
+	</update>
+	<select id="GetReservationCList" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'complete']]>
 	</select>
 </mapper>

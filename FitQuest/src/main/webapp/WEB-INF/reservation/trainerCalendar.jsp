@@ -103,7 +103,7 @@
    <tr>
 	 <td colspan="7" class="calendar-none">
 	   <div>
-	    <span>스케줄 내역이 없습니다.</span>
+	    <span>예약 내역이 없습니다.</span>
 	   </div>
 	 </td>
    </tr>

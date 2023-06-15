@@ -60,9 +60,15 @@
    </div>
 <!-- 버튼 -->
    <div class="calendar-button-div">
-  	  <div class="left"></div> 
+  	  <div class="left">
+  	  <c:if test="${not empty reviewTname}">
+  	  	<input type="button" class="btn btn-warning" onClick="location.href='reviewWrite.pd?id=${reviewTid}'" value="${reviewTname} 트레이너님 리뷰 작성 가능!">
+  	  </c:if>
+  	  </div> 
       <div class="right">
+      <c:if test="${not empty rList}">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
+      </c:if>
       	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="예약하러 가기">
       </div>
    </div>
