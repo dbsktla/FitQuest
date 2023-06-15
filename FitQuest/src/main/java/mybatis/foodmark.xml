@@ -9,29 +9,34 @@
 		INSERT INTO FOODMARK 
 		VALUES(
 				fkseq.nextval
-			   ,#{fnum}
 			   ,#{id}
+			   ,#{fname}
+			   ,#{fweight}
+			   ,#{calories}
+			   ,#{carbohydrate}
+			   ,#{protein}
+			   ,#{fat}
+			   ,#{sugar}
+			   ,#{sodium}
 			  )
 	</insert>
 	
 	<select id="GetFoodMarkList" resultType="nutrition.model.FoodBean">
-		SELECT	fknum AS fnum
-			   ,fname
-			   ,fweight
-			   ,calories
-			   ,carbohydrate
-			   ,protein
-			   ,fat
-			   ,sugar
-			   ,sodium
-		FROM 	FOODMARK
-		NATURAL JOIN FOOD 
+		SELECT	f.*
+			   ,f.fknum AS fnum
+		FROM 	FOODMARK f
 		WHERE id = #{id}
-		ORDER BY fknum
 	</select>
 	
 	<delete id="DeleteFoodmark">
 		DELETE FOODMARK
 		WHERE  fknum = #{fknum}
 	</delete>
+	
+	<select id="CountFoodmark" resultType="int">
+		SELECT	COUNT(*) 
+		FROM 	FOODMARK 
+		WHERE 	id    = #{id} 
+		AND 	fname = #{fname}
+	</select>
 </mapper>

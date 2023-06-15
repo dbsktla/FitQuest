@@ -78,4 +78,51 @@
 		FROM   FOOD
 	</select>
 	
+	<select id="GetAllByMnum" resultType="nutrition.model.FoodBean">
+		SELECT	fnum
+			   ,n.nnum
+			   ,mnum
+			   ,nudate
+			   ,fimage
+			   ,mealtype
+			   ,fname
+			   ,fweight
+			   ,calories
+			   ,carbohydrate
+			   ,protein
+			   ,fat
+			   ,sugar
+			   ,sodium
+		FROM   	(
+				 SELECT	f.fnum
+				 	   ,f.nnum
+				 	   ,f.mnum
+				 	   ,fimage
+				 	   ,mealtype
+				 	   ,fname
+				 	   ,fweight
+				 	   ,calories
+				 	   ,carbohydrate
+				 	   ,protein
+				 	   ,fat
+				 	   ,sugar
+				 	   ,sodium
+				 FROM 	(
+					 	 SELECT *
+					 	 FROM FOOD
+					 	 ) f
+				 INNER JOIN MEAL m
+				 ON f.mnum = m.mnum
+			   	) f
+		INNER 	JOIN NUTRITION n
+		ON 		f.nnum = n.nnum
+		AND 	f.mnum = #{mnum}
+		AND 	id 	   = #{id}
+	</select>
+	
+	<delete id="DeleteFood">
+		DELETE 	FOOD
+		WHERE 	fnum = #{delfnum}
+	</delete>
+	
 </mapper>

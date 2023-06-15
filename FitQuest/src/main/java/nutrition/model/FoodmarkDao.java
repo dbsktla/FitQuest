@@ -28,4 +28,9 @@ public class FoodmarkDao {
 		cnt = sqlSessionTemplate.delete(namespace + ".DeleteFoodmark", fknum);
 		return cnt;
 	}
+
+	public int countFoodmark(FoodmarkBean foodmarkBean) {
+		int count = sqlSessionTemplate.selectOne(namespace + ".CountFoodmark", foodmarkBean);
+		return count;
+	}
 }

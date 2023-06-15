@@ -29,4 +29,13 @@ public class FoodDao {
 		int fnum = sqlSessionTemplate.selectOne(namespace + ".GetMaxFnum");
 		return fnum;
 	}
+
+	public List<FoodBean> getAllByMnum(Map<String, Object> map) {
+		List<FoodBean> flist = sqlSessionTemplate.selectList(namespace + ".GetAllByMnum", map);
+		return flist;
+	}
+
+	public void deleteFood(int delfnum) {
+		sqlSessionTemplate.delete(namespace + ".DeleteFood", delfnum);
+	}
 }
