@@ -17,6 +17,7 @@
 		from question inner join member
 		on question.id = member.id
 		where qstatus = '답변미완료'
+		order by qnum desc
 	</select>
 	
 	<select id="GetQuestionFinishCount" resultType="int">
@@ -31,5 +32,49 @@
 		from question inner join member
 		on question.id = member.id
 		where qstatus = '답변완료'
+		order by qnum desc
 	</select>
+	
+	<select id="GetMyQuestionCount" resultType="int">
+		select count(*)
+		from question inner join member
+		on question.id = member.id
+		where question.id=#{id}
+	</select>
+	
+	<select id="GetMyQuestionList" resultType="question.model.QuestionBean">
+		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+		from question inner join member
+		on question.id = member.id
+		where question.id=#{id}
+		order by qnum desc
+	</select>
+	
+	<insert id="InsertQuestion">
+		insert into question(qnum,id,qsubject,qcontent)
+		values(qseq.nextval,#{id},#{qsubject},#{qcontent})
+	</insert>
+	
+	<select id="GetQuestionByQnum" resultType="question.model.QuestionBean">
+		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+		from question inner join member
+		on question.id = member.id
+		where qnum=#{qnum}
+	</select>
+	
+	<update id="UpdateInsertQstatus">
+		update question
+		set qstatus = '답변완료'
+		where qnum = #{qnum}
+	</update>
+	<update id="UpdateDeleteQstatus">
+		update question
+		set qstatus = '답변미완료'
+		where qnum = #{qnum}
+	</update>
+	
+	<delete id="DeleteQuestion">
+		delete from question
+		qnum = #{qnum}
+	</delete>
 </mapper>

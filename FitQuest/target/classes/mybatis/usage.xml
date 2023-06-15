@@ -31,13 +31,19 @@
 		usage = usage -1
 		where unum = #{unum}
 	</update>
-	<delete id="DeleteUsage">
-		delete usage
-		where unum = #{unum}
-	</delete>
 	<update id="IncreaseUsage">
 		update usage set
 		usage = usage +1
 		where unum = #{unum}
+	</update>
+	<update id="UpdateUstateA">
+		<![CDATA[update usage set
+		ustate = 'unavailable'
+		where unum = #{unum}]]>
+	</update>
+	<update id="UpdateUstateU">
+		<![CDATA[update usage set
+		ustate = 'available'
+		where unum = #{unum}]]>
 	</update>
 </mapper>
