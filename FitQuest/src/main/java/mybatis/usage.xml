@@ -9,10 +9,11 @@
 		select count(*) from usage
 		where tid = #{tid}
 		and mid = #{mid}
+		and ustate = 'available'
 	</select>
 	<insert id = "InsertUsage">
 		insert into usage
-		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage})
+		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage}, 'available')
 	</insert>
 	<select id = "GetOneUsage" resultType = "usage.model.UsageBean">
 		select * from usage
