@@ -165,7 +165,7 @@
 	<select id="GetReservationListAct" resultType = "composite.model.ReservationListActBean">
 		<![CDATA[select r.*, t.activity from reservation r join trainer t 
 		on r.tid = t.id
-		where r.mid = #{mid} and r.rstate = 'true']]>
+		where r.mid = #{mid} and (r.rstate = 'true' or r.rstate = 'complete')]]>
 	</select>
 	<select id="GetReservationDetailG" resultType = "composite.model.ReservationDetailGBean">
 		select
