@@ -288,7 +288,7 @@ CREATE TABLE usage (
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
    mid varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
    usage   number   NOT NULL, --남은 횟수
-   ustate varchar2(15) NOT NULL --유효한지 상태(available/unavailable)
+   ustate varchar2(15) default 'available' --유효한지 상태(available/unavailable)
 );
 
 select * from usage;
