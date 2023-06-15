@@ -78,6 +78,7 @@
 		}); // ajax
 	}
 	
+	// 선택 삭제
 	function deleteHnum() {
 		flag = false;
 		var chkObj = document.getElementsByName("rowchk");
@@ -95,12 +96,14 @@
 		
 		document.hdform.submit();
 	}
-		
+	
+	// 수정버튼 클릭
 	function updateHnum() {
 		//alert("u " + clickHnum);
 		location.href='myHealthUpdate.ht?hnum=' + clickHnum;
 	}
 	
+	// 체크박스 선택
 	function allcheck() {
 		//alert(1);
 		
@@ -118,6 +121,7 @@
 		}
 	}
 	
+	// 헬스 목록 리스트
 	function listup() {
 		$('#showbutton').css("display","none");
 		$("#healthDetail").empty();
@@ -161,6 +165,7 @@
 		
 	}
 	
+	// 캘린더 불러오기
 	function calanderLookup() {
 		alert(2);
 		// request: 년, 월 정보 . 트레이너 이름, 목록.  
