@@ -92,7 +92,7 @@ insert into food values(fseq.nextval, 2, 4, '콘샐러드', 100, 104.00, 22.40, 
 insert into food values(fseq.nextval, 3, 5, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
 
 -- 식단 북마크
-insert into foodmark values(fkseq.nextval, 2, 'hong');
-insert into foodmark values(fkseq.nextval, 3, 'hong');
+insert into foodmark values(fkseq.nextval, 'hong', '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into foodmark values(fkseq.nextval, 'hong', '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
 
 commit;

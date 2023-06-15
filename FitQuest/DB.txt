@@ -452,8 +452,15 @@ create sequence fkseq
 drop table foodmark cascade constraints;
 CREATE TABLE foodmark (
    fknum number, -- 북마크 번호
-   fnum number references food(fnum) on delete cascade, --음식번호
-   ID varchar2(100) references MEMBER(ID) on delete cascade -- 회원아이디 
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디
+   fname   varchar2(50), --음식이름
+   fweight number default 0.0, -- 음식무게
+   calories   number, --칼로리
+   carbohydrate   number, --탄수화물
+   protein   number, --단백질
+   fat   number, --지방
+   sugar   number, --당
+   sodium   number --나트륨 
 );
 
 
