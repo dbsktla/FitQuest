@@ -3,29 +3,50 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
 <script type="text/javascript">
-	function openPopup(rnum) { //팝업창 설정
+	function openPopup(rnum, rstate) {
 		// 팝업 창의 URL과 창의 속성을 설정
-	 	 var url = "genericCalendarDetail.rv?rnum="+rnum;
-		 var width = 700; // 팝업 창의 너비
-	 	 var height = 550; // 팝업 창의 높이
- 		 var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
-	 	 var top = (window.screen.availHeight - height) / 2;
-
-	 	 var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
-
-	 	  // 팝업 창이 로드된 후에 닫기 버튼 추가
-	 	  popup.onload = function() {
-	 	    var closeButton = popup.document.createElement("button");
-	 	    closeButton.innerText = "닫기";
-	 	    closeButton.classList.add("close-button");
-	 	    closeButton.addEventListener("click", function() {
-	 	      popup.close(); // 팝업 창 닫기
-	 	    });
-
-	 	    // 팝업 창에 닫기 버튼 추가한 후에 포커스를 닫기 버튼으로 이동
-	 	    popup.document.body.appendChild(closeButton);
-	 	    closeButton.focus();
-	 	  };
+		var url = "genericCalendarDetail.rv?rnum=" + rnum;
+		var width = 700; // 팝업 창의 너비
+		var height = 550; // 팝업 창의 높이
+		var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
+		var top = (window.screen.availHeight - height) / 2;
+		
+		var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
+		
+		// 팝업 창이 로드된 후에 닫기 버튼 추가
+		popup.onload = function () {
+			 var closeButton = popup.document.createElement("button");
+			 closeButton.innerText = "닫기";
+			 closeButton.classList.add("close-button");
+			 closeButton.addEventListener("click", function () {
+				popup.close(); // 팝업 창 닫기
+			 });
+		
+			// 예약 상태가 true라면 예약 취소 버튼 추가(예약 확정은 되었지만 운동 완료하지 않은 상태)
+			if (rstate == "true") {
+				var cancelButton = popup.document.createElement("button");
+				cancelButton.innerText = "예약 취소";
+				cancelButton.classList.add("close-button");
+				cancelButton.addEventListener("click", function () {
+					var confirmCancel = popup.confirm("예약을 취소하시겠습니까?");
+				
+					if (confirmCancel) {
+						popup.alert("예약 취소 완료되었습니다.");
+						popup.close(); // 팝업 창 닫기
+						window.location.href = "reservationCancel.rv?rnum=" + rnum;
+					}
+			  });
+			
+				// 버튼 간격 조절
+				cancelButton.style.marginRight = "10px";
+				
+				popup.document.body.appendChild(cancelButton);
+				closeButton.focus();
+			}
+			
+			popup.document.body.appendChild(closeButton);
+			closeButton.focus();
+		};
 	}
 </script>
 <br><br>
@@ -131,7 +152,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">
@@ -179,7 +200,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">
@@ -230,7 +251,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">
@@ -255,6 +276,7 @@
 			                </c:forEach>
 			            </c:if>
 			        </c:if>
+			        
            		</c:if>
            	</c:forEach>
 	       </div>

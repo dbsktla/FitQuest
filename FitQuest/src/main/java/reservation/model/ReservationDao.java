@@ -89,5 +89,17 @@ public class ReservationDao {
 		return cList;
 	}
 
+	public int cancelReservation(int rnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".CancelReservation",rnum);
+		return cnt;
+	}
+
+	public List<ReservationBean> getReservationTCList(String tid) {
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",tid);
+		return rList;
+	}
+
 	
 }

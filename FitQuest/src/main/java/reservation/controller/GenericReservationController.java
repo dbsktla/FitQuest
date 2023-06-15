@@ -1,5 +1,6 @@
 package reservation.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -88,15 +89,28 @@ public class GenericReservationController {
 			usageCount += ub.getUnum();
 		}
 
-		//사용권 남은 개수(트레이너별)
+		//사용권 남은 개수
 		UsageBean usageBean = usageDao.getOneUsage(mid,tid);
-		int usageNum = usageBean.getUsage();
+		int usageNum = 0; 
+		if (usageBean != null) {
+		    usageNum = usageBean.getUsage();
+		    // 사용권 모두 소진 시 상태 unavailable로 바꾸기
+		    if (usageNum <= 0) {
+		        int cnt = usageDao.updateUstateA(usageBean.getUnum()); 
+		        if (cnt != -1) {
+		            System.out.println("사용권 모두 소진 후 상태 바꿈");
+		        } else {
+		            System.out.println("사용권 모두 소진 후 상태 바꿈 실패");
+		        }
+		    }
+		}
+		
+		  
 		
 		model.addAttribute("tid",tid);
 		model.addAttribute("tname",tname);
 		model.addAttribute("usageCount",usageCount);
 		model.addAttribute("usageNum",usageNum);
-		System.out.println("컨트롤러 사용권 횟수:"+usageNum);	
 		
 		//트레이너 스케줄 가져가기
 		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
@@ -198,6 +212,18 @@ public class GenericReservationController {
 			model.addAttribute("tsdayArr",tsdayArr);
 			model.addAttribute("tstimeArr",tstimeArr);
 			model.addAttribute("tscheduleBean",tscheduleBean);
+			
+			
+			//오늘 날짜 이전은 예약 막기 위함
+			LocalDate today = LocalDate.now(); //오늘 날짜
+			int tyear = today.getYear();
+			int tmonth = today.getMonthValue();
+			int tday = today.getDayOfMonth();
+			
+			
+			model.addAttribute("tyear",tyear); 
+			model.addAttribute("tmonth",tmonth); 
+			model.addAttribute("tday",tday); 
 		}//else
 		return getPage;
 	}
