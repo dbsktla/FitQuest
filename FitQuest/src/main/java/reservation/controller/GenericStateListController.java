@@ -48,6 +48,7 @@ public class GenericStateListController {
 			System.out.println("날짜:"+rb.getRdate());
 			System.out.println("시간:"+rb.getRtime());
 		}
+		
 		for (ReservationBean rb : tList) {
 		    LocalDate reservationDate = LocalDate.parse(rb.getRdate());
 		    

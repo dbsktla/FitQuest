@@ -77,5 +77,17 @@ public class ReservationDao {
 		return rList;
 	}
 
+	public int updateStateComplete(int rnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".UpdateStateComplete",rnum);
+		return cnt;
+	}
+
+	public List<ReservationBean> getReservationCList(String mid) {
+		List<ReservationBean> cList = new ArrayList<ReservationBean>();
+		cList = sqlSessionTemplate.selectList(namespace+".GetReservationCList",mid);
+		return cList;
+	}
+
 	
 }
