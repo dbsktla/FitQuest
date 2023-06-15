@@ -95,10 +95,22 @@ public class ReservationDao {
 		return cnt;
 	}
 
-	public List<ReservationBean> getReservationTCList(String tid) {
-		List<ReservationBean> rList = new ArrayList<ReservationBean>();
-		rList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",tid);
-		return rList;
+	public List<ReservationBean> getReservationTCList(String mid) {
+		List<ReservationBean> tcList = new ArrayList<ReservationBean>();
+		tcList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",mid);
+		return tcList;
+	}
+
+	public List<ReservationBean> getReservationMListByMid(String mid) {
+		List<ReservationBean> mList = new ArrayList<ReservationBean>();
+		mList = sqlSessionTemplate.selectList(namespace+".GetReservationMListByMid",mid);
+		return mList;
+	}
+
+	public List<ReservationBean> getReservationCListByMid(String mid) {
+		List<ReservationBean> cList = new ArrayList<ReservationBean>();
+		cList = sqlSessionTemplate.selectList(namespace+".GetReservationCListByMid",mid);
+		return cList;
 	}
 
 	

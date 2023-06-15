@@ -181,6 +181,9 @@ public class GenericCalendarController {
 			    }
 			}
 			
+			//사용권 있나 확인
+			String usage = usageDao.getTid(mid);
+			model.addAttribute("usage",usage);
 			return getPage; 
 	}
 }
