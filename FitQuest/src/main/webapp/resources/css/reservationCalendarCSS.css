@@ -272,6 +272,7 @@ a{
 	text-align: center;
 	width: 80%;
 	margin-top: 20px;
+	border-radius: 10px;
 }
 .detail-name-box{
 	width: 80%;
@@ -285,13 +286,13 @@ a{
 }
 .sub-title{
 	font-weight: bold;
-	padding: 10px 5px;
+	padding: 15px 5px;
 	border-bottom: 1px solid lightgray;
 	border-right: 1px solid lightgray;
 }
 .sub-title-last{
 	font-weight: bold;
-	padding: 10px 5px;
+	padding: 15px 5px;
 	border-right: 1px solid lightgray;
 }
 .sub-text{
@@ -322,4 +323,21 @@ button.close-button:hover {
 }
 .day-area td {
   text-align: left;
+}
+
+.stateList-body{ 
+	width: 68%;
+	text-align: center;
+}
+
+.stateList-title{
+	font-weight: bold;
+	font-size: 18px; 
+	width: 68%;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 13px;
+}
+.m-top{
+	margin-top: 50px;
 }

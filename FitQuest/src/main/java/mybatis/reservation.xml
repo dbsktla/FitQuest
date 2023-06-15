@@ -51,10 +51,20 @@
 		where mid = #{mid} and rstate = 'reject'
 		order by rtime]]>
 	</select>
+	<select id="GetReservationMListByMid" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'complete'
+		order by rtime]]>
+	</select>
+	<select id="GetReservationCListByMid" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'cancel'
+		order by rtime]]>
+	</select>
 	<select id="GetReservationTCList" resultType="reservation.model.ReservationBean">
 		<![CDATA[select * from reservation
-		where tid = #{tid} and rstate = 'true' or rstate = 'complete'
-		order by rtime]]>
+		where mid = #{mid} and rstate = 'true' or rstate = 'complete'
+		order by rdate]]>
 	</select>
 	<select id="GetReservationAllList" resultType="reservation.model.ReservationBean">
 		select * from reservation

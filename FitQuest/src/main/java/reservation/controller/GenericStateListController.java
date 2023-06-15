@@ -32,11 +32,17 @@ public class GenericStateListController {
 	public String doAction(Model model, HttpServletRequest request,HttpSession session) {
 		
 		LocalDate today = LocalDate.now();
-        System.out.println("오늘의 날짜: " + today);
         
-        //예약 완료된 내역 가져오기 (true)
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
+		
+		//예약 완료된 내역 가져오기 (true)
 		List<ReservationBean> tList = reservationDao.getReservationTListByMid(mid);
+		
+		//예약 취소된 내역 가져오기 (cancel)
+		List<ReservationBean> cList = reservationDao.getReservationCListByMid(mid);
+		
+		//운동 완료된 내역 가져오기 (complete)
+		List<ReservationBean> mList = reservationDao.getReservationMListByMid(mid);
 		
 		//예약 승인전 내역 가져오기 (false)
 		List<ReservationBean> fList = reservationDao.getReservationFListByMid(mid);
@@ -44,25 +50,9 @@ public class GenericStateListController {
 		//예약 거절된 내역 가져오기 (reject)
 		List<ReservationBean> jList = reservationDao.getReservationJListByMid(mid);
 		
-		for(ReservationBean rb : tList) {
-			System.out.println("날짜:"+rb.getRdate());
-			System.out.println("시간:"+rb.getRtime());
-		}
-		
-		for (ReservationBean rb : tList) {
-		    LocalDate reservationDate = LocalDate.parse(rb.getRdate());
-		    
-		    if (reservationDate.isAfter(today)) {
-		        System.out.println("예약 날짜가 오늘을 넘었습니다.");
-		    } else if (reservationDate.isEqual(today)) {
-		        System.out.println("예약 날짜가 오늘과 동일합니다.");
-		    } else {
-		        System.out.println("예약 날짜가 아직 오지 않았습니다.");
-		    }
-		}
-		
-		model.addAttribute("today",today);
 		model.addAttribute("tList",tList);
+		model.addAttribute("cList",cList);
+		model.addAttribute("mList",mList);
 		model.addAttribute("fList",fList);
 		model.addAttribute("jList",jList);
 		return getPage;

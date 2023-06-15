@@ -220,7 +220,6 @@ public class GenericReservationController {
 			int tmonth = today.getMonthValue();
 			int tday = today.getDayOfMonth();
 			
-			
 			model.addAttribute("tyear",tyear); 
 			model.addAttribute("tmonth",tmonth); 
 			model.addAttribute("tday",tday); 
