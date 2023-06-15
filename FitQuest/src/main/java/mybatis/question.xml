@@ -5,5 +5,31 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="question.model.Question">
-
+	<select id="GetQuestionRequestCount" resultType="int">
+		select count(*)
+		from question inner join member
+		on question.id = member.id
+		where qstatus = '답변미완료'
+	</select>
+	
+	<select id="GetQuestionRequestList" resultType="question.model.QuestionBean">
+		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+		from question inner join member
+		on question.id = member.id
+		where qstatus = '답변미완료'
+	</select>
+	
+	<select id="GetQuestionFinishCount" resultType="int">
+		select count(*)
+		from question inner join member
+		on question.id = member.id
+		where qstatus = '답변완료'
+	</select>
+	
+	<select id="GetQuestionFinishList" resultType="question.model.QuestionBean">
+		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+		from question inner join member
+		on question.id = member.id
+		where qstatus = '답변완료'
+	</select>
 </mapper>
