@@ -37,4 +37,10 @@ public class NutritionDao {
 		return nnum;
 	}
 
+	public int deleteNutrition(int nnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace + ".DeleteNutrition", nnum);
+		return cnt;
+	}
+
 }

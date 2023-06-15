@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- myNutritionInsertForm.jsp -->
+<!-- myNutritionUpdateForm.jsp -->
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
+
 <%
 	session.setAttribute("foodscope", 0);
 %>
@@ -163,6 +164,7 @@
 		
 	}
 </script>
+
 
 <%@ include file="myHealthBottom.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>

@@ -33,4 +33,9 @@
 		SELECT MAX(nnum) 
 		FROM   NUTRITION
 	</select>
+	
+	<delete id="DeleteNutrition">
+		DELETE NUTRITION
+		WHERE  nnum = #{nnum}
+	</delete>
 </mapper>
