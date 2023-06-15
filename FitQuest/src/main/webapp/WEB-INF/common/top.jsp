@@ -131,7 +131,7 @@
 	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
 	              <li><a href="viewProductList.pd">상품관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
-	              <li><a href="myQuestionList.co">문의 내역</a></li>
+	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
            </c:if>
@@ -143,7 +143,7 @@
 	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
 	              <li><a href="viewMyOrderList.od">구매관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
-	              <li><a href="myQuestionList.co">문의 내역</a></li>
+	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
            </c:if>
