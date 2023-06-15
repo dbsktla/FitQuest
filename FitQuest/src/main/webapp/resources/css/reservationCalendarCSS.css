@@ -167,6 +167,7 @@ a{
 	margin: 10px 0px;
 	text-align: center;
 	transition: transform 0.3s;
+	border-radius: 10px;
 }
 .rstate-area:hover{
 	transform: scale(1.05);
@@ -206,6 +207,7 @@ a{
 	margin: 10px 0px;
 	text-align: center;
 	background-color: #FEF9E7; 
+	border-radius: 10px;
 }
 .rstate-y{
 	background-color: #F7F7F8;
