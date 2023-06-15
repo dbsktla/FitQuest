@@ -51,6 +51,11 @@
 		where mid = #{mid} and rstate = 'reject'
 		order by rtime]]>
 	</select>
+	<select id="GetReservationTCList" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where tid = #{tid} and rstate = 'true' or rstate = 'complete'
+		order by rtime]]>
+	</select>
 	<select id="GetReservationAllList" resultType="reservation.model.ReservationBean">
 		select * from reservation
 		where mid = #{mid}
@@ -74,4 +79,9 @@
 		<![CDATA[select * from reservation
 		where mid = #{mid} and rstate = 'complete']]>
 	</select>
+	<update id="CancelReservation">
+		<![CDATA[update reservation set
+		rstate = 'cancel'
+		where rnum = #{rnum}]]>
+	</update>
 </mapper>

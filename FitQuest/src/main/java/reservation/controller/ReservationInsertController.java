@@ -75,13 +75,6 @@ public class ReservationInsertController {
 			System.out.println("예약 성공");
 			//남은 횟수 차감
 			usageDao.decreaseUsage(unum);
-			//남은 횟수 0일때 사용권 삭제
-			UsageBean ub = usageDao.getOneUsage(mid,tid);
-			int usageNumber = ub.getUsage();
-			if(usageNumber <= 0) {
-				//사용권 삭제
-				int cnt1 = usageDao.deleteUsage(unum);
-			}
 		}else {
 			System.out.println("예약 실패");
 		}

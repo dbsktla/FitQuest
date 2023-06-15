@@ -20,7 +20,7 @@ import utility.Paging;
 
 @Controller
 public class AdminQuestionFinishListController {
-	private final String command = "adminQuestTionFinishList.ad";
+	private final String command = "/adminQuestTionFinishList.ad";
 	private final String getPage = "adminQuestionFinishList";
 	
 	@Autowired

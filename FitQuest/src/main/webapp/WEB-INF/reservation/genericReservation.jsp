@@ -5,20 +5,25 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css">
 <script type="text/javascript">
 	function reservationCheck(date, time, year, month, tid, tname, usageNum) {
-		if (confirm(
-				'날짜 : '+year+'-'+month+'-'+date+'\n'
-			   +'시간 : '+time+'\n'
-			   +'예약 하시겠습니까?'
-						)) { // 확인
-			location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum;
+		if(usageNum > 0){
 			
-			if (confirm('계속 예약 하시겠습니까?')) { // 확인
-				location.href = 'genericReservation.rv?tid='+tid+'&tname='+tname; // 예약 페이지
+			if (confirm(
+					'날짜 : '+year+'-'+month+'-'+date+'\n'
+				   +'시간 : '+time+'\n'
+				   +'예약 하시겠습니까?'
+							)) { // 확인
+				location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum;
+				
+				if (confirm('계속 예약 하시겠습니까?')) { // 확인
+					location.href = 'genericReservation.rv?tid='+tid+'&tname='+tname; // 예약 페이지
+				} else { // 취소
+					location.href = 'genericCalendar.rv'; // My PT 페이지
+				}
 			} else { // 취소
-				location.href = 'genericCalendar.rv'; // My PT 페이지
+			    alert('예약 신청이 취소되었습니다.');
 			}
-		} else { // 취소
-		    alert('예약 신청이 취소되었습니다.');
+		}else{
+			alert('사용권이 모두 소진되었습니다.');
 		}
 	}
 </script>
@@ -60,7 +65,7 @@
       </div>
       <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericCalendar.rv'" value="My PT">
-      	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 신청 내역">
+      	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
       	<c:if test="${usageCount >= 2}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="트레이너 선택">
       	</c:if>
@@ -123,6 +128,10 @@
 	       	  <c:set var="print1" value="출력전"/>
 	       	  <c:set var="print2" value="출력전"/>
 			  <c:set var="hasReservation" value="예약없음"/>
+			  
+			  
+			  <c:if test="${tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date}">
+			  
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq '토'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
@@ -204,6 +213,10 @@
 			        </c:if>
 			      </c:if>
 			    </c:forEach>
+			    
+			 </c:if>
+			 
+			    
 			</td>
     </tr>
 		</c:when>
@@ -223,6 +236,7 @@
 	       	  <c:set var="print1" value="출력전"/>
 	       	  <c:set var="print2" value="출력전"/>
 			  <c:set var="hasReservation" value="예약없음"/>
+			  <c:if test="${tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date}">
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq '일'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
@@ -304,6 +318,7 @@
 			        </c:if>
 			      </c:if>
 			    </c:forEach>
+			    </c:if>
 			</td>
           </c:when>
      </c:choose>       
@@ -324,6 +339,7 @@
 	       	  <c:set var="print1" value="출력전"/>
 	       	  <c:set var="print2" value="출력전"/>
 			  <c:set var="hasReservation" value="예약없음"/>
+			  <c:if test="${tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date}">
 			    <c:forEach var="day" items="${tsdayArr}">
 			      <c:if test="${day eq dayIndex}">  
 			        <c:if test="${dateList.date <= date_status.last}">
@@ -405,6 +421,7 @@
 			        </c:if>
 			      </c:if>
 			    </c:forEach>
+			  </c:if>
           	</c:if>
 		  </c:forEach>
         </div>

@@ -84,8 +84,8 @@ public class TrainerCalendarController {
 			model.addAttribute("dateList", dateList); //날짜 데이터 배열
 			model.addAttribute("today_info", today_info);
 			
-			//예약 내역 가져오기
-			List<ReservationBean> rList = reservationDao.getReservationTList(tid);
+			//예약 내역 가져오기(true/complete)
+			List<ReservationBean> rList = reservationDao.getReservationTCList(tid);
 			
 			//년,월,일로 쪼개서 배열에 담는 과정 
 			//rtime : 13:00~14:00 | rdate : 2023-06-01

@@ -47,14 +47,19 @@ public class UsageDao {
 		cnt = sqlSessionTemplate.update(namespace+".DecreaseUsage",unum);
 		return cnt;
 	}
-	public int deleteUsage(int unum) {
-		int cnt = -1;
-		cnt = sqlSessionTemplate.delete(namespace+".DeleteUsage",unum);
-		return cnt;
-	}
 	public int increaseUsage(int unum) {
 		int cnt = -1;
 		cnt = sqlSessionTemplate.update(namespace+".IncreaseUsage",unum);
+		return cnt;
+	}
+	public int updateUstateA(int unum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".UpdateUstateA",unum);
+		return cnt;
+	}
+	public int updateUstateU(int unum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".UpdateUstateU",unum);
 		return cnt;
 	}
 }

@@ -38,7 +38,6 @@
 						<span>${reservationDetailGBean.gaddr2}</span>
 					</td>
 				</tr>
-			
 			</table>
 		</div>
  </body>

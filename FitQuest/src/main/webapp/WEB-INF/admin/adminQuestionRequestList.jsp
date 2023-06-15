@@ -14,7 +14,6 @@
     </div><!-- End Page Title -->
     
 			<div class="tab-content pt-2" id="myTabContent">
-				<!-- 리스트보기 -->
 				<div class="tab-pane fade show active" id="list" role="tabpanel"
 					aria-labelledby="board">
 					<div class="row">
@@ -26,7 +25,7 @@
 								<table class="table table-hover">
 									<tr align="center">
 										<th scope="col">번호</th>
-										<th scope="col">리뷰 제목</th>
+										<th scope="col">문의 제목</th>
 										<th scope="col">문의한 회원</th>
 										<th scope="col">상태</th>
 										<th scope="col">답변</th>
@@ -48,7 +47,7 @@
 												<td>${ question.name }</td>
 												<td>${ question.qstatus }</td>
 												<td>
-													<input type="button" value="답변하기" class="btn btn-primary btn-sm" onclick="location.href='adminQcommentInsert.ad?qnum=${ question.qnum }'">
+													<input type="button" value="답변하기" class="btn btn-primary btn-sm" onclick="location.href='adminQuestionDetail.ad?qnum=${ question.qnum }'">
 												</td>
 											</tr>
 										</c:forEach>
