@@ -25,7 +25,7 @@
 		<mapper resource="mybatis/food.xml"/>
 		<mapper resource="mybatis/foodmark.xml"/>
 		<mapper resource="mybatis/physique.xml"/>
-		<mapper resource="mybatis/goal.xml"/>
+		<mapper resource="mybatis/goalphysique.xml"/>
 		<mapper resource="mybatis/report.xml"/>
 		<mapper resource="mybatis/question.xml"/>
 		<mapper resource="mybatis/qcomment.xml"/>

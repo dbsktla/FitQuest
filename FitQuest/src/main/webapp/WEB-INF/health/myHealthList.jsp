@@ -7,22 +7,79 @@
 
 <style>
 
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  .fc-event-time{
-  	display: none;
-  }
-
+	body {
+	  margin: 40px 10px;
+	  padding: 0;
+	  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	  font-size: 14px;
+	}
+	
+	#calendar {
+	  max-width: 1100px;
+	  margin: 0 auto;
+	}
+	
+	.fc-event-time{
+		display: none;
+	}
+	a[class="fc-col-header-cell-cushion"], a[class="fc-daygrid-day-number"]{
+		color : gray;
+	}
+	.fc-daygrid-event-dot{
+		border-color : #ffc107 !important;
+	}
+	.fc-event-title{
+		color : #000000;
+	}
+	.fc .fc-button-primary {
+		background-color : #ffc107;
+		border-color : #ffc107;
+	}
+	.fc-toolbar-title{
+		color: #494949 !important;
+	}
+	
+	
+	.modal {
+	  display: none; /* 모달창 숨겨 놓기 */
+	  position: fixed; 
+	  z-index: 1; /* 모달창을 제일 앞에 두기 */
+	  padding-top: 100px;
+	  left: 0; top: 0;
+	  width: 100%; height: 100%;
+	  overflow: auto; /* 스크롤 허용 auto */
+	  cursor: pointer; /* 마우스 손가락모양 */
+	  background-color: rgba(210, 210, 210, 0.4);
+	}
+	/* 모달창 애니메이션 추가 */
+	@keyframes zoom {
+	  from {transform: scale(0)}
+	  to {transform: scale(1)}
+	}
+	/* 모달창 이미지 */
+	.modal_content {
+	  margin: auto;
+	  width: 50%; height: auto;
+	  max-width: 1000px;
+	  border-radius: 10px;
+	  animation-name: zoom;
+	  animation-duration: 0.8s;
+	  background: white;
+	}
+	/* 닫기 버튼 꾸미기 */
+	.close {
+	  position: absolute;
+	  top: 15px;
+	  right: 35px;
+	  color: #f1f1f1;
+	  font-size: 40px;
+	  font-weight: bold;
+	  transition: 0.3s;
+	}
+	.close:hover, .close:focus{
+	  color: #bbb;
+	  text-decoration: none;
+	  cursor: pointer;
 </style>
 
 <script type="text/javascript" src="resources/dist/index.global.js" ></script>
@@ -32,13 +89,26 @@
 <script type="text/javascript">
 
 	var clickHnum = 0;
+	const modal = document.querySelector(".modal");
+	const modal_img = document.querySelector(".modal_content");
+	const span = document.querySelector(".close");
 	
-	/* 상세정보 띄우기 */
 	$(document).ready(function(){
 		$('#showbutton').css("display","none");
 		
-		calenderLookup();
-	}); // document
+		
+		
+		// 모달
+		
+		$('.close').click(function () {
+			$('.modal').css('display', "none");
+		});
+		
+		$('.modal').click(function () {
+			$('.modal').css('display', "none");
+		});
+	});
+	
 	
 	// 상세정보
 	function btnclick(hnum) {
@@ -165,21 +235,9 @@
 		
 	}
 	
-	// 캘린더 불러오기
-	function calanderLookup() {
-		alert(2);
-		// request: 년, 월 정보 . 트레이너 이름, 목록.  
-		// 데이터 비교 -> 운동 데이터가 있는날은 따로 체크(이미지 띄우기)
-		$.ajax({
-			url : "myHealthCalList.ht",
-			type : "POST",
-			dataType : "json",
-			success : function () {
-				alert(1);
-			}
-		});
 		
-	}
+	
+	
 </script>
 
 <body style="background-color: #FEF9E7">
@@ -294,17 +352,22 @@
 				<!-- 캘린더보기 -->
 				<div class="tab-pane fade" id="cal" role="tabpanel"	aria-labelledby="cal-tab">
 					<div class="row">
-						
-						<div class="col-lg-7">
+						<!-- 캘린더 -->
+						<div class="col-lg-9">
 							<!-- Default Card -->
 							<div class="card">
 								<div class="card-body">
 						
 									<div id='calendar'></div>
 									
+									<div class="modal card-body col-lg-5">
+									  <span class="close">&times;</span>
+									</div>
+									
 								</div>
 							</div>
 						</div>
+						
 						
 					</div><!-- row -->	
 				</div>
@@ -317,34 +380,71 @@
 </body>
 
 
+<script src='./lib/main.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
 
-function cal_lookup() {
-	//alert('test');
+	function cal_lookup() {
+		//alert('test');
+		
+		var calendarEl = document.getElementById('calendar');
 	
-	var calendarEl = document.getElementById('calendar');
-
-	   var calendar = new FullCalendar.Calendar(calendarEl, {
-	     //initialDate: '2023-01-12',
-	     editable: true,
-	     selectable: true,
-	     businessHours: true,
-	     dayMaxEvents: true, // allow "more" link when too many events
-	     events: [
-	    	 <c:forEach var="hdlist" items="${hdlist}" varStatus="status">
-	    		{
-	    		  title: <c:if test="${hdlist.tname != null}">'${hdlist.tname}(${hdlist.tactivity})'</c:if><c:if test="${hdlist.tname == null}">'개인운동'</c:if>,
-	    		  start: '${hdlist.hdate}'
-	    		}
-	    		<c:if test="${!status.last}">,</c:if>
-	    	</c:forEach>
-
-	     ]
-	   });
-
-	   calendar.render();
-}
-
+		   var calendar = new FullCalendar.Calendar(calendarEl, {
+		     //initialDate: '2023-01-12',
+		     editable: true,
+		     selectable: true,
+		     businessHours: true,
+		     dayMaxEvents: true, // allow "more" link when too many events
+		     events: [
+		    	 <c:forEach var="hdlist" items="${hdlist}" varStatus="status">
+		    		{
+		    		  title: <c:if test="${hdlist.tname != null}">'${hdlist.tname}(${hdlist.tactivity}-${hdlist.hnum})'</c:if><c:if test="${hdlist.tname == null}">'개인운동-${hdlist.hnum}'</c:if>
+		    		 ,start: '${hdlist.hdate}'
+		    		, textColor : "#000000"
+		    		  
+		    		}
+		    		<c:if test="${!status.last}">,</c:if>
+		    	</c:forEach>
+	
+		     ],
+		     eventClick : function (info) {
+		    	 healthModal(info.event.title);
+		    	 
+		  	 }
+		   	 
+		   });
+	
+		   calendar.render();
+	}
+	
+	function healthModal(info) {
+		
+		$.ajax({
+			url : "myHealthModal.ht",
+			type : "POST",
+			data : {'info' : info},
+			dataType : "json",
+			success : function (data) {
+				var msg = "";
+				
+				var msg = "<table class='table modal_content' style='width: 50%;margin-top: 20%; vertical-align:middle;' ><tr class='table-warning'>";
+				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
+				for(var i=0; i<data.length; i++){
+					msg += "<td>"+data[i].hname+"</td>";
+					msg += "<td>"+(data[i].starttime).substring(0,16)+"</td>";
+					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
+					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
+				}
+				
+				msg += "</table>";
+				$(".modal").html(msg);
+				$('.modal').css('display', "block");
+			}
+		});
+		
+	}
+	
 </script>
 
 <%@ include file="myHealthBottom.jsp"%>

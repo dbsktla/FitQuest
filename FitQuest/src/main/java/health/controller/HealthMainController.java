@@ -25,6 +25,8 @@ import health.model.HealthDateDao;
 import member.model.MemberBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import nutrition.model.FoodBean;
+import nutrition.model.FoodDao;
 import physique.model.GoalphysiqueBean;
 import physique.model.GoalphysiqueDao;
 import physique.model.PhysiqueBean;
@@ -58,6 +60,9 @@ public class HealthMainController {
 	@Autowired
 	GoalphysiqueDao goalphysiqueDao;
 	
+	@Autowired
+	FoodDao foodDao;
+	
 	// 내 운동 관리 페이지로 이동
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public ModelAndView doAction(HttpSession session, HttpServletResponse response) {
@@ -90,7 +95,9 @@ public class HealthMainController {
 			mav.addObject("hblist", hblist);
 			
 			// 오늘 식단정보 - 오늘 식단일자 데이터 조회, 없으면 식단 작성하러기가 , 있으면 식단내역 가져올것
-			
+			map.put("selectDate", sdf.format(nowDate));
+			FoodBean foodBean = foodDao.getSumToday(map);
+			mav.addObject("foodBean", foodBean);
 			
 			// 함께하는 트레이너 정보 - 트레이너 이름, 구매일자, 어떤 운동인지
 			List<HealthDateBean> mainHealthList = healthDateDao.getMainHealthList(mid);

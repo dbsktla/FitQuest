@@ -9,7 +9,7 @@ public class GoalphysiqueDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	private String namespace = "goal.model.Goalpysique";
+	private String namespace = "physique.model.Goalphysique";
 	
 	public GoalphysiqueBean getOneGoal(String id) {
 		GoalphysiqueBean goalBean = sqlSessionTemplate.selectOne(namespace + ".GetOneGoal", id);

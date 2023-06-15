@@ -226,8 +226,45 @@
 				<div class="card info-card revenue-card">
 					<div class="card-body">
 					<h5 class="card-title">오늘의 식단</h5>
-						<div class="ps-3">
-						
+						<div class="ps-3" style="text-align: center">
+							<c:if test="${empty foodBean}">
+								오늘의 식단 정보가 없습니다.<br><br>
+							<div class="text-center">
+								<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myNutritionList.ht'">식단 등록하러 가기</button>
+							</div>
+							</c:if>
+							<c:if test="${not empty foodBean}">
+								<table style="width: 100%;">
+									<tr>
+										<td colspan="4">오늘의 종합 영양섭취 정보</td>
+									</tr>
+									<tr>
+										<td colspan="1" style="width: 25%;"><font style="color: gray; font-size: 16px">음식명</font></td>
+										<td colspan="3">${foodBean.fname}</td>
+									</tr>
+									<tr>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">칼로리</font></td>
+										<td>${foodBean.calories}kcal</td>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">탄수화물</font></td>
+										<td>${foodBean.carbohydrate}g</td>
+									</tr>
+									<tr>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">단백질</font></td>
+										<td>${foodBean.protein}g</td>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">지방</font></td>
+										<td>${foodBean.fat}g</td>
+									</tr>
+									<tr>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">설탕</font></td>
+										<td>${foodBean.sugar}g</td>
+										<td style="width: 25%;"><font style="color: gray; font-size: 16px">나트륨</font></td>
+										<td>${foodBean.sodium}g</td>
+									</tr>
+								</table>
+							<div class="text-center">
+								<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myNutritionList.ht'">식단 정보 보러가기</button>
+							</div>
+							</c:if>
 						</div><!-- ps-3 -->
 					 </div><!-- card-body -->
 				</div>
@@ -335,7 +372,7 @@
 									</c:if>
 								</table>
 								<div class="text-center" style="padding-top: 10%">
-									<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href=''">목표체중 등록하기</button>
+									<button type="button" class="btn btn-warning scrollto btn-sm" onclick="location.href='myPhysiqueGoal.ht'">목표체중 등록하기</button>
 								</div>
 							</div><!-- col-xxl-3 -->
 							
