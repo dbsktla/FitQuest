@@ -34,4 +34,10 @@ public class MealDao {
 		List<MealBean> mlist = sqlSessionTemplate.selectList(namespace + ".GetMealByNnum", nnum);
 		return mlist;
 	}
+
+	public int updateMeal(MealBean mealBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace + ".UpdateMeal", mealBean);
+		return cnt;
+	}
 }

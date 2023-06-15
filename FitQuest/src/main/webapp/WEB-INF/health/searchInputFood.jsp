@@ -141,6 +141,7 @@
 		pamsg += '<font style="font-size: 17;"><b>'+ $('#fname').val() +'</b></font> ';
 		pamsg += '<font style="font-size: 14;">'+$('#calories').val()+' kcal, '+$('#fweight').val()+'g | '
 		pamsg += '탄수화물 '+$('#carbohydrate').val()+'g, 단백질 '+$('#protein').val()+'g, 지방 '+$('#fat').val()+'g, 당 '+$('#sugar').val()+'g, 나트륨 '+$('#sodium').val()+'g</font>';
+		pamsg += '<input type="hidden" name="fnum" value="-1">';
 		pamsg += '<input type="hidden" name="fname" value="'+ $('#fname').val() +'">';
 		pamsg += '<input type="hidden" name="fweight" value="'+ $('#fweight').val() +'">';
 		pamsg += '<input type="hidden" name="calories" value="'+ $('#calories').val() +'">';

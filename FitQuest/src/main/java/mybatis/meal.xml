@@ -31,4 +31,10 @@
 		WHERE  nnum = #{nnum}
 	</select>
 	
+	<update id="UpdateMeal">
+		UPDATE 	MEAL 
+		SET 	fimage = #{fimage} 
+		WHERE 	mnum   = #{mnum}
+	</update>
+	
 </mapper>

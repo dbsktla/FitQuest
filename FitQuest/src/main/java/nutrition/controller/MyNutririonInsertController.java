@@ -141,11 +141,22 @@ public class MyNutririonInsertController {
 					System.out.println("cnt_f : " + cnt_f);
 					
 					if(foodmark != null) {
-						FoodmarkBean foodmarkBean = new FoodmarkBean();
-						foodmarkBean.setId(memberBean.getId());
 						for(int i=0; i<fnum.length; i++) {
-							foodmarkBean.setFnum(fnum[i]);
-							foodmarkDao.insertFoodmark(foodmarkBean);
+							FoodmarkBean foodmarkBean = new FoodmarkBean();
+							foodmarkBean.setId(memberBean.getId());
+							foodmarkBean.setFname(fname[i]);
+							foodmarkBean.setFweight(Double.parseDouble(fweight[i]));
+							foodmarkBean.setCalories(Double.parseDouble(calories[i]));
+							foodmarkBean.setCarbohydrate(Double.parseDouble(carbohydrate[i]));
+							foodmarkBean.setProtein(Double.parseDouble(protein[i]));
+							foodmarkBean.setFat(Double.parseDouble(fat[i]));
+							foodmarkBean.setSugar(Double.parseDouble(sugar[i]));
+							foodmarkBean.setSodium(Double.parseDouble(sodium[i]));
+							
+							int count = foodmarkDao.countFoodmark(foodmarkBean); //id, fname
+							if(count == 0) {
+								foodmarkDao.insertFoodmark(foodmarkBean);
+							}
 						}
 					}
 					
