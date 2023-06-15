@@ -125,4 +125,24 @@
 		WHERE 	fnum = #{delfnum}
 	</delete>
 	
+	<select id="GetSumToday" resultType="nutrition.model.FoodBean">
+		SELECT	LISTAGG(fname, ' ㆍ ') WITHIN GROUP(order by fname) AS fname
+		       ,sum(fweight) AS fweight
+		       ,sum(calories) AS calories
+		       ,sum(carbohydrate) AS carbohydrate
+		       ,sum(protein) AS protein
+		       ,sum(fat) AS fat
+		       ,sum(sugar) AS sugar
+		       ,sum(sodium) AS sodium
+		       ,nudate
+		FROM (
+			  SELECT * FROM FOOD
+			 ) f
+		INNER JOIN NUTRITION n
+		ON f.nnum = n.nnum
+		AND id = #{id}
+		AND nudate = #{nowDate}
+		GROUP BY nudate
+	</select>
+	
 </mapper>

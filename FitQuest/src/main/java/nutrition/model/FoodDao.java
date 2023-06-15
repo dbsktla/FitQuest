@@ -38,4 +38,9 @@ public class FoodDao {
 	public void deleteFood(int delfnum) {
 		sqlSessionTemplate.delete(namespace + ".DeleteFood", delfnum);
 	}
+
+	public FoodBean getSumToday(Map<String, Object> map) {
+		FoodBean foodBean = sqlSessionTemplate.selectOne(namespace + ".GetSumToday", map);
+		return foodBean;
+	}
 }
