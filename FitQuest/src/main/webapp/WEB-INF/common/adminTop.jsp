@@ -135,11 +135,23 @@
           <span>게시글 신고</span>
         </a>
       </li>
+      
        <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-        <i class="ri-customer-service-2-fill"></i>
-          <span>1:1 문의</span>
+        <a class="nav-link collapsed" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri-customer-service-2-fill"></i><span>1:1 문의</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="question-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="adminQuestTionRequestList.ad">
+            	<i class="bi bi-file-earmark-plus-fill"></i><span>접수 내역</span>
+            </a>
+          </li>
+          <li>
+            <a href="adminQuestTionFinishList.ad">
+             <i class="bi bi-file-earmark-check-fill"></i><span>완료 내역</span>
+            </a>
+          </li>
+        </ul>
       </li>
     </ul>
 

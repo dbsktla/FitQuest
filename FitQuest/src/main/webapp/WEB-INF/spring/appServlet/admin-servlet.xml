@@ -15,8 +15,6 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
-	
-	
 	<context:component-scan base-package="admin"/>
 	<context:component-scan base-package="community"/>
 	<context:component-scan base-package="member"/>
@@ -33,5 +31,6 @@
 	<context:component-scan base-package="reservation"/>
 	<context:component-scan base-package="health"/>
 	<context:component-scan base-package="nutrition"/>
-
+	<context:component-scan base-package="question"/>
+	
 </beans>
