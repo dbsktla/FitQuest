@@ -21,7 +21,7 @@ import member.model.MemberBean;
 import utility.Paging;
 
 @Controller
-public class myBoardListController {
+public class MyBoardListController {
 	private final String command = "/myBoardList.co";
 	private final String getPage = "myBoardList";
 
