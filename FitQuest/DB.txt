@@ -520,15 +520,27 @@ drop table question cascade constraints;
 CREATE TABLE question (
    qnum   number   primary key, --문의 번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
-   qdate   date   NOT NULL, --문의 날짜 
-   qcontent   varchar2(500)   NOT NULL, --문의 내용
+   qdate   date default sysdate, --문의 날짜 
    qsubject   varchar2(60)   NOT NULL, --문의 제목
-   qstatus   varchar2(20)  NOT NULL check(qstatus in('답변완료', '답변미완료'))--문의 답변 상태 "answered" / "unanswered"
+   qcontent   varchar2(500)   NOT NULL, --문의 내용
+   qstatus   varchar2(20) default '답변미완료' check(qstatus in('답변완료', '답변미완료'))--문의 답변 상태 "answered" / "unanswered"
 );
+
+insert into question (qnum,id,qsubject,qcontent,qstatus)
+values(qseq.nextval,'hong','입력이 안됩니다.','3회 이상 수업을 들었는데 리뷰 작성 입력이 안됩니다.', '답변미완료');
 
 select * from question;
 commit;
 
+select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+from question inner join member
+on question.id = member.id
+where qstatus = '답변미완료';
+
+select count(*)
+from question inner join member
+on question.id = member.id
+where qstatus = '답변미완료';
 
 --문의 답변
 drop sequence qcseq;
@@ -544,12 +556,14 @@ CREATE TABLE QComment (
    qcnum   number primary key,
    qnum   number   NOT NULL,
    qcomment   varchar2(500),
-   qcdate   date
+   qcdate date default sysdate
 );
+
+insert into QComment(qcnum,qnum,qcomment)
+values(qcseq.nextval,1,'마지막 수업이 반영되지 않았습니다. <br> 조금만 기다려 주세요.');
 
 select * from QComment;
 commit;
-
 
 
 --리뷰 테이블
