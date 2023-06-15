@@ -19,4 +19,16 @@
 		SELECT MAX(mnum) 
 		FROM   MEAL
 	</select>
+	
+	<delete id="DeleteMeal">
+		DELETE MEAL
+		WHERE  mnum = #{mnum}
+	</delete>
+	
+	<select id="GetMealByNnum" resultType="nutrition.model.MealBean">
+		SELECT * 
+		FROM   MEAL 
+		WHERE  nnum = #{nnum}
+	</select>
+	
 </mapper>

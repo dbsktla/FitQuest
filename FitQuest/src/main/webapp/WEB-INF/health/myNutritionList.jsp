@@ -169,9 +169,10 @@
 						msg += '<img class="imgs" onerror="this.src='+ "'/ex/resources/Image/FoodImage/no_img.jpg'" +'" src="/ex/resources/Image/FoodImage/'+data[i].flist.fimage+'" style="margin: auto; width: 100%;">';
 						msg += '</div><div class="col-8">';
 						msg += '<div style="padding: 10;">';
-						msg += '<input type="button" value="수정" onclick="" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
+						msg += '<input type="button" value="식단 삭제" onclick="nu_delete('+"'"+data[i].flist.nnum + "'," + data[i].flist.mnum +')" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
+						msg += '<input type="button" value="수정" onclick="nu_update('+"'"+data[i].flist.mealtype + "'," + data[i].flist.mnum +')" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">';
 						msg += '</div>';
-						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식</div><hr>';
+						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식<p style="font-size: 13;color: gray;display: inline;float: right;margin-top: 0;">*상세 삭제는 수정에서 진행해주세요.</p></div><hr style="width: 100%;">';
 						msg += '<div>' + data[i].flist.fname + ' ' + data[i].flist.fweight + 'g</div><div>';
 						msg += '<ul class="list-group" style="padding-top: 20; padding-bottom: 20;">';
 						msg += '<li class="list-group-item list-group-item-warning">';
@@ -241,6 +242,16 @@
 	function goInsert(selectDate) {
 		location.href="myNutritionInsert.ht?selectDate=" + selectDate;
 	}// goInsert
+	
+	function nu_update(mealtype, mnum) {
+		//alert(mealtype + " , " + mnum);
+		location.href = "myNutritionUpdate.ht?mealtype=" + mealtype + "&mnum=" + mnum;
+	}
+	
+	function nu_delete(nnum, mnum) {
+		location.href = "myNutritionDelete.ht?nnum="+ nnum +"&mnum=" + mnum;
+		
+	}
 </script>
 <%
 	Date now = new Date();
