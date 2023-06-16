@@ -26,7 +26,12 @@ section{
 .td{
 	text-align:center;
 }
+.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+}
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 80%;">
 	
     <div class="pagetitle" style = "margin: 40px 0px;">
@@ -79,7 +84,7 @@ section{
       
       
     </section>
-    
+</body>
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

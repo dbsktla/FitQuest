@@ -261,6 +261,8 @@ $(document).ready(function(){
 	});
 });
 </script>
+<body style="background-color : #FEF9E7;">
+
      <!-- ======= 사용권 섹션 ======= -->
     <section id="pricing" class="pricing">
 
@@ -269,8 +271,8 @@ $(document).ready(function(){
         <header class="section-header">
           <h2>My 회원권</h2>
         </header>
-	<c:if test = "${ not empty muList }">
-        <div class="row gy-4" data-aos="fade-left">
+		<c:if test = "${ not empty muList }">
+        <div class="row gy-4" data-aos="fade-left" style = "padding-bottom: 50px;">
 		<c:forEach var = "usage" items = "${muList }">
 		<c:if test = "${usage.activity eq 'PT'}">
 			<c:set var = "color" value = "#ff901c"/>
@@ -340,7 +342,7 @@ $(document).ready(function(){
 	                	<td>${date}</td>
 	                	<td>${order.orderCount}</td>
 	                	<td>${order.totalPrice }</td>
-	                	<td><a href = "orderDetail.mb?onum=${order.onum }"><i class="bi bi-blockquote-left"></i>자세히 보기</a></td>
+	                	<td><a href = "orderDetail.od?onum=${order.onum }"><i class="bi bi-blockquote-left"></i>자세히 보기</a></td>
                 	</tr>
                 	</c:forEach>
              	</tbody>
@@ -355,6 +357,7 @@ $(document).ready(function(){
 	    </div>
       </div>
   </section>
+ </body>
 <%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

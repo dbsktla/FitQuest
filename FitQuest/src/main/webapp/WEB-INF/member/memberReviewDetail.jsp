@@ -33,6 +33,7 @@ section{
 	margin-bottom:25px;
 }
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 72%;">
 	
     <div class="pagetitle" style = "margin-top:40px;">
@@ -91,7 +92,7 @@ section{
       </div>
       
     </section>
-    
+</body>
 <%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

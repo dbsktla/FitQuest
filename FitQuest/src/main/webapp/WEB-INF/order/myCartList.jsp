@@ -6,6 +6,10 @@
 		text-align: center !important;
 		margin: auto !important;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
@@ -32,6 +36,7 @@
 		document.myform.submit();
 	}//selectDelete
 </script>
+<body style="background-color : #FEF9E7;">
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
 
@@ -40,8 +45,8 @@
 	          <h2>FitQuest</h2>
 	          <p>장바구니</p>
 	        </header>
-          <div class="col-lg-12 entries">
-   			<article class="entry entry-single">
+          <div class="col-lg-12 entries" style = "padding: 0px;background-color: white;">
+   			<article class="entry entry-single" style = "margin:0px;">
    			 <div class="col-lg-12">
 			        <div class="col-lg-12 col-sm-12 hero-feature">
 			            <form action = "cartOrder.od" name = "myform">
@@ -127,7 +132,7 @@
    		  </div>
    		</div>
 </section>
-   	  
+</body>
 
 
 <%@ include file="../common/bottom.jsp" %>

@@ -25,15 +25,20 @@ section{
 .btn-check + &:hover {
     // override for the checkbox/radio buttons
     background-color: #ffc107 !important;
-  }
+ }
 section{
 		padding: 0px !important;
 		}
-	.pageTitle{
+.pageTitle{
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}
+.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section">
 	
     <div class="pagetitle">
@@ -125,7 +130,7 @@ section{
 					</c:forEach>
 					${rating1 }
              	 </h5>
-             	 <table class="table">
+             		 <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">리뷰 작성 날짜</th>
@@ -164,6 +169,7 @@ section{
         </div>
       </div>
     </section>
+</body>
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

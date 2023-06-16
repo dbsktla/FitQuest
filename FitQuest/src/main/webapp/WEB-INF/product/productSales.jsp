@@ -163,7 +163,13 @@ section{
 	    transition: 0.3s;
 	    font-size: 16px;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
+<body style="background-color : #FEF9E7;">
+
     <section class="section">
 	
     <div class="pagetitle">
@@ -350,15 +356,12 @@ section{
                 });
               </script>
               <!-- End Bar CHart -->
-
             </div>
           </div>
         </div>
 	</div>
-      
-      
     </section>
-
+</body>
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

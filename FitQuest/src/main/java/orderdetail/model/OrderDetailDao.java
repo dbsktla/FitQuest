@@ -27,5 +27,10 @@ public class OrderDetailDao {
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetOrderCountByPnum", pnum);
 		return cnt;
 	}
+	public List<OrderDetailBean> getOrderDetailListByOnum(int onum) {
+		List<OrderDetailBean> odList = new ArrayList<OrderDetailBean>();
+		odList = sqlSessionTemplate.selectList(namespace + ".GetOrderDetails", onum);
+		return odList;
+	}
 	
 }
