@@ -48,7 +48,6 @@ section{
                     <th scope="col">사용기간</th>
                     <th scope="col">사용 갯수</th>
                     <th scope="col">개인 / 그룹</th>
-                    <th scope="col">수업 시간길이</th>
                     <th scope="col">자세히 보기</th>
                   </tr>
                 </thead>
@@ -58,7 +57,6 @@ section{
 	                	<td>${product.months}개월</td>
 	                	<td>레슨 ${product.pcount }회</td>
 	                	<td>${product.ptype }</td>
-	                	<td>${product.ptime }시간</td>
 	                	<td><a href = "productDetail.pd?pnum=${product.pnum }"><i class="bi bi-bag-plus" style = "font-size: 20px;"></i></a></td>
                 	</tr>
                 	</c:forEach>

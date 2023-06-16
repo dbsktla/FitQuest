@@ -70,7 +70,6 @@ public class OrderCartListController {
 				msBean.setMonths(productBean.getMonths());
 				msBean.setPcount(productBean.getPcount());
 				msBean.setPtype(productBean.getPtype());
-				msBean.setPtime(productBean.getPtime());
 				msBean.setPeople(productBean.getPeople());
 				msBean.setRating(rating);
 				msBean.setHasReview(hasReview);

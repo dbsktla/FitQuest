@@ -62,7 +62,7 @@ public class MyOrderListController {
 			return "forward:/login.mb";
 		}
 		List<MyOrderBean> mList = compositeDao.getMyOrderList(memberBean.getId());
-		List<UsageBean> uList = usageDao.getTListByMid(memberBean.getId());
+		List<UsageBean> uList = usageDao.getAvailableUsageListByMid(memberBean.getId());
 		List<MyUsageBean> muList = new ArrayList<MyUsageBean>();
 		for(UsageBean uBean : uList) {
 			String tid = uBean.getTid();
@@ -78,7 +78,6 @@ public class MyOrderListController {
 			mub.setUsage(uBean.getUsage());
 			mub.setName(tmemberBean.getName());
 			mub.setPnum(pnum);
-			mub.setPtime(productBean.getPtime());
 			mub.setUnum(uBean.getUnum());
 			mub.setPtype(productBean.getPtype());
 			mub.setTimage(trainerBean.getTimage());
