@@ -52,6 +52,7 @@
 		select * from usage
 		where mid = #{mid}
     	and ustate = 'available'
+    </select>
 
 	<select id = "GetUsageList" resultType = "usage.model.UsageBean">
 		select * from usage

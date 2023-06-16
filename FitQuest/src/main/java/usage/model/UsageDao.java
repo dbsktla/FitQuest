@@ -67,7 +67,7 @@ public class UsageDao {
 		List<UsageBean> tidList = new ArrayList<UsageBean>();
 		tidList = sqlSessionTemplate.selectList(namespace+".GetTListByMidA",mid);
 		return tidList;
-
+	}
 	public List<UsageBean> getAvailableUsageListByMid(String mid) {
 		List<UsageBean> usageList = new ArrayList<UsageBean>();
 		usageList = sqlSessionTemplate.selectList(namespace + ".GetUsageList", mid);
