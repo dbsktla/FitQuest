@@ -146,6 +146,11 @@
 	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
+	          <li>
+          	<a href = "cartList.od">
+          		<i class="bi bi-cart" style="font-size: 30px;"></i>
+          	</a>
+          </li>
            </c:if>
            <c:if test = "${loginInfo.mtype eq 'admin' }">
            <li class="dropdown" ><a href=""><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
@@ -155,14 +160,8 @@
 	              <li><a href=""></a></li>
 	              <li><a href=""></a></li>
 	            </ul>
-	          </li>
-           
+	       </li>
            </c:if>
-          <li>
-          	<a href = "cartList.od">
-          		<i class="bi bi-cart" style="font-size: 30px;"></i>
-          	</a>
-          </li>
           <li>
           	<a class="scrollto">
           		<!-- 로그인 정보 없으면 login -->
