@@ -64,16 +64,6 @@
 			$('input[name=price]').select();
 			return false;
 		}
-		if($('input[name=ptime]').val() == ""){
-			alert("수업시간 길이 입력하세요");
-			$('input[name=ptime]').focus();
-			return false;
-		}
-		if(isNaN($('input[name=ptime]').val())){
-			alert("수업시간 길이 숫자로 입력하세요");
-			$('input[name=ptime]').select();
-			return false;
-		}
 	}
 </script>
 <style>
@@ -204,10 +194,6 @@ section{
                   <div class="col-md-6 form-group">
                   <span>가격</span>
                       <input name="price" type="text" class="form-control" placeholder = "${productBean.price}만원">
-                    </div>
-                    <div class="col-md-6 form-group">
-                    <span>수업시간 길이</span>
-                      <input name="ptime" type="text" class="form-control" placeholder = "${productBean.ptime}시간">
                     </div>
                   </div>	
                   <div class = "" style = "margin-bottom: 20px;">
