@@ -243,6 +243,12 @@ $(document).ready(function(){
 			$('#newPwmessage').show();
 		}
 	});
+	$('#imgBtn').click(function(){
+		if($('input[name=upload]').val() == ""){
+			alert("사진 먼저 선택하세요.");
+			return false;
+		}
+	});
 });
 </script>
 <body style="background-color : #FEF9E7;">
@@ -263,7 +269,7 @@ $(document).ready(function(){
               <h3>운동 목적: ${trainerBean.purpose}</h3>
               <input type = "hidden" name = "id" value = "${trainerBean.id }">
               <p style = "display:flex;"><input class="form-control" type="file" name="upload" id="upload" value = "사진 올리기"/>
-			  <input type = "submit" value = "사진 수정" class = "btn btn-warning">
+			  <input type = "submit" value = "사진 수정" class = "btn btn-warning" id = "imgBtn">
               <input name = "oldtimage" value = "${trainerBean.timage }" type = "hidden"></p>
             </div>
             </form>
