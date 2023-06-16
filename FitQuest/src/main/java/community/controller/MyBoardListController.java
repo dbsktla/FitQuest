@@ -41,6 +41,7 @@ public class MyBoardListController {
 			Model model
 			) {
 		session.setAttribute("destination", "redirect:/myBoardList.co");
+		session.setAttribute("menubar", "myBoardMain");
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}

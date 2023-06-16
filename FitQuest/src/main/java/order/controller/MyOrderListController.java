@@ -51,6 +51,7 @@ public class MyOrderListController {
 						   Model model) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
+		session.setAttribute("menubar", "myOrderMain");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/viewMyOrderList.od");
 			try {

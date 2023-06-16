@@ -24,6 +24,7 @@ public class ProductListController {
 	public String doAction(Model model,
 						   HttpSession session) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myProductMain");
 		List<ProductBean> pList = productDao.getProductListById(memberBean.getId());
 		model.addAttribute("pList", pList);
 		return getPage;

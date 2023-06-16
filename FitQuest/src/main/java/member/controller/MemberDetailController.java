@@ -20,7 +20,7 @@ public class MemberDetailController {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("topmenu", "genericMember");
-		
+		session.setAttribute("menubar", "myDetailMain");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/genericMemberDetail.mb");
 			try {
