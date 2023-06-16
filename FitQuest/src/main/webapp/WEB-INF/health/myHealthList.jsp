@@ -243,7 +243,7 @@
 </script>
 
 <body style="background-color: #FEF9E7">
-	<div class="pagetitle">
+	<div class="pagetitle" style = "margin: 40px 0px;">
 		<h1>
 			<i class="bi bi-list toggle-sidebar-btn"></i> 운동관리
 		</h1>

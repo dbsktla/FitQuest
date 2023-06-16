@@ -35,6 +35,7 @@ public class HealthBoardListController {
 			HttpSession session
 	) {
 		session.setAttribute("destination", "redirect:/healthBoardList.co");
+		session.setAttribute("topmenu", "healthBoard");
 		
 		if(bcategory == null) {
 			bcategory = "";

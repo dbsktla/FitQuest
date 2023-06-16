@@ -70,6 +70,8 @@ public class HealthMainController {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myHealthMain");
+		session.setAttribute("topmenu", "healthList");
 		
 		Date nowDate = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
