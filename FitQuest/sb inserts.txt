@@ -99,24 +99,24 @@ insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview)
 values(rvseq.nextval, 'parkjay', 'kim', 3, '추천합니다', '굳', sysdate, 'Y');
 
 --상품
-insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인', '1');
-insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'park', 14, 1, 11, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park', 28, 2, 19, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park', 39, 3, 30, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim2', 10, 1, 10, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim2', 20, 2, 18, 1, '개인', '1');
-insert into product values(pseq.nextval, 'kim2', 30, 3, 28, 1, '개인', '1');
-insert into product values(pseq.nextval, 'lee2', 8, 1, 8, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee2', 16, 2, 16, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'lee2', 22, 3, 22, 4, '그룹', '1');
-insert into product values(pseq.nextval, 'park2', 14, 1, 11, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park2', 28, 2, 19, 1, '개인', '1');
-insert into product values(pseq.nextval, 'park2', 39, 3, 30, 1, '개인', '1');
+insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인');
+insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인');
+insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인');
+insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹');
+insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹');
+insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹');
+insert into product values(pseq.nextval, 'park', 14, 1, 11, 1, '개인');
+insert into product values(pseq.nextval, 'park', 28, 2, 19, 1, '개인');
+insert into product values(pseq.nextval, 'park', 39, 3, 30, 1, '개인');
+insert into product values(pseq.nextval, 'kim2', 10, 1, 10, 1, '개인');
+insert into product values(pseq.nextval, 'kim2', 20, 2, 18, 1, '개인');
+insert into product values(pseq.nextval, 'kim2', 30, 3, 28, 1, '개인');
+insert into product values(pseq.nextval, 'lee2', 8, 1, 8, 4, '그룹');
+insert into product values(pseq.nextval, 'lee2', 16, 2, 16, 4, '그룹');
+insert into product values(pseq.nextval, 'lee2', 22, 3, 22, 4, '그룹');
+insert into product values(pseq.nextval, 'park2', 14, 1, 11, 1, '개인');
+insert into product values(pseq.nextval, 'park2', 28, 2, 19, 1, '개인');
+insert into product values(pseq.nextval, 'park2', 39, 3, 30, 1, '개인');
 
 --orders
 insert into orders values(oseq.nextval, 'hong', '2023-05-02');
@@ -185,3 +185,8 @@ insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박�
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-16', '08:00~09:00', 'true');
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-17', '11:00~12:00', 'true');
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-20', '10:00~11:00', 'true');
+
+
+--usage
+
+insert into usage values(useq.nextval, 1, 1, 'kim', 'hong', 14, 'available');

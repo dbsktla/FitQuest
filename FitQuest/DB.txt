@@ -217,8 +217,7 @@ CREATE TABLE product (
    months   number   NOT NULL, --회원권 사용기간
    pcount   number   NOT NULL, --회원권 사용갯수
    people   number   NOT NULL, --수업 참여 회원 갯수
-   ptype   varchar2(15)   NOT NULL check(ptype in('개인', '그룹')), --개인, 그룹 수업 구분 "group"/"ind"
-   ptime   number   NOT NULL --수업 시간길이 (1이면 1시간이라는 뜻!)
+   ptype   varchar2(15)   NOT NULL check(ptype in('개인', '그룹')) --개인, 그룹 수업 구분 "group"/"ind"
 );
 
 
