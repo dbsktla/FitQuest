@@ -26,4 +26,26 @@
 		on rbc.id = member.id
 		order by status, rpnum
 	</select>
+	
+	<select id="GetMainReportBoardList" resultType="admin.model.AdminReportBean">
+		select rpnum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name
+		from(select rpnum,bcnum, report.id, rtype, status, rcontent, board.bsubject
+		from report inner join board
+		on report.bcnum = board.bnum
+		where rtype='board' and status = '신고 접수' order by status, rpnum) rb inner join member
+		on rb.id = member.id
+		order by status, rpnum
+	</select>
+	
+	<select id="GetMainReportBCommnerList" resultType="admin.model.AdminReportBean">
+		select rpnum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name
+		from(select rpnum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject
+		from(select rpnum, bcnum, report.id, rtype, status, rcontent, bcomment.bnum, ccontent
+		from report inner join bcomment
+		on report.bcnum = bcomment.cnum
+		where rtype='bcomment' and status = '신고 접수' order by status, rpnum) rc inner join board 
+		on rc.bnum = board.bnum) rbc inner join member
+		on rbc.id = member.id
+		order by status, rpnum
+	</select>
 </mapper>

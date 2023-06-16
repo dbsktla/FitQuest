@@ -87,4 +87,10 @@ public class QuestionDao {
 		return cnt;
 	}
 
+	public List<QuestionBean> getMainQuestionRequestList() {
+		List<QuestionBean> myQuestionList = new ArrayList<QuestionBean>();
+		myQuestionList = sqlSessionTemplate.selectList(namespace + ".GetQuestionRequestList");
+		return myQuestionList;
+	}
+
 }

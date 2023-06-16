@@ -77,4 +77,5 @@
 		delete from question
 		qnum = #{qnum}
 	</delete>
+	
 </mapper>

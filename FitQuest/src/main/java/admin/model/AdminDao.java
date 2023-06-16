@@ -25,5 +25,17 @@ public class AdminDao {
 		reportBcommentList = sqlSessionTemplate.selectList(namespace + ".GetReportBCommnerList");
 		return reportBcommentList;
 	}
+
+	public List<AdminReportBean> getMainReportBoardList() {
+		List<AdminReportBean> reportBoardList = new ArrayList<AdminReportBean>();
+		reportBoardList = sqlSessionTemplate.selectList(namespace + ".GetMainReportBoardList");
+		return reportBoardList;
+	}
+	
+	public List<AdminReportBean> getMainReportBCommnerList(){
+		List<AdminReportBean> reportBcommentList = new ArrayList<AdminReportBean>();
+		reportBcommentList = sqlSessionTemplate.selectList(namespace + ".GetMainReportBCommnerList");
+		return reportBcommentList;
+	}
 	
 }

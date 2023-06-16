@@ -218,6 +218,13 @@
 		where report is not null
 		order by report, renum
 	</select>
+	<select id="GetMainReviewReport" resultType="review.model.ReviewBean">
+		select renum, tid, rtitle, report, name
+		from review inner join member
+		on review.tid = member.id
+		where report is not null and report = '신고접수'
+		order by report, renum
+	</select>
 	<update id="UpdateReviewReport">
 		update review set report='신고거절'
 		where renum = #{renum}
