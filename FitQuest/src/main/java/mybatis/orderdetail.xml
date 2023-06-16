@@ -17,4 +17,8 @@
 	select count(*) from orderdetail
 	where pnum = #{pnum}
 </select>
+<select id = "GetOrderDetails" resultType = "orderdetail.model.OrderDetailBean">
+	select * from orderdetail
+	where onum = #{onum}
+</select>
 </mapper>

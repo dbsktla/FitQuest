@@ -14,4 +14,9 @@
 		from orders
 		where id = #{id}
 	</select>
+	<select id = "GetOrderByOnum" resultType = "order.model.OrderBean">
+		select * from 
+		orders
+		where onum = #{onum}	
+	</select>
 </mapper>

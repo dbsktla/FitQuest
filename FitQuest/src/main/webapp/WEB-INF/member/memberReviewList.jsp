@@ -18,6 +18,7 @@
 		margin-bottom: 50px;
 	}
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section">
 	
     <div class="pagetitle">
@@ -135,7 +136,7 @@
         </div>
       </div>
     </section>
-
+</body>
 <%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

@@ -21,4 +21,8 @@ public class OrderDao {
 		orderNum = sqlSessionTemplate.selectOne(namespace + ".SelectOrderNum", id);
 		return orderNum;
 	}
+	public OrderBean getOrderByOnum(int onum) {
+		OrderBean orderBean = sqlSessionTemplate.selectOne(namespace + ".GetOrderByOnum", onum);
+		return orderBean;
+	}
 }

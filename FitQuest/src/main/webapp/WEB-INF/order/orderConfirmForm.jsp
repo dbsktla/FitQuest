@@ -4,12 +4,16 @@
 <%
 	session.setAttribute("flag2", true); 
 %>
-
 <style type = "text/css">
 	h4 {
     	color: #FAC710;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
+<body style="background-color : #FEF9E7;">
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
 
@@ -18,8 +22,8 @@
 	          <h2>FitQuest</h2>
 	          <p>주문 확인</p>
 	        </header>
-          <div class="col-lg-12 entries">
-   			<article class="entry entry-single">
+          <div class="col-lg-12 entries" style = "padding: 0px;background-color: white;">
+   			<article class="entry entry-single" style = "margin:0px;">
    			 <div class="col-lg-12">
 			        <div class="col-lg-12 col-sm-12 hero-feature">
 			        <h4>주문하실 상품 확인한 후 결제하세요</h4>
@@ -82,5 +86,5 @@
    		  </div>
    		</div>
 </section>
-
+</body>
 <%@ include file="../common/bottom.jsp" %>
