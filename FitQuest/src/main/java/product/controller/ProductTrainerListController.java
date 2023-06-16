@@ -33,6 +33,9 @@ public class ProductTrainerListController {
 						   @RequestParam(value = "addressSiGunGu", required = false) String addressSiGunGu,
 						   @RequestParam(value = "pageNumber", required = false) String pageNumber,
 						   HttpServletRequest request, HttpSession session) {
+		session.setAttribute("topmenu", "trainerList");
+		
+		
 		Map<String, String> map = new HashMap<String, String>();
 		if(purpose == null) {
 			purpose = "null,null,null,null";

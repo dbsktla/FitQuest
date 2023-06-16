@@ -40,6 +40,7 @@ public class MyNutritionController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myNutrition");
 		
 		// 로그인 정보 확인
 		if(memberBean == null) { 

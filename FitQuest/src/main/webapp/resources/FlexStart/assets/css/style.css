@@ -246,6 +246,7 @@ section {
 
 .navbar a:hover,
 .navbar .active,
+.active,
 .navbar .active:focus,
 .navbar li:hover>a {
 	color: #fac710;
