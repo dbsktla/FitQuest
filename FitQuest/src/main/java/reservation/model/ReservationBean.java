@@ -1,7 +1,5 @@
 package reservation.model;
 
-import java.sql.Date;
-
 public class ReservationBean {
 	private int rnum;
 	private String mid;
@@ -17,7 +15,6 @@ public class ReservationBean {
 	public ReservationBean() {
 		
 	}
-
 	public ReservationBean(int rnum, String mid, String tid, String mname, String tname, int onum, int unum,
 			String rdate, String rtime, String rstate) {
 		super();
