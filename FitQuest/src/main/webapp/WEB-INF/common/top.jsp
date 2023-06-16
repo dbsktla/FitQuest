@@ -110,18 +110,8 @@
 	            </ul>
 	          </li>
           </c:if>
-          <!-- 트레이너 메뉴 -->
-          <c:if test="${loginInfo.mtype eq 'trainer'}">
-	          <li class="dropdown"><a href="#"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
-	            <ul>
-	              <li><a href="#">회원목록</a></li>
-	              <li><a href="#">운동관리</a></li>
-	              <li><a href="#">식단관리</a></li>
-	              <li><a href="#">신체정보</a></li>
-	            </ul>
-	          </li>
-          </c:if>
-          
+
+
           
           <!-- 내글보기, 회원정보수정 등 - 트레이너  -->
           <c:if test="${loginInfo.mtype eq 'trainer'}">
