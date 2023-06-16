@@ -15,12 +15,10 @@ public class ProductBean {
 	private int people;
 	@NotBlank(message = "개인/그룹 중 하나 선택하세요")
 	private String ptype;
-	@NotBlank(message = "수업 시간 길이 입력하세요")
-	private int ptime;
 	public ProductBean() {
 		super();
 	}
-	public ProductBean(int pnum, String id, int price, int months, int pcount, int people, String ptype, int ptime) {
+	public ProductBean(int pnum, String id, int price, int months, int pcount, int people, String ptype) {
 		super();
 		this.pnum = pnum;
 		this.id = id;
@@ -29,7 +27,6 @@ public class ProductBean {
 		this.pcount = pcount;
 		this.people = people;
 		this.ptype = ptype;
-		this.ptime = ptime;
 	}
 	public int getPnum() {
 		return pnum;
@@ -72,11 +69,5 @@ public class ProductBean {
 	}
 	public void setPtype(String ptype) {
 		this.ptype = ptype;
-	}
-	public int getPtime() {
-		return ptime;
-	}
-	public void setPtime(int ptime) {
-		this.ptime = ptime;
 	}
 }

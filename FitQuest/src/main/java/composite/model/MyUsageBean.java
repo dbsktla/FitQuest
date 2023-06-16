@@ -5,7 +5,6 @@ public class MyUsageBean {
 	private int pnum; //상품 번호
 	private int months; //사용권 사용기간
 	private int usage; //사용권 남은 횟수
-	private int ptime; //수업 길이
 	private String gname; //헬스장 명 
 	private String activity; //운동 종류
 	private String name; //트레이너 이름.
@@ -15,14 +14,13 @@ public class MyUsageBean {
 	public MyUsageBean() {
 		super();
 	}
-	public MyUsageBean(int unum, int pnum, int months, int usage, int ptime, String gname, String activity, String name,
+	public MyUsageBean(int unum, int pnum, int months, int usage, String gname, String activity, String name,
 			String ptype, String timage, String tid) {
 		super();
 		this.unum = unum;
 		this.pnum = pnum;
 		this.months = months;
 		this.usage = usage;
-		this.ptime = ptime;
 		this.gname = gname;
 		this.activity = activity;
 		this.name = name;
@@ -71,12 +69,6 @@ public class MyUsageBean {
 	}
 	public void setUsage(int usage) {
 		this.usage = usage;
-	}
-	public int getPtime() {
-		return ptime;
-	}
-	public void setPtime(int ptime) {
-		this.ptime = ptime;
 	}
 	public String getGname() {
 		return gname;

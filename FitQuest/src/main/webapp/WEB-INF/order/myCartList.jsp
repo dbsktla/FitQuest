@@ -82,7 +82,7 @@
 			                            </td>
 			                            <td valign = "middle" align = "center"> ${item.ptype }(${ item.people}명) ${item.activity }수업</td>
 			                            <td valign = "middle" align = "center">
-			                            	${item.months }개월 : ${item.ptime }시간 레슨 ${item.pcount }회
+			                            	${item.months }개월 : 레슨 ${item.pcount }회
 			                            </td>
 			                            <td valign = "middle" align = "center">
 			                            	<c:if test = "${item.hasReview eq 'Y'}">
