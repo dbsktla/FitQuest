@@ -38,7 +38,7 @@
       
       <li class="nav-item">
         <a class="nav-link collapsed" href="myPhysiqueGoal.ht">
-          <i class="bi bi-person"></i><span>운동목표</span>
+          <i class="bi bi-person"></i><span>목표관리</span>
         </a>
       </li>
 

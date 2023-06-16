@@ -47,9 +47,16 @@
 		ustate = 'available'
 		where unum = #{unum}]]>
 	</update>
+	
+	<select id="GetTListByMidA" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid}
+    	and ustate = 'available'
+
 	<select id = "GetUsageList" resultType = "usage.model.UsageBean">
 		select * from usage
 		where mid = #{mid}
 		and ustate = 'available'
+
 	</select>
 </mapper>

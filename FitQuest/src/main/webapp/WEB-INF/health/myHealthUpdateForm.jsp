@@ -35,6 +35,26 @@
 			flug--;
 		}
 	}
+	
+	function validCheck() {
+		$('.errmsg').empty();
+		flag = false;
+		
+		var str = "필수입력사항";
+		
+		if($('#hdate').val() == ""){
+			$('#derr').html(str);
+			flag = true;
+		}
+		if($('#hname').val() == ""){
+			$('.herr').html(str);
+			flag = true;
+		}
+		
+		if(flag){
+			return false;
+		}
+	}
 
 </script>
 
@@ -94,6 +114,7 @@
 							<label for="hdate" class="form-label">운동일자</label> 
 							<input type="date" class="form-control" id="hdate" name="hdate" value='<fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/>'>
 							<input type="hidden" name="olddate" value="<fmt:formatDate value="${day}" pattern="yyyy-MM-dd"/>">
+							<div class="errmsg" id="derr"></div>
 						</div>
 						<div class="col-md-6">
 							<label for="tid" class="form-label">담당 트레이너</label>
@@ -112,6 +133,7 @@
 								<div class="col-md-12">
 									<label for="hname" class="form-label">운동명</label> 
 									<input type="text" class="form-control" id="hname" name="hname" value="${hb.hname}">
+									<div class="errmsg herr"></div>
 								</div>
 								
 								<c:set var="sho" value="<%=sho%>"/>
@@ -171,7 +193,7 @@
 						</div>
 						
 						<div class="text-center">
-						<button type="submit" class="btn btn-warning">수정하기</button>
+						<button type="submit" class="btn btn-warning" onclick="return validCheck()">수정하기</button>
 						</div>
 					</form>
 				</div>

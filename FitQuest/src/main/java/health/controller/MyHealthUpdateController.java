@@ -62,7 +62,7 @@ public class MyHealthUpdateController {
 			mav.setViewName("redirect:/loginForm.mb");
 		} else {
 			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
-			List<UsageBean> ulist = usageDao.getTListByMid(memberBean.getId());
+			List<UsageBean> ulist = usageDao.getTListByMidA(memberBean.getId());
 			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
 			
 			System.out.println("ulist : " + ulist);

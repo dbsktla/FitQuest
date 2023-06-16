@@ -5,6 +5,12 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<style>
+	.errmsg{
+		color: red;
+	}
+</style>
+
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script>
 	var classcount
@@ -28,6 +34,26 @@
 			
 			$('.healthScopePlus').eq(slen-1).remove();
 			
+		}
+	}
+	
+	function validCheck() {
+		$('.errmsg').empty();
+		flag = false;
+		
+		var str = "필수입력사항";
+		
+		if($('#hdate').val() == ""){
+			$('#derr').html(str);
+			flag = true;
+		}
+		if($('#hname').val() == ""){
+			$('.herr').html(str);
+			flag = true;
+		}
+		
+		if(flag){
+			return false;
 		}
 	}
 
@@ -66,6 +92,7 @@
 						<div class="col-md-6">
 							<label for="hdate" class="form-label">운동일자</label> 
 							<input type="date" class="form-control" id="hdate" name="hdate">
+							<div class="errmsg" id="derr"></div>
 						</div>
 						
 						<div class="col-md-6">
@@ -77,6 +104,7 @@
 								</c:forEach>
 							</select>
 						</div>
+						
 						<div style="height: 10"></div>
 						
 						
@@ -84,6 +112,7 @@
 							<label for="hname" class="form-label">운동명</label> 
 							<input type="text" class="form-control" id="hname" name="hname">
 						</div>
+						<div class="errmsg herr"></div>
 						
 						<div class="col-md-6">
 							<label for="starthour" class="form-label" style="display: block;">시작시간</label>
@@ -134,7 +163,7 @@
 						<div id="healthScope"></div>
 						
 						<div class="text-center">
-						<button type="submit" class="btn btn-warning" onclick="location.href='myHealthInsert.ht'">추가하기</button>
+						<button type="submit" class="btn btn-warning" onclick="return validCheck()">추가하기</button>
 						</div>
 					</form>
 				</div>

@@ -15,5 +15,13 @@ public class GoalphysiqueDao {
 		GoalphysiqueBean goalBean = sqlSessionTemplate.selectOne(namespace + ".GetOneGoal", id);
 		return goalBean;
 	}
+
+	public void insertGoal(GoalphysiqueBean goalphysiqueBean) {
+		sqlSessionTemplate.insert(namespace + ".InsertGoal", goalphysiqueBean);
+	}
+	
+	public void updateGoal(GoalphysiqueBean goalphysiqueBean) {
+		sqlSessionTemplate.update(namespace + ".UpdateGoal", goalphysiqueBean);
+	}
 	
 }
