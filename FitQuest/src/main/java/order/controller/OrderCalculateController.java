@@ -113,7 +113,6 @@ public class OrderCalculateController {
 			msBean.setMonths(productBean2.getMonths());
 			msBean.setPcount(productBean2.getPcount());
 			msBean.setPtype(productBean2.getPtype());
-			msBean.setPtime(productBean2.getPtime());
 			msBean.setPeople(productBean2.getPeople());
 			msBean.setRating(rating);
 			msBean.setHasReview(hasReview);

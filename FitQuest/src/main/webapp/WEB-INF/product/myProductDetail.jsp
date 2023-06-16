@@ -64,16 +64,6 @@
 			$('input[name=price]').select();
 			return false;
 		}
-		if($('input[name=ptime]').val() == ""){
-			alert("수업시간 길이 입력하세요");
-			$('input[name=ptime]').focus();
-			return false;
-		}
-		if(isNaN($('input[name=ptime]').val())){
-			alert("수업시간 길이 숫자로 입력하세요");
-			$('input[name=ptime]').select();
-			return false;
-		}
 	}
 </script>
 <style>
@@ -101,13 +91,16 @@ section{
 	font-size:12px;
 	font-weight:bold;
 }
+.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+}
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 90%;">
-	
     <div class="pagetitle" style = "margin-bottom:60px;">
       <h1>상품 자세히보기</h1>
     </div><!-- End Page Title -->
-
       <div class="row">
       <div class="col-lg-1"></div>
       <div class="col-lg-10">
@@ -151,9 +144,6 @@ section{
                   <div class = "row" style = "margin-bottom:20px;">
                   <div class="col-md-6 form-group">
                       <input name="email" type="text" class="form-control" value = "사용기간 :  ${productBean.price}만원" disabled>
-                    </div>
-                    <div class="col-md-6 form-group">
-                      <input name="email" type="text" class="form-control" value = "수업시간 길이 :  ${productBean.ptime}시간" disabled>
                     </div>
                   </div>
                 </form>
@@ -205,10 +195,6 @@ section{
                   <span>가격</span>
                       <input name="price" type="text" class="form-control" placeholder = "${productBean.price}만원">
                     </div>
-                    <div class="col-md-6 form-group">
-                    <span>수업시간 길이</span>
-                      <input name="ptime" type="text" class="form-control" placeholder = "${productBean.ptime}시간">
-                    </div>
                   </div>	
                   <div class = "" style = "margin-bottom: 20px;">
                   		<input type = "submit" class = "btn btn-warning" value = "수정" onClick = "return checkData()">
@@ -233,7 +219,7 @@ section{
       
       
     </section>
-    
+</body>
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

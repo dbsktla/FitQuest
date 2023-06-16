@@ -183,5 +183,6 @@
 					natural join 
 				orderdetail where id = #{id}))
 		group by odate, onum
+		order by onum asc
 	</select>
 </mapper>

@@ -64,16 +64,6 @@ function checkData(){
 		$('input[name=price]').select();
 		return false;
 	}
-	if($('input[name=ptime]').val() == ""){
-		alert("수업시간 길이 입력하세요");
-		$('input[name=ptime]').focus();
-		return false;
-	}
-	if(isNaN($('input[name=ptime]').val())){
-		alert("수업시간 길이 숫자로 입력하세요");
-		$('input[name=ptime]').select();
-		return false;
-	}
 }
 </script>
 <style>
@@ -96,10 +86,15 @@ section{
 .td{
 	text-align:center;
 }
+.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+}
 <% 
 	session.setAttribute("insertFlag", true);
 %>
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 80%;">
 	
     <div class="pagetitle">
@@ -153,10 +148,6 @@ section{
                   <span>가격</span>
                       <input name="price" type="text" class="form-control" placeholder = "${productBean.price}만원">
                     </div>
-                    <div class="col-md-6 form-group">
-                    <span>수업시간 길이</span>
-                      <input name="ptime" type="text" class="form-control" placeholder = "${productBean.ptime}시간">
-                    </div>
                   </div>	
                   <div class = "" style = "margin-bottom: 20px;">
                   		<input type = "submit" class = "btn btn-warning" value = "등록" onClick = "return checkData()">
@@ -171,7 +162,7 @@ section{
       
       
     </section>
-    
+</body>
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

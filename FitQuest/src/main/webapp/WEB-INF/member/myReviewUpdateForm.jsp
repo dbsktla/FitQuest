@@ -91,34 +91,18 @@
 		}
 	}
 </script>
+<body style="background-color : #FEF9E7;">
 <section id="blog" class="blog">
+    <div class="pagetitle">
+      <h1>리뷰 수정</h1>
+    </div><!-- End Page Title -->
+    
 	<div class="container" data-aos="fade-up">
 
         <div class="row" style = "justify-contents: center;">
-         <header class="section-header" style = "margin-top:60px;">
-	          <h2>FitQuest</h2>
-	          <p>리뷰 작성</p>
-	        </header>
-	      <div class ="col-lg-1"></div>
-	      <div class="col-lg-10 entries">
-	      	<article class="entry entry-single">
-   			 <div class="col-lg-12">
-   			  <div class="col-lg-12 col-sm-12 hero-feature" style = "margin-bottom:20px;">
-			        	<h3 style = "color: #012970; font-weight: bold;">리뷰 대상 : ${tmemberBean.name } 선생님</h3>
-   			 		</div>
-			        	<div class = "col-lg-12" style = "display:flex; justify-content: left; margin-bottom: 40px;">
-	                			<img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainerBean.timage}" alt="" class="img-fluid" style = "width: 100px; height:100px; text-align:center;">
-				        		<h2 style = "margin-left: 60px;">${tmemberBean.name } 선생님에게 ${trainerBean.activity } 수업 ${reserveCount }번 받았습니다.<br><span>${ gymBean.gname } : ${gymBean.gaddr1 }, ${gymBean.gaddr2 }</span>
-				        		<br>이메일: ${tmemberBean.email }</h2>
-						</div>
-	      	 </div>
-	      	 </article>
-	      </div>
-	      <div class ="col-lg-1"></div>
-	      
 	      <div class ="col-lg-1"></div>  	
-          <div class="col-lg-10 entries">
-   			<article class="entry entry-single">
+          <div class="col-lg-10 entries"  style = "padding: 0px;background-color: white;">
+   			<article class="entry entry-single" style = "margin:0px;">
    			 <div class="col-lg-12">
 			        <div class="col-lg-12 col-sm-12 hero-feature">
 			        
@@ -190,6 +174,7 @@
 		</div>
 	</div>
 </section>
+</body>
 <%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

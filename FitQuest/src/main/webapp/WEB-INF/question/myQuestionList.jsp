@@ -65,7 +65,6 @@
 			</div>
 
 			<div class="tab-content pt-2" id="myTabContent">
-				<!-- 리스트보기 -->
 				<div class="tab-pane fade show active" id="list" role="tabpanel"
 					aria-labelledby="board">
 					<div class="row">
@@ -73,7 +72,7 @@
 							<div class="card-body">
 								<div align="right">
 									<c:if test="${ sessionScope.loginInfo.id != null }">
-										<input type="button" value="작성하기" class="btn btn-warning btn-sm" onclick="location.href='questionInsert.qt'">
+										<input type="button" value="문의하기" class="btn btn-warning btn-sm" onclick="location.href='questionInsert.qt'">
 									</c:if>
 								</div>
 								<h5 class="card-title">문의 내역</h5>

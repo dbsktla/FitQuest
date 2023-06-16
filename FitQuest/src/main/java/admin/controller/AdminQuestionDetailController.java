@@ -14,7 +14,7 @@ import question.model.QuestionBean;
 import question.model.QuestionDao;
 
 @Controller
-public class AdminquestionDetailController {
+public class AdminQuestionDetailController {
 	private final String command = "/adminQuestionDetail.ad";
 	private final String getPage = "adminQuestionDetail";
 	

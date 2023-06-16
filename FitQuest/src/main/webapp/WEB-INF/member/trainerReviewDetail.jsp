@@ -32,7 +32,12 @@ section{
 .row{
 	margin-bottom:25px;
 }
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 </style>
+<body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 72%;">
 	
     <div class="pagetitle" style = "margin-top:40px;">
@@ -91,7 +96,7 @@ section{
       </div>
       
     </section>
-    
+<body style="background-color : #FEF9E7;">
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>

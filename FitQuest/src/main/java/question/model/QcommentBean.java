@@ -1,13 +1,26 @@
 package question.model;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 public class QcommentBean {
 	private int qcnum;
 	private int qnum;
 	private String qcomment;
 	private String qcdate;
+	private String email;
+	private String qcontent;
 	
+	public String getQcontent() {
+		return qcontent;
+	}
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getQcdate() {
 		return qcdate;
 	}

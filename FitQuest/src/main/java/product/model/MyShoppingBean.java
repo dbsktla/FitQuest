@@ -17,7 +17,6 @@ public class MyShoppingBean {
 	private int months;
 	private int pcount;
 	private String ptype;
-	private int ptime;
 	private int people;
 	//db - review
 	private double rating;
@@ -27,7 +26,7 @@ public class MyShoppingBean {
 	}
 	
 	public MyShoppingBean(String tid, String tname, String activity, String purpose, String timage, String gname,
-			String gaddr1, String gaddr2, int pnum, int price, int months, int pcount, String ptype, int ptime,
+			String gaddr1, String gaddr2, int pnum, int price, int months, int pcount, String ptype,
 			int people, double rating) {
 		super();
 		this.tid = tid;
@@ -43,7 +42,6 @@ public class MyShoppingBean {
 		this.months = months;
 		this.pcount = pcount;
 		this.ptype = ptype;
-		this.ptime = ptime;
 		this.people = people;
 		this.rating = rating;
 	}
@@ -125,12 +123,6 @@ public class MyShoppingBean {
 	}
 	public void setPtype(String ptype) {
 		this.ptype = ptype;
-	}
-	public int getPtime() {
-		return ptime;
-	}
-	public void setPtime(int ptime) {
-		this.ptime = ptime;
 	}
 	public int getPeople() {
 		return people;

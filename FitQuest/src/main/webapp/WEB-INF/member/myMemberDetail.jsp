@@ -241,6 +241,7 @@ $(document).ready(function(){
 	});
 });
 </script>
+<body style="background-color : #FEF9E7;">
     <section class="section">
 	 <section class="section profile">
 	 <div class="pagetitle">
@@ -410,7 +411,7 @@ $(document).ready(function(){
       
     </section>
     
-
+</body>
 
 <%@ include file="../common/myMemberBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>

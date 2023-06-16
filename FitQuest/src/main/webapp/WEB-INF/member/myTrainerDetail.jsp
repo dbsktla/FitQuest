@@ -26,6 +26,10 @@
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
 }
 </style>
 
@@ -241,6 +245,7 @@ $(document).ready(function(){
 	});
 });
 </script>
+<body style="background-color : #FEF9E7;">
     <section class="section">
 	 <section class="section profile">
 	 <div class="pagetitle">
@@ -497,7 +502,7 @@ $(document).ready(function(){
     </section>
       
     </section>
-    
+</body>   
 <%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
 <%@ include file="../common/bottom.jsp"%>
