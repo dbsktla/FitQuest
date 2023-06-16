@@ -108,10 +108,8 @@
 												<td>${ report.name }</td>
 												<td>${ report.status }</td>
 												<td>
-													<c:if test="${ report.status != '처리 완료' && report.status != '신고 거절' }">
-														<input type="button" value="신고거절" class="btn btn-danger btn-sm" onclick="location.href='adminCommunityReportUpdate.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
-														<input type="button" value="처리완료" class="btn btn-success btn-sm" onclick="location.href='adminCommunityReportDelete.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
-													</c:if>
+													<input type="button" value="신고거절" class="btn btn-danger btn-sm" onclick="location.href='adminCommunityReportUpdate.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
+													<input type="button" value="처리완료" class="btn btn-success btn-sm" onclick="location.href='adminCommunityReportDelete.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
 												</td>
 											</tr>
 										</c:forEach>
@@ -120,6 +118,7 @@
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
     

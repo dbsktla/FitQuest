@@ -116,4 +116,9 @@ public class ReviewDao {
 		cnt = sqlSessionTemplate.update(namespace + ".UpdateReviewReport", renum);
 		return cnt;
 	}
+	public List<ReviewBean> getMainReviewReport() {
+		List<ReviewBean> reportReviewList = new ArrayList<ReviewBean>();
+		reportReviewList = sqlSessionTemplate.selectList(namespace + ".GetMainReviewReport");
+		return reportReviewList;
+	}
 }

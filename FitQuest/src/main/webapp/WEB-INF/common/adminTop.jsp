@@ -99,30 +99,30 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-         <i class="bi bi-people-fill"></i>
-          <span>회원 목록</span>
-        </a>
-      </li>
+<!--       <li class="nav-item"> -->
+<!--         <a class="nav-link collapsed" href="#"> -->
+<!--          <i class="bi bi-people-fill"></i> -->
+<!--           <span>회원 목록</span> -->
+<!--         </a> -->
+<!--       </li> -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-         <i class="bi bi-person-lines-fill"></i><span>트레이너 목록 </span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="#">
-            	<i class="bi bi-person-fill"></i><span>트레이너</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-building"></i><span>헬스장</span>
-            </a>
-          </li>
-        </ul>
-      </li>
+<!--       <li class="nav-item"> -->
+<!--         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"> -->
+<!--          <i class="bi bi-person-lines-fill"></i><span>트레이너 목록 </span><i class="bi bi-chevron-down ms-auto"></i> -->
+<!--         </a> -->
+<!--         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav"> -->
+<!--           <li> -->
+<!--             <a href="#"> -->
+<!--             	<i class="bi bi-person-fill"></i><span>트레이너</span> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--           <li> -->
+<!--             <a href="#"> -->
+<!--               <i class="bi bi-building"></i><span>헬스장</span> -->
+<!--             </a> -->
+<!--           </li> -->
+<!--         </ul> -->
+<!--       </li> -->
        <li class="nav-item">
         <a class="nav-link collapsed" href="adminReviewReportList.ad">
         <i class="bi bi-x-octagon-fill"></i>
