@@ -6,11 +6,43 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class TscheduleBean {
 	private String tid;
+	
 	@NotBlank(message = "요일을 선택해 주세요")
 	private String tsday;
+	
 	@NotBlank(message = "시간을 선택해 주세요")
 	private String tstime;
+	
 	private String tsdate;
+	
+	@NotBlank(message = "유형을 선택해 주세요")
+	private String tstype;
+	
+	@NotBlank(message = "인원을 선택해 주세요")
+	private String tspeople;
+	
+	
+	//요일별 시간 임시변수들
+	private String suntime;
+	private String montime;
+	private String tuetime;
+	private String wedtime;
+	private String thutime;
+	private String fritime;
+	private String sattime;
+	
+	public String getTstype() {
+		return tstype;
+	}
+	public void setTstype(String tstype) {
+		this.tstype = tstype;
+	}
+	public String getTspeople() {
+		return tspeople;
+	}
+	public void setTspeople(String tspeople) {
+		this.tspeople = tspeople;
+	}
 	public String getTid() {
 		return tid;
 	}
@@ -35,14 +67,60 @@ public class TscheduleBean {
 	public void setTsdate(String tsdate) {
 		this.tsdate = tsdate;
 	}
-	public TscheduleBean(String tid, String tsday, String tstime, String tsdate) {
+	public TscheduleBean() {
+		
+	}
+	public TscheduleBean(String tid, String tsday, String tstime, String tsdate, String tstype, String tspeople) {
 		super();
 		this.tid = tid;
 		this.tsday = tsday;
 		this.tstime = tstime;
 		this.tsdate = tsdate;
+		this.tstype = tstype;
+		this.tspeople = tspeople;
 	}
-	public TscheduleBean() {
-		
+	
+	//임시변수들
+	public String getSuntime() {
+		return suntime;
+	}
+	public void setSuntime(String suntime) {
+		this.suntime = suntime;
+	}
+	public String getMontime() {
+		return montime;
+	}
+	public void setMontime(String montime) {
+		this.montime = montime;
+	}
+	public String getTuetime() {
+		return tuetime;
+	}
+	public void setTuetime(String tuetime) {
+		this.tuetime = tuetime;
+	}
+	public String getWedtime() {
+		return wedtime;
+	}
+	public void setWedtime(String wedtime) {
+		this.wedtime = wedtime;
+	}
+	public String getThutime() {
+		return thutime;
+	}
+	public void setThutime(String thutime) {
+		this.thutime = thutime;
+	}
+	public String getFritime() {
+		return fritime;
+	}
+	public void setFritime(String fritime) {
+		this.fritime = fritime;
+	}
+	public String getSattime() {
+		return sattime;
+	}
+	public void setSattime(String sattime) {
+		this.sattime = sattime;
 	}
 }
