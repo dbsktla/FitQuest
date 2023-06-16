@@ -62,4 +62,9 @@ public class UsageDao {
 		cnt = sqlSessionTemplate.update(namespace+".UpdateUstateU",unum);
 		return cnt;
 	}
+	public List<UsageBean> getTListByMidA(String mid) {
+		List<UsageBean> tidList = new ArrayList<UsageBean>();
+		tidList = sqlSessionTemplate.selectList(namespace+".GetTListByMidA",mid);
+		return tidList;
+	}
 }

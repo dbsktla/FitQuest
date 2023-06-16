@@ -77,7 +77,7 @@ public class MyHealthListController {
 			
 			// 사용권 존재하면 트레이너 목록 불러옴
 			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
-			List<UsageBean> ulist = usageDao.getTListByMid(mid);
+			List<UsageBean> ulist = usageDao.getTListByMidA(mid);
 			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
 			
 			if (ulist != null) { // 사용권 잇으면 데이터 넣기

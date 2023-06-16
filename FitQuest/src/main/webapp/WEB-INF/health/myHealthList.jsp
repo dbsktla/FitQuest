@@ -5,6 +5,8 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="myHealthTop.jsp"%>
 
+<link rel="stylesheet" type="text/css" href="/ex/resources/css/reservationCalendarCSS.css?after"/>
+
 <style>
 
 	body {
@@ -51,11 +53,11 @@
 	  cursor: pointer; /* 마우스 손가락모양 */
 	  background-color: rgba(210, 210, 210, 0.4);
 	}
-	/* 모달창 애니메이션 추가 */
-	@keyframes zoom {
-	  from {transform: scale(0)}
-	  to {transform: scale(1)}
-	}
+/* 	/* 모달창 애니메이션 추가 */ */
+/* 	@keyframes zoom { */
+/* 	  from {transform: scale(0)} */
+/* 	  to {transform: scale(1)} */
+/* 	} */
 	/* 모달창 이미지 */
 	.modal_content {
 	  margin: auto;
@@ -373,6 +375,8 @@
 					</div><!-- row -->	
 				</div>
 				</div>
+				
+				
 				<!-- End 캘린더 -->
 			</div>
 			
@@ -430,7 +434,27 @@
 			success : function (data) {
 				var msg = "";
 				
-				var msg = "<table class='table modal_content' style='width: 50%;margin-top: 20%; vertical-align:middle;' ><tr class='table-warning'>";
+// 				var msg = "<table class='table modal_content' style='width: 50%;margin-top: 20%; vertical-align:middle;' ><tr class='table-warning'>";
+// 				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
+// 				for(var i=0; i<data.length; i++){
+// 					msg += "<td>"+data[i].hname+"</td>";
+// 					msg += "<td>"+(data[i].starttime).substring(0,16)+"</td>";
+// 					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
+// 					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
+// 				}
+				
+// 				msg += "</table>";
+				
+				msg += "<div class='modal_content detail-body' style='width: 50%; margin: auto; vertical-align: middle; padding: 5%; background: #FEF9E7; transform: translate(0%,50%);' ><tr class='table-warning'>";
+				msg += '<div class="detail-title" style="margin-top: 0px;">';
+				msg += '<div class="detail-title-font">운동 상세 내역</div>';
+				msg += '</div>';
+				msg += '<div class="detail-name-box">';
+// 				msg += '<span class="calender-text">'+${loginInfo.name}+' 님</span>';
+				msg += '</div>';
+				msg += '<div class="detail-container" style="width: 100%;">';
+				msg += '<table width="100%" align="center" border="0" class="table modal_content">';
+				msg += "<tr class='table-warning'>";
 				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
 				for(var i=0; i<data.length; i++){
 					msg += "<td>"+data[i].hname+"</td>";
@@ -438,8 +462,11 @@
 					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
 					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
 				}
+				msg += '</table>';
+				msg += '</div>';
+				msg += '</div>';
 				
-				msg += "</table>";
+				
 				$(".modal").html(msg);
 				$('.modal').css('display', "block");
 			}
