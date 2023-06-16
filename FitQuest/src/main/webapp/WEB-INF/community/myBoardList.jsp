@@ -3,58 +3,17 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 
-<aside id="sidebar" class="sidebar">
-	<ul class="sidebar-nav" id="sidebar-nav" style="padding-top: 20px;">
-		<c:if test="${ sessionScope.loginInfo.mtype == 'trainer' }">
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="trainerDetail.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
-			</a></li>
+<c:if test="${loginInfo.mtype eq 'trainer'}">
+<%@ include file="../common/myTrainerTop.jsp"%>
+</c:if>
+<c:if test="${loginInfo.mtype eq 'generic'}">
+<%@ include file="../common/myMemberTop.jsp"%>
+</c:if>
 
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="trainerReviewList.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
-			</a></li>
 
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="viewProductList.pd"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>상품관리</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="productSalesDetail.pd"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>수익보기</span>
-			</a></li>
-		</c:if>
-
-		<c:if test="${ sessionScope.loginInfo.mtype == 'generic' }">
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="genericMemberDetail.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="viewMyReviewList.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed" href="">
-					<i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span>
-			</a></li>
-		</c:if>
-
-		<li class="nav-item"><a class="nav-link" href="myBoardList.co">
-				<i class="bi bi-layout-text-window-reverse"></i><span>내 글보기</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-		</a></li>
-		<li class="nav-item"><a class="nav-link collapsed" href="myQuestionList.qt">
-				<i class="bi bi-layout-text-window-reverse"></i><span>문의 내역</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-		</a></li>
-	</ul>
-</aside>
-
-<body style="background-color: #FEF9E7; text-align: center;">
-	<main id="main" class="main" style="margin-top: 5px">
-		<main>
+<body style="background-color: #FEF9E7; ">
+<!-- 	<main id="main" class="main" style="margin-top: 5px"> -->
+<!-- 		<main> -->
 			<div class="col-lg-12">
 				<div class="pagetitle" style="text-align: left;">
 					<h1>
@@ -83,7 +42,7 @@
 						<div class="card" style="width: 70%; margin: auto;">
 							<div class="card-body">
 								<div align="right"></div>
-								<h5 class="card-title">내 글보기</h5>
+								<h5 class="card-title"  style="text-align: center;">내 글보기</h5>
 								<div class="col-md-12" align="right">
 									<a style="color: #FAC710;"
 										href="myBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
@@ -186,7 +145,7 @@
 						<div class="card" style="width: 60%; margin: auto;">
 							<div class="card-body">
 								<div align="right"></div>
-								<h5 class="card-title">스크랩</h5>
+								<h5 class="card-title" style="text-align: center;">스크랩</h5>
 								<div class="col-md-5" align="left"></div>
 								<table class="table table-hover">
 									<tr align="center">
@@ -228,8 +187,9 @@
 					</div>
 				</div>
 			</div>
-		</main>
-	</main>
+<!-- 		</main> -->
+<!-- 	</main> -->
 </body>
-<%@ include file="../common/bottom.jsp"%>
+<%@ include file="../common/myTrainerBot.jsp"%>
 <%@ include file="../common/adminBootBottom.jsp"%>
+<%@ include file="../common/bottom.jsp"%>
