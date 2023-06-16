@@ -7,7 +7,14 @@ public class QcommentBean {
 	private String qcomment;
 	private String qcdate;
 	private String email;
+	private String qcontent;
 	
+	public String getQcontent() {
+		return qcontent;
+	}
+	public void setQcontent(String qcontent) {
+		this.qcontent = qcontent;
+	}
 	public String getEmail() {
 		return email;
 	}

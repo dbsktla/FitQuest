@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script type="text/javascript">
+	function reviewDetail(renum){
+		var openWin = window.open("reviewDetailPopup.ad?" + "renum=" + renum, "_blank", "width=550, height=500, left=500");
+	}
+</script>        
 
 <%@ include file="../common/adminTop.jsp" %>
   <main id="main" class="main">

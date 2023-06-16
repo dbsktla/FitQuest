@@ -39,7 +39,7 @@ public class AdminQcommentInsertController {
 					System.out.println("답변 삽입 성공");
 					cnt = questionDao.updateInsertQstatus(qcommentBean.getQnum());
 					if(cnt != -1) {
-						mailService.questionEmail(qcommentBean.getEmail());
+						mailService.questionEmail(qcommentBean.getEmail(),qcommentBean.getQcontent(),qcommentBean.getQcomment());
 					}
 				}
 				else {
