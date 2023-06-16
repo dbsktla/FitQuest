@@ -6,17 +6,16 @@
   <!-- ======= 메뉴바!!! ======= -->
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav" style="padding-top: 20px;">
-	
 	 <li class="nav-heading">Profile</li>
 	
       <li class="nav-item">
-        <a class="nav-link collapsed" href="genericMemberDetail.mb">
+        <a class="nav-link <c:if test="${menubar != 'myDetailMain'}">collapsed</c:if>" href="genericMemberDetail.mb">
           <i class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       
       <li class="nav-item">
-        <a class="nav-link collapsed" href="myBoardList.co">
+        <a class="nav-link <c:if test="${menubar != 'myBoardMain'}">collapsed</c:if>" href="myBoardList.co">
           <i class="bi bi-layout-text-window-reverse"></i><span>내글보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
@@ -25,13 +24,13 @@
       <li class="nav-heading">Manage</li>
       	
 	 <li class="nav-item">
-        <a class="nav-link collapsed" href="viewMyReviewList.mb">
+        <a class="nav-link <c:if test="${menubar != 'myReviewMain'}">collapsed</c:if>" href="viewMyReviewList.mb">
           <i class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
 	
       <li class="nav-item">
-        <a class="nav-link collapsed" href="viewMyOrderList.od">
+        <a class="nav-link <c:if test="${menubar != 'myOrderMain'}">collapsed</c:if>" href="viewMyOrderList.od">
           <i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->

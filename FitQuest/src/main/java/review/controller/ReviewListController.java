@@ -40,7 +40,8 @@ public class ReviewListController {
 						   @RequestParam(value = "whatColumn", required = false) String whatColumn,
 						   @RequestParam(value = "keyword", required = false) String keyword,
 						   HttpServletResponse response) {
-		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myReviewMain");
 		response.setContentType("text/html; charset=utf-8");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/trainerReviewList.mb");

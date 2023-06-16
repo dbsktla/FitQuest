@@ -36,6 +36,7 @@ public class GenericReviewDetailController {
 						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
+		session.setAttribute("menubar", "myReviewMain");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/viewMyReviewList.mb");
 			try {

@@ -3,6 +3,8 @@ package order.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,12 +42,14 @@ public class MyOrderDetailController {
 	@Autowired 
 	MemberDao memberDao;
 	@RequestMapping(value = command)
-	public String doAction(@RequestParam("onum") int onum, Model model) {
+	public String doAction(@RequestParam("onum") int onum, Model model,
+						   HttpSession session) {
 		List<OrderDetailBean> odList = orderDetailDao.getOrderDetailListByOnum(onum);
 		OrderBean orderBean = orderDao.getOrderByOnum(onum);
 		List<MyShoppingBean> msList = new ArrayList<MyShoppingBean>();
 		int orderCount = 0;
 		int totalAmount = 0;
+		session.setAttribute("menubar", "myOrderMain");
 		for(OrderDetailBean odBean : odList) {
 			int pnum = odBean.getPnum();
 			MyShoppingBean msBean = new MyShoppingBean();
