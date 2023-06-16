@@ -56,7 +56,7 @@
 	</insert>
 	
 	<select id="GetQuestionByQnum" resultType="question.model.QuestionBean">
-		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name
+		select qnum, question.id, qdate, qsubject, qcontent, qstatus, name, email
 		from question inner join member
 		on question.id = member.id
 		where qnum=#{qnum}
