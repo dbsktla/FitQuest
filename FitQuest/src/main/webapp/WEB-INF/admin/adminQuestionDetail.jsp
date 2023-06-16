@@ -14,6 +14,7 @@
 			'<tr>' +
 			'<td colspan="4">' +
 			'<input type="hidden" name="qnum" value="${ questionBean.qnum }">' +
+			'<input type="hidden" name="email" value="${ questionBean.email }">' +
 			'<input type="text" placeholder="답변" name="qcomment" id="qcomment" class="form-control" value="${ qcommentBean.qcomment }">' +
 			'<form:errors cssClass="err" path="qcomment"/>' +
 			'</td>' +

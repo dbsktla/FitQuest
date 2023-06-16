@@ -14,6 +14,8 @@ public class QuestionBean {
 	private String qcontent;
 	private String qstatus;
 	private String name;
+	private String email;
+	
 	public int getQnum() {
 		return qnum;
 	}
@@ -25,6 +27,12 @@ public class QuestionBean {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getQdate() {
 		return qdate;

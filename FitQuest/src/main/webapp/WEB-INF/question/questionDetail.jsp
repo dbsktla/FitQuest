@@ -134,6 +134,9 @@
 									${ qcommentBean.qcomment }
 								</td>
 								<td>
+									관리자
+								</td>
+								<td>
 									<fmt:parseDate var="parseDate" value="${ qcommentBean.qcdate }" pattern="yyyy-MM-dd HH:mm" />
 									<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm"/>
 								</td>
