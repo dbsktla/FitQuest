@@ -1,7 +1,8 @@
 package physique.model;
 
-public class GoalphysiqueBean {
 
+public class GoalphysiqueBean {
+	
 	private String id;
 	private String gpdate;
 	private double weight;

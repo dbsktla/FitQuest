@@ -10,4 +10,23 @@
 		FROM GOALPHYSIQUE 
 		WHERE id = #{id}
 	</select>
+	
+	<insert id="InsertGoal">
+		INSERT INTO GOALPHYSIQUE 
+		VALUES (
+				#{id}
+			   ,#{gpdate}
+			   ,#{weight}
+			   ,#{bodyfatper}
+			   ,#{goaltime})
+	</insert>
+	
+	<update id="UpdateGoal">
+		UPDATE  GOALPHYSIQUE
+		SET 	gpdate = #{gpdate}
+			   ,weight = #{weight}
+			   ,bodyfatper = #{bodyfatper}
+			   ,goaltime = #{goaltime}
+		WHERE 	id = #{id}
+	</update>
 </mapper>

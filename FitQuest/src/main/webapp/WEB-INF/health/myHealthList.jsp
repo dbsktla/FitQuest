@@ -350,7 +350,8 @@
 				</div><!-- list -->
 				
 				<!-- 캘린더보기 -->
-				<div class="tab-pane fade" id="cal" role="tabpanel"	aria-labelledby="cal-tab">
+				<div class="row justify-content-center">
+				<div class="tab-pane fade" id="cal" role="tabpanel"	aria-labelledby="cal-tab" style="width: 70%;">
 					<div class="row">
 						<!-- 캘린더 -->
 						<div class="col-lg-9">
@@ -371,7 +372,8 @@
 						
 					</div><!-- row -->	
 				</div>
-				<!-- End Default Tabs -->
+				</div>
+				<!-- End 캘린더 -->
 			</div>
 			
 		</div>
