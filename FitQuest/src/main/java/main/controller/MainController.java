@@ -13,6 +13,7 @@ public class MainController {
 	@RequestMapping(command)
 	public String doAction(HttpSession session) {
 		session.setAttribute("destination", "redirect:/main.go");
+		session.setAttribute("topmenu", "main");
 		return getPage;
 	}
 }

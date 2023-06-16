@@ -55,6 +55,8 @@ public class MyHealthListController {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myHealth");
+		
 		
 		// 로그인 정보 확인
 		if(memberBean == null) { 

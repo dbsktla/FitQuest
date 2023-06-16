@@ -19,6 +19,8 @@ public class MemberDetailController {
 						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
+		session.setAttribute("topmenu", "genericMember");
+		
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/genericMemberDetail.mb");
 			try {

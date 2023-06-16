@@ -30,6 +30,8 @@ public class TrainerDetailController {
 						   Model model) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
+		session.setAttribute("topmenu", "trainerMember");
+		
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/trainerDetail.mb");
 			try {

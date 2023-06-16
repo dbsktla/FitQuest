@@ -33,6 +33,7 @@ public class MyPhysiqueGoalController {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		session.setAttribute("menubar", "myPhysiqueGoal");
 		
 		// 로그인 정보 확인
 		if(memberBean == null) { 

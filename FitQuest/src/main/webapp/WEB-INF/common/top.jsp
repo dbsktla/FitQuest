@@ -54,9 +54,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#">ABOUT US</a></li>
+          <li><a class="nav-link scrollto <c:if test="${topmenu eq 'main'}">active</c:if>" href="main.go">ABOUT US</a></li>
           
-          <li class="dropdown" ><a href="healthBoardList.co"><span>COMMUNITY</span><i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown" ><a href="healthBoardList.co" class="<c:if test="${topmenu eq 'healthBoard'}">active</c:if>"><span>COMMUNITY</span><i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="healthBoardList.co">건강 정보 게시판</a></li>
               <li><a href="freeBoardList.co">자유 게시판</a></li>
@@ -65,15 +65,7 @@
           
           <li><a class="nav-link scrollto" href="#">TIPS</a></li>
           
-          <li class="dropdown" ><a href="trainerList.pd"><span>TRAINERS</span><i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="trainerList.pd">트레이너 찾기</a></li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          
+          <li><a class="nav-link scrollto <c:if test="${topmenu eq 'trainerList'}">active</c:if>" href="trainerList.pd">TRAINERS</a></li>
           
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
@@ -101,7 +93,7 @@
           
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
-	          <li class="dropdown"><a href="health.ht"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
+	          <li class="dropdown"><a href="health.ht" class="<c:if test="${topmenu eq 'healthList'}">active</c:if>"><span>HEALTHCARE</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="health.ht">내 건강관리</a></li>
 	              <li><a href="myHealthList.ht">운동관리</a></li>
@@ -115,7 +107,7 @@
           
           <!-- 내글보기, 회원정보수정 등 - 트레이너  -->
           <c:if test="${loginInfo.mtype eq 'trainer'}">
-          	<li class="dropdown" ><a href="trainerDetail.mb"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
+          	<li class="dropdown" ><a href="trainerDetail.mb" class="<c:if test="${topmenu eq 'trainerMember'}">active</c:if>"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="trainerDetail.mb">마이페이지</a></li>
 	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
@@ -127,7 +119,7 @@
            </c:if>
           <!-- 내글보기, 회원정보수정 등 - 회원  -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
-          	<li class="dropdown" ><a href="genericMemberDetail.mb"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
+          	<li class="dropdown" ><a href="genericMemberDetail.mb" class="<c:if test="${topmenu eq 'genericMember'}">active</c:if>"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="genericMemberDetail.mb">마이페이지</a></li>
 	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
