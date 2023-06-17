@@ -1,10 +1,12 @@
 package question.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import question.model.QuestionDao;
 import utility.Paging;
 
 @Controller
-public class MyQuestionList {
+public class MyQuestionListController {
 	private final String command = "myQuestionList.qt";
 	private final String getPage = "myQuestionList";
 
@@ -31,14 +33,29 @@ public class MyQuestionList {
 			HttpSession session, 
 			Model model,
 			@RequestParam(value="pageNumber",required = false) String pageNumber,
-			HttpServletRequest request
+			HttpServletRequest request,
+			HttpServletResponse response
 			) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/myQuestionList.qt");
+		session.setAttribute("menubar", "myQuestionMain");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+			if(memberBean.getMtype().equals("generic")) {
+				session.setAttribute("topmenu", "genericMember");
+			}
+			else {
+				session.setAttribute("topmenu", "trainerMember");
+			}
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("whatColumn", "");
 			map.put("keyword", "");

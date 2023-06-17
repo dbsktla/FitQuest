@@ -16,7 +16,13 @@
       
       <li class="nav-item">
         <a class="nav-link <c:if test="${menubar != 'myBoardMain'}">collapsed</c:if>" href="myBoardList.co">
-          <i class="bi bi-layout-text-window-reverse"></i><span>내글보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+          <i class="bi bi-layout-text-window-reverse"></i><span>내 글보기</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+        </a>
+      </li><!-- End Tables Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link <c:if test="${menubar != 'myQuestionMain'}">collapsed</c:if>" href="myQuestionList.qt">
+          <i class="bi bi-layout-text-window-reverse"></i><span>문의 내역</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
       

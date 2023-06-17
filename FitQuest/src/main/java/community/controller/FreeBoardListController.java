@@ -35,6 +35,7 @@ public class FreeBoardListController {
 			HttpSession session
 	) {
 		session.setAttribute("destination", "redirect:freeBoardList.co");
+		session.setAttribute("topmenu", "healthBoard");
 		
 		if(bcategory == null) {
 			bcategory = "";

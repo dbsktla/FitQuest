@@ -1,17 +1,16 @@
 package question.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import question.model.QuestionBean;
 import question.model.QuestionDao;
 
 @Controller
@@ -26,11 +25,19 @@ public class QuestionDeleteController {
 	public String insert(
 			@RequestParam("qnum") int qnum,
 			HttpSession session,
-			Model model
+			Model model,
+			HttpServletResponse response
 			) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			int cnt = questionDao.deleteQuestion(qnum);
