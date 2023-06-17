@@ -3,6 +3,7 @@ package community.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -28,10 +29,17 @@ public class HealthBoardInsertController {
 	BoardDao boardDao;
 
 	@RequestMapping(value = command, method=RequestMethod.GET)
-	public String insert(HttpSession session) {
+	public String insert(HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			return getPage;
@@ -39,11 +47,18 @@ public class HealthBoardInsertController {
 	}
 
 	@RequestMapping(value = command, method=RequestMethod.POST)
-	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
+	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/healthBoardInsert.co");
 		
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/CommunityImage";

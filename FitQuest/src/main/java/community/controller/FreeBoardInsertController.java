@@ -1,5 +1,8 @@
 package community.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -23,9 +26,16 @@ public class FreeBoardInsertController {
 	BoardDao boardDao;
 
 	@RequestMapping(value = command, method=RequestMethod.GET)
-	public String insert(HttpSession session) {
+	public String insert(HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") == null) {
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return "redirect:/login.mb";
 		}
 		else {
@@ -34,11 +44,17 @@ public class FreeBoardInsertController {
 	}
 
 	@RequestMapping(value = command, method=RequestMethod.POST)
-	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session) {
-		
+	public String insert(@Valid BoardBean boardBean, BindingResult result, HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/freeBoardInsert.co");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			if(result.hasErrors()) {

@@ -1,5 +1,8 @@
 package community.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,8 @@ public class BcommentReplyController {
 	BcommentDao bcommentDao;
 
 	@RequestMapping(value = command)
-	public String reply(BcommentBean bcommentBean, @RequestParam("btype") String btype ,HttpSession session) {
+	public String reply(BcommentBean bcommentBean, @RequestParam("btype") String btype ,HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		if(btype.equals("자유")) {
 			session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum());
 		}
@@ -27,7 +31,13 @@ public class BcommentReplyController {
 			session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + bcommentBean.getBnum());
 		}
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");

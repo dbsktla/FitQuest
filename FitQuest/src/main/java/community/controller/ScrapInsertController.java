@@ -1,5 +1,8 @@
 package community.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,17 @@ public class ScrapInsertController {
 	ScrapDao scrapDao;
 	
 	@RequestMapping(command)
-	public String insert(ScrapBean scrapBean, HttpSession session) {
+	public String insert(ScrapBean scrapBean, HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + scrapBean.getBnum());
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");

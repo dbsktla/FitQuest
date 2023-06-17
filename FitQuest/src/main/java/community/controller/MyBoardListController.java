@@ -47,6 +47,12 @@ public class MyBoardListController {
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+			if(memberBean.getMtype().equals("generic")) {
+				session.setAttribute("topmenu", "genericMember");
+			}
+			else {
+				session.setAttribute("topmenu", "trainerMember");
+			}
 			Map<String,String> map = new HashMap<String,String>();
 			if(pageNumber == null) {
 				pageNumber = "1";

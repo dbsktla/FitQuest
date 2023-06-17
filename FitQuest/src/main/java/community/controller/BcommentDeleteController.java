@@ -1,5 +1,8 @@
 package community.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,8 @@ public class BcommentDeleteController {
 	BcommentDao bcommentDao;
 	
 	@RequestMapping(command)
-	public String delete(@RequestParam("cnum") int cnum, @RequestParam("bnum") int bnum ,@RequestParam("id") String id, @RequestParam("btype") String btype ,HttpSession session) {
+	public String delete(@RequestParam("cnum") int cnum, @RequestParam("bnum") int bnum ,@RequestParam("id") String id, @RequestParam("btype") String btype ,HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		if(btype.equals("자유")) {
 			session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bnum);
 		}
@@ -26,7 +30,13 @@ public class BcommentDeleteController {
 			session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + bnum);
 		}
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
