@@ -1,10 +1,12 @@
 package admin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +33,19 @@ public class AdminQuestionFinishListController {
 					HttpSession session, 
 					Model model,
 					@RequestParam(value="pageNumber",required = false) String pageNumber,
-					HttpServletRequest request
+					HttpServletRequest request,
+					HttpServletResponse response
 		) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminQuestTionFinish.ad");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
@@ -58,7 +68,13 @@ public class AdminQuestionFinishListController {
 				return getPage;
 			}
 			else {
-				return "redirect:/login.mb";
+				try {
+					response.getWriter().print("<script>alert('관리자 로그인이 필요합니다.');</script>");
+					response.getWriter().flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return "forward:/login.mb";
 			}
 		}
 	}
