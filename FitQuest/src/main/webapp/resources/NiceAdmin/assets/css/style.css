@@ -684,9 +684,9 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #fac710;
   transition: 0.3;
-  background: #f6f9ff;
+  background: #fef9e7;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -694,25 +694,25 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #fac710;
 }
 
 .sidebar-nav .nav-link.collapsed {
-  color: #012970;
+  color: #000;
   background: #fff;
 }
 
 .sidebar-nav .nav-link.collapsed i {
-  color: #899bbd;
+  color: #a0a0a0;
 }
 
 .sidebar-nav .nav-link:hover {
-  color: #4154f1;
-  background: #f6f9ff;
+  color: #fac710;
+  background: #fef9e7;
 }
 
 .sidebar-nav .nav-link:hover i {
-  color: #4154f1;
+  color: #fac710;
 }
 
 .sidebar-nav .nav-link .bi-chevron-down {
