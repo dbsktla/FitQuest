@@ -28,6 +28,7 @@ public class AdminCommunityReportListController {
 	public String reportList(Model model, HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminCommunityReportList.ad");
+		session.setAttribute("adminMenubar", "communityReport");
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
 		}
