@@ -1,8 +1,10 @@
 package admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,8 @@ public class AdminCommunityReportListController {
 	AdminDao adminDao;
 	
 	@RequestMapping(command)
-	public String reportList(Model model, HttpSession session) {
+	public String reportList(Model model, HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminCommunityReportList.ad");
 		if(session.getAttribute("loginInfo") == null) {
 			return "redirect:/login.mb";
@@ -40,7 +43,13 @@ public class AdminCommunityReportListController {
 				return getPage;
 			}
 			else {
-				return "redirect:/login.mb";
+				try {
+					response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+					response.getWriter().flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return "forward:/login.mb";
 			}
 		}
 	}
