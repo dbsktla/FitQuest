@@ -37,7 +37,8 @@ public class AdminQuestionFinishListController {
 					HttpServletResponse response
 		) {
 		response.setContentType("text/html; charset=utf-8");
-		session.setAttribute("destination", "redirect:/adminQuestTionFinish.ad");
+		session.setAttribute("destination", "redirect:/adminQuestTionFinishList.ad");
+		session.setAttribute("adminMenubar", "question");
 		if(session.getAttribute("loginInfo") == null) {
 			try {
 				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");

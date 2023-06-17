@@ -36,6 +36,7 @@ public class AdminReviewReportListController {
 	public String reportList(Model model, HttpSession session, @RequestParam(value="pageNumber",required = false) String pageNumber, HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminReviewReportList.ad");
+		session.setAttribute("adminMenubar", "reviewReport");
 		if(session.getAttribute("loginInfo") == null) {
 			try {
 				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");

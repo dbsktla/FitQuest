@@ -124,20 +124,20 @@
 <!--         </ul> -->
 <!--       </li> -->
        <li class="nav-item">
-        <a class="nav-link collapsed" href="adminReviewReportList.ad">
+        <a class="nav-link <c:if test="${ adminMenubar != 'reviewReport'}">collapsed</c:if>" href="adminReviewReportList.ad">
         <i class="bi bi-x-octagon-fill"></i>
           <span>리뷰 삭제 요청</span>
         </a>
       </li>
        <li class="nav-item">
-        <a class="nav-link collapsed" href="adminCommunityReportList.ad">
+        <a class="nav-link <c:if test="${ adminMenubar != 'communityReport'}">collapsed</c:if>" href="adminCommunityReportList.ad">
           <i class="bi bi-megaphone-fill"></i>
           <span>게시글 신고</span>
         </a>
       </li>
       
        <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link <c:if test="${ adminMenubar != 'question'}">collapsed</c:if>" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
           <i class="ri-customer-service-2-fill"></i><span>1:1 문의</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="question-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">

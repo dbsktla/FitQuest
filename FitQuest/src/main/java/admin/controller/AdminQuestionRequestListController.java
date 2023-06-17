@@ -38,6 +38,7 @@ public class AdminQuestionRequestListController {
 		) {
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminQuestTionRequestList.ad");
+		session.setAttribute("adminMenubar", "question");
 		if(session.getAttribute("loginInfo") == null) {
 			try {
 				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");

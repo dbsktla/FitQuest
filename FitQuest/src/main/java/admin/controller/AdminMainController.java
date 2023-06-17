@@ -43,6 +43,7 @@ public class AdminMainController {
 	) {
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminMain.ad");
+		session.setAttribute("adminMenubar", null);
 		if(session.getAttribute("loginInfo") == null) {
 			try {
 				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
