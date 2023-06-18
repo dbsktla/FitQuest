@@ -589,3 +589,28 @@ CREATE TABLE review (
 );
 select * from review;
 commit;
+
+--notifications
+drop sequence noseq;
+create sequence noseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;  
+  
+drop table gym cascade constraints;
+CREATE TABLE notification (
+   nonum   number   primary key, --알림 번호
+   recId varchar2(100), --알림 수신자 id
+   sendId varchar2(100), --알림 발신자 id
+   recName varchar2(100), --알림 수신자 이름
+   sendName varchar2(100), --알림 발신자 이름
+   request varchar2(100), --이동 시킬 페이지
+   notifContent varchar2(500), --알림 내용
+   notifDate date default sysdate, --알림 날짜 
+   notifRead varchar2(20) check(notifRead in('read', 'unread')) --알림 읽었는지 안 읽었는지 구분
+);
+
+commit;
+select * from notification;

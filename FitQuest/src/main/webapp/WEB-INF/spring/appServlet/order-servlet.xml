@@ -26,4 +26,5 @@
 	<context:component-scan base-package="usage"/>
 	<context:component-scan base-package="orderdetail"/>
 	<context:component-scan base-package="order"/>
+	<context:component-scan base-package="notification"/>
 </beans>

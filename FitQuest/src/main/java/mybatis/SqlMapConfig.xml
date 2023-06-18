@@ -32,6 +32,7 @@
 		<mapper resource="mybatis/review.xml"/>
 		<mapper resource="mybatis/composite.xml"/> <!-- join -->
 		<mapper resource="mybatis/admin.xml"/>
+		<mapper resource="mybatis/notification.xml"/>
 	</mappers>
 	
 </configuration>

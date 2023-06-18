@@ -28,4 +28,6 @@
 	<context:component-scan base-package="community"/>
 	<context:component-scan base-package="admin"/>
 	<context:component-scan base-package="question"/>
+	<context:component-scan base-package="notification"/>
+	
 </beans>

@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
 import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 
 @Controller
 public class MemberLoginController {
@@ -23,7 +26,8 @@ public class MemberLoginController {
 
 	@Autowired
 	MemberDao memberDao;
-
+	@Autowired
+	NotificationDao notificationDao;
 	@RequestMapping(value=command,method=RequestMethod.GET)
 	public String login() {
 		return getPage;
@@ -47,6 +51,16 @@ public class MemberLoginController {
 			else {
 				if(memberBean.getPassword().equals(password)) {
 					session.setAttribute("loginInfo", memberBean);
+					
+					//로그인 하면 알림 있는지 확인.
+					int notifCount = notificationDao.getNotifCount(id);
+					List<NotificationBean> notifList = null;
+					//알림이 있으면
+					if(notifCount > 0) {
+						notifList = notificationDao.getAllNotifications(id);
+						session.setAttribute("notifList", notifList);
+						session.setAttribute("notifCount", notifCount);
+					}
 					if(id.equals("admin")) {
 						return "redirect:/adminMain.ad";
 					}
@@ -76,6 +90,8 @@ public class MemberLoginController {
 	@RequestMapping(value="/logout.mb")
 	public String logout(HttpSession session) {
 		session.setAttribute("loginInfo", null);
+		session.setAttribute("notifList", null);
+		session.setAttribute("notifCount", null);
 		return "redirect:/main.go";
 	}
 	

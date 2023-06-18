@@ -31,4 +31,6 @@
 	<context:component-scan base-package="gym"/>
 	<context:component-scan base-package="usage"/>
 	<context:component-scan base-package="trainer"/>
+	<context:component-scan base-package="notification"/>
+	
 </beans>

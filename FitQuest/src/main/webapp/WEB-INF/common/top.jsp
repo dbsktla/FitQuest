@@ -2,7 +2,17 @@
     pageEncoding="UTF-8"%>
 <!-- top.jsp -->
 <%@ include file="../common/common.jsp" %>
-
+<style>
+	.notification-item:hover{
+		background-color:#FEF9E7;
+	}
+	.notification-item{
+		padding: 0px;
+	}
+	p{
+		padding: 0px;
+	}
+</style>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -128,7 +138,9 @@
 	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
-	          <li>
+	      
+	    <!--   장바구니 - 일반 회원 -->
+	      <li>
           	<a href = "cartList.od">
           		<i class="bi bi-cart" style="font-size: 30px;"></i>
           	</a>
@@ -144,6 +156,47 @@
 	            </ul>
 	       </li>
            </c:if>
+           
+		  <!-- 알림 -->
+		  <c:if test = "${loginInfo.mtype != null }">
+		  <c:if test = "${ notifCount != null }">
+		  <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell" style = "font-size: 25px;"></i>
+            <span class="badge bg-primary badge-number">${notifCount }</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header" style = "display:flex; justify-content: space-around; align-items: center; padding:0px;">
+              알림 ${ notifCount }개 있습니다.
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+			
+			<c:forEach var = "notif" items = "${notifList}">
+            <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <p>${notif.notifContent }</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+			</c:forEach>
+            <li class="dropdown-footer">
+              <a href="#">전체 알림 보기</a>
+            </li>
+            
+          </ul><!-- End Notification Dropdown Items -->
+        </li><!-- End Notification Nav -->
+        </c:if>
+        </c:if>
+        
           <li>
           	<a class="scrollto">
           		<!-- 로그인 정보 없으면 login -->
