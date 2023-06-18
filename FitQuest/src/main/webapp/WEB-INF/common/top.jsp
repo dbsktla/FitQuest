@@ -73,8 +73,6 @@
             </ul>
           </li>
           
-          <li><a class="nav-link scrollto" href="#">TIPS</a></li>
-          
           <li><a class="nav-link scrollto <c:if test="${topmenu eq 'trainerList'}">active</c:if>" href="trainerList.pd">TRAINERS</a></li>
           
           <!-- 일반회원 메뉴 -->
