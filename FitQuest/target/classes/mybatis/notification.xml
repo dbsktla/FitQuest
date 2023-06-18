@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notification.model.Notification">
+	<insert id = "InsertPurchaseNotif">
+		insert into notification 
+		values(noseq.nextval, #{recId}, #{sendId}, #{recName}, #{sendName}, #{request}, #{notifContent}, sysdate, 'unread')
+	</insert>
+	<select id = "GetAllNotifs" resultType = "notification.model.NotificationBean">
+		select * from notification 
+		where recId = #{id}
+	</select>
+	<select id = "GetNotifCount" resultType = "int">
+		select count(*) from notification 
+		where recId = #{recId}
+	</select>
+</mapper>
