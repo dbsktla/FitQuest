@@ -30,7 +30,7 @@
       <li class="nav-heading">Manage</li>
       
       <li class="nav-item">
-        <a class="nav-link <c:if test="${menubar != ''}">collapsed</c:if>" href="memberHealthCare.ht">
+        <a class="nav-link <c:if test="${menubar != 'memberHealthCare'}">collapsed</c:if>" href="memberHealthCare.ht">
           <i class="bi bi-layout-text-window-reverse"></i><span>회원운동관리</span><!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
       </li><!-- End Tables Nav -->
