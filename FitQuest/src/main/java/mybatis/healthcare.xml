@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="healthcare.model.HealthCare">
+	<select id="GetHealthCareList" resultType="healthcare.model.HealthCareBean">
+		SELECT		m.*
+				   ,u.odate
+				   ,u.usage
+				   ,u.ustate
+		FROM 		(
+				 	 SELECT id AS mid
+				 	 	   ,name
+				 	 	   ,TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), birth) / 12) AS age
+				 	 	   ,mphone
+				 	 	   ,email
+				 	 	   ,gender
+				 	 FROM   MEMBER
+					) m
+		INNER JOIN 	(
+					 SELECT  u.tid
+					 		,u.mid
+					 		,odate
+					 		,usage
+					 		,ustate
+					 FROM	 (
+						 	  SELECT   *
+						 	  FROM     (
+								        SELECT  tid
+								        	   ,mid
+								        	   ,MIN(onum) AS onum
+								        	   ,MAX(unum) AS unum
+								        FROM (
+								              SELECT  *
+								 	 		  FROM    PRODUCT p
+								  	   		 ) p
+								  	    INNER JOIN USAGE u 
+								  	    ON    p.pnum = u.unum
+								  	    GROUP BY mid, tid
+								  	   ) u
+							  INNER JOIN ORDERS o
+							  ON    u.onum = o.onum
+							 ) o
+					 INNER JOIN USAGE u
+					 ON    o.unum = u.unum
+					) u
+		ON    u.mid = m.mid
+		WHERE u.tid = #{tid}
+		<if test="whatName != null">
+			AND name like #{whatName}
+		</if>
+		<if test="whatGender != null">
+			AND gender = #{whatGender}
+		</if>
+		<if test="whatStatus != null">
+			AND u.ustate = #{whatStatus}
+		</if>
+		<if test="startAge != 0">
+			AND age BETWEEN #{startAge} AND #{endAge}
+		</if>
+		
+	</select>
+</mapper>

@@ -1,26 +1,26 @@
--- 주문
-insert into orders values(oseq.nextval, 'hong', '23-04-01');
-insert into orders values(oseq.nextval, 'hong', '23-06-01');
-insert into orders values(oseq.nextval, 'jkim', '23-06-05');
-
-commit;
-
-
--- 주문상세
-insert into orderdetail values(odseq.nextval, 2, 1);
-insert into orderdetail values(odseq.nextval, 7, 2);
-insert into orderdetail values(odseq.nextval, 1, 18);
-
-commit;
-
-
--- 사용권
-insert into usage values(useq.nextval, 2, 1, 'kim', 'hong', 18, 'available');
-insert into usage values(useq.nextval, 5, 1, 'lee', 'hong', 18, 'available');
-insert into usage values(useq.nextval, 7, 2, 'park', 'hong', 11, 'unavailable');
-insert into usage values(useq.nextval, 1, 3, 'kim', 'jkim', 10, 'available');
-
-commit;
+---- 주문
+--insert into orders values(oseq.nextval, 'hong', '23-04-01');
+--insert into orders values(oseq.nextval, 'hong', '23-06-01');
+--insert into orders values(oseq.nextval, 'jkim', '23-06-05');
+--
+--commit;
+--
+--
+---- 주문상세
+--insert into orderdetail values(odseq.nextval, 2, 1);
+--insert into orderdetail values(odseq.nextval, 7, 2);
+--insert into orderdetail values(odseq.nextval, 1, 18);
+--
+--commit;
+--
+--
+---- 사용권
+--insert into usage values(useq.nextval, 2, 1, 'kim', 'hong', 18, 'available');
+--insert into usage values(useq.nextval, 5, 1, 'lee', 'hong', 18, 'available');
+--insert into usage values(useq.nextval, 7, 2, 'park', 'hong', 11, 'unavailable');
+--insert into usage values(useq.nextval, 1, 3, 'kim', 'jkim', 10, 'available');
+--
+--commit;
 
 
 -- 운동일자

@@ -103,7 +103,7 @@
 		SELECT	o.tid
 			   ,o.mid as id
 			   ,o.name AS tname
-			   ,TO_DATE(SYSDATE, 'yyyy-MM-dd') - to_date(o.odate, 'yyyy-MM-dd') AS hdate
+			   ,TO_DATE(SYSDATE, 'yyyy-MM-dd') - TO_DATE(o.odate, 'yyyy-MM-dd') AS hdate
 			   ,t.activity AS tactivity
 		FROM 	(
 			      SELECT	*

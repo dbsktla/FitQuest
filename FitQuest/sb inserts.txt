@@ -134,6 +134,8 @@ insert into orders values(oseq.nextval, 'hong', sysdate - 3 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 2 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 1 );
 insert into orders values(oseq.nextval, 'hong', sysdate);
+insert into orders values(oseq.nextval, 'parkjay', '2022-12-02');
+insert into orders values(oseq.nextval, 'jkim', sysdate);
 
 --orderdetail
 insert into orderdetail values(odseq.nextval, 1, 1);
@@ -172,6 +174,8 @@ insert into orderdetail values(odseq.nextval, 5, 13);
 insert into orderdetail values(odseq.nextval, 6, 14);
 insert into orderdetail values(odseq.nextval, 6, 15);
 insert into orderdetail values(odseq.nextval, 6, 15);
+insert into orderdetail values(odseq.nextval, 2, 16);
+insert into orderdetail values(odseq.nextval, 3, 17);
 
 
 
@@ -190,3 +194,6 @@ insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박�
 --usage
 
 insert into usage values(useq.nextval, 1, 1, 'kim', 'hong', 14, 'available');
+insert into usage values(useq.nextval, 3, 16, 'kim', 'parkjay', 0, 'unavailable');
+insert into usage values(useq.nextval, 2, 17, 'kim', 'jkim', 28, 'available');
+insert into usage values(useq.nextval, 4, 12, 'lee', 'hong', 28, 'available');
