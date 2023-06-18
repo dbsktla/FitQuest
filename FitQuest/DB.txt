@@ -599,7 +599,7 @@ create sequence noseq
   maxvalue 10000
   nocache;  
   
-drop table gym cascade constraints;
+drop table notification cascade constraints;
 CREATE TABLE notification (
    nonum   number   primary key, --알림 번호
    recId varchar2(100), --알림 수신자 id
