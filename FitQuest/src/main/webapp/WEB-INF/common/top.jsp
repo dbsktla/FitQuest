@@ -118,9 +118,10 @@
           	<li class="dropdown" ><a href="trainerDetail.mb" class="<c:if test="${topmenu eq 'trainerMember'}">active</c:if>"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="trainerDetail.mb">마이페이지</a></li>
-	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
-	              <li><a href="viewProductList.pd">상품관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
+	              <li><a href="memberHealthCare.ht">회원운동관리</a></li>
+	              <li><a href="viewProductList.pd">상품관리</a></li>
+	              <li><a href="trainerReviewList.mb">리뷰관리</a></li>
 	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
@@ -130,9 +131,9 @@
           	<li class="dropdown" ><a href="genericMemberDetail.mb" class="<c:if test="${topmenu eq 'genericMember'}">active</c:if>"><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="genericMemberDetail.mb">마이페이지</a></li>
-	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
-	              <li><a href="viewMyOrderList.od">구매관리</a></li>
 	              <li><a href="myBoardList.co">내 글보기</a></li>
+	              <li><a href="viewMyOrderList.od">구매관리</a></li>
+	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
 	              <li><a href="myQuestionList.qt">문의 내역</a></li>
 	            </ul>
 	          </li>
