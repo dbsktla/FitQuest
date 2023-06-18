@@ -1,5 +1,8 @@
 package question.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -23,9 +26,16 @@ public class QuestionInsertController {
 	QuestionDao questionDao;
 	
 	@RequestMapping(value=command,method=RequestMethod.GET)
-	public String insert(HttpSession session) {
+	public String insert(HttpSession session, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		return getPage;
 	}
@@ -35,11 +45,19 @@ public class QuestionInsertController {
 			@Valid QuestionBean questionBean, 
 			BindingResult result,
 			HttpSession session,
-			Model model
+			Model model,
+			HttpServletResponse response
 		) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			if(result.hasErrors()) {

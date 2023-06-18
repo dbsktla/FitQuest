@@ -1,10 +1,12 @@
 package admin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,18 @@ public class AdminReviewReportListController {
 	ReviewDao reviewDao;
 	
 	@RequestMapping(command)
-	public String reportList(Model model, HttpSession session, @RequestParam(value="pageNumber",required = false) String pageNumber, HttpServletRequest request) {
+	public String reportList(Model model, HttpSession session, @RequestParam(value="pageNumber",required = false) String pageNumber, HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/adminReviewReportList.ad");
+		session.setAttribute("adminMenubar", "reviewReport");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
@@ -57,7 +67,13 @@ public class AdminReviewReportListController {
 				
 				return getPage;
 			}else {
-				return "redirect:/login.mb";
+				try {
+					response.getWriter().print("<script>alert('관리자 로그인이 필요합니다.');</script>");
+					response.getWriter().flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return "forward:/login.mb";
 			}
 		}
 	}

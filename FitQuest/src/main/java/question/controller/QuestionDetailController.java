@@ -1,5 +1,8 @@
 package question.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +28,17 @@ public class QuestionDetailController {
 	QcommentDao qcommentDao;
 	
 	@RequestMapping(command)
-	public String detail(HttpSession session, @RequestParam("qnum") int qnum, Model model) {
+	public String detail(HttpSession session, @RequestParam("qnum") int qnum, Model model, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", "redirect:/myQuestionList.qt");
 		if(session.getAttribute("loginInfo") == null) {
-			return "redirect:/login.mb";
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		else {
 			QuestionBean questionBean = questionDao.getQuestionByQnum(qnum);

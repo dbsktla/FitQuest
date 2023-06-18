@@ -1,6 +1,7 @@
 package order.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ import gym.model.GymBean;
 import gym.model.GymDao;
 import member.model.MemberBean;
 import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 import order.model.OrderDao;
 import orderdetail.model.OrderDetailDao;
 import product.model.MyShoppingBean;
@@ -47,26 +50,48 @@ public class OrderCalculateController {
 	GymDao gymDao;
 	@Autowired
 	ReviewDao reviewDao;
-
+	@Autowired
+	NotificationDao notificationDao;
+	
 	@RequestMapping(value = command)
 	public String doAction(@RequestParam("pnum") int[] pnumArr,
 			Model model,
 			HttpSession session) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		int totalAmount = 0;
-		boolean flag2 = (Boolean)session.getAttribute("flag2");
+		boolean flag2 = (Boolean)session.getAttribute("flag2"); //새로고침 하면 다시 주문 안되게 session변수 확인
 		if(flag2 == true) {
-			int cnt = orderDao.insertOrder(memberBean.getId());
-			int orderNum = orderDao.selectOrderNum(memberBean.getId());
+			
+			int cnt = orderDao.insertOrder(memberBean.getId()); //주문 테이블에 먼저 삽입
+			int orderNum = orderDao.selectOrderNum(memberBean.getId()); //주문 상세 테이블 다음 삽입.
+			
 			if(cnt > -1) {
-				for(int i = 0; i < pnumArr.length; i++) {
-					int pnum = pnumArr[i];
+				for(int i = 0; i < pnumArr.length; i++) { //주문 한 상품 하나씩 하나씩 주문 상세 테이블에 넣는거임. 주문을 완료 시키는것.
+					int pnum = pnumArr[i]; 
 					Map<String, Integer> odMap = new HashMap<String, Integer>();
 					odMap.put("pnum", pnum);
 					odMap.put("onum", orderNum);
-					int cnt2 = orderDetailDao.insertOrderDetail(odMap);
+					int cnt2 = orderDetailDao.insertOrderDetail(odMap); //주문에 어떤 상품을 구매 했는지 추가
 					System.out.println("cnt2: " + cnt2);
-					if(cnt2 > -1) {
+					
+					//해당 회원권이 주문되면서 그 해당되는 트레이너에게 알림 보내는 설정
+					String recId = productDao.getIdByPnum(pnum); //수신자는 트레이너라서 트레이너 ID.
+					String recName = memberDao.getName(recId); //따라서 수신자 이름
+					String sendId = memberBean.getId();
+					String sendName = memberBean.getName();
+					String request = "redirect:/main.go";
+					String notifContent = sendName + "회원님이 " + recName + "선생님의 회원권을 구매했습니다.";
+					NotificationBean notifBean = new NotificationBean();
+					notifBean.setRecId(recId);
+					notifBean.setRecName(recName);
+					notifBean.setSendId(sendId);
+					notifBean.setSendName(sendName);
+					notifBean.setRequest(request);
+					notifBean.setNotifContent(notifContent);
+					int notif = notificationDao.insertPurchaseNotif(notifBean);
+					
+					
+					if(cnt2 > -1) { //주문 완료 되서 바로 사용권 테이블로 추가한다.
 						ProductBean productBean = productDao.getProductByPnum(pnum);
 						String tid = productDao.getIdByPnum(pnum);
 						UsageBean usageBean = new UsageBean();
@@ -77,7 +102,7 @@ public class OrderCalculateController {
 						usageBean.setPnum(pnum);
 						usageBean.setUsage(productBean.getPcount());
 						int cnt3 = usageDao.insertUsage(usageBean);
-						if(cnt3 > -1) {
+						if(cnt3 > -1) { //주문 관련 작업 다 끝나서 이젠 카트를 비우는것.
 								session.setAttribute("cartList", null);
 								session.setAttribute("flag2", false);
 						}
@@ -85,6 +110,8 @@ public class OrderCalculateController {
 					}
 				}
 			}
+		
+		//다시 주문 확인 내용 출력 하기 위해 주문한 내용을 생성한다.
 		ArrayList<MyShoppingBean> sList = new ArrayList<MyShoppingBean>();
 		int orderNum2 = orderDao.selectOrderNum(memberBean.getId());
 		List<Integer> pList = orderDetailDao.getPnumList(orderNum2);

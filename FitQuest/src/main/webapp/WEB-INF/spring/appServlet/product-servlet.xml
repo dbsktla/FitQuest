@@ -30,4 +30,5 @@
 	<context:component-scan base-package="reservation"/>
 	<context:component-scan base-package="health"/>
 	<context:component-scan base-package="nutrition"/>
+	<context:component-scan base-package="notification"/>
 </beans>

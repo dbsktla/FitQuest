@@ -1,5 +1,8 @@
 package admin.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,8 @@ public class AdminReviewReportDeleteController {
 	ReviewDao reviewDao;
 	
 	@RequestMapping(command)
-	public String delete(HttpSession session, @RequestParam("renum") int renum) {
+	public String delete(HttpSession session, @RequestParam("renum") int renum, HttpServletResponse response) {
+		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("destination", gotoPage);
 		if(session.getAttribute("loginInfo") != null) {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
@@ -40,12 +44,23 @@ public class AdminReviewReportDeleteController {
 				}
 			}
 			else {
-				session.setAttribute("loginInfo", null);
-				return "redirect:/login.mb";
+				try {
+					response.getWriter().print("<script>alert('관리자 로그인이 필요합니다.');</script>");
+					response.getWriter().flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return "forward:/login.mb";
 			}
 		}
-		else {
-			return "redirect:/login.mb";
+		else  {
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
 		}
 		return gotoPage;
 	}
