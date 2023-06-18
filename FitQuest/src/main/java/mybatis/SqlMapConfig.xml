@@ -20,6 +20,7 @@
 		<mapper resource="mybatis/reservation.xml"/>
 		<mapper resource="mybatis/health.xml"/>
 		<mapper resource="mybatis/healthDate.xml"/>
+		<mapper resource="mybatis/healthcare.xml"/>
 		<mapper resource="mybatis/nutrition.xml"/>
 		<mapper resource="mybatis/meal.xml"/>
 		<mapper resource="mybatis/food.xml"/>
