@@ -120,7 +120,7 @@
                 <h4>${ trainerList[0].name }</h4>
                 <p>${ trainerList[0].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[0].id }&pageNumber=1&hasReview=${ trainerList[0].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[0].id }&pageNumber=1&hasReview=${ trainerList[0].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@
                 <h4>${ trainerList[1].name }</h4>
                 <p>${ trainerList[1].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[1].id }&pageNumber=1&hasReview=${ trainerList[1].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[1].id }&pageNumber=1&hasReview=${ trainerList[1].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -159,7 +159,7 @@
                 <h4>${ trainerList[3].name }</h4>
                 <p>${ trainerList[3].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[3].id }&pageNumber=1&hasReview=${ trainerList[3].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[3].id }&pageNumber=1&hasReview=${ trainerList[3].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@
                 <h4>${ trainerList[4].name }</h4>
                 <p>${ trainerList[4].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[4].id }&pageNumber=1&hasReview=${ trainerList[4].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[4].id }&pageNumber=1&hasReview=${ trainerList[4].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -185,7 +185,7 @@
                <h4>${ trainerList[5].name }</h4>
                 <p>${ trainerList[5].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[5].id }&pageNumber=1&hasReview=${ trainerList[5].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[5].id }&pageNumber=1&hasReview=${ trainerList[5].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@
                 <h4>${ trainerList[6].name }</h4>
                 <p>${ trainerList[6].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[6].id }&pageNumber=1&hasReview=${ trainerList[6].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[6].id }&pageNumber=1&hasReview=${ trainerList[6].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -211,7 +211,7 @@
                 <h4>${ trainerList[7].name }</h4>
                 <p>${ trainerList[7].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[7].id }&pageNumber=1&hasReview=${ trainerList[7].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[7].id }&pageNumber=1&hasReview=${ trainerList[7].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@
                 <h4>${ trainerList[8].name }</h4>
                 <p>${ trainerList[8].activity }</p>
                 <div class="portfolio-links">
-                  <a href="trainerDetail.mb?id=${ trainerList[8].id }&pageNumber=1&hasReview=${ trainerList[8].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
+                  <a href="trainerDetail.pd?id=${ trainerList[8].id }&pageNumber=1&hasReview=${ trainerList[8].hasReview }" title="More Details"><i class="bi bi-link"></i></a>
                 </div>
               </div>
             </div>
