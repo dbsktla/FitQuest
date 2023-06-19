@@ -12,6 +12,12 @@
 	p{
 		padding: 0px;
 	}
+	ul {
+		list-style-position: inside;
+	}
+	.notification-item{
+		width: 300px;
+	}
 </style>
 <head>
   <meta charset="utf-8">
@@ -47,6 +53,17 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+   <!-- Vendor CSS Files -->
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="<%=request.getContextPath()%>/resources/NiceAdmin/assets/css/style.css" rel="stylesheet">
   
 
 </head>
@@ -157,44 +174,52 @@
            </c:if>
            
 		  <!-- 알림 -->
+		      <nav class="header-nav ms-auto">
+      		<ul class="d-flex align-items-center">
+		  <!-- 알림 -->
 		  <c:if test = "${loginInfo.mtype != null }">
 		  <c:if test = "${ notifCount != null }">
 		  <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown" href="#">
             <i class="bi bi-bell" style = "font-size: 25px;"></i>
             <span class="badge bg-primary badge-number">${notifCount }</span>
           </a><!-- End Notification Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header" style = "display:flex; justify-content: space-around; align-items: center; padding:0px;">
-              알림 ${ notifCount }개 있습니다.
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style = "width : 300px; margin-top: 38px;">
+            <li class="dropdown-header" style = "display:flex; justify-content: center; align-items: center; padding:0px;">
+              <span>알림 ${ notifCount }개 있습니다.</span>
+              <a href="#"><span class="badge rounded-pill bg-warning p-2 ms-2">모든 알림 삭제</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 			
+			<!-- 각 알림 아이템 -->
 			<c:forEach var = "notif" items = "${notifList}">
-            <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <p>${notif.notifContent }</p>
-              </div>
-            </li>
 
+			<a href = "${notif.request}" style = "width:300px;">
+            <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
+              <i class="bi bi-exclamation-circle text-warning" style = "width: 20%;"></i>
+                
+                <p style = "width: 75%;white-space: normal">${notif.notifContent }</p>
+            </li>
+			</a>
             <li>
               <hr class="dropdown-divider">
             </li>
+            
 			</c:forEach>
             <li class="dropdown-footer">
-              <a href="#">전체 알림 보기</a>
+              <a href="#" style = "justify-content: center; align-items:center;">전체 알림 보기</a>
             </li>
             
           </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
         </c:if>
         </c:if>
+        </ul>
+        </nav>
         
           <li>
           	<a class="scrollto">
