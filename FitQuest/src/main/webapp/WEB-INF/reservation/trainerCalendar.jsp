@@ -84,10 +84,10 @@
   	  <div class="left"></div>
       <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
-      	<c:if test="${flag == 'true'}">
+      	<c:if test="${updateFlag == 'true'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleUpdate.rv'" value="스케줄 수정">
       	</c:if>
-      	<c:if test="${flag == 'false'}">
+      	<c:if test="${insertFlag == 'true'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">
       	</c:if>
       </div>

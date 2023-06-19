@@ -2,24 +2,20 @@ package reservation.model;
 
 
 
-import org.hibernate.validator.constraints.NotBlank;
 
 public class TscheduleBean {
+	private int tsnum;
 	private String tid;
 	
-	@NotBlank(message = "요일을 선택해 주세요")
 	private String tsday;
 	
-	@NotBlank(message = "시간을 선택해 주세요")
 	private String tstime;
 	
 	private String tsdate;
 	
-	@NotBlank(message = "유형을 선택해 주세요")
 	private String tstype;
 	
-	@NotBlank(message = "인원을 선택해 주세요")
-	private String tspeople;
+	private int tspeople;
 	
 	
 	//요일별 시간 임시변수들
@@ -37,10 +33,10 @@ public class TscheduleBean {
 	public void setTstype(String tstype) {
 		this.tstype = tstype;
 	}
-	public String getTspeople() {
+	public int getTspeople() {
 		return tspeople;
 	}
-	public void setTspeople(String tspeople) {
+	public void setTspeople(int tspeople) {
 		this.tspeople = tspeople;
 	}
 	public String getTid() {
@@ -70,7 +66,7 @@ public class TscheduleBean {
 	public TscheduleBean() {
 		
 	}
-	public TscheduleBean(String tid, String tsday, String tstime, String tsdate, String tstype, String tspeople) {
+	public TscheduleBean(String tid, String tsday, String tstime, String tsdate, String tstype, int tspeople) {
 		super();
 		this.tid = tid;
 		this.tsday = tsday;

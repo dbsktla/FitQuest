@@ -1,5 +1,8 @@
 package reservation.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,14 +16,15 @@ public class TscheduleDao {
 
 	public int insertTschedule(TscheduleBean tscheduleBean) {
 		int cnt = -1;
+		System.out.println("넘어오는지 테스트");
 		cnt = sqlSessionTemplate.insert(namespace+".InsertTschedule",tscheduleBean);
 		return cnt;
 	}
 
-	public TscheduleBean findTschedule(String tid) {
-		TscheduleBean tscheduleBean = null;
-		tscheduleBean = sqlSessionTemplate.selectOne(namespace+".FindTschedule",tid);
-		return tscheduleBean;
+	public List<TscheduleBean> findTschedule(String tid) {
+		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
+		tsList = sqlSessionTemplate.selectList(namespace+".FindTschedule",tid);
+		return tsList;
 	}
 
 	public int updateTschedule(TscheduleBean tscheduleBean) {
@@ -28,6 +32,7 @@ public class TscheduleDao {
 		cnt = sqlSessionTemplate.update(namespace+".UpdateTschedule",tscheduleBean);
 		return cnt;
 	}
+
 	
 	
 }
