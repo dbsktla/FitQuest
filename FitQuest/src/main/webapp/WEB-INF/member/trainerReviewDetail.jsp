@@ -50,7 +50,7 @@ section{
           <div class="card">
             <div class="card-body">
              	 <h5 class="card-title">
-             	 <fmt:formatNumber var = "rating1" value="${reviewBean.rating }" type="number" pattern="#.0"/>
+             	 	<fmt:formatNumber var = "rating1" value="${reviewBean.rating }" type="number" pattern="#.0"/>
 					<fmt:formatNumber var = "rating" value="${reviewBean.rating}" type="number" pattern="#"/>
 	                리뷰 별점 : 
 					<c:set var = "starCount" value = "0"/>

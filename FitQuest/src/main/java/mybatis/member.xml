@@ -52,4 +52,11 @@
 		select * from member
 		where id = #{id} and email = #{email}
 	</select>
+	
+	<select id="GetMainTrainerList" resultType="member.model.MemberBean">
+		<![CDATA[select rownum, member.id, name, email, activity, timage
+		from (select * from member where mtype='trainer') member inner join trainer
+		on member.id = trainer.id
+		where rownum < 10]]>
+	</select>
 </mapper>

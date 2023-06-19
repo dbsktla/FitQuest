@@ -1,5 +1,7 @@
 package member.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
+import review.model.ReviewDao;
 import trainer.model.TrainerBean;
 
 @Component
@@ -15,6 +18,9 @@ public class MemberDao {
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
+	
+	@Autowired
+	ReviewDao reviewDao;
 	
 	public boolean searchId(String id) {
 		boolean isCheck = false;
@@ -94,5 +100,13 @@ public class MemberDao {
 		return memberBeanPw;
 	}
 	
+	public List<MemberBean> getMainTrainerList(){
+		List<MemberBean> trainerList = new ArrayList<MemberBean>();
+		trainerList = sqlSessionTemplate.selectList(namespace + ".GetMainTrainerList");
+		for(MemberBean trainer : trainerList) {
+			trainer.setHasReview(reviewDao.getHasReviewById(trainer.getId()));
+		}
+		return trainerList;
+	}
 	
 }

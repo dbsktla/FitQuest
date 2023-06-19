@@ -121,4 +121,16 @@ public class ReviewDao {
 		reportReviewList = sqlSessionTemplate.selectList(namespace + ".GetMainReviewReport");
 		return reportReviewList;
 	}
+	
+	public List<ReviewBean> getMainReviewList() {
+		List<ReviewBean> reviewAvgList = new ArrayList<ReviewBean>();
+		List<ReviewBean> reviewMainList = new ArrayList<ReviewBean>();
+		reviewAvgList = sqlSessionTemplate.selectList(namespace + ".GetAvgReviewList");
+		for(ReviewBean review : reviewAvgList) {
+			ReviewBean reviewBean = sqlSessionTemplate.selectOne(namespace + ".GetMainReview", review.getTid());
+			reviewBean.setRating(review.getRating());
+			reviewMainList.add(reviewBean);
+		}
+		return reviewMainList;
+	}
 }
