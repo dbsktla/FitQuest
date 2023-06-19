@@ -136,7 +136,7 @@ section {
   right: 15px;
   bottom: 15px;
   z-index: 99999;
-  background: #4154f1;
+  background: #FAC710;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -150,7 +150,7 @@ section {
 }
 
 .back-to-top:hover {
-  background: #6776f4;
+  background: #FEF9E7;
   color: #fff;
 }
 
@@ -573,7 +573,7 @@ section {
 .about h2 {
   font-size: 24px;
   font-weight: 700;
-  color: #012970;
+  color: #FAC710;
 }
 
 .about p {
@@ -1195,12 +1195,12 @@ section {
 
 .portfolio .portfolio-wrap .portfolio-info h4 {
   font-size: 20px;
-  color: #012970;
+  color: #FAC710;
   font-weight: 700;
 }
 
 .portfolio .portfolio-wrap .portfolio-info p {
-  color: #012970;
+  color: #FAC710;
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
@@ -1215,7 +1215,7 @@ section {
 
 .portfolio .portfolio-wrap .portfolio-links a {
   color: #fff;
-  background: #4154f1;
+  background: #FAC710;
   margin: 10px 2px;
   width: 36px;
   height: 36px;
@@ -1232,7 +1232,7 @@ section {
 }
 
 .portfolio .portfolio-wrap .portfolio-links a:hover {
-  background: #5969f3;
+  background: #FEF9E7;
 }
 
 .portfolio .portfolio-wrap:hover img {
@@ -1386,11 +1386,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #4154f1;
+  border: 1px solid #FAC710;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #4154f1;
+  background-color: #FAC710;
 }
 
 .testimonials .swiper-slide {
