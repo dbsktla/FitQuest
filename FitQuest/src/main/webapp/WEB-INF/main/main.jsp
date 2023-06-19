@@ -35,7 +35,7 @@
 
   </section><!-- End Hero -->
 
-  <main id="main">
+<main style="margin: 0;">
 
     <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
@@ -617,10 +617,10 @@
     </section><!-- End F.A.Q Section -->
     
 
-  </main><!-- End #main -->
+ </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer" style="margin: 0;">
 
     <div class="footer-top">
       <div class="container">
