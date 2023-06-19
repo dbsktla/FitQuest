@@ -85,7 +85,7 @@
       <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
       	<c:if test="${updateFlag == 'true'}">
-	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleUpdate.rv'" value="스케줄 수정">
+	      	<input type="button" class="btn btn-warning" onClick="location.href='trainerScheChoose.rv'" value="스케줄 수정">
       	</c:if>
       	<c:if test="${insertFlag == 'true'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">

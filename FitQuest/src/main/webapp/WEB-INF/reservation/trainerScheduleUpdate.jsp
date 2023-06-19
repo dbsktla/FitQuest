@@ -20,6 +20,7 @@
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script>
+	//날짜 추가
 	var classcount
 	function inputScope() {
 		document.getElementById('healthScope').innerHTML += '<div class="col-md-12 healthScopePlus margin-bottom">'
@@ -32,12 +33,146 @@
 		$('.healthScopePlus').eq(slen-1).remove();
 	}
 
+	$(document).ready(function() {
+		
+	  //선택된 체크박스가 있는 버튼에 클래스 추가
+	  $('.day-button').each(function() {
+	    var day = $(this).val();
+	    var checkboxes = $('#time-section-' + day + ' .time-checkbox');
+	    if (checkboxes.is(':checked')) {
+	      $(this).addClass('used');
+	    }
+	  });
+		
+	  //그룹/개인에 따라 인원수 다르게 보이기
+	  $('input[name="tstype"]').change(function() {
+	    if ($(this).val() === '그룹') {
+	      $('input[name="tspeople"]').each(function() {
+	        if ($(this).val() !== '1') {
+	          $(this).closest('label').show();
+	        } else {
+	          $(this).closest('label').hide();
+	        }
+	      });
+	    } else {
+	      $('input[name="tspeople"]').each(function() {
+	        if ($(this).val() === '1') {
+	          $(this).closest('label').show();
+	        } else {
+	          $(this).closest('label').hide();
+	        }
+	      });
+	    }
+	  });
+	  
+	// 선택한 요일에 따라 감추고 보이게 하기 및 선택한 체크박스 저장
+	  var selectedDay = null;
+	  var selectedCheckboxes = {}; // 요일별로 선택한 체크박스를 저장하는 객체
+
+		  
+	  $('.day-button').click(function() {
+		  //버튼 클릭하면 배경색 변경
+		  $('.day-button').removeClass('selected');
+	      $(this).addClass('selected');
+	      
+	    var day = $(this).val();
+	    
+	    if (selectedDay !== day) { // 이미 선택된 요일과 현재 클릭한 요일이 다른 경우에만 실행
+	      if (selectedDay) { // 숨기기
+	        $('#time-section-' + selectedDay).hide();
+	        saveSelectedCheckboxes(selectedDay); // 저장하기
+	      }
+	      $('#time-section-' + day).show(); // 보이기
+	      selectedDay = day; // 선택된 요일로
+	      restoreSelectedCheckboxes(selectedDay); // 복원하기
+	    }
+	    
+	  // 선택한 시간이 있으면 'used' 클래스 추가
+	    $('#time-section-' + day + ' .time-checkbox').each(function() {
+	      if ($(this).is(':checked')) {
+	        $(this).addClass('used');
+	      } else {
+	        $(this).removeClass('used');
+	      }
+	    });
+	  });
+
+	  // 체크박스 저장
+	  function saveSelectedCheckboxes(day) {
+	    var checkboxes = $('#time-section-' + day + ' .time-checkbox');
+	    selectedCheckboxes[day] = checkboxes.filter(':checked').map(function() {
+	      return this.value;
+	    }).get();
+	  // 선택한 버튼에 클래스 추가
+	    if (checkboxes.is(':checked')) {
+	      $('.day-button[value="' + day + '"]').addClass('used');
+	    } else {
+	      $('.day-button[value="' + day + '"]').removeClass('used');
+	    }
+	  }
+
+	  // 체크박스 복원
+	  function restoreSelectedCheckboxes(day) {
+	    var checkboxes = $('#time-section-' + day + ' .time-checkbox');
+	    var selectedValues = selectedCheckboxes[day];
+	    if (selectedValues && selectedValues.length > 0) {
+	      checkboxes.prop('checked', false);
+	      checkboxes.filter(function() {
+	        return selectedValues.includes(this.value);
+	      }).prop('checked', true);
+	    }
+	  }
+
+	  // 선택한 요일과 시간들을 묶어서 가져가기
+	  $('#yourForm').submit(function() {
+	    var selectedDaysArray = Object.keys(selectedCheckboxes).filter(function(day) {
+	      var selectedTimes = selectedCheckboxes[day];
+	      return selectedTimes && selectedTimes.length > 0; // 시간을 하나 이상 선택한 요일만 필터링
+	    });
+	    $('#selectedDays').val(selectedDaysArray.join(',')); // 선택한 요일을 쉼표로 구분된 문자열로 저장
+	  });
+	  
+	});//ready
+	
+	//유효성 검사
+	 function validateForm() {
+			var radiosType = document.getElementsByName("tstype");
+	        var radiosPeople = document.getElementsByName("tspeople");
+	        var isCheckedType = false;
+	        var isCheckedPeople = false;
+
+	        for (var i = 0; i < radiosType.length; i++) {
+	            if (radiosType[i].checked) {
+	                isCheckedType = true;
+	                break;
+	            }
+	        }
+	        
+	        for (var j = 0; j < radiosPeople.length; j++) {
+	            if (radiosPeople[j].checked) {
+	                isCheckedPeople = true;
+	                break;
+	            }
+	        }
+
+	        if (!isCheckedType) {
+	            alert("유형을 선택해주세요.");
+	            return false;
+	        }
+	        
+	        if (!isCheckedPeople) {
+	            alert("인원수를 선택해주세요.");
+	            return false;
+	        }
+
+	        
+	    }
+	
 </script>
 
 <%
 String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","10:00~11:00","12:00~13:00","13:00~14:00","15:00~16:00","16:00~17:00","18:00~19:00",
 		"19:00~20:00","20:00~21:00","21:00~22:00"}; 
-String [] dayArr = {"일","월","화","수","목","금","토"}; 
 %> 
 
 <body style="background-color : #FEF9E7;">
@@ -54,61 +189,173 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">스케줄 수정</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">스케줄 설정</h5>
                   </div>
                   
-                  <form:form commandName="tscheduleBean" action="tScheduleUpdate.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form action="tScheduleUpdate.rv" method="post" class="row g-3 needs-validation" id="yourForm">
+                    <input type="hidden" name="selectedDays" id="selectedDays" />
+                    <input type="hidden" name="tspeople" id="tspeople" />
+                    <input type="hidden" name="tstype" id="tstype" />
                     <div class="col-12">
-                      <label for="yourDay" class="form-label b margin-bottom">요일
-                      <form:errors cssClass="err" path="tsday" /></label>
+                      <label for="yourDay" class="form-label b margin-bottom">유형</label>
                       <br>
                       	<div class="center form-control">
-                        <c:forEach var="tsd" items="<%=dayArr%>">
-                      	<label for="${tsd}" class="margin5">
-                      	<input type="checkbox" name="tsday" id="${tsd}" value="${tsd}" <c:if test="${tscheduleBean.tsday.contains(tsd)}">checked</c:if>>
-                      	${tsd} 
-                        </label>
-                        </c:forEach>
+	                      	<label for="${tstype}" class="margin5">
+		                      	${tstype} 
+	                        </label>
                         </div>
                     </div>
                     
-                     <div class="col-12">
+                    <div class="col-12">
+                      <label for="yourDay" class="form-label b margin-bottom">인원수</label>
+                      <br>
+                      	<div class="center form-control">
+	                      	<label for="${people}" class="margin5">
+		                      	${tspeople} 
+	                        </label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
                       <div class="margin-top"></div>
-                      <label for="yourTstime" class="form-label b">시간
-                      <form:errors cssClass="err" path="tstime"/>
-                      </label> <br>
-                      <div class="center form-control">
-                        <c:forEach var="tst" items="<%=tstimeArr%>">
-                      	<label for="${tst}" class="margin5 form-control">
-                      	<input type="checkbox" name="tstime" id="${tst}" value="${tst}" <c:if test="${tscheduleBean.tstime.contains(tst)}">checked</c:if>>
-                      	${tst} 
-                        </label>
-                        </c:forEach>
-                       </div>
-                      </div>
+                      <label for="yourDay" class="form-label b margin-bottom">요일</label>
+                      <br>
+                      	<div class="center form-control">
+						    <button type="button" name="tsday" class="day-button" value="sun">일</button>
+						    <button type="button" name="tsday" class="day-button" value="mon">월</button>
+						    <button type="button" name="tsday" class="day-button" value="tue">화</button>
+						    <button type="button" name="tsday" class="day-button" value="wed">수</button>
+						    <button type="button" name="tsday" class="day-button" value="thu">목</button>
+						    <button type="button" name="tsday" class="day-button" value="fri">금</button>
+						    <button type="button" name="tsday" class="day-button" value="sat">토</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-sun" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="suntime" value="${tst}" class="time-checkbox"<c:if test="${existSun.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-mon" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="montime" value="${tst}" class="time-checkbox"<c:if test="${existMon.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-tue" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="tuetime" value="${tst}" class="time-checkbox"<c:if test="${existTue.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-wed" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="wedtime" value="${tst}" class="time-checkbox"<c:if test="${existWed.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-thu" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="thutime" value="${tst}" class="time-checkbox"<c:if test="${existThu.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-fri" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="fritime" value="${tst}" class="time-checkbox"<c:if test="${existFri.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
+                    
+                    <div class="col-12" id="time-section-sat" style="display: none;">
+                      <div class="margin-top"></div>
+                      <label for="yourDay" class="form-label b margin-bottom">시간</label>
+                      <br>
+                      	<div class="center form-control">
+		                <c:forEach var="tst" items="<%=tstimeArr%>">
+		                    <label for="${tst}" class="margin5 form-control">
+		                        <input type="checkbox" name="sattime" value="${tst}" class="time-checkbox"<c:if test="${existSat.contains(tst)}">checked</c:if>>
+		                        ${tst}
+		                    </label>
+		                </c:forEach>
+                   	 </div>
+                    </div>
                     
                     <div class="col-12 margin-top">
                       <div class="margin-top"></div>
                       <label for="yourTsdate" class="form-label b">불가능한 날짜</label>
-                      <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">추가날짜 삭제</button> 
+                      
+                      <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">날짜 삭제</button> 
 					  <button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜 추가</button><br><br>
-						
-						
-					  <c:forEach var="date" items="${dateList}">
-						  <div class="col-md-12 margin-bottom">
-	                      	<input type="date" name="tsdate" class="form-control" id="tsdate" value="${date}">
-	                      </div>
-                      </c:forEach>
+					
+					  <c:if test="${not empty dateList}">
+	                      <c:forEach var="date" items="${dateList}">
+							  <div class="col-md-12 margin-bottom">
+		                      	<input type="date" name="tsdate" class="form-control" id="tsdate" value="${date}">
+		                      </div>
+	                      </c:forEach>
+					  </c:if>	
+					  <c:if test="${empty dateList}">
+					  	<input type="date" name="tsdate" class="form-control" id="tsdate">
+					  </c:if>
                     </div>
                     
                     <!-- 추가영역 -->
 					<div id="healthScope"></div>
 						
                     <div class="col-12 center">
-                 	    <button type="button" class="btn btn-warning m-size" onClick="javascript:history.go(-1)">취소</button>
-                    	<button type="submit" id="updateSub" class="btn btn-warning m-size" onClick="location.href='tScheduleUpdate.rv'">수정</button>
+                    	<button type="button" class="btn btn-warning m-size" onClick="javascript:history.go(-1)">취소</button>
+                    	<button type="submit" id="insertSub" class="btn btn-warning m-size" onClick="return validateForm()">수정</button>
                     </div>
-                  </form:form> 
+                  </form> 
 
                 </div> 
               </div>
@@ -130,17 +377,5 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
     </div>
   </main>
 </body>  
-
-
-
-
-
-
-
-
-
-
-
-
 <%@ include file="../common/adminBootBottom.jsp" %>  
 <%@ include file="../common/bottom.jsp" %>

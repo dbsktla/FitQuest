@@ -1,10 +1,10 @@
 package reservation.controller;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,69 +33,236 @@ public class TrainerScheduleUpdateController {
 	TscheduleDao tscheduleDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
-	public String doAction(HttpSession session,Model model) {
-		//설정해놓은 스케줄 가져가기
+	public String doAction(HttpSession session,Model model,
+			@RequestParam("tspeople") int tspeople) {
+		
+		//설정해놓은 스케줄 가져가기(인원수 기준)
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
+		List<TscheduleBean> tsList = tscheduleDao.findTscheduleByTspeople(tspeople,tid); 
+		
+		String[] tsdateArr = null;
+		TscheduleBean timeBean = new TscheduleBean();
 		
 		//날짜 문자열 date 타입으로 변환(기본값으로 넣기 위해)
-		String[] tsdateArr = tscheduleBean.getTsdate().split(","); //2023-06-23 2023-06-24
+		for(TscheduleBean tb : tsList) {
+			if(tb.getTsdate() != null) {
+				tsdateArr = tb.getTsdate().split(","); //2023-06-23 2023-06-24
+			}
+			// 요일에 따라 변수 설정
+    	    if (tb.getTsday().equals("sun")) {
+    	    	timeBean.setSuntime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("mon")) {
+    	    	timeBean.setMontime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("tue")) {
+    	    	timeBean.setTuetime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("wed")) {
+    	    	timeBean.setWedtime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("thu")) {
+    	    	timeBean.setThutime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("fri")) {
+    	    	timeBean.setFritime(tb.getTstime());
+    	    }else if (tb.getTsday().equals("sat")) {
+    	    	timeBean.setSattime(tb.getTstime());
+    	    }
+		}
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-
-        try {
-            for (String dateString : tsdateArr) {
-                java.util.Date utilDate = dateFormat.parse(dateString);
-                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                dateList.add(sqlDate);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+		List<java.sql.Date> dateList = null;
+		if(tsdateArr != null) {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			dateList = new ArrayList<java.sql.Date>();
+			
+			try {
+				for (String dateString : tsdateArr) {
+					java.util.Date utilDate = dateFormat.parse(dateString);
+					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+					dateList.add(sqlDate);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+    	
+    	//요일별 선점된 시간대 가져가기
+    	model.addAttribute("existSun",timeBean.getSuntime());
+    	model.addAttribute("existMon",timeBean.getMontime());
+    	model.addAttribute("existTue",timeBean.getTuetime());
+    	model.addAttribute("existWed",timeBean.getWedtime());
+    	model.addAttribute("existThu",timeBean.getThutime());
+    	model.addAttribute("existFri",timeBean.getFritime());
+    	model.addAttribute("existSat",timeBean.getSattime());
+        
+        model.addAttribute("dateList",dateList); //쉬는날
+        model.addAttribute("tspeople",tspeople);
+        if(tspeople == 1) {
+        	model.addAttribute("tstype","개인");
+        }else {
+        	model.addAttribute("tstype","그룹");
         }
-
-        //날짜는 따로 담아가기
-        model.addAttribute("dateList",dateList);
-		model.addAttribute("tscheduleBean",tscheduleBean);
 		return getPage;
 	}
 	
 	@RequestMapping(value=command,method = RequestMethod.POST)
-	public String doAction(@Valid TscheduleBean tscheduleBean, BindingResult result,HttpServletRequest request, Model model,
-			HttpSession session,@RequestParam("tsdate") List<String> tsdateList) {
+	public String doAction(TscheduleBean tscheduleBean,HttpServletRequest request, Model model,HttpSession session,
+			@RequestParam("tsdate") List<String> tsdateList,
+			@RequestParam("tspeople") int tspeople,
+			@RequestParam("tstype") String tstype,
+			@RequestParam("selectedDays") String[] selectedDays) {
+		
 		System.out.println("빈 안에 tsdate:"+tscheduleBean.getTsdate());
+		
 		for(String tsdatelist : tsdateList) {
 			System.out.println("날짜 리스트로 받은거:"+tsdatelist);
 		}
 		
-		if(result.hasErrors()) {
-			return getPage;
-		}else {
-			String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-			tscheduleBean.setTid(tid);
+		
+		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
+		List<TscheduleBean> tsList = tscheduleDao.findTscheduleByTspeople(tspeople,tid); 
+		
+		//기존에 있던 요일과 비교하기
+		for (TscheduleBean tb : tsList) {
 			
-			String tsdate = ""; 
-			
-			if(tsdateList.size() > 1) {
-				for(int i=0;i<tsdateList.size();i++) {
-					tsdate += tsdateList.get(i);
-			        if (i < tsdateList.size() - 1) {
-			            tsdate += ",";
-			        }
-				}
-			}
-			tscheduleBean.setTsdate(tsdate);
-			System.out.println("빈에 담아놓은거"+tsdate);
-			
-			int cnt = tscheduleDao.updateTschedule(tscheduleBean);
-			if(cnt != -1) {
-				System.out.println("수정 성공");
-				return gotoPage;
+			if (tsdateList.isEmpty()) {
+			    System.out.println("값이 누락되었습니다.");
+			    tb.setTsdate("null");
 			}else {
-				System.out.println("수정 실패");
-				return getPage;
+				//쉬는날이 여러날일 경우 한번에 담아 가져가기
+				String tsdate = ""; 
+				
+				if(tsdateList.size() > 1) {
+					for(int i=0;i<tsdateList.size();i++) {
+						tsdate += tsdateList.get(i);
+						if (i < tsdateList.size() - 1) {
+							tsdate += ",";
+						}
+					}
+				} 
+				tb.setTsdate(tsdate);
 			}
 			
+		    if (Arrays.asList(selectedDays).contains(tb.getTsday())) { // 요일 일치 - update
+		    	String tsday = tb.getTsday();
+		        String tstime = "";
+
+		        if (tsday.equals("sun")) {
+		            tstime = tscheduleBean.getSuntime();
+		        } else if (tsday.equals("mon")) {
+		            tstime = tscheduleBean.getMontime();
+		        } else if (tsday.equals("tue")) {
+		            tstime = tscheduleBean.getTuetime();
+		        } else if (tsday.equals("wed")) {
+		            tstime = tscheduleBean.getWedtime();
+		        } else if (tsday.equals("thu")) {
+		            tstime = tscheduleBean.getThutime();
+		        } else if (tsday.equals("fri")) {
+		            tstime = tscheduleBean.getFritime();
+		        } else if (tsday.equals("sat")) {
+		            tstime = tscheduleBean.getSattime();
+		        }
+
+		        tb.setTstime(tstime);
+		    	
+		        int cnt = tscheduleDao.updateTschedule(tb);
+		        if (cnt != -1) {
+		            System.out.println("수정 성공");
+		        } else {
+		            System.out.println("수정 실패");
+		        }
+		    } else { // 요일 일치하지 않음 - delete
+		    	TscheduleBean tsb = new TscheduleBean();
+		    	tsb.setTid(tid);
+		    	tsb.setTsday(tb.getTsday());
+		    	tsb.setTspeople(tspeople);
+		        int cnt = tscheduleDao.deleteTschedule(tsb);
+		        if (cnt != -1) {
+		            System.out.println("삭제 성공");
+		        } else {
+		            System.out.println("삭제 실패");
+		        }
+		    }
 		}
+
+		// selectedDays에만 있는 값은 insert
+		for (String selectedDay : selectedDays) {
+		    boolean isExisting = false;
+		    for (TscheduleBean tb : tsList) {
+		        if (selectedDay.equals(tb.getTsday())) {
+		            isExisting = true;
+		            break;
+		        }
+		    }
+		    if (!isExisting) { // insert
+		        tscheduleBean.setTid(tid);
+		        tscheduleBean.setTsday(selectedDay);
+		        tscheduleBean.setTstype(tstype);
+		        tscheduleBean.setTspeople(tspeople);
+
+		        if (tsdateList.isEmpty()) {
+		            System.out.println("값이 누락되었습니다.");
+		            tscheduleBean.setTsdate("null");
+		        } else {
+		            // 쉬는날이 여러날일 경우 한번에 담아 가져가기
+		            String tsdate = "";
+
+		            if (tsdateList.size() > 1) {
+		                for (int i = 0; i < tsdateList.size(); i++) {
+		                    tsdate += tsdateList.get(i);
+		                    if (i < tsdateList.size() - 1) {
+		                        tsdate += ",";
+		                    }
+		                }
+		            }
+		            tscheduleBean.setTsdate(tsdate);
+		        }
+		        // 요일에 따른 시간 설정
+		        if (selectedDay.equals("sun")) {
+		            tscheduleBean.setTstime(tscheduleBean.getSuntime());
+		        } else if (selectedDay.equals("mon")) {
+		            tscheduleBean.setTstime(tscheduleBean.getMontime());
+		        } else if (selectedDay.equals("tue")) {
+		            tscheduleBean.setTstime(tscheduleBean.getTuetime());
+		        } else if (selectedDay.equals("wed")) {
+		            tscheduleBean.setTstime(tscheduleBean.getWedtime());
+		        } else if (selectedDay.equals("thu")) {
+		            tscheduleBean.setTstime(tscheduleBean.getThutime());
+		        } else if (selectedDay.equals("fri")) {
+		            tscheduleBean.setTstime(tscheduleBean.getFritime());
+		        } else if (selectedDay.equals("sat")) {
+		            tscheduleBean.setTstime(tscheduleBean.getSattime());
+		        }
+		        
+		        int cnt = tscheduleDao.insertTschedule(tscheduleBean);
+		        if (cnt != -1) {
+		            System.out.println("추가 성공");
+		        } else {
+		            System.out.println("추가 실패");
+		        }
+		    }
+		}   
+		//요일이 일치하지 않는 경우 delete/insert
+		
+		tscheduleBean.setTid(tid);
+		
+		String tsdate = ""; 
+		
+		if(tsdateList.size() > 1) {
+			for(int i=0;i<tsdateList.size();i++) {
+				tsdate += tsdateList.get(i);
+		        if (i < tsdateList.size() - 1) {
+		            tsdate += ",";
+		        }
+			}
+		}
+		tscheduleBean.setTsdate(tsdate);
+		System.out.println("빈에 담아놓은거"+tsdate);
+		
+		int cnt = tscheduleDao.updateTschedule(tscheduleBean);
+		if(cnt != -1) {
+			System.out.println("수정 성공");
+			return gotoPage;
+		}else {
+			System.out.println("수정 실패");
+			return getPage;
+		}
+			
 	}
 }

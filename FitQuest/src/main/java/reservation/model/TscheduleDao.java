@@ -33,6 +33,21 @@ public class TscheduleDao {
 		return cnt;
 	}
 
+	public List<TscheduleBean> findTscheduleByTspeople(int tspeople,String tid) {
+		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
+		TscheduleBean tb = new TscheduleBean();
+		tb.setTspeople(tspeople);
+		tb.setTid(tid);
+		tsList = sqlSessionTemplate.selectList(namespace+".FindTscheduleByTspeople",tb);
+		return tsList;
+	}
+
+	public int deleteTschedule(TscheduleBean tsb) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace+".DeleteTschedule",tsb);
+		return cnt;
+	}
+
 	
 	
 }

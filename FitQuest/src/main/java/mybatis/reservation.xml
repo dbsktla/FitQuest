@@ -13,11 +13,21 @@
 		select * from tschedule
 		where tid = #{tid}
 	</select>
+	<select id="FindTscheduleByTspeople" resultType="reservation.model.TscheduleBean">
+		select * from tschedule
+		where tspeople = #{tspeople} and tid = #{tid}
+	</select>
 	<update id="UpdateTschedule">
 		update tschedule set
 		tsday=#{tsday}, tstime=#{tstime}, tsdate=#{tsdate}
 		where tid = #{tid}
 	</update>
+	<delete id="DeleteTschedule">
+		delete tschedule
+		where tid = #{tid} and tsday = #{tsday} and tspeople = #{tspeople}
+	</delete>
+	
+	
 	<insert id="InsertReservation">
 		insert into reservation
 		values(reseq.nextval,#{mid},#{tid},#{mname},#{tname},#{onum},#{unum},#{rdate},#{rtime},'false')
