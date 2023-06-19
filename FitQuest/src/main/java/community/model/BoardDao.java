@@ -167,4 +167,10 @@ public class BoardDao {
 		cnt = sqlSessionTemplate.update(namespace + ".UpdateBoard", adminReportBean);
 		return cnt;
 	}
+
+	public int getRecentBnum() {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".GetRecentBnum");
+		return cnt;
+	}
 }

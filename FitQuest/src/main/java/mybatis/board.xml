@@ -260,4 +260,7 @@
 		<![CDATA[update board set bsubject = '관리자에 의해 가려졌습니다.', bstatus = '신고'
 		where bnum = #{bcnum}]]>
 	</update>
+	<select id = "GetRecentBnum" resultType = "int">
+		select max(bnum) as bnum from board
+	</select>
 </mapper>

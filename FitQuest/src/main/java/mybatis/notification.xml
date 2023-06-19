@@ -11,7 +11,8 @@
 	</insert>
 	<select id = "GetAllNotifs" resultType = "notification.model.NotificationBean">
 		select * from notification 
-		where recId = #{id}
+		where recId = #{id} 
+		order by notifDate desc
 	</select>
 	<select id = "GetNotifCount" resultType = "int">
 		select count(*) from notification 

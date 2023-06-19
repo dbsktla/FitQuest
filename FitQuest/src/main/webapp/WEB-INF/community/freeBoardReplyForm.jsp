@@ -74,6 +74,7 @@ $(document).ready(function(){
 					<input type="hidden" name="brestep" value="${ param.brestep }">
 					<input type="hidden" name="brelevel" value="${ param.brelevel }">
 					<input type="hidden" name="bcategory" value="${ param.bcategory }">
+					<input type="hidden" name="bnum" value="${ param.bnum }">
 					<div class="col-md-9" align="left">
 						<label for="bsubject" class="form-label">제목</label> <input
 							type="text" name="bsubject" class="form-control" id="bsubject" value="${ boardBean.bsubject }">

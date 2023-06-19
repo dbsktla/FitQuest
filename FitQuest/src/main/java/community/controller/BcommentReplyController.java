@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import community.model.BcommentBean;
 import community.model.BcommentDao;
+import community.model.BoardBean;
+import community.model.BoardDao;
 import member.model.MemberBean;
+import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 
 @Controller
 public class BcommentReplyController {
@@ -20,7 +25,12 @@ public class BcommentReplyController {
 
 	@Autowired
 	BcommentDao bcommentDao;
-
+	@Autowired
+	BoardDao boardDao;
+	@Autowired
+	MemberDao memberDao;
+	@Autowired
+	NotificationDao notificationDao;
 	@RequestMapping(value = command)
 	public String reply(BcommentBean bcommentBean, @RequestParam("btype") String btype ,HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
@@ -42,11 +52,34 @@ public class BcommentReplyController {
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 			bcommentBean.setId(memberBean.getId());
-
 			int cnt = bcommentDao.replyBcomment(bcommentBean);
 			System.out.println("ReplyBcomment cnt : " + cnt);
 			if(cnt != -1) {
 				System.out.println("삽입 성공");
+				//댓글에 답변 삽입 성공 하면 알림 추가
+				int bnum = bcommentBean.getBnum();
+				BoardBean boardBean = null;
+				String request = "";
+				if(btype.equals("자유")) {
+					boardBean = boardDao.getOneFreeBoard(bnum);
+					request = "freeBoardDetail.co?bnum=" + bcommentBean.getBnum();
+				} else {
+					boardBean = boardDao.getOnehealthBoard(bnum);
+					request = "healthBoardDetail.co?bnum=" + bcommentBean.getBnum();
+				}
+				String recId = boardBean.getId();
+				String recName = memberDao.getName(recId);
+				String sendId = bcommentBean.getId();
+				String sendName = memberDao.getName(sendId);
+				String notifContent = sendName + " 회원님이 " + recName + "님의 댓글에 답변을 추가했습니다.";
+				NotificationBean notifBean = new NotificationBean();
+				notifBean.setRecId(recId);
+				notifBean.setRecName(recName);
+				notifBean.setSendId(sendId);
+				notifBean.setSendName(sendName);
+				notifBean.setRequest(request);
+				notifBean.setNotifContent(notifContent);
+				int notif = notificationDao.insertPurchaseNotif(notifBean);
 			}
 			else {
 				System.out.println("삽입 실패");

@@ -114,7 +114,7 @@
 									<input type="button" value="수정하기" class="btn btn-warning btn-sm" onclick="freeBoardUpdate()">
 									<input type="button" value="삭제하기" class="btn btn-warning btn-sm" onclick="freeBoardDelete()">
 								</c:if>
-								<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='freeBoardReply.co?bref=${ boardBean.bref }&brestep=${ boardBean.brestep }&brelevel=${ boardBean.brelevel }&bcategory=${ boardBean.bcategory }'">
+								<input type="button" value="답글작성" class="btn btn-warning btn-sm" onclick="location.href='freeBoardReply.co?bref=${ boardBean.bref }&brestep=${ boardBean.brestep }&brelevel=${ boardBean.brelevel }&bcategory=${ boardBean.bcategory }&bnum=${boardBean.bnum }'">
 							</div>
 						</td></tr>
 				</table>
