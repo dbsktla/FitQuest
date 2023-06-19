@@ -68,8 +68,8 @@
 
           <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
-             <h2>건강 정보 글</h2>
-              <p style="color: grey;">트레이너들이 직접 올리는 꿀팁들<br><br></p>
+             <h2>맞춤 트레이너 찾기</h2>
+              <p style="color: grey;">검증된 리뷰와 함께 카테고리 별<br>트레이너를 한눈에 살피기</p>
                <img src="<%= request.getContextPath() %>/resources/Image/MainImage/mainPT.jpg" class="img-fluid">
               <a href="genericCalendar.rv" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
             </div>
@@ -77,8 +77,8 @@
 
           <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
             <div class="box">
-             <h2>맞춤 트레이너 찾기</h2>
-              <p style="color: grey;">검증된 리뷰와 함께 카테고리 별<br>트레이너를 한눈에 살피기</p>
+             <h2>건강 정보 글</h2>
+              <p style="color: grey;">트레이너들이 직접 올리는 꿀팁들<br><br></p>
                <img src="<%= request.getContextPath() %>/resources/Image/MainImage/mainBoard.jpg" class="img-fluid">
               <a href="healthBoardList.co" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
             </div>
