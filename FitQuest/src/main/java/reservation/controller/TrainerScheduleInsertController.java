@@ -226,10 +226,7 @@ public class TrainerScheduleInsertController {
 			} 
 			tscheduleBean.setTsdate(tsdate);
 		}
-		System.out.println("들어오나 체크 요일:"+selectedDays);
-		for(int i=0;i<selectedDays.length;i++) {
-			System.out.println("들어오나 체크 요일 for:"+selectedDays[i]);
-		}
+		
 		//요일 개수만큼 tsday에 요일 집어넣고 tstime에 해당 요일의 시간대 집어넣기
 		int cnt = 0;
 		for(int i=0;i<selectedDays.length;i++) {

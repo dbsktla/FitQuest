@@ -114,6 +114,7 @@ public class GenericReservationController {
 		
 		//트레이너 스케줄 가져가기
 		TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
+		
 		if(tscheduleBean == null) {
 			tscheduleBean = new TscheduleBean();
 		    // 빈 객체에 필요한 값 설정

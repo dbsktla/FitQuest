@@ -61,6 +61,10 @@
 	  var selectedCheckboxes = {}; // 요일별로 선택한 체크박스를 저장하는 객체
 
 	  $('.day-button').click(function() {
+		  //버튼 클릭하면 배경색 변경
+		  $('.day-button').removeClass('selected');
+	      $(this).addClass('selected');
+	      
 	    var day = $(this).val();
 	    
 	    if (selectedDay !== day) { // 이미 선택된 요일과 현재 클릭한 요일이 다른 경우에만 실행
@@ -80,6 +84,12 @@
 	    selectedCheckboxes[day] = checkboxes.filter(':checked').map(function() {
 	      return this.value;
 	    }).get();
+	 // 선택한 버튼에 클래스 추가
+	    if (checkboxes.is(':checked')) {
+	      $('.day-button[value="' + day + '"]').addClass('used');
+	    } else {
+	      $('.day-button[value="' + day + '"]').removeClass('used');
+	    }
 	  }
 
 	  // 체크박스 복원
@@ -107,7 +117,7 @@
 	
 	//유효성 검사
 	 function validateForm() {
-		 var radiosType = document.getElementsByName("tstype");
+			var radiosType = document.getElementsByName("tstype");
 	        var radiosPeople = document.getElementsByName("tspeople");
 	        var isCheckedType = false;
 	        var isCheckedPeople = false;
@@ -137,7 +147,6 @@
 	        }
 
 	        
-	        document.getElementById("yourForm").submit();
 	    }
 	
 </script>
@@ -145,7 +154,6 @@
 <%
 String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","10:00~11:00","12:00~13:00","13:00~14:00","15:00~16:00","16:00~17:00","18:00~19:00",
 		"19:00~20:00","20:00~21:00","21:00~22:00"}; 
-String [] dayArr = {"일","월","화","수","목","금","토"}; 
 %> 
 
 <body style="background-color : #FEF9E7;">
@@ -168,8 +176,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                   <form action="tScheduleInsert.rv" method="post" class="row g-3 needs-validation" id="yourForm">
                     <input type="hidden" name="selectedDays" id="selectedDays" />
                     <div class="col-12">
-                      <label for="yourDay" class="form-label b margin-bottom">유형
-                      <form:errors cssClass="err" path="tstype" /></label>
+                      <label for="yourDay" class="form-label b margin-bottom">유형</label>
                       <br>
                       	<div class="center form-control">
 	                        <c:forEach var="type" items="${typeArray}">
@@ -182,8 +189,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                     </div>
                     
                     <div class="col-12">
-                      <label for="yourDay" class="form-label b margin-bottom">인원수
-						<form:errors cssClass="err" path="tspeople" /></label>
+                      <label for="yourDay" class="form-label b margin-bottom">인원수</label>
                       <br>
                       	<div class="center form-control">
 	                        <c:forEach var="people" items="${peopleArray}">
@@ -218,7 +224,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="suntime" value="${tst}" class="time-checkbox"<c:if test="${existSun.contains(tst)}">disabled</c:if>>
-		                        ${tst}일
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -232,7 +238,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="montime" value="${tst}" class="time-checkbox"<c:if test="${existMon.contains(tst)}">disabled</c:if>>
-		                        ${tst}월
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -246,7 +252,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="tuetime" value="${tst}" class="time-checkbox"<c:if test="${existTue.contains(tst)}">disabled</c:if>>
-		                        ${tst}화
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -260,7 +266,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="wedtime" value="${tst}" class="time-checkbox"<c:if test="${existWed.contains(tst)}">disabled</c:if>>
-		                        ${tst}수
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -274,7 +280,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="thutime" value="${tst}" class="time-checkbox"<c:if test="${existThu.contains(tst)}">disabled</c:if>>
-		                        ${tst}목
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -288,7 +294,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="fritime" value="${tst}" class="time-checkbox"<c:if test="${existFri.contains(tst)}">disabled</c:if>>
-		                        ${tst}금
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -302,7 +308,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
 		                        <input type="checkbox" name="sattime" value="${tst}" class="time-checkbox"<c:if test="${existSat.contains(tst)}">disabled</c:if>>
-		                        ${tst}토
+		                        ${tst}
 		                    </label>
 		                </c:forEach>
                    	 </div>
@@ -312,9 +318,9 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       <div class="margin-top"></div>
                       <label for="yourTsdate" class="form-label b">불가능한 날짜</label>
                       <button type="button" onclick="deleteScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right;">날짜 삭제</button> 
-						<button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜 추가</button><br><br>
+					  <button type="button" onclick="inputScope()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">날짜 추가</button><br><br>
 						
-                      <input type="date" name="tsdate" class="form-control" id="tsdate" value="${tscheduleBean.tsdate}">
+                      <input type="date" name="tsdate" class="form-control" id="tsdate">
                     </div>
                     
                     <!-- 추가영역 -->
@@ -322,7 +328,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 						
                     <div class="col-12 center">
                     	<button type="button" class="btn btn-warning m-size" onClick="javascript:history.go(-1)">취소</button>
-                    	<button type="button" id="insertSub" class="btn btn-warning m-size" onClick="validateForm()">등록</button>
+                    	<button type="submit" id="insertSub" class="btn btn-warning m-size" onClick="return validateForm()">등록</button>
                     </div>
                   </form> 
 

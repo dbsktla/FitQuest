@@ -27,3 +27,19 @@
 .margin-bottom{
 	margin-bottom: 16px;
 }
+.day-button{
+	background-color: white;
+	border: 1px solid #FAC710;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 3px 8px;
+}
+.day-button:hover {
+	background-color: #FAC710;
+}
+.selected{
+	background-color: #FAC710;
+}
+.used{
+	background-color: #FEF9E7;
+}
