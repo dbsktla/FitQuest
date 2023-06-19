@@ -237,7 +237,7 @@
     </section><!-- End Portfolio Section -->
 
    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials" style="background-color: #FEF9E7">
 
       <div class="container" data-aos="fade-up">
 
