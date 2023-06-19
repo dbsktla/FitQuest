@@ -205,6 +205,14 @@
         where rank between 1 and 3
 	</select>
 	
+	<select id="GetMainHealthBoardList" resultType="community.model.BoardBean">
+		select rank, bnum, board.id id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select rownum as rank, bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from (select bnum, board.id, btype, bcategory, name, bsubject, bregdate, breadcount, bcontent, bimage, bstatus
+		from board inner join member on board.id = member.id  where btype = '건강' and bstatus is null and bimage is not null order by breadcount desc) board) board
+        where rank between 1 and 3
+	</select>
+	
 	<select id="GetOneHealthBoard" resultType="community.model.BoardBean">
 		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bcontent, bimage
 		from board inner join member 

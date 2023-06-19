@@ -110,6 +110,12 @@ public class BoardDao {
 		hotHealthBoardList = sqlSessionTemplate.selectList(namespace + ".GetHotHealthBoardList");
 		return hotHealthBoardList;
 	}
+	
+	public List<BoardBean> getMainHealthBoardList() {
+		List<BoardBean> healthBoardList = new ArrayList<BoardBean>();
+		healthBoardList = sqlSessionTemplate.selectList(namespace + ".GetMainHealthBoardList");
+		return healthBoardList;
+	}
 
 	public BoardBean getOnehealthBoard(int bnum) {
 		BoardBean boardBean = null;

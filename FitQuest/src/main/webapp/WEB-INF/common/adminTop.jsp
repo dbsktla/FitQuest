@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>    
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -27,7 +28,7 @@
   <link href="<%= request.getContextPath() %>/resources/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="<%= request.getContextPath() %>/resources/NiceAdmin/assets/css/style.css" rel="stylesheet">
+  <link href="<%= request.getContextPath() %>/resources/NiceAdmin/assets/css/adminStyle.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin

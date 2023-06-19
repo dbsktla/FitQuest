@@ -19,7 +19,22 @@ public class ReviewBean {
 	private String hasReview;
 	private String report;
 	private String name;
+	private String activity;
+	private String timage;
 	
+	
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
+	public String getTimage() {
+		return timage;
+	}
+	public void setTimage(String timage) {
+		this.timage = timage;
+	}
 	public String getName() {
 		return name;
 	}

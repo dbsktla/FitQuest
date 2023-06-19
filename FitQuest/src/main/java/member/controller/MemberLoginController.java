@@ -89,7 +89,7 @@ public class MemberLoginController {
 	
 	@RequestMapping(value="/logout.mb")
 	public String logout(HttpSession session) {
-		session.setAttribute("loginInfo", null);
+		session.removeAttribute("loginInfo");
 		session.setAttribute("notifList", null);
 		session.setAttribute("notifCount", null);
 		return "redirect:/main.go";

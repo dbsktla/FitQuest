@@ -216,17 +216,34 @@
 		from review inner join member
 		on review.tid = member.id
 		where report is not null
-		order by report, renum
+		order by report desc, renum
 	</select>
 	<select id="GetMainReviewReport" resultType="review.model.ReviewBean">
 		select renum, tid, rtitle, report, name
 		from review inner join member
 		on review.tid = member.id
 		where report is not null and report = '신고접수'
-		order by report, renum
+		order by report desc, renum
 	</select>
 	<update id="UpdateReviewReport">
 		update review set report='신고거절'
 		where renum = #{renum}
 	</update>
+	
+	<select id="GetAvgReviewList" resultType="review.model.ReviewBean">
+		select avg(rating) rating, tid
+		from review
+		where rating is not null
+		group by tid
+		order by rating desc
+	</select>
+	
+	<select id="GetMainReview" resultType="review.model.ReviewBean">
+		select rownum, renum, tid, rating, rtitle, rcontent, rdate, hasReview, name, activity, timage
+		from(select renum, tid, rating, rtitle, rcontent, rdate, hasReview, name
+		from review inner join member
+		on tid = id where tid=#{tid} order by rating desc) rm inner join trainer
+		on tid = id
+		where rownum = 1
+	</select>
 </mapper>

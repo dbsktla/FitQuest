@@ -23,6 +23,29 @@ public class MemberBean {
 	@NotBlank(message = "성별을 선택해 주세요.")
 	private String gender;
 	
+	private String activity;
+	private String timage;
+	private String hasReview
+	;
+	
+	public String getHasReview() {
+		return hasReview;
+	}
+	public void setHasReview(String hasReview) {
+		this.hasReview = hasReview;
+	}
+	public String getTimage() {
+		return timage;
+	}
+	public void setTimage(String timage) {
+		this.timage = timage;
+	}
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
 	public MemberBean() {
 			
 	}
