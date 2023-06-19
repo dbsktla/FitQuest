@@ -59,8 +59,8 @@
 
           <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
-              <h2>간편한 PT 예약</h2>
-              <p style="color: grey;">트레이너와 내 일정을 한눈에 살펴<br>편리하게 예약하기</p>
+             <h2>맞춤 트레이너 찾기</h2>
+              <p style="color: grey;">검증된 리뷰와 함께 카테고리 별<br>트레이너를 한눈에 살피기</p>
                <img src="<%= request.getContextPath() %>/resources/Image/MainImage/mainTrainer.jpg" class="img-fluid">
              <a href="trainerList.pd" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
             </div>
@@ -68,8 +68,8 @@
 
           <div class="col-lg-3 col-md-6 aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
-             <h2>맞춤 트레이너 찾기</h2>
-              <p style="color: grey;">검증된 리뷰와 함께 카테고리 별<br>트레이너를 한눈에 살피기</p>
+              <h2>간편한 PT 예약</h2>
+              <p style="color: grey;">트레이너와 내 일정을 한눈에 살펴<br>편리하게 예약하기</p>
                <img src="<%= request.getContextPath() %>/resources/Image/MainImage/mainPT.jpg" class="img-fluid">
               <a href="genericCalendar.rv" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
             </div>
