@@ -1,9 +1,12 @@
 package reservation.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import member.model.MemberBean;
+import product.model.ProductBean;
+import product.model.ProductDao;
 import reservation.model.CalendarBean;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
@@ -31,6 +36,9 @@ public class TrainerCalendarController {
 	
 	@Autowired
 	TscheduleDao tscheduleDao;
+	
+	@Autowired
+	ProductDao productDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -71,12 +79,43 @@ public class TrainerCalendarController {
 			
 			//이미 스케줄 설정했는지 확인용
 			String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-			TscheduleBean tscheduleBean = tscheduleDao.findTschedule(tid);
-			boolean flag = false;
-			if(tscheduleBean != null) {
-				flag = true;
-			}
-			model.addAttribute("flag",flag);
+			List<TscheduleBean> tsList = tscheduleDao.findTschedule(tid);
+			
+			//등록한 상품과 비교해서 스케줄 설정 얼마나 했나 체크
+			boolean insertFlag = true; //초기값은 true로 설정
+			boolean updateFlag = true;
+
+			List<ProductBean> pList = productDao.getProductListById(tid);
+			
+			//중복된 운동인원(개월수에 따라 분리됨) 하나로 합치기
+			Set<Integer> uniqueNumbers = new HashSet<Integer>();
+	        for (ProductBean pb : pList) {
+	            uniqueNumbers.add(pb.getPeople());
+	        }
+	        Integer[] peopleArr = uniqueNumbers.toArray(new Integer[0]);
+	        
+	        for (Integer number : peopleArr) {
+	            boolean found = false; // 숫자를 찾았는지 여부를 저장하는 변수
+	            for (TscheduleBean tsb : tsList) {
+	                if (number.equals(tsb.getTspeople())) {
+	                    found = true; // 숫자를 찾음
+	                    insertFlag = false;
+	                    break;
+	                }
+	            }
+	            if (!found) {
+	                insertFlag = true; // 숫자를 찾지 못했으므로 true로 설정
+	                break;
+	            }
+	        }
+	        if (tsList.isEmpty()) {
+	            updateFlag = false;
+	        } else {
+	            updateFlag = true;
+	        }
+	        System.out.println("업데이트 플래그"+updateFlag);
+			model.addAttribute("insertFlag",insertFlag);
+			model.addAttribute("updateFlag",updateFlag);
 			
 			String tname = ((MemberBean)session.getAttribute("loginInfo")).getName();
 			

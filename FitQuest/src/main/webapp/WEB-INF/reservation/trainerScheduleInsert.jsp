@@ -56,74 +56,89 @@
 	    }
 	  });
 	  
-	  //선택한 요일에 따라 감추고 보이게 하기
+	// 선택한 요일에 따라 감추고 보이게 하기 및 선택한 체크박스 저장
 	  var selectedDay = null;
+	  var selectedCheckboxes = {}; // 요일별로 선택한 체크박스를 저장하는 객체
+
 	  $('.day-button').click(function() {
-	      var day = $(this).val();
-	      
-	      if (selectedDay !== day) {// 이미 선택된 요일과 현재 클릭한 요일이 다른 경우에만 실행
-	        if (selectedDay) { //숨기기
-	          $('#time-section-' + selectedDay).hide();
-	        }
-	        $('#time-section-' + day).show(); //보이기
-	        selectedDay = day; //선택된 요일로
+	    var day = $(this).val();
+	    
+	    if (selectedDay !== day) { // 이미 선택된 요일과 현재 클릭한 요일이 다른 경우에만 실행
+	      if (selectedDay) { // 숨기기
+	        $('#time-section-' + selectedDay).hide();
+	        saveSelectedCheckboxes(selectedDay); // 저장하기
 	      }
-	    });
-	  
-	  
-	  // 다른 요일에서 선택한 시간 선택 못하게 막기
-	  
-	  
-	  
-	  
-	  
-	// 시간별로 선택한 요일을 저장할 객체
-	  var selectedDaysByTime = {};
-
-	  // 체크박스 클릭 이벤트
-	  $('input[type="checkbox"]').click(function(event) {
-	    var selectedDay = $(this).attr('name');
-	    var selectedTime = $(this).val();
-	    var checkBox = $(this);
-
-	    if (checkBox.is(':checked')) {
-	      // 다른 요일에서 해당 시간을 선택한 경우, 선택을 해제하고 이전에 선택한 시간을 사용자에게 알림
-	      if (selectedDaysByTime[selectedTime]) {
-	        checkBox.prop('checked', false);
-	        alert('이미 다른 요일에서 해당 시간이 선택되어 있습니다.');
-	        return;
-	      }
-
-	      // 선택된 시간을 해당 요일로 설정
-	      selectedDaysByTime[selectedTime] = selectedDay;
-	    } else {
-	      // 선택이 해제된 경우
-	      delete selectedDaysByTime[selectedTime];
+	      $('#time-section-' + day).show(); // 보이기
+	      selectedDay = day; // 선택된 요일로
+	      restoreSelectedCheckboxes(selectedDay); // 복원하기
 	    }
-
-	    // 다른 요일에서 해당 시간을 선택하지 못하도록 처리
-	    $('input[type="checkbox"]').not(checkBox).each(function() {
-	      var day = $(this).attr('name');
-	      if ($(this).val() === selectedTime) {
-	        if (selectedDaysByTime[selectedTime] && selectedDaysByTime[selectedTime] !== day) {
-	          $(this).prop('disabled', true);
-	        } else {
-	          $(this).prop('disabled', false);
-	        }
-	      }
-	    });
 	  });
 
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+	  // 체크박스 저장
+	  function saveSelectedCheckboxes(day) {
+	    var checkboxes = $('#time-section-' + day + ' .time-checkbox');
+	    selectedCheckboxes[day] = checkboxes.filter(':checked').map(function() {
+	      return this.value;
+	    }).get();
+	  }
+
+	  // 체크박스 복원
+	  function restoreSelectedCheckboxes(day) {
+	    var checkboxes = $('#time-section-' + day + ' .time-checkbox');
+	    var selectedValues = selectedCheckboxes[day];
+	    if (selectedValues && selectedValues.length > 0) {
+	      checkboxes.prop('checked', false);
+	      checkboxes.filter(function() {
+	        return selectedValues.includes(this.value);
+	      }).prop('checked', true);
+	    }
+	  }
+
+	  // 선택한 요일과 시간들을 묶어서 가져가기
+	  $('#yourForm').submit(function() {
+	    var selectedDaysArray = Object.keys(selectedCheckboxes).filter(function(day) {
+	      var selectedTimes = selectedCheckboxes[day];
+	      return selectedTimes && selectedTimes.length > 0; // 시간을 하나 이상 선택한 요일만 필터링
+	    });
+	    $('#selectedDays').val(selectedDaysArray.join(',')); // 선택한 요일을 쉼표로 구분된 문자열로 저장
+	  });
 	  
 	});//ready
 	
+	//유효성 검사
+	 function validateForm() {
+		 var radiosType = document.getElementsByName("tstype");
+	        var radiosPeople = document.getElementsByName("tspeople");
+	        var isCheckedType = false;
+	        var isCheckedPeople = false;
+
+	        for (var i = 0; i < radiosType.length; i++) {
+	            if (radiosType[i].checked) {
+	                isCheckedType = true;
+	                break;
+	            }
+	        }
+	        
+	        for (var j = 0; j < radiosPeople.length; j++) {
+	            if (radiosPeople[j].checked) {
+	                isCheckedPeople = true;
+	                break;
+	            }
+	        }
+
+	        if (!isCheckedType) {
+	            alert("유형을 선택해주세요.");
+	            return false;
+	        }
+	        
+	        if (!isCheckedPeople) {
+	            alert("인원수를 선택해주세요.");
+	            return false;
+	        }
+
+	        
+	        document.getElementById("yourForm").submit();
+	    }
 	
 </script>
 
@@ -150,32 +165,33 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                     <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">스케줄 설정</h5>
                   </div>
                   
-                  <form:form commandName="tscheduleBean" action="tScheduleInsert.rv" method="post" class="row g-3 needs-validation" novalidate="novalidate">
+                  <form action="tScheduleInsert.rv" method="post" class="row g-3 needs-validation" id="yourForm">
+                    <input type="hidden" name="selectedDays" id="selectedDays" />
                     <div class="col-12">
                       <label for="yourDay" class="form-label b margin-bottom">유형
-                      <form:errors cssClass="err" path="tsday" /></label>
+                      <form:errors cssClass="err" path="tstype" /></label>
                       <br>
                       	<div class="center form-control">
-                        <c:forEach var="type" items="${typeArray}">
+	                        <c:forEach var="type" items="${typeArray}">
 	                      	<label for="${type}" class="margin5">
-	                      	<input type="radio" name="tstype" id="${type}" value="${type}">
-	                      	${type} 
+		                      	<input type="radio" name="tstype" id="${type}" value="${type}"<c:if test="${tscheduleBean.tspeople.contains(people)}">checked</c:if>>
+		                      	${type} 
 	                        </label>
-                        </c:forEach>
+	                        </c:forEach>
                         </div>
                     </div>
                     
                     <div class="col-12">
                       <label for="yourDay" class="form-label b margin-bottom">인원수
-                      <form:errors cssClass="err" path="tsday" /></label>
+						<form:errors cssClass="err" path="tspeople" /></label>
                       <br>
                       	<div class="center form-control">
-                        <c:forEach var="people" items="${peopleArray}">
+	                        <c:forEach var="people" items="${peopleArray}">
 	                      	<label for="${people}" class="margin5">
-	                      	<input type="radio" name="tspeople" id="${people}" value="${people}" <c:if test="${tscheduleBean.tspeople.contains(people)}">checked</c:if>>
-	                      	${people} 
+		                      	<input type="radio" name="tspeople" id="${people}" value="${people}"<c:if test="${tscheduleBean.tspeople.contains(people)}">checked</c:if>>
+		                      	${people} 
 	                        </label>
-                        </c:forEach>
+	                        </c:forEach>
                         </div>
                     </div>
                     
@@ -184,7 +200,6 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       <label for="yourDay" class="form-label b margin-bottom">요일</label>
                       <br>
                       	<div class="center form-control">
-                      		
 						    <button type="button" name="tsday" class="day-button" value="sun">일</button>
 						    <button type="button" name="tsday" class="day-button" value="mon">월</button>
 						    <button type="button" name="tsday" class="day-button" value="tue">화</button>
@@ -202,7 +217,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="suntime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="suntime" value="${tst}" class="time-checkbox"<c:if test="${existSun.contains(tst)}">disabled</c:if>>
 		                        ${tst}일
 		                    </label>
 		                </c:forEach>
@@ -216,7 +231,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="montime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="montime" value="${tst}" class="time-checkbox"<c:if test="${existMon.contains(tst)}">disabled</c:if>>
 		                        ${tst}월
 		                    </label>
 		                </c:forEach>
@@ -230,7 +245,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="tuetime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="tuetime" value="${tst}" class="time-checkbox"<c:if test="${existTue.contains(tst)}">disabled</c:if>>
 		                        ${tst}화
 		                    </label>
 		                </c:forEach>
@@ -244,7 +259,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="wedtime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="wedtime" value="${tst}" class="time-checkbox"<c:if test="${existWed.contains(tst)}">disabled</c:if>>
 		                        ${tst}수
 		                    </label>
 		                </c:forEach>
@@ -258,7 +273,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="thutime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="thutime" value="${tst}" class="time-checkbox"<c:if test="${existThu.contains(tst)}">disabled</c:if>>
 		                        ${tst}목
 		                    </label>
 		                </c:forEach>
@@ -272,7 +287,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="fritime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="fritime" value="${tst}" class="time-checkbox"<c:if test="${existFri.contains(tst)}">disabled</c:if>>
 		                        ${tst}금
 		                    </label>
 		                </c:forEach>
@@ -286,7 +301,7 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
 		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="sattime" id="${tst}" value="${tst}">
+		                        <input type="checkbox" name="sattime" value="${tst}" class="time-checkbox"<c:if test="${existSat.contains(tst)}">disabled</c:if>>
 		                        ${tst}토
 		                    </label>
 		                </c:forEach>
@@ -307,9 +322,9 @@ String [] dayArr = {"일","월","화","수","목","금","토"};
 						
                     <div class="col-12 center">
                     	<button type="button" class="btn btn-warning m-size" onClick="javascript:history.go(-1)">취소</button>
-                    	<button type="submit" id="inertSub" class="btn btn-warning m-size" onClick="location.href='tScheduleInsert.rv'">등록</button>
+                    	<button type="button" id="insertSub" class="btn btn-warning m-size" onClick="validateForm()">등록</button>
                     </div>
-                  </form:form> 
+                  </form> 
 
                 </div> 
               </div>

@@ -7,7 +7,7 @@
 <mapper namespace="reservation.model.Reservation">
 	<insert id="InsertTschedule">
 		insert into tschedule
-		values(#{tid},#{tsday},#{tstime},#{tsdate})
+		values(tsseq.nextval,#{tid},#{tsday},#{tstime},#{tsdate},#{tstype},#{tspeople})
 	</insert>
 	<select id="FindTschedule" resultType="reservation.model.TscheduleBean">
 		select * from tschedule
