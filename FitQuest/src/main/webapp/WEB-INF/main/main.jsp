@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="col-lg-6 hero-img aos-init aos-animate" data-aos="zoom-out" data-aos-delay="200">
-          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+          <img src="<%= request.getContextPath() %>/resources/FlexStart/assets/img/hero-img.png" class="img-fluid" alt="">
         </div>
       </div>
     </div>
@@ -90,7 +90,7 @@
 
     </section><!-- End Pricing Section -->
 
-
+	<c:if test="${ trainerList != null }">
     <!-- ======= Portfolio Section ======= -->
     <section id="portfolio" class="portfolio">
 
@@ -235,7 +235,9 @@
       </div>
 
     </section><!-- End Portfolio Section -->
+    </c:if>
 
+	<c:if test="${ reviewList != null }">
    <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials" style="background-color: #FEF9E7">
 
@@ -439,8 +441,9 @@
 		</div>
           <div class="swiper-pagination"></div>
     </section><!-- End Testimonials Section -->
-    
-
+    </c:if>
+	
+	<c:if test="${ healthBoardList != null }">
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-blog-posts" class="recent-blog-posts">
 
@@ -455,7 +458,7 @@
 		<c:forEach var="board" items="${ healthBoardList }">
           <div class="col-lg-4">
             <div class="post-box">
-              <div class="post-img"><img src="<%= request.getContextPath() %>/resources/Image/CommunityImage/${ board.bimage }" class="img-fluid" alt=""></div>
+              <div class="post-img" style="height: 65%"><img width="100%" height="100%" src="<%= request.getContextPath() %>/resources/Image/CommunityImage/${ board.bimage }" alt=""></div>
               <span class="post-date">
               	<c:if test="${ board.bregdate.contains('-01-') }">
               		January
@@ -506,7 +509,7 @@
       </div>
 
     </section><!-- End Recent Blog Posts Section -->
-
+	</c:if>
     
         <!-- ======= F.A.Q Section ======= -->
     <section id="faq" class="faq">
@@ -571,12 +574,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                    효과가 좋았던 식단을 저장할 방법은 없나요?
                   </button>
                 </h2>
                 <div id="faq2-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    HealthCare - 식단관리에서 북마크 기능을 통해 저장할 수 있습니다.
                   </div>
                 </div>
               </div>
@@ -597,12 +600,12 @@
               <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                    Varius vel pharetra vel turpis nunc eget lorem dolor?
+                   기타
                   </button>
                 </h2>
                 <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                   <div class="accordion-body">
-                    Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+                    이 외에 새로운 질문은 1:1 문의를 이용해 주시거나<br>fitquest1470@gmail.com으로 문의 사항을 남겨주세요.
                   </div>
                 </div>
               </div>
