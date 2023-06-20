@@ -30,7 +30,7 @@
 	
 	<insert id="InsertReservation">
 		insert into reservation
-		values(reseq.nextval,#{mid},#{tid},#{mname},#{tname},#{onum},#{unum},#{rdate},#{rtime},'false')
+		values(reseq.nextval,#{mid},#{tid},#{mname},#{tname},#{onum},#{unum},#{people},#{rdate},#{rtime},'false')
 	</insert>
 	<select id = "GetReservationCount" resultType = "int">
 		<![CDATA[select count(*) from reservation

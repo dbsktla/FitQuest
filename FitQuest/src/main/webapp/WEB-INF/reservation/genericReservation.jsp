@@ -12,10 +12,10 @@
 				   +'시간 : '+time+'\n'
 				   +'예약 하시겠습니까?'
 							)) { // 확인
-				location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum;
+				location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum + '&people=' + people;
 				
 				if (confirm('계속 예약 하시겠습니까?')) { // 확인
-					location.href = 'genericReservation.rv?tid='+tid+'&tname='+tname; // 예약 페이지
+					location.href = 'genericReservation.rv?tid='+tid+'&tname='+tname+'&people=' + people; // 예약 페이지
 				} else { // 취소
 					location.href = 'genericCalendar.rv'; // My PT 페이지
 				}
@@ -38,11 +38,11 @@
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
-      <a class="calendar_year" href="genericReservation.rv?year=${today_info.search_year-1}&month=${today_info.search_month-1}&tid=${tid}&tname=${tname}">
+      <a class="calendar_year" href="genericReservation.rv?year=${today_info.search_year-1}&month=${today_info.search_month-1}&tid=${tid}&tname=${tname}&people=${people}">
          &lt;&lt;
       </a> 
       <!-- 이전달 -->
-      <a class="calendar_month" href="genericReservation.rv?year=${today_info.before_year}&month=${today_info.before_month}&tid=${tid}&tname=${tname}">
+      <a class="calendar_month" href="genericReservation.rv?year=${today_info.before_year}&month=${today_info.before_month}&tid=${tid}&tname=${tname}&people=${people}">
          &lt;
       </a> 
       <span class="this_month">
@@ -50,13 +50,61 @@
          <c:if test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
       </span>
       <!-- 다음달 -->
-      <a class="calendar_month" href="genericReservation.rv?year=${today_info.after_year}&month=${today_info.after_month}&tid=${tid}&tname=${tname}">
+      <a class="calendar_month" href="genericReservation.rv?year=${today_info.after_year}&month=${today_info.after_month}&tid=${tid}&tname=${tname}&people=${people}">
          &gt;
       </a> 
          <!-- 다음년 -->
-      <a class="calendar_year" href="genericReservation.rv?year=${today_info.search_year+1}&month=${today_info.search_month-1}&tid=${tid}&tname=${tname}">
+      <a class="calendar_year" href="genericReservation.rv?year=${today_info.search_year+1}&month=${today_info.search_month-1}&tid=${tid}&tname=${tname}&people=${people}">
          &gt;&gt;
       </a>
+   </div>
+    <div>
+   	<c:forEach var="titem" items="${tsList}">
+   		<c:if test="${titem.tsday eq 'mon'}">
+   			<div>${titem.tstime}월</div>
+   			<div>${titem.tstype}</div>
+   		</c:if>
+   		<c:if test="${titem.tsday eq 'tue'}">
+   			<div>${titem.tstime}화</div>
+   			<div>${titem.tstype}</div>
+   		</c:if>
+   		<c:if test="${titem.tsday eq 'sat'}">
+   			<div>${titem.tstime}토</div>
+   			<div>${titem.tstype}</div>
+   		</c:if>
+   		<c:if test="${titem.tsday eq 'fri'}">
+   			<div>${titem.tstime}금</div>
+   			<div>${titem.tstype}</div>
+   		</c:if> 
+   		<c:if test="${not empty titem.tsdate}">
+   			<div>${titem.tsdate}쉬는날</div>
+   		</c:if>
+   		<c:if test="${not empty titem.tsdate}">
+   		<c:forEach var="date" items="${fn:split(titem.tsdate, ',')}">
+				      <div>${date}강아지</div>
+		</c:forEach>
+		</c:if>
+   	</c:forEach>
+   </div>
+   
+   <div>
+   ------------------------------
+   <c:set var="ch" value="출력전" />
+   		<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
+   			<c:forEach var="titem" items="${tsList}">
+   				<c:if test="${ch == '출력전'}">
+   				<c:forEach var="date" items="${fn:split(titem.tsdate, ',')}">
+   					<c:set var="tsYear" value="${date.substring(0, 4)}" />
+		            <c:set var="tsMonth" value="${date.substring(5, 7)}" />
+		            <c:set var="tsDay" value="${date.substring(8)}" />
+		            <c:if test="${tsYear == today_info.search_year && tsMonth == today_info.search_month && tsDay == dateList.date}">
+				      <div>휴무</div>   
+				      <c:set var="ch" value="출력됨" />
+   					</c:if>
+				</c:forEach>
+				</c:if>
+   			</c:forEach>
+   		</c:forEach>
    </div>
 <!-- 버튼 -->
    <div class="calendar-button-div">
@@ -130,15 +178,16 @@
 			  <c:set var="hasReservation" value="예약없음"/>
 			  
 			  
-			  <c:if test="${tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date}">
 			  
 			    <c:forEach var="tsitem" items="${tsList}">
-			      <c:if test="${day eq '토'}">  
+			      <c:if test="${tsitem.tsday eq 'sat'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
-		         	  
-				      <c:if test="${not empty tsyear}">
-				        <c:forEach var="i" begin="0" end="${fn:length(tsyear)-1}">
-				           <c:if test="${tsyear[i] == today_info.search_year && tsmonth[i] == today_info.search_month && tsday[i] == dateList.date}">
+				      <c:if test="${not empty tsitem.tsdate}">
+				        <c:forEach var="tsdate" items="${fn:split(tsitem.tsdate, ',')}">
+				           <c:set var="tsYear" value="${date.substring(0, 4)}" />  
+				           <c:set var="tsMonth" value="${date.substring(5, 7)}" />
+				           <c:set var="tsDay" value="${date.substring(8)}" />
+				           <c:if test="${tsYear == today_info.search_year && tsMonth == today_info.search_month && tsDay == dateList.date}">
 				               <div class="reservation-area">
 				                  <img src="<%=request.getContextPath()%>/resources/Icon/impossible.png" width="20px" class="icon">
 				                  <span class="calender-text">휴무</span>
@@ -169,7 +218,7 @@
 										  <c:if test="${!reserved}">
 										    <div class="reservation-area">
 										      <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-										      <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+										      <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}','${people}')">
 										        <span>${time}</span>
 										      </a>
 										    </div>
@@ -187,7 +236,7 @@
 									<c:forEach var="time" items="${tstimeArr}">
 							            <div class="reservation-area">
 							                <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+							                <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}','${people}')">
 							                    <span>${time}</span>
 							                </a>
 							            </div>
@@ -202,7 +251,7 @@
 			          	 <c:forEach var="time" items="${tstimeArr}">
                             <div class="reservation-area">
                               <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
-                              <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}')">
+                              <a href="" class="calender-text" onClick="reservationCheck('${dateList.date}','${time}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}','${people}')">
                                <span>${time}</span>
                               </a>
                             </div>
@@ -214,7 +263,6 @@
 			      </c:if>
 			    </c:forEach>
 			    
-			 </c:if>
 			 
 			    
 			</td>

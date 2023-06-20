@@ -6,7 +6,7 @@
 	$(document).ready(function(){
 		
 	});
-	function stateYes(rnum){
+	function stateYes(rnum,people){
 		if (confirm('예약 승인 하시겠습니까?')) { //확인
 			location.href='reservationState.rv?rnum='+rnum+'&rstate=true';
 		    alert('예약 승인 완료되었습니다.');
@@ -14,7 +14,7 @@
 		    alert('예약 승인 취소되었습니다.');
 		}
 	}
-	function stateNo(rnum){
+	function stateNo(rnum,people){
 		if (confirm('예약 거절 하시겠습니까?')) { //확인
 			location.href='reservationState.rv?rnum='+rnum+'&rstate=reject';
 		    alert('예약 거절 완료되었습니다.');
@@ -133,10 +133,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -186,10 +186,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -239,10 +239,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -282,10 +282,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -325,10 +325,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -368,10 +368,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>
@@ -412,10 +412,10 @@
 										            </div>
 										            <div class="rstate-btn-area">
 										                <div class="left-btn">
-										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}')">승인</button>
+										                    <button class="rstate-btn-blue" onClick="stateYes('${reservation.rnum}','${reservation.people}')">승인</button>
 										                </div>
 										                <div class="right-btn">
-										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}')">거절</button>
+										                    <button class="rstate-btn-red" onClick="stateNo('${reservation.rnum}','${reservation.people}')">거절</button>
 										                </div>
 										            </div>
 										        </div>

@@ -45,6 +45,7 @@ public class ReservationInsertController {
 			@RequestParam("tid") String tid,
 			@RequestParam("tname") String tname,
 			@RequestParam("usageNum") int usageNum,
+			@RequestParam("people") int people,
 			HttpSession session) {
 		
 		//사용권 정보 가져오기
@@ -67,6 +68,7 @@ public class ReservationInsertController {
         reservationBean.setTname(tname);
         reservationBean.setOnum(onum);
         reservationBean.setUnum(unum);
+        reservationBean.setPeople(people);
         reservationBean.setRdate(rdate);
         reservationBean.setRtime(rtime);
 		int cnt = reservationDao.insertReservation(reservationBean);
