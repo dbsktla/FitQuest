@@ -74,4 +74,12 @@ public class UsageDao {
 		return usageList;
 
 	}
+	public UsageBean getUsageByPeople(String mid, String tid, int people) {
+		UsageBean ub = new UsageBean();
+		ub.setMid(mid);
+		ub.setTid(tid);
+		ub.setPeople(people);
+		UsageBean usageBean = sqlSessionTemplate.selectOne(namespace + ".GetUsageByPeople", ub);
+		return usageBean;
+	}
 }

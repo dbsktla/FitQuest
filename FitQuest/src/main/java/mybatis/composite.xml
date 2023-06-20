@@ -104,11 +104,11 @@
 		where activity = #{activity}
 	</select>
 	<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
-		select u.people, t.activity, t.purpose, t.timage, m.name, m.id
-		from usage u join trainer t
-		on t.ID = u.tid and t.ID = #{tid}
-		join member m on m.ID = u.mid and u.tid = #{tid}
-		where u.mid = #{mid}
+		select usage.people, trainer.activity, trainer.purpose, trainer.timage, member.name, member.id
+		from usage join trainer 
+		on trainer.ID = usage.tid
+		join member on member.id = trainer.ID
+		where trainer.ID = #{tid} and usage.mid = #{mid} and usage.tid = #{tid}
 	</select>
 	<select id="ReservationDetailBean" resultType = "composite.model.ReservationDetailBean">
 		select r.rdate, r.rtime, m.id, m.birth,m.mphone,m.email,m.name from reservation r,member m
@@ -191,6 +191,6 @@
 	<select id="GetTscheduleByUsage" resultType = "reservation.model.TscheduleBean">
 		select tschedule.* from tschedule join usage
 		on tschedule.tid = usage.tid and tschedule.tspeople = usage.people
-		where usage.mid = #{mid} and usage.tid = #{tid}
+		where usage.mid = #{mid} and usage.tid = #{tid} and tschedule.tspeople = #{people}
 	</select>
 </mapper>

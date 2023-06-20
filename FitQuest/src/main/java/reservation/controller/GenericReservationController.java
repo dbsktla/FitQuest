@@ -47,7 +47,9 @@ public class GenericReservationController {
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
-			HttpSession session,@RequestParam("tid") String tid,@RequestParam("tname") String tname){
+			HttpSession session,@RequestParam("tid") String tid,@RequestParam("tname") String tname
+			,@RequestParam("people") int people
+			){
 		
 		//달력 띄우기
 		Calendar cal = Calendar.getInstance();
@@ -94,7 +96,7 @@ public class GenericReservationController {
 		}
 		
 		//사용권 남은 개수
-		UsageBean usageBean = usageDao.getOneUsage(mid,tid);
+		UsageBean usageBean = usageDao.getUsageByPeople(mid,tid,people);
 		int usageNum = 0; 
 		if (usageBean != null) {
 		    usageNum = usageBean.getUsage();
@@ -117,11 +119,17 @@ public class GenericReservationController {
 		
 		
 		//사용권에 등록된 정보를 바탕으로 트레이너 스케줄 가져오기(4인권,1인권 등)
-		List<TscheduleBean> tsList = compositeDao.getTscheduleByUsage(mid,tid);
+		System.out.println("오는지 테스트");
+		System.out.println("mid: "+mid);
+		System.out.println("tid: "+tid);
+		System.out.println("people: "+people);
+		List<TscheduleBean> tsList = compositeDao.getTscheduleByUsage(mid,tid,people);
 		for(TscheduleBean tb: tsList) {
-			System.out.println("스케줄 테스트"+tb.getTsday());
+			System.out.println("스케줄 테스트: "+tb.getTsday());
+			System.out.println("스케줄 테스트 인원: "+tb.getTspeople());
 		}
 		model.addAttribute("tsList",tsList);
+		
 		/*
 		for(TscheduleBean tscheduleBean : tsList) {
 			//트레이너 스케줄 - 끊어주기

@@ -132,7 +132,7 @@
 			  
 			  <c:if test="${tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date}">
 			  
-			    <c:forEach var="day" items="${tsdayArr}">
+			    <c:forEach var="tsitem" items="${tsList}">
 			      <c:if test="${day eq '토'}">  
 			        <c:if test="${dateList.date <= date_status.last}">
 		         	  
