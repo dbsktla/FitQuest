@@ -91,7 +91,7 @@ public class OrderCalculateController {
 					int notif = notificationDao.insertPurchaseNotif(notifBean);
 					
 					
-					if(cnt2 > -1) { //주문 완료 되서 바로 사용권 테이블로 추가한다.
+					if(cnt2 > -1) { //주문 완료 돼서 바로 사용권 테이블로 추가한다.
 						ProductBean productBean = productDao.getProductByPnum(pnum);
 						String tid = productDao.getIdByPnum(pnum);
 						UsageBean usageBean = new UsageBean();
@@ -101,6 +101,8 @@ public class OrderCalculateController {
 						usageBean.setOnum(orderNum);
 						usageBean.setPnum(pnum);
 						usageBean.setUsage(productBean.getPcount());
+						usageBean.setPeople(productBean.getPeople());
+						
 						int cnt3 = usageDao.insertUsage(usageBean);
 						if(cnt3 > -1) { //주문 관련 작업 다 끝나서 이젠 카트를 비우는것.
 								session.setAttribute("cartList", null);

@@ -4,22 +4,34 @@ public class UsageBean {
 	private int unum;
 	private int pnum;
 	private int onum;
+	private int people;
 	private String tid;
 	private String mid;
 	private int usage;
 	
 	public UsageBean() {
-		super();
+		
 	}
-	public UsageBean(int unum, int pnum, int onum, String tid, String mid, int usage) {
+	
+	public UsageBean(int unum, int pnum, int onum, int people, String tid, String mid, int usage) {
 		super();
 		this.unum = unum;
 		this.pnum = pnum;
 		this.onum = onum;
+		this.people = people;
 		this.tid = tid;
 		this.mid = mid;
 		this.usage = usage;
 	}
+	
+	public int getPeople() {
+		return people;
+	}
+
+	public void setPeople(int people) {
+		this.people = people;
+	}
+
 	public int getUnum() {
 		return unum;
 	}
