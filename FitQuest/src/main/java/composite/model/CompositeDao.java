@@ -87,10 +87,11 @@ public class CompositeDao {
 		mList = sqlSessionTemplate.selectList(namespace + ".GetOrderList", id);
 		return mList;
 	}
-	public List<TscheduleBean> getTscheduleByUsage(String mid, String tid) {
+	public List<TscheduleBean> getTscheduleByUsage(String mid, String tid, int people) {
 		UsageBean ub = new UsageBean();
 		ub.setMid(mid);
 		ub.setTid(tid);
+		ub.setPeople(people);
 		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
 		tsList = sqlSessionTemplate.selectList(namespace + ".GetTscheduleByUsage",ub);
 		return tsList;

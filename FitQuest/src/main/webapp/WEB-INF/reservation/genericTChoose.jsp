@@ -57,8 +57,9 @@
               	<form action="genericReservation.rv" method="get">
               	  <input type="hidden" name="tid" value="${trainer.id}">
               	  <input type="hidden" name="tname" value="${trainer.name}">
+              	  <input type="hidden" name="people" value="${trainer.people}">
 	                <div><h4 style = "margin-top:10px;">${trainer.name}</h4></div>
-	                <div><span class="margin text">${trainer.activity} 4인권</span></div>
+	                <div><span class="margin text">${trainer.activity} ${trainer.people}인권</span></div>
 	                <div><span class="margin">${trainer.purpose}</span></div> 
 	                <div class="position">
 	                 <input type="submit" value="선택" class="btn btn-warning">
