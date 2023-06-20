@@ -55,7 +55,7 @@ public class MemberLoginController {
 					//로그인 하면 알림 있는지 확인.
 					int notifCount = notificationDao.getNotifCount(id);
 					List<NotificationBean> notifList = null;
-					//알림이 있으면
+					//알림이 있으면 알람 리스트 생성
 					if(notifCount > 0) {
 						notifList = notificationDao.getAllNotifications(id);
 						session.setAttribute("notifList", notifList);
@@ -145,6 +145,15 @@ public class MemberLoginController {
 			session.setAttribute("loginInfo", memberBean);
 			
 			String destination = (String)session.getAttribute("destination");
+			//로그인 하면 알림 있는지 확인.
+			int notifCount = notificationDao.getNotifCount(id);
+			List<NotificationBean> notifList = null;
+			//알림이 있으면 알람 리스트 생성
+			if(notifCount > 0) {
+				notifList = notificationDao.getAllNotifications(id);
+				session.setAttribute("notifList", notifList);
+				session.setAttribute("notifCount", notifCount);
+			}
 			// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
 			if(destination != null) {
 				return destination;
@@ -211,6 +220,15 @@ public class MemberLoginController {
 		boolean login = memberDao.searchId(id);
 		if(login) {
 			session.setAttribute("loginInfo", memberBean);
+			//로그인 하면 알림 있는지 확인.
+			int notifCount = notificationDao.getNotifCount(id);
+			List<NotificationBean> notifList = null;
+			//알림이 있으면 알람 리스트 생성
+			if(notifCount > 0) {
+				notifList = notificationDao.getAllNotifications(id);
+				session.setAttribute("notifList", notifList);
+				session.setAttribute("notifCount", notifCount);
+			}
 			String destination = (String)session.getAttribute("destination");
 			// 이전 페이지 정보가 있으면 이전 페이지로 이동한다.
 			if(destination != null) {

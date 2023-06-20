@@ -18,4 +18,12 @@
 		select count(*) from notification 
 		where recId = #{recId}
 	</select>
+	<delete id = "ClearAllNotifs">
+		delete from notification 
+		where recId = #{recId}
+	</delete>
+	<delete id = "ClearOneNotif">
+		delete from notification
+		where nonum = #{nonum}
+	</delete>
 </mapper>

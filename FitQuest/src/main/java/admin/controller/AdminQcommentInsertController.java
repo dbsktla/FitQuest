@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import member.model.MailSendService;
 import member.model.MemberBean;
+import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 import question.model.QcommentBean;
 import question.model.QcommentDao;
+import question.model.QuestionBean;
 import question.model.QuestionDao;
 
 @Controller
@@ -27,7 +31,13 @@ public class AdminQcommentInsertController {
 
 	@Autowired
 	MailSendService mailService;
-
+	
+	@Autowired
+	MemberDao memberDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
+	
 	@RequestMapping(command)
 	public String insert(QcommentBean qcommentBean, HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
@@ -51,6 +61,23 @@ public class AdminQcommentInsertController {
 					if(cnt != -1) {
 						System.out.println("답변 삽입 성공");
 						cnt = questionDao.updateInsertQstatus(qcommentBean.getQnum());
+						//답변 삽입 하면 문의를 하신 회원에게 알림 보낸다.
+						int qnum = qcommentBean.getQnum();
+						String request = "questionDetail.qt?qnum=" + qnum;
+						QuestionBean questionBean = questionDao.getQuestionByQnum(qnum);
+						String recId = questionBean.getId(); //문의 올린 회원이 알립 받는 id 값
+						String recName = memberDao.getName(recId);
+						String sendId = "admin"; //문의 답변 보내는 사람 은 관리자
+						String sendName = "관리자";
+						String notifContent = recName + "님의 문의에 답변이 올려졌습니다.";
+						NotificationBean notifBean = new NotificationBean();
+						notifBean.setRecId(recId);
+						notifBean.setRecName(recName);
+						notifBean.setSendId(sendId);
+						notifBean.setSendName(sendName);
+						notifBean.setRequest(request);
+						notifBean.setNotifContent(notifContent);
+						int notif = notificationDao.insertPurchaseNotif(notifBean);
 						if(cnt != -1) {
 							mailService.questionEmail(qcommentBean.getEmail(),qcommentBean.getQcontent(),qcommentBean.getQcomment());
 						}
