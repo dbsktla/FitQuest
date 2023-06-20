@@ -89,6 +89,6 @@ public class CompositeDao {
 		ub.setTid(tid);
 		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
 		tsList = sqlSessionTemplate.selectList(namespace + ".GetTscheduleByUsage",ub);
-		return null;
+		return tsList;
 	}
 }
