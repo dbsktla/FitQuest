@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -102,7 +103,7 @@ public class TrainerScheduleUpdateController {
 	}
 	
 	@RequestMapping(value=command,method = RequestMethod.POST)
-	public String doAction(TscheduleBean tscheduleBean,HttpServletRequest request, Model model,HttpSession session,
+	public String doAction(TscheduleBean tscheduleBean, HttpServletRequest request, Model model, HttpSession session,
 			@RequestParam("tsdate") List<String> tsdateList,
 			@RequestParam("tspeople") int tspeople,
 			@RequestParam("tstype") String tstype,
@@ -112,6 +113,9 @@ public class TrainerScheduleUpdateController {
 		
 		for(String tsdatelist : tsdateList) {
 			System.out.println("날짜 리스트로 받은거:"+tsdatelist);
+		}
+		for(String day : selectedDays) {
+			System.out.println("선택한 요일:"+day);
 		}
 		
 		
@@ -141,6 +145,7 @@ public class TrainerScheduleUpdateController {
 			
 		    if (Arrays.asList(selectedDays).contains(tb.getTsday())) { // 요일 일치 - update
 		    	String tsday = tb.getTsday();
+		    	System.out.println("update-요일:"+tsday);
 		        String tstime = "";
 
 		        if (tsday.equals("sun")) {
@@ -172,11 +177,14 @@ public class TrainerScheduleUpdateController {
 		    	tsb.setTid(tid);
 		    	tsb.setTsday(tb.getTsday());
 		    	tsb.setTspeople(tspeople);
+		    	System.out.println("delete-요일:"+tb.getTsday());
 		        int cnt = tscheduleDao.deleteTschedule(tsb);
 		        if (cnt != -1) {
 		            System.out.println("삭제 성공");
+		            return gotoPage;
 		        } else {
 		            System.out.println("삭제 실패");
+		            return getPage;
 		        }
 		    }
 		}
@@ -229,40 +237,18 @@ public class TrainerScheduleUpdateController {
 		        } else if (selectedDay.equals("sat")) {
 		            tscheduleBean.setTstime(tscheduleBean.getSattime());
 		        }
-		        
+		        System.out.println("insert-요일:"+selectedDay);
 		        int cnt = tscheduleDao.insertTschedule(tscheduleBean);
 		        if (cnt != -1) {
 		            System.out.println("추가 성공");
+		            return gotoPage;
 		        } else {
 		            System.out.println("추가 실패");
+		            return getPage;
 		        }
-		    }
-		}   
-		//요일이 일치하지 않는 경우 delete/insert
-		
-		tscheduleBean.setTid(tid);
-		
-		String tsdate = ""; 
-		
-		if(tsdateList.size() > 1) {
-			for(int i=0;i<tsdateList.size();i++) {
-				tsdate += tsdateList.get(i);
-		        if (i < tsdateList.size() - 1) {
-		            tsdate += ",";
-		        }
-			}
-		}
-		tscheduleBean.setTsdate(tsdate);
-		System.out.println("빈에 담아놓은거"+tsdate);
-		
-		int cnt = tscheduleDao.updateTschedule(tscheduleBean);
-		if(cnt != -1) {
-			System.out.println("수정 성공");
-			return gotoPage;
-		}else {
-			System.out.println("수정 실패");
-			return getPage;
-		}
+		    }//if
+		}//for
 			
+		return null;
 	}
 }

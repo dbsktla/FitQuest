@@ -19,8 +19,8 @@
 	</select>
 	<update id="UpdateTschedule">
 		update tschedule set
-		tsday=#{tsday}, tstime=#{tstime}, tsdate=#{tsdate}
-		where tid = #{tid}
+		tsday = #{tsday}, tstime = #{tstime}, tsdate = #{tsdate}
+		where tid = #{tid} and tsday = #{tsday} and tspeople = #{tspeople}
 	</update>
 	<delete id="DeleteTschedule">
 		delete tschedule

@@ -123,50 +123,30 @@
 	    }
 	  }
 
-	  // 선택한 요일과 시간들을 묶어서 가져가기
-	  $('#yourForm').submit(function() {
-	    var selectedDaysArray = Object.keys(selectedCheckboxes).filter(function(day) {
-	      var selectedTimes = selectedCheckboxes[day];
-	      return selectedTimes && selectedTimes.length > 0; // 시간을 하나 이상 선택한 요일만 필터링
+	  // 선택한 요일 담아가기
+	  $('.time-checkbox').change(function() {
+	    var selectedDays = []; // 선택된 요일을 저장할 배열
+
+	    // 모든 요일에 대해서 반복
+	    $('[id^="time-section-"]').each(function() {
+	      var dayId = $(this).attr('id'); // 요일 섹션의 ID
+	      var day = dayId.substring(13); // 요일 값 (예: sun, mon, tue, ...)
+
+	      // 해당 요일의 체크박스를 확인하고 선택된 경우 배열에 추가
+	      var selectedTimes = $(this).find('input[type="checkbox"]:checked').map(function() {
+	        return $(this).val();
+	      }).get();
+
+	      if (selectedTimes.length > 0) {
+	        selectedDays.push(day);
+	      }
 	    });
-	    $('#selectedDays').val(selectedDaysArray.join(',')); // 선택한 요일을 쉼표로 구분된 문자열로 저장
+
+	    // 선택된 요일 배열을 숨겨진 입력란에 설정
+	    $('#selectedDays').val(selectedDays.join(',')); // 쉼표로 구분하여 문자열로 변환
 	  });
 	  
 	});//ready
-	
-	//유효성 검사
-	 function validateForm() {
-			var radiosType = document.getElementsByName("tstype");
-	        var radiosPeople = document.getElementsByName("tspeople");
-	        var isCheckedType = false;
-	        var isCheckedPeople = false;
-
-	        for (var i = 0; i < radiosType.length; i++) {
-	            if (radiosType[i].checked) {
-	                isCheckedType = true;
-	                break;
-	            }
-	        }
-	        
-	        for (var j = 0; j < radiosPeople.length; j++) {
-	            if (radiosPeople[j].checked) {
-	                isCheckedPeople = true;
-	                break;
-	            }
-	        }
-
-	        if (!isCheckedType) {
-	            alert("유형을 선택해주세요.");
-	            return false;
-	        }
-	        
-	        if (!isCheckedPeople) {
-	            alert("인원수를 선택해주세요.");
-	            return false;
-	        }
-
-	        
-	    }
 	
 </script>
 
@@ -194,8 +174,8 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                   
                   <form action="tScheduleUpdate.rv" method="post" class="row g-3 needs-validation" id="yourForm">
                     <input type="hidden" name="selectedDays" id="selectedDays" />
-                    <input type="hidden" name="tspeople" id="tspeople" />
-                    <input type="hidden" name="tstype" id="tstype" />
+                    <input type="hidden" name="tspeople" id="tspeople" value="${tspeople}"/>
+                    <input type="hidden" name="tstype" id="tstype" value="${tstype}"/>
                     <div class="col-12">
                       <label for="yourDay" class="form-label b margin-bottom">유형</label>
                       <br>
@@ -211,7 +191,7 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 	                      	<label for="${people}" class="margin5">
-		                      	${tspeople} 
+		                      	${tspeople}인
 	                        </label>
                         </div>
                     </div>
