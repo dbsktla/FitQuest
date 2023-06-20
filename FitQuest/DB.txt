@@ -313,6 +313,7 @@ CREATE TABLE reservation (
    tname varchar2(100) NOT NULL, -- 트레이너 이름
    onum   number   NOT NULL, --주문 번호
    unum   number   NOT NULL,--사용권 번호
+   people number NOT NULL, --인원수
    rdate varchar2(15) NOT NULL, --예약 날짜 2023-6-23
    rtime varchar2(15) NOT NULL, --예약 시간 "13:00~14:00"
    rstate varchar2(10) default 'false' --상태
@@ -349,7 +350,25 @@ CREATE TABLE tschedule (
 select * from tschedule;
 commit;
 
+-- 예약 완료된 스케줄
+drop sequence cpseq;
+create sequence cpseq
+  increment by 1
+  start with 1
+  minvalue 1
+  maxvalue 10000
+  nocache;
 
+drop table complete cascade constraints;
+CREATE TABLE complete (
+   cpnum   number   primary key, --번호/시퀀스
+   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
+   cpday varchar2(30)   NOT NULL, --예약 완료 요일
+   cptime varchar2(500)   NOT NULL,--예약 완료 시간
+   cpeople number   NOT NULL --수업 참여 회원 개수
+);
+select * from complete;
+commit;
 
 
 

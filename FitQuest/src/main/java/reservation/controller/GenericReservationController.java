@@ -112,6 +112,7 @@ public class GenericReservationController {
 		}
 		model.addAttribute("tid",tid);
 		model.addAttribute("tname",tname);
+		model.addAttribute("people",people);
 		model.addAttribute("usageCount",usageCount);
 		model.addAttribute("usageNum",usageNum);
 		
@@ -123,6 +124,7 @@ public class GenericReservationController {
 		System.out.println("mid: "+mid);
 		System.out.println("tid: "+tid);
 		System.out.println("people: "+people);
+		
 		List<TscheduleBean> tsList = compositeDao.getTscheduleByUsage(mid,tid,people);
 		for(TscheduleBean tb: tsList) {
 			System.out.println("스케줄 테스트: "+tb.getTsday());
