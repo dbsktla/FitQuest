@@ -13,7 +13,7 @@
 	</select>
 	<insert id = "InsertUsage">
 		insert into usage
-		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage}, 'available')
+		values(useq.nextval, #{pnum}, #{onum}, #{people}, #{tid}, #{mid}, #{usage}, 'available')
 	</insert>
 	<select id = "GetOneUsage" resultType = "usage.model.UsageBean">
 		select * from usage
