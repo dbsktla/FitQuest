@@ -185,4 +185,9 @@
 		group by odate, onum
 		order by onum asc
 	</select>
+	<select id="GetTscheduleByUsage" resultType = "reservation.model.TscheduleBean">
+		select tschedule.* from tschedule join usage
+		on tschedule.tid = usage.tid and tschedule.tspeople = usage.people
+		where usage.mid = #{mid} and usage.tid = #{tid}
+	</select>
 </mapper>
