@@ -3,8 +3,11 @@
 <!-- top.jsp -->
 <%@ include file="../common/common.jsp" %>
 <style>
-	.notification-item:hover{
+	.notif:hover{
 		background-color:#FEF9E7;
+	}
+	.notification-item:hover{
+		background-color:#FEF9E7 !important;
 	}
 	.notification-item{
 		padding: 0px;
@@ -189,35 +192,36 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style = "width : 300px; margin-top: 38px;">
             <li class="dropdown-header" style = "display:flex; justify-content: center; align-items: center; padding:0px;">
               <span>알림 ${ notifCount }개 있습니다.</span>
-              <a href="#"><span class="badge rounded-pill bg-warning p-2 ms-2">모든 알림 삭제</span></a>
+              <a href="clearMyNotifications.mb"><span class="badge rounded-pill bg-warning p-2 ms-2">모든 알림 삭제</span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 			
-			<!-- 각 알림 아이템 -->
-			<c:forEach var = "notif" items = "${notifList}">
+			<!-- 각 알림 아이템 (5개 만 보여줌) -->
+			<c:forEach begin="0" end = "4" step = "1" var = "notif" items = "${notifList}">
 
-			<a href = "${notif.request}" style = "width:300px;">
+			<a class = "notif" href = "${notif.request}" style = "width:300px;">
             <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
               <i class="bi bi-exclamation-circle text-warning" style = "width: 20%;"></i>
-                
                 <p style = "width: 75%;white-space: normal">${notif.notifContent }</p>
             </li>
 			</a>
+			
             <li>
               <hr class="dropdown-divider">
             </li>
             
 			</c:forEach>
             <li class="dropdown-footer">
-              <a href="#" style = "justify-content: center; align-items:center;">전체 알림 보기</a>
+              <a href="viewMyNotifications.mb" style = "justify-content: center; align-items:center;">전체 알림 보기</a>
             </li>
             
           </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
         </c:if>
         </c:if>
+        
         </ul>
         </nav>
         

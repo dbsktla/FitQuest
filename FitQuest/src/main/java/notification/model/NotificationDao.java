@@ -27,4 +27,10 @@ public class NotificationDao {
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetNotifCount", recId);
 		return cnt;
 	}
+	public void clearAllNotifs(String recId) {
+		sqlSessionTemplate.delete(namespace + ".ClearAllNotifs", recId);
+	}
+	public void clearOneNotif(int nonum) {
+		sqlSessionTemplate.delete(namespace + ".ClearOneNotif", nonum);
+	}
 }
