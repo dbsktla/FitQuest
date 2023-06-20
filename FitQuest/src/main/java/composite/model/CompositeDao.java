@@ -9,7 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import reservation.model.TscheduleBean;
 import trainer.model.TrainerBean;
+import usage.model.UsageBean;
 import utility.Paging;
 
 @Component
@@ -80,5 +82,13 @@ public class CompositeDao {
 		List<MyOrderBean> mList = new ArrayList<MyOrderBean>();
 		mList = sqlSessionTemplate.selectList(namespace + ".GetOrderList", id);
 		return mList;
+	}
+	public List<TscheduleBean> getTscheduleByUsage(String mid, String tid) {
+		UsageBean ub = new UsageBean();
+		ub.setMid(mid);
+		ub.setTid(tid);
+		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
+		tsList = sqlSessionTemplate.selectList(namespace + ".GetTscheduleByUsage",ub);
+		return null;
 	}
 }
