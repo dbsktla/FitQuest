@@ -204,8 +204,6 @@ public class TrainerScheduleInsertController {
 		for(int i=0;i<selectedDays.length;i++) {
 			System.out.println("선택한 요일: "+selectedDays[i]);
 		}
-		
-		
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 		tscheduleBean.setTid(tid);
 		

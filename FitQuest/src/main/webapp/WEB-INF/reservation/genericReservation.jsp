@@ -98,7 +98,7 @@
       </td>
    </tr>
 </thead>
-<c:if test="${tscheduleBean.tsday == ''}">
+<c:if test="${empty tsList}">
    <tr>
 	 <td colspan="7" class="calendar-none">
 	   <div>
@@ -107,7 +107,7 @@
 	 </td>
    </tr>
 </c:if>
-<c:if test="${tscheduleBean.tsday != ''}">
+<c:if test="${not empty tsList}">
 <tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
