@@ -37,9 +37,13 @@ public class CompositeDao {
 		tList = sqlSessionTemplate.selectList(namespace + ".GetSimilarTrainers", trainerBean);
 		return tList;
 	}
-	public TrainerListSBean getTrainerListByTid(String tid) {
-		TrainerListSBean trainers = sqlSessionTemplate.selectOne(namespace + ".GetTrainerListByTid", tid);
-		return trainers;
+	public List<TrainerListSBean> getTrainerListByTid(String mid,String tid) {
+		UsageBean ub = new UsageBean();
+		ub.setTid(tid);
+		ub.setMid(mid);
+		List<TrainerListSBean> tList = new ArrayList<TrainerListSBean>();
+		tList = sqlSessionTemplate.selectList(namespace + ".GetTrainerListByTid", ub);
+		return tList;
 	}
 	public ReservationDetailBean getReservationDetail(int rnum) {
 		ReservationDetailBean reservationDetailBean = sqlSessionTemplate.selectOne(namespace+".ReservationDetailBean",rnum);
