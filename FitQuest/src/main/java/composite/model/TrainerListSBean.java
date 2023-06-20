@@ -6,6 +6,8 @@ public class TrainerListSBean {
 	private String purpose;
 	private String timage;
 	private String name;
+	private int people;
+	
 	public String getId() {
 		return id;
 	}
@@ -35,6 +37,12 @@ public class TrainerListSBean {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getPeople() {
+		return people;
+	}
+	public void setPeople(int people) {
+		this.people = people;
 	}
 	
 }

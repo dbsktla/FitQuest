@@ -103,9 +103,12 @@
 		(select id, gnum, gaddr1 from trainer natural join gym))
 		where activity = #{activity}
 	</select>
-		<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
-		select t.activity, t.purpose, t.timage, m.name, m.id from trainer t,member m
-		where t.id=m.id and t.id=#{tid}
+	<select id="GetTrainerListByTid" resultType = "composite.model.TrainerListSBean">
+		select u.people, t.activity, t.purpose, t.timage, m.name, m.id
+		from usage u join trainer t
+		on t.ID = u.tid and t.ID = #{tid}
+		join member m on m.ID = u.mid and u.tid = #{tid}
+		where u.mid = #{mid}
 	</select>
 	<select id="ReservationDetailBean" resultType = "composite.model.ReservationDetailBean">
 		select r.rdate, r.rtime, m.id, m.birth,m.mphone,m.email,m.name from reservation r,member m
