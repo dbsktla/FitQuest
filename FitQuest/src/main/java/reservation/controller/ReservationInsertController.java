@@ -47,7 +47,7 @@ public class ReservationInsertController {
 		
 		//사용권 정보 가져오기
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		UsageBean usageBean = usageDao.getOneUsage(mid,tid);
+		UsageBean usageBean = usageDao.getOneUsage(mid,tid,people);
 		int onum = usageBean.getOnum(); //주문 번호
 		int unum = usageBean.getUnum(); //사용권 번호
 		
@@ -55,7 +55,10 @@ public class ReservationInsertController {
 		String rdate = year + "-" + month + "-" + date;
 		
 		//이름 가져오기
-		String mname = memberDao.getName(mid);
+		String mname = ((MemberBean)session.getAttribute("loginInfo")).getName();
+		System.out.println("인서트 이름:"+mname);
+		System.out.println("인서트 날짜:"+rdate);
+		System.out.println("인서트 주문번호:"+onum);
 		
 		//예약 테이블에 삽입
         ReservationBean reservationBean = new ReservationBean();
@@ -78,7 +81,7 @@ public class ReservationInsertController {
 			System.out.println("예약 실패");
 		}
 		
-		return "genericReservation?tid="+tid+"&tname="+tname;
+		return "genericReservation?tid="+tid+"&tname="+tname+"&people=" + people;
 	}
 	
 	

@@ -125,7 +125,6 @@ public class GenericReservationController {
 		
 		
 		//사용권에 등록된 정보를 바탕으로 트레이너 스케줄 가져오기(4인권,1인권 등)
-		System.out.println("오는지 테스트");
 		System.out.println("mid: "+mid);
 		System.out.println("tid: "+tid);
 		System.out.println("people: "+people);
@@ -137,10 +136,27 @@ public class GenericReservationController {
 		}
 		model.addAttribute("tsList",tsList);
 		
-		//예약 마감된 값 가져오기
-		List<CompleteBean> cList = completeDao.getAllComplete(tid);
+		//인원수에 따라 예약 마감된 값 가져오기
+		List<CompleteBean> cList = completeDao.getCompleteByPeople(tid,people);
 		model.addAttribute("cList",cList);
 		
+		//오늘 날짜 가져오기(이전 날짜는 예약 막기 위함)
+		LocalDate today = LocalDate.now(); //오늘 날짜
+		int tyear = today.getYear();
+		int tmonth = today.getMonthValue();
+		int tday = today.getDayOfMonth();
+		
+		model.addAttribute("tyear",tyear); 
+		model.addAttribute("tmonth",tmonth); 
+		model.addAttribute("tday",tday); 
+			
+		//내가 예약 신청한 목록 가져오기(false)
+		List<ReservationBean> rfList = reservationDao.getReservationFListByPeople(mid,tid,people);
+		model.addAttribute("rfList",rfList); 
+		for(ReservationBean rb : rfList) {
+			System.out.println("예약 신청한 날짜:"+rb.getRdate());
+			System.out.println("예약 신청한 시간:"+rb.getRtime());
+		}
 		/*
 		for(TscheduleBean tscheduleBean : tsList) {
 			//트레이너 스케줄 - 끊어주기

@@ -81,6 +81,11 @@
 		where mid = #{mid}
 		order by rdate
 	</select>
+	<select id="GetReservationFListByPeople" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and tid = #{tid} and people = #{people} and rstate = 'false'
+		order by rdate]]>
+	</select>
 	<update id="UpdateState">
 		update reservation set
 		rstate = #{rstate}
