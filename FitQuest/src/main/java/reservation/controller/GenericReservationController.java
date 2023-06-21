@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import complete.model.CompleteBean;
+import complete.model.CompleteDao;
 import composite.model.CompositeDao;
 import member.model.MemberBean;
 import reservation.model.CalendarBean;
@@ -44,6 +46,9 @@ public class GenericReservationController {
 	
 	@Autowired
 	CompositeDao compositeDao;
+	
+	@Autowired
+	CompleteDao completeDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -131,6 +136,10 @@ public class GenericReservationController {
 			System.out.println("스케줄 테스트 인원: "+tb.getTspeople());
 		}
 		model.addAttribute("tsList",tsList);
+		
+		//예약 마감된 값 가져오기
+		List<CompleteBean> cList = completeDao.getAllComplete(tid);
+		model.addAttribute("cList",cList);
 		
 		/*
 		for(TscheduleBean tscheduleBean : tsList) {

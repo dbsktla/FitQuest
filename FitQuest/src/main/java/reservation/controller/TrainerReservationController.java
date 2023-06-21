@@ -14,14 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import complete.model.CompleteBean;
+import complete.model.CompleteDao;
 import member.model.MemberBean;
-import member.model.MemberDao;
 import reservation.model.CalendarBean;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
-import reservation.model.TscheduleBean;
-import reservation.model.TscheduleDao;
-import usage.model.UsageDao;
 
 @Controller
 public class TrainerReservationController {
@@ -32,13 +30,7 @@ public class TrainerReservationController {
 	ReservationDao reservationDao;
 	
 	@Autowired
-	TscheduleDao tscheduleDao;
-	
-	@Autowired
-	UsageDao usageDao;
-	
-	@Autowired
-	MemberDao memberDao;
+	CompleteDao completeDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -128,9 +120,13 @@ public class TrainerReservationController {
 		    dayNum[i] = Integer.parseInt(day[i]);
 		}
 		
+		//예약 완료 테이블에 있는 정보 가져오기
+		List<CompleteBean> cList = completeDao.getAllComplete(tid);
+		
 		model.addAttribute("ryear",yearNum);
 		model.addAttribute("rmonth",monthNum);
 		model.addAttribute("rday",dayNum);
+		model.addAttribute("cList", cList);
 		model.addAttribute("rList", rList);
 		
 		return getPage;

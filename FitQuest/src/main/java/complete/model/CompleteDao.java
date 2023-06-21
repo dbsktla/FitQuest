@@ -1,10 +1,11 @@
 package complete.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import reservation.model.ReservationBean;
 
 @Component
 public class CompleteDao {
@@ -13,9 +14,15 @@ public class CompleteDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
-	public int insertComplete(ReservationBean rb) {
+	public int insertComplete(CompleteBean cb) {
 		int cnt = -1;
-		cnt = sqlSessionTemplate.insert(namespace+".InsertComplete",rb);
+		cnt = sqlSessionTemplate.insert(namespace+".InsertComplete",cb);
 		return cnt;
+	}
+
+	public List<CompleteBean> getAllComplete(String tid) {
+		List<CompleteBean> cList = new ArrayList<CompleteBean>();
+		cList = sqlSessionTemplate.selectList(namespace+".GetAllComplete",tid);
+		return cList;
 	}
 }
