@@ -19,33 +19,24 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#kakaopay').click(function (){
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp46655364'); 
-		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
 		window.IMP.request_pay({
 			pg: 'kakaopay.TC0ONETIME',
 			pay_method: 'card',
 			merchant_uid: 'merchant_' + new Date().getTime(),
-			/* 
-			 *  merchant_uid에 경우 
-			 *  https://docs.iamport.kr/implementation/payment
-			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-			 */
 			name: '사용권',
 			// 결제창에서 보여질 이름
-			// name: '주문명 : ${auction.a_title}',
-			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+			
 			amount: '${ totalAmount }0000',
-			// amount: ${bid.b_bid},
 			// 가격 
 			buyer_name: '${ sessionScope.loginInfo.name }',
 			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 			}, function (rsp) {
 				console.log(rsp);
 				var msg = '';
@@ -55,6 +46,35 @@ $(document).ready(function(){
 				$('#myform').submit();
 				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			} else {
+				//msg += '결제에 실패하였습니다.\n';
+				msg += rsp.error_msg;
+				alert(msg);
+			}
+		});
+		
+	});
+	
+	$('#pay').click(function (){
+		var IMP = window.IMP;
+		IMP.init('imp46655364'); 
+		window.IMP.request_pay({
+			pg : 'html5_inicis',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			name: '사용권',
+			// 결제창에서 보여질 이름
+			
+			//amount: '${ totalAmount }0000',
+			amount: '100',
+			// 가격 
+			buyer_name: '${ sessionScope.loginInfo.name }',
+			buyer_email : '${ sessionScope.loginInfo.email }'
+			}, function (rsp) {
+				console.log(rsp);
+				var msg = '';
+			if (rsp.success) {
+				$('#myform').submit();
 			} else {
 				//msg += '결제에 실패하였습니다.\n';
 				msg += rsp.error_msg;
@@ -129,11 +149,11 @@ $(document).ready(function(){
 			            <div class="btn-group btns-cart">
 			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'"><i class="fa fa-arrow-circle-left">트레이너 목록보기</i></button>
 			                <button type="button" class="btn btn-warning" onClick = "location.href='cartList.od'"><i class="fa fa-arrow-circle-left"></i>장바구니 보기</button>
-			                <button type="submit" class="btn btn-warning"><i class="fa fa-arrow-circle-right"></i>결제하기</button>
+			                <button type="button" id="pay" class="btn btn-warning"><i class="fa fa-arrow-circle-right"></i>결제하기</button>
 			            </div>
-			                <a id="kakaopay">
+			               <%--  <a id="kakaopay">
 			                	<img src="<%= request.getContextPath() %>/resources/Image/LoginImage/kakaopay2.png">
-			                </a>
+			                </a> --%>
 			            </form>
 			        </div>
 			    </div>
