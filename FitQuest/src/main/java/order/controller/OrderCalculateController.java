@@ -106,6 +106,7 @@ public class OrderCalculateController {
 						int cnt3 = usageDao.insertUsage(usageBean);
 						if(cnt3 > -1) { //주문 관련 작업 다 끝나서 이젠 카트를 비우는것.
 								session.setAttribute("cartList", null);
+								session.setAttribute("cartCount", null);
 								session.setAttribute("flag2", false);
 						}
 						}

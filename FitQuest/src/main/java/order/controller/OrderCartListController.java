@@ -85,6 +85,7 @@ public class OrderCartListController {
 				}
 			}
 			model.addAttribute("sList", sList);
+			session.setAttribute("sList", sList);
 			model.addAttribute("totalAmount", totalAmount);
 			model.addAttribute("minPrice", minPrice);
 			model.addAttribute("maxPrice", maxPrice);
