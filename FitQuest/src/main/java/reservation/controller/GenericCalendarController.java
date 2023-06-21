@@ -159,14 +159,14 @@ public class GenericCalendarController {
 			Map<String, Integer> trainerCountMap = new HashMap<String, Integer>();
 			Map<String, String> trainerNameMap = new HashMap<String, String>();
 
-			// 트레이너 아이디 별로 카운트를 세어서 맵에 저장
+			//트레이너 아이디 별로 카운트를 세어서 맵에 저장
 			for (ReservationBean rb : cList) {
 			    String trainerId = rb.getTid();
 			    trainerCountMap.put(trainerId, trainerCountMap.getOrDefault(trainerId, 0) + 1);
 			    trainerNameMap.put(trainerId, rb.getTname());
 			}
 
-			// 맵을 순회하면서 3번 이상인 경우 출력
+			//맵을 순회하면서 3번 이상인 경우 출력
 			for (Map.Entry<String, Integer> entry : trainerCountMap.entrySet()) {
 			    String trainerId = entry.getKey();
 			    int count = entry.getValue();
@@ -182,8 +182,10 @@ public class GenericCalendarController {
 			}
 			
 			//사용권 있나 확인
-			String usage = usageDao.getTid(mid);
+			int usage = usageDao.getUsageExist(mid);
+			System.out.println("사용권 개수:"+usage);
 			model.addAttribute("usage",usage);
+			
 			return getPage; 
 	}
 }

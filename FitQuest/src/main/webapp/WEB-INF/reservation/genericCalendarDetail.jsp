@@ -20,6 +20,10 @@
 					<td class="sub-text"><span>${reservationDetailGBean.rtime}</span></td>
 				</tr>
 				<tr class="tr">
+					<td class="sub-title">인원수</td>
+					<td class="sub-text"><span>${reservationDetailGBean.people}인</span></td>
+				</tr>
+				<tr class="tr">
 					<td class="sub-title">전화번호</td>
 					<td class="sub-text"><span>${mphone}</span></td>
 				</tr>

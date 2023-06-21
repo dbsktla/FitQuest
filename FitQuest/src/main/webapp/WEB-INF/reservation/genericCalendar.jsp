@@ -7,7 +7,7 @@
 		// 팝업 창의 URL과 창의 속성을 설정
 		var url = "genericCalendarDetail.rv?rnum=" + rnum;
 		var width = 700; // 팝업 창의 너비
-		var height = 620; // 팝업 창의 높이
+		var height = 680; // 팝업 창의 높이
 		var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
 		var top = (window.screen.availHeight - height) / 2;
 		
@@ -90,7 +90,7 @@
       <c:if test="${not empty rList}">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
       </c:if>
-      <c:if test="${not empty usage}">
+      <c:if test="${usage >= 1}">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="예약하러 가기">
       </c:if>
       </div>
@@ -154,7 +154,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}'); return false;">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">
@@ -202,7 +202,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}'); return false;">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">
@@ -253,7 +253,7 @@
 			                            <c:forEach var="reservation" items="${rList}">
 				                         <c:set var="check" value="출력완료"/>
 			                                <c:if test="${reservation.rdate == reservationDay}">
-			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}')">
+			                                  <a href="#" onclick="openPopup('${reservation.rnum}','${reservation.rstate}'); return false;">
 						                        <div class="rstate-container-gc">
 				                                    <div class="center">
 					                                   	 <c:if test="${reservation.activity == 'PT'}">

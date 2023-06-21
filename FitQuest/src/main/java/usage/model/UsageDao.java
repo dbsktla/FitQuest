@@ -83,4 +83,9 @@ public class UsageDao {
 		UsageBean usageBean = sqlSessionTemplate.selectOne(namespace + ".GetUsageByPeople", ub);
 		return usageBean;
 	}
+	public int getUsageExist(String mid) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.selectOne(namespace + ".GetUsageExist", mid);
+		return cnt;
+	}
 }

@@ -1,7 +1,6 @@
 package reservation.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import complete.model.CompleteBean;
+import complete.model.CompleteDao;
 import member.model.MemberBean;
 import product.model.ProductBean;
 import product.model.ProductDao;
@@ -39,6 +40,9 @@ public class TrainerCalendarController {
 	
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	CompleteDao completeDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -171,6 +175,11 @@ public class TrainerCalendarController {
 			model.addAttribute("rmonth",monthNum);
 			model.addAttribute("rday",dayNum);
 			model.addAttribute("rList", rList);
+			
+			//예약 완료 테이블에 있는 값 가져오기(예약 마감된 값)
+			List<CompleteBean> cList = completeDao.getAllComplete(tid);
+			model.addAttribute("cList", cList);
+			
 			return getPage;
 	}
 }
