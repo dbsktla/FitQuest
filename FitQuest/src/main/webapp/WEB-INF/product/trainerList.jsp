@@ -10,7 +10,6 @@
 		border: #FAC710 !important;
 	}
 	.btn {
-		border-radius: 25px !important;
 		color: #444444 !important;
 		font-size: 15px !important;
 		font-weight: 600 !important;
@@ -24,6 +23,15 @@
 	.header{
 		background-color: white !important;
 		padding-bottom: 50px;
+	}
+	.btn-check:checked + .btn-check-label :{
+		background-color: #FAC710;
+		color: white !important;
+		outline:none;
+	}
+	.section{ padding: 20px 0px !important; }
+	.btn-check-label, .form-check-label{
+		border-radius: 25px !important;
 	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
@@ -145,11 +153,10 @@ var areaSelectMaker = function(target){
 </script>
 <!-- 운동 카테고리 선택.-->
 <body style="background-color : #FEF9E7;">
-<div height = "80px"></div>
- <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important;"> 
+ <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important; padding: 20px 0px;"> 
       <div class="container" data-aos="fade-up">
         <div class="row" data-aos="fade-up" data-aos-delay="100">
-	        <header class="section-header" style = "margin-top:60px;">
+	        <header class="section-header" style = "margin-top:30px;">
 	          <h2>FitQuest</h2>
 	          <p>트레이너 목록</p>
 	        </header>
@@ -162,29 +169,29 @@ var areaSelectMaker = function(target){
           <div class="col-lg-12 d-flex justify-content-center">
           	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 운동 : </span>
           	  <input type="radio" class="btn-check" value = "null" name="activity" id="option1" autocomplete="off"
-          	  <c:if test = "${activity eq 'null'}">
+          	  <c:if test = "${activity eq 'null' or activity eq null}">
           	  checked
           	  </c:if>
           	  >
-			  <label class="btn" for="option1">전체보기</label>
+			  <label class="btn btn-check-label" for="option1">전체보기</label>
           	  <input type="radio" class="btn-check" value = "PT" name="activity" id="option2" autocomplete="off"
           	  <c:if test = "${activity eq 'PT' }">
           	  checked
           	  </c:if>
           	  >
-			  <label class="btn" for="option2">PT</label>
+			  <label class="btn btn-check-label" for="option2">PT</label>
           	  <input type="radio" class="btn-check" value = "필라테스" name="activity" id="option3" autocomplete="off"
           	  <c:if test = "${activity eq '필라테스' }">
           	  checked
           	  </c:if>
           	  >
-			  <label class="btn" for="option3">필라테스</label>
+			  <label class="btn btn-check-label" for="option3">필라테스</label>
           	  <input type="radio" class="btn-check" value = "요가" name="activity" id="option4" autocomplete="off"
           	  <c:if test = "${activity eq '요가' }">
           	  checked
           	  </c:if>
           	  >
-			  <label class="btn" for="option4">요가</label>
+			  <label class="btn btn-check-label" for="option4">요가</label>
           </div>
           <div class="col-lg-12 d-flex justify-content-center">
           	  <span class = "box" style = "line-height:40px; margin-right: 8px;">원하는 효과 : </span>
@@ -272,11 +279,11 @@ var areaSelectMaker = function(target){
 				<c:set var = "starCount" value = "0"/>
 				<div class="stars">
 				<c:forEach begin = "1" end = "${rating }" step="1" var="i">
-                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill" style = "color: #FAC710;"></i>
                   <c:set var = "starCount" value = "${starCount + 1 }"/>
 				</c:forEach>
 				<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
-				<i class = "bi bi-star"></i>
+				<i class = "bi bi-star" style = "color: #FAC710;"></i>
 				</c:forEach>
 				<c:if test = "${ trainer.hasReview eq 'Y' }">
 				(${rating1})

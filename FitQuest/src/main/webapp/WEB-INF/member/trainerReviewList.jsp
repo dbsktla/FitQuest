@@ -122,13 +122,13 @@ section{
 	                평균 별점 : 
 					<c:set var = "starCount" value = "0"/>
 					<c:forEach begin = "1" end = "${rating }" step="1" var="i">
-	                  <i class="bi bi-star-fill"></i>
+	                  <i class="bi bi-star-fill" style = "color: #FAC710;"></i>
 	                  <c:set var = "starCount" value = "${starCount + 1 }"/>
 					</c:forEach>
 					<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
-					<i class = "bi bi-star"></i>
+					<i class = "bi bi-star" style = "color: #FAC710;"></i>
 					</c:forEach>
-					${rating1 }
+					<span  style = "color: #FAC710; font-size:20px;">${rating1 }</span>
              	 </h5>
              		 <table class="table">
                 <thead>

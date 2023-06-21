@@ -16,23 +16,13 @@
 section{
 	padding: 0px !important;
 }
-.btn:checked{
-	background-color: #ffc107 !important;
-}
-.btn:hover {
-		background-color:#FAC710 !important;
-	}
 .btn-check{
 	border-radius:20px !important;
 }
-.btn-check + &:hover {
-    // override for the checkbox/radio buttons
-    background-color: #ffc107 !important;
-  }
 .row{
 	margin-bottom:25px;
 }
-	.header{
+.header{
 		background-color: white !important;
 		padding-bottom: 50px;
 	}
@@ -55,13 +45,13 @@ section{
 	                리뷰 별점 : 
 					<c:set var = "starCount" value = "0"/>
 					<c:forEach begin = "1" end = "${rating }" step="1" var="i">
-	                  <i class="bi bi-star-fill"></i>
+	                  <i class="bi bi-star-fill" style = "color: #FAC710;"></i>
 	                  <c:set var = "starCount" value = "${starCount + 1 }"/>
 					</c:forEach>
 					<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
-					<i class = "bi bi-star"></i>
+					<i class = "bi bi-star" style = "color: #FAC710;"></i>
 					</c:forEach>
-					${rating1 }
+					<span  style = "color: #FAC710; font-size:20px;">${rating1 }</span>
              	 </h5>
              	 <div class="reply-form">
                 <form action="reportReview.mb" name = "myform">
