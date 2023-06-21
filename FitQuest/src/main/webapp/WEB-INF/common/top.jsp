@@ -156,7 +156,7 @@
 	              <li><a href="viewMyOrderList.od">구매관리</a></li>
 	              <li><a href="viewMyReviewList.mb">리뷰관리</a></li>
 	            </ul>
-	          </li>
+	        </li>
 	      
 	    <!--   장바구니 - 일반 회원 -->
 	      <li>
@@ -181,7 +181,7 @@
       		<ul class="d-flex align-items-center">
 		  <!-- 알림 -->
 		  <c:if test = "${loginInfo.mtype != null }">
-		  <c:if test = "${ notifCount != null }">
+		  <c:if test = "${ notifCount != null && notifCount != 0}">
 		  <li class="nav-item dropdown">
 
           <a class="nav-link dropdown" href="#">
@@ -203,7 +203,7 @@
 
 			<a class = "notif" href = "${notif.request}" style = "width:300px;">
             <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
-              <i class="bi bi-exclamation-circle text-warning" style = "width: 20%;"></i>
+              <i class="bi bi-exclamation-circle text-warning" style = "margin: 0px; width: 20%; font-size:40px;"></i>
                 <p style = "width: 75%;white-space: normal">${notif.notifContent }</p>
             </li>
 			</a>
@@ -214,14 +214,29 @@
             
 			</c:forEach>
             <li class="dropdown-footer">
-              <a href="viewMyNotifications.mb" style = "justify-content: center; align-items:center;">전체 알림 보기</a>
+              <a href="viewMyNotifications.mb" style = "justify-content: center; align-items:center; text-decoration: none;">전체 알림 보기</a>
             </li>
             
           </ul><!-- End Notification Dropdown Items -->
         </li><!-- End Notification Nav -->
         </c:if>
         </c:if>
+        <c:if test = "${loginInfo.mtype != null }">
+        <c:if test = "${ notifCount == null or notifCount == 0 }">
         
+        	<li class="nav-item dropdown">
+
+	          <a class="nav-link dropdown" href="#">
+	            <i class="bi bi-bell" style = "font-size: 25px;"></i>
+	          </a><!-- End Notification Icon -->
+	
+	          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style = "width : 300px; margin-top: 38px;">
+	            <li class="dropdown-header" style = "display:flex; justify-content: center; align-items: center; padding:0px;">
+	              <span>알림 없습니다.</span>
+	            </li>
+	            </ul>
+        </c:if>
+        </c:if>
         </ul>
         </nav>
         
