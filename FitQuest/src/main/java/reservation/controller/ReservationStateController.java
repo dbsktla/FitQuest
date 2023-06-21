@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import complete.model.CompleteDao;
 import member.model.MemberBean;
 import member.model.MemberDao;
 import reservation.model.ReservationBean;
@@ -29,7 +30,7 @@ public class ReservationStateController {
 	UsageDao usageDao;
 	
 	@Autowired
-	
+	CompleteDao completeDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request,HttpSession session,
@@ -56,13 +57,18 @@ public class ReservationStateController {
 			}
 		}
 		
-		//총 인원수 비교하고 같은 날짜,시간 데이터 몇갠지 카운트
-		String tid = ((MemberBean) session.getAttribute("loginInfo")).getId(); 
-		int rcount = reservationDao.getTrueCount(rb.getRdate(),rb.getRtime(),tid);
+		//총 인원수 비교하고 같은 트레이너의 날짜,시간 데이터 몇갠지 카운트
+		int rcount = reservationDao.getTrueCount(rb.getRdate(),rb.getRtime(),rb.getTid());
+		System.out.println("카운트: "+rcount);
 		
 		//총 인원수와 동일하면 예약 완료 테이블에 삽입
 		if(rcount == people) {
-			
+			int cnt2 = completeDao.insertComplete(rb);
+			if(cnt2 != -1) {
+				System.out.println("예약 완료 테이블 삽입");
+			}else {
+				System.out.println("예약 완료 테이블 삽입 실패");
+			}
 		}
 		
 		return gotoPage;
