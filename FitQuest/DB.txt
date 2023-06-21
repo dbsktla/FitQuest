@@ -181,10 +181,10 @@ insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
 values(bcseq.nextval,5,'moon',2,0,0,'괜찮습니다! 내일부터 다시 시작하면됩니다. 화이팅!!','23/06/05');
 
 insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
-values(bcseq.nextval,7,'moon',3,0,0,'일반인도 참여할 수 있나요?','23/05/17');
+values(bcseq.nextval,8,'hong',3,0,0,'일반인도 참여할 수 있나요?','23/05/17');
 
 insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
-values(bcseq.nextval,7,'moon',3,1,1,'물론입니다. 하지만, 경험이 없는 참가자는 무리가 갈 수 있기에 조심하셔야 합니다.','23/05/18');
+values(bcseq.nextval,8,'moon',3,1,1,'물론입니다. 하지만, 경험이 없는 참가자는 무리가 갈 수 있기에 조심하셔야 합니다.','23/05/18');
 
 select * from BCOMMENT;
 commit;
