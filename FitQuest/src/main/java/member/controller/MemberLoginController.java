@@ -92,6 +92,7 @@ public class MemberLoginController {
 		session.removeAttribute("loginInfo");
 		session.setAttribute("notifList", null);
 		session.setAttribute("notifCount", null);
+		session.setAttribute("cartCount", null);
 		return "redirect:/main.go";
 	}
 	

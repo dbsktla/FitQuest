@@ -73,16 +73,9 @@ section{
 .btn:checked{
 	background-color: #ffc107 !important;
 }
-.btn:hover {
-		background-color:#FAC710 !important;
-	}
 .btn-check{
 	border-radius:20px !important;
 }
-.btn-check + &:hover {
-    // override for the checkbox/radio buttons
-    background-color: #ffc107 !important;
-  }
 .td{
 	text-align:center;
 }

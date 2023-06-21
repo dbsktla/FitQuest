@@ -159,12 +159,85 @@
 	        </li>
 	      
 	    <!--   장바구니 - 일반 회원 -->
-	      <li>
-          	<a href = "cartList.od">
-          		<i class="bi bi-cart" style="font-size: 30px;"></i>
-          	</a>
-          </li>
+	     <nav class="header-nav ms-auto">
+      		<ul class="d-flex align-items-center">
+		  <!-- 장바구니 뛰우기 -->
+		  <c:if test = "${loginInfo.mtype != null }">
+		  <c:if test = "${cartCount != null && cartCount != 0}">
+		  <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown" href="#">
+            <i class="bi bi-cart" style = "font-size: 25px;"></i>
+            <span class="badge bg-primary badge-number">${cartCount }</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style = "width : 300px; margin-top: 38px;">
+            <li class="dropdown-header" style = "display:flex; justify-content: center; align-items: center; padding:0px;">
+              <span>상품 ${ cartCount }개 있습니다.</span>
+              <a href="clearCart.od"><span class="badge rounded-pill bg-warning p-2 ms-2">장바구니 비우기</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+			
+			<!-- 각 알림 아이템 (8개 까지만 보여줌) -->
+			<c:forEach begin="0" end = "4" step = "1" var = "cartItem" items = "${sList}">
+
+			<a class = "notif" href = "trainerDetail.pd?id=${cartItem.tid }&hasReview=${cartItem.hasReview}" style = "width:300px;">
+            <li class="notification-item" style = "display:flex; justify-content: space-around; align-items: center; padding: 0px;">
+               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${cartItem.timage}" class="img-fluid" alt="text" style = "width:50px;"/>
+                <p style = "width: 75%;white-space: normal">${cartItem.tname} 선생님의 ${cartItem.activity } 수업 : &#8361;${cartItem.price }만원</p>
+            </li>
+			</a>
+			
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            
+			</c:forEach>
+            <li class="dropdown-footer" style = "display: flex; justify-content: space-around; align-items: center;">
+              <a href="cartList.od" style = "text-decoration: none !important;"><span class="badge rounded-pill bg-warning p-2 ms-2" style = "font-size: 16px;">장바구니 보기</span></a>
+              <form action = "cartOrder.od" name = "myform" id = "myform">
+              		<c:forEach var = "cartItem" items = "${sList }">
+              		<input type = "hidden" name = "pnum" value = "${cartItem.pnum }">	
+					</c:forEach>
+				<a href="javascript:{}" onclick="document.getElementById('myform').submit();" style = "text-decoration: none !important;"><span class="badge rounded-pill bg-warning p-2 ms-2" style = "margin-top: 13px; font-size:16px;">주문하기</span></a>			  
+			</form>              
+            </li>
+            
+          </ul><!-- End Notification Dropdown Items -->
+        </li><!-- End Notification Nav -->
+        </c:if>
+        </c:if>
+        
+        <!-- 장바구니에 추가한거 없으면. -->
+        <c:if test = "${loginInfo.mtype != null }">
+        <c:if test = "${ cartCount == null or cartCount == 0 }">
+        
+        	<li class="nav-item dropdown">
+
+	          <a class="nav-link dropdown" href="#">
+	            <i class="bi bi-cart" style = "font-size: 25px;"></i>
+	          </a><!-- End Notification Icon -->
+	
+	          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" style = "width : 300px; margin-top: 38px;">
+	            <li class="dropdown-header" style = "display:flex; justify-content: center; align-items: center; padding:0px;">
+	              <span>장바구니 비었습니다.</span>
+	            </li>
+	            </ul>
+        </c:if>
+        </c:if>
+        </ul>
+        </nav>
+          
+          
+          <!-- 장바구니 끝 -->
            </c:if>
+           
+           
+           
+           
+           
            <c:if test = "${loginInfo.mtype eq 'admin' }">
            <li class="dropdown" ><a href=""><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
@@ -177,7 +250,7 @@
            </c:if>
            
 		  <!-- 알림 -->
-		      <nav class="header-nav ms-auto">
+	      <nav class="header-nav ms-auto">
       		<ul class="d-flex align-items-center">
 		  <!-- 알림 -->
 		  <c:if test = "${loginInfo.mtype != null }">

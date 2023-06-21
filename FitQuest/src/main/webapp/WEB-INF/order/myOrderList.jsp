@@ -28,7 +28,7 @@
 	}
 	.btn-buy:hover {
 		background-color:#FAC710 !important;
-		color: black !important;
+		color: white !important;
 	}
 	.btn-check:checked{
 		background-color:#FAC710 !important;
@@ -41,6 +41,9 @@
 		font-weight: 600 !important;
 		padding: 8px 20px 10px 20px !important;
 		border: 1px solid #FAC710 !important;
+	}
+	.btn-buy:hover{
+		color:white;
 	}
 	.box {
 		color: #444444;
@@ -269,7 +272,7 @@ $(document).ready(function(){
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2>My 회원권</h2>
+          <h2 style = "color: #012970">My 회원권</h2>
         </header>
 		<c:if test = "${ not empty muList }">
         <div class="row gy-4" data-aos="fade-left" style = "padding-bottom: 50px;">
@@ -292,7 +295,7 @@ $(document).ready(function(){
                 <li style = "font-weight: bold;">${ usage.name } 선생님</li>
                 <li>장소 : ${usage.gname }</li>
               </ul>
-              <a href="genericReservation.rv?tid=${usage.tid }&tname=${usage.name}" class="btn-buy" style = "color: #fac710 !important">예약하기</a>
+              <a href="genericReservation.rv?tid=${usage.tid }&tname=${usage.name}" class="btn-buy">예약하기</a>
             </div>
           </div>
 		</c:forEach>
@@ -317,7 +320,7 @@ $(document).ready(function(){
 
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <h2>주문 내역</h2>
+          <h2 style = "color: #012970">주문 내역</h2>
         </header>
         
         <div class="card">
