@@ -23,7 +23,6 @@
 					</c:if>
 				</div>
 				<h5 class="card-title">자유 게시판</h5>
-				<c:if test="${ not empty freeBoardList }">
 				<div class="col-md-12" align="right">
 					<a style="color : #FAC710;" href="freeBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
 					<font color="#FAC710"> | </font>
@@ -31,7 +30,6 @@
 					<font color="#FAC710"> | </font>
 					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=운동인증&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">운동인증</a>
 				 </div>
-				 </c:if>
 				 <div class="col-md-5" align="left">
 				 	
 				 </div>
