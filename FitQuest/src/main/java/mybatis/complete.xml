@@ -13,4 +13,8 @@
 		select * from complete
 		where tid = #{tid}
 	</select>
+	<select id="GetCompleteByPeople" resultType="complete.model.CompleteBean">
+		select * from complete
+		where tid = #{tid} and cpeople = #{cpeople}
+	</select>
 </mapper>

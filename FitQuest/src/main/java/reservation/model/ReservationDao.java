@@ -18,6 +18,7 @@ public class ReservationDao {
 
 	public int insertReservation(ReservationBean reservationBean) {
 		int cnt = -1;
+		System.out.println("인서트 다오");
 		cnt = sqlSessionTemplate.insert(namespace+".InsertReservation",reservationBean);
 		return cnt;
 	}
@@ -120,6 +121,16 @@ public class ReservationDao {
 		rb.setTid(tid);
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetTrueCount", rb);
 		return cnt;
+	}
+
+	public List<ReservationBean> getReservationFListByPeople(String mid, String tid, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setMid(mid);
+		rb.setTid(tid);
+		rb.setPeople(people);
+		List<ReservationBean> rfList = new ArrayList<ReservationBean>();
+		rfList = sqlSessionTemplate.selectList(namespace + ".GetReservationFListByPeople", rb);
+		return rfList;
 	}
 
 	

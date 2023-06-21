@@ -25,4 +25,13 @@ public class CompleteDao {
 		cList = sqlSessionTemplate.selectList(namespace+".GetAllComplete",tid);
 		return cList;
 	}
+
+	public List<CompleteBean> getCompleteByPeople(String tid, int people) {
+		CompleteBean cb = new CompleteBean();
+		cb.setTid(tid);
+		cb.setCpeople(people);
+		List<CompleteBean> cList = new ArrayList<CompleteBean>();
+		cList = sqlSessionTemplate.selectList(namespace+".GetCompleteByPeople",cb);
+		return cList;
+	}
 }
