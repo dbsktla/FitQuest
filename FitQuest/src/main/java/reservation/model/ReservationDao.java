@@ -113,5 +113,14 @@ public class ReservationDao {
 		return cList;
 	}
 
+	public int getTrueCount(String rdate, String rtime, String tid) {
+		ReservationBean rb = new ReservationBean();
+		rb.setRdate(rdate);
+		rb.setRtime(rtime);
+		rb.setTid(tid);
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetTrueCount", rb);
+		return cnt;
+	}
+
 	
 }

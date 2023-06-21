@@ -8,7 +8,7 @@
 	});
 	function stateYes(rnum,people){
 		if (confirm('예약 승인 하시겠습니까?')) { //확인
-			location.href='reservationState.rv?rnum='+rnum+'&rstate=true';
+			location.href='reservationState.rv?rnum='+rnum+'&rstate=true&people='+people;
 		    alert('예약 승인 완료되었습니다.');
 		} else { //취소
 		    alert('예약 승인 취소되었습니다.');
@@ -16,7 +16,7 @@
 	}
 	function stateNo(rnum,people){
 		if (confirm('예약 거절 하시겠습니까?')) { //확인
-			location.href='reservationState.rv?rnum='+rnum+'&rstate=reject';
+			location.href='reservationState.rv?rnum='+rnum+'&rstate=reject&people='+people;
 		    alert('예약 거절 완료되었습니다.');
 		} else { //취소
 		    alert('예약 거절 취소되었습니다.');

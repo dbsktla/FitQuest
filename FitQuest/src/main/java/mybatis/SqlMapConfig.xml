@@ -34,6 +34,7 @@
 		<mapper resource="mybatis/composite.xml"/> <!-- join -->
 		<mapper resource="mybatis/admin.xml"/>
 		<mapper resource="mybatis/notification.xml"/>
+		<mapper resource="mybatis/complete.xml"/>
 	</mappers>
 	
 </configuration>

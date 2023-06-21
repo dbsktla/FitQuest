@@ -363,7 +363,7 @@ drop table complete cascade constraints;
 CREATE TABLE complete (
    cpnum   number   primary key, --번호/시퀀스
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
-   cpday varchar2(30)   NOT NULL, --예약 완료 요일
+   cpdate varchar2(30)   NOT NULL, --예약 완료 날짜
    cptime varchar2(500)   NOT NULL,--예약 완료 시간
    cpeople number   NOT NULL --수업 참여 회원 개수
 );
