@@ -96,9 +96,9 @@ public class ReservationDao {
 		return cnt;
 	}
 
-	public List<ReservationBean> getReservationTCList(String mid) {
+	public List<ReservationBean> getReservationTCList(String tid) {
 		List<ReservationBean> tcList = new ArrayList<ReservationBean>();
-		tcList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",mid);
+		tcList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",tid);
 		return tcList;
 	}
 

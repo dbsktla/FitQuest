@@ -57,7 +57,7 @@
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">  
 	<div class="calendarTitle-font">예약</div>
-	<div class="calendarSubtitle-font"><span><span>${tname}</span> 트레이너님 스케줄</span></div>
+	<div class="calendarSubtitle-font"><span><span>${tname}</span> 트레이너님 ${people}인권 스케줄</span></div>
 </div> 
 <div>
    <!-- 년/월 바꾸기 -->
@@ -93,7 +93,7 @@
       	<input type="button" class="btn btn-warning" onClick="location.href='genericCalendar.rv'" value="My PT">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
       	<c:if test="${usageCount >= 2}">
-	      	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="트레이너 선택">
+	      	<input type="button" class="btn btn-warning" onClick="location.href='genericTChoose.rv'" value="사용권 목록">
       	</c:if>
       </div>
    </div>

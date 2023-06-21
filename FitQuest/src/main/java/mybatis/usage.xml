@@ -51,17 +51,19 @@
 		ustate = 'available'
 		where unum = #{unum}]]>
 	</update>
-	
 	<select id="GetTListByMidA" resultType = "usage.model.UsageBean">
 		select * from usage
 		where mid = #{mid}
     	and ustate = 'available'
     </select>
-
 	<select id = "GetUsageList" resultType = "usage.model.UsageBean">
 		select * from usage
 		where mid = #{mid}
 		and ustate = 'available'
-
+	</select>
+	<select id="GetUsageExist" resultType="int">
+		select count(*) from usage
+		where mid = #{mid}
+		and ustate = 'available'
 	</select>
 </mapper>

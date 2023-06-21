@@ -9,6 +9,7 @@ public class ReservationDetailGBean {
 	private String gaddr1;
 	private String gaddr2;
 	private String gphone;
+	private int people;
 	
 	public String getName() {
 		return name;
@@ -58,8 +59,17 @@ public class ReservationDetailGBean {
 	public void setGphone(String gphone) {
 		this.gphone = gphone;
 	}
+	public int getPeople() {
+		return people;
+	}
+	public void setPeople(int people) {
+		this.people = people;
+	}
+	public ReservationDetailGBean() {
+		
+	}
 	public ReservationDetailGBean(String name, String rdate, String rtime, String mphone, String gname, String gaddr1,
-			String gaddr2, String gphone) {
+			String gaddr2, String gphone, int people) {
 		super();
 		this.name = name;
 		this.rdate = rdate;
@@ -69,8 +79,7 @@ public class ReservationDetailGBean {
 		this.gaddr1 = gaddr1;
 		this.gaddr2 = gaddr2;
 		this.gphone = gphone;
+		this.people = people;
 	}
-	public ReservationDetailGBean() {
-		
-	}
+	
 }

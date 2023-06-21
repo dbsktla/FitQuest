@@ -73,7 +73,7 @@
 	</select>
 	<select id="GetReservationTCList" resultType="reservation.model.ReservationBean">
 		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'true' or rstate = 'complete'
+		where tid = #{tid} and rstate = 'true' or rstate = 'complete'
 		order by rdate]]>
 	</select>
 	<select id="GetReservationAllList" resultType="reservation.model.ReservationBean">

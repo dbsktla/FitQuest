@@ -183,7 +183,7 @@
 				</c:if>
 				<c:if test="${empty cList}">
 					<tr align="center">
-						<td colspan="4">거절된 예약이 없습니다.</td>
+						<td colspan="4">취소된 예약이 없습니다.</td>
 					</tr>
 				</c:if>
 			</table>
