@@ -6,6 +6,7 @@ public class CompleteBean {
 	private String cpdate;
 	private String cptime;
 	private int cpeople;
+	
 	public int getCpnum() {
 		return cpnum;
 	}

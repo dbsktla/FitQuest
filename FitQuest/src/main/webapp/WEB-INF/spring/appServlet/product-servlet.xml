@@ -31,4 +31,5 @@
 	<context:component-scan base-package="health"/>
 	<context:component-scan base-package="nutrition"/>
 	<context:component-scan base-package="notification"/>
+	<context:component-scan base-package="complete"/>
 </beans>

@@ -9,4 +9,8 @@
 		insert into complete
 		values(cpseq.nextval,#{tid},#{cpdate},#{cptime},#{cpeople})
 	</insert>
+	<select id="GetAllComplete" resultType="complete.model.CompleteBean">
+		select * from complete
+		where tid = #{tid}
+	</select>
 </mapper>

@@ -1,5 +1,6 @@
 package reservation.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import complete.model.CompleteBean;
 import complete.model.CompleteDao;
-import member.model.MemberBean;
-import member.model.MemberDao;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
-import reservation.model.TscheduleDao;
 import usage.model.UsageDao;
 
 @Controller
@@ -32,10 +31,12 @@ public class ReservationStateController {
 	@Autowired
 	CompleteDao completeDao;
 	
+	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request,HttpSession session,
 			@RequestParam("rnum") int rnum,
 			@RequestParam("people") int people,
+			@RequestParam("full") String full,
 			@RequestParam("rstate") String rstate) {
 		
 		//true or reject로 상태 바꿔주기
@@ -63,11 +64,18 @@ public class ReservationStateController {
 		
 		//총 인원수와 동일하면 예약 완료 테이블에 삽입
 		if(rcount == people) {
-			int cnt2 = completeDao.insertComplete(rb);
-			if(cnt2 != -1) {
-				System.out.println("예약 완료 테이블 삽입");
-			}else {
-				System.out.println("예약 완료 테이블 삽입 실패");
+			if(full.equals("false")) { //full로 왔을땐 삽입x
+				CompleteBean cb = new CompleteBean();
+				cb.setTid(rb.getTid());
+				cb.setCpdate(rb.getRdate());
+				cb.setCptime(rb.getRtime());
+				cb.setCpeople(rb.getPeople());
+				int cnt2 = completeDao.insertComplete(cb);
+				if(cnt2 != -1) {
+					System.out.println("예약 완료 테이블 삽입");
+				}else {
+					System.out.println("예약 완료 테이블 삽입 실패");
+				}
 			}
 		}
 		
