@@ -36,7 +36,6 @@ $(document).ready(function(){
 			amount: '${ totalAmount }0000',
 			// 가격 
 			buyer_name: '${ sessionScope.loginInfo.name }',
-			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
 			}, function (rsp) {
 				console.log(rsp);
 				var msg = '';
@@ -44,8 +43,6 @@ $(document).ready(function(){
 				//msg += '결제가 완료되었습니다.\n';
 				//msg += '결제 금액 : ' + rsp.paid_amount + '원';
 				$('#myform').submit();
-				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				// 자세한 설명은 구글링으로 보시는게 좋습니다.
 			} else {
 				//msg += '결제에 실패하였습니다.\n';
 				msg += rsp.error_msg;
