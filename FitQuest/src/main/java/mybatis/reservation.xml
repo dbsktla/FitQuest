@@ -104,4 +104,8 @@
 		rstate = 'cancel'
 		where rnum = #{rnum}]]>
 	</update>
+	<select id="GetTrueCount" resultType="int">
+		<![CDATA[select count(*) from reservation
+		where rstate = 'true' and rdate = #{rdate} and rtime = #{rtime} and tid = #{tid}]]>
+	</select>
 </mapper>
