@@ -35,7 +35,8 @@ public class MyPhysiqueDetailController {
 	public String doAction(HttpSession session, HttpServletResponse response,
 							@RequestParam("selectDay") String selectDay,
 							@RequestParam("selectYear") String selectYear,
-							@RequestParam("selectMon") String selectMon) {
+							@RequestParam("selectMon") String selectMon,
+							@RequestParam(value = "mid", required = false) String mid) {
 		response.setContentType("text/html; charset=UTF-8");
 		MemberBean memberBean =  (MemberBean)session.getAttribute("loginInfo");
 		
@@ -59,7 +60,11 @@ public class MyPhysiqueDetailController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("phdate", selectDate);
-			map.put("id", memberBean.getId());
+			if(mid != null) {
+				map.put("id", mid);
+			}else {
+				map.put("id", memberBean.getId());
+			}
 			
 			PhysiqueBean physiqueBean = physiqueDao.getOnePhysique(map);
 			

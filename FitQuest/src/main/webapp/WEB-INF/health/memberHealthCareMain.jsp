@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!-- memberHealthCareMain.jsp -->
@@ -21,12 +22,62 @@
 		border-left: solid 3px #adb5bd;
 		height:100%;
 	}
+	#calenderTable{
+		height: 300px;
+	}
+	table{
+		text-align: center;
+		margin: auto;
+	}
+	td, tr{
+		height: 40px;
+		width: 40px;
+	}
+	.daySun{
+		color: red;
+	}
+	.daySat{
+		color: blue;
+	}
+	.dayOn:hover{
+		background-color: #FAC710 ;
+	}
+	.dayOn:active{
+		background-color: #f9a61a ;
+	}
+	.dayOn:visited{
+		background-color: #FAC710 ;
+	}
+	.dayCheck{
+		background-color: #FEF9E7;
+	}
+	.topMar{
+		margin-top: 20px;
+	}
+	.inbodyBtnDiv{
+		float: right;
+	}
+	.fe {
+	    position: absolute;
+	    right: 0px;
+	    top: 15px;
+	}
+	.ie {
+	    color: #aab7cf;
+	    padding-right: 20px;
+	    padding-bottom: 5px;
+	    transition: 0.3s;
+	    font-size: 16px;
+	}
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
 <script>
 	$(document).ready(function(){
 	   $('.datatable-search').css('display','none');
+// 	   calenderLookup();
+// 	   calenderLookup2();
+// 	   getGraphAll();
 	});
 	
 	function btnCheckOff() {
@@ -36,23 +87,697 @@
 	   $('#whatName').attr("value","");
 	}
 	
-	function detail(mid) {
+	function memberDetail(mid) {
 		//alert(mid);
 		
 		//(멤버리스트 보는 목록으로 가는 버튼 만들기)
 		//닫기버튼 생성하기
 		
-// 		$.ajax({
-// 			url : 'memberHealthDetail.ht',
-// 			type : 'POST',
-// 			data : {"mid": mid},
-// 			dataType : 'json',
-// 			success : function(data) {
+		$.ajax({
+			url : 'memberHealthDetail.ht',
+			type : 'POST',
+			data : {"mid": mid},
+			dataType : 'json',
+			success : function(data) {
+				// 회원상세정보
+				// 운동정보 - hdlist
 				
-// 			}
-// 		});
+				
+			},
+			error: function (request, status, error) {
+		        console.log("code: " + request.status)
+		        console.log("message: " + request.responseText)
+		        console.log("error: " + error);
+		    }
+			
+		});
+	}
+	
+	// 운동상세정보
+	function btnclick(hnum) {
+		//alert(hnum);
+		clickHnum = hnum;
+		$('#showbutton').show();
+		
+		$.ajax({	
+			type : "POST", // 요청타입
+			url : "myHealthDetail.ht", // 요청 url
+			data : ({'hnum' : hnum}), // url로 넘길 데이터 설정
+			dataType : "json", // 받아올 데이터 타입설정
+			success : function (data) {
+				
+				$('#healthDetail').empty(); // healthDetail div 내용 비우기
+				var msg = "<table class='table'><tr class='table-warning'>";
+				msg += "<th><input type='checkbox' name='allchk' class='form-check-input' onclick='allcheck()'></th>";
+				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
+				
+				// 현재 jsonArray 형태로 값이 넘어와서 data에 담긴상태	
+				for(var i=0; i<data.length; i++){
+					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "@" + data[i].starttime + "@" + clickHnum + "'></td>";
+					msg += "<td>"+data[i].hname+"</td>";
+					msg += "<td>"+(data[i].starttime).substring(0,16)+"</td>";
+					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
+					msg += "<td>"+data[i].hset+"세트 "+data[i].hcount+"회</td></tr>";
+				}
+				
+				msg += "</table>";
+				
+				// string값을 healthDetail div에 추가함!!
+				$("#healthDetail").append(msg);
+			},
+			error : function () {
+				alert("fail"); // 실패
+			}
+		}); // ajax
+	}
+	
+	// 식단상세정보
+	function calenderLookup() {
+		
+		var sYear = $('#selectYear option:selected').val();
+		var sMon = $('#selectMon option:selected').val();
+		var mid = $('#selectMid').val();
+		
+		$.ajax({
+			type : "POST",
+			url : "myNutritionList.ht",
+			data : ({'selectYear' : sYear, 'selectMon' : sMon, 'mid' : mid}),
+			dataType : "json",
+			success : function (data) {
+				$('#calenderTable').empty(); // calenderTable div 내용 비우기
+
+				var msg = '<table><tr><td class="daySun">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="daySat">토</td></tr>';
+				
+				for(var i=0; i<data.length -1; i++){
+					if(i == 0){
+						for(var j=0; j<data[i].date; j++){
+							msg += '<td> </td>';
+						}
+					}
+					
+					if(data[i].date == 0){
+						msg += '</tr><tr>';
+					}
+					
+					var strDate = "";
+					if(i+1 < 10){
+						strDate = "0" + (i+1);
+					}else{
+						strDate = (i+1);
+					}
+					var dateL = data[data.length -1].dateList;
+					
+					if(dateL == 'noData'){
+						if(data[i].date == 0){
+							msg += "<td class='daySun dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}else if(data[i].date == 6){
+							msg += "<td class='daySat dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}else{
+							msg += "<td class='dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+						}
+					}else{
+						
+						if(dateL.indexOf(strDate) != -1){
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn dayCheck' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}else{
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn ' onclick='dateClick("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}
+					}
+					
+				}// for
+				
+				msg += '</tr></table>';
+				
+				$("#calenderTable").append(msg);
+			}
+		}); // ajax
+	}
+	
+	
+	/* 날짜 클릭 상세정보 */
+	function dateClick(day){
+		var sYear = $('#selectYear option:selected').val();
+		var sMon = $('#selectMon option:selected').val();
+		var selectDate = sYear + "-" + sMon + "-" + day;
+		var mid = $('#selectMid').val();
+		
+		var allSumCal = 0.0;
+		var allSumBo = 0.0;
+		var allSumPro = 0.0;
+		var allSumFat = 0.0;
+		var allSumSu = 0.0;
+		var allSumSo = 0.0;
+		
+		$.ajax({
+			url : "myNutritionDetail.ht",
+			type : "POST",
+			data : {"selectDate" : selectDate, "mid": mid},
+			dataType : "json",
+			success : function (data) {
+				//alert(data);
+
+				var msg = "";
+				var msgAll = "";
+				$('#today-all-sum').empty();
+				$('#detailDiv').empty();
+				
+				
+				// 로그인정보 없을 때
+				if(data.returnData == 'idNull'){
+					$('#detailDiv').empty();
+					alert('로그인이 필요합니다.');
+					location.href='login.mb';
+				}
+				// 데이터정보가 없을 때
+				else if(data.returnData == 'BeanNull'){
+					$('#detailDiv').empty();
+					msg += '<div style="text-align: center; min-height: 60;">';
+					msg += '등록된 데이터가 없습니다.';
+					msg += '</div>';
+				}
+				// 데이터정보가 있을 때
+				else{
+					
+					for(var i=0; i<data.length; i++){
+						var x = data[i].flist.carbohydrate + data[i].flist.protein + data[i].flist.fat;
+						
+						msg += '<div class="row"><div class="col-4" style="padding: 10;">';
+						msg += '<img class="imgs" onerror="this.src='+ "'/ex/resources/Image/FoodImage/no_img.jpg'" +'" src="/ex/resources/Image/FoodImage/'+data[i].flist.fimage+'" style="margin: auto; width: 100%;">';
+						msg += '</div><div class="col-8">';
+						msg += '<div style="padding: 10;">';
+						msg += '</div>';
+						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식<p style="font-size: 13;color: gray;display: inline;float: right;margin-top: 0;">*상세 식단 변경은 수정에서 진행해주세요.</p></div><hr style="width: 100%;">';
+						msg += '<div>' + data[i].flist.fname + ' ' + data[i].flist.fweight + 'g</div><div>';
+						msg += '<ul class="list-group" style="padding-top: 20; padding-bottom: 20;">';
+						msg += '<li class="list-group-item list-group-item-warning">';
+						msg += '<nav class="navbar"><ul style="width: 100%;text-align: center;">';
+						msg += '<li style="width: 25%">칼로리' + data[i].flist.calories + 'kcal</li>';
+						msg += '<li style="width: 25%">탄수화물 ' + data[i].flist.carbohydrate + 'g</li>';
+						msg += '<li style="width: 25%">단백질 ' + data[i].flist.protein + 'g</li>';
+						msg += '<li style="width: 25%">지방 ' + data[i].flist.fat + 'g</li>';
+						msg += '</ul></nav><hr><nav class="navbar"><ul style="width: 100%; text-align: center;">';
+						msg += '<li style="width: 50%">당 ' + data[i].flist.sugar + 'g</li>';
+						msg += '<li style="width: 50%">나트륨 ' + data[i].flist.sodium + 'mg</li>';
+						msg += '</ul></nav></li></ul></div>';
+						msg += '<div class="progress">';
+						msg += '<div class="progress-bar" style="width: '+((data[i].flist.carbohydrate/x)*100)+'%; background-color: #FFD073; color: #6a6a6a;">';
+						msg += '탄수화물';
+						msg += '</div>';
+						msg += '<div class="progress-bar" style="width: '+((data[i].flist.protein/x)*100)+'%; background-color: #FFB54C;">';
+						msg += '단백질';
+						msg += '</div>';
+						msg += '<div class="progress-bar" style="width: '+((data[i].flist.fat/x)*100)+'%; background-color: #FF9326;">';
+						msg += '지방';
+						msg += '</div></div></div></div><hr>';
+						
+						
+						allSumCal += data[i].flist.calories;
+						allSumBo += data[i].flist.carbohydrate;
+						allSumPro += data[i].flist.protein;
+						allSumFat += data[i].flist.fat;
+						allSumSu += data[i].flist.sugar;
+						allSumSo += data[i].flist.sodium;
+						
+					}//for
+					
+					var x = allSumBo + allSumPro + allSumFat;
+					
+					msgAll += '<ul class="list-group" style="padding-top: 20; padding-bottom: 20;">';
+					msgAll += '<li class="list-group-item list-group-item-secondary">';
+					msgAll += '<nav class="navbar"><ul style="width: 100%;text-align: center;">';
+					msgAll += '<li style="width: 25%">칼로리' + allSumCal + 'kcal</li>';
+					msgAll += '<li style="width: 25%">탄수화물 ' + allSumBo + 'g</li>';
+					msgAll += '<li style="width: 25%">단백질 ' + allSumPro + 'g</li>';
+					msgAll += '<li style="width: 25%">지방 ' + allSumFat + 'g</li>';
+					msgAll += '</ul></nav><hr><nav class="navbar"><ul style="width: 100%; text-align: center;">';
+					msgAll += '<li style="width: 50%">당 ' + allSumSu + 'g</li>';
+					msgAll += '<li style="width: 50%">나트륨 ' + allSumSo + 'mg</li>';
+					msgAll += '</ul></nav></li></ul></div>';
+					msgAll += '<div class="progress">';
+					msgAll += '<div class="progress-bar" style="width: '+((allSumBo/x)*100)+'%; background-color: #FFD073; color: #6a6a6a;">';
+					msgAll += '탄수화물';
+					msgAll += '</div>';
+					msgAll += '<div class="progress-bar" style="width: '+((allSumPro/x)*100)+'%; background-color: #FFB54C;">';
+					msgAll += '단백질';
+					msgAll += '</div>';
+					msgAll += '<div class="progress-bar" style="width: '+((allSumFat/x)*100)+'%; background-color: #FF9326;">';
+					msgAll += '지방';
+					msgAll += '</div></div>';
+					
+				} // if
+				
+				$('#detailDiv').append(msg);
+				$('#today-all-sum').append(msgAll);
+			}
+		}); // ajax
+	} //dateClick()
+	
+	
+	// 신체 상세 날짜
+	function calenderLookup2() {
+		var sYear = $('#selectYear option:selected').val();
+		var sMon = $('#selectMon option:selected').val();
+		var mid = $('#selectMid').val();
+		
+		//alert(sYear);
+		//alert(sMon);
+		
+		$.ajax({
+			type : "POST",
+			url : "myPhysiqueList.ht",
+			data : ({'selectYear' : sYear, 'selectMon' : sMon, 'mid' : mid}),
+			dataType : "json",
+			success : function (data) {
+				$('#calenderTable2').empty(); // calenderTable div 내용 비우기
+
+				var msg = '<table><tr><td class="daySun">일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td class="daySat">토</td></tr>';
+				
+				for(var i=0; i<data.length -1; i++){
+					if(i == 0){
+						for(var j=0; j<data[i].date; j++){
+							msg += '<td> </td>';
+						}
+					}
+					
+					if(data[i].date == 0){
+						msg += '</tr><tr>';
+					}
+					
+					var strDate = "";
+					if(i+1 < 10){
+						strDate = "0" + (i+1);
+					}else{
+						strDate = (i+1);
+					}
+					
+					
+					var dateL = data[data.length -1].dateList;
+					
+					if(dateL == 'noData'){
+						if(data[i].date == 0){
+							msg += "<td class='daySun dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+						}else if(data[i].date == 6){
+							msg += "<td class='daySat dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+						}else{
+							msg += "<td class='dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+						}
+					}else{
+						
+						if(dateL.indexOf(strDate) != -1){
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn dayCheck' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn dayCheck' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn dayCheck' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}else{
+							if(data[i].date == 0){
+								msg += "<td class='daySun dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}else if(data[i].date == 6){
+								msg += "<td class='daySat dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}else{
+								msg += "<td class='dayOn ' onclick='dateClick2("+(i+1)+")'>" + (i+1) + "</td>";
+							}
+						}
+					}
+					
+				}// for
+				
+				msg += '</tr></table>';
+				
+				$("#calenderTable2").append(msg);
+			}
+		}); // ajax
+	}
+	
+	
+	/* 신체 날짜 상세 정보*/
+	function dateClick2(day){
+		
+		//alert(day);
+		var sYear = $('#selectYear option:selected').val();
+		var sMon = $('#selectMon option:selected').val();
+		var mid = $('#selectMid').val();
+		//var sday = day;
+		
+		$.ajax({
+			type : "POST",
+			url : "myPhysiqueDetail.ht",
+			data : ({"selectDay" : day, "selectYear" : sYear, "selectMon" : sMon, 'mid' : mid}),
+			dataType : "json",
+			success : function (data) {
+				// alert(data);
+				
+				var msg = "";
+				var phdate = "";
+				//alert(sYear + "-" + sMon+ "-" day);
+				
+				if(data.returnData == 'idNull'){
+					$('#detailDiv2').empty();
+					alert('로그인이 필요합니다.');
+					location.href='login.mb';
+				}else if(data.returnData == 'BeanNull'){
+					$('#detailDiv2').empty();
+					msg = "<h5 align='center'>등록된 신체 정보가 없습니다.</h5>";
+				}else{
+					$('#detailDiv2').empty();
+					msg += "<h5>" + data.phdate + "</h5>";
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">이름</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.name + ' 님</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">신장</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.height + ' cm</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">체중</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.weight + ' kg</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">BMI</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bmi + '</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">골격근량</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.skeletalmuscle + ' kg</div>';
+					msg += '</div>';
+					msg += '<div class="row" style="margin-top: 20px;">';
+					msg += '<div class="col-lg-3 col-md-4 label ">체지방률</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bodyfatper + ' %</div>';
+					msg += '<div class="col-lg-3 col-md-4 label ">기초대사량</div>';
+					msg += '<div class="col-lg-3 col-md-4">' + data.bmr + ' kcal</div>';
+					msg += '</div><div class="topMar"><input type="hidden" id="phimage" name="phimage" value="'+data.phimage+'">';
+					msg += '<input type="button" value="인바디 정보" onclick="showImg()" class="btn btn-outline-warning rounded-pill btn-sm inbodyBtnDiv"></div>';
+				}
+				
+				$("#detailDiv2").append(msg);
+			}
+			
+		}); // ajax
+	}
+	
+	function showImg() {
+		var phimage = $('#phimage').val();
+		//alert(phimage);
+		
+		// undefined
+		window.open('pop.ht?phimage=' + phimage,'팝업','width=500,height=700');
+	}
+	
+	function getGraphAll(){
+		
+		var weightData = [];
+		var skmuscleData = [];
+		var bodyfatperData = [];
+		var Date = [];
+		
+		var mid = $('#selectMid').val();
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			data : {'mid' : mid},
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					weightData.push(data[i].weight);
+					skmuscleData.push(data[i].skeletalmuscle);
+					bodyfatperData.push(data[i].bodyfatper);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체중(kg)",
+						data: weightData
+					}, {
+						name: "골격근량(kg)",
+						data: skmuscleData
+					}, {
+						name: "체지방률(%)",
+						data: bodyfatperData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+		
+	} //getGraphAll
+	
+	function getGraphWeight(){
+		
+		var weightData = [];
+		var Date = [];
+		var mid = $('#selectMid').val();
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			data : {'mid' : mid},
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					weightData.push(data[i].weight);
+					Date.push(data[i].phdate);
+				}
+
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체중(kg)",
+						data: weightData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphWeight
+	
+	function getGraphSkmuscle(){
+		var skmuscleData = [];
+		var Date = [];
+		var mid = $('#selectMid').val();
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			data : {'mid' : mid},
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					skmuscleData.push(data[i].skeletalmuscle);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "골격근량(kg)",
+						data: skmuscleData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphSkmuscle
+	
+	function getGraphBodyfatper(){
+		var bodyfatperData = [];
+		var Date = [];
+		var mid = $('#selectMid').val();
+		
+		$.ajax({
+			url : "myPhysiqueGraph.ht",
+			type : "GET",
+			data : {'mid' : mid},
+			dataType : "json",
+			success : function (data) {
+				
+				for(i=0; i<data.length; i++){
+					bodyfatperData.push(data[i].bodyfatper);
+					Date.push(data[i].phdate);
+				}
+				
+				new ApexCharts(document.querySelector("#lineChart"), {
+					series: [{
+						name: "체지방률(%)",
+						data: bodyfatperData
+					}],
+					chart: {
+						height: 350,
+						type: 'area',
+						toolbar: {
+							show: false
+						},
+					},
+					markers: {
+						size: 4
+					},
+					colors: ['#4154f1', '#2eca6a', '#ff771d'],
+					fill: {
+						type: "gradient",
+						gradient: {
+							shadeIntensity: 1,
+							opacityFrom: 0.3,
+							opacityTo: 0.4,
+							stops: [0, 90, 100]
+						}
+					},
+					dataLabels: {
+						enabled: false
+					},
+					stroke: {
+						curve: 'smooth',
+						width: 2
+					},
+					xaxis: {
+						categories: Date,
+					}
+				}).render();
+			} //success
+		}); //ajax
+	} // getGraphBodyfatper
+	
+	
+	function graphAll() {
+		//alert(1);
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">전체보기</h5><div id="lineChart"></div>');
+		getGraphAll();
+	}
+	
+	function graphW() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">체중 변화</h5><div id="lineChart"></div>');
+		getGraphWeight();
+	}
+	
+	function graphS() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">골격근량 변화</h5><div id="lineChart"></div>');
+		getGraphSkmuscle();
+	}
+	
+	function graphB() {
+		$('#my-graph').empty();
+		$('#my-graph').html('<h5 class="card-title">체지방률 변화</h5><div id="lineChart"></div>');
+		getGraphBodyfatper();
+	}
+	
+	function healthDetail() {
+		
+	}
+	function nutritionDetail() {
+		
+	}
+	function physiqueDetail() {
+		
 	}
 </script>
+
+<%
+	Date now = new Date();
+%>
+
 <body style="background-color: #FEF9E7;">
 
 	<div class="pagetitle" style="margin: 40px 0px;">
@@ -64,102 +789,12 @@
 	<div class="row">
 
 		<!-- 회원클릭시 상세정보 -->
-		<div id="mDetail" class="col-lg-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="row">
-						<!-- left -->
-						<div class="col-lg-3">
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">이름</label>
-								<div class="col-sm-7 col-form-label">ddd</div>
-							</div>
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">성별</label>
-								<div class="col-sm-7 col-form-label">여자</div>
-							</div>
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">생년월일</label>
-								<div class="col-sm-7 col-form-label">2020.02.03</div>
-							</div>
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">이메일</label>
-								<div class="col-sm-7 col-form-label">aaa@aaaa</div>
-							</div>
-							
-						</div><!-- left -->
-						
-						<!-- right -->
-						<div class="col-lg-9 v-line">
-							
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">최초등록일</label>
-								<div class="col-sm-7 col-form-label">2020.02.03</div>
-							</div>
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">시작일</label>
-								<div class="col-sm-7 col-form-label">2020.02.03(재등록)</div>
-							</div>
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">진도율</label>
-								<div class="col-sm-7 col-form-label">PT 총 10회중 5회남음</div>
-							</div>
-							
-							<div class="row mb-3">
-								<label class="col-sm-5 col-form-label">상태</label>
-								<div class="col-sm-7 col-form-label">유효</div>
-							</div>
-							
-						</div><!-- right -->
-						
-						<!-- center -->
-						<div class="col-lg-12">
-						
-							<div class="row mb-3">
-							
-								<label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-								
-								<div class="col-md-8 col-lg-9">
-									<input name="password" type="password" class="form-control" id="currentPassword">
-								</div>
-							</div>
+		<div id="memberDetail" class="col-lg-12">
 
-							<!-- Bordered Tabs -->
-							<ul class="nav nav-tabs nav-tabs-bordered">
-
-								<li class="nav-item">
-									<button class="nav-link active" data-bs-toggle="tab"
-										data-bs-target="#profile-overview">Overview</button>
-								</li>
-
-								<li class="nav-item">
-									<button class="nav-link" data-bs-toggle="tab"
-										data-bs-target="#profile-edit">Edit Profile</button>
-								</li>
-
-								<li class="nav-item">
-									<button class="nav-link" data-bs-toggle="tab"
-										data-bs-target="#profile-settings">Settings</button>
-								</li>
-
-								
-								<div class="tab-content pt-2">
-
-					             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-					             <h5 class="card-title">About</h5>
-
-							</ul>
-
-						</div><!-- center -->
-						
-					</div>
-				</div>
-			</div>
-		</div>
+		</div><!-- 회원클릭시 상세정보 -->
 
 		<!-- 상단 회원 간략 정보 -->
-		<div class="col-lg-12" style="margin: 20px 0px;">신규 회원 유효 회원 만료
-			회원</div>
+		<div class="col-lg-12" style="margin: 20px 0px;">신규 회원 유효 회원 만료 회원</div>
 		<!-- 회원 간략 정보  -->
 
 		<div class="col-lg-12">
@@ -263,7 +898,7 @@
 									<tr>
 										<td scope="row">${status.count}</td>
 										<td>
-											<a href='javascript:detail("${hclist.mid}")'>${hclist.name}</a>
+											<a href='javascript:memberDetail("${hclist.mid}")'>${hclist.name}</a>
 										</td>
 										<td>${hclist.gender}</td>
 										<td>만 ${hclist.age}세</td>
