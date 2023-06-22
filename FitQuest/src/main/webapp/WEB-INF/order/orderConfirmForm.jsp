@@ -29,7 +29,7 @@ $(document).ready(function(){
 		window.IMP.request_pay({
 			pg: 'kakaopay.TC0ONETIME',
 			pay_method: 'card',
-			merchant_uid: 'merchant_' + new Date().getTime(),
+			merchant_uid: 'fitquest_' + new Date().getTime(),
 			name: '사용권',
 			// 결제창에서 보여질 이름
 			
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		window.IMP.request_pay({
 			pg : 'html5_inicis',
 			pay_method: 'card',
-			merchant_uid: 'merchant_' + new Date().getTime(),
+			merchant_uid: 'fitquest_' + new Date().getTime(),
 			name: '사용권',
 			// 결제창에서 보여질 이름
 			
