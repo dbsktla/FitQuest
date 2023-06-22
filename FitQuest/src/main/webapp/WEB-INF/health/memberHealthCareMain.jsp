@@ -397,7 +397,7 @@
 						msg += '</div><div class="col-8">';
 						msg += '<div style="padding: 10;">';
 						msg += '</div>';
-						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식<p style="font-size: 13;color: gray;display: inline;float: right;margin-top: 0;">*상세 식단 변경은 수정에서 진행해주세요.</p></div><hr style="width: 100%;">';
+						msg += '<h5><b>'+ data[i].flist.mealtype +'</b></h5><div>먹은 음식</div><hr style="width: 100%;">';
 						msg += '<div>' + data[i].flist.fname + ' ' + data[i].flist.fweight + 'g</div><div>';
 						msg += '<ul class="list-group" style="padding-top: 20; padding-bottom: 20;">';
 						msg += '<li class="list-group-item list-group-item-warning">';
