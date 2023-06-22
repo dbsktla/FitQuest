@@ -2,7 +2,6 @@ package reservation.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +9,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.org.eclipse.jdt.internal.compiler.AbstractAnnotationProcessorManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -157,6 +155,20 @@ public class GenericReservationController {
 			System.out.println("예약 신청한 날짜:"+rb.getRdate());
 			System.out.println("예약 신청한 시간:"+rb.getRtime());
 		}
+		
+		//예약 완료 했지만, 정원 마감은 안된 목록 가져오기(true지만, complete 테이블엔 없는)
+		List<ReservationBean> ncList = compositeDao.getReservationNotComplete(mid,tid,people);
+		model.addAttribute("ncList",ncList); 
+		
+		
+		for(ReservationBean rb : rfList) {
+			System.out.println("예약 신청한 날짜c:"+rb.getRdate());
+			System.out.println("예약 신청한 시간c:"+rb.getRtime());
+		}
+		//다른 회원권에서 예약 완료된 모든 값 가져오기(동일 시간,날짜 예약 막기 위함)
+		List<ReservationBean> tList = reservationDao.getReservationTListByPeople(mid,tid,people);
+		model.addAttribute("tList",tList); 
+		
 		/*
 		for(TscheduleBean tscheduleBean : tsList) {
 			//트레이너 스케줄 - 끊어주기

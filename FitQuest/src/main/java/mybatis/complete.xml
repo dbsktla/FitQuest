@@ -17,4 +17,8 @@
 		select * from complete
 		where tid = #{tid} and cpeople = #{cpeople}
 	</select>
+	<delete id="DeleteComplete">
+		delete complete
+		where cptime = #{cptime} and cpdate = #{cpdate} and cpeople = #{cpeople} and tid = #{tid}
+	</delete>
 </mapper>

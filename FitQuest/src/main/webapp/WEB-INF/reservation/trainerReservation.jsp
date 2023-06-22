@@ -3,9 +3,6 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
 	function stateYes(rnum,people){
 		if (confirm('예약 승인 하시겠습니까?')) { //확인
 			location.href='reservationState.rv?rnum='+rnum+'&rstate=true&people='+people+'&full=false';
@@ -133,7 +130,7 @@
 			                            <c:set var="count" value="0" />
 			                            <c:forEach var="reservation" items="${rList}">
 			                        	  <c:forEach var="citem" items="${cList}">
-			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime}">
+			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime && citem.cpeople == reservation.people}">
 			                        	  		<c:set var="completeDay" value="true"/>
 			                        	  	</c:if>
 			                        	  </c:forEach>
@@ -198,7 +195,7 @@
 			                            <c:set var="count" value="0" />
 			                            <c:forEach var="reservation" items="${rList}">
 			                        	  <c:forEach var="citem" items="${cList}">
-			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime}">
+			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime && citem.cpeople == reservation.people}">
 			                        	  		<c:set var="completeDay" value="true"/>
 			                        	  	</c:if>
 			                        	  </c:forEach>
@@ -265,7 +262,7 @@
 			                            <c:set var="count" value="0" />
 			                            <c:forEach var="reservation" items="${rList}">
 			                        	  <c:forEach var="citem" items="${cList}">
-			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime}">
+			                        	  	<c:if test="${citem.cpdate == reservationDay && citem.cptime == reservation.rtime && citem.cpeople == reservation.people}">
 			                        	  		<c:set var="completeDay" value="true"/>
 			                        	  	</c:if>
 			                        	  </c:forEach>

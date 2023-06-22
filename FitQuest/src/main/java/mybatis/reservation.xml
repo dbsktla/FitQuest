@@ -86,6 +86,17 @@
 		where mid = #{mid} and tid = #{tid} and people = #{people} and rstate = 'false'
 		order by rdate]]>
 	</select>
+	<select id="GetReservationTListByPeople" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where mid = #{mid} and rstate = 'true' and rnum NOT IN (
+	    select rnum from reservation
+	    where mid = #{mid} and tid = #{tid} and people = #{people} and rstate = 'true'
+		)]]>
+	</select>
+	<select id="GetReservationList" resultType="reservation.model.ReservationBean">
+		<![CDATA[select * from reservation
+		where tid = #{tid} and rdate = #{rdate} and rtime = #{rtime} and people = #{people} and rstate = 'true']]>
+	</select>
 	<update id="UpdateState">
 		update reservation set
 		rstate = #{rstate}
@@ -104,13 +115,18 @@
 		<![CDATA[select * from reservation
 		where mid = #{mid} and rstate = 'complete']]>
 	</select>
-	<update id="CancelReservation">
+	<update id="CancelReservationT">
+		<![CDATA[update reservation set
+		rstate = 'cancel'
+		where rdate = #{rdate} and rtime = #{rtime} and tid = #{tid} and people = #{people}]]>
+	</update>
+	<update id="CancelReservationM">
 		<![CDATA[update reservation set
 		rstate = 'cancel'
 		where rnum = #{rnum}]]>
 	</update>
 	<select id="GetTrueCount" resultType="int">
 		<![CDATA[select count(*) from reservation
-		where rstate = 'true' and rdate = #{rdate} and rtime = #{rtime} and tid = #{tid}]]>
+		where rstate = 'true' and rdate = #{rdate} and rtime = #{rtime} and tid = #{tid} and people = #{people}]]>
 	</select>
 </mapper>

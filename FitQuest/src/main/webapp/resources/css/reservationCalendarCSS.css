@@ -191,6 +191,18 @@ a{
     background-color: #FEF9E7; 
 	padding: 10px 7px;
 }
+.rstate-container-t{
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
+	margin: 5px 0px;
+	text-align: center;
+	transition: transform 0.3s;
+	border-radius: 10px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FEF9E7; 
+	padding: 5px 10px;
+}
 .center{
 	display: flex;
     align-items: center;
@@ -200,6 +212,9 @@ a{
 	transform: scale(1.05);
 }
 .rstate-container-gc:hover{
+	transform: scale(1.05);
+}
+.rstate-container-t:hover{
 	transform: scale(1.05);
 }
 .rstate-dot{
@@ -290,6 +305,18 @@ a{
 	border-bottom: 1px solid lightgray;
 	border-right: 1px solid lightgray;
 }
+.sub-title-i{
+	font-weight: bold;
+	padding: 15px 5px;
+	border-bottom: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.icon-i{
+	margin: 10px;
+}
 .sub-title-last{
 	font-weight: bold;
 	padding: 15px 5px;
@@ -304,6 +331,7 @@ a{
 }
 button.close-button {
 	margin-top: 40px;
+	margin-bottom: 60px;
 	background-color: #FAC710;
 	border: none;
 	outline: none;
@@ -320,6 +348,8 @@ button.close-button:hover {
 	padding: 8px 12px;
 	background-color: #F7F7F8;
 	border-radius: 8px; 
+	margin-right: 5px;
+	border: none;
 }
 .day-area td {
   text-align: left;

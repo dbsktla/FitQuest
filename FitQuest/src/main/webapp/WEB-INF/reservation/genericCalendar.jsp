@@ -33,7 +33,7 @@
 					if (confirmCancel) {
 						popup.alert("예약 취소 완료되었습니다.");
 						popup.close(); // 팝업 창 닫기
-						window.location.href = "reservationCancel.rv?rnum=" + rnum;
+						window.location.href = "genericCancel.rv?rnum=" + rnum;
 					}
 			  });
 			
@@ -87,7 +87,7 @@
   	  </c:if>
   	  </div> 
       <div class="right">
-      <c:if test="${not empty rList}">
+      <c:if test="${not empty rAList}">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericStateList.rv'" value="예약 내역">
       </c:if>
       <c:if test="${usage >= 1}">
