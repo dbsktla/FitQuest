@@ -31,6 +31,7 @@ insert into healthdate values(hseq.nextval, 'hong', '2023-06-03','lee');
 insert into healthdate values(hseq.nextval, 'hong', '2023-06-05','notrainer');
 insert into healthdate values(hseq.nextval, 'jkim', '2023-06-01','kim');
 insert into healthdate values(hseq.nextval, 'jkim', '2023-06-02','kim');
+insert into healthdate values(hseq.nextval, 'hong', '2021-10-02','park');
 
 commit;
 
@@ -50,6 +51,8 @@ insert into health values(6, '캐딜락',TO_DATE('2023-06-01 17:00','YYYY-MM-DD 
 insert into health values(6, '스쿼트',TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),20,5);
 insert into health values(7, '캐딜락',TO_DATE('2023-06-02 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 17:20','YYYY-MM-DD HH24:MI'),20,5);
 insert into health values(7, '스쿼트',TO_DATE('2023-06-02 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(8, '유산소',TO_DATE('2021-10-02 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2021-10-02 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(8, '벤치프레스',TO_DATE('2021-10-02 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2021-10-02 11:40','YYYY-MM-DD HH24:MI'),10,3);
 
 commit;
 
