@@ -917,7 +917,7 @@
 		msg += '<select name="selectMon" id="selectMon">';
 		<c:forEach var="i" begin="1" end="12">
 			msg += '<option value="' + ${i} + '" ';
-			<c:if test="${i == selectYear}"> 
+			<c:if test="${i == selectMon}"> 
 				msg += 'selected';
 			</c:if>
 			msg += '>' + ${i} + '</option>';
@@ -981,7 +981,7 @@
 		msg += '<select name="selectMon" id="selectMon">';
 		<c:forEach var="i" begin="1" end="12">
 			msg += '<option value="' + ${i} + '" ';
-			<c:if test="${i == selectYear}"> 
+			<c:if test="${i == selectMon}"> 
 				msg += 'selected';
 			</c:if>
 			msg += '>' + ${i} + '</option>';
