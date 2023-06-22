@@ -193,4 +193,19 @@
 		on tschedule.tid = usage.tid and tschedule.tspeople = usage.people
 		where usage.mid = #{mid} and usage.tid = #{tid} and tschedule.tspeople = #{people}
 	</select>
+	<select id="GetReservationNotComplete" resultType="reservation.model.ReservationBean">
+		select * from reservation
+		where people = #{people}
+		  and mid = #{mid}
+		  and tid = #{tid}
+		  and rstate = 'true'
+		  AND NOT EXISTS (
+		    select 1
+		    from complete
+		    where reservation.tid = complete.tid
+		      and reservation.people = complete.cpeople
+		      and reservation.rdate = complete.cpdate
+		      and reservation.rtime = complete.cptime
+		  )
+	</select>
 </mapper>

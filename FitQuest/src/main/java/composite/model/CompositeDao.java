@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import reservation.model.ReservationBean;
 import reservation.model.TscheduleBean;
 import trainer.model.TrainerBean;
 import usage.model.UsageBean;
@@ -95,5 +96,14 @@ public class CompositeDao {
 		List<TscheduleBean> tsList = new ArrayList<TscheduleBean>();
 		tsList = sqlSessionTemplate.selectList(namespace + ".GetTscheduleByUsage",ub);
 		return tsList;
+	}
+	public List<ReservationBean> getReservationNotComplete(String mid, String tid, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setMid(mid);
+		rb.setTid(tid);
+		rb.setPeople(people);
+		List<ReservationBean> rtList = new ArrayList<ReservationBean>();
+		rtList = sqlSessionTemplate.selectList(namespace+".GetReservationNotComplete",rb);
+		return rtList;
 	}
 }
