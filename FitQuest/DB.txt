@@ -573,7 +573,7 @@ CREATE TABLE question (
 );
 
 insert into question (qnum,id,qsubject,qcontent,qstatus)
-values(qseq.nextval,'hong','입력이 안됩니다.','3회 이상 수업을 들었는데 리뷰 작성 입력이 안됩니다.', '답변미완료');
+values(qseq.nextval,'hong','입력이 안됩니다.','3회 이상 수업을 들었는데 리뷰 작성 입력이 안됩니다.', '답변완료');
 
 select * from question;
 commit;

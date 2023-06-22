@@ -4,10 +4,10 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 
 <c:if test="${loginInfo.mtype eq 'trainer'}">
-<%@ include file="../common/myTrainerTop.jsp"%>
+	<%@ include file="../common/myTrainerTop.jsp"%>
 </c:if>
 <c:if test="${loginInfo.mtype eq 'generic'}">
-<%@ include file="../common/myMemberTop.jsp"%>
+	<%@ include file="../common/myMemberTop.jsp"%>
 </c:if>
 
 <body style="background-color: #FEF9E7;">

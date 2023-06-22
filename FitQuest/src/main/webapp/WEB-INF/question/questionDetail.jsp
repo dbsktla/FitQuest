@@ -3,6 +3,13 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 
+<c:if test="${loginInfo.mtype eq 'trainer'}">
+	<%@ include file="../common/myTrainerTop.jsp"%>
+</c:if>
+<c:if test="${loginInfo.mtype eq 'generic'}">
+	<%@ include file="../common/myMemberTop.jsp"%>
+</c:if>
+
 <script>
 	function qcommentInsert(){
 		document.getElementById('qcommentTable').innerHTML += 
@@ -19,56 +26,6 @@
 		document.getElementById('insertBtn').style.display = 'none';
 	}
 </script>
-
-<aside id="sidebar" class="sidebar">
-	<ul class="sidebar-nav" id="sidebar-nav" style="padding-top: 20px;">
-		<c:if test="${ sessionScope.loginInfo.mtype == 'trainer' }">
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="trainerDetail.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="trainerReviewList.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="viewProductList.pd"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>상품관리</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="productSalesDetail.pd"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>수익보기</span>
-			</a></li>
-			
-		</c:if>
-
-		<c:if test="${ sessionScope.loginInfo.mtype == 'generic' }">
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="genericMemberDetail.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>마이페이지</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="viewMyReviewList.mb"> <i
-					class="bi bi-layout-text-window-reverse"></i><span>리뷰관리</span>
-			</a></li>
-
-			<li class="nav-item"><a class="nav-link collapsed" href="">
-					<i class="bi bi-layout-text-window-reverse"></i><span>구매관리</span>
-			</a></li>
-		</c:if>
-
-		<li class="nav-item"><a class="nav-link collapsed" href="myBoardList.co">
-				<i class="bi bi-layout-text-window-reverse"></i><span>내 글보기</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-		</a></li>
-		<li class="nav-item"><a class="nav-link" href="myQuestionList.qt">
-				<i class="bi bi-layout-text-window-reverse"></i><span>문의 내역</span> <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-		</a></li>
-	</ul>
-</aside>
 
 <body style="background-color: #FEF9E7; text-align: center;">
 	<main id="main" class="main" style="margin-top: 5px">
