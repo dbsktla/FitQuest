@@ -112,7 +112,7 @@
 	</select>
 	<select id="ReservationDetailBean" resultType = "composite.model.ReservationDetailBean">
 		select r.rdate, r.rtime, m.id, m.birth,m.mphone,m.email,m.name from reservation r,member m
-		where r.mid=m.id and r.rnum=#{rnum}
+		where r.mid = m.id and r.tid = #{tid} and r.rdate = #{rdate} and r.rtime = #{rtime} and r.people = #{people}
 	</select>
 	<select id = "GetWeeklySales" resultType = "composite.model.SalesBean">
 		select pnum, odate, id, sum(price) as price from
