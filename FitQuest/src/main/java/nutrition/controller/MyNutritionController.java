@@ -69,7 +69,8 @@ public class MyNutritionController {
 	@ResponseBody
 	public String doAction(HttpServletResponse response, HttpSession session,
 							@RequestParam(value = "selectYear", required = false) String selectYear,
-							@RequestParam(value = "selectMon", required = false) String selectMon) {
+							@RequestParam(value = "selectMon", required = false) String selectMon,
+							@RequestParam(value = "mid", required = false) String mid) {
 		response.setContentType("text/html; charset=UTF-8");
 		Calendar cal = Calendar.getInstance();
 		Map<Integer, Integer> dateMap = new HashMap<Integer, Integer>();
@@ -107,7 +108,12 @@ public class MyNutritionController {
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("id", memberBean.getId());
+		
+		if(mid != null) {
+			map.put("id", mid);
+		}else {
+			map.put("id", memberBean.getId());
+		}
 		map.put("smon", selectYear + "-" + selectMon + "-01");
 		map.put("emon", selectYear + "-" + selectMon + "-" + maxDate);
 		

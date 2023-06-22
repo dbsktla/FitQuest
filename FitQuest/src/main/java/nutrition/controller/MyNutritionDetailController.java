@@ -31,7 +31,8 @@ public class MyNutritionDetailController {
 	@RequestMapping(value = command, method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String doAction(HttpServletResponse response, HttpSession session,
-							@RequestParam("selectDate") String selectDate) {
+							@RequestParam("selectDate") String selectDate,
+							@RequestParam(value = "mid", required = false) String mid) {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -46,7 +47,12 @@ public class MyNutritionDetailController {
 			return jsFList.toString();
 		} else {
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", memberBean.getId());
+			if(mid != null) {
+				map.put("id", mid);
+			}else {
+				map.put("id", memberBean.getId());
+			}
+			
 			map.put("selectDate", selectDate);
 			
 			List<FoodBean> flist = foodDao.getAllDetailByDate(map);

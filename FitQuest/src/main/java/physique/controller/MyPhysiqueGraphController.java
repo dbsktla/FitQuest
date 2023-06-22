@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import health.model.HealthBean;
@@ -26,11 +27,18 @@ public class MyPhysiqueGraphController {
 	
 	@RequestMapping(value = command, method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String doAction(HttpSession session) {
+	public String doAction(HttpSession session, @RequestParam(value = "mid", required = false) String mid) {
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
+		String id = "";
 		// 전체목록
-		List<PhysiqueBean> phlist = physiqueDao.getPhysiqueList(memberBean.getId());
+		if(mid != null) {
+			id = mid;
+		}else {
+			id = memberBean.getId();
+		}
+		List<PhysiqueBean> phlist = physiqueDao.getPhysiqueList(id);
 		
 		JSONArray jsArr = new JSONArray();
 		int i =0;

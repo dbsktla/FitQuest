@@ -5,12 +5,22 @@ public class HealthCareBean {
 	private String mid;
 	private String name;
 	private String gender;
+	private String birth;
 	private String age;
 	private String mphone;
 	private String email;
 	private String odate;
 	private String usage;
 	private String ustate;
+	
+	
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
 
 	public String getMid() {
 		return mid;
