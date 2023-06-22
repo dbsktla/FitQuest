@@ -1,8 +1,10 @@
 package order.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +39,28 @@ public class OrderCartListController {
 	ReviewDao reviewDao;
 
 	@RequestMapping(value = command)
-	public String doAction(HttpSession session, Model model) {
+	public String doAction(HttpSession session, Model model,
+						   HttpServletResponse response) {
+		MemberBean memberBean1 = (MemberBean)session.getAttribute("loginInfo"); 
+		response.setContentType("text/html; charset=utf-8");
+		if(memberBean1 == null) {
+			session.setAttribute("destination", "redirect:/viewMyOrderList.od");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
+		} else if(!memberBean1.getMtype().equals("generic")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
+		}
 		ArrayList<MyShoppingBean> sList = new ArrayList<MyShoppingBean>();
 		MyCartList cartList = (MyCartList)session.getAttribute("cartList");
 		if(cartList != null) {

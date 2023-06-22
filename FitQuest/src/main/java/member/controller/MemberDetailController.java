@@ -30,6 +30,14 @@ public class MemberDetailController {
 				e.printStackTrace();
 			}
 			return "forward:/login.mb";
+		} else if(!memberBean.getMtype().equals("generic")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
 		}
 		String[] date = memberBean.getBirth().split(" ");
 		memberBean.setBirth(date[0]);
