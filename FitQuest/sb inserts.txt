@@ -173,19 +173,19 @@ insert into orderdetail values(odseq.nextval, 3, 17);
 
 
 --reservation
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-12', '09:00~10:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-16', '08:00~09:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-17', '11:00~12:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-20', '10:00~11:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-12', '09:00~10:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-16', '08:00~09:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-17', '11:00~12:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-20', '10:00~11:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-12', '09:00~10:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-16', '08:00~09:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-17', '11:00~12:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-20', '10:00~11:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-12', '09:00~10:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-16', '08:00~09:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-17', '11:00~12:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-20', '10:00~11:00', 'true');
 
 
 --usage
 
-insert into usage values(useq.nextval, 1, 1, 'kim', 'hong', 14, 'available');
-insert into usage values(useq.nextval, 3, 16, 'kim', 'parkjay', 0, 'unavailable');
-insert into usage values(useq.nextval, 2, 17, 'kim', 'jkim', 28, 'available');
-insert into usage values(useq.nextval, 4, 12, 'lee', 'hong', 28, 'available');
+insert into usage values(useq.nextval, 1, 1, 1, 'kim', 'hong', 14, 'available');
+insert into usage values(useq.nextval, 3, 16, 1, 'kim', 'parkjay', 0, 'unavailable');
+insert into usage values(useq.nextval, 2, 17, 1, 'kim', 'jkim', 28, 'available');
+insert into usage values(useq.nextval, 4, 12, 4, 'lee', 'hong', 28, 'available');
