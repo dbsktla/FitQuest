@@ -46,9 +46,15 @@ public class CompositeDao {
 		tList = sqlSessionTemplate.selectList(namespace + ".GetTrainerListByTid", ub);
 		return tList;
 	}
-	public ReservationDetailBean getReservationDetail(int rnum) {
-		ReservationDetailBean reservationDetailBean = sqlSessionTemplate.selectOne(namespace+".ReservationDetailBean",rnum);
-		return reservationDetailBean;
+	public List<ReservationDetailBean> getReservationDetail(String tid, String date, String time, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setTid(tid);
+		rb.setRdate(date);
+		rb.setRtime(time);
+		rb.setPeople(people);
+		List<ReservationDetailBean> rList = new ArrayList<ReservationDetailBean>();
+		rList = sqlSessionTemplate.selectOne(namespace+".ReservationDetailBean",rb);
+		return rList;
 	}
 	public List<SalesBean> getWeeklySales(String id) {
 		List<SalesBean> weeklySalesList = sqlSessionTemplate.selectList(namespace + ".GetWeeklySales", id);
