@@ -1,33 +1,56 @@
 
 --member
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('park','trainer','박영진','1234','홍시','1992-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('park','trainer','박영진','1234','영진스','1992-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('jin','trainer','진이','1234','홍시','1991-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('jin','trainer','이진영','1234','진영','1992-01-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('moon2','trainer','문주','1234','홍시','1991-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('moon2','trainer','문주은','1234','주은','1991-02-03','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('kim2','trainer','김주영','1234','홍시','1993-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('kim2','trainer','김주영','1234','주영','1983-10-21','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('kim3','trainer','김준','1234','홍시','1994-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('kim3','trainer','김준','1234','허준','1994-09-20','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('lee2','trainer','이보영','1234','홍시','1984-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
+		values('lee2','trainer','이보영','1234','보영','1984-12-11','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('moon3','trainer','문하나','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
+		values('moon3','trainer','문하나','1234','onemoon','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('admin','admin','관리자','1234','관리자','1991-09-09','01090909090','admin@fitquest.com','서울 중구 북창동 136','2층','여자');
+		values('admin','admin','관리자','1234','관리자','1991-09-09','01090909090','admin@fitquest.com','서울 중구 북창동 136','2층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('park2','trainer','박정은','1234','홍시','1983-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+		values('park2','trainer','박정원','1234','parkgarden','1983-07-17','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('jkim','generic','김윤정','1234','홍시','1990-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+		values('jkim','generic','김윤정','1234','유니','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('parkjay','generic','박제원','1234','홍시','1990-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+		values('kimyoon','trainer','김윤아','1234','아아','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('shin','trainer','신유진','1234', 'genie','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('han','trainer','한오영','1234','150','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('lim','trainer','임지원','1234','apply','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim5','trainer','김하원','1234','하원','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kang2','trainer','강은역','1234','1호선','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('lee4','trainer','이지구','1234','Earth','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim6','trainer','김륜진','1234','진륜','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('seodeo','trainer','서데호','1234','로데오','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moonj','trainer','문정호','1234','문','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('parkjay','trainer','박제원','1234','JayOne','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('mistermoon','generic','문종원','1234','문맨','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
 --gym
 insert into gym values(gseq.nextval, '골드짐', '서울 마포구 서교동 125', '1층', '0212345678');
 insert into gym values(gseq.nextval, '고피티', '서울 중구 북창동 136', '1층', '0212345678');
 insert into gym values(gseq.nextval, '필라테스틱', '부산 동구 한동', '1층', '0212345678');
-insert into gym values(gseq.nextval, '요가하루', '서울 마포구 서교동 125', '1층', '0212345678');
-
+insert into gym values(gseq.nextval, '요가하루', '서울 송파구 가락동 102-24', '1층', '0212345678');
+insert into gym values(gseq.nextval, '베터핏', '인천 남동구 간석동 73-9', '1층', '0212345678');
+insert into gym values(gseq.nextval, '박스짐', '서울 강남구 신사동 210', '3층', '0212345678');
 --trainer
 
 insert into trainer values('kim', 1, 'PT', '체지방 감소, 근육량 증가, 재활', 'hi~','개인 pt 30년', 'tr1.jpg');
@@ -40,7 +63,18 @@ insert into trainer values('kim2', 3, '필라테스', '체지방 감소,근육�
 insert into trainer values('kim3', 1, 'PT', '근육량 증가,재활,체력 강화', 'hi~','개인 pt 30년', 'tr8.jpg');
 insert into trainer values('lee2', 4, '요가', '근육량 증가,재활', 'hi~','개인 pt 30년', 'tr9.jpg');
 insert into trainer values('moon3', 2, 'PT', '체력 강화', 'hi~ 트레이너 소개입니다!!!!!!!','개인 pt 30년', 'tr10.jpg');
-insert into trainer values('park2', 1, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다!!!!!!! 13년 경력11111','PT수업 Since 2010', 'tr11.jpg');
+insert into trainer values('park2', 1, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr11.jpg');
+
+insert into trainer values('shin', 4, 'PT', '체력 강화', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr12.jpg');
+insert into trainer values('han', 3, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr13.jpg');
+insert into trainer values('lim', 3, 'PT', '체력 강화,근육량 증가', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr14.jpg');
+insert into trainer values('kim5', 5, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr15.jpg');
+insert into trainer values('kang2', 2, 'PT', '체지방 감소,근육량 증가,재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr16.jpg');
+insert into trainer values('lee4', 5, '필라테스', '체지방 감소', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr17.jpg');
+insert into trainer values('kim6', 2, '요가', '근육량 증가', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr18.jpg');
+insert into trainer values('seodeo', 5, '요가', '재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr19.jpg');
+insert into trainer values('moonj', 6, '필라테스', '근육량 증가,재활', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr20.jpg');
+insert into trainer values('parkjay', 6, '필라테스', '체지방 감소,근육량 증가', '안녕하세요 트레이너 소개입니다~~~~~','PT수업 Since 2010', 'tr21.jpg');
 
 --review
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
@@ -48,6 +82,14 @@ values(rvseq.nextval, 'hong', 'kim', 4, '추천합니다', '굳', sysdate, 'Y');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'jin', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'moon', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'shin', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'lim', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'kim5', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'kang2', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'lee4', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'kim6', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'seodeo', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'moonj', 'N');
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
 values(rvseq.nextval, 'hong', 'kim', 3, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
@@ -109,9 +151,61 @@ insert into product values(pseq.nextval, 'lee2', 22, 3, 22, 4, '그룹');
 insert into product values(pseq.nextval, 'park2', 14, 1, 11, 1, '개인');
 insert into product values(pseq.nextval, 'park2', 28, 2, 19, 1, '개인');
 insert into product values(pseq.nextval, 'park2', 39, 3, 30, 1, '개인');
+insert into product values(pseq.nextval, 'jin', 12, 1, 12, 3, '그룹');
+insert into product values(pseq.nextval, 'jin', 25, 2, 22, 3, '그룹');
+insert into product values(pseq.nextval, 'jin', 30, 3, 28, 3, '그룹');
+insert into product values(pseq.nextval, 'moon', 11, 1, 10, 1, '개인');
+insert into product values(pseq.nextval, 'moon', 21, 2, 22, 1, '개인');
+insert into product values(pseq.nextval, 'moon', 30, 4, 45, 1, '개인');
+insert into product values(pseq.nextval, 'moon2', 11, 1, 10, 3, '그룹');
+insert into product values(pseq.nextval, 'moon2', 21, 2, 22, 3, '그룹');
+insert into product values(pseq.nextval, 'moon2', 30, 4, 45, 3, '그룹');
+insert into product values(pseq.nextval, 'kim3', 13, 1, 11, 1, '개인');
+insert into product values(pseq.nextval, 'kim3', 23, 2, 22, 1, '개인');
+insert into product values(pseq.nextval, 'kim3', 33, 3, 33, 1, '개인');
+insert into product values(pseq.nextval, 'moon3', 11, 1, 14, 3, '그룹');
+insert into product values(pseq.nextval, 'moon3', 24, 2, 25, 3, '그룹');
+insert into product values(pseq.nextval, 'moon3', 34, 3, 35, 3, '그룹');
+insert into product values(pseq.nextval, 'shin', 9, 1, 10, 1, '개인');
+insert into product values(pseq.nextval, 'shin', 18, 2, 20, 1, '개인');
+insert into product values(pseq.nextval, 'shin', 30, 3, 28, 1, '개인');
+insert into product values(pseq.nextval, 'han', 12, 1, 13, 4, '그룹');
+insert into product values(pseq.nextval, 'han', 23, 2, 24, 4, '그룹');
+insert into product values(pseq.nextval, 'han', 34, 3, 34, 4, '그룹');
+insert into product values(pseq.nextval, 'lim', 10, 1, 12, 3, '그룹');
+insert into product values(pseq.nextval, 'lim', 22, 2, 22, 3, '그룹');
+insert into product values(pseq.nextval, 'lim', 33, 3, 31, 3, '그룹');
+insert into product values(pseq.nextval, 'kang2', 11, 1, 14, 1, '개인');
+insert into product values(pseq.nextval, 'kang2', 24, 2, 25, 1, '개인');
+insert into product values(pseq.nextval, 'kang2', 34, 3, 35, 1, '개인');
+insert into product values(pseq.nextval, 'kim5', 11, 1, 14, 3, '그룹');
+insert into product values(pseq.nextval, 'kim5', 24, 2, 25, 3, '그룹');
+insert into product values(pseq.nextval, 'kim5', 34, 3, 35, 3, '그룹');
+insert into product values(pseq.nextval, 'lee4', 11, 1, 14, 4, '그룹');
+insert into product values(pseq.nextval, 'lee4', 24, 2, 25, 4, '그룹');
+insert into product values(pseq.nextval, 'lee4', 34, 3, 35, 4, '그룹');
+insert into product values(pseq.nextval, 'kim6', 10, 1, 12, 1, '개인');
+insert into product values(pseq.nextval, 'kim6', 21, 2, 23, 1, '개인');
+insert into product values(pseq.nextval, 'kim6', 32, 3, 33, 1, '개인');
+insert into product values(pseq.nextval, 'seodeo', 8, 1, 4, 1, '그룹');
+insert into product values(pseq.nextval, 'seodeo', 16, 2, 8, 1, '그룹');
+insert into product values(pseq.nextval, 'seodeo', 22, 3, 12, 1, '그룹');
+insert into product values(pseq.nextval, 'moonj', 12, 1, 8, 1, '개인');
+insert into product values(pseq.nextval, 'moonj', 24, 2, 12, 1, '개인');
+insert into product values(pseq.nextval, 'moonj', 34, 3, 20, 1, '개인');
+insert into product values(pseq.nextval, 'parkjay', 10, 1, 13, 3, '그룹');
+insert into product values(pseq.nextval, 'parkjay', 19, 2, 24, 3, '그룹');
+insert into product values(pseq.nextval, 'parkjay', 28, 3, 33, 3, '그룹');
+
+
+
+
+
+
+
+
 
 --orders
-insert into orders values(oseq.nextval, 'hong', '2021-12-02');
 insert into orders values(oseq.nextval, 'hong', '2022-12-02');
 insert into orders values(oseq.nextval, 'hong', '2023-01-02');
 insert into orders values(oseq.nextval, 'hong', '2023-02-02');
@@ -122,70 +216,108 @@ insert into orders values(oseq.nextval, 'hong', sysdate - 7 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 6 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 5 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 4 );
-insert into orders values(oseq.nextval, 'hong', sysdate - 3 );
-insert into orders values(oseq.nextval, 'hong', sysdate - 2 );
-insert into orders values(oseq.nextval, 'hong', sysdate - 1 );
-insert into orders values(oseq.nextval, 'hong', sysdate);
-insert into orders values(oseq.nextval, 'parkjay', '2022-12-02');
+--10번째 주문
+insert into orders values(oseq.nextval, 'jkim', sysdate - 3 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 2 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 1 );
 insert into orders values(oseq.nextval, 'jkim', sysdate);
+insert into orders values(oseq.nextval, 'jkim', '2023-04-02');
+insert into orders values(oseq.nextval, 'jkim', '2023-05-03');
+insert into orders values(oseq.nextval, 'jkim', sysdate - 7 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 6 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 5 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 4 );
+--20번째 주문
+insert into orders values(oseq.nextval, 'mistermoon', '2022-12-02');
+insert into orders values(oseq.nextval, 'mistermoon', '2023-01-02');
+insert into orders values(oseq.nextval, 'mistermoon', '2023-02-02');
+insert into orders values(oseq.nextval, 'mistermoon', '2023-03-02');
+insert into orders values(oseq.nextval, 'mistermoon', '2023-04-02');
+insert into orders values(oseq.nextval, 'mistermoon', '2023-05-02');
+insert into orders values(oseq.nextval, 'mistermoon', sysdate - 7 );
+insert into orders values(oseq.nextval, 'mistermoon', sysdate - 6 );
+insert into orders values(oseq.nextval, 'mistermoon', sysdate - 5 );
+insert into orders values(oseq.nextval, 'mistermoon', sysdate - 4 );
 
 --orderdetail
-insert into orderdetail values(odseq.nextval, 1, 1);
-insert into orderdetail values(odseq.nextval, 1, 1);
-insert into orderdetail values(odseq.nextval, 1, 2);
-insert into orderdetail values(odseq.nextval, 1, 2);
-insert into orderdetail values(odseq.nextval, 1, 3);
-insert into orderdetail values(odseq.nextval, 1, 3);
-insert into orderdetail values(odseq.nextval, 1, 4);
-insert into orderdetail values(odseq.nextval, 1, 5);
-insert into orderdetail values(odseq.nextval, 1, 5);
-insert into orderdetail values(odseq.nextval, 1, 5);
-insert into orderdetail values(odseq.nextval, 1, 6);
-insert into orderdetail values(odseq.nextval, 1, 6);
-insert into orderdetail values(odseq.nextval, 1, 7);
-insert into orderdetail values(odseq.nextval, 1, 7);
-insert into orderdetail values(odseq.nextval, 1, 7);
-insert into orderdetail values(odseq.nextval, 1, 8);
-insert into orderdetail values(odseq.nextval, 1, 8);
-insert into orderdetail values(odseq.nextval, 2, 9);
-insert into orderdetail values(odseq.nextval, 2, 10);
-insert into orderdetail values(odseq.nextval, 2, 10);
+insert into orderdetail values(odseq.nextval, 2, 1);
+insert into orderdetail values(odseq.nextval, 4, 1);
+insert into orderdetail values(odseq.nextval, 7, 2);
+insert into orderdetail values(odseq.nextval, 11, 2);
+insert into orderdetail values(odseq.nextval, 14, 3);
+insert into orderdetail values(odseq.nextval, 16, 3);
+insert into orderdetail values(odseq.nextval, 19, 4);
+insert into orderdetail values(odseq.nextval, 22, 5);
+insert into orderdetail values(odseq.nextval, 25, 5);
+insert into orderdetail values(odseq.nextval, 28, 5);
+insert into orderdetail values(odseq.nextval, 32, 6);
+insert into orderdetail values(odseq.nextval, 34, 6);
+insert into orderdetail values(odseq.nextval, 37, 7);
+insert into orderdetail values(odseq.nextval, 40, 7);
+insert into orderdetail values(odseq.nextval, 43, 7);
+insert into orderdetail values(odseq.nextval, 46, 8);
+insert into orderdetail values(odseq.nextval, 49, 8);
+insert into orderdetail values(odseq.nextval, 53, 9);
+insert into orderdetail values(odseq.nextval, 56, 10);
+insert into orderdetail values(odseq.nextval, 60, 10);
+
 insert into orderdetail values(odseq.nextval, 2, 11);
-insert into orderdetail values(odseq.nextval, 3, 11);
-insert into orderdetail values(odseq.nextval, 2, 12);
-insert into orderdetail values(odseq.nextval, 2, 12);
-insert into orderdetail values(odseq.nextval, 3, 12);
-insert into orderdetail values(odseq.nextval, 2, 13);
-insert into orderdetail values(odseq.nextval, 3, 14);
-insert into orderdetail values(odseq.nextval, 2, 15);
-insert into orderdetail values(odseq.nextval, 3, 15);
-
-insert into orderdetail values(odseq.nextval, 4, 12);
-insert into orderdetail values(odseq.nextval, 4, 12);
-insert into orderdetail values(odseq.nextval, 5, 13);
-insert into orderdetail values(odseq.nextval, 6, 14);
-insert into orderdetail values(odseq.nextval, 6, 15);
-insert into orderdetail values(odseq.nextval, 6, 15);
-insert into orderdetail values(odseq.nextval, 2, 16);
-insert into orderdetail values(odseq.nextval, 3, 17);
-
-
-
-
+insert into orderdetail values(odseq.nextval, 4, 11);
+insert into orderdetail values(odseq.nextval, 7, 12);
+insert into orderdetail values(odseq.nextval, 11, 12);
+insert into orderdetail values(odseq.nextval, 14, 13);
+insert into orderdetail values(odseq.nextval, 16, 13);
+insert into orderdetail values(odseq.nextval, 19, 14);
+insert into orderdetail values(odseq.nextval, 22, 15);
+insert into orderdetail values(odseq.nextval, 25, 15);
+insert into orderdetail values(odseq.nextval, 28, 15);
+insert into orderdetail values(odseq.nextval, 32, 16);
+insert into orderdetail values(odseq.nextval, 34, 16);
+insert into orderdetail values(odseq.nextval, 37, 17);
+insert into orderdetail values(odseq.nextval, 40, 17);
+insert into orderdetail values(odseq.nextval, 43, 17);
+insert into orderdetail values(odseq.nextval, 46, 18);
+insert into orderdetail values(odseq.nextval, 49, 18);
+insert into orderdetail values(odseq.nextval, 53, 19);
+insert into orderdetail values(odseq.nextval, 56, 20);
+insert into orderdetail values(odseq.nextval, 60, 20);
+--30번째 
+insert into orderdetail values(odseq.nextval, 3, 21);
+insert into orderdetail values(odseq.nextval, 6, 21);
+insert into orderdetail values(odseq.nextval, 9, 22);
+insert into orderdetail values(odseq.nextval, 12, 22);
+insert into orderdetail values(odseq.nextval, 15, 23);
+insert into orderdetail values(odseq.nextval, 18, 23);
+insert into orderdetail values(odseq.nextval, 21, 24);
+insert into orderdetail values(odseq.nextval, 24, 25);
+insert into orderdetail values(odseq.nextval, 27, 25);
+insert into orderdetail values(odseq.nextval, 30, 25);
+insert into orderdetail values(odseq.nextval, 32, 26);
+insert into orderdetail values(odseq.nextval, 34, 26);
+insert into orderdetail values(odseq.nextval, 37, 27);
+insert into orderdetail values(odseq.nextval, 40, 27);
+insert into orderdetail values(odseq.nextval, 43, 27);
+insert into orderdetail values(odseq.nextval, 46, 28);
+insert into orderdetail values(odseq.nextval, 49, 28);
+insert into orderdetail values(odseq.nextval, 53, 29);
+insert into orderdetail values(odseq.nextval, 56, 30);
+insert into orderdetail values(odseq.nextval, 60, 30);
 --reservation
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-12', '09:00~10:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-16', '08:00~09:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-17', '11:00~12:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-01-20', '10:00~11:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-12', '09:00~10:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-16', '08:00~09:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-17', '11:00~12:00', 'true');
-insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, 4, '2023-01-20', '10:00~11:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-12', '09:00~10:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-16', '08:00~09:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-17', '11:00~12:00', 'complete');
+insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-20', '10:00~11:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-12', '09:00~10:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-16', '08:00~09:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-17', '11:00~12:00', 'true');
+insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-20', '10:00~11:00', 'true');
 
 
 --usage
 
-insert into usage values(useq.nextval, 1, 1, 1, 'kim', 'hong', 14, 'available');
-insert into usage values(useq.nextval, 3, 16, 1, 'kim', 'parkjay', 0, 'unavailable');
-insert into usage values(useq.nextval, 2, 17, 1, 'kim', 'jkim', 28, 'available');
-insert into usage values(useq.nextval, 4, 12, 4, 'lee', 'hong', 28, 'available');
+insert into usage values(useq.nextval, 1, 1, 12, 'kim', 'hong', 14, 'available');
+insert into usage values(useq.nextval, 3, 16, 12, 'kim', 'parkjay', 0, 'unavailable');
+insert into usage values(useq.nextval, 2, 17, 12, 'kim', 'jkim', 28, 'available');
+insert into usage values(useq.nextval, 4, 12, 12, 'lee', 'hong', 28, 'available');
+
+commit;
