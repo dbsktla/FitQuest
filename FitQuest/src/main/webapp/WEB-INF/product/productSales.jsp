@@ -173,7 +173,7 @@ section{
     <section class="section">
 	
     <div class="pagetitle">
-      <h1 style = "margin: 50px 0px;">수익보기</h1>
+      <h1 style = "margin: 50px 0px;"><i class="bi bi-list toggle-sidebar-btn"></i> 수익보기</h1>
     </div><!-- End Page Title -->
       <div class="row">
 			<div class="col-12">

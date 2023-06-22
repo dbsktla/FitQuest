@@ -22,7 +22,7 @@
     <section class="section">
 	
     <div class="pagetitle">
-      <h1>리뷰관리</h1>
+      <h1><i class="bi bi-list toggle-sidebar-btn"></i> 리뷰관리</h1>
     </div><!-- End Page Title -->
 
       <div class="row">

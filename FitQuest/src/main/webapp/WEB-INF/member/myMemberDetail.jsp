@@ -245,7 +245,7 @@ $(document).ready(function(){
     <section class="section">
 	 <section class="section profile">
 	 <div class="pagetitle">
-      <h1>마이 페이지</h1>
+      <h1><i class="bi bi-list toggle-sidebar-btn"></i> 마이 페이지</h1>
     </div><!-- End Page Title -->
       <div class="row">
         <div class="col-xl-2"></div>
