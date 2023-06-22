@@ -217,16 +217,16 @@ insert into orders values(oseq.nextval, 'hong', sysdate - 6 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 5 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 4 );
 --10번째 주문
-insert into orders values(oseq.nextval, 'jkim', sysdate - 3 );
-insert into orders values(oseq.nextval, 'jkim', sysdate - 2 );
-insert into orders values(oseq.nextval, 'jkim', sysdate - 1 );
-insert into orders values(oseq.nextval, 'jkim', sysdate);
 insert into orders values(oseq.nextval, 'jkim', '2023-04-02');
 insert into orders values(oseq.nextval, 'jkim', '2023-05-03');
 insert into orders values(oseq.nextval, 'jkim', sysdate - 7 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 6 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 5 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 4 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 3 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 2 );
+insert into orders values(oseq.nextval, 'jkim', sysdate - 1 );
+insert into orders values(oseq.nextval, 'jkim', sysdate);
 --20번째 주문
 insert into orders values(oseq.nextval, 'mistermoon', '2022-12-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-01-02');
@@ -302,6 +302,8 @@ insert into orderdetail values(odseq.nextval, 49, 28);
 insert into orderdetail values(odseq.nextval, 53, 29);
 insert into orderdetail values(odseq.nextval, 56, 30);
 insert into orderdetail values(odseq.nextval, 60, 30);
+
+
 --reservation
 insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-12', '09:00~10:00', 'complete');
 insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-16', '08:00~09:00', 'complete');
@@ -315,7 +317,7 @@ insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박�
 
 --usage
 
-insert into usage values(useq.nextval, 1, 1, 12, 'kim', 'hong', 14, 'available');
+insert into usage values(useq.nextval, 1, 1, 10, 'kim', 'hong', 10, 'available');
 insert into usage values(useq.nextval, 3, 16, 12, 'kim', 'parkjay', 0, 'unavailable');
 insert into usage values(useq.nextval, 2, 17, 12, 'kim', 'jkim', 28, 'available');
 insert into usage values(useq.nextval, 4, 12, 12, 'lee', 'hong', 28, 'available');
