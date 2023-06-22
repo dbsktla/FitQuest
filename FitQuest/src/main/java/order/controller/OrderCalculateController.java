@@ -1,11 +1,13 @@
 package order.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +58,28 @@ public class OrderCalculateController {
 	@RequestMapping(value = command)
 	public String doAction(@RequestParam("pnum") int[] pnumArr,
 			Model model,
-			HttpSession session) {
+			HttpSession session,
+			HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		response.setContentType("text/html; charset=utf-8");
+		if(memberBean == null) {
+			session.setAttribute("destination", "redirect:/viewMyOrderList.od");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
+		} else if(!memberBean.getMtype().equals("generic")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
+		}
 		int totalAmount = 0;
 		boolean flag2 = (Boolean)session.getAttribute("flag2"); //새로고침 하면 다시 주문 안되게 session변수 확인
 		if(flag2 == true) {

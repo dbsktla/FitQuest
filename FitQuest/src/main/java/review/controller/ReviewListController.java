@@ -52,6 +52,14 @@ public class ReviewListController {
 				e.printStackTrace();
 			}
 			return "forward:/login.mb";
+		} else if(!memberBean.getMtype().equals("trainer")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
 		}
 		TrainerBean trainerBean = trainerDao.getTrainer(memberBean.getId());
 		String hasReview = reviewDao.getHasReviewById(trainerBean.getId());

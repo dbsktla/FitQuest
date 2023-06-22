@@ -162,7 +162,7 @@
 	     <nav class="header-nav ms-auto">
       		<ul class="d-flex align-items-center">
 		  <!-- 장바구니 뛰우기 -->
-		  <c:if test = "${loginInfo.mtype != null }">
+		  <c:if test = "${loginInfo.mtype eq 'generic'}">
 		  <c:if test = "${cartCount != null && cartCount != 0}">
 		  <li class="nav-item dropdown">
 
@@ -211,7 +211,7 @@
         </c:if>
         
         <!-- 장바구니에 추가한거 없으면. -->
-        <c:if test = "${loginInfo.mtype != null }">
+        <c:if test = "${loginInfo.mtype eq 'generic' }">
         <c:if test = "${ cartCount == null or cartCount == 0 }">
         
         	<li class="nav-item dropdown">

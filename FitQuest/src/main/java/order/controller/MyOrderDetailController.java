@@ -1,8 +1,10 @@
 package order.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +45,29 @@ public class MyOrderDetailController {
 	MemberDao memberDao;
 	@RequestMapping(value = command)
 	public String doAction(@RequestParam("onum") int onum, Model model,
-						   HttpSession session) {
+						   HttpSession session,
+						   HttpServletResponse response) {
+		MemberBean memberBean1 = (MemberBean)session.getAttribute("loginInfo"); 
+		response.setContentType("text/html; charset=utf-8");
+		session.setAttribute("menubar", "myOrderMain");
+		if(memberBean1 == null) {
+			session.setAttribute("destination", "redirect:/viewMyOrderList.od");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
+		} else if(!memberBean1.getMtype().equals("generic")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
+		}
 		List<OrderDetailBean> odList = orderDetailDao.getOrderDetailListByOnum(onum);
 		OrderBean orderBean = orderDao.getOrderByOnum(onum);
 		List<MyShoppingBean> msList = new ArrayList<MyShoppingBean>();

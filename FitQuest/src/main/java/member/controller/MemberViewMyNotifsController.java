@@ -36,6 +36,14 @@ public class MemberViewMyNotifsController {
 			}
 			session.setAttribute("destination", "redirect:/viewMyNotifications.mb");
 			return "redirect:/login.mb";
+		} else if(memberBean.getMtype().equals("admin")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
 		}
 		
 		List<NotificationBean> notifList = notificationDao.getAllNotifications(memberBean.getId());
