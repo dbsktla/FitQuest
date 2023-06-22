@@ -35,7 +35,7 @@ section{
     <section class="section"  style = "height: 80%;">
 	
     <div class="pagetitle" style = "margin: 40px 0px;">
-      <h1>상품관리</h1>
+      <h1><i class="bi bi-list toggle-sidebar-btn"></i> 상품관리</h1>
     </div><!-- End Page Title -->
 
       <div class="row">

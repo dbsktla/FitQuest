@@ -42,7 +42,7 @@
 						<div class="card" style="width: 70%; margin: auto;">
 							<div class="card-body">
 								<div align="right"></div>
-								<h5 class="card-title"  style="text-align: center;">내 글보기</h5>
+								<h5 class="card-title"  style="text-align: center;"> 내 글보기</h5>
 								<div class="col-md-12" align="right">
 									<a style="color: #FAC710;"
 										href="myBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
