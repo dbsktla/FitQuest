@@ -13,6 +13,7 @@
 		FROM 		(
 				 	 SELECT id AS mid
 				 	 	   ,name
+				 	 	   ,birth
 				 	 	   ,TRUNC(MONTHS_BETWEEN(TRUNC(SYSDATE), birth) / 12) AS age
 				 	 	   ,mphone
 				 	 	   ,email
@@ -57,8 +58,11 @@
 		<if test="whatStatus != null">
 			AND u.ustate = #{whatStatus}
 		</if>
-		<if test="startAge != 0">
+		<if test="startAge != null">
 			AND age BETWEEN #{startAge} AND #{endAge}
+		</if>
+		<if test="mid != null">
+			AND m.mid = #{mid}
 		</if>
 		
 	</select>

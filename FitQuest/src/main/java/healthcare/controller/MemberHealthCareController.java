@@ -1,7 +1,7 @@
 package healthcare.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +32,7 @@ public class MemberHealthCareController {
 	
 	// 검색, 필터 : 사용자 이름, 성별, 나이-만(연령대), 회원상태
 	@RequestMapping(value = commnad)
-	public ModelAndView doAction(HttpSession session, HttpServletResponse response,
+	public ModelAndView doAction(HttpSession session, HttpServletResponse response, Model model,
 							@RequestParam(value = "whatName", required = false) String whatName,
 							@RequestParam(value = "whatGender", required = false) String whatGender,
 							@RequestParam(value = "whatStatus", required = false) String whatStatus,
@@ -76,12 +77,19 @@ public class MemberHealthCareController {
 				map.put("startAge",age);
 				map.put("endAge",age+9);
 			}else {
-				map.put("startAge",0);
+				//map.put("startAge",0);
 			}
 			List<HealthCareBean> hclist = healthCareDao.getHealthCareList(map);
 			mav.addObject("hclist", hclist);
 
 		}
+		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String strnow = sdf.format(now);
+
+		model.addAttribute("selectYear", strnow.substring(0, 4));
+		model.addAttribute("selectMon", strnow.substring(4, 6));
 		
 		mav.setViewName(getPage);
 		return mav;

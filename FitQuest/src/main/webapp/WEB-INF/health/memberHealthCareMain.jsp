@@ -6,6 +6,14 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myTrainerTop.jsp"%>
 
+
+<%
+	Date now = new Date();
+%>
+
+<c:set var="sye" value=""/>
+<c:set var="smo" value=""/>
+
 <style>
 	tr:hover {
 		background-color: #f4f4f4;
@@ -75,9 +83,7 @@
 <script>
 	$(document).ready(function(){
 	   $('.datatable-search').css('display','none');
-// 	   calenderLookup();
-// 	   calenderLookup2();
-// 	   getGraphAll();
+
 	});
 	
 	function btnCheckOff() {
@@ -88,6 +94,7 @@
 	}
 	
 	function memberDetail(mid) {
+		$('html, body').animate({scrollTop: 0}, 200);
 		//alert(mid);
 		
 		//(멤버리스트 보는 목록으로 가는 버튼 만들기)
@@ -97,11 +104,124 @@
 			url : 'memberHealthDetail.ht',
 			type : 'POST',
 			data : {"mid": mid},
-			dataType : 'json',
+			dataType : "json",
 			success : function(data) {
 				// 회원상세정보
 				// 운동정보 - hdlist
+				$('#memberDetail').empty();
 				
+				var msg = '<div class="card">';
+				msg += '<div class="card-body">';
+				msg += '<div class="row">';
+				msg += '<div class="col-lg-6">'; // start left
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">이름</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.name+'</div>';
+				msg += '<input type="hidden" name="mid" id="selectMid" value="'+data.hclist.mid+'">';
+				msg += '</div>';
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">성별</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.gender+'</div>';
+				msg += '</div>';
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">생년월일</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.birth +'(만 '+ data.hclist.age +'세)</div>';
+				msg += '</div>';
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">이메일</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.email+'</div>';
+				msg += '</div>';
+				msg += '</div>'; // end left
+				msg += '<div class="col-lg-6 v-line">'; // start right
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">최초등록일</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.odate+'</div>';
+				msg += '</div>';
+
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">진도율</label>';
+				msg += '<div class="col-sm-7 col-form-label">'+data.hclist.usage+'회 남음</div>';
+				msg += '</div>';
+				msg += '<div class="row mb-3">';
+				msg += '<label class="col-sm-5 col-form-label">상태</label>';
+				msg += '<div class="col-sm-7 col-form-label">'
+				if(data.hclist.ustate == 'unavailable'){
+					msg += '만료';
+				}else{
+					msg += '유효';
+				}
+				msg += '</div>';
+				msg += '</div>';
+				msg += '</div>'; // end right
+				msg += '<div class="col-lg-12" style="margin-top: 40px;">'; // start 조회 center
+				msg += '<ul class="nav nav-tabs nav-tabs-bordered">';
+				msg += '<li class="nav-item">';
+				msg += '<button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" onclick="healthDetail()">운동조회</button>';
+				msg += '</li>';
+				msg += '<li class="nav-item">';
+				msg += '<button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" onclick="nutritionDetail()">식단조회</button>';
+				msg += '</li>';
+				msg += '<li class="nav-item">';
+				msg += '<button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings" onclick="physiqueDetail()">신체조회</button>';
+				msg += '</li>';
+				msg += '</ul>';
+				msg += '<div class="tab-content pt-2">';
+				msg += '<div class="tab-pane fade show active profile-overview" id="profile-overview">';
+				msg += '<div class="row" id="hDetail">';
+				msg += '<div class="col-lg-4" style="color: black;">';
+				msg += '<h5 class="card-title">운동 목록</h5>';
+				msg += '';
+				msg += '<table class="table">'; // 운동목록
+				msg += '<thead>';
+				msg += '<tr class="table-warning">';
+				msg += '<th scope="col" align="center">NO</th>';
+				msg += '<th scope="col" align="center">트레이너</th>';
+				msg += '<th scope="col" align="center">날짜</th>';
+				msg += '<th scope="col" align="center">운동시간</th>';
+				msg += '</tr>';
+				msg += '</thead>';
+				msg += '<tbody id="healthList">';
+				if(data.hdlist.length == 0){
+					msg += '<tr>';
+					msg += '<td colspan="4" align="center">등록 된 운동내역이 없습니다.</td>';
+					msg += '</tr>';
+					
+				}else{
+					for(var i=0; i < data.hdlist.length; i++){
+						msg += '<tr>';
+						msg += '<td>'+(i+1)+'</td>';
+						msg += '<td>' +data.hdlist[i].tname +'('+data.hdlist[i].tactivity+ ')</td>';
+						msg += '<td><button type="button" class="btn btn-link" id="hdetailbtn" onclick="btnclick('+"'"+ data.hdlist[i].hnum+"'"+')">'+data.hdlist[i].hdate+'</button></td>';
+						msg += '<td>'+ data.hdlist[i].playtime +'분</td>';
+						msg += '</tr>';
+						
+					}
+					
+				}
+				msg += '</tbody>';
+				msg += '</table>';
+				msg += '</div>';  // end 운동목록
+				msg += '<div class="col-lg-8" style="color: black;">'; // start 상세조회
+				msg += '<h5 class="card-title">상세 정보</h5>';
+				msg += '<div id="healthDetail">';
+				msg += '<span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span>';
+				msg += '</div>';
+				msg += '</div>';// end 상세조회
+				msg += '</div>';
+				msg += '</div>'; // end row
+				
+				msg += '<div class="tab-pane fade profile-edit pt-3" id="profile-edit">'; // start 식단정보
+				msg += '</div>'; // end 식단정보
+				msg += '<div class="tab-pane fade pt-3" id="profile-settings">'; // start 신체정보
+				msg += '</div>'; // end 신체정보
+				
+				
+				msg += '</div>'; // end 조회 center
+				msg += '</div>';
+				msg += '</div>';
+				msg += '</div>';
+				
+				$('#memberDetail').append(msg);
 				
 			},
 			error: function (request, status, error) {
@@ -128,12 +248,11 @@
 				
 				$('#healthDetail').empty(); // healthDetail div 내용 비우기
 				var msg = "<table class='table'><tr class='table-warning'>";
-				msg += "<th><input type='checkbox' name='allchk' class='form-check-input' onclick='allcheck()'></th>";
 				msg += "<th scope='col'>운동명</th><th scope='col'>시작시간</th><th scope='col'>종료시간</th><th scope='col'>세트</th></tr>";
 				
 				// 현재 jsonArray 형태로 값이 넘어와서 data에 담긴상태	
 				for(var i=0; i<data.length; i++){
-					msg += "<tr><td><input type='checkbox' name='rowchk' class='form-check-input' value='"+data[i].hname + "@" + data[i].starttime + "@" + clickHnum + "'></td>";
+					msg += "<tr>";
 					msg += "<td>"+data[i].hname+"</td>";
 					msg += "<td>"+(data[i].starttime).substring(0,16)+"</td>";
 					msg += "<td>"+(data[i].endtime).substring(0,16)+"</td>";
@@ -767,20 +886,161 @@
 		
 	}
 	function nutritionDetail() {
+		$('#profile-edit').empty();
 		
+		var msg = "";
+		msg += '<div class="row">';
+		msg += '<h5 class="card-title">식단조회</h5>';
+		msg += '<div class="row">';
+		msg += '<div class="col-lg-4" >';
+		msg += '<div class="card">'; // start card
+		msg += '<div class="card-body">';
+		msg += '<h5 style="padding-bottom: 20;">오늘의 총 섭취 영양정보</h5>';
+		msg += '<div id="today-all-sum" style="margin: auto; text-align: center; min-height: 40;">조회할 날짜를 클릭하세요</div>';
+		msg += '</div>';
+		msg += '</div>'; // end card
+		msg += '<div class="card">'; // start card
+		msg += '<div class="card-body">';
+		msg += '<h5 class="card-title">일자 선택 </h5>';
+		msg += '<div style="margin: auto; text-align: center;">';
+		
+		msg += '<select name="selectYear" id="selectYear">';
+		<c:forEach var="i" begin="<%=now.getYear() + 1890%>" end="<%=now.getYear() + 1900%>">
+			msg += '<option value="' + ${i} + '" ';
+			<c:if test="${i == selectYear}"> 
+				msg += 'selected';
+			</c:if>
+			msg += '>' + ${i} + '</option>';
+		</c:forEach>
+		
+		msg += '</select> 년';
+		msg += '<select name="selectMon" id="selectMon">';
+		<c:forEach var="i" begin="1" end="12">
+			msg += '<option value="' + ${i} + '" ';
+			<c:if test="${i == selectYear}"> 
+				msg += 'selected';
+			</c:if>
+			msg += '>' + ${i} + '</option>';
+		</c:forEach>
+		msg += '</select> 월';
+		
+		msg += '<input type="button" value="조회" onclick="calenderLookup()" class="btn btn-warning rounded-pill btn-sm">';
+		msg += '</div>';
+		msg += '<div id="calenderTable"></div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+
+		msg += '<div class="col-lg-8">';
+		msg += '<div class="card">';
+		msg += '<div class="card-body">';
+		msg += '<h5 class="card-title">식단 상세 정보 </h5>';
+		msg += '<div id="detailDiv">'; // start detailDiv
+		msg += '<div style="text-align: center; min-height: 60;">';
+		msg += '조회할 날짜를 클릭하세요';
+		msg += '</div>';
+		msg += '</div>'; //end detailDiv
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		
+		
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		
+		
+		$('#profile-edit').append(msg);
+		calenderLookup();
 	}
+	
 	function physiqueDetail() {
+		$('#profile-settings').empty();
 		
+		var msg = "";
+		msg += '<div class="row">';
+		msg += '<div class="col-lg-12">';
+		msg += '<div class="card">';
+		msg += '<div class="card-body">';
+		msg += '<h5 class="card-title">신체정보</h5>';
+		msg += '<div class="row">';
+		msg += '<div class="col-lg-5">';
+		
+		msg += '<div style="margin: auto; text-align: center;">';
+		
+		msg += '<select name="selectYear" id="selectYear">';
+		<c:forEach var="i" begin="<%=now.getYear() + 1890%>" end="<%=now.getYear() + 1900%>">
+			msg += '<option value="' + ${i} + '" ';
+			<c:if test="${i == selectYear}"> 
+				msg += 'selected';
+			</c:if>
+			msg += '>' + ${i} + '</option>';
+		</c:forEach>
+		
+		msg += '</select> 년';
+		msg += '<select name="selectMon" id="selectMon">';
+		<c:forEach var="i" begin="1" end="12">
+			msg += '<option value="' + ${i} + '" ';
+			<c:if test="${i == selectYear}"> 
+				msg += 'selected';
+			</c:if>
+			msg += '>' + ${i} + '</option>';
+		</c:forEach>
+		msg += '</select> 월';
+		
+		msg += '<input type="button" value="조회" onclick="calenderLookup2()" class="btn btn-warning rounded-pill btn-sm">';
+		msg += '</div>';
+		
+		msg += '<div id="calenderTable2">';
+		msg += '</div>';
+		msg += '</div>';
+		
+		msg += '<div class="col-lg-7">';//start 상세정보
+		msg += '<div id="detailDiv2">';
+		msg += '<div  style="text-align: center;">조회할 날짜를 클릭하세요</div>';
+		msg += '</div>';
+		msg += '</div>';//end 상세정보
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		
+		msg += '<div class="col-12">';
+		msg += '<div class="card">';
+		msg += '<div class="filter fe">';
+		msg += '<a class="icon ie" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>';
+		msg += '<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">';
+		msg += '<li class="dropdown-header text-start">';
+		msg += '<h6>필터선택</h6>';
+		msg += '</li>';
+		msg += '<li><a class="dropdown-item" href="javascript:graphAll()">전체보기</a></li>';
+		msg += '<li><a class="dropdown-item" href="javascript:graphW()">체중 변화</a></li>';
+		msg += '<li><a class="dropdown-item" href="javascript:graphS()">골격근량 변화</a></li>';
+		msg += '<li><a class="dropdown-item" href="javascript:graphB()">체지방률 변화</a></li>';
+		msg += '</ul>';
+		msg += '</div>';
+		
+		msg += '<div class="card-body" id="my-graph">';
+		msg += '<h5 class="card-title">전체보기</h5>';
+		msg += '<div id="lineChart"></div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		msg += '</div>';
+		
+		$('#profile-settings').append(msg);
+		
+ 	   calenderLookup2();
+ 	   getGraphAll();
 	}
 </script>
 
-<%
-	Date now = new Date();
-%>
-
 <body style="background-color: #FEF9E7;">
 
-	<div class="pagetitle" style="margin: 40px 0px;">
+	<div class="pagetitle">
 		<h1>
 			<i class="bi bi-list toggle-sidebar-btn"></i> 회원운동관리
 		</h1>
@@ -790,7 +1050,6 @@
 
 		<!-- 회원클릭시 상세정보 -->
 		<div id="memberDetail" class="col-lg-12">
-
 		</div><!-- 회원클릭시 상세정보 -->
 
 		<!-- 상단 회원 간략 정보 -->
