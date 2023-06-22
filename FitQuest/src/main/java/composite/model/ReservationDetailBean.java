@@ -8,8 +8,29 @@ public class ReservationDetailBean {
 	private String mphone;
 	private String email;
 	private String name;
+	private int people;
 	
-	
+	public ReservationDetailBean() {
+		
+	}
+	public ReservationDetailBean(String rdate, String rtime, String id, String birth, String mphone, String email,
+			String name, int people) {
+		super();
+		this.rdate = rdate;
+		this.rtime = rtime;
+		this.id = id;
+		this.birth = birth;
+		this.mphone = mphone;
+		this.email = email;
+		this.name = name;
+		this.people = people;
+	}
+	public int getPeople() {
+		return people;
+	}
+	public void setPeople(int people) {
+		this.people = people;
+	}
 	public String getRdate() {
 		return rdate;
 	}

@@ -34,4 +34,15 @@ public class CompleteDao {
 		cList = sqlSessionTemplate.selectList(namespace+".GetCompleteByPeople",cb);
 		return cList;
 	}
+
+	public int deleteComplete(String tid, String date, String time, int people) {
+		CompleteBean cb = new CompleteBean();
+		cb.setTid(tid);
+		cb.setCpdate(date);
+		cb.setCptime(time);
+		cb.setCpeople(people);
+		int cnt = -1;
+		cnt = sqlSessionTemplate.delete(namespace+".DeleteComplete",cb);
+		return cnt;
+	}
 }

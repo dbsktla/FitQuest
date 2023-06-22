@@ -90,9 +90,13 @@ public class ReservationDao {
 		return cList;
 	}
 
-	public int cancelReservation(int rnum) {
-		int cnt = -1;
-		cnt = sqlSessionTemplate.update(namespace+".CancelReservation",rnum);
+	public int cancelReservationT(String tid, String date, String time, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setTid(tid);
+		rb.setRdate(date);
+		rb.setRtime(time);
+		rb.setPeople(people);
+		int cnt = sqlSessionTemplate.update(namespace+".CancelReservationT",rb);
 		return cnt;
 	}
 
@@ -114,11 +118,12 @@ public class ReservationDao {
 		return cList;
 	}
 
-	public int getTrueCount(String rdate, String rtime, String tid) {
+	public int getTrueCount(String rdate, String rtime, String tid, int people) {
 		ReservationBean rb = new ReservationBean();
 		rb.setRdate(rdate);
 		rb.setRtime(rtime);
 		rb.setTid(tid);
+		rb.setPeople(people);
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetTrueCount", rb);
 		return cnt;
 	}
@@ -131,6 +136,33 @@ public class ReservationDao {
 		List<ReservationBean> rfList = new ArrayList<ReservationBean>();
 		rfList = sqlSessionTemplate.selectList(namespace + ".GetReservationFListByPeople", rb);
 		return rfList;
+	}
+
+	public List<ReservationBean> getReservationTListByPeople(String mid, String tid, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setMid(mid);
+		rb.setTid(tid);
+		rb.setPeople(people);
+		List<ReservationBean> tList = new ArrayList<ReservationBean>();
+		tList = sqlSessionTemplate.selectList(namespace + ".GetReservationTListByPeople", rb);
+		return tList;
+	}
+
+	public List<ReservationBean> getReservationList(String tid, String date, String time, int people) {
+		ReservationBean rb = new ReservationBean();
+		rb.setTid(tid);
+		rb.setRdate(date);
+		rb.setRtime(time);
+		rb.setPeople(people);
+		List<ReservationBean> rList = new ArrayList<ReservationBean>();
+		rList = sqlSessionTemplate.selectList(namespace + ".GetReservationList", rb);
+		return rList;
+	}
+
+	public int cancelReservationM(int rnum) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.update(namespace+".CancelReservationM",rnum);
+		return cnt;
 	}
 
 	

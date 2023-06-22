@@ -23,8 +23,6 @@ import member.model.MemberBean;
 import reservation.model.CalendarBean;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
-import reservation.model.TscheduleBean;
-import usage.model.UsageBean;
 import usage.model.UsageDao;
 
 @Controller
@@ -186,6 +184,9 @@ public class GenericCalendarController {
 			System.out.println("사용권 개수:"+usage);
 			model.addAttribute("usage",usage);
 			
+			//전체 예약 내역
+			List<ReservationBean> rAList = reservationDao.getReservationAllList(mid);
+			model.addAttribute("rAList",rAList);
 			return getPage; 
 	}
 }

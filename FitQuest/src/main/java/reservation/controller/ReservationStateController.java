@@ -59,7 +59,7 @@ public class ReservationStateController {
 		}
 		
 		//총 인원수 비교하고 같은 트레이너의 날짜,시간 데이터 몇갠지 카운트
-		int rcount = reservationDao.getTrueCount(rb.getRdate(),rb.getRtime(),rb.getTid());
+		int rcount = reservationDao.getTrueCount(rb.getRdate(),rb.getRtime(),rb.getTid(),rb.getPeople()); 
 		System.out.println("카운트: "+rcount);
 		
 		//총 인원수와 동일하면 예약 완료 테이블에 삽입

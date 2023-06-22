@@ -43,13 +43,41 @@
 			alert('사용권이 모두 소진되었습니다.');
 		}
 	}
-	
+	function openPopup() { //팝업창 설정
+		// 팝업 창의 URL과 창의 속성을 설정
+	 	var url = "iconExplain.rv";
+	 	var width = 1100; // 팝업 창의 너비
+		var height = 650; // 팝업 창의 높이
+		var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
+		var top = (window.screen.availHeight - height) / 2;
+		
+		var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
+		
+		// 팝업 창이 로드된 후에 닫기 버튼 추가
+		popup.onload = function () {
+			 var closeButton = popup.document.createElement("button");
+			 closeButton.innerText = "닫기";
+			 closeButton.classList.add("close-button");
+			 closeButton.addEventListener("click", function () {
+				popup.close(); // 팝업 창 닫기
+			 });
+		
+			
+			popup.document.body.appendChild(closeButton);
+			closeButton.focus();
+		};
+	}
 	function impossibleCheck(){
 		alert('예약 마감되었습니다.');
 	}
-	
 	function alreadyCheck(){
 		alert('이미 예약 신청되었습니다.');
+	}
+	function notfullCheck(){
+		alert('이미 예약 완료 되었습니다.');
+	}
+	function reservedCheck(){
+		alert('해당 시간은 다른 수업에서 이미 예약하셨습니다.');
 	}
 </script>
 <br><br>
@@ -88,6 +116,7 @@
    <div class="calendar-button-div">
       <div class="left">
       	<span class="usage-area">남은 사용권 횟수 : ${usageNum}번</span>
+      	<button class="usage-area" onclick="openPopup(); return false;">아이콘별 안내</button>
       </div>
       <div class="right">
       	<input type="button" class="btn btn-warning" onClick="location.href='genericCalendar.rv'" value="My PT">
@@ -157,6 +186,7 @@
 			  <c:set var="hasReservation" value="예약없음"/>
 			  <c:set var="reserved" value="false" />
 			  <c:set var="reservedf" value="false" />
+			  <c:set var="nowDay" value="${today_info.search_year}-${today_info.search_month}-${dateList.date}"/>
 			  
 			  <c:forEach var="tsitem" items="${tsList}">
   				<c:if test="${tyear < today_info.search_year || (tyear == today_info.search_year && tmonth < today_info.search_month) || (tyear == today_info.search_year && tmonth == today_info.search_month && tday < dateList.date)}">
@@ -178,15 +208,17 @@
 				       </c:if>
 				      
 				       <c:if test="${check1 eq '휴무아님'}">    
-				       	<c:if test="${not empty cList}">
+				       	<c:if test="${not empty cList || not empty ncList}">
 				       	
-				       		<c:set var="nowDay" value="${today_info.search_year}-${today_info.search_month}-${dateList.date}"/>
+				       		
 				       		  
 				       		  
 				       		<c:if test="${print1 == '출력전'}">
 				       		   
 						      <c:forEach var="tstime" items="${fn:split(tsitem.tstime, ',')}">
 						      <c:set var="reserved" value="false" />
+						      <c:set var="reservedn" value="false" />
+						      <c:set var="reservedt" value="false" />
 						      <c:set var="reservedf" value="false" />
 				       		   <c:forEach var="citem" items="${cList}">
 	                       	  	<c:if test="${citem.cpdate == nowDay && citem.cptime == tstime}">
@@ -196,6 +228,28 @@
 								          <span>${tstime}</span>
 								     	</a>
 								       <c:set var="reserved" value="true" />
+								    </div>
+	                       	  	</c:if>
+				       		   </c:forEach>
+				       		   <c:forEach var="nitem" items="${ncList}">
+	                       	  	<c:if test="${nitem.rdate == nowDay && nitem.rtime == tstime}">
+	                       	  		<div class="reservation-area">
+								       <img src="<%=request.getContextPath()%>/resources/Icon/notFull.png" width="20px">
+								       	<a class="calender-text" href="#" onclick="notfullCheck(); return false;">
+								          <span>${tstime}</span>
+								     	</a>
+								       <c:set var="reservedn" value="true" />
+								    </div>
+	                       	  	</c:if>
+				       		   </c:forEach>
+				       		   <c:forEach var="titem" items="${tList}">
+	                       	  	<c:if test="${titem.rdate == nowDay && titem.rtime == tstime}">
+	                       	  		<div class="reservation-area">
+								       <img src="<%=request.getContextPath()%>/resources/Icon/impossible-already.png" width="20px">
+								       	<a class="calender-text" href="#" onclick="reservedCheck(); return false;">
+								          <span>${tstime}</span>
+								     	</a>
+								       <c:set var="reservedt" value="true" />
 								    </div>
 	                       	  	</c:if>
 				       		   </c:forEach>
@@ -210,7 +264,7 @@
 								    </div>
 	                       	  	</c:if>
 				       		   </c:forEach>
-	                       	  	<c:if test="${!reserved && !reservedf}">
+	                       	  	<c:if test="${!reserved && !reservedf && !reservedn && !reservedt}">
 								    <div class="reservation-area">
 								       <img src="<%=request.getContextPath()%>/resources/Icon/possible.png" width="20px">
 								        <a class="calender-text" href="#" onclick="reservationCheck('${dateList.date}','${tstime}','${today_info.search_year}','${today_info.search_month}','${tid}','${tname}','${usageNum}','${people}'); return false;">
@@ -221,6 +275,7 @@
 								<c:set var="hasReservation" value="예약있음" />
 								<c:set var="print1" value="출력후"/>
 							 </c:forEach>
+							 
 	                       	</c:if>
 								
 	                       	
