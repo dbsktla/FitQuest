@@ -91,6 +91,7 @@ public class MyOrderListController {
 			mub.setPtype(productBean.getPtype());
 			mub.setTimage(trainerBean.getTimage());
 			mub.setTid(tid);
+			mub.setPeople(productBean.getPeople());
 			muList.add(mub);
 		}
 		System.out.println(muList.size());

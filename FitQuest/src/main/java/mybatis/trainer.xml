@@ -29,4 +29,20 @@
 		update trainer set timage = #{timage}
 		where id = #{id}
 	</update>
+	<select id = "SimilarTrainers" resultType = "trainer.model.TrainerBean">
+		SELECT *
+			FROM   (
+			    SELECT *
+			    FROM  trainer
+			    ORDER BY DBMS_RANDOM.RANDOM)
+			WHERE id != #{id}
+			and activity = #{activity}
+	</select>
+	<select id = "SimilarTrainerCount" resultType = "int">
+		select count(*) from trainer
+		 where 
+		 id != #{id} 
+		 	and 
+		 activity = #{activity}
+	</select>
 </mapper>

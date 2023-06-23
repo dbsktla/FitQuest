@@ -294,8 +294,9 @@ $(document).ready(function(){
               <ul>
                 <li style = "font-weight: bold;">${ usage.name } 선생님</li>
                 <li>장소 : ${usage.gname }</li>
+                <li>${usage.ptype} 수업  (${usage.people}명)</li>
               </ul>
-              <a href="genericReservation.rv?tid=${usage.tid }&tname=${usage.name}" class="btn-buy">예약하기</a>
+              <a href="genericReservation.rv?tid=${usage.tid }&tname=${usage.name}&people=${usage.people}" class="btn-buy">예약하기</a>
             </div>
           </div>
 		</c:forEach>

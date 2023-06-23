@@ -8,7 +8,7 @@
 	<select id = "GetProductListById" resultType = "product.model.ProductBean">
 		select * from product
 		where id = #{id}
-		order by months asc
+		order by people asc, months asc
 	</select>
 	<select id = "GetIdByPnum" resultType = "String">
 		select id from product

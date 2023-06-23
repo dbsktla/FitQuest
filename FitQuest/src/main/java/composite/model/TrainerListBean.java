@@ -8,7 +8,7 @@ public class TrainerListBean {
 	private String intro;
 	private String exp;
 	private String timage;
-	private String rating;
+	private double rating;
 	private String gaddr1;
 	private String name;
 	private String hasReview;
@@ -17,7 +17,7 @@ public class TrainerListBean {
 		super();
 	}
 	public TrainerListBean(String id, String gnum, String activity, String purpose, String intro, String exp,
-			String timage, String rating, String gaddr1) {
+			String timage, double rating, String gaddr1) {
 		super();
 		this.id = id;
 		this.gnum = gnum;
@@ -71,10 +71,10 @@ public class TrainerListBean {
 	public void setTimage(String timage) {
 		this.timage = timage;
 	}
-	public String getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(String rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 	public String getGaddr1() {
