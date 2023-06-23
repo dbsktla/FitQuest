@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import complete.model.CompleteDao;
 import member.model.MemberBean;
+import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 import usage.model.UsageDao;
@@ -28,6 +31,12 @@ public class GenericCancelController {
 	
 	@Autowired
 	CompleteDao completeDao;
+	
+	@Autowired
+	MemberDao memberDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
 	
 	@RequestMapping(command)
 	public String doAction(HttpSession session,
@@ -65,6 +74,21 @@ public class GenericCancelController {
 		}
 		if(cnt != -1) {
 			System.out.println("예약 취소 성공");
+			//예약 최소 되면 트레이너에게 취소 알림 보내기.
+			String recId = rb.getTid(); //수신자는 트레이너라서 트레이너 ID.
+			String recName = memberDao.getName(recId); //따라서 수신자 이름
+			String sendId = rb.getMid(); //보내는 회원 - 예약을 했었던 회원.
+			String sendName = memberDao.getName(sendId);
+			String request = "trainerReservation.rv"; //알림 클릭 하면 보내는 페이지 : 예약 내역 페이지.
+			String notifContent = sendName + " 회원님이 " + recName + " 선생님의 수업 신청을 취소했습니다.";
+			NotificationBean notifBean = new NotificationBean();
+			notifBean.setRecId(recId);
+			notifBean.setRecName(recName);
+			notifBean.setSendId(sendId);
+			notifBean.setSendName(sendName);
+			notifBean.setRequest(request);
+			notifBean.setNotifContent(notifContent);
+			int notif = notificationDao.insertPurchaseNotif(notifBean);
 		}else {
 			System.out.println("예약 취소 실패");
 		}

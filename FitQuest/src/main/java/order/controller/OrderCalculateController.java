@@ -101,8 +101,8 @@ public class OrderCalculateController {
 					String recName = memberDao.getName(recId); //따라서 수신자 이름
 					String sendId = memberBean.getId();
 					String sendName = memberBean.getName();
-					String request = "main.go";
-					String notifContent = sendName + " 회원님이 " + recName + "선생님의 회원권을 구매했습니다.";
+					String request = "memberHealthCare.ht";
+					String notifContent = sendName + " 회원님이 " + recName + " 선생님의 회원권을 구매했습니다.";
 					NotificationBean notifBean = new NotificationBean();
 					notifBean.setRecId(recId);
 					notifBean.setRecName(recName);

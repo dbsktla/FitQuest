@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
 import member.model.MemberDao;
+import notification.model.NotificationBean;
+import notification.model.NotificationDao;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
 import reservation.model.TscheduleDao;
@@ -32,6 +34,9 @@ public class ReservationInsertController {
 	
 	@Autowired
 	MemberDao memberDao;
+	
+	@Autowired
+	NotificationDao notificationDao;
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(
@@ -75,6 +80,21 @@ public class ReservationInsertController {
 		
 		if(cnt != -1) {
 			System.out.println("예약 성공");
+			//예약 성공 - 알림 보내기
+			String recId = reservationBean.getTid(); //수신자는 트레이너라서 트레이너 ID.
+			String recName = memberDao.getName(recId); //따라서 수신자 이름
+			String sendId = reservationBean.getMid(); //보내는 회원 - 예약을 했었던 회원.
+			String sendName = memberDao.getName(sendId);
+			String request = "trainerReservation.rv"; //알림 클릭 하면 보내는 페이지 : 예약 내역 페이지.
+			String notifContent = sendName + " 회원님이 " + recName + " 선생님의 수업을 신청했습니다.";
+			NotificationBean notifBean = new NotificationBean();
+			notifBean.setRecId(recId);
+			notifBean.setRecName(recName);
+			notifBean.setSendId(sendId);
+			notifBean.setSendName(sendName);
+			notifBean.setRequest(request);
+			notifBean.setNotifContent(notifContent);
+			int notif = notificationDao.insertPurchaseNotif(notifBean);
 			//남은 횟수 차감
 			usageDao.decreaseUsage(unum);
 		}else {
