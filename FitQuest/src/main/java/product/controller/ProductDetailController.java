@@ -1,6 +1,7 @@
 package product.controller;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,8 +51,41 @@ public class ProductDetailController {
 		GymBean gymBean = gymDao.selectGym(trainerBean.getGnum());
 		List<ProductBean> pList = productDao.getProductListById(id);
 		List<ReviewBean> rList = reviewDao.getReviewListByTid(id);
-		List<TrainerListBean> tList = compositeDao.getSimilarTrainerList(trainerBean);
-		Collections.shuffle(tList); //랜덤 순서 적용함
+		List<TrainerListBean> tList = new ArrayList<TrainerListBean>();
+		
+		int trainerCount = trainerDao.getSimilarTrainerCount(trainerBean);
+		List<TrainerBean> similarTList = null;
+		if(trainerCount > 0) {
+			similarTList = trainerDao.getSimilarTrainers(trainerBean);
+			//랜덤 순서로 정렬된 비슷한 트레이너 리스트
+		}
+		for(int i = 0; i < trainerCount; i++) {
+			TrainerBean currentTrainer = similarTList.get(i); //랜덤 정렬 리스트 중 하나 씩 가져옴 
+			TrainerListBean trainer = new TrainerListBean(); //뷰로 보낼 빈 생성
+			GymBean gymBean2 = gymDao.selectGym(currentTrainer.getGnum());
+			MemberBean tMemberBean = memberDao.selectMemberById(currentTrainer.getId());
+			String hasReview2 = reviewDao.getHasReviewById(currentTrainer.getId());
+			double avgRev = 0.0;
+			System.out.println(tMemberBean.getId() + " "  + hasReview2);
+			if(hasReview2.equals("Y")){
+				avgRev = reviewDao.getAverageReviewScore(currentTrainer.getId());
+			} 
+			trainer.setId(currentTrainer.getId());
+			trainer.setGnum(currentTrainer.getGnum());
+			trainer.setActivity(currentTrainer.getActivity());
+			trainer.setPurpose(currentTrainer.getPurpose());
+			trainer.setIntro(currentTrainer.getIntro());
+			trainer.setExp(currentTrainer.getExp());
+			trainer.setTimage(currentTrainer.getTimage());
+			trainer.setRating(avgRev);
+			trainer.setGaddr1(gymBean2.getGaddr1());
+			trainer.setName(tMemberBean.getName());
+			trainer.setHasReview(hasReview2);
+			tList.add(trainer);
+			if(i == 2) {
+				break;
+			}
+		}
 		double avgScore = 0.0;
 		if(hasReview.equals("Y")) {
 			avgScore = reviewDao.getAverageReviewScore(id);

@@ -130,12 +130,15 @@ values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '굳', sysdate, 'Y');
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
 values(rvseq.nextval, 'parkjay', 'kim', 2, '추천합니다', '굳', sysdate, 'Y');
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
-values(rvseq.nextval, 'parkjay', 'kim', 3, '추천합니다', '굳', sysdate, 'Y');
+values(rvseq.nextval, 'hong', 'parkjay', 3, '추천합니다', '굳', sysdate, 'Y');
 
 --상품
 insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인');
 insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인');
 insert into product values(pseq.nextval, 'kim', 30, 3, 28, 1, '개인');
+insert into product values(pseq.nextval, 'kim', 12, 1, 8, 3, '그룹');
+insert into product values(pseq.nextval, 'kim', 24, 2, 14, 3, '그룹');
+insert into product values(pseq.nextval, 'kim', 36, 3, 24, 4, '그룹');
 insert into product values(pseq.nextval, 'lee', 8, 1, 8, 4, '그룹');
 insert into product values(pseq.nextval, 'lee', 16, 2, 16, 4, '그룹');
 insert into product values(pseq.nextval, 'lee', 22, 3, 22, 4, '그룹');
@@ -196,7 +199,7 @@ insert into product values(pseq.nextval, 'moonj', 34, 3, 20, 1, '개인');
 insert into product values(pseq.nextval, 'parkjay', 10, 1, 13, 3, '그룹');
 insert into product values(pseq.nextval, 'parkjay', 19, 2, 24, 3, '그룹');
 insert into product values(pseq.nextval, 'parkjay', 28, 3, 33, 3, '그룹');
-
+commit;
 
 
 
@@ -238,6 +241,7 @@ insert into orders values(oseq.nextval, 'mistermoon', sysdate - 7 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 6 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 5 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 4 );
+commit;
 
 --orderdetail
 insert into orderdetail values(odseq.nextval, 2, 1);
@@ -302,7 +306,7 @@ insert into orderdetail values(odseq.nextval, 49, 28);
 insert into orderdetail values(odseq.nextval, 53, 29);
 insert into orderdetail values(odseq.nextval, 56, 30);
 insert into orderdetail values(odseq.nextval, 60, 30);
-
+commit;
 
 --reservation
 insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, '2023-01-12', '09:00~10:00', 'complete');
@@ -313,13 +317,14 @@ insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박�
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-16', '08:00~09:00', 'true');
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-17', '11:00~12:00', 'true');
 insert into reservation values(reseq.nextval, 'hong', 'park', '홍길동', '박영진', 1, 1, '2023-01-20', '10:00~11:00', 'true');
-
+commit;
 
 --usage
 
-insert into usage values(useq.nextval, 1, 1, 10, 'kim', 'hong', 10, 'available');
-insert into usage values(useq.nextval, 3, 16, 12, 'kim', 'parkjay', 0, 'unavailable');
-insert into usage values(useq.nextval, 2, 17, 12, 'kim', 'jkim', 28, 'available');
-insert into usage values(useq.nextval, 4, 12, 12, 'lee', 'hong', 28, 'available');
+insert into usage values(useq.nextval, 1, 2, 1, 'kim', 'hong', 10, 'available');
+insert into usage values(useq.nextval, 5, 12, 3, 'kim', 'hong', 15, 'available');
+insert into usage values(useq.nextval, 3, 16, 2, 'kim', 'parkjay', 0, 'unavailable');
+insert into usage values(useq.nextval, 2, 17, 3, 'kim', 'jkim', 28, 'available');
+insert into usage values(useq.nextval, 8, 12, 3, 'lee', 'hong', 28, 'available');
 
 commit;

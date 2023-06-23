@@ -39,14 +39,16 @@ public class ProductSalesGraphController {
 		    date = cal.getTime();
 		    days[i] = sdf.format(date);
 		}
-		for(int i = 0; i < days.length;i++) {
-			SalesBean sBean = sList.get(i);
-			String[] day = sBean.getOdate().split(" ");
-			for(int j = 0; j < days.length; j++) {
-				String comp1 = days[j].trim();
-				String comp2 = day[0].trim();
-				if(comp1.equals(comp2)) {
-					sales[j] = sBean.getPnum();
+		if(sList.size() != 0) {
+			for(int i = 0; i < sList.size();i++) {
+				SalesBean sBean = sList.get(i);
+				String[] day = sBean.getOdate().split(" ");
+				for(int j = 0; j < days.length; j++) {
+					String comp1 = days[j].trim();
+					String comp2 = day[0].trim();
+					if(comp1.equals(comp2)) {
+						sales[j] = sBean.getPnum();
+					}
 				}
 			}
 		}
@@ -75,14 +77,16 @@ public class ProductSalesGraphController {
 			date2 = cal2.getTime();
 			months[i] = sdf2.format(date2);
 		}
-		for(int i = 0; i < months.length;i++) {
-			SalesBean sBean = sList.get(i);
-			String[] day = sBean.getOdate().split(" ");
-			for(int j = 0; j < months.length; j++) {
-				String comp1 = months[j].trim();
-				String comp2 = day[0].trim();
-				if(comp1.equals(comp2)) {
-					monthSales[j] = sBean.getPnum();
+		if(sList.size() != 0) {
+			for(int i = 0; i < sList.size();i++) {
+				SalesBean sBean = sList.get(i);
+				String[] day = sBean.getOdate().split(" ");
+				for(int j = 0; j < months.length; j++) {
+					String comp1 = months[j].trim();
+					String comp2 = day[0].trim();
+					if(comp1.equals(comp2)) {
+						monthSales[j] = sBean.getPnum();
+					}
 				}
 			}
 		}
@@ -92,7 +96,7 @@ public class ProductSalesGraphController {
 			jsObject.put("mdate", months[i]);
 			jsArr.add(i, jsObject);
 		}
-		System.out.println(jsArr);
+		System.out.println("jsArr" + jsArr);
 		return jsArr.toString();
 	}
 }

@@ -9,14 +9,19 @@
 		select count(*) from usage
 		where tid = #{tid}
 		and mid = #{mid}
+		and ustate = 'available'
 	</select>
 	<insert id = "InsertUsage">
 		insert into usage
-		values(useq.nextval, #{pnum}, #{onum}, #{tid}, #{mid}, #{usage})
+		values(useq.nextval, #{pnum}, #{onum}, #{people}, #{tid}, #{mid}, #{usage}, 'available')
 	</insert>
 	<select id = "GetOneUsage" resultType = "usage.model.UsageBean">
 		select * from usage
-		where mid = #{mid} and tid = #{tid}
+		where mid = #{mid} and tid = #{tid} and people = #{people}
+	</select>
+	<select id = "GetUsageByPeople" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid} and tid = #{tid} and people = #{people}
 	</select>
 	<select id="GetTid" resultType="String">
 		select tid from usage
@@ -46,4 +51,19 @@
 		ustate = 'available'
 		where unum = #{unum}]]>
 	</update>
+	<select id="GetTListByMidA" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid}
+    	and ustate = 'available'
+    </select>
+	<select id = "GetUsageList" resultType = "usage.model.UsageBean">
+		select * from usage
+		where mid = #{mid}
+		and ustate = 'available'
+	</select>
+	<select id="GetUsageExist" resultType="int">
+		select count(*) from usage
+		where mid = #{mid}
+		and ustate = 'available'
+	</select>
 </mapper>

@@ -46,6 +46,16 @@ public class TrainerDao {
 		int cnt = sqlSessionTemplate.update(namespace + ".UpdateImage", trainerBean);
 		return cnt;
 	}
+
+	public List<TrainerBean> getSimilarTrainers(TrainerBean trainerBean) {
+		List<TrainerBean> similarTList = sqlSessionTemplate.selectList(namespace + ".SimilarTrainers", trainerBean);
+		return similarTList;
+	}
+
+	public int getSimilarTrainerCount(TrainerBean trainerBean) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".SimilarTrainerCount", trainerBean);
+		return cnt;
+	}
 	
 	
 }

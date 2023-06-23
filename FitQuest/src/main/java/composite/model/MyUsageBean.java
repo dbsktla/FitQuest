@@ -11,11 +11,13 @@ public class MyUsageBean {
 	private String ptype; //개인/그룹 수업
 	private String timage; //트레이너 
 	private String tid; //트레이너 id
+	private int people; //수업 인원수
 	public MyUsageBean() {
 		super();
 	}
+	
 	public MyUsageBean(int unum, int pnum, int months, int usage, String gname, String activity, String name,
-			String ptype, String timage, String tid) {
+			String ptype, String timage, String tid, int people) {
 		super();
 		this.unum = unum;
 		this.pnum = pnum;
@@ -27,7 +29,17 @@ public class MyUsageBean {
 		this.ptype = ptype;
 		this.timage = timage;
 		this.tid = tid;
+		this.people = people;
 	}
+
+	public int getPeople() {
+		return people;
+	}
+
+	public void setPeople(int people) {
+		this.people = people;
+	}
+
 	public String getTid() {
 		return tid;
 	}
