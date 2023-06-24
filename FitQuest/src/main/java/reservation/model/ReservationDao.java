@@ -54,24 +54,6 @@ public class ReservationDao {
 		return reservationBean;
 	}
 
-	public List<ReservationBean> getReservationTListByMid(String mid) {
-		List<ReservationBean> tList = new ArrayList<ReservationBean>();
-		tList = sqlSessionTemplate.selectList(namespace+".GetReservationTListByMid",mid);
-		return tList;
-	}
-	
-	public List<ReservationBean> getReservationFListByMid(String mid) {
-		List<ReservationBean> fList = new ArrayList<ReservationBean>();
-		fList = sqlSessionTemplate.selectList(namespace+".GetReservationFListByMid",mid);
-		return fList;
-	}
-	
-	public List<ReservationBean> getReservationJListByMid(String mid) {
-		List<ReservationBean> jList = new ArrayList<ReservationBean>();
-		jList = sqlSessionTemplate.selectList(namespace+".GetReservationJListByMid",mid);
-		return jList;
-	}
-
 	public List<ReservationBean> getReservationAllList(String mid) {
 		List<ReservationBean> rList = new ArrayList<ReservationBean>();
 		rList = sqlSessionTemplate.selectList(namespace+".GetReservationAllList",mid);
@@ -104,18 +86,6 @@ public class ReservationDao {
 		List<ReservationBean> tcList = new ArrayList<ReservationBean>();
 		tcList = sqlSessionTemplate.selectList(namespace+".GetReservationTCList",tid);
 		return tcList;
-	}
-
-	public List<ReservationBean> getReservationMListByMid(String mid) {
-		List<ReservationBean> mList = new ArrayList<ReservationBean>();
-		mList = sqlSessionTemplate.selectList(namespace+".GetReservationMListByMid",mid);
-		return mList;
-	}
-
-	public List<ReservationBean> getReservationCListByMid(String mid) {
-		List<ReservationBean> cList = new ArrayList<ReservationBean>();
-		cList = sqlSessionTemplate.selectList(namespace+".GetReservationCListByMid",mid);
-		return cList;
 	}
 
 	public int getTrueCount(String rdate, String rtime, String tid, int people) {
@@ -163,6 +133,12 @@ public class ReservationDao {
 		int cnt = -1;
 		cnt = sqlSessionTemplate.update(namespace+".CancelReservationM",rnum);
 		return cnt;
+	}
+
+	public List<ReservationBean> getReservationAllListByTid(String tid) {
+		List<ReservationBean> aList = new ArrayList<ReservationBean>();
+		aList = sqlSessionTemplate.selectList(namespace+".GetReservationAllListByTid",tid);
+		return aList;
 	}
 
 	

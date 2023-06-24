@@ -53,14 +53,17 @@ public class GenericTChooseController {
 		List<UsageBean> tidList = usageDao.getTListByMid(mid);
 
 		// 트레이너 목록 가져오기
-		//List<TrainerListSBean> tList = new ArrayList<TrainerListSBean>();
-		
+		List<TrainerListSBean> tList = new ArrayList<TrainerListSBean>();
 		String tid = "";
 		for (int i = 0; i < tidList.size(); i++) {
 			tid = tidList.get(i).getTid();
-			//tList.add(trainers);
+			List<TrainerListSBean> tempList = compositeDao.getTrainerListByTid(mid, tid);
+		    if (!tempList.isEmpty()) {
+		        TrainerListSBean trainer = tempList.get(0);
+		        tList.add(trainer);
+		        System.out.println(trainer.getName());
+		    }
 		}
-		List<TrainerListSBean> tList = compositeDao.getTrainerListByTid(mid,tid);
 
 		
 		model.addAttribute("tList", tList);

@@ -4,7 +4,6 @@ package reservation.model;
 
 
 public class TscheduleBean {
-	private int tsnum;
 	private String tid;
 	
 	private String tsday;

@@ -7,7 +7,7 @@
 <mapper namespace="reservation.model.Reservation">
 	<insert id="InsertTschedule">
 		insert into tschedule
-		values(tsseq.nextval,#{tid},#{tsday},#{tstime},#{tsdate},#{tstype},#{tspeople})
+		values(#{tid},#{tsday},#{tstime},#{tsdate},#{tstype},#{tspeople})
 	</insert>
 	<select id="FindTschedule" resultType="reservation.model.TscheduleBean">
 		select * from tschedule
@@ -46,31 +46,6 @@
 		where tid = #{tid} and rstate = 'true'
 		order by rtime]]>
 	</select>
-	<select id="GetReservationTListByMid" resultType="reservation.model.ReservationBean">
-		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'true'
-		order by rtime]]>
-	</select>
-	<select id="GetReservationFListByMid" resultType="reservation.model.ReservationBean">
-		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'false'
-		order by rtime]]>
-	</select>
-	<select id="GetReservationJListByMid" resultType="reservation.model.ReservationBean">
-		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'reject'
-		order by rtime]]>
-	</select>
-	<select id="GetReservationMListByMid" resultType="reservation.model.ReservationBean">
-		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'complete'
-		order by rtime]]>
-	</select>
-	<select id="GetReservationCListByMid" resultType="reservation.model.ReservationBean">
-		<![CDATA[select * from reservation
-		where mid = #{mid} and rstate = 'cancel'
-		order by rtime]]>
-	</select>
 	<select id="GetReservationTCList" resultType="reservation.model.ReservationBean">
 		<![CDATA[select * from reservation
 		where tid = #{tid} and rstate = 'true' or rstate = 'complete'
@@ -79,6 +54,11 @@
 	<select id="GetReservationAllList" resultType="reservation.model.ReservationBean">
 		select * from reservation
 		where mid = #{mid}
+		order by rdate
+	</select>
+	<select id="GetReservationAllListByTid" resultType="reservation.model.ReservationBean">
+		select * from reservation
+		where tid = #{tid}
 		order by rdate
 	</select>
 	<select id="GetReservationFListByPeople" resultType="reservation.model.ReservationBean">

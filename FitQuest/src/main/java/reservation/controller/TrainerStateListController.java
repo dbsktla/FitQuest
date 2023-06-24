@@ -18,9 +18,9 @@ import reservation.model.ReservationDao;
 import usage.model.UsageDao;
 
 @Controller
-public class GenericStateListController {
-	private final String command = "/genericStateList.rv";
-	private final String getPage = "genericStateList";
+public class TrainerStateListController {
+	private final String command = "/trainerStateList.rv";
+	private final String getPage = "trainerStateList";
 
 	@Autowired
 	ReservationDao reservationDao;
@@ -33,8 +33,8 @@ public class GenericStateListController {
 		
 		LocalDate today = LocalDate.now();
         
-		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
-		List<ReservationBean> aList = reservationDao.getReservationAllList(mid);
+		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
+		List<ReservationBean> aList = reservationDao.getReservationAllListByTid(tid);
 		model.addAttribute("aList",aList);
 		
 		return getPage;

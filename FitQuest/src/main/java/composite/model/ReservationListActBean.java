@@ -12,8 +12,11 @@ public class ReservationListActBean {
 	private String rtime;
 	private String rstate;
 	private String activity;
+	private int people;
+	
+	
 	public ReservationListActBean(int rnum, String mid, String tid, String mname, String tname, int onum, int unum,
-			String rdate, String rtime, String rstate, String activity) {
+			String rdate, String rtime, String rstate, String activity, int people) {
 		super();
 		this.rnum = rnum;
 		this.mid = mid;
@@ -26,10 +29,21 @@ public class ReservationListActBean {
 		this.rtime = rtime;
 		this.rstate = rstate;
 		this.activity = activity;
+		this.people = people;
 	}
+
 	public ReservationListActBean() {
 		
 	}
+	
+	public int getPeople() {
+		return people;
+	}
+
+	public void setPeople(int people) {
+		this.people = people;
+	}
+
 	public int getRnum() {
 		return rnum;
 	}

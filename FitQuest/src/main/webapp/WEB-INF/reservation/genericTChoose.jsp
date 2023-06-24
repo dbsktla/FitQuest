@@ -45,22 +45,22 @@
 <section id="team" class="team">
       <div class="container" data-aos="fade-up">
         <div class="row gy-4 justify-content-center">
-		  <c:forEach var = "trainer" items = "${tList}">
+		  <c:forEach var = "titem" items = "${tList}">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
                 <a href = "trainerDetail.pd">
              	 <div class="member-img">
-               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text"/>
+               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${titem.timage}" class="img-fluid" alt="text" width="500px"/>
             	 </div>
                 </a>
               <div class="member-info">
               	<form action="genericReservation.rv" method="get">
-              	  <input type="hidden" name="tid" value="${trainer.id}">
-              	  <input type="hidden" name="tname" value="${trainer.name}">
-              	  <input type="hidden" name="people" value="${trainer.people}">
-	                <div><h4 style = "margin-top:10px;">${trainer.name}</h4></div>
-	                <div><span class="margin text">${trainer.activity} ${trainer.people}인권</span></div>
-	                <div><span class="margin">${trainer.purpose}</span></div> 
+              	  <input type="hidden" name="tid" value="${titem.id}">
+              	  <input type="hidden" name="tname" value="${titem.name}">
+              	  <input type="hidden" name="people" value="${titem.people}">
+	                <div><h4 style = "margin-top:10px;">${titem.name}</h4></div>
+	                <div><span class="margin text">${titem.activity} ${titem.people}인권</span></div>
+	                <div><span class="margin">${titem.purpose}</span></div> 
 	                <div class="position">
 	                 <input type="submit" value="선택" class="btn btn-warning">
                		</div>

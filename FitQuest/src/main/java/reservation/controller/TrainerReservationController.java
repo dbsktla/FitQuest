@@ -62,11 +62,10 @@ public class TrainerReservationController {
 		int index = 7-dateList.size()%7;
 
 		if(dateList.size()%7!=0){
-
-		for (int i = 0; i < index; i++) {
-		calendarData= new CalendarBean(null, null, null, null);
-		dateList.add(calendarData);
-		}
+			for (int i = 0; i < index; i++) {
+			calendarData= new CalendarBean(null, null, null, null);
+			dateList.add(calendarData);
+			}
 		}
 		
 		String tname = ((MemberBean)session.getAttribute("loginInfo")).getName();
@@ -79,53 +78,9 @@ public class TrainerReservationController {
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 		List<ReservationBean> rList = reservationDao.getReservationFList(tid);
 		
-		//년,월,일로 쪼개서 배열에 담는 과정 
-		//rtime : 13:00~14:00 | rdate : 2023-06-01
-		List<String> rdateList = new ArrayList<String>();
-		
-		for (ReservationBean reservationBean : rList) {
-		    rdateList.add(reservationBean.getRdate());
-		}
-
-		String[] rdateArrL = rdateList.toArray(new String[0]);
-		
-		List<String> yearList = new ArrayList<String>();
-		List<String> monthList = new ArrayList<String>();
-		List<String> dayList = new ArrayList<String>();
-		
-		String[] rdateArrS;
-		for (int i = 0; i < rdateArrL.length; i++) {
-			rdateArrS = rdateArrL[i].split("-"); //2023 06 23 2023 06 24
-		    
-	        yearList.add(rdateArrS[0]);
-	        monthList.add(rdateArrS[1]);
-	        dayList.add(rdateArrS[2]);
-		}
-		String[] year = yearList.toArray(new String[0]);
-		String[] month = monthList.toArray(new String[0]);
-		String[] day = dayList.toArray(new String[0]);
-		
-		// 숫자로 변환
-		int[] yearNum = new int[year.length];
-		int[] monthNum = new int[month.length];
-		int[] dayNum = new int[day.length];
-
-		for (int i = 0; i < year.length; i++) {
-		    yearNum[i] = Integer.parseInt(year[i]);
-		}
-		for (int i = 0; i < month.length; i++) {
-		    monthNum[i] = Integer.parseInt(month[i]);
-		}
-		for (int i = 0; i < day.length; i++) {
-		    dayNum[i] = Integer.parseInt(day[i]);
-		}
-		
 		//예약 완료 테이블에 있는 정보 가져오기
 		List<CompleteBean> cList = completeDao.getAllComplete(tid);
 		
-		model.addAttribute("ryear",yearNum);
-		model.addAttribute("rmonth",monthNum);
-		model.addAttribute("rday",dayNum);
 		model.addAttribute("cList", cList);
 		model.addAttribute("rList", rList);
 		
