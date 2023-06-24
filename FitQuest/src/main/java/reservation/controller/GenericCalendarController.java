@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import complete.model.CompleteDao;
 import composite.model.CompositeDao;
 import composite.model.ReservationListActBean;
 import member.model.MemberBean;
@@ -39,41 +40,43 @@ public class GenericCalendarController {
 	@Autowired
 	CompositeDao compositeDao;
 	
+	@Autowired
+	CompleteDao completeDao;
+	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
 			HttpSession session){
 
-		Calendar cal = Calendar.getInstance();
-		CalendarBean calendarData;
+			Calendar cal = Calendar.getInstance();
+			CalendarBean calendarData;
 
-		if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
-			dateData = new CalendarBean(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
+			if(dateData.getDate().equals("")&&dateData.getMonth().equals("")){
+				dateData = new CalendarBean(String.valueOf(cal.get(Calendar.YEAR)),String.valueOf(cal.get(Calendar.MONTH)),String.valueOf(cal.get(Calendar.DATE)),null);
 			}
 
 			Map<String, Integer> today_info =  dateData.today_info(dateData);
 			List<CalendarBean> dateList = new ArrayList<CalendarBean>();
 
 			for(int i=1; i<today_info.get("start"); i++){
-			calendarData= new CalendarBean(null, null, null, null);
-			dateList.add(calendarData);
+				calendarData= new CalendarBean(null, null, null, null);
+				dateList.add(calendarData);
 			}
 			for (int i = today_info.get("startDay"); i <= today_info.get("endDay"); i++) {
-			if(i==today_info.get("today")){
-			calendarData= new CalendarBean(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
-			}else{
-			calendarData= new CalendarBean(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date");
-			}
-			dateList.add(calendarData);
+				if(i==today_info.get("today")){
+					calendarData= new CalendarBean(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "today");
+				}else{
+					calendarData= new CalendarBean(String.valueOf(dateData.getYear()), String.valueOf(dateData.getMonth()), String.valueOf(i), "normal_date");
+					}
+					dateList.add(calendarData);
 			}
 
 			int index = 7-dateList.size()%7;
 
 			if(dateList.size()%7!=0){
-
-			for (int i = 0; i < index; i++) {
-			calendarData= new CalendarBean(null, null, null, null);
-			dateList.add(calendarData);
-			}
+				for (int i = 0; i < index; i++) {
+				calendarData= new CalendarBean(null, null, null, null);
+				dateList.add(calendarData);
+				}
 			}
 			
 			model.addAttribute("dateList", dateList); //날짜 데이터 배열
@@ -82,54 +85,9 @@ public class GenericCalendarController {
 			//예약 완료된 내역 + pt종류 가져오기 (true)
 			String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 			List<ReservationListActBean> rList = compositeDao.getReservationListAct(mid);
-			
-			
-			//년,월,일로 쪼개서 배열에 담는 과정 
-			//rtime : 13:00~14:00 | rdate : 2023-06-01
-			List<String> rdateList = new ArrayList<String>();
-			
-			for (ReservationListActBean rb : rList) {
-			    rdateList.add(rb.getRdate());
-			}
-
-			String[] rdateArrL = rdateList.toArray(new String[0]);
-			
-			List<String> yearList = new ArrayList<String>();
-			List<String> monthList = new ArrayList<String>();
-			List<String> dayList = new ArrayList<String>();
-			
-			String[] rdateArrS;
-			for (int i = 0; i < rdateArrL.length; i++) {
-				rdateArrS = rdateArrL[i].split("-"); //2023 06 23 2023 06 24
-			    
-		        yearList.add(rdateArrS[0]);
-		        monthList.add(rdateArrS[1]);
-		        dayList.add(rdateArrS[2]);
-			}
-			String[] year = yearList.toArray(new String[0]);
-			String[] month = monthList.toArray(new String[0]);
-			String[] day = dayList.toArray(new String[0]);
-			
-			// 숫자로 변환
-			int[] yearNum = new int[year.length];
-			int[] monthNum = new int[month.length];
-			int[] dayNum = new int[day.length];
-
-			for (int i = 0; i < year.length; i++) {
-			    yearNum[i] = Integer.parseInt(year[i]);
-			}
-			for (int i = 0; i < month.length; i++) {
-			    monthNum[i] = Integer.parseInt(month[i]);
-			}
-			for (int i = 0; i < day.length; i++) {
-			    dayNum[i] = Integer.parseInt(day[i]);
-			}
-			model.addAttribute("ryear",yearNum);
-			model.addAttribute("rmonth",monthNum);
-			model.addAttribute("rday",dayNum);
 			model.addAttribute("rList", rList);
 			
-			//날짜 변환해서 오늘 날짜와 비교하고 넘었으면 rstate 상태 complete로 바꿔주기
+			//날짜 변환해서 오늘 날짜와 비교하고 넘었으면 rstate 상태 complete로 바꿔주고 예약 완료 테이블에서 해당 데이터 삭제
 			LocalDate today = LocalDate.now(); //오늘 날짜
 			
 			DateTimeFormatter formatter;
@@ -142,11 +100,15 @@ public class GenericCalendarController {
 			    }
 			    LocalDate reservationDate = LocalDate.parse(rb.getRdate(), formatter);
 			    
-			    if (reservationDate.isBefore(today)) { //지난 날짜
+			    if (reservationDate.isBefore(today)) { //이전 날짜
 			    	if(rb.getRstate().equals("true")) { //업데이트 전
-			    		int cnt = reservationDao.updateStateComplete(rb.getRnum());
-			    		if(cnt != -1) {
+			    		int cnt1 = reservationDao.updateStateComplete(rb.getRnum());
+			    		int cnt2 = completeDao.deleteComplete(rb.getTid(), rb.getRdate(), rb.getRtime(), rb.getPeople());
+			    		if(cnt1 != -1) {
 			    			System.out.println("날짜 지나서 상태 업데이트:"+reservationDate);
+			    		}
+			    		if(cnt2 != -1) {
+			    			System.out.println("날짜 지나서 예약 완료 테이블에서 삭제:"+reservationDate);
 			    		}
 			    	}
 			    }

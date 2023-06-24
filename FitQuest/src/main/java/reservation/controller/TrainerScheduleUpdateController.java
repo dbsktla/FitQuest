@@ -109,8 +109,6 @@ public class TrainerScheduleUpdateController {
 			@RequestParam("tstype") String tstype,
 			@RequestParam("selectedDays") String[] selectedDays) {
 		
-		System.out.println("빈 안에 tsdate:"+tscheduleBean.getTsdate());
-		
 		for(String tsdatelist : tsdateList) {
 			System.out.println("날짜 리스트로 받은거:"+tsdatelist);
 		}
@@ -118,15 +116,16 @@ public class TrainerScheduleUpdateController {
 			System.out.println("선택한 요일:"+day);
 		}
 		
-		
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 		List<TscheduleBean> tsList = tscheduleDao.findTscheduleByTspeople(tspeople,tid); 
+
+		//
 		
 		//기존에 있던 요일과 비교하기
 		for (TscheduleBean tb : tsList) {
 			
 			if (tsdateList.isEmpty()) {
-			    System.out.println("값이 누락되었습니다.");
+			    System.out.println("쉬는날이 없습니다.");
 			    tb.setTsdate("null");
 			}else {
 				//쉬는날이 여러날일 경우 한번에 담아 가져가기
@@ -143,7 +142,7 @@ public class TrainerScheduleUpdateController {
 				tb.setTsdate(tsdate);
 			}
 			
-		    if (Arrays.asList(selectedDays).contains(tb.getTsday())) { // 요일 일치 - update
+		    if (Arrays.asList(selectedDays).contains(tb.getTsday())) { //기존 요일과 일치 - update
 		    	String tsday = tb.getTsday();
 		    	System.out.println("update-요일:"+tsday);
 		        String tstime = "";
@@ -172,13 +171,12 @@ public class TrainerScheduleUpdateController {
 		        } else {
 		            System.out.println("수정 실패");
 		        }
-		    } else { // 요일 일치하지 않음 - delete
-		    	TscheduleBean tsb = new TscheduleBean();
-		    	tsb.setTid(tid);
-		    	tsb.setTsday(tb.getTsday());
-		    	tsb.setTspeople(tspeople);
+		    } else { //기존 요일과 일치하지 않음 - delete
+		    	tb.setTid(tid);
+		    	tb.setTsday(tb.getTsday());
+		    	tb.setTspeople(tspeople);
 		    	System.out.println("delete-요일:"+tb.getTsday());
-		        int cnt = tscheduleDao.deleteTschedule(tsb);
+		        int cnt = tscheduleDao.deleteTschedule(tb);
 		        if (cnt != -1) {
 		            System.out.println("삭제 성공");
 		            return gotoPage;
@@ -187,7 +185,7 @@ public class TrainerScheduleUpdateController {
 		            return getPage;
 		        }
 		    }
-		}
+		}//for
 
 		// selectedDays에만 있는 값은 insert
 		for (String selectedDay : selectedDays) {
@@ -249,6 +247,6 @@ public class TrainerScheduleUpdateController {
 		    }//if
 		}//for
 			
-		return null;
+		return gotoPage;
 	}
 }

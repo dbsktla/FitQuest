@@ -99,10 +99,8 @@
           <c:if test="${loginInfo.mtype eq 'generic'}">
 	          <li class="dropdown"><a href="genericCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="genericCalendar.rv">My PT</a></li>
-	              <li><a href="#">1</a></li>
-	              <li><a href="#">2</a></li>
-	              <li><a href="#">3</a></li>
+	              <li><a href="genericStateList.rv">예약 내역</a></li>
+	              <li><a href="genericTChoose.rv">예약하러 가기</a></li>
 	            </ul>
 	          </li>
           </c:if>
@@ -110,10 +108,8 @@
           <c:if test="${loginInfo.mtype eq 'trainer'}">
 	          <li class="dropdown"><a href="trainerCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="trainerCalendar.rv">My PT</a></li>
-	              <li><a href="#">1</a></li>
-	              <li><a href="#">2</a></li>
-	              <li><a href="#">3</a></li>
+	              <li><a href="trainerStateList.rv">예약 내역</a></li>
+	              <li><a href="trainerReservation.rv">예약 신청 내역</a></li>
 	            </ul>
 	          </li>
           </c:if>

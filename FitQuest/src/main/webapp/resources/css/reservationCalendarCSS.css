@@ -7,6 +7,10 @@ a{
 .b{
 	font-weight: bold;
 }
+.calendar-container{
+	margin: auto;
+	text-align: center;
+}
 .calendar{
 	text-align: center;
 }
@@ -24,8 +28,8 @@ a{
 	text-align: center;
 }
 .calendarTitle{
-	margin-top: 100px;
-	text-align: center;
+	margin-top: 40px;
+	text-align: center; 
 }
 .calendarTitle-font{
 	font-size: 30px;
@@ -71,11 +75,19 @@ a{
 	color: #FAC710;
 }
 .calendar-button-div {
-	margin: 10px 0px;
+	margin: auto;
+	margin: 15px 0px;
 	text-align: center;
 	display: flex;
 	justify-content: space-between;
-	width: 68%;
+	width: 100%;
+}
+.calendar-button-container {
+	margin: auto;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	width: 70%;
 }
 .calendar-button-div .left {
 	display: flex;
@@ -86,20 +98,25 @@ a{
 .calendar-button-div .right {
 	text-align: right;
 }
-.calendar_body{
-	width: 68%;
+.m-right{
+	margin-right: 4px;
+}
+.calendar-body{
+	width: 70%;
 	height: 800px;
-	margin-top: 20px;
 	text-align: center;
+	margin: auto; 
+	background-color: white;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .calendar-box{
-	padding: 5px;
+	padding: 10px;
 	border-bottom: 1px solid lightgray;
 	position: relative;
 	height: 250px;
 }
 .t-calendar-box{
-	padding: 5px;
+	padding: 10px;
 	position: relative;
 	height: 250px;
 	background-color: #F5FAFF;
@@ -108,7 +125,7 @@ a{
 .day{
 	color: black;
 	font-weight: 700;
-	padding: 8px 5px;
+	padding: 8px 14px;
 }
 .sun{
 	color: red;
@@ -124,7 +141,7 @@ a{
 	margin-bottom: 20px;
 	position: absolute;
 	top: 10%;
-	left: 7%;
+	left: 12%;
 	transform: translate(-50%, -50%);
 }
 .today-area{
@@ -142,7 +159,7 @@ a{
     justify-content: center;
     text-align: center;
     transition: transform 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 .reservation-area:hover{
 	transform: scale(1.05);
@@ -163,7 +180,7 @@ a{
 }
 
 .rstate-area{
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 	margin: 10px 0px;
 	text-align: center;
 	transition: transform 0.3s;
@@ -173,14 +190,14 @@ a{
 	transform: scale(1.05);
 }
 .rstate-container{
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
 	margin: 5px 0px;
 	text-align: center;
 	transition: transform 0.3s;
 	border-radius: 10px;
 }
 .rstate-container-gc{
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
 	margin: 5px 0px;
 	text-align: center;
 	transition: transform 0.3s;
@@ -192,7 +209,7 @@ a{
 	padding: 10px 7px;
 }
 .rstate-container-t{
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); 
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); 
 	margin: 5px 0px;
 	text-align: center;
 	transition: transform 0.3s;
@@ -218,7 +235,7 @@ a{
 	transform: scale(1.05);
 }
 .rstate-dot{
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 	margin: 10px 0px;
 	text-align: center;
 	background-color: #FEF9E7; 
@@ -356,14 +373,14 @@ button.close-button:hover {
 }
 
 .stateList-body{ 
-	width: 68%;
+	width: 70%;
 	text-align: center;
 }
 
 .stateList-title{
 	font-weight: bold;
 	font-size: 18px; 
-	width: 68%;
+	width: 70%;
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 13px;

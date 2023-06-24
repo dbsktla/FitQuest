@@ -101,7 +101,7 @@ public class ReservationInsertController {
 			System.out.println("예약 실패");
 		}
 		
-		return "genericReservation?tid="+tid+"&tname="+tname+"&people=" + people;
+		return "redirect:/genericReservation.rv?tid="+tid+"&tname="+tname+"&people=" + people;
 	}
 	
 	

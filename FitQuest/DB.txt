@@ -344,17 +344,8 @@ commit;
 
 
 -- 트레이너 스케줄
-drop sequence tsseq;
-create sequence tsseq
-  increment by 1
-  start with 1
-  minvalue 1
-  maxvalue 10000
-  nocache;
-
 drop table tschedule cascade constraints;
 CREATE TABLE tschedule (
-   tsnum   number   primary key, --번호/시퀀스
    tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
    tsday varchar2(30)   NOT NULL, --예약 가능 요일
    tstime varchar2(500)   NOT NULL,--예약 가능 시간

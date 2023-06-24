@@ -12,7 +12,6 @@
 		var top = (window.screen.availHeight - height) / 2;
 		
 		var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
-		alert(rnum);
 		// 팝업 창이 로드된 후에 닫기 버튼 추가
 		popup.onload = function () {
 			 var closeButton = popup.document.createElement("button");
@@ -50,13 +49,12 @@
 		};
 	}
 </script>
-<br><br>
-<center>
+<body style="background-color: #FEF9E7; text-align: center;"> 
 <!-- 타이틀 폰트 -->
 <div class="calendarTitle">
 	<div class="calendarTitle-font">My PT</div>
 </div> 
-<div>
+<div class="calendar-container">
    <!-- 년/월 바꾸기 -->
    <div class="changeCalendar">
       <!-- 이전년 -->
@@ -81,21 +79,26 @@
       </a>
    </div>
 <!-- 버튼 -->
+<div class="calendar-button-container">
    <div class="calendar-button-div">
-  	  <div class="left"></div>
-      <div class="right">
-      	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
-      	<c:if test="${updateFlag == 'true'}">
-	      	<input type="button" class="btn btn-warning" onClick="location.href='trainerScheChoose.rv'" value="스케줄 수정">
+  	  <div class="left">
+      	<c:if test="${updateFlag == 'true'}"> 
+	      	<input type="button" class="btn btn-warning m-right" onClick="location.href='trainerScheChoose.rv'" value="스케줄 수정">
       	</c:if>
       	<c:if test="${insertFlag == 'true'}">
 	      	<input type="button" class="btn btn-warning" onClick="location.href='tScheduleInsert.rv'" value="스케줄 설정">
       	</c:if>
+  	  </div>
+      <div class="right">
+      	<input type="button" class="btn btn-warning" onClick="location.href='trainerReservation.rv'" value="예약 신청 내역">
+      	<c:if test="${not empty rList}">
+      		<input type="button" class="btn btn-warning" onClick="location.href='trainerStateList.rv'" value="예약 내역">
+        </c:if>
       </div>
    </div>
+</div>
 <!-- 달력  -->  
-<table class="calendar_body">
-<thead>
+<table class="calendar-body">
    <tr class="day-area">
       <td class="day sun" width="14%">
          일
@@ -119,7 +122,6 @@
          토
       </td>
    </tr>
-</thead>
 <c:if test="${empty rList}">
    <tr>
 	 <td colspan="7" class="calendar-none">
@@ -130,7 +132,6 @@
    </tr>
 </c:if>
 <c:if test="${not empty rList}">
-<tbody>
    <tr>
 	<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
          <c:choose>
@@ -355,10 +356,8 @@
 	     </td>
        </c:if>
      </c:forEach>
-</tbody>
 </c:if>
 </table>
 </div>
-</center>
-
+</body>
 <%@ include file="../common/bottom.jsp" %>
