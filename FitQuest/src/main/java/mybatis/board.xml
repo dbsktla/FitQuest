@@ -92,7 +92,7 @@
 	</update>
 	
 	<select id="GetOneFreeBoard" resultType="community.model.BoardBean">
-		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bref, brestep, brelevel, bcontent
+		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bref, brestep, brelevel, bcontent, btype
 		from board inner join member
 		on board.id = member.id
 		where bnum = #{bnum}
@@ -214,7 +214,7 @@
 	</select>
 	
 	<select id="GetOneHealthBoard" resultType="community.model.BoardBean">
-		select bnum, board.id id, name, bsubject, bcategory, bregdate, breadcount, bcontent, bimage
+		select bnum, board.id id, name, btype, bsubject, bcategory, bregdate, breadcount, bcontent, bimage
 		from board inner join member 
 		on board.id = member.id
 		where bnum = #{bnum}
