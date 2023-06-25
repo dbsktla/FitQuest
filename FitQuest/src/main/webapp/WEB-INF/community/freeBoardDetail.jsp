@@ -69,11 +69,21 @@
 			alert('이미 답글창이 추가되었습니다.');
 		}
 	}
-	function commentReportInsert(cnum,bnum){
-		var openWin = window.open("reportInsertForm.co?bcnum=" + cnum + "&rtype=bcomment&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+	function commentReportInsert(cnum,bnum,id){
+		if(id == '${ sessionScope.loginInfo.id }'){
+			alert('본인 댓글은 신고할 수 없습니다.');
+		}
+		else{
+			var openWin = window.open("reportInsertForm.co?bcnum=" + cnum + "&rtype=bcomment&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+		}	
 	}
-	function boardReportInsert(bnum){
-		var openWin = window.open("reportInsertForm.co?bcnum=" + bnum + "&rtype=board&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+	function boardReportInsert(bnum,id){
+		if(id == '${ sessionScope.loginInfo.id }'){
+			alert('본인 게시글은 신고할 수 없습니다.');
+		}
+		else{
+			var openWin = window.open("reportInsertForm.co?bcnum=" + bnum + "&rtype=board&bnum=" + bnum, "_blank", "width=500, height=500, left=300");
+		}	
 	}
 </script>
 
@@ -84,7 +94,7 @@
 				<div align="right">
 					<input type="button" value="목록보기" class="btn btn-warning btn-sm" onclick="location.href='freeBoardList.co'">
 					<c:if test="${ sessionScope.loginInfo != null }">
-						<input type="button" value="신고하기" class="btn btn-danger btn-sm" onclick="boardReportInsert('${ boardBean.bnum }')">
+						<input type="button" value="신고하기" class="btn btn-danger btn-sm" onclick="boardReportInsert('${ boardBean.bnum }','${ boardBean.id }')">
 					</c:if>	
 				</div>
 				<h2 class="card-title">${ boardBean.bsubject }</h2>
@@ -149,7 +159,7 @@
 									<a style="color : #FAC710;" href="javascript:bcommentReply('${ boardBean.btype }','${ boardBean.bnum }','${ bcomment.cref }','${ bcomment.crestep }','${ bcomment.crelevel }')">답글</a>
 								</td>
 								<td align="right">
-									<a id="report" href="javascript:commentReportInsert('${ bcomment.cnum }','${ boardBean.bnum }')" style="color : red;">신고</a>
+									<a id="report" href="javascript:commentReportInsert('${ bcomment.cnum }','${ boardBean.bnum }','${ bcomment.id }')" style="color : red;">신고</a>
 								</td>
 							</c:if>
 							<c:if test="${ sessionScope.loginInfo.id eq bcomment.id }">
