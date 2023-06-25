@@ -74,7 +74,7 @@ public class HealthBoardUpdateController {
 			}
 			else {
 				try {
-					if(boardBean.getUpload() != null) {
+					if(boardBean.getBimage() != "") {
 						if(boardBean.getBimageOld() != null) {
 							int bimageCount = boardDao.selectBimageCount(boardBean.getBimageOld());
 							if(bimageCount == 1) {
