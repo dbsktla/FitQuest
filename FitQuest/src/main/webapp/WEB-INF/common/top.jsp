@@ -237,10 +237,9 @@
            <c:if test = "${loginInfo.mtype eq 'admin' }">
            <li class="dropdown" ><a href=""><span><font size="2">${loginInfo.name}님(${loginInfo.nickname})</font></span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
-	              <li><a href="questionList">문의 관리</a></li>
-	              <li><a href="reviewDeleteRequestList.mb">리뷰삭제 신청 관리</a></li>
-	              <li><a href=""></a></li>
-	              <li><a href=""></a></li>
+	              <li><a href="adminReviewReportList.ad">리뷰삭제 신청 관리</a></li>
+	              <li><a href="adminCommunityReportList.ad">게시글 신고 관리</a></li>
+	              <li><a href="adminQuestTionRequestList.ad">문의 관리</a></li>
 	            </ul>
 	       </li>
            </c:if>

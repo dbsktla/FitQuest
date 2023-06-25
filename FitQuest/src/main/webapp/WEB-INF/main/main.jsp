@@ -53,7 +53,12 @@
              <h2>건강 정보 관리하기</h2>
               <p style="color: grey;">트레이너와 함께 만들어가는 내 건강<br><br></p>
               <img src="<%= request.getContextPath() %>/resources/Image/MainImage/mainHealth.jpg" class="img-fluid">
-              <a href="health.ht" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
+              <c:if test="${loginInfo.mtype eq 'trainer'}">
+              	<a href="memberHealthCare.ht" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
+              </c:if>
+              <c:if test="${loginInfo.mtype != 'trainer'}">
+              	<a href="health.ht" class="btn btn-outline-warning">&ensp;GO!&ensp;</a>
+              </c:if>
             </div>
           </div>
 
