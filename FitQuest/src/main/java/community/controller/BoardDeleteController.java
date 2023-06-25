@@ -76,6 +76,7 @@ public class BoardDeleteController {
 				}
 			}
 		}
+		System.out.println(btype);
 		if(btype.equals("자유")) {
 			return getPageFree;
 		}

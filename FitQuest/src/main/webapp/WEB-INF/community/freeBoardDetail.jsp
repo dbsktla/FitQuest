@@ -17,7 +17,7 @@
 	function freeBoardDelete(){
 		var check = confirm('삭제하시겠습니까?');
 		if(check){
-			location.href='boardDelete.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }&btype${ boardBean.btype }';
+			location.href='boardDelete.co?bnum=${ boardBean.bnum }&id=${ boardBean.id }&btype=${ boardBean.btype }';
 		}
 	}
 	function freeBoardUpdate(){
