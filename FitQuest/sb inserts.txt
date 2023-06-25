@@ -314,7 +314,7 @@ commit;
 
 --usage
 
-insert into usage values(useq.nextval, 1, 2, 1, 'kim', 'hong', 0, 'unavailable');
+insert into usage values(useq.nextval, 1, 2, 1, 'kim', 'hong', 10, 'available');
 insert into usage values(useq.nextval, 5, 12, 3, 'kim', 'hong', 15, 'available');
 insert into usage values(useq.nextval, 3, 16, 2, 'kim', 'parkjay', 0, 'unavailable');
 insert into usage values(useq.nextval, 2, 17, 3, 'kim', 'jkim', 28, 'available');
