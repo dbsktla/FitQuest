@@ -47,7 +47,7 @@ public class TrainerCalendarController {
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
 			HttpSession session){
-
+		session.setAttribute("topmenu", "trainerCalendar");
 		Calendar cal = Calendar.getInstance();
 		CalendarBean calendarData;
 

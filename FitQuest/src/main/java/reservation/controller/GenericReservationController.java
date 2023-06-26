@@ -1,5 +1,6 @@
 package reservation.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import complete.model.CompleteBean;
 import complete.model.CompleteDao;
@@ -160,7 +163,7 @@ public class GenericReservationController {
 		//다른 회원권에서 예약 완료된 모든 값 가져오기(동일 시간,날짜 예약 막기 위함)
 		List<ReservationBean> tList = reservationDao.getReservationTListByPeople(mid,tid,people);
 		model.addAttribute("tList",tList); 
-		
+			
 		return getPage;
 	}
 }

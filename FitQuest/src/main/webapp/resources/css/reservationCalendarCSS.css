@@ -22,6 +22,7 @@ a{
 	background-color: #F9F7F4;
 	border-top: 1.5px solid gray;
 	border-bottom: 1px solid lightgray;
+	height: 50px;
 }
 .calendar{
 	margin: 50px 0px;
