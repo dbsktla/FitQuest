@@ -173,4 +173,36 @@
 			    GROUP BY hdate
 		      )
 	</select>
+	
+	<select id="GetTrainerList" resultType="health.model.HealthDateBean">
+		SELECT	* 
+		FROM 	(
+				 SELECT	o.tid
+				 	   ,o.mid as id
+				 	   ,o.name AS tname
+				 	   ,t.activity AS tactivity
+				 FROM 	(
+				 	      SELECT	*
+				 	      FROM 		(
+				 	            	 SELECT	*
+				 	            	 FROM	(
+				 	                  		 SELECT	*
+				 	                  		 FROM 	USAGE
+				 	                  		 ) u
+				 	           		 INNER JOIN ORDERS o
+				 	            	 ON u.onum  = o.onum
+				 	            	 AND ustate = 'available'
+				 	            ) o
+				 	      INNER JOIN MEMBER m
+				 	      ON o.tid = m.id
+				 	    ) o
+				 INNER JOIN TRAINER t
+				 ON o.tid	= t.id
+				 AND o.mid 	= #{mid}
+				)
+		GROUP BY tid
+				,id
+				,tname
+				,tactivity
+	</select>
 </mapper>

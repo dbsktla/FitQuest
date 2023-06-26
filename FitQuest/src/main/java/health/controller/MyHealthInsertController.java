@@ -67,21 +67,7 @@ public class MyHealthInsertController {
 			mav.setViewName("redirect:/loginForm.mb");
 		} else { // 로그인 정보 존재할때
 			
-			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
-			List<UsageBean> ulist = usageDao.getTListByMidA(memberBean.getId());
-			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
-			
-			System.out.println("ulist : " + ulist);
-			if(ulist != null) { // 사용권 잇으면 데이터 넣기
-				for(UsageBean ub : ulist) {
-					System.out.println("ulist tid : " + ub.getTid());
-					TrainerBean trainerBean = trainerDao.getTrainerMember(ub.getTid());
-					
-					System.out.println("trainerBean id : " + trainerBean.getId());
-					System.out.println("trainerBean name : " + trainerBean.getName());
-					tlist.add(trainerBean);
-				}
-			}
+			List<HealthDateBean> tlist = healthDateDao.getTrainerList(memberBean.getId());
 			
 			mav.addObject("tlist", tlist);
 			mav.setViewName(getPage);

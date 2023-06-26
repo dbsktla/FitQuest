@@ -96,4 +96,10 @@ public class HealthDateDao {
 		return sum;
 	}
 
+	public List<HealthDateBean> getTrainerList(String mid) {
+		List<HealthDateBean> list = sqlSessionTemplate.selectList(namespace + ".GetTrainerList", mid);
+
+		return list;
+	}
+
 }
