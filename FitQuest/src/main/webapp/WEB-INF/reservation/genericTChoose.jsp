@@ -10,15 +10,12 @@
 		background-color:#FAC710 !important;
 		border: #FAC710 !important;
 	}
-	.btn {
+	input[type="submit"]{
 		border-radius: 25px !important;
 		color: #444444 !important;
 		font-size: 15px !important;
 		font-weight: 600 !important;
 		padding: 8px 20px 10px 20px !important;
-		/* position: absolute;
-		transform: translate(-50%, -50%);
-		bottom: 20px; */
 	}
 	.box {
 		color: #444444;
