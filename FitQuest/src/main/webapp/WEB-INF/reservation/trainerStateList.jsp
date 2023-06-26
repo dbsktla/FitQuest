@@ -3,16 +3,15 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/reservationCalendarCSS.css?after"/>
 <script type="text/javascript">
-	function openPopup(rnum, rstate) {
+	function openPopup(tid,date,time,people,rstate,rnum) { //complete 팝업창 설정
 		// 팝업 창의 URL과 창의 속성을 설정
-		var url = "genericCalendarDetail.rv?rnum=" + rnum;
-		var width = 700; // 팝업 창의 너비
-		var height = 620; // 팝업 창의 높이
+	 	var url = "trainerCalendarDetail.rv?tid="+tid+"&date="+date+"&time="+time+"&people="+people;
+	 	var width = 900; // 팝업 창의 너비
+		var height = 600; // 팝업 창의 높이
 		var left = (window.screen.availWidth - width) / 2; // 화면 중앙에 위치하도록 좌표 계산
 		var top = (window.screen.availHeight - height) / 2;
 		
 		var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
-		
 		// 팝업 창이 로드된 후에 닫기 버튼 추가
 		popup.onload = function () {
 			 var closeButton = popup.document.createElement("button");
@@ -22,7 +21,7 @@
 				popup.close(); // 팝업 창 닫기
 			 });
 		
-			// 예약 상태가 true라면 예약 취소 버튼 추가(예약 확정은 되었지만 운동 완료하지 않은 상태)
+			// 예약 상태가 true라면 예약 취소 버튼 추가(예약 확정은 되었지만 운동 완료하지 않은 상태) complete 테이블의 값은 오늘 이전의 예약일 경우 삭제되어 상관 없음
 			if (rstate == "true") {
 				var cancelButton = popup.document.createElement("button");
 				cancelButton.innerText = "예약 취소";
@@ -33,7 +32,7 @@
 					if (confirmCancel) {
 						popup.alert("예약 취소 완료되었습니다.");
 						popup.close(); // 팝업 창 닫기
-						window.location.href = "reservationCancel.rv?rnum=" + rnum;
+						window.location.href = "trainerStateList.rv";
 					}
 			  });
 			
@@ -46,6 +45,7 @@
 			
 			popup.document.body.appendChild(closeButton);
 			closeButton.focus();
+			popup.scrollTo(0, 0);
 		};
 	}
 </script>
@@ -57,6 +57,9 @@
 	tr.clickable-row:hover {
         cursor: pointer;
         cursor: hand;
+    }
+    th{
+    	width: 30%;
     }
 </style>
 <body style="background-color: #FEF9E7;">
@@ -72,14 +75,14 @@
 				<tr align="center">
 					<th scope="col">날짜</th>
 					<th scope="col">시간</th>
-					<th scope="col">트레이너</th>
+					<th scope="col">회원</th>
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'true'}">
-						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
+						<tr align="center" onclick="openPopup('${aitem.tid}','${aitem.rdate}','${aitem.rtime}','${aitem.people}','${aitem.rstate}','${aitem.rnum}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
-							<td>${aitem.tname}</td>
+							<td>${aitem.mname}</td>
 						</tr>
 						<c:set var="tdata" value="true" />
 					</c:if>
@@ -102,14 +105,14 @@
 				<tr align="center">
 					<th scope="col">날짜</th>
 					<th scope="col">시간</th>
-					<th scope="col">트레이너</th>
+					<th scope="col">회원</th>
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'false'}">
 						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
-							<td>${aitem.tname}</td>
+							<td>${aitem.mname}</td>
 						</tr>
 						<c:set var="fdata" value="true" />
 					</c:if>
@@ -131,14 +134,14 @@
 				<tr align="center">
 					<th scope="col">날짜</th>
 					<th scope="col">시간</th>
-					<th scope="col">트레이너</th>
+					<th scope="col">회원</th>
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'reject'}">
 						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
-							<td>${aitem.tname}</td>
+							<td>${aitem.mname}</td>
 						</tr>
 						<c:set var="jdata" value="true" />
 					</c:if>
@@ -160,14 +163,14 @@
 				<tr align="center">
 					<th scope="col">날짜</th>
 					<th scope="col">시간</th>
-					<th scope="col">트레이너</th>
+					<th scope="col">회원</th>
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'cancel'}">
 						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
-							<td>${aitem.tname}</td>
+							<td>${aitem.mname}</td>
 						</tr>
 						<c:set var="cdata" value="true" />
 					</c:if>
@@ -189,14 +192,14 @@
 				<tr align="center">
 					<th scope="col">날짜</th>
 					<th scope="col">시간</th>
-					<th scope="col">트레이너</th>
+					<th scope="col">회원</th>
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'complete'}">
 						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
-							<td>${aitem.tname}</td>
+							<td>${aitem.mname}</td>
 						</tr>
 						<c:set var="mdata" value="true" />
 					</c:if>

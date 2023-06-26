@@ -26,6 +26,7 @@
 				   +'예약 하시겠습니까?'
 							)) { // 확인
 				location.href = 'reservationInsert.rv?date=' + date + '&time=' + time + '&year=' + year + '&month=' + month + '&tid=' + tid + '&tname=' + tname + '&usageNum=' + usageNum + '&people=' + people;
+				 alert('예약 신청이 완료되었습니다.');
 			} else { // 취소
 				// 스크롤 위치 설정
 	            window.scrollTo(0, scrollPosition);
