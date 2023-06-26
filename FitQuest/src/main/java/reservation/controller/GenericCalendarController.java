@@ -1,5 +1,6 @@
 package reservation.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +47,21 @@ public class GenericCalendarController {
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
-			HttpSession session){
+			HttpSession session,HttpServletResponse response){
 
+		session.setAttribute("topmenu", "genericCalendar");
+		response.setContentType("text/html; charset=UTF-8");
+		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
+		if(memberBean == null) {
+			session.setAttribute("destination", "redirect:/genericCalendar.rv");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');location.href='login.mb'</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
 			Calendar cal = Calendar.getInstance();
 			CalendarBean calendarData;
 
@@ -149,6 +164,7 @@ public class GenericCalendarController {
 			//전체 예약 내역
 			List<ReservationBean> rAList = reservationDao.getReservationAllList(mid);
 			model.addAttribute("rAList",rAList);
-			return getPage; 
+		}
+		return getPage; 
 	}
 }

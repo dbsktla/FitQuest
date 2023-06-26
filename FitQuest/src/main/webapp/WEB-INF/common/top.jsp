@@ -97,7 +97,7 @@
           
           <!-- 일반회원 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'generic'}">
-	          <li class="dropdown"><a href="genericCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
+	          <li class="dropdown"><a href="genericCalendar.rv" class="<c:if test="${topmenu eq 'genericCalendar'}">active</c:if>"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="genericStateList.rv">예약 내역</a></li>
 	              <li><a href="genericTChoose.rv">예약하러 가기</a></li>
@@ -106,7 +106,7 @@
           </c:if>
            <!-- 트레이너 메뉴 -->
           <c:if test="${loginInfo.mtype eq 'trainer'}">
-	          <li class="dropdown"><a href="trainerCalendar.rv"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
+	          <li class="dropdown"><a href="trainerCalendar.rv" class="<c:if test="${topmenu eq 'trainerCalendar'}">active</c:if>"><span>MY PT</span><i class="bi bi-chevron-down"></i></a>
 	            <ul>
 	              <li><a href="trainerStateList.rv">예약 내역</a></li>
 	              <li><a href="trainerReservation.rv">예약 신청 내역</a></li>
