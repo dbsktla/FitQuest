@@ -54,3 +54,12 @@
 	font-size: 30px;
 	font-weight: bold;
 }
+.aboutUs{
+ 
+ background-image: url("../Image/AboutUsImage/aboutUs.jpg");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 2600px;
+ 
+}
