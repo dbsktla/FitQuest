@@ -4,10 +4,22 @@
 <%
 	session.setAttribute("flag1", true); 
 %>
+<style>
+	.entry-title{
+		color: black !important;
+		font-size: 24px !important;
+		margin-top: 50px !important;
+	}
+	h3{
+		color: black !important;
+		font-size: 20px !important;
+	}
+</style>
+<body style="background-color: #FEF9E7;">
  <section class="breadcrumbs">
       <div class="container">
         <ol>
-          <li><a href="main.go">홈 페이지</a></li>
+          <li><a href="main.go">홈페이지</a></li>
           <li><a href="trainerList.pd?pageNumber=${pageNumber }">목록보기</a></li>
         </ol>
       </div>
@@ -19,21 +31,21 @@
 		  <div class ="col-lg-2"></div>
           <div class="col-lg-8 entries">
 
-            <article class="entry entry-single">
+            <article class="entry entry-single" style="background-color: white; border-radius: 10px;">
 
               <div class="entry-img" align = "center">
-                <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainerBean.timage}" alt="" class="img-fluid" style = "width: 80%; text-align:center; margin-top: 50px;">
+                <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainerBean.timage}" alt="" class="img-fluid" style = "width: 92%; text-align:center; margin-top: 50px;">
               </div>
 
               <h2 class="entry-title">
-              	${memberBean.name } ${trainerBean.activity } 선생님 소개합니다!
+              	${memberBean.name } ${trainerBean.activity } 선생님
               </h2>
 
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-person"></i>별명 : ${memberBean.nickname }</li>
                   <li class="d-flex align-items-center"><i class="bi bi-clock"></i>나이 : ${ age }</li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#reviewSection">리뷰 : ${reviewCount } 글</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#reviewSection">리뷰 : ${reviewCount }개</a></li>
                 </ul>
               </div>
 
@@ -63,7 +75,7 @@
               </div>
 				
             </article><!-- End blog entry -->
-            <h4 class="comments-count">수업 회원권 : </h4><br>
+            <h2 class="entry-title">수업 회원권</h2><br>
 			<c:forEach var = "product" items = "${pList }">
             <div class="blog-author d-flex align-items-center" style = "justify-content: space-between;">
 			  <i class="bi bi-cart-plus" style="font-size: 30px"></i>
@@ -192,5 +204,6 @@
 
       </div>
     </section><!-- End Blog Single Section -->
+</body>
 <%@ include file="../common/bottom.jsp" %>
     

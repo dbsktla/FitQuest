@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <style type = "text/css">
 	.btn:hover {
 		background-color:#FAC710 !important;
@@ -11,9 +12,9 @@
 	}
 	.btn {
 		color: #444444 !important;
-		font-size: 15px !important;
+		font-size: 16px !important;
 		font-weight: 600 !important;
-		padding: 8px 20px 10px 20px !important;
+		padding: 7px 12px !important;
 	}
 	.box {
 		color: #444444;
@@ -153,13 +154,12 @@ var areaSelectMaker = function(target){
 </script>
 <!-- 운동 카테고리 선택.-->
 <body style="background-color : #FEF9E7;">
+          <div class="title-container">
+			<div class="title-text">트레이너 목록</div>
+  		  </div>
  <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important; padding: 20px 0px;"> 
       <div class="container" data-aos="fade-up">
         <div class="row" data-aos="fade-up" data-aos-delay="100">
-	        <header class="section-header" style = "margin-top:30px;">
-	          <h2>FitQuest</h2>
-	          <p>트레이너 목록</p>
-	        </header>
 	      <form action = "trainerList.pd" id = "myform">
           <div class="col-lg-12 d-flex justify-content-center" style = "margin-bottom: 60px; align-items: center;">
             <select name="addressRegion" id="addressRegion1" class="form-select" size = "5" aria-label="multiple select example"></select>
@@ -267,12 +267,12 @@ var areaSelectMaker = function(target){
             <div class="member">
                 <a href = "trainerDetail.pd?id=${trainer.id }&pageNumber=${pageInfo.pageNumber}&hasReview=${trainer.hasReview}">
              	 <div class="member-img">
-               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text"/>
+               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text" width="400px"/>
             	 </div>
                 </a>
               <div class="member-info">
-                <h4 style = "margin-top:10px;">${trainer.name }</h4>
-                <span>${trainer.activity} : ${trainer.purpose }</span>
+                <h4 style = "margin-top:10px; color:black;">${trainer.name }</h4>
+                <span class="magin-top-15">${trainer.activity} : ${trainer.purpose }</span>
 				<span style = "color:black;">${trainer.gaddr1}</span>
                	<fmt:formatNumber var = "rating1" value="${trainer.rating }" type="number" pattern="#.##"/>
 				<fmt:formatNumber var = "rating" value="${trainer.rating }" type="number" pattern="#"/>
@@ -286,7 +286,7 @@ var areaSelectMaker = function(target){
 				<i class = "bi bi-star" style = "color: #FAC710;"></i>
 				</c:forEach>
 				<c:if test = "${ trainer.hasReview eq 'Y' }">
-				(${rating1})
+				(${rating1})<br>
 				</c:if>
 				<c:if test = "${ trainer.hasReview eq 'N' }">
 				<br>(작성된 리뷰 없습니다)
