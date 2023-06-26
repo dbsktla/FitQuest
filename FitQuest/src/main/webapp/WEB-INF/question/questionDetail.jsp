@@ -27,7 +27,7 @@
 	}
 </script>
 
-<body style="background-color: #FEF9E7; text-align: center;">
+<body style="background-color: #FEF9E7;">
 	<div class="col-lg-12">
 		<div class="pagetitle" style="text-align: left;">
 			<h1>
