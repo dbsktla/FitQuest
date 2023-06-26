@@ -282,7 +282,7 @@
 									<select name="tid" id="tid" onchange="listup()" class="form-select" aria-label="Default select example" style="margin-bottom: 20">
 										<option value="all">전체보기</option>
 										<c:forEach var="tlist" items="${tlist}">
-											<option value="${tlist.id}">${tlist.name}(${tlist.activity})</option>
+											<option value="${tlist.tid}">${tlist.tname}(${tlist.tactivity})</option>
 										</c:forEach>
 									</select>
 									

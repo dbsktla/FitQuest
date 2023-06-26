@@ -77,35 +77,7 @@ public class MyHealthListController {
 			// 운동 날짜 불러옴
 			List<HealthDateBean> hdlist = healthDateDao.getMyHealthDateList(map);
 			
-			// 사용권 존재하면 트레이너 목록 불러옴
-			// 유저가 가지고 있는 사용권을 통해 트레이너 조회
-			List<UsageBean> ulist = usageDao.getTListByMidA(mid);
-			List<TrainerBean> tlist = new ArrayList<TrainerBean>();
-			
-			if (ulist != null) { // 사용권 잇으면 데이터 넣기
-				for (UsageBean ub : ulist) {
-
-					TrainerBean trainerBean = trainerDao.getTrainerMember(ub.getTid());
-					String odate = healthDateDao.getComp(ub.getOnum());
-
-					odate = odate.substring(0, 10);
-					try {
-						Date d1 = new SimpleDateFormat("yyyy-MM-dd").parse(odate);
-						Date d2 = new Date();
-
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						sdf.format(d2);
-						long diffSec = (d2.getTime() - d1.getTime()) / 1000;
-						long diffDays = diffSec / (24 * 60 * 60);
-
-						odate = String.valueOf(diffDays + 1);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					trainerBean.setIntro(odate); // ub.getOnum();
-					tlist.add(trainerBean);
-				}
-			}
+			List<HealthDateBean> tlist = healthDateDao.getTrainerList(mid);
 		  
 			mav.addObject("tlist", tlist);
 			mav.addObject("hdlist", hdlist);

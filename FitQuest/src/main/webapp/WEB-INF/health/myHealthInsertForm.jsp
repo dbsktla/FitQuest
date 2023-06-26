@@ -117,7 +117,7 @@
 							<select id="tid" name="tid" class="form-select">
 								<option value="notrainer">선택안함</option>
 								<c:forEach var="tlist" items="${tlist}">
-									<option value="${tlist.id}">${tlist.name}</option>
+									<option value="${tlist.tid}">${tlist.tname}(${tlist.tactivity})</option>
 								</c:forEach>
 							</select>
 						</div>
