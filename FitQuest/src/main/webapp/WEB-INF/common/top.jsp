@@ -78,13 +78,12 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="main.go" class="logo d-flex align-items-center">
-        <img src="" alt="">
-        <span>FlexStart</span>
+        <img src="<%= request.getContextPath() %>/resources/Image/MainImage/FitQuest_Logo.png" width="150px" alt="FitQuest">
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto <c:if test="${topmenu eq 'main'}">active</c:if>" href="main.go">ABOUT US</a></li>
+          <li><a class="nav-link scrollto <c:if test="${topmenu eq 'aboutUs'}">active</c:if>" href="aboutUs.go">ABOUT US</a></li>
           
           <li class="dropdown" ><a href="healthBoardList.co" class="<c:if test="${topmenu eq 'healthBoard'}">active</c:if>"><span>COMMUNITY</span><i class="bi bi-chevron-down"></i></a>
             <ul>

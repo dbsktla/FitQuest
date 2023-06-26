@@ -35,10 +35,13 @@ public class MainController {
 		session.setAttribute("destination", "redirect:/main.go");
 		session.setAttribute("topmenu", "main");
 		
+		MemberBean memberBean = (MemberBean) session.getAttribute("loginInfo");
+		
 		List<ReviewBean> reviewList = reviewDao.getMainReviewList();
 		List<BoardBean> healthBoardList = boardDao.getMainHealthBoardList();
 		List<MemberBean> trainerList = memberDao.getMainTrainerList();
 		
+		model.addAttribute("memberBean", memberBean);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("healthBoardList", healthBoardList);
 		model.addAttribute("trainerList", trainerList);
