@@ -34,8 +34,9 @@
 		</if>
 	</select>
 	<select id = "GetReviewList" resultType = "review.model.ReviewBean">
-		select *
-		from review
+		select renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report, name
+		from review inner join member
+			on id = mid 
 		where tid = #{tid}
 		<if test = "whatColumn == 'tname'">
 			and mid in (select id from member where name like #{keyword})
@@ -60,7 +61,7 @@
 		where renum = #{renum}
 	</select>
 	<update id = "InsertReport">
-		update review set report = 'Y'
+		update review set report = '신고접수'
 		where renum = #{renum}
 	</update>
 	<select id = "ReviewCountCheck" resultType = "int">
@@ -106,7 +107,9 @@
 		</if>
 	</select>
 	<select id = "GetMyReviewList" resultType = "review.model.ReviewBean">
-		select * from review
+		select renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report, name, nickname
+			from review inner join member
+		on id = tid
 			where mid = #{mid}
 		<if test = "whatColumn == 'tname'">
 			and tid in 
@@ -247,5 +250,9 @@
 		on tid = id where tid=#{tid} order by rating desc) rm inner join trainer
 		on tid = id
 		where rownum = 1
+	</select>
+	<select id = "GetReportCount" resultType = "int">
+		select count(report) from review
+		where renum = #{renum}
 	</select>
 </mapper>

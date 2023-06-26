@@ -1,5 +1,6 @@
 
 --member
+--트레이너 회원
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('park','trainer','박영진','1234','영진스','1992-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
@@ -14,8 +15,6 @@ insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,mad
 		values('lee2','trainer','이보영','1234','보영','1984-12-11','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('moon3','trainer','문하나','1234','onemoon','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
-insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('admin','admin','관리자','1234','관리자','1991-09-09','01090909090','admin@fitquest.com','서울 중구 북창동 136','2층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('park2','trainer','박정원','1234','parkgarden','1983-07-17','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
@@ -42,8 +41,38 @@ insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,mad
 		values('moonj','trainer','문정호','1234','문','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('parkjay','trainer','박제원','1234','JayOne','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+		
+--일반 회원
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('mistermoon','generic','문종원','1234','문맨','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('starwars','generic','안재준','1234','준','1993-01-21','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('beepbeep','generic','강하림','1234','riv','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('hwangpro','generic','황조은','1234','frag','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kimseo','generic','김서준','1234','mrww','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('sky','generic','이하늘','1234','skyhigh','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('junha','generic','임하준','1234','junie','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moonlow','generic','문로운','1234','moonie','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('daon','generic','김다온','1234','downtown','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('yujun','generic','한유준','1234','foundry','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('jihyo','generic','김지효','1234','runningwoman','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('jihae','generic','이지혜','1234','craycray','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('hwanglow','generic','황로건','1234','tekken','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('hwangpro2','generic','황조은','1234','ryse','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
+
+
 --gym
 insert into gym values(gseq.nextval, '골드짐', '서울 마포구 서교동 125', '1층', '0212345678');
 insert into gym values(gseq.nextval, '고피티', '서울 중구 북창동 136', '1층', '0212345678');
@@ -51,6 +80,8 @@ insert into gym values(gseq.nextval, '필라테스틱', '부산 동구 한동', 
 insert into gym values(gseq.nextval, '요가하루', '서울 송파구 가락동 102-24', '1층', '0212345678');
 insert into gym values(gseq.nextval, '베터핏', '인천 남동구 간석동 73-9', '1층', '0212345678');
 insert into gym values(gseq.nextval, '박스짐', '서울 강남구 신사동 210', '3층', '0212345678');
+
+
 --trainer
 
 insert into trainer values('kim', 1, 'PT', '체지방 감소, 근육량 증가, 재활', 'hi~','개인 pt 30년', 'tr1.jpg');
@@ -92,23 +123,23 @@ insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 's
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'moonj', 'N');
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
 values(rvseq.nextval, 'hong', 'kim', 3, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'moon2', 3, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'kim2', 4, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'kim2', 2, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'kim3', 4, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview)  
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report)  
 values(rvseq.nextval, 'hong', 'lee', 4.2, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
  values(rvseq.nextval, 'hong', 'moon3', 3.4,  '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview)  
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report)  
 values(rvseq.nextval, 'hong', 'lee2', 3.0, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'lee2', 3.0, '추천합니다', '굳', sysdate, 'Y');
-insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview, report) 
 values(rvseq.nextval, 'hong', 'kim', 5, 'PT 수업 굿 예시 리뷰 타이틀', '리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.리뷰 내용 입니다.', sysdate, 'Y');
 insert into review values(rvseq.nextval, 'hong', 'park2', 3.8, '굿 예시 리뷰 타이틀', '굳', sysdate, 'Y', '신고접수');
 insert into review values(rvseq.nextval, 'jkim', 'kim', 3, '추천합니다', '리뷰 내용 입니다', sysdate, 'Y', '신고접수');
@@ -209,42 +240,130 @@ commit;
 
 
 --orders
+--1~10 번째 주문 'hong'
 insert into orders values(oseq.nextval, 'hong', '2022-12-02');
 insert into orders values(oseq.nextval, 'hong', '2023-01-02');
 insert into orders values(oseq.nextval, 'hong', '2023-02-02');
 insert into orders values(oseq.nextval, 'hong', '2023-03-02');
 insert into orders values(oseq.nextval, 'hong', '2023-04-02');
 insert into orders values(oseq.nextval, 'hong', '2023-05-02');
-insert into orders values(oseq.nextval, 'hong', sysdate - 7 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 6 );
 insert into orders values(oseq.nextval, 'hong', sysdate - 5 );
-insert into orders values(oseq.nextval, 'hong', sysdate - 4 );
---10번째 주문
+insert into orders values(oseq.nextval, 'hong', sysdate - 2 );
+insert into orders values(oseq.nextval, 'hong', sysdate - 1 );
+--10번째 주문 'jkim'
+insert into orders values(oseq.nextval, 'jkim', '2023-01-02');
 insert into orders values(oseq.nextval, 'jkim', '2023-04-02');
 insert into orders values(oseq.nextval, 'jkim', '2023-05-03');
-insert into orders values(oseq.nextval, 'jkim', sysdate - 7 );
-insert into orders values(oseq.nextval, 'jkim', sysdate - 6 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 5 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 4 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 3 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 2 );
 insert into orders values(oseq.nextval, 'jkim', sysdate - 1 );
 insert into orders values(oseq.nextval, 'jkim', sysdate);
---20번째 주문
+--20번째 주문 'mistermoon'
 insert into orders values(oseq.nextval, 'mistermoon', '2022-12-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-01-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-02-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-03-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-04-02');
 insert into orders values(oseq.nextval, 'mistermoon', '2023-05-02');
-insert into orders values(oseq.nextval, 'mistermoon', sysdate - 7 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 6 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 5 );
 insert into orders values(oseq.nextval, 'mistermoon', sysdate - 4 );
+--30번째 주문 'starwars'
+insert into orders values(oseq.nextval, 'starwars', '2022-12-02');
+insert into orders values(oseq.nextval, 'starwars', '2023-02-02');
+insert into orders values(oseq.nextval, 'starwars', '2023-03-02');
+insert into orders values(oseq.nextval, 'starwars', sysdate - 6 );
+insert into orders values(oseq.nextval, 'starwars', sysdate - 5 );
+insert into orders values(oseq.nextval, 'starwars', sysdate - 4 );
+insert into orders values(oseq.nextval, 'starwars', sysdate - 3 );
+insert into orders values(oseq.nextval, 'starwars', sysdate - 2 );
+insert into orders values(oseq.nextval, 'starwars', sysdate - 1 );
+insert into orders values(oseq.nextval, 'starwars', sysdate);
+--40번째 주문 'beepbeep'
+insert into orders values(oseq.nextval, 'beepbeep', '2023-02-02');
+insert into orders values(oseq.nextval, 'beepbeep', '2023-03-02');
+insert into orders values(oseq.nextval, 'beepbeep', '2023-05-02');
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 6 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 5 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 4 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 3 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 2 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate - 1 );
+insert into orders values(oseq.nextval, 'beepbeep', sysdate);
+--50번째 주문 'hwangpro'
+insert into orders values(oseq.nextval, 'hwangpro', '2023-01-02');
+insert into orders values(oseq.nextval, 'hwangpro', '2023-04-02');
+insert into orders values(oseq.nextval, 'hwangpro', '2023-05-02');
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 6 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 5 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 4 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 3 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 2 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate - 1 );
+insert into orders values(oseq.nextval, 'hwangpro', sysdate);
+--60번째 주문 'kimseo'
+insert into orders values(oseq.nextval, 'kimseo', '2022-12-02');
+insert into orders values(oseq.nextval, 'kimseo', '2023-01-02');
+insert into orders values(oseq.nextval, 'kimseo', '2023-02-02');
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 6 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 5 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 4 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 3 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 2 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate - 1 );
+insert into orders values(oseq.nextval, 'kimseo', sysdate);
+--70번째 주문 'sky'
+insert into orders values(oseq.nextval, 'sky', '2022-12-02');
+insert into orders values(oseq.nextval, 'sky', '2023-04-02');
+insert into orders values(oseq.nextval, 'sky', '2023-05-02');
+insert into orders values(oseq.nextval, 'sky', sysdate - 6 );
+insert into orders values(oseq.nextval, 'sky', sysdate - 5 );
+insert into orders values(oseq.nextval, 'sky', sysdate - 4 );
+insert into orders values(oseq.nextval, 'sky', sysdate - 3 );
+insert into orders values(oseq.nextval, 'sky', sysdate - 2 );
+insert into orders values(oseq.nextval, 'sky', sysdate - 1 );
+insert into orders values(oseq.nextval, 'sky', sysdate);
+--80번째 주문 'junha'
+insert into orders values(oseq.nextval, 'junha', '2023-01-02');
+insert into orders values(oseq.nextval, 'junha', '2023-02-02');
+insert into orders values(oseq.nextval, 'junha', '2023-03-02');
+insert into orders values(oseq.nextval, 'junha', sysdate - 6 );
+insert into orders values(oseq.nextval, 'junha', sysdate - 5 );
+insert into orders values(oseq.nextval, 'junha', sysdate - 4 );
+insert into orders values(oseq.nextval, 'junha', sysdate - 3 );
+insert into orders values(oseq.nextval, 'junha', sysdate - 2 );
+insert into orders values(oseq.nextval, 'junha', sysdate - 1 );
+insert into orders values(oseq.nextval, 'junha', sysdate);
+--90번째 주문 'moonlow'
+insert into orders values(oseq.nextval, 'moonlow', '2023-04-02');
+insert into orders values(oseq.nextval, 'moonlow', '2023-05-02');
+insert into orders values(oseq.nextval, 'moonlow', '2023-06-02');
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 6 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 5 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 4 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 3 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 2 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 1 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate);
+--100번째 주문 'daon'
+insert into orders values(oseq.nextval, 'moonlow', '2023-04-02');
+insert into orders values(oseq.nextval, 'moonlow', '2023-05-02');
+insert into orders values(oseq.nextval, 'moonlow', '2023-06-02');
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 6 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 5 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 4 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 3 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 2 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate - 1 );
+insert into orders values(oseq.nextval, 'moonlow', sysdate);
 commit;
 
 --orderdetail
-insert into orderdetail values(odseq.nextval, 2, 1);
+--1 ~ 10 주문내역 'hong'
+insert into orderdetail values(odseq.nextval, 60, 1);
 insert into orderdetail values(odseq.nextval, 4, 1);
 insert into orderdetail values(odseq.nextval, 7, 2);
 insert into orderdetail values(odseq.nextval, 11, 2);
@@ -263,9 +382,9 @@ insert into orderdetail values(odseq.nextval, 46, 8);
 insert into orderdetail values(odseq.nextval, 49, 8);
 insert into orderdetail values(odseq.nextval, 53, 9);
 insert into orderdetail values(odseq.nextval, 56, 10);
-insert into orderdetail values(odseq.nextval, 60, 10);
-
-insert into orderdetail values(odseq.nextval, 2, 11);
+insert into orderdetail values(odseq.nextval, 2, 10);
+--11 ~ 20 주문내역 'jkim'
+insert into orderdetail values(odseq.nextval, 60, 11);
 insert into orderdetail values(odseq.nextval, 4, 11);
 insert into orderdetail values(odseq.nextval, 7, 12);
 insert into orderdetail values(odseq.nextval, 11, 12);
@@ -284,8 +403,8 @@ insert into orderdetail values(odseq.nextval, 46, 18);
 insert into orderdetail values(odseq.nextval, 49, 18);
 insert into orderdetail values(odseq.nextval, 53, 19);
 insert into orderdetail values(odseq.nextval, 56, 20);
-insert into orderdetail values(odseq.nextval, 60, 20);
---30번째 
+insert into orderdetail values(odseq.nextval, 2, 20);
+--21 ~ 30 주문내역 'mistermoon'
 insert into orderdetail values(odseq.nextval, 3, 21);
 insert into orderdetail values(odseq.nextval, 6, 21);
 insert into orderdetail values(odseq.nextval, 9, 22);
@@ -306,6 +425,153 @@ insert into orderdetail values(odseq.nextval, 49, 28);
 insert into orderdetail values(odseq.nextval, 53, 29);
 insert into orderdetail values(odseq.nextval, 56, 30);
 insert into orderdetail values(odseq.nextval, 60, 30);
+--31 ~ 40 주문내역 'starwars'
+insert into orderdetail values(odseq.nextval, 3, 37);
+insert into orderdetail values(odseq.nextval, 6, 31);
+insert into orderdetail values(odseq.nextval, 9, 32);
+insert into orderdetail values(odseq.nextval, 12, 32);
+insert into orderdetail values(odseq.nextval, 15, 33);
+insert into orderdetail values(odseq.nextval, 18, 33);
+insert into orderdetail values(odseq.nextval, 21, 34);
+insert into orderdetail values(odseq.nextval, 24, 35);
+insert into orderdetail values(odseq.nextval, 27, 35);
+insert into orderdetail values(odseq.nextval, 30, 35);
+insert into orderdetail values(odseq.nextval, 32, 36);
+insert into orderdetail values(odseq.nextval, 34, 36);
+insert into orderdetail values(odseq.nextval, 37, 37);
+insert into orderdetail values(odseq.nextval, 40, 37);
+insert into orderdetail values(odseq.nextval, 43, 37);
+insert into orderdetail values(odseq.nextval, 46, 38);
+insert into orderdetail values(odseq.nextval, 49, 38);
+insert into orderdetail values(odseq.nextval, 53, 39);
+insert into orderdetail values(odseq.nextval, 56, 40);
+insert into orderdetail values(odseq.nextval, 60, 40);
+--41 ~ 50 주문내역 'beepbeep'
+insert into orderdetail values(odseq.nextval, 3, 43);
+insert into orderdetail values(odseq.nextval, 6, 41);
+insert into orderdetail values(odseq.nextval, 9, 42);
+insert into orderdetail values(odseq.nextval, 12, 42);
+insert into orderdetail values(odseq.nextval, 15, 43);
+insert into orderdetail values(odseq.nextval, 18, 43);
+insert into orderdetail values(odseq.nextval, 21, 44);
+insert into orderdetail values(odseq.nextval, 24, 45);
+insert into orderdetail values(odseq.nextval, 27, 45);
+insert into orderdetail values(odseq.nextval, 30, 45);
+insert into orderdetail values(odseq.nextval, 32, 46);
+insert into orderdetail values(odseq.nextval, 34, 46);
+insert into orderdetail values(odseq.nextval, 37, 47);
+insert into orderdetail values(odseq.nextval, 40, 47);
+insert into orderdetail values(odseq.nextval, 43, 47);
+insert into orderdetail values(odseq.nextval, 46, 48);
+insert into orderdetail values(odseq.nextval, 49, 48);
+insert into orderdetail values(odseq.nextval, 53, 49);
+insert into orderdetail values(odseq.nextval, 56, 50);
+insert into orderdetail values(odseq.nextval, 60, 50);
+--51 ~ 60 주문내역 'hwangpro'
+insert into orderdetail values(odseq.nextval, 3, 60);
+insert into orderdetail values(odseq.nextval, 6, 60);
+insert into orderdetail values(odseq.nextval, 9, 59);
+insert into orderdetail values(odseq.nextval, 12, 59);
+insert into orderdetail values(odseq.nextval, 15, 58);
+insert into orderdetail values(odseq.nextval, 18, 58);
+insert into orderdetail values(odseq.nextval, 21, 57);
+insert into orderdetail values(odseq.nextval, 24, 57);
+insert into orderdetail values(odseq.nextval, 27, 56);
+insert into orderdetail values(odseq.nextval, 30, 56);
+insert into orderdetail values(odseq.nextval, 32, 55);
+insert into orderdetail values(odseq.nextval, 34, 55);
+insert into orderdetail values(odseq.nextval, 37, 54);
+insert into orderdetail values(odseq.nextval, 40, 54);
+insert into orderdetail values(odseq.nextval, 43, 53);
+insert into orderdetail values(odseq.nextval, 46, 53);
+insert into orderdetail values(odseq.nextval, 49, 52);
+insert into orderdetail values(odseq.nextval, 53, 52);
+insert into orderdetail values(odseq.nextval, 56, 51);
+insert into orderdetail values(odseq.nextval, 60, 51);
+--61 ~ 70 주문내역 'kimseo'
+insert into orderdetail values(odseq.nextval, 3, 67);
+insert into orderdetail values(odseq.nextval, 6, 61);
+insert into orderdetail values(odseq.nextval, 9, 62);
+insert into orderdetail values(odseq.nextval, 12, 62);
+insert into orderdetail values(odseq.nextval, 15, 63);
+insert into orderdetail values(odseq.nextval, 18, 63);
+insert into orderdetail values(odseq.nextval, 21, 63);
+insert into orderdetail values(odseq.nextval, 24, 64);
+insert into orderdetail values(odseq.nextval, 27, 64);
+insert into orderdetail values(odseq.nextval, 30, 65);
+insert into orderdetail values(odseq.nextval, 32, 65);
+insert into orderdetail values(odseq.nextval, 34, 66);
+insert into orderdetail values(odseq.nextval, 37, 66);
+insert into orderdetail values(odseq.nextval, 40, 67);
+insert into orderdetail values(odseq.nextval, 43, 67);
+insert into orderdetail values(odseq.nextval, 46, 68);
+insert into orderdetail values(odseq.nextval, 49, 68);
+insert into orderdetail values(odseq.nextval, 53, 69);
+insert into orderdetail values(odseq.nextval, 56, 70);
+insert into orderdetail values(odseq.nextval, 60, 70);
+--71 ~ 80 주문내역 'sky'
+insert into orderdetail values(odseq.nextval, 3, 76);
+insert into orderdetail values(odseq.nextval, 6, 71);
+insert into orderdetail values(odseq.nextval, 9, 72);
+insert into orderdetail values(odseq.nextval, 12, 72);
+insert into orderdetail values(odseq.nextval, 15, 73);
+insert into orderdetail values(odseq.nextval, 18, 73);
+insert into orderdetail values(odseq.nextval, 21, 73);
+insert into orderdetail values(odseq.nextval, 24, 74);
+insert into orderdetail values(odseq.nextval, 27, 74);
+insert into orderdetail values(odseq.nextval, 30, 75);
+insert into orderdetail values(odseq.nextval, 32, 75);
+insert into orderdetail values(odseq.nextval, 34, 76);
+insert into orderdetail values(odseq.nextval, 37, 76);
+insert into orderdetail values(odseq.nextval, 40, 77);
+insert into orderdetail values(odseq.nextval, 43, 77);
+insert into orderdetail values(odseq.nextval, 46, 78);
+insert into orderdetail values(odseq.nextval, 49, 78);
+insert into orderdetail values(odseq.nextval, 53, 79);
+insert into orderdetail values(odseq.nextval, 56, 80);
+insert into orderdetail values(odseq.nextval, 60, 80);
+--81 ~ 90 주문내역 'junha'
+insert into orderdetail values(odseq.nextval, 3, 84);
+insert into orderdetail values(odseq.nextval, 6, 81);
+insert into orderdetail values(odseq.nextval, 9, 82);
+insert into orderdetail values(odseq.nextval, 12, 82);
+insert into orderdetail values(odseq.nextval, 15, 83);
+insert into orderdetail values(odseq.nextval, 18, 83);
+insert into orderdetail values(odseq.nextval, 21, 83);
+insert into orderdetail values(odseq.nextval, 24, 84);
+insert into orderdetail values(odseq.nextval, 27, 84);
+insert into orderdetail values(odseq.nextval, 30, 85);
+insert into orderdetail values(odseq.nextval, 32, 85);
+insert into orderdetail values(odseq.nextval, 34, 86);
+insert into orderdetail values(odseq.nextval, 37, 86);
+insert into orderdetail values(odseq.nextval, 40, 87);
+insert into orderdetail values(odseq.nextval, 43, 87);
+insert into orderdetail values(odseq.nextval, 46, 88);
+insert into orderdetail values(odseq.nextval, 49, 88);
+insert into orderdetail values(odseq.nextval, 53, 89);
+insert into orderdetail values(odseq.nextval, 56, 90);
+insert into orderdetail values(odseq.nextval, 60, 90);
+--91 ~ 100 주문내역 'moonlow'
+insert into orderdetail values(odseq.nextval, 3, 91);
+insert into orderdetail values(odseq.nextval, 6, 91);
+insert into orderdetail values(odseq.nextval, 9, 92);
+insert into orderdetail values(odseq.nextval, 12, 92);
+insert into orderdetail values(odseq.nextval, 15, 93);
+insert into orderdetail values(odseq.nextval, 18, 93);
+insert into orderdetail values(odseq.nextval, 21, 93);
+insert into orderdetail values(odseq.nextval, 24, 94);
+insert into orderdetail values(odseq.nextval, 27, 94);
+insert into orderdetail values(odseq.nextval, 30, 95);
+insert into orderdetail values(odseq.nextval, 32, 95);
+insert into orderdetail values(odseq.nextval, 34, 96);
+insert into orderdetail values(odseq.nextval, 37, 96);
+insert into orderdetail values(odseq.nextval, 40, 97);
+insert into orderdetail values(odseq.nextval, 43, 97);
+insert into orderdetail values(odseq.nextval, 46, 98);
+insert into orderdetail values(odseq.nextval, 49, 98);
+insert into orderdetail values(odseq.nextval, 53, 99);
+insert into orderdetail values(odseq.nextval, 56, 100);
+insert into orderdetail values(odseq.nextval, 60, 100);
 commit;
 
 --reservation
@@ -313,11 +579,5 @@ insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍�
 commit;
 
 --usage
-
-insert into usage values(useq.nextval, 1, 2, 1, 'kim', 'hong', 10, 'available');
-insert into usage values(useq.nextval, 5, 12, 3, 'kim', 'hong', 15, 'available');
-insert into usage values(useq.nextval, 3, 16, 2, 'kim', 'parkjay', 0, 'unavailable');
-insert into usage values(useq.nextval, 2, 17, 3, 'kim', 'jkim', 28, 'available');
-insert into usage values(useq.nextval, 8, 12, 3, 'lee', 'hong', 28, 'available');
 
 commit;

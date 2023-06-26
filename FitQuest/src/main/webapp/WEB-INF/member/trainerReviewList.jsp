@@ -146,7 +146,7 @@ section{
                 		<fmt:parseDate value = "${review.rdate }" pattern = "yyyy-MM-dd" var = "date"/>
                     	<fmt:formatDate value = "${date }" var = "date" pattern = "yyyy-MM-dd"/>
 	                	<td>${date}</td>
-	                	<td>${review.mid }</td>
+	                	<td>${review.name } (${review.mid })</td>
 	                	<td>${review.rtitle }</td>
 	                	<td>${review.rating }</td>
 	                	<td><a href = "reviewDetail.mb?renum=${review.renum }&mid=${review.mid}"><i class="bi bi-blockquote-left"></i>내용보기</a></td>

@@ -133,4 +133,8 @@ public class ReviewDao {
 		}
 		return reviewMainList;
 	}
+	public int getReportCount(int renum) {
+		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetReportCount", renum);
+		return cnt;
+	}
 }
