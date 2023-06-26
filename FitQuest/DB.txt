@@ -309,6 +309,33 @@ CREATE TABLE usage (
 select * from usage;
 commit;
 
+insert into usage values(useq.nextval,1,1,1,'kim','hong',10,'available');
+insert into usage values(useq.nextval,6,2,4,'kim','hong',10,'available');
+insert into usage values(useq.nextval,1,3,1,'kim','jkim',10,'available');
+insert into usage values(useq.nextval,6,4,4,'kim','jkim',10,'available');
+
+
+-- 트레이너 스케줄
+drop table tschedule cascade constraints;
+CREATE TABLE tschedule (
+   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
+   tsday varchar2(30)   NOT NULL, --예약 가능 요일
+   tstime varchar2(500)   NOT NULL,--예약 가능 시간
+   tsdate varchar2(500) null, --예약 불가능 날짜
+   tstype varchar2(15) NOT NULL check(tstype in('개인', '그룹')), --개인, 그룹 수업 구분
+   tspeople number   NOT NULL --수업 참여 회원 개수
+);
+select * from tschedule;
+commit;
+
+insert into tschedule values('kim','mon','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','wed','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','sat','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','sun','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','mon','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+insert into tschedule values('kim','wed','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+insert into tschedule values('kim','sat','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+
 
 -- pt 예약
 drop sequence reseq;
@@ -342,19 +369,16 @@ commit;
 		-- cancel = 예약 취소
 		-- complete = 운동 완료(3회 이상 완료시 리뷰 작성 가능하게 하기 위함)
 
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-10','10:00~11:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-15','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-1','13:00~14:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-12','14:00~15:00','false');
 
--- 트레이너 스케줄
-drop table tschedule cascade constraints;
-CREATE TABLE tschedule (
-   tid varchar2(100) references TRAINER(ID) on delete cascade, --트레이너 아이디
-   tsday varchar2(30)   NOT NULL, --예약 가능 요일
-   tstime varchar2(500)   NOT NULL,--예약 가능 시간
-   tsdate varchar2(500) null, --예약 불가능 날짜
-   tstype varchar2(15) NOT NULL check(tstype in('개인', '그룹')), --개인, 그룹 수업 구분
-   tspeople number   NOT NULL --수업 참여 회원 개수
-);
-select * from tschedule;
-commit;
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-10','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-15','12:00~13:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-1','14:00~15:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-12','15:00~16:00','false');
+
 
 -- 예약 완료된 스케줄
 drop sequence cpseq;

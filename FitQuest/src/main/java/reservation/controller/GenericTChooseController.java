@@ -2,8 +2,10 @@ package reservation.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,17 +56,20 @@ public class GenericTChooseController {
 
 		// 트레이너 목록 가져오기
 		List<TrainerListSBean> tList = new ArrayList<TrainerListSBean>();
-		String tid = "";
-		for (int i = 0; i < tidList.size(); i++) {
-			tid = tidList.get(i).getTid();
-			List<TrainerListSBean> tempList = compositeDao.getTrainerListByTid(mid, tid);
-		    if (!tempList.isEmpty()) {
-		        TrainerListSBean trainer = tempList.get(0);
-		        tList.add(trainer);
-		        System.out.println(trainer.getName());
-		    }
+		
+		Set<String> uniqueTids = new HashSet<String>();
+		for (UsageBean tidBean : tidList) {
+		    uniqueTids.add(tidBean.getTid());
 		}
 
+		for (String tid : uniqueTids) {
+		    List<TrainerListSBean> tempList = compositeDao.getTrainerListByTid(mid, tid);
+		    for (TrainerListSBean trainer : tempList) {
+		        tList.add(trainer);
+		        System.out.println(trainer.getName());
+		        System.out.println(trainer.getPeople());
+		    }
+		}
 		
 		model.addAttribute("tList", tList);
 
