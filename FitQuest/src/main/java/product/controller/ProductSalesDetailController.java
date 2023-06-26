@@ -1,17 +1,17 @@
 package product.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import composite.model.CompositeDao;
 import composite.model.SalesBean;
 import member.model.MemberBean;
@@ -38,8 +38,31 @@ public class ProductSalesDetailController {
 	TrainerDao trainerDao;
 	@RequestMapping(value = command)
 	public String doAction(HttpSession session,
-						   Model model) {
+						   Model model,
+						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
+		
+		//사이드 바 코드 추가
+		session.setAttribute("menubar", "mySalesMain");
+		response.setContentType("text/html; charset=utf-8");
+		if(memberBean == null) {
+			session.setAttribute("destination", "redirect:/trainerDetail.mb");
+			try {
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/login.mb";
+		} else if(!memberBean.getMtype().equals("trainer")){
+			try {
+				response.getWriter().print("<script>alert('비정상적인 접근입니다.');</script>");
+				response.getWriter().flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "forward:/main.go";
+		}
 		TrainerBean trainerBean = trainerDao.getTrainer(memberBean.getId());
 		List<SalesBean> weeklySalesList = compositeDao.getWeeklySales(memberBean.getId());
 		List<SalesBean> monthlySalesList = compositeDao.getMonthlySales(memberBean.getId());
@@ -48,7 +71,7 @@ public class ProductSalesDetailController {
 		Calendar cal = Calendar.getInstance();
 		Calendar cal2 = Calendar.getInstance();
 		Date date = cal.getTime();
-		Date date2 = cal.getTime();
+		Date date2 = cal2.getTime();
 		String[] days = new String[7];
 		String[] months = new String[6];
 		int[] sales = new int[7];
@@ -103,9 +126,8 @@ public class ProductSalesDetailController {
 			totalAmount += sb.getPrice();
 			productSales[i] = sb.getPrice();
 			productArr[i] = pb.getPtype() + " " + trainerBean.getActivity() + "수업" + "(" + pb.getMonths() + "개월-레슨" + pb.getPcount() + "회)";
-			System.out.println(productArr[i]);
 		}
-		double avgScore = compositeDao.getAverageSaleByActivity(trainerBean.getActivity());
+		
 		model.addAttribute("days", days);
 		model.addAttribute("months", months);
 		model.addAttribute("weeklySales", sales);
@@ -113,7 +135,6 @@ public class ProductSalesDetailController {
 		model.addAttribute("totalAmount", totalAmount);
 		model.addAttribute("productSales", productSales);
 		model.addAttribute("products", productArr);
-		model.addAttribute("avgScore", avgScore);
 		model.addAttribute("activity", trainerBean.getActivity());
 		return getPage;
 	}
