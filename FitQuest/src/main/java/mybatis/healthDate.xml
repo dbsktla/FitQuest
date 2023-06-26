@@ -105,20 +105,27 @@
 			   ,o.name AS tname
 			   ,TO_DATE(SYSDATE, 'yyyy-MM-dd') - TO_DATE(o.odate, 'yyyy-MM-dd') AS hdate
 			   ,t.activity AS tactivity
+			   ,ptype
 		FROM 	(
-			      SELECT	*
-			      FROM 		(
-			            	 SELECT	*
-			            	 FROM	(
-			                  		 SELECT	*
-			                  		 FROM 	USAGE
-			                  		 ) u
-			           		 INNER JOIN ORDERS o
-			            	 ON u.onum = o.onum
-			            ) o
-			      INNER JOIN MEMBER m
-			      ON o.tid = m.id
-			    ) o
+				 SELECT	o.*
+				 	   ,p.ptype
+				 FROM	(
+					      SELECT	*
+					      FROM 		(
+					            	 SELECT	*
+					            	 FROM	(
+					                  		 SELECT	*
+					                  		 FROM 	USAGE
+					                  		 ) u
+					           		 INNER JOIN ORDERS o
+					            	 ON u.onum = o.onum
+					            ) o
+					      INNER JOIN MEMBER m
+					      ON o.tid = m.id
+					      ) o
+				  INNER JOIN PRODUCT p
+				  ON p.pnum = o.pnum
+			     ) o
 		INNER JOIN TRAINER t
 		ON o.tid	= t.id
 		AND o.mid 	= #{id}
