@@ -43,12 +43,29 @@
 		
 		var str = "필수입력사항";
 		
+		var sh = Number($('#starthour').val());
+		var sm = Number($('#startminute').val());
+		var eh = Number($('#endhour').val());
+		var em = Number($('#endminute').val());
+		
+		//alert(sh + "," + sm + "," + eh + "," + em);
+		
 		if($('#hdate').val() == ""){
 			$('#derr').html(str);
 			flag = true;
 		}
 		if($('#hname').val() == ""){
 			$('.herr').html(str);
+			flag = true;
+		}
+		
+		if(sh > eh || ((sh == eh || sh < eh) && sm > em)){
+			$('#terr').html('시작시간이 종료시간보다 큽니다. 다시 입력하세요');
+			flag = true;
+		}
+		
+		if(sh == eh && sm == em){
+			$('#terr').html('운동 시간은 1분 이상 입력해주세요');
 			flag = true;
 		}
 		
@@ -147,6 +164,7 @@
 							</select>
 							<font style="margin-left: 5;">분</font>
 						</div>
+						<div class="errmsg" id="terr"></div>
 						
 						<div class="col-md-6">
 							<label for="hcount" class="form-label">횟수</label>

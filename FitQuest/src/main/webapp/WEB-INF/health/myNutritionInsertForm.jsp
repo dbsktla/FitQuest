@@ -51,7 +51,7 @@
 								<label for="nudate" class="col-form-label col-md-3 col-lg-2 col-form-label" style="color: gray;"><b>섭취일</b></label>
 								<div class="col-md-8 col-lg-4">
 									<fmt:parseDate value="${param.selectDate}" var="day" pattern="yyyy-MM-dd" scope="page"/>
-									<input name="nudate" type="date" class="form-control" id="nudate" value="<fmt:formatDate value='${day}' pattern='yyyy-MM-dd'/>" >
+									<input name="nudate" type="date" class="form-control" id="nudate" onchange="checkDate(this)" value="<fmt:formatDate value='${day}' pattern='yyyy-MM-dd'/>" >
 									<span class="errmsg derrmsg"></span>
 								</div><!-- 섭취일 -->
 							
@@ -72,6 +72,7 @@
 									<label class="btn" for="option4">간식</label> 
 									
 									</div>
+									<div><font size="2" color="gray">* 이미 작성된 날짜-분류는 추가 불가능.<br> 수정을 이용해주세요.</font></div>
 									<span class="errmsg merrmsg"></span>
 								</div><!-- 분류 -->
 							</div>
@@ -161,6 +162,37 @@
 			return false;
 		}
 		
+	}
+	
+	function checkDate(input) {
+		//alert(input.value);
+		
+		// 아침, 점심, 저녁, 간식
+		var optionArr = new Array($('#option1'), $('#option2'), $('#option3'), $('#option4'));
+		for(var i=0; i<optionArr.length; i++){
+			optionArr[i].attr("checked", false);
+			optionArr[i].attr("disabled", false);
+		}
+		
+		$.ajax({
+			url : 'insertCheckDate.ht',
+			type : 'POST',
+			data : {'date' : input.value},
+			dataType : 'json',
+			success : function (data) {
+				
+				if(data[0] != 'Nodata'){
+					for(var i=0; i<optionArr.length; i++){
+						for(var j=0; j<data.length; j++){
+							if(optionArr[i].val() == data[j]){
+								optionArr[i].attr("disabled", true);
+							}
+							
+						}
+					}
+				}
+			}
+		});
 	}
 </script>
 
