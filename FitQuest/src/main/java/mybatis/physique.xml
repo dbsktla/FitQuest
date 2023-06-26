@@ -63,6 +63,7 @@
 		SELECT 	* 
 		FROM 	PHYSIQUE 
 		WHERE 	id = #{id}
+		ORDER BY phdate
 	</select>
 	
 	<select id="GetOnePhysiqueByMaxdate" resultType="physique.model.PhysiqueBean">
