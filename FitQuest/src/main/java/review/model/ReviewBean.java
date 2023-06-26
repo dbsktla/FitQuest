@@ -21,8 +21,14 @@ public class ReviewBean {
 	private String name;
 	private String activity;
 	private String timage;
+	private String nickname;
 	
-	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getActivity() {
 		return activity;
 	}

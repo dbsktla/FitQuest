@@ -310,11 +310,14 @@ $(document).ready(function(){
 					
                   <form:form commandName="memberBean" action="genericMemberUpdate.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                   	<input type="hidden" name="id" value="${memberBean.id }">
+                  	<input type="hidden" name="name" value="${memberBean.name }">
+                  	<input type="hidden" name="birth" value="${memberBean.birth}">
+                  	<input type="hidden" name="gender" value="${memberBean.gender }">
                     
                      <div class="col-12">
                       <label for="yourUsername" class="form-label">이름</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="name" class="form-control" id="yourUsername" value="${memberBean.name}" required>
+                        <input type="text" name="name" class="form-control" id="yourUsername" value="${memberBean.name}" disabled>
                         <div class="invalid-feedback">이름을 입력해 주세요.</div>
                       </div>
                     </div>
@@ -336,12 +339,12 @@ $(document).ready(function(){
                     
                     <div class="col-12">
                       <label for="yourBirth" class="form-label">생년월일</label>
-                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${date}">
+                      <input type="date" name="birth" class="form-control" id="yourBirth" value="${date}" disabled>
                     </div>
                      <div class="col-12">
                       <label for="gender" class="form-label">성별</label> <br>
-                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ memberBean.gender eq '남자' }">checked</c:if>> 남자</label> &nbsp;
-                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ memberBean.gender eq '여자' }">checked</c:if>> 여자</label><br>
+                     <label for="남자"><input type="radio" name="gender" id="남자" value="남자" <c:if test="${ memberBean.gender eq '남자' }">checked</c:if> disabled> 남자</label> &nbsp;
+                     <label for="여자"><input type="radio" name="gender" id="여자" value="여자" <c:if test="${ memberBean.gender eq '여자' }">checked</c:if> disabled> 여자</label><br>
                     <form:errors cssClass="err" path="gender" />
                     </div>
                    

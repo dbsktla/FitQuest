@@ -102,7 +102,7 @@
                 <thead>
                   <tr>
                     <th scope="col">리뷰 작성 날짜</th>
-                    <th scope="col">트레이너 아이디</th>
+                    <th scope="col">트레이너 이름 (별명)</th>
                     <th scope="col">리뷰 제목</th>
                     <th scope="col">리뷰 별점</th>
                     <th scope="col">리뷰 내용보기</th>
@@ -114,7 +114,7 @@
                 		<fmt:parseDate value = "${review.rdate }" pattern = "yyyy-MM-dd" var = "date"/>
                     	<fmt:formatDate value = "${date }" var = "date" pattern = "yyyy-MM-dd"/>
 	                	<td>${date}</td>
-	                	<td>${review.tid }</td>
+	                	<td>${review.name } (${review.nickname})</td>
 	                	<td>${review.rtitle }</td>
 	                	<td>${review.rating }</td>
 	                	<td><a href = "viewMyReviewDetail.mb?renum=${review.renum }&tid=${review.tid}"><i class="bi bi-blockquote-left"></i>내용보기</a></td>

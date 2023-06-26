@@ -153,11 +153,11 @@ section{
                		<div class="row" style = "margin-bottom:20px;">
 	                    <div class="col-md-6 form-group">
 	                    	<span>회원권 사용기간</span>
-	                      <input name="months" type="text" class="form-control" placeholder = "${productBean.months}개월">
+	                      <input name="months" type="text" class="form-control" placeholder = "${productBean.months}개월" value = "${productBean.months }">
 	                    </div>
 	                     <div class="col-md-6 form-group">
 	                    	<span>회원권 사용갯수</span>
-	                      <input name="pcount" type="text" class="form-control" placeholder = "레슨 ${productBean.pcount}회">
+	                      <input name="pcount" type="text" class="form-control" placeholder = "레슨 ${productBean.pcount}회" value = "${productBean.pcount }">
 	                    </div>
                     </div>	
                			<div class = "row" style = "margin-bottom:20px;">
@@ -179,14 +179,14 @@ section{
                     </div>
                   <div class="col-md-6 form-group">
                        	<span>수업참여 회원 갯수</span>
-                      <input name="people" type="text" class="form-control" placeholder = "${ productBean.people }" onkeyup="numCheck()">
+                      <input name="people" type="text" class="form-control" placeholder = "${ productBean.people }" onkeyup="numCheck()" value = "${productBean.people }">
                     </div>
                   </div>
                			
                		<div class = "row" style = "margin-bottom:20px;">
                   <div class="col-md-6 form-group">
                   <span>가격</span>
-                      <input name="price" type="text" class="form-control" placeholder = "${productBean.price}만원">
+                      <input name="price" type="text" class="form-control" placeholder = "${productBean.price}만원" value = "${productBean.price }">
                     </div>
                   </div>	
                   <div class = "" style = "margin-bottom: 20px;">

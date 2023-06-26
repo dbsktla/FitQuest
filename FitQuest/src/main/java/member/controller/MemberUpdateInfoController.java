@@ -25,6 +25,7 @@ public class MemberUpdateInfoController {
 						   Model model,
 						   HttpSession session) {
 		if(result.hasErrors()) {
+			System.out.println("수정 실패.");
 			return getPage;
 		} else {
 			int cnt = memberDao.updateTrainerMember(memberBean);
