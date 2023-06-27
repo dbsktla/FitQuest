@@ -31,6 +31,24 @@
 		margin: 5px 0px !important;
 	}
 </style>
+
+<script>
+	function tquestion(tid) {
+		// alert(tid);
+		var popWidth = 600;
+		var popHeight = 600;
+		
+		var popX = (window.screen.width / 2) - (popWidth / 2);
+		var popY = (window.screen.height / 2) - (popHeight / 2);
+		
+		window.name = "parentForm";
+		
+		windowObj = window.open("openTQuestion.qt?tid="+tid+", "childForm", "width="+popWidth+", height="+popHeight+", left="+popX+", top="+popY+", resizable");
+	}
+	
+</script>
+
+
 <body style="background-color: #FEF9E7;">
  <section class="breadcrumbs">
       <div class="container">
@@ -64,6 +82,7 @@
                   <c:if test = "${hasReview eq 'Y' }">
                   	<li class="d-flex align-items-center s-text"><i class="bi bi-chat-dots"></i><a href="#reviewSection" class="s-text">리뷰 : ${reviewCount}개</a></li>
                   </c:if>
+                  <li class="d-flex align-items-center s-text"><input type="button" onclick="tquestion('${trainerBean.id}')" value="트레이너 문의하기" class="btn btn-warning btn-sm"></li>
                 </ul>
               </div>
 
