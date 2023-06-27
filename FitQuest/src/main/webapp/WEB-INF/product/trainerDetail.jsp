@@ -43,7 +43,7 @@
 		
 		window.name = "parentForm";
 		
-		windowObj = window.open("openTQuestion.qt?tid="+tid+", "childForm", "width="+popWidth+", height="+popHeight+", left="+popX+", top="+popY+", resizable");
+		windowObj = window.open("openTQuestion.qt?tid="+tid , 'childForm', "width="+popWidth+" , height="+popHeight+" , left="+popX+" , top="+popY);
 	}
 	
 </script>
