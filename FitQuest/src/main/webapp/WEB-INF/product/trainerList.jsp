@@ -34,9 +34,6 @@
 	.btn-check-label, .form-check-label{
 		border-radius: 25px !important;
 	}
-	.member{
-		height: 500px !important;
-	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
@@ -157,9 +154,9 @@ var areaSelectMaker = function(target){
 </script>
 <!-- 운동 카테고리 선택.-->
 <body style="background-color : #FEF9E7;">
-          <div class="title-container">
-			<div class="title-text">트레이너 목록</div>
-  		  </div>
+	<div class="title-container">
+		<div class="title-text">트레이너 목록</div>
+	</div>
  <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important; padding: 20px 0px;"> 
       <div class="container" data-aos="fade-up">
         <div class="row" data-aos="fade-up" data-aos-delay="100">

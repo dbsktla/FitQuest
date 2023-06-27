@@ -23,6 +23,13 @@
 		background-color: white;
 		border-radius: 10px;
 	}
+	.header{
+		background-color: white !important;
+		padding-bottom: 50px;
+	}
+	h5{
+		margin: 5px 0px !important;
+	}
 </style>
 <body style="background-color: #FEF9E7;">
  <section class="breadcrumbs">
@@ -53,8 +60,10 @@
               <div class="entry-meta">
                 <ul>
                   <li class="d-flex align-items-center s-text"><i class="bi bi-person"></i>별명 : ${memberBean.nickname }</li>
-                  <li class="d-flex align-items-center s-text"><i class="bi bi-clock"></i>나이 : ${ age }세</li>
-                  <li class="d-flex align-items-center s-text"><i class="bi bi-chat-dots"></i><a href="#reviewSection" class="s-text">리뷰 : ${reviewCount}개</a></li>
+                  <li class="d-flex align-items-center s-text"><i class="bi bi-clock"></i>나이 : ${age}세</li>
+                  <c:if test = "${hasReview eq 'Y' }">
+                  	<li class="d-flex align-items-center s-text"><i class="bi bi-chat-dots"></i><a href="#reviewSection" class="s-text">리뷰 : ${reviewCount}개</a></li>
+                  </c:if>
                 </ul>
               </div>
 
@@ -126,9 +135,10 @@
             <!--  리뷰 섹션 -->
             <c:if test = "${hasReview eq 'Y' }">
             <div class="blog-comments" id = "reviewSection">
-              <h4 class="comments-count">리뷰 : ${reviewCount }<br><br>
+              <h2 class="entry-title">리뷰 : ${reviewCount}개<br><br>
               <fmt:formatNumber var = "rating1" value="${avgScore }" type="number" pattern="#.0"/>
 				<fmt:formatNumber var = "rating" value="${avgScore}" type="number" pattern="#"/>
+                <span style="font-size: 17px;">
                 평균 별점 : 
 				<c:set var = "starCount" value = "0"/>
 				<c:forEach begin = "1" end = "${rating }" step="1" var="i">
@@ -138,13 +148,14 @@
 				<c:forEach begin = "1" end = "${5 - starCount }" step = "1" var = "j">
 				<i class = "bi bi-star"></i>
 				</c:forEach>
-				${rating1 }
-				</h4>
+				${rating1}</span>
+				</h2>
 			  <c:forEach var = "review" items = "${rList }">
               <div id="comment-1" class="comment">
-                <div class="d-flex">
+                <div class="review-box">
                   <div class = "reviewComment">
-                  	<h5 style = "font-weight: bold; ">${review.mid }회원님 : "${review.rtitle }"</h5>
+                  	<h5 style = "font-weight: bold; font-size: 17px;">"${review.rtitle }"</h5>
+                  	<h5 style = "font-weight: bold; color: gray; ">${review.mid}</h5>
                   	<h5>
                   	<fmt:formatNumber var = "rating3" value="${review.rating }" type="number" pattern="#.0"/>
 					<fmt:formatNumber var = "rating2" value="${review.rating}" type="number" pattern="#"/>
@@ -161,7 +172,7 @@
                     <fmt:parseDate value = "${review.rdate }" pattern = "yyyy-MM-dd" var = "date"/>
                     <fmt:formatDate value = "${date }" var = "date" pattern = "yyyy-MM-dd"/>
                     <h6 style = "color: #FAC710">${date }</h6>
-                    <p>
+                    <p style="margin: 5px 0px;">
                     ${review.rcontent }
                     </p>
                   </div>
@@ -171,16 +182,21 @@
             </div><!-- End blog comments -->
 		  </c:if>
 		  <c:if test = "${hasReview eq 'N' }">
-		  	아직 작성된 리뷰가 없습니다.
+		  	<div class="review-box" style="margin: 20px 0px;font-weight:bold; font-size:17px; height:80px;display: flex; align-items: center; justify-content: space-between;">아직 작성된 리뷰가 없습니다.</div>
 		  </c:if>
 		  
-		  <div style = "font-weight:bold;font-size:14px;">
-		  <input type = "button" class ="btn btn-warning" value = "리뷰 작성하기" onclick="location.href='reviewWrite.pd?id=${trainerBean.id}'">
- 			${memberBean.name } 선생님에게 수업 3번 이상 받으시면 리뷰 작성 가능합니다!
+		  <div style="font-weight:bold; font-size:17px; height:80px; display: flex; align-items: center; justify-content: space-between;" class="review-box">
+			  <span style="margin-right: 50px;">
+			    ${memberBean.name} 선생님에게 수업 3번 이상 받으시면 리뷰 작성 가능합니다!
+			  </span>
+			  <input type="button" class="btn btn-warning" value="리뷰 작성하기" onclick="location.href='reviewWrite.pd?id=${trainerBean.id}'">
 		  </div>
+		  
           <!-- 비슷한 트레이너 보기 : -->
-          <div class="container" data-aos="fade-up" style = "margin-top: 60px;">
-		  <h4>다른 ${trainerBean.activity } 트레이너들도 보세요 :</h4>
+          <div class="container" data-aos="fade-up" style = "margin-top: 60px; padding: 0;">
+		  <h2 class="entry-title">다른 ${trainerBean.activity} 트레이너들 둘러보기</h2>
+		  <section id="team" class="team" style = "background-color: #FEF9E7 !important;">
+     	  <div class="container" data-aos="fade-up">
 		  <div class="row gy-4">
 		  <c:set var = "similarTrainerCount" value = "0"/>
 		  <c:forEach var = "trainer" items = "${tList }" varStatus="status">
@@ -191,11 +207,11 @@
             <div class="member">
                 <a href = "trainerDetail.pd?id=${trainer.id }&pageNumber=${pageInfo.pageNumber}&hasReview=${trainer.hasReview}">
              	 <div class="member-img">
-               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text"/>
+               	 <img src="<%= request.getContextPath() %>/resources/Image/TrainerImage/${trainer.timage}" class="img-fluid" alt="text" width="400px"/>
             	 </div>
                 </a>
               <div class="member-info">
-                <h4 style = "margin-top:10px;">${trainer.name }</h4>
+                <h4 style = "margin-top:10px; color:black;">${trainer.name }</h4>
                 <span>${trainer.activity} : ${trainer.purpose }</span><br>
 				<span style = "color:black;">${trainer.gaddr1}</span><br>
                	<fmt:formatNumber var = "rating1" value="${trainer.rating }" type="number" pattern="#.##"/>
@@ -210,7 +226,7 @@
 				<i class = "bi bi-star"></i>
 				</c:forEach>
 				<c:if test = "${ trainer.hasReview eq 'Y' }">
-				(${rating1})
+				(${rating1})<br>
 				</c:if>
 				<c:if test = "${ trainer.hasReview eq 'N' }">
 				<br>(작성된 리뷰 없습니다)
@@ -228,6 +244,8 @@
 		  </c:forEach>
 		  
         </div>
+        </div>
+        </section>
         </div>
           
           
