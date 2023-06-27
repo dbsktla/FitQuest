@@ -13,6 +13,9 @@
 		
 		var popup = window.open(url, "_blank", "width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
 		
+		alert(rnum);
+		alert(rstate);
+		
 		// 팝업 창이 로드된 후에 닫기 버튼 추가
 		popup.onload = function () {
 			 var closeButton = popup.document.createElement("button");
@@ -33,7 +36,7 @@
 					if (confirmCancel) {
 						popup.alert("예약 취소 완료되었습니다.");
 						popup.close(); // 팝업 창 닫기
-						window.location.href = "reservationCancel.rv?rnum=" + rnum;
+						window.location.href = "genericCancel.rv?rnum=" + rnum;
 					}
 			  });
 			

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <%
 	session.setAttribute("flag1", true); 
 %>
@@ -12,7 +13,15 @@
 	}
 	h3{
 		color: black !important;
-		font-size: 20px !important;
+		font-size: 18px !important;
+	}
+	.entry-meta{
+		padding-bottom: 20px;
+		border-bottom: 1px solid lightgray;
+	}
+	.blog-author{
+		background-color: white;
+		border-radius: 10px;
 	}
 </style>
 <body style="background-color: #FEF9E7;">
@@ -20,7 +29,7 @@
       <div class="container">
         <ol>
           <li><a href="main.go">홈페이지</a></li>
-          <li><a href="trainerList.pd?pageNumber=${pageNumber }">목록보기</a></li>
+          <li><a href="trainerList.pd?pageNumber=${pageNumber}">목록보기</a></li>
         </ol>
       </div>
 </section><!-- End Breadcrumbs -->
@@ -43,35 +52,60 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i>별명 : ${memberBean.nickname }</li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i>나이 : ${ age }</li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#reviewSection">리뷰 : ${reviewCount }개</a></li>
+                  <li class="d-flex align-items-center s-text"><i class="bi bi-person"></i>별명 : ${memberBean.nickname }</li>
+                  <li class="d-flex align-items-center s-text"><i class="bi bi-clock"></i>나이 : ${ age }세</li>
+                  <li class="d-flex align-items-center s-text"><i class="bi bi-chat-dots"></i><a href="#reviewSection" class="s-text">리뷰 : ${reviewCount}개</a></li>
                 </ul>
               </div>
 
               <div class="entry-content">
-                <h3>헬스장 안내 : ${gymBean.gname }</h3>
-                <p>
-                	주소 : ${gymBean.gaddr1 } <br> ${ gymbean.gaddr2 }
-                	전화 번호 : ${gymBean.gphone }
-                </p>
                 <blockquote>
                   <p>
 					${trainerBean.intro}
                   </p>
                 </blockquote>
- 				<h3>트레이너 정보 (${trainerBean.activity })</h3>
-                <p>
-                	운동 목적 : <br>
-                	<c:forEach var = "purpose" items = "${trainerBean.purpose }">
-                		<i class="bi bi-check"></i>${purpose }<br>
-                	</c:forEach>
-                	경력 : ${trainerBean.exp }<br>
-                	나이 : ${age }<br>
-                	성별 : ${memberBean.gender}<br>
-                	전화번호 : ${memberBean.mphone }<br>
-                	이메일 : ${memberBean.email }
-                </p>
+ 				<h3>선생님 소개</h3>
+ 				<table class="t-table">
+                	<tr>
+                		<th class="t-th">운동 목적</th>
+                		<td class="t-td">
+                			<c:forEach var = "purpose" items = "${trainerBean.purpose }">
+		                		<i class="bi bi-check"></i>${purpose}<br>
+		                	</c:forEach>
+                		</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">경력</th>
+                		<td class="t-td">${trainerBean.exp}</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">나이</th>
+                		<td class="t-td">${age}세</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">성별</th>
+                		<td class="t-td">${memberBean.gender}</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">전화번호</th>
+                		<td class="t-td">${memberBean.mphone}</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">이메일</th>
+                		<td class="t-td">${memberBean.email}</td>
+                	</tr>
+                </table>
+                <h3>${gymBean.gname}</h3>
+                <table class="t-table">
+                	<tr>
+                		<th class="t-th">주소</th>
+                		<td class="t-td">${gymBean.gaddr1}</td>
+                	</tr>
+                	<tr>
+                		<th class="t-th">전화번호</th>
+                		<td class="t-td">${gymBean.gphone}</td>
+                	</tr>
+                </table>
               </div>
 				
             </article><!-- End blog entry -->
@@ -80,7 +114,8 @@
             <div class="blog-author d-flex align-items-center" style = "justify-content: space-between;">
 			  <i class="bi bi-cart-plus" style="font-size: 30px"></i>
               <div>
-                <h5 style = "color: #FAC710">${ product.months }개월 회원권 = ${product.ptype}레슨(${product.people}명 수업) ${product.pcount }회 : ${product.price }만원</h5>
+                <h5 class="p-text"><span class="p-box">${ product.months }개월 회원권</span>&emsp;&emsp;&emsp;
+                ${product.ptype}레슨(${product.people}명 수업) ${product.pcount }회 : ${product.price }만원</h5>
               </div>
               <div>
               	<input type = "button" class ="btn btn-warning" value = "카트 추가하기" onclick = "location.href='cartInsert.od?pnum=${product.pnum}&id=${trainerBean.id }'">

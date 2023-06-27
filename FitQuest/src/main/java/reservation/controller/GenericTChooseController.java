@@ -30,7 +30,6 @@ import usage.model.UsageDao;
 public class GenericTChooseController {
 	private final String command = "/genericTChoose.rv";
 	private final String getPage = "genericTChoose";
-	private final String gotoPage = "redirect:/genericCalendar.rv";
 
 	@Autowired
 	ReservationDao reservationDao;

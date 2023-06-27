@@ -32,7 +32,7 @@
 					if (confirmCancel) {
 						popup.alert("예약 취소 완료되었습니다.");
 						popup.close(); // 팝업 창 닫기
-						window.location.href = "trainerStateList.rv";
+						window.location.href = "trainerCancel.rv?tid="+tid+"&date="+date+"&time="+time+"&people="+people;
 					}
 			  });
 			
