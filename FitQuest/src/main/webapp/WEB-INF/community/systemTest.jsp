@@ -9,7 +9,7 @@
 <!-- 				<h1><i class="bi bi-person"></i></h1> -->
 <!-- 				비회원 -->
 <!-- 			</td> -->
-<!-- 			<!-- <td> -->
+<!-- 			<td> -->
 <!-- 				<h1><i class="bi bi-arrow-right"></i></h1> -->
 <!-- 			</td> -->
 <!-- 			<td width="15%" height="20"> -->
@@ -208,8 +208,8 @@
 					<tr>
 						<th style="background-color: #FAC710;">PT예약</th>
 					</tr>
-					<tr><td>트레이너 목록 조회</td></tr>
-					<tr><td>장바구니</td></tr>
+					<tr><td>예약 신청</td></tr>
+					<tr><td>운동 스케줄 관리</td></tr>
 					<tr><td>리뷰 작성</td></tr>
 				</table>
 			</td>
@@ -246,6 +246,32 @@
 			<td width="15%" height="20">
 				<table class="table table-hover" border="1" style="text-align: center;">
 					<tr>
+						<th style="background-color: #FAC710;">상품 구매</th>
+					</tr>
+					<tr><td>트레이너 조회</td></tr>
+					<tr><td>장바구니 및 결제</td></tr>
+					<tr><td>리뷰작성</td></tr>
+				</table>
+			</td>
+			<td width="15%" height="20">
+				<table class="table table-hover" border="1" style="text-align: center;">
+					<tr>
+						<th style="background-color: #FAC710;">상품 관리</th>
+					</tr>
+					<tr><td>상품 등록</td></tr>
+					<tr><td>회원 수 그래프</td></tr>
+					<tr><td>수익 계산</td></tr>
+				</table>
+			</td>
+			<td></td>
+			
+		</tr>
+		
+		<tr valign="top">
+			<td></td>
+			<td width="15%" height="20">
+				<table class="table table-hover" border="1" style="text-align: center;">
+					<tr>
 						<th style="background-color: #FAC710;">운동 관리</th>
 					</tr>
 					<tr><td>운동 내역</td></tr>
@@ -258,14 +284,15 @@
 					<tr>
 						<th style="background-color: #FAC710;">회원 운동 관리</th>
 					</tr>
-					<tr><td>회원 조회</td></tr>
-					<tr><td>회원 별 운동 조회</td></tr>
-					<tr><td>운동 추가</td></tr>
+					<tr><td>회원 목록 조회</td></tr>
+					<tr><td>회원 별 운동,신체 관리</td></tr>
+					<tr><td>회원 별 식단 관리</td></tr>
 				</table>
 			</td>
 			<td></td>
 			
 		</tr>
+		
 		<tr valign="top">
 			<td></td>
 			<td width="15%" height="20">
@@ -281,11 +308,11 @@
 			<td width="15%" height="20">
 				<table class="table table-hover" border="1" style="text-align: center;">
 					<tr>
-						<th style="background-color: #FAC710;">상품 관리</th>
+						<th style="background-color: #FAC710;">트레이너 정보</th>
 					</tr>
-					<tr><td>상품 등록</td></tr>
-					<tr><td>회원 수 그래프</td></tr>
-					<tr><td>수익 계산</td></tr>
+					<tr><td>트레이너 정보 작성</td></tr>
+					<tr><td>리뷰 조회</td></tr>
+					<tr><td>리뷰 삭제 요청</td></tr>
 				</table>
 			</td>
 			<td></td>
@@ -306,11 +333,12 @@
 			<td width="15%" height="20">
 				<table class="table table-hover" border="1" style="text-align: center;">
 					<tr>
-						<th style="background-color: #FAC710;">트레이너 정보</th>
+						<th style="background-color: #FAC710;">건강 정보 게시판</th>
 					</tr>
-					<tr><td>트레이너 정보 작성</td></tr>
-					<tr><td>리뷰 조회</td></tr>
-					<tr><td>리뷰 삭제 요청</td></tr>
+					<tr><td>게시글 작성</td></tr>
+					<tr><td>댓글 작성</td></tr>
+					<tr><td>게시글/댓글 신고</td></tr>
+					<tr><td>게시글 스크랩</td></tr>
 				</table>
 			</td>
 		</tr>
@@ -330,9 +358,10 @@
 			<td width="15%" height="20">
 				<table class="table table-hover" border="1" style="text-align: center;">
 					<tr>
-						<th style="background-color: #FAC710;">건강 정보 게시판</th>
+						<th style="background-color: #FAC710;">자유게시판</th>
 					</tr>
 					<tr><td>게시글 작성</td></tr>
+					<tr><td>답글 작성</td></tr>
 					<tr><td>댓글 작성</td></tr>
 					<tr><td>게시글/댓글 신고</td></tr>
 				</table>
@@ -346,11 +375,21 @@
 					<tr>
 						<th style="background-color: #FAC710;">문의/알림</th>
 					</tr>
-					<tr><td>1:1 문의</td></tr>
+					<tr><td>1:1 관리자 문의</td></tr>
+					<tr><td>트레이너-일반회원 문의</td></tr>
 					<tr><td>알림</td></tr>
 				</table>
 			</td>
-			<td></td>
+			<td width="15%" height="20">
+				<table class="table table-hover" border="1" style="text-align: center;">
+					<tr>
+						<th style="background-color: #FAC710;">문의/알림</th>
+					</tr>
+					<tr><td>1:1 관리자 문의</td></tr>
+					<tr><td>트레이너-일반회원 문의</td></tr>
+					<tr><td>알림</td></tr>
+				</table>
+			</td>
 			<td></td>
 		</tr>
 		
