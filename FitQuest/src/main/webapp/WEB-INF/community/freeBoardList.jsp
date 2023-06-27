@@ -13,25 +13,34 @@
 		var openWin = window.open("memberInfoPopup.co?" + "id=" + id, "_blank", "width=550, height=500, left=500");
 	}
 	document.addEventListener("DOMContentLoaded", function() {
-		var buttons = document.querySelectorAll(".title-button");
-	    var selectedButtonId = localStorage.getItem("selectedButtonId");
+		  var buttons = document.querySelectorAll(".title-button");
+		  var selectedButtonId = localStorage.getItem("selectedButtonId");
 
-		buttons.forEach(function(button) {
-		  button.addEventListener("click", function() {
-		    buttons.forEach(function(btn) {
-		      btn.classList.remove("selected-board");
+		  buttons.forEach(function(button) {
+		    button.addEventListener("click", function() {
+		      buttons.forEach(function(btn) {
+		        btn.classList.remove("selected-board");
+		      });
+		      this.classList.add("selected-board");
+		      selectedButtonId = this.id;
+		      localStorage.setItem("selectedButtonId", selectedButtonId);
 		    });
-		    this.classList.add("selected-board");
-		    selectedButtonId = this.id;
-		    localStorage.setItem("selectedButtonId", selectedButtonId);
 		  });
+
+		  // 페이지 로드 시 전체 버튼 선택
+		  var defaultButton = document.getElementById("button1");
+		  defaultButton.classList.add("selected-board");
+		  localStorage.setItem("selectedButtonId", "button1");
+
+		  // 다른 페이지에서 돌아왔을 때 전체 버튼 선택
+		  if (selectedButtonId && document.getElementById(selectedButtonId)) {
+		    var selectedButton = document.getElementById(selectedButtonId);
+		    selectedButton.classList.add("selected-board");
+		    defaultButton.classList.remove("selected-board"); // 전체 버튼에서 클래스 제거
+		  } else {
+		    defaultButton.classList.add("selected-board");
+		  }
 		});
-	
-		if (selectedButtonId) {
-		  var selectedButton = document.getElementById(selectedButtonId);
-		  selectedButton.classList.add("selected-board");
-		}
-	});
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
