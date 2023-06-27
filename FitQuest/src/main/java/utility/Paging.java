@@ -434,10 +434,10 @@ public class Paging {
 		
 		// 시작페이지가 1이 아니면 이전으로 가는 페이지가 필요하다 따라서 해당되는 링크가 생김
 		if (this.beginPage != 1) { // 앞쪽, pageSize:한 화면에 보이는 레코드 수
-			result += "&nbsp;<a href='" + url  
+			result += "&nbsp;<a class = 'page-link' href='" + url  
 					+ "?pageNumber=" + ( 1 ) + "&pageSize=" + this.pageSize 
 					+ added_param + "'>맨 처음</a>&nbsp;" ;
-			result += "&nbsp;<a href='" + url 
+			result += "&nbsp;<a class = 'page-link' href='" + url 
 					+ "?pageNumber=" + (this.beginPage - 1 ) + "&pageSize=" + this.pageSize 
 					+ added_param + "'>이전</a>&nbsp;" ;
 		}
@@ -446,13 +446,13 @@ public class Paging {
 		// 내가 보고 이쓴 ㅍㅔ이지와 같으면 빨간색으로 나오도록 설정함!!
 		for (int i = this.beginPage; i <= this.endPage ; i++) {
 			if ( i == this.pageNumber ) {
-				result += "&nbsp;<font color='red'>" + i + "</font>&nbsp;"	;
+				result += "&nbsp;<font class = 'page-link' id = 'red' color='red'>" + i + "</font>&nbsp;"	;
 						
 			} else {
 				
 //				<a href='/ex/list/ab?pageNumber=3&pageSize=3&whatColumn=null&keyword=null'>
 				// 위처럼 링크설정된 문자열이 리턴이 되는것이당
-				result += "&nbsp;<a href='" + url   
+				result += "&nbsp;<a class = 'page-link' href='" + url   
 						+ "?pageNumber=" + i + "&pageSize=" + this.pageSize 
 						+ added_param + "'>" + i + "</a>&nbsp;" ;
 				
@@ -464,11 +464,11 @@ public class Paging {
 		
 		if ( this.endPage != this.totalPage) { // 뒤쪽
 			
-			result += "&nbsp;<a href='" + url  
+			result += "&nbsp;<a class = 'page-link' href='" + url  
 					+ "?pageNumber=" + (this.endPage + 1 ) + "&pageSize=" + this.pageSize 
 					+ added_param + "'>다음</a>&nbsp;" ;
 			
-			result += "&nbsp;<a href='" + url  
+			result += "&nbsp;<a class = 'page-link' href='" + url  
 					+ "?pageNumber=" + (this.totalPage ) + "&pageSize=" + this.pageSize 
 					+ added_param + "'>맨 끝</a>&nbsp;" ;
 		}		
