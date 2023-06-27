@@ -82,18 +82,20 @@ public class MailSendService {
 
 
 
-		public String trainerEmail(String temail, String aemail, String mcontent, String subject) {
-			ㅁㄴㅇㄴㅁ수정해야댐
-			String setFrom = aemail; // email-config에 설정한 자신의 이메일 주소를 입력 
+		public String trainerEmail(String temail, String aemail, String mcontent, String subject, String name) {
+			
+			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 			String toMail = temail;
 			String title = subject; // 이메일 제목 
 			String content = 
-					"<h1>Fitquest 문의내역 입니다.</h1>" + 	//html 형식으로 작성 ! 
+					"<h1>Fitquest " + name + "님의 문의내역 입니다.</h1>" + 	//html 형식으로 작성 ! 
 	                "<br><br>" + 
-	                mcontent ; //이메일 내용 삽입
+	                mcontent +
+	                "<br><br>" + 
+	                "회신 연락처 : " + aemail; //이메일 내용 삽입
 			mailSend(setFrom, toMail, title, content);
 			
-			return "";
+			return "success";
 		}
 		
 	

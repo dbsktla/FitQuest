@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import member.model.MemberBean;
 import question.model.QuestionBean;
 import question.model.QuestionDao;
+import question.model.TquestionBean;
+import question.model.TquestionDao;
 import utility.Paging;
 
 @Controller
@@ -27,6 +29,9 @@ public class MyQuestionListController {
 
 	@Autowired
 	QuestionDao questionDao;
+	
+	@Autowired
+	TquestionDao tquestionDao;
 
 	@RequestMapping(command)
 	public String list(
@@ -69,10 +74,20 @@ public class MyQuestionListController {
 			String url = request.getContextPath() + command;
 			Paging pageInfo = new Paging(pageNumber,"5",totalCount,url,"","",null);
 			List<QuestionBean> myQuestionList = questionDao.getMyQuestionList(pageInfo,map);
+			
 			model.addAttribute("totalCount", totalCount);
 			model.addAttribute("pageNumber", pageNumber);
 			model.addAttribute("pageInfo", pageInfo);
 			model.addAttribute("myQuestionList",myQuestionList);
+			
+			// 30일 지난 데이터 삭제
+			int cnt = tquestionDao.delete30Days();
+			System.out.println("cnt : " + cnt);
+			
+			// 트레이너 문의
+			List<TquestionBean> tqlist = tquestionDao.getTquestionList(memberBean.getId());
+			
+			model.addAttribute("tqlist",tqlist);
 			return getPage;
 		}
 	}
