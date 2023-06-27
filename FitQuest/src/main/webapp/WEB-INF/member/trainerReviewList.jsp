@@ -3,6 +3,7 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myTrainerTop.jsp"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 	function sendForm(){
@@ -10,32 +11,35 @@
 	}
 </script>
 <style>
-section{
-	padding: 0px !important;
-}
-.btn:checked{
-	background-color: #ffc107 !important;
-}
-.btn:hover {
+	section{
+		padding: 0px !important;
+	}
+	.btn:checked{
+		background-color: #ffc107 !important;
+	}
+	.btn:hover {
 		background-color:#FAC710 !important;
 	}
-.btn-check{
-	border-radius:20px !important;
-}
-.btn-check + &:hover {
-    // override for the checkbox/radio buttons
-    background-color: #ffc107 !important;
- }
-section{
+	.btn-check{
+		border-radius:20px !important;
+	}
+	.btn-check + &:hover {
+	    // override for the checkbox/radio buttons
+	    background-color: #ffc107 !important;
+	}
+	section{
 		padding: 0px !important;
-		}
-.pageTitle{
+	}
+	.pageTitle{
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}
-.header{
+	.header{
 		background-color: white !important;
 		padding-bottom: 50px;
+	}
+	.btn-warning{
+		padding: 11px 18px !important;
 	}
 </style>
 <body style="background-color : #FEF9E7;">
@@ -86,7 +90,7 @@ section{
 						  </label>
             		</div>
             		<div class = "col-lg-6" align="right" style = "vertical-align:center;">
-            		<select name = "whatColumn">
+            		<select name = "whatColumn" class="search-choose">
             			<option value = "">선택</option>
             			<option value = "tname"
             			<c:if test = "${whatColumn eq 'tname' }">
@@ -103,8 +107,8 @@ section{
             		<c:if test = "${keyword != 'null' }">	
             		"${ keyword }"
             		</c:if>
-            		>
-            		<button type="submit" class="btn btn-primary" style = "background-color: #FAC710; border-color: black; margin-bottom:3px;">
+            		class="search-box">
+            		<button type="submit" class="btn btn-warning" style = "background-color: #FAC710; border: none; margin-bottom:3px;">
 					  <i class="bi bi-search"></i>
 					</button>
             		</div>

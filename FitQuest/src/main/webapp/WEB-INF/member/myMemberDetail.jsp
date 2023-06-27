@@ -34,6 +34,10 @@
 	.card-body{
 		padding: 30px !important;	
 	}
+	.col-form-label{
+		color: black !important;
+		font-weight: bold;
+	}
 }
 </style>
 

@@ -3,6 +3,8 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myMemberTop.jsp"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
+
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">
 	function sendForm(){
@@ -16,6 +18,9 @@
 	.pageTitle{
 		margin-top: 50px;
 		margin-bottom: 50px;
+	}
+	.btn-warning{
+		padding: 11px 18px !important;
 	}
 </style>
 <body style="background-color : #FEF9E7;">
@@ -66,7 +71,7 @@
 						  </label>
             		</div>
             		<div class = "col-lg-6" align="right" style = "vertical-align:center;">
-            		<select name = "whatColumn">
+            		<select name = "whatColumn" class="search-choose">
             			<option value = "">선택</option>
             			<option value = "tname"
             			<c:if test = "${whatColumn eq 'tname' }">
@@ -83,8 +88,8 @@
             		<c:if test = "${keyword != 'null' }">	
             		"${ keyword }"
             		</c:if>
-            		>
-            		<button type="submit" class="btn btn-primary" style = "background-color: #FAC710; border-color: black; margin-bottom:3px;">
+            		class="search-box">
+            		<button type="submit" class="btn btn-warning" style = "background-color: #FAC710; border: none; margin-bottom:3px;">
 					  <i class="bi bi-search"></i>
 					</button>
             		</div>
@@ -125,7 +130,7 @@
               </c:if>
 			    <c:if test = "${empty rList}">
 			  	<h5 class="card-title">
-			  		아직 작성된 리뷰 없습니다.
+			  		아직 작성된 리뷰가 없습니다.
 			  	</h5>
               </c:if>
             </div>
