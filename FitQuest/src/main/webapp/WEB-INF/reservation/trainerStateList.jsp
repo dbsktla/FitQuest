@@ -109,7 +109,7 @@
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'false'}">
-						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
+						<tr align="center" onclick="openPopup('${aitem.tid}','${aitem.rdate}','${aitem.rtime}','${aitem.people}','${aitem.rstate}','${aitem.rnum}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
 							<td>${aitem.mname}</td>
@@ -138,7 +138,7 @@
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'reject'}">
-						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
+						<tr align="center" onclick="openPopup('${aitem.tid}','${aitem.rdate}','${aitem.rtime}','${aitem.people}','${aitem.rstate}','${aitem.rnum}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
 							<td>${aitem.mname}</td>
@@ -167,7 +167,7 @@
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'cancel'}">
-						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
+						<tr align="center" onclick="openPopup('${aitem.tid}','${aitem.rdate}','${aitem.rtime}','${aitem.people}','${aitem.rstate}','${aitem.rnum}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
 							<td>${aitem.mname}</td>
@@ -196,7 +196,7 @@
 				</tr>
 				<c:forEach var="aitem" items="${aList}">
 					<c:if test="${aitem.rstate == 'complete'}">
-						<tr align="center" onclick="openPopup('${aitem.rnum}','${aitem.rstate}'); return false;" class="clickable-row">
+						<tr align="center" onclick="openPopup('${aitem.tid}','${aitem.rdate}','${aitem.rtime}','${aitem.people}','${aitem.rstate}','${aitem.rnum}'); return false;" class="clickable-row">
 							<td>${aitem.rdate}</td>
 							<td>${aitem.rtime}</td>
 							<td>${aitem.mname}</td>

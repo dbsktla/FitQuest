@@ -157,7 +157,7 @@ var areaSelectMaker = function(target){
 	<div class="title-container">
 		<div class="title-text">트레이너 목록</div>
 	</div>
- <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important; padding: 20px 0px;"> 
+ <section id="portfolio" class="portfolio" style = "background-color: #FEF9E7 !important; padding: 0px 0px 20px 0px;"> 
       <div class="container" data-aos="fade-up">
         <div class="row" data-aos="fade-up" data-aos-delay="100">
 	      <form action = "trainerList.pd" id = "myform">

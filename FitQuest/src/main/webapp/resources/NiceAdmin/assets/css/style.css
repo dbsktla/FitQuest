@@ -56,14 +56,14 @@ h6 {
 # Page Title
 --------------------------------------------------------------*/
 .pagetitle {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .pagetitle h1 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
-  color: #012970;
+  color: black;
 }
 
 /*--------------------------------------------------------------
@@ -234,9 +234,10 @@ h6 {
 .card-title {
   padding: 20px 0 15px 0;
   font-size: 18px;
-  font-weight: 500;
-  color: #012970;
+  font-weight: 800;
+  color: black;
   font-family: "Poppins", sans-serif;
+  border-bottom: 1px solid lightgray;
 }
 
 .card-title span {
@@ -390,7 +391,8 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: black;
+  border-bottom: 1px solid lightgray;
 }
 
 .header .search-bar {
