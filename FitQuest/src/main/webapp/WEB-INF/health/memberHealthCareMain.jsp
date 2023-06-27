@@ -5,6 +5,7 @@
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myTrainerTop.jsp"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 
 
 <%
@@ -1106,14 +1107,14 @@
 							</div>
 
 							<div class="col-lg-2 btn-group" >
-								<input type="text" id="whatName" name="whatName" placeholder="이름검색" value="${param.whatName}" style="width: 80%;">
-								<button type="submit" class="btn btn-warning btn-sm">
+								<input type="text" id="whatName" name="whatName" placeholder="이름검색" value="${param.whatName}" style="width: 80%; margin-right: 10px;" class="search-choose">
+								<button type="submit" class="btn btn-warning" style = "background-color: #FAC710; border: none; margin-bottom:3px; border-radius: 5px;">
 									<i class="ri-search-line"></i>
 								</button>
 							</div>
 							
 							<div class="col-lg-1 btn-group"  style="padding: 2% 2%;">
-								<input type="button" onclick="btnCheckOff()" class="btn btn-warning btn-sm" value="선택해제" style="float: right;">
+								<input type="button" onclick="btnCheckOff()" class="btn btn-warning" value="선택해제" style="float: right;">
 							</div>
 						</div>
 						<!-- 필터 -->

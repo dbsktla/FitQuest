@@ -9,7 +9,11 @@
 <c:if test="${loginInfo.mtype eq 'generic'}">
 	<%@ include file="../common/myMemberTop.jsp"%>
 </c:if>
-
+<style>
+	.card-title{
+		text-align: center;
+	}
+</style>
 <body style="background-color: #FEF9E7;">
 <!-- 	<main id="main" class="main" style="margin-top: 5px">
 		<main> -->
@@ -53,7 +57,7 @@
 											<tr align="center">
 												<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
 												<td>
-													<a style="color: #FAC710;"href="questionDetail.qt?qnum=${ question.qnum }">${ question.qsubject }</a></td>
+													<a style="color: black;"href="questionDetail.qt?qnum=${ question.qnum }">${ question.qsubject }</a></td>
 												<td>
 													<fmt:parseDate var="parseDate" value="${ question.qdate }" pattern="yyyy-MM-dd HH:mm" />
 													<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm" />
@@ -71,7 +75,7 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<c:if test="${ pageInfo.beginPage != 1 }">
-											<li class="page-item"><a style="color: #FAC710;"
+											<li class="page-item"><a style="color: black;"
 												class="page-link"
 												href="${ pageInfo.url }?pageNumber=${ pageInfo.beginPage - 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }"
 												aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -85,14 +89,14 @@
 													href="#">${ page }</a></li>
 											</c:if>
 											<c:if test="${ page != pageNumber }">
-												<li class="page-item"><a style="color: #FAC710;"
+												<li class="page-item"><a style="color: black;"
 													class="page-link"
 													href="${ pageInfo.url }?pageNumber=${ page }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }">${ page }</a></li>
 											</c:if>
 										</c:forEach>
 
 										<c:if test="${ pageInfo.endPage != pageInfo.totalPage }">
-											<li class="page-item"><a style="color: #FAC710;"
+											<li class="page-item"><a style="color: black;"
 												class="page-link"
 												href="${ pageInfo.url }?pageNumber=${ pageInfo.endPage + 1 }&pageSize=${ pageInfo.pageSize }&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }&bcategory=${ bcategory }"
 												aria-label="Next"> <span aria-hidden="true">&raquo;</span>

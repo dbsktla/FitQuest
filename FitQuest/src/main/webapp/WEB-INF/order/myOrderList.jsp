@@ -266,13 +266,17 @@ $(document).ready(function(){
 </script>
 <body style="background-color : #FEF9E7;">
 
+	<div class="pagetitle">
+      <h1><i class="bi bi-list toggle-sidebar-btn"></i> 구매관리</h1>
+    </div><!-- End Page Title -->
+    
      <!-- ======= 사용권 섹션 ======= -->
     <section id="pricing" class="pricing">
 
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h2 style = "color: #012970">My 회원권</h2>
+          <h2>My 회원권</h2>
         </header>
 		<c:if test = "${ not empty muList }">
         <div class="row gy-4" data-aos="fade-left" style = "padding-bottom: 50px;">
@@ -321,7 +325,7 @@ $(document).ready(function(){
 
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <h2 style = "color: #012970">주문 내역</h2>
+          <h2>주문 내역</h2>
         </header>
         
         <div class="card">
