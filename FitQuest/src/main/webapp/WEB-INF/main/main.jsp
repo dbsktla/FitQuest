@@ -14,11 +14,11 @@
 <body>
   <!-- ======= Image Section ======= -->
   <c:if test="${memberBean == null}">
- 	 <div class="non-member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
+ 	 <div class="main-non-member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
   </c:if>
   <c:if test="${memberBean != null}">
   d
- 	 <div class="member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
+ 	 <div class="main-member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
   </c:if>
 
 <main style="margin: 0;">

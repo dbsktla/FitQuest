@@ -25,6 +25,9 @@
 .margin5{
 	margin: 5px;
 }
+.margin10{
+	margin: 10px 0px;
+}
 .magin-top-15{
 	margin-top: 15px;
 }
@@ -33,6 +36,17 @@
 }
 .margin-bottom{
 	margin-bottom: 16px;
+}
+.title-button{
+	background-color: #FEF9E7;
+	border: none;
+	border-radius: 5px;
+	margin: 3px;
+	padding: 4px 25px;
+	font-weight: bold;
+}
+.title-button:hover{
+	background-color: #FAC710;
 }
 .day-button{
 	background-color: white;
@@ -47,6 +61,13 @@
 .selected{
 	background-color: #FAC710;
 }
+.selected-board{
+	background-color: #FAC710;
+	color: white;
+}
+.day-button.selected {
+  background-color: #FAC710;
+}
 .used{
 	background-color: #FEF9E7;
 }
@@ -55,7 +76,7 @@
 	text-align: center; 
 } 
 .title-text{
-	font-size: 30px;
+	font-size: 27px;
 	font-weight: bold;
 }
 .aboutUs{
@@ -97,4 +118,17 @@
 	padding: 6px 25px;
 	border-radius: 5px;
 	color: black;
+}
+.review-container{
+	margin: 40px 0px 20px 0px; 
+}
+.review-box{
+	width: 100%;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	padding: 15px 20px;
+}
+.r-box{
+	margin: 10px 0px;
 }

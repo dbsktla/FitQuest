@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp"%>
 <%@ include file="../common/adminBootTop.jsp"%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 
 <%
 	session.setAttribute("freeBoardListFlag", "true");
@@ -11,9 +12,32 @@
 	function writerInfo(id){
 		var openWin = window.open("memberInfoPopup.co?" + "id=" + id, "_blank", "width=550, height=500, left=500");
 	}
+	document.addEventListener("DOMContentLoaded", function() {
+		var buttons = document.querySelectorAll(".title-button");
+	    var selectedButtonId = localStorage.getItem("selectedButtonId");
+
+		buttons.forEach(function(button) {
+		  button.addEventListener("click", function() {
+		    buttons.forEach(function(btn) {
+		      btn.classList.remove("selected-board");
+		    });
+		    this.classList.add("selected-board");
+		    selectedButtonId = this.id;
+		    localStorage.setItem("selectedButtonId", selectedButtonId);
+		  });
+		});
+	
+		if (selectedButtonId) {
+		  var selectedButton = document.getElementById(selectedButtonId);
+		  selectedButton.classList.add("selected-board");
+		}
+	});
 </script>
 
 <body style="background-color: #FEF9E7; text-align: center;">
+	<div class="title-container">
+		<div class="title-text">자유 게시판</div>
+	</div>
 	<main>
 		<div class="card" style="width: 70%; margin: auto;">
 			<div class="card-body">
@@ -22,13 +46,16 @@
 						<input type="button" value="작성하기" class="btn btn-warning btn-sm" onclick="location.href='freeBoardInsert.co'">
 					</c:if>
 				</div>
-				<h5 class="card-title">자유 게시판</h5>
-				<div class="col-md-12" align="right">
-					<a style="color : #FAC710;" href="freeBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">전체</a>
-					<font color="#FAC710"> | </font>
-					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=일반&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">일반</a>
-					<font color="#FAC710"> | </font>
-					<a style="color : #FAC710;" href="freeBoardList.co?bcategory=운동인증&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }">운동인증</a>
+				<div class="col-md-12" align="center" style="margin-bottom: 20px; border-bottom: 1px solid lightgray; padding-bottom: 15px;">  
+					<button id="button1" onClick="window.location.href='freeBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }'" class="title-button">
+						전체
+					</button>
+					<button id="button2" onClick="window.location.href='freeBoardList.co?bcategory=일반&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }'" class="title-button">
+						일반
+					</button>
+					<button id="button3" onClick="window.location.href='freeBoardList.co?bcategory=운동인증&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }'" class="title-button" style="margin-right: 0;">
+						운동인증
+					</button>
 				 </div>
 				 <div class="col-md-5" align="left">
 				 	
@@ -60,10 +87,10 @@
 										</c:forEach>
 										<i style="color : #FAC710;" class="bi bi-arrow-return-right"></i>
 									</c:if>
-									<a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+									<a style="color : black; font-weight: bold;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
 								</td>
 								<td style="background-color: #FEF9E7">${ board.bcategory }</td>
-								<td style="background-color: #FEF9E7"><a style="color : #FAC710;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
+								<td style="background-color: #FEF9E7"><a style="color : black;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
 								<td style="background-color: #FEF9E7">${ board.breadcount }</td>
 								<td style="background-color: #FEF9E7">
 									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
@@ -74,23 +101,23 @@
 						<tr><td height="30" style="border: white;"></td><tr>
 						<c:forEach var="board" items="${ freeBoardList }" varStatus="status">
 							<tr align="center">
-								<th scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</th>
+								<td scope="row">${ totalCount - (param.pageNumber-1)*(param.pageSize) - status.index }</td>
 								<td align="left">
 									<c:if test="${ board.brelevel > 0 }">
 										<c:forEach var="i" begin="0" end="${ board.brelevel }">
 											&emsp;
 										</c:forEach>
-										<i style="color : #FAC710;" class="bi bi-arrow-return-right"></i>
+										<i style="color : gray;" class="bi bi-arrow-return-right"></i>
 									</c:if>
 									<c:if test="${ board.bstatus eq '신고' }">
 										${ board.bsubject }
 									</c:if>
 									<c:if test="${ board.bstatus != '신고' }">
-										<a style="color : #FAC710;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
+										<a style="color : black; font-weight: bold;" href="freeBoardDetail.co?bnum=${ board.bnum }">${ board.bsubject }</a>
 									</c:if>
 								</td>
 								<td>${ board.bcategory }</td>
-								<td><a style="color : #FAC710;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
+								<td><a style="color : black;" href="javascript:writerInfo('${ board.id }')">${ board.name }</a></td>
 								<td>${ board.breadcount }</td>
 								<td>
 									<fmt:parseDate var="parseDate" value="${ board.bregdate }" pattern="yyyy-MM-dd HH:mm" />
@@ -102,23 +129,25 @@
 				</table>
 				
 			<c:if test="${ not empty freeBoardList }">
-				<div class="col-md-6">
-			      <form method="get" class="search-form d-flex align-items-center" action="freeBoardList.co">
+				<div class="col-md-6" style="width: 100%; margin-top: 50px;">
+			      <form method="get" class="search-form d-flex align-items-center" action="freeBoardList.co" style="justify-content: center;">
 				      <c:if test="${ bcategory != '' }">
 				      	<input type="hidden" name="bcategory" value="${ bcategory }">
 				      	<input type="hidden" name="pageNumber" value="1">
 				      </c:if>
-				      <div class="col-md-3">
-				      <select name="whatColumn" class="form-select">
-	                    <option value="">전체</option>
-	                    <option value="bsubject">제목</option>
-						<option value="name">작성자</option>
-	                  </select>
+				      <div class="col-md-3" style="width: 10%;">
+					      <select name="whatColumn" class="form-select">
+		                    <option value="">전체</option>
+		                    <option value="bsubject">제목</option>
+							<option value="name">작성자</option>
+		                  </select>
 	                  </div>
-			        <input type="text" name="keyword" class="form-control" placeholder="Search">
-			        &nbsp;<button type="submit" class="btn btn-warning">
-			        	<i class="bi bi-search"></i>
-			        </button>
+	                  <div style="display: flex; margin-left: 15px; width: 30%;">
+				          <input type="text" name="keyword" class="form-control" placeholder="Search" style="margin-right: 10px; width: 100%;">&nbsp;
+				          <button type="submit" class="btn btn-warning">
+				          <i class="bi bi-search"></i>
+				      	  </button>
+			          </div>
 			      </form>
 			    </div>
 			</c:if>

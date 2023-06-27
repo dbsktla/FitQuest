@@ -37,6 +37,9 @@ public class GenericStateListController {
 		List<ReservationBean> aList = reservationDao.getReservationAllList(mid);
 		model.addAttribute("aList",aList);
 		
+		for(ReservationBean rb : aList) {
+			System.out.println("a리스트 체크: "+rb.getTname());
+		}
 		return getPage;
 	}
 }
