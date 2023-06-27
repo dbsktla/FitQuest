@@ -51,11 +51,13 @@ public class GenericReservationController {
 	@Autowired
 	CompleteDao completeDao;
 	
-	@RequestMapping(value=command,method = RequestMethod.GET)
+	@RequestMapping(value=command,method = RequestMethod.GET, produces = "application/text; charset=utf-8")
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
 			HttpSession session,@RequestParam("tid") String tid,@RequestParam("tname") String tname
-			,@RequestParam("people") int people
+			,@RequestParam("people") int people, HttpServletResponse response
 			){
+		response.setContentType("text/html; charset=UTF-8");
+		System.out.println("tname22 : " + tname);
 		
 		//달력 띄우기
 		Calendar cal = Calendar.getInstance();

@@ -15,6 +15,9 @@
 	});
 	
 	function reservationCheck(date, time, year, month, tid, tname, usageNum, people) {
+		
+		//alert(tname);
+		
 		// 스크롤 위치 기억
 	    var scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 		

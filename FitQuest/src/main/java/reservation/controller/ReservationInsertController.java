@@ -1,6 +1,10 @@
 package reservation.controller;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +42,7 @@ public class ReservationInsertController {
 	@Autowired
 	NotificationDao notificationDao;
 	
-	@RequestMapping(value=command,method = RequestMethod.GET)
+	@RequestMapping(value=command,method = RequestMethod.GET, produces = "application/text; charset=utf-8")
 	public String doAction(
 			@RequestParam("year") String year,
 			@RequestParam("month") String month,
@@ -48,7 +52,10 @@ public class ReservationInsertController {
 			@RequestParam("tname") String tname,
 			@RequestParam("usageNum") int usageNum,
 			@RequestParam("people") int people,
-			HttpSession session) {
+			HttpSession session,HttpServletResponse response
+			) throws UnsupportedEncodingException {
+		
+		response.setContentType("text/html; charset=UTF-8");
 		
 		//사용권 정보 가져오기
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();
@@ -100,8 +107,9 @@ public class ReservationInsertController {
 		}else {
 			System.out.println("예약 실패");
 		}
-		
-		return "redirect:/genericReservation.rv?tid="+tid+"&tname="+tname+"&people=" + people;
+		String encodedParam = URLEncoder.encode(tname, "UTF-8");
+		System.out.println("tname11 : " + tname);
+		return "redirect:/genericReservation.rv?tid="+tid+"&tname="+encodedParam+"&people=" + people;
 	}
 	
 	
