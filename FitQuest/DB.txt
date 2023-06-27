@@ -651,7 +651,7 @@ CREATE TABLE review (
 select * from review;
 commit;
 
---notifications
+-- 알림기능 
 drop sequence noseq;
 create sequence noseq
   increment by 1
@@ -675,3 +675,23 @@ CREATE TABLE notification (
 
 commit;
 select * from notification;
+
+-- 트레이너 1대1 문의
+drop sequence tqseq;
+create sequence tqseq
+  increment by 1
+  start with 1
+  minvalue 1
+  nocache;
+  
+drop table tquestion cascade constraints;
+CREATE TABLE tquestion (
+   tqnum   number   primary key, --문의 번호
+   ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   tqdate   date default sysdate, --문의 날짜 
+   tqsubject   varchar2(60)   NOT NULL, --문의 제목
+   tqcontent   varchar2(1000)   NOT NULL, --문의 내용
+   tqanswer varchar2(100) NOT NULL -- 답변받을 연락처
+);
+
+commit;
