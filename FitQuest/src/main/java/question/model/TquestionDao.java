@@ -10,4 +10,10 @@ public class TquestionDao {
 	SqlSessionTemplate sqlSessionTemplate;
 	private final String namespace = "question.model.Tquestion";
 	
+	public int insertTQuestion(TquestionBean tquestionBean) {
+		int cnt = -1;
+		cnt = sqlSessionTemplate.insert(namespace + ".InsertTQuestion", tquestionBean);
+		return cnt;
+	}
+	
 }
