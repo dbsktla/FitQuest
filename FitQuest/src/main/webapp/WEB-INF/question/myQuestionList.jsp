@@ -29,6 +29,8 @@
 				<div class="tab-pane fade show active" id="list" role="tabpanel"
 					aria-labelledby="board">
 					<div class="row">
+					
+						<!-- 시스템 관련 문의 내역 -->
 						<div class="card" style="width: 70%; margin: auto;">
 							<div class="card-body">
 								<div align="right">
@@ -36,7 +38,7 @@
 										<input type="button" value="문의하기" class="btn btn-warning btn-sm" onclick="location.href='questionInsert.qt'">
 									</c:if>
 								</div>
-								<h5 class="card-title">문의 내역</h5>
+								<h5 class="card-title">시스템 관련 문의 내역</h5>
 								<div class="col-md-5" align="left"></div>
 								<table class="table table-hover">
 									<tr align="center">
@@ -68,8 +70,6 @@
 									</c:if>
 								</table>
 							</div>
-
-
 
 							<div style="display: inline-block; margin: auto;">
 								<nav aria-label="Page navigation example">
@@ -105,7 +105,45 @@
 									</ul>
 								</nav>
 							</div>
-						</div>
+						</div><!-- 시스템 관련 문의 내역 -->
+						
+						<!-- 트레이너 이메일 문의 -->
+						<div class="card" style="width: 70%; margin: auto; margin-top: 5%;">
+							<div class="card-body">
+								<h5 class="card-title">트레이너 이메일 문의 내역</h5>
+								<div class="col-md-5" align="left"></div>
+								<table class="table table-hover">
+									<tr align="center">
+										<th scope="col">번호</th>
+										<th scope="col" width="40%">문의 제목</th>
+										<th scope="col">트레이너</th>
+										<th scope="col">문의 날짜</th>
+									</tr>
+									<c:if test="${ empty tqlist }">
+										<tr align="center">
+											<td colspan="4">문의 내역이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:if test="${ !empty tqlist }">
+										<c:forEach var="question" items="${ tqlist }" varStatus="status">
+											<tr align="center">
+												<th scope="row">${status.index + 1}</th>
+												<td>
+													<a style="color: black;"href="tquestionDetail.qt?tqnum=${ question.tqnum }">${ question.tqsubject }</a>
+												</td>
+												<td>${ question.tname }</td>
+												<td>
+													<fmt:parseDate var="parseDate" value="${ question.tqdate }" pattern="yyyy-MM-dd HH:mm" />
+													<fmt:formatDate value="${ parseDate }" pattern="MM-dd HH:mm" />
+												</td>
+											</tr>
+										</c:forEach>
+									</c:if>
+								</table>
+							</div>
+						</div><!-- 트레이너 이메일 문의 -->
+						
 					</div>
 				</div>
 			</div>

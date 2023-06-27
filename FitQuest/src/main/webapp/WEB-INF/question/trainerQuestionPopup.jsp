@@ -41,6 +41,7 @@
 		<div class="col-10" style="margin: auto;margin-top: 5%; ">
 			
 			<input type="hidden" name="id" value="${ memberBean.id }">
+			<input type="hidden" name="name" value="${ memberBean.name }">
 			
 			<div style="padding: 15 15 15 0"><font color="gray">*문의는 이메일로 전송됩니다.</font></div>
 			

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import question.model.TquestionBean;
 import question.model.TquestionDao;
@@ -18,7 +19,8 @@ public class TquestionInsertController {
 	TquestionDao tquestionDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String doAction(@ModelAttribute("tquestionBean") TquestionBean tquestionBean) {
+	public String doAction(@ModelAttribute("tquestionBean") TquestionBean tquestionBean,
+							@RequestParam("name") String name) {
 		int cnt = tquestionDao.insertTQuestion(tquestionBean);
 		
 		System.out.println("cnt : " + cnt);

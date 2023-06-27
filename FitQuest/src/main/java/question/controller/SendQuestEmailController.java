@@ -20,10 +20,11 @@ public class SendQuestEmailController {
 	public String doAction(@RequestParam("temail") String temail,
 							@RequestParam("aemail") String aemail,
 							@RequestParam("content") String content,
-							@RequestParam("subject") String subject) {
+							@RequestParam("subject") String subject,
+							@RequestParam("name") String name) {
 		
 		
 		
-		return mailService.trainerEmail(temail,aemail,content,subject);
+		return mailService.trainerEmail(temail,aemail,content,subject,name);
 	}
 }

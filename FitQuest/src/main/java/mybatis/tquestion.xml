@@ -17,4 +17,29 @@
 			   ,#{tqanswer}
 			   )
 	</insert>
+	
+	<select id="GetTquestionList" resultType="question.model.TquestionBean">
+		SELECT	tq.*
+        	   ,m.name AS tname
+		FROM	(
+			     SELECT *
+				 FROM	TQUESTION
+			    ) tq
+		INNER 	JOIN MEMBER m
+	    ON 		m.email = tq.tqemail
+		AND 	tq.id 	=  #{id}
+		ORDER BY tqdate DESC
+	</select>
+	
+	<select id="GetTquestionDetail" resultType="question.model.TquestionBean">
+		SELECT 	*
+		FROM 	TQUESTION
+		WHERE 	tqnum = #{tqnum}
+	</select>
+	
+	<delete id="Delete30Days">
+		DELETE 	
+		FROM 	TQUESTION 
+		WHERE 	TO_DATE(sysdate) - TO_DATE(tqdate) > 30
+	</delete>
 </mapper>
