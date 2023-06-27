@@ -34,6 +34,9 @@
 	.btn-check-label, .form-check-label{
 		border-radius: 25px !important;
 	}
+	.member{
+		height: 500px !important;
+	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
 <script type = "text/javascript">

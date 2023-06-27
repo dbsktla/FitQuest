@@ -15,6 +15,10 @@
 .m-size{
 	width: 40%;
 }
+.s-text{
+	color: black;
+	font-size: 15px;
+}
 .m-text{
 	font-size: 20px;
 }
@@ -62,4 +66,35 @@
 	background-repeat: no-repeat;
 	height: 2600px;
  
+}
+.height{
+	height: 300px;
+}
+.t-table{
+	width: 100%;
+	text-align: center;
+	margin: 20px 0px;
+}
+.t-td{
+	padding: 15px 10px;
+	background-color: #fafafa;
+	border-bottom: 2px solid white;
+}
+.t-th{
+	padding: 15px 10px;
+	width: 40%;  
+	background-color: #fafafa;
+	border-bottom: 2px solid white;
+	border-right: 2px solid white;
+}
+.p-text{
+	margin: 0;
+	color: #333333;
+	font-size: 18px;
+}
+.p-box{
+	background-color: #FEF9E7; 
+	padding: 6px 25px;
+	border-radius: 5px;
+	color: black;
 }

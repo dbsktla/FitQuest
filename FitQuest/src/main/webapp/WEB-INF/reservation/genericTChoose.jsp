@@ -36,6 +36,9 @@
 		border-radius: 50px;
 		padding: 10px; 
 	}
+	.member{
+		height: 500px !important;
+	}
 </style>
 
 
