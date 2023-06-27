@@ -3,6 +3,9 @@
 <%@ include file="../common/top.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <style type = "text/css">
+	#red{
+		color: red !important;
+	}
 	.btn:hover {
 		background-color:#FAC710 !important;
 	}
@@ -303,8 +306,12 @@ var areaSelectMaker = function(target){
         </div>	
       </div>
 	<div align = "center" style = "margin-top:20px;">
-		${pageInfo.pagingHtml}
-	</div>
+        <nav id="pagination" aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" style = "display: flex;">${pageInfo.pagingHtml}</li>
+            </ul>
+        </nav>
+</div>
     </section><!-- End Team Section -->
     </body>
 <%@ include file="../common/bottom.jsp" %>
