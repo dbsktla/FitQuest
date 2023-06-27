@@ -86,12 +86,12 @@ public class MailSendService {
 			
 			String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
 			String toMail = temail;
-			String title = subject; // 이메일 제목 
+			String title = "Fitquest " + name + "님의 문의내역 입니다."; // 이메일 제목 
 			String content = 
 					"<h1>Fitquest " + name + "님의 문의내역 입니다.</h1>" + 	//html 형식으로 작성 ! 
 	                "<br><br>" + 
-	                mcontent +
-	                "<br><br>" + 
+					"문의 제목 : " + subject + "<br>" +
+	                "문의 내용 : " + mcontent + "<br><br>" + 
 	                "회신 연락처 : " + aemail; //이메일 내용 삽입
 			mailSend(setFrom, toMail, title, content);
 			
