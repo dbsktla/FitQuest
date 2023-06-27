@@ -69,14 +69,6 @@
 							<th scope="col">조회수</th>
 							<th scope="col">작성일</th>
 						</tr>
-						<c:if test="${ empty freeBoardList }">
-							<tr align="center">
-								<td colspan="6">
-									작성된 게시글이 없습니다.
-								</td>
-							</tr>
-						</c:if>
-						<c:if test="${ not empty freeBoardList }">
 						<c:forEach var="board" items="${ hotFreeBoardList }" varStatus="status">
 							<tr align="center" >
 								<th scope="row" style="background-color: #FEF9E7">인기</th>
@@ -98,6 +90,14 @@
 								</td>
 							</tr>
 						</c:forEach>
+						<c:if test="${ empty freeBoardList }">
+							<tr align="center">
+								<td colspan="6">
+									작성된 게시글이 없습니다.
+								</td>
+							</tr>
+						</c:if>
+						<c:if test="${ not empty freeBoardList }">
 						<tr><td height="30" style="border: white;"></td><tr>
 						<c:forEach var="board" items="${ freeBoardList }" varStatus="status">
 							<tr align="center">
