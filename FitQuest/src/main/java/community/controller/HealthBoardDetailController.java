@@ -31,6 +31,11 @@ public class HealthBoardDetailController {
 	
 	@Autowired
 	ScrapDao scrapDao;
+	
+	@RequestMapping("/test.co")
+	public String test() {
+		return "systemTest";
+	}
 
 	@RequestMapping(command)
 	public ModelAndView detail(@RequestParam("bnum") int bnum, HttpSession session){
