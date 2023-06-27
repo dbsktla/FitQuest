@@ -8,8 +8,6 @@
 		<div class="detail-title-font">예약 상세 내역</div>
 	</div> 
 <c:forEach var="ritem" items="${rList}">
-
-    <%-- HTML 출력 --%>
     <div class="detail-name-box">
         <span class="calender-text">${ritem.name}님</span>
         <span class="calender-text-id">(${ritem.id})</span>

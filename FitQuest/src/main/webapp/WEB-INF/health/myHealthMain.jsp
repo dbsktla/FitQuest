@@ -17,6 +17,21 @@
 	    transition: 0.3s;
 	    font-size: 16px;
 	}
+	.ps-3{
+		margin: 30px 0px !important;
+	}
+	.col-xxl-3{
+		 background-color: #F7F7F8 !important;
+		 margin: 10px !important;
+		 padding: 20px !important;
+		 border-radius: 10px;
+		 width: 23% !important;
+		 text-align: center;
+	}
+	.row{
+		justify-content: center;
+		width: 100%;
+	}
 </style>
 
 <script type="text/javascript" src="resources/js/jquery.js"></script>
@@ -192,7 +207,7 @@
 							</div>
 							</c:if>
 							<c:if test="${not empty hblist}">
-								<table>
+								<table align="center">
 									<c:forEach var="hblist" items="${hblist}">
 									<c:if test="${hblist.tid == 'notrainer'}">
 										<tr>
@@ -234,7 +249,7 @@
 							</div>
 							</c:if>
 							<c:if test="${not empty foodBean}">
-								<table style="width: 100%;">
+								<table style="width: 100%;" align="center">
 									<tr>
 										<td colspan="4">오늘의 종합 영양섭취 정보</td>
 									</tr>
@@ -282,7 +297,7 @@
 							<!-- 선택한 날짜, 00 트레이너와 00일쨰 00중 -->
 							<c:if test="${not empty mainHealthList}">
 								<c:forEach var="hlist" items="${mainHealthList}">
-									<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate}</b>일 째 <b>${hlist.ptype} ${hlist.tactivity}</b> 중<br>
+									<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate}</b>일째 <b>${hlist.ptype} ${hlist.tactivity}</b> 중<br>
 								</c:forEach>
 							</c:if>
 						</div><!-- ps-3 -->
@@ -297,9 +312,9 @@
 						<h5 class="card-title">나의 목표</h5>
 						<div class="ps-3">
 						<div class="row">
-							<div class="col-xxl-3">
+							<div class="col-xxl-3"style="padding-left: 0;">
 								<font style="font-size: 18px; color: #FAC710;"><b>현재 체중</b></font><br><br>
-								<table>
+								<table align="center">
 									<c:if test="${empty phsiqueBean}">
 										<tr>
 											<td colspan="2">등록된 신체정보가 없습니다.</td>
@@ -332,7 +347,7 @@
 							
 							<div class="col-xxl-3">
 								<font style="font-size: 18px; color: #FAC710;"><b>목표 체중</b></font><br><br>
-								<table>
+								<table align="center">
 									<c:if test="${empty goalBean}">
 										<tr>
 											<td colspan="2">등록된 목표체중이 없습니다.</td>

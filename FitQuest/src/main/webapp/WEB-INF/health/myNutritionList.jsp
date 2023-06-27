@@ -276,7 +276,7 @@
 		<div class="col-lg-4" >
 			<div class="card">
 				<div class="card-body">
-					<h5 style="padding-bottom: 20;">
+					<h5 class="card-title" style="padding-bottom: 20;">
 						오늘의 총 섭취 영양정보
 						<input type="button" value="추가" onclick="location.href='myNutritionInsert.ht'" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10px">
 					</h5>

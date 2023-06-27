@@ -70,7 +70,7 @@ function findPw(){
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D;">로그인</h5>
+                    <h5 class="card-title text-center pb-0 fs-4" style="color : #5D5D5D; border: none;">로그인</h5>
                   </div>
 
                   <form action="login.mb" method="post" class="row g-3 needs-validation" novalidate>

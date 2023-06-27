@@ -4,7 +4,6 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myMemberTop.jsp"%>
 <style>
-
 	body{
 		background-color: #FEF9E7;
 		color : black;
@@ -25,6 +24,15 @@
 	.pageTitle{
 		margin-top: 50px;
 		margin-bottom: 50px;
+	}
+	.profile .profile-overview .label{
+		color: black;
+	}
+	.col-lg-9{
+		color: gray;
+	}
+	.card-body{
+		padding: 30px !important;	
 	}
 }
 </style>
