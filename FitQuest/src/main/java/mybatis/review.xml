@@ -70,8 +70,8 @@
 		and tid = #{tid}
 	</select>
 	<insert id = "InsertReview">
-		insert into review
-		values(rvseq.nextval, #{mid}, #{tid}, #{rating}, #{rtitle}, #{rcontent}, sysdate, #{hasReview}, #{report})
+		insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
+		values(rvseq.nextval, #{mid}, #{tid}, #{rating}, #{rtitle}, #{rcontent}, sysdate, #{hasReview})
 	</insert>
 	<select id = "GetMyReviewCount" resultType = "int">
 		select count(*) from review

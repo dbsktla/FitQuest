@@ -117,7 +117,6 @@
 		                	<input type = "hidden" name = "mid" value = "${memberBean.id }">
 		                	<input type = "hidden" name = "tid" value = "${trainerBean.id }">
 		                	<input type = "hidden" name = "hasReview" value = "Y">
-		                	<input type = "hidden" name = "report" value = "N">
 		                  <div class="row">
 		                    <div class="col-md-6 form-group">
 		                      <input name="id" type="text" class="form-control" value = "작성자 : ${memberBean.id } 회원님" disabled>
