@@ -619,13 +619,3 @@ insert into orderdetail values(odseq.nextval, 56, 120);
 insert into orderdetail values(odseq.nextval, 60, 120);
 
 commit;
-
---reservation
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-06-26', '10:00~11:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-06-26', '10:00~11:00', 'complete');
-insert into reservation values(reseq.nextval, 'hong', 'kim', '홍길동', '홍길동', 1, 1, 1, '2023-06-26', '10:00~11:00', 'complete');
-commit;
-
---usage
-
-commit;
