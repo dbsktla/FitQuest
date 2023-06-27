@@ -595,6 +595,7 @@ drop table tquestion cascade constraints;
 CREATE TABLE tquestion (
    tqnum   number   primary key, --문의 번호
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 회원아이디 
+   tqemail varchar2(100), -- 문의 할 이메일
    tqdate   date default sysdate, --문의 날짜 
    tqsubject   varchar2(60)   NOT NULL, --문의 제목
    tqcontent   varchar2(1000)   NOT NULL, --문의 내용
