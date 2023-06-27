@@ -1,6 +1,17 @@
 
 --member
+-- admin/관리자
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('admin','admin','관리자','1234','관리자','1991-09-09','01090909090','admin@fitquest.com','서울 중구 북창동 136','2층','여자');
+
 --트레이너 회원
+
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('kim','trainer','트레이너 회원','1234','홍시','1991-09-09','01090909090','kim@fitquest.com','서울 중구 북창동 136','2층','여자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('lee','trainer','이준영','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','남자');
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('moon','trainer','문지영','1234','홍시','1989-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('park','trainer','박영진','1234','영진스','1992-09-09','01090909090','lee@fitquest.com','서울 마포구 서교동 125','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
@@ -43,6 +54,9 @@ insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,mad
 		values('parkjay','trainer','박제원','1234','JayOne','1990-04-20','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
 		
 --일반 회원
+
+insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
+		values('hong','generic','일반 회원','qwerty1!','홍시','1990-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('mistermoon','generic','문종원','1234','문맨','1990-03-11','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
@@ -145,6 +159,99 @@ values(rvseq.nextval, 'hong', 'parkjay', 3, '추천합니다', '굳', sysdate, '
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
 values(rvseq.nextval, 'mistermoon', 'moon2', 3, '추천합니다', '굳', sysdate, 'Y');
 
+--게시판
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent,Bregdate)
+values(bseq.nextval,'hong','자유','일반','다이어트 1일차',1,0,0,'<h1>다이어트 1일차</h1><p>20kg 감량 목표입니다.</p><p>현재 -0.1kg</p>','2023-06-01');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent, Bregdate)
+values(bseq.nextval,'hong','자유','일반','다이어트 2일차',2,0,0,'<h1>다이어트 2일차</h1><p>20kg 감량 목표입니다.</p><p>현재 -0.3kg</p>','2023-06-02');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent, Bregdate)
+values(bseq.nextval,'hong','자유','일반','다이어트 3일차',3,0,0,'<h1>다이어트 3일차</h1><p>20kg 감량 목표입니다.</p><p>현재 -0.7kg</p>','2023-06-03');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent, Bregdate)
+values(bseq.nextval,'hong','자유','일반','다이어트 4일차',4,0,0,'<h1>다이어트 4일차</h1><p>20kg 감량 목표입니다.</p><p>현재 -0.9kg</p>','2023-06-04');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bref,Brestep,Brelevel,Bcontent, Bregdate)
+values(bseq.nextval,'hong','자유','일반','다이어트 실패..',4,1,1,'<p>참지 못하고 오늘 술 한잔 했습니다..</p><p>조금 쉬었다가 다시 글 남기겠습니다.</p>','2023-06-05');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage)
+values(bseq.nextval,'kim','건강','운동','스쿼트','<h1>스쿼트의 효과</h1><p><br></p><ul><li><strong style="color: rgb(17, 17, 17);">하체 근육을 기른다.</strong></li><li><strong style="color: rgb(17, 17, 17);">신체기능을 유지하게 한다.</strong></li><li><strong style="color: rgb(17, 17, 17);">관절의 안정성과 자세를 개선한다.</strong></li><li><strong style="color: rgb(17, 17, 17);">지방을 태운다.</strong></li><li><strong style="color: rgb(17, 17, 17);">유연성을 향상시킨다.</strong></li></ul><p><strong style="color: rgb(17, 17, 17);">스쿼트를 할 때는 올바른 자세를 유지할 수 있도록 해야합니다.</strong></p>', 'squat.jpg');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage)
+values(bseq.nextval,'moon','건강','식단','브로콜리','<h1>브로콜리의 효능</h1><p><span style="color: rgb(64, 64, 64);">브로콜리는 샐러드, 수프, 스튜 등 서양음식에 가장 많이 사용하는 채소 중 하나다.</span></p><p><span style="color: rgb(102, 102, 102);">세계 10대 푸드중 하나로 소염, 항암 성분 및 강력한 알칼리화 작용으로 유명하다. 미국 국립암연구소에서 선정한 최고의 암예방 식품 중 하나로 선정되기도 했는데 비타민-C 함유량이 레몬의 약 2배로 채소 중 가장 많으며 B1, B2, 칼슘, 인, 칼륨 등의 미네랄 성분도 듬뿍 들어 있다. 이밖에도 베타카로틴, 플라보노이드, 이소티오시안산, 황, 식이섬유, 루테인이 풍부하면서도 칼로리가 낮아 다이어트 식품으로도 훌륭하다. 풍부한 섬유질은 장내 미생물총에 대한 영양분 공급 및 면역기능 강화와 소화 및 배변에도 도움이 된다.</span></p>', 'broccoli.jpg');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage, Bregdate)
+values(bseq.nextval,'moon','건강','기타','2023 서울신문 하프마라톤 대회','<h1>2023 서울신문 하프마라톤 대회</h1><p>2023.05.20(토) 9시 출발</p><p>상암동 월드텁공원 평화의 광장</p><p>참여하시면 좋은 기회가 될 것이라고 생각합니다!</p>', 'marathon.jpeg','2023-05-10');
+
+insert into board(Bnum,id,btype,bcategory,Bsubject,Bcontent,Bimage)
+values(bseq.nextval,'lee','건강','식단','사과','<h1>사과</h1><p><span style="color: rgb(84, 84, 84);">  - 고혈압 예방 : 사과의 칼륨</span></p><p><span style="color: rgb(84, 84, 84);">;- 콜레스테롤조절 : 사과의 팩틴, 콜레스테롤 흡수 및 배설 촉진</span></p><p><span style="color: rgb(84, 84, 84);">;- 당뇨병 예방 : 사과의 팩틴, 당질을 흡수</span></p><p><span style="color: rgb(84, 84, 84);">;- 피로회복 : 사과의 사과산, 구연산은 유산저하, 신진대사 활발</span></p><p><span style="color: rgb(84, 84, 84);">;- 대장암 발생 감소 : 사과의 식이 섬유, 변비해소</span></p><p><span style="color: rgb(84, 84, 84);">;- 충치 예방 : 사과의 과육, 자연의 칫솔, 잇몸 건강</span></p><p><span style="color: rgb(84, 84, 84);">;- 어깨 결림 및 요통 감소 : 사과산 구연산</span></p>', 'apple.jpg');
+
+--책갈피 
+
+insert into scrap values(sseq.nextval,'hong',6);
+insert into scrap values(sseq.nextval,'hong',8);
+
+--댓글
+
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
+values(bcseq.nextval,1,'moon',1,0,0,'화이팅!! 응원합니다','23/06/01');
+
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
+values(bcseq.nextval,5,'moon',2,0,0,'괜찮습니다! 내일부터 다시 시작하면됩니다. 화이팅!!','23/06/05');
+
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
+values(bcseq.nextval,8,'hong',3,0,0,'일반인도 참여할 수 있나요?','23/05/17');
+
+insert into BCOMMENT(cnum,Bnum,ID,cref,crestep,crelevel,Ccontent,cregdate)
+values(bcseq.nextval,8,'moon',3,1,1,'물론입니다. 하지만, 경험이 없는 참가자는 무리가 갈 수 있기에 조심하셔야 합니다.','23/05/18');
+
+--신고 테이블
+
+insert into report
+values(rpseq.nextval,1,'hong','bcomment','처리 준비','글의 내용이 부적절하다고 생각됩니다.');
+
+--사용권 usage 
+
+insert into usage values(useq.nextval,1,1,1,'kim','hong',10,'available');
+insert into usage values(useq.nextval,6,2,4,'kim','hong',10,'available');
+insert into usage values(useq.nextval,1,3,1,'kim','jkim',10,'available');
+insert into usage values(useq.nextval,6,4,4,'kim','jkim',10,'available');
+
+--tschedule 트레이너 스케줄
+
+insert into tschedule values('kim','mon','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','wed','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','sat','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','sun','10:00~11:00,11:00~12:00,12:00~13:00','null','개인',1);
+insert into tschedule values('kim','mon','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+insert into tschedule values('kim','wed','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+insert into tschedule values('kim','sat','13:00~14:00,14:00~15:00,15:00~16:00','null','그룹',4);
+
+--pt예약 테이블
+-- rstate: false = 승인 전(예약 신청만 된 상태)
+		-- true = 승인 완료(예약 승인 완료)
+		-- reject = 승인 거절(예약 승인 거절)
+		-- cancel = 예약 취소
+		-- complete = 운동 완료(3회 이상 완료시 리뷰 작성 가능하게 하기 위함)
+
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-10','10:00~11:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-15','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-1','13:00~14:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-12','14:00~15:00','false');
+
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-10','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-15','12:00~13:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-1','14:00~15:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-12','15:00~16:00','false');
+
+--리뷰 조건을 위해 추가:
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-5-10','10:00~11:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-5-15','11:00~12:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-5-1','13:00~14:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-5-12','14:00~15:00','complete');
+
 --상품
 insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인');
 insert into product values(pseq.nextval, 'kim', 20, 2, 18, 1, '개인');
@@ -213,12 +320,6 @@ insert into product values(pseq.nextval, 'parkjay', 10, 1, 13, 3, '그룹');
 insert into product values(pseq.nextval, 'parkjay', 19, 2, 24, 3, '그룹');
 insert into product values(pseq.nextval, 'parkjay', 28, 3, 33, 3, '그룹');
 commit;
-
-
-
-
-
-
 
 
 --orders
@@ -617,5 +718,92 @@ insert into orderdetail values(odseq.nextval, 49, 118);
 insert into orderdetail values(odseq.nextval, 53, 119);
 insert into orderdetail values(odseq.nextval, 56, 120);
 insert into orderdetail values(odseq.nextval, 60, 120);
+
+
+--문의
+insert into question (qnum,id,qsubject,qcontent,qstatus)
+values(qseq.nextval,'hong','입력이 안됩니다.','3회 이상 수업을 들었는데 리뷰 작성 입력이 안됩니다.', '답변완료');
+
+--문의 답변
+insert into QComment(qcnum,qnum,qcomment)
+values(qcseq.nextval,1,'마지막 수업이 반영되지 않았습니다. <br> 조금만 기다려 주세요.');
+
+-- 운동일자
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-01','kim');
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-02','kim');
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-01','lee');
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-03','lee');
+insert into healthdate values(hseq.nextval, 'hong', '2023-06-05','notrainer');
+insert into healthdate values(hseq.nextval, 'jkim', '2023-06-01','kim');
+insert into healthdate values(hseq.nextval, 'jkim', '2023-06-02','kim');
+insert into healthdate values(hseq.nextval, 'hong', '2021-10-02','park');
+
+commit;
+
+
+-- 상세 운동
+insert into health values(1, '유산소',TO_DATE('2023-06-01 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(1, '벤치프레스',TO_DATE('2023-06-01 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 11:40','YYYY-MM-DD HH24:MI'),10,3);
+insert into health values(2, '유산소',TO_DATE('2023-06-02 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(2, '스쿼트',TO_DATE('2023-06-02 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 12:00','YYYY-MM-DD HH24:MI'),12,5);
+insert into health values(3, '캐딜락',TO_DATE('2023-06-01 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),17,3);
+insert into health values(3, '리포머',TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:50','YYYY-MM-DD HH24:MI'),15,3);
+insert into health values(4, '래더바렐',TO_DATE('2023-06-03 15:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 16:00','YYYY-MM-DD HH24:MI'),12,5);
+insert into health values(4, '스프링보드',TO_DATE('2023-06-03 16:30','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),19,5);
+insert into health values(4, '캐딜락',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(5, '스쿼트',TO_DATE('2023-06-03 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-03 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(6, '캐딜락',TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(6, '스쿼트',TO_DATE('2023-06-01 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-01 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(7, '캐딜락',TO_DATE('2023-06-02 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(7, '스쿼트',TO_DATE('2023-06-02 17:00','YYYY-MM-DD HH24:MI'),TO_DATE('2023-06-02 17:20','YYYY-MM-DD HH24:MI'),20,5);
+insert into health values(8, '유산소',TO_DATE('2021-10-02 11:00','YYYY-MM-DD HH24:MI'),TO_DATE('2021-10-02 11:30','YYYY-MM-DD HH24:MI'),0,0);
+insert into health values(8, '벤치프레스',TO_DATE('2021-10-02 11:30','YYYY-MM-DD HH24:MI'),TO_DATE('2021-10-02 11:40','YYYY-MM-DD HH24:MI'),10,3);
+
+commit;
+
+
+-- 운동목표
+insert into goalphysique values('hong', '2023-08-31', 70.8, 18.7, 15);
+
+commit;
+
+
+-- 신체정보
+insert into physique values(phseq.nextval, 'hong', 170.5, 90.0, 30.9, '2023-04-30', 29.3, 33.2, 1607, null);
+insert into physique values(phseq.nextval, 'hong', 170.5, 85.0, 29.2, '2023-05-10', 30.3, 30.5, 1570, 'hong_inbody1.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 80.1, 27.5, '2023-05-23', 31.5, 29.8, 1540, 'hong_inbody2.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 75.4, 25.9, '2023-06-01', 32.9, 28.1, 1580, 'hong_inbody3.jpg');
+insert into physique values(phseq.nextval, 'hong', 170.5, 70.0, 24.07, '2023-06-07', 33.1, 27.5, 1607, 'hong_inbody4.jpg');
+
+commit;
+
+
+-- 식단
+insert into nutrition values(nseq.nextval, 'hong', '2023-06-12');
+insert into nutrition values(nseq.nextval, 'hong', '2023-06-13');
+insert into nutrition values(nseq.nextval, 'jkim', '2023-06-13');
+
+-- 식사정보
+insert into meal values(mealseq.nextval, 1, 'food1.jpg', '아침');
+insert into meal values(mealseq.nextval, 1, 'food2.jpg', '점심');
+insert into meal values(mealseq.nextval, 2, 'no_img.jpg', '아침');
+insert into meal values(mealseq.nextval, 2, 'food4.jpg', '점심');
+insert into meal values(mealseq.nextval, 3, 'food1.jpg', '점심');
+
+-- 식사정보
+insert into food values(fseq.nextval, 1, 1, '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into food values(fseq.nextval, 1, 2, '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
+insert into food values(fseq.nextval, 1, 2, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+insert into food values(fseq.nextval, 2, 3, '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into food values(fseq.nextval, 2, 3, '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
+insert into food values(fseq.nextval, 2, 4, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+insert into food values(fseq.nextval, 3, 5, '콘샐러드', 100, 104.00, 22.40, 3.20, 0.20, 0, 330.00);
+
+-- 식단 북마크
+insert into foodmark values(fkseq.nextval, 'hong', '바나나칩', 30, 49.50, 5.40, 0.30, 3.0, 3.3, 0.6);
+insert into foodmark values(fkseq.nextval, 'hong', '감자,삶은것', 100, 66.00, 14.20, 3.20, 2.00, 0, 2.00);
+
+commit;
+
 
 commit;
