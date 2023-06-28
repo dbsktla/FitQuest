@@ -4,7 +4,6 @@
 <%@ include file="../common/adminBootTop.jsp"%>
 <%@ include file="../common/myMemberTop.jsp"%>
 <style>
-
 	body{
 		background-color: #FEF9E7;
 		color : black;
