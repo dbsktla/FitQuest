@@ -219,11 +219,13 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <label for="yourDay" class="form-label b margin-bottom">시간</label>
                       <br>
                       	<div class="center form-control">
+                      	<c:set var="i" value="0"/> 
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="suntime" value="${tst}" class="time-checkbox"<c:if test="${existSun.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="suntime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existSun.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -234,10 +236,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="montime" value="${tst}" class="time-checkbox"<c:if test="${existMon.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="montime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existMon.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -248,10 +251,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="tuetime" value="${tst}" class="time-checkbox"<c:if test="${existTue.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="tuetime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existTue.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -262,10 +266,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="wedtime" value="${tst}" class="time-checkbox"<c:if test="${existWed.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="wedtime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existWed.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -276,10 +281,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="thutime" value="${tst}" class="time-checkbox"<c:if test="${existThu.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="thutime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existThu.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -290,10 +296,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="fritime" value="${tst}" class="time-checkbox"<c:if test="${existFri.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="fritime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existFri.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
@@ -304,10 +311,11 @@ String [] tstimeArr = {"05:00~06:00","06:00~07:00","07:00~08:00","08:00~09:00","
                       <br>
                       	<div class="center form-control">
 		                <c:forEach var="tst" items="<%=tstimeArr%>">
-		                    <label for="${tst}" class="margin5 form-control">
-		                        <input type="checkbox" name="sattime" value="${tst}" class="time-checkbox"<c:if test="${existSat.contains(tst)}">checked</c:if>>
+		                    <label for="${tst}${i}" class="margin5 form-control">
+		                        <input type="checkbox" name="sattime" id="${tst}${i}" value="${tst}" class="time-checkbox"<c:if test="${existSat.contains(tst)}">checked</c:if>>
 		                        ${tst}
 		                    </label>
+		                    <c:set var="i" value="${i+1}"/> 
 		                </c:forEach>
                    	 </div>
                     </div>
