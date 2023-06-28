@@ -1,8 +1,14 @@
 package gym.controller;
 
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,15 +30,28 @@ public class GymInsertController {
 	} 
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
-	public String insert(GymBean gymBean) {
-		
-		int cnt = gymDao.insertGym(gymBean);
-		System.out.println("InsertGym cnt : " + cnt);
-		if(cnt != -1) {
-			return gotoPage;			
-		}
-		else {
-			return getPage;
-		}
+	public String insert(GymBean gymBean, HttpServletResponse response) {
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			int cnt = gymDao.insertGym(gymBean);
+			System.out.println("InsertGym cnt : " + cnt);
+			if(cnt != -1) {
+				response.getWriter().print("<script>alert('헬스장 등록되었습니다.');location.href='gymList.mb';</script>");
+				response.getWriter().flush();
+			}
+			else {
+				return getPage;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		return "";
+	}
+	
+	@RequestMapping("/gymList.mb")
+	public String list(Model model) {
+		List<GymBean> glist = gymDao.getAllGym();
+		model.addAttribute("glist",glist);
+		return "gymList";
 	}
 }

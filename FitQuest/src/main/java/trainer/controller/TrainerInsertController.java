@@ -50,6 +50,7 @@ public class TrainerInsertController {
 
 	@RequestMapping(value=command,method=RequestMethod.POST)
 	public String insert(@Valid TrainerBean trainerBean, BindingResult result,HttpServletRequest request, Model model) {
+		System.out.println("eCheck : " + trainerBean.geteCheck());
 		List<GymBean> glist = gymDao.getAllGym();
 		String uploadPath = FitQuestUtil.getValueFromProjectProperties("common_directory") + "/TrainerImage";
 		

@@ -25,8 +25,18 @@ public class MemberBean {
 	
 	private String activity;
 	private String timage;
-	private String hasReview
-	;
+	private String hasReview;
+	
+	private String eCheck;
+
+	public String geteCheck() {
+		return eCheck;
+	}
+
+	public void seteCheck(String eCheck) {
+		this.eCheck = eCheck;
+	}
+
 	
 	public String getHasReview() {
 		return hasReview;
