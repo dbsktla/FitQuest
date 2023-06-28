@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <%
 	session.setAttribute("flag2", true); 
 %>
@@ -14,6 +15,16 @@
 	}
 	#kakaopay:hover{
 		cursor: pointer;
+	}
+	.title-container{
+		margin-bottom: 0 !important; 
+	}
+	.btn-warning{
+		margin: 2.5px;
+	}
+	th{
+		text-align: center !important;
+		margin: auto !important;
 	}
 </style>
 
@@ -84,20 +95,16 @@ $(document).ready(function(){
 </script>
 
 <body style="background-color : #FEF9E7;">
+	<div class="title-container">
+		<div class="title-text">주문 확인</div>
+	</div>
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
 
         <div class="row" style = "justify-contents: center;">
-         <header class="section-header" style = "margin-top:60px;">
-	          <h2>FitQuest</h2>
-	          <p>주문 확인</p>
-	        </header>
           <div class="col-lg-12 entries" style = "padding: 0px;background-color: white;">
    			<article class="entry entry-single" style = "margin:0px;">
    			 <div class="col-lg-12">
-			        <div class="col-lg-12 col-sm-12 hero-feature">
-			        <h4>주문하실 상품 확인한 후 결제하세요</h4>
-   			 		</div>
    			 		
 			        <div class="col-lg-12 col-sm-12 hero-feature">
 			            <form action = "cartCalculate.od" name = "myform" id="myform">
@@ -105,11 +112,11 @@ $(document).ready(function(){
 			                <table class="table table-bordered tbl-cart">
 			                    <thead>
 			                        <tr class = "table-warning">
-			                            <td colspan = "2" valign = "middle" align = "center">트레이너</td>
-			                            <td valign = "middle" align = "center">헬스장</td>
-			                            <td valign = "middle" align = "center">수업</td>
-			                            <td valign = "middle" align = "center">회원권</td>
-			                            <td valign = "middle" align = "center">가격</td>
+			                            <th colspan = "2" valign = "middle" align = "center">트레이너</th>
+			                            <th valign = "middle" align = "center">헬스장</th>
+			                            <th valign = "middle" align = "center">수업</th>
+			                            <th valign = "middle" align = "center">회원권</th>
+			                            <th valign = "middle" align = "center">가격</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -143,9 +150,9 @@ $(document).ready(function(){
 			                    </tbody>
 			                </table>
 			            </div>
-			            <div class="btn-group btns-cart">
-			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'"><i class="fa fa-arrow-circle-left">트레이너 목록보기</i></button>
-			                <button type="button" class="btn btn-warning" onClick = "location.href='cartList.od'"><i class="fa fa-arrow-circle-left"></i>장바구니 보기</button>
+			            <div style="display:flex; justify-content: center !important;">
+			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'">트레이너 목록보기</button>
+			                <button type="button" class="btn btn-warning" onClick = "location.href='cartList.od'">장바구니 보기</button>
 			                <button type="button" id="pay" class="btn btn-warning"><i class="fa fa-arrow-circle-right"></i>결제하기</button>
 			            </div>
 			               <%--  <a id="kakaopay">

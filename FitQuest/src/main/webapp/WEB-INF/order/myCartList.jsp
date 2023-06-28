@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/top.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/basicCSS.css?after"/>
 <style type = "text/css">
-	.tr, .td{
+	.tr, .td, th{
 		text-align: center !important;
 		margin: auto !important;
 	}
 	.header{
 		background-color: white !important;
 		padding-bottom: 50px;
+	}
+	.title-container{
+		margin-bottom: 0 !important; 
+	}
+	.btn-warning{
+		margin: 2.5px;
 	}
 </style>
 <script type = "text/javascript" src = "<%=request.getContextPath()%>/resources/js/jquery.js"></script>
@@ -37,14 +44,13 @@
 	}//selectDelete
 </script>
 <body style="background-color : #FEF9E7;">
+	<div class="title-container">
+		<div class="title-text">장바구니</div>
+	</div>
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
 
         <div class="row" style = "justify-contents: center;">
-         <header class="section-header" style = "margin-top:60px;">
-	          <h2>FitQuest</h2>
-	          <p>장바구니</p>
-	        </header>
           <div class="col-lg-12 entries" style = "padding: 0px;background-color: white;">
    			<article class="entry entry-single" style = "margin:0px;">
    			 <div class="col-lg-12">
@@ -54,14 +60,14 @@
 			                <table class="table table-bordered tbl-cart">
 			                    <thead>
 			                        <tr class = "table-warning">
-			                        	<td valign = "middle" align = "center">선택</td>
-			                            <td valign = "middle" align = "center">삭제</td>
-			                            <td colspan = "2" valign = "middle" align = "center">트레이너</td>
-			                            <td valign = "middle" align = "center">헬스장</td>
-			                            <td valign = "middle" align = "center">수업</td>
-			                            <td valign = "middle" align = "center">회원권</td>
-			                            <td valign = "middle" align = "center">리뷰 평균</td>
-			                            <td valign = "middle" align = "center">가격</td>
+			                        	<th valign = "middle" align = "center">선택</th>
+			                            <th valign = "middle" align = "center">삭제</th>
+			                            <th colspan = "2" valign = "middle" align = "center">트레이너</th>
+			                            <th valign = "middle" align = "center">헬스장</th>
+			                            <th valign = "middle" align = "center">수업</th>
+			                            <th valign = "middle" align = "center">회원권</th>
+			                            <th valign = "middle" align = "center">리뷰 평균</th>
+			                            <th valign = "middle" align = "center">가격</th>
 			                        </tr>
 			                    </thead>
 			                    <tbody>
@@ -119,10 +125,10 @@
 			                    </tbody>
 			                </table>
 			            </div>
-			            <div class="btn-group btns-cart">
-			                <button type="button" class="btn btn-warning" id = "checkAll" style = "width: 180px;"><i class="fa fa-arrow-circle-left"></i>전체상품 선택하기</button>
-			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'"><i class="fa fa-arrow-circle-left"></i>트레이너 목록보기</button>
-			                <button type="submit" class="btn btn-warning" onClick = "return cartCheck()"><i class="fa fa-arrow-circle-right"></i>주문하기</button>
+			            <div style="display:flex; justify-content: center !important;">
+			                <button type="button" class="btn btn-warning" id = "checkAll" style = "width: 180px;">전체상품 선택하기</button>
+			                <button type="button" class="btn btn-warning" onClick = "location.href='trainerList.pd'">트레이너 목록보기</button>
+			                <button type="submit" class="btn btn-warning" onClick = "return cartCheck()">주문하기</button>
 			            </div>
 			            </form>
 			        </div>
