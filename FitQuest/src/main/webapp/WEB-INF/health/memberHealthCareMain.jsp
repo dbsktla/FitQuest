@@ -896,8 +896,8 @@
 		msg += '<div class="col-lg-4" >';
 		msg += '<div class="card">'; // start card
 		msg += '<div class="card-body">';
-		msg += '<h5 style="padding-bottom: 20;">오늘의 총 섭취 영양정보</h5>';
-		msg += '<div id="today-all-sum" style="margin: auto; text-align: center; min-height: 40;">조회할 날짜를 클릭하세요</div>';
+		msg += '<h5 class="card-title" style="padding-bottom: 20;">오늘의 총 섭취 영양정보</h5>';
+		msg += '<div id="today-all-sum" style="margin: auto; text-align: center; min-height: 40;"><font color="black">조회할 날짜를 클릭하세요</font></div>';
 		msg += '</div>';
 		msg += '</div>'; // end card
 		msg += '<div class="card">'; // start card
@@ -914,7 +914,7 @@
 			msg += '>' + ${i} + '</option>';
 		</c:forEach>
 		
-		msg += '</select> 년';
+		msg += '</select> <font color="black">년</font>';
 		msg += '<select name="selectMon" id="selectMon">';
 		<c:forEach var="i" begin="1" end="12">
 			msg += '<option value="' + ${i} + '" ';
@@ -923,7 +923,7 @@
 			</c:if>
 			msg += '>' + ${i} + '</option>';
 		</c:forEach>
-		msg += '</select> 월';
+		msg += '</select> <font color="black">월<font>';
 		
 		msg += '<input type="button" value="조회" onclick="calenderLookup()" class="btn btn-warning rounded-pill btn-sm">';
 		msg += '</div>';
@@ -936,9 +936,9 @@
 		msg += '<div class="card">';
 		msg += '<div class="card-body">';
 		msg += '<h5 class="card-title">식단 상세 정보 </h5>';
-		msg += '<div id="detailDiv">'; // start detailDiv
+		msg += '<div id="detailDiv" style="color:black;">'; // start detailDiv
 		msg += '<div style="text-align: center; min-height: 60;">';
-		msg += '조회할 날짜를 클릭하세요';
+		msg += '<font color="black">조회할 날짜를 클릭하세요</font>';
 		msg += '</div>';
 		msg += '</div>'; //end detailDiv
 		msg += '</div>';
@@ -978,7 +978,7 @@
 			msg += '>' + ${i} + '</option>';
 		</c:forEach>
 		
-		msg += '</select> 년';
+		msg += '</select> <font color="black">년</font>';
 		msg += '<select name="selectMon" id="selectMon">';
 		<c:forEach var="i" begin="1" end="12">
 			msg += '<option value="' + ${i} + '" ';
@@ -987,7 +987,7 @@
 			</c:if>
 			msg += '>' + ${i} + '</option>';
 		</c:forEach>
-		msg += '</select> 월';
+		msg += '</select> <font color="black">월<font>';
 		
 		msg += '<input type="button" value="조회" onclick="calenderLookup2()" class="btn btn-warning rounded-pill btn-sm">';
 		msg += '</div>';
@@ -997,8 +997,8 @@
 		msg += '</div>';
 		
 		msg += '<div class="col-lg-7">';//start 상세정보
-		msg += '<div id="detailDiv2">';
-		msg += '<div  style="text-align: center;">조회할 날짜를 클릭하세요</div>';
+		msg += '<div id="detailDiv2" style="color:black;">';
+		msg += '<div  style="text-align: center;"><font color="black">조회할 날짜를 클릭하세요</font></div>';
 		msg += '</div>';
 		msg += '</div>';//end 상세정보
 		msg += '</div>';
