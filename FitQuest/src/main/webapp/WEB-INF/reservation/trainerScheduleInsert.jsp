@@ -15,6 +15,9 @@
 	input[type=checkbox]{
 		accent-color : #FAC710;
 	}
+	.card-title{
+		border: none !important;
+	}
 }
 </style>
 
