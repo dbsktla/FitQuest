@@ -43,7 +43,7 @@
 			        	</c:forEach>
 			        	<tr>
 			        		<td colspan = "2" valign = "middle" align = "right">
-			        			<b>구매한 상품 갯수: x ${ orderCount }</b>
+			        			<b>구매한 상품 개수: x ${ orderCount }</b>
 			        		</td>
 			        	</tr>
 			        	<tr>

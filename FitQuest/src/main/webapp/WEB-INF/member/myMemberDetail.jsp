@@ -375,9 +375,9 @@ $(document).ready(function(){
 						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
 						<span id="guide" style="color:#999;display:none"></span>
 					</div>
-					<div class = "col-12">
+					<div class = "col-12" style="text-align: center;">
 						<input type = "submit" class = "btn btn-warning" id = "sub" value = "수정">
-						<input type = "reset" class = "btn btn-primary" value = "초기화">
+						<input type = "reset" class = "btn btn-secondary" value = "초기화">
 					</div>
                   </form:form>
                 </div>
@@ -409,7 +409,7 @@ $(document).ready(function(){
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary" id = "pwSub">수정</button>
+                      <button type="submit" class="btn btn-warning" id = "pwSub">수정</button>
                     </div>
                   </form><!-- End Change Password Form -->
 

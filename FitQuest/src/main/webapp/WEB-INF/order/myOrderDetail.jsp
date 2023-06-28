@@ -15,14 +15,14 @@
    			 <div class="col-lg-12">
 			        <div class="col-lg-12 col-sm-12 hero-feature">
 			        
-			        	<div class="reply-form">
-		                <h4>주문 #${orderBean.onum } 자세히 보기 :</h4>
+			        	<div>
+		                <h4 class="card-title">주문 #${orderBean.onum } 상세 보기</h4>
 		              </div>
 		              
 		            <div class="table-responsive">
 			       		 <table class = "table table-striped table-warning">
 			        	<tr>
-			        		<td colspan = "2"><b>주문한 상품 : </b></td>
+			        		<td colspan = "2"><b>주문한 상품</b></td>
 			        	</tr>
 			        	<c:forEach var = "product" items = "${msList}">
 			        	<tr>
@@ -36,7 +36,7 @@
 			        	</c:forEach>
 			        	<tr>
 			        		<td colspan = "2" valign = "middle" align = "right">
-			        			<b>구매한 상품 갯수: x ${ orderCount }</b>
+			        			<b>구매한 상품 개수: x ${ orderCount }</b>
 			        		</td>
 			        	</tr>
 			        	<tr>
