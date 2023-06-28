@@ -80,13 +80,12 @@
 	font-weight: bold;
 }
 .aboutUs{
- 
- background-image: url("../Image/AboutUsImage/aboutUs.jpg");
+	height: 2600px;
+	width: 100%;
+	background-image: url("../Image/AboutUsImage/aboutUs.jpg");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
-	height: 2600px;
- 
 }
 .height{
 	height: 300px;

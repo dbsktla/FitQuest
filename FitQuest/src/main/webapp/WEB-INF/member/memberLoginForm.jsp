@@ -3,7 +3,11 @@
 <%@ include file="../common/common.jsp" %>
 <%@ include file="../common/top.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
-
+<style>
+	.form-label{
+		font-weight: bold !important;
+	}
+</style>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
@@ -93,9 +97,9 @@ function findPw(){
                       <button type="submit" class="btn btn-warning w-100">Login</button>
                     </div>
                     
-					<div class="col-12">
-						<a style="color:#FAC710;" href="javascript:findId()">아이디 찾기</a> <font color="#FAC710">|</font>
-                      	<a style="color:#FAC710;" href="javascript:findPw()">비밀번호 찾기</a>
+					<div class="col-12" style="text-align: center;">
+						<a style="color:gray;" href="javascript:findId()">아이디 찾기</a> <font color="gray">|</font>
+                      	<a style="color:gray;" href="javascript:findPw()">비밀번호 찾기</a>
 					</div>
 					
                     <div class="card-body" id="naverIdLogin" style="text-align: center;">
@@ -114,10 +118,10 @@ function findPw(){
 					   <a href="javascript:kakaoLogin();"><img height="42" src="<%= request.getContextPath() %>/resources/Image/LoginImage/kakaoLogin.png" alt="카카오계정 로그인" /></a>
 		
                     </div>
-                    <div class="col-12">
+                    <div class="col-12" style="text-align: center;">
                       <p class="small mb-0">계정이 없으시다면? <br>
-                      	<a style="color:#FAC710;" href="memberInsert.mb">일반 회원가입</a> <font color="#FAC710">|</font>
-                      	<a style="color:#FAC710;" href="trainerInsert.mb">트레이너 회원가입</a>
+                      	<a style="color:gray;" href="memberInsert.mb">일반 회원가입</a> <font color="gray">|</font>
+                      	<a style="color:gray;" href="trainerInsert.mb">트레이너 회원가입</a>
                       </p>
                     </div>
                   </form>

@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
-
+<style>
+	.card-title{
+		border: none !important;
+	}
+</style>
 <body style="background-color : #FEF9E7;">
 <main>
     <div class="container">

@@ -13,6 +13,6 @@
  
 <%@ include file="../common/top.jsp" %>
 <body>
-	<div class="aboutUs d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
+	<div class="aboutUs" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
 </body>
 <%@ include file="../common/bottom.jsp" %>

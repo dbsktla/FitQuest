@@ -11,6 +11,12 @@
 	input[type=radio]{
 		accent-color : #FAC710;
 	}
+	.card-title{
+		border: none !important;
+	}
+	.form-label{
+		font-weight: bold !important;
+	}
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

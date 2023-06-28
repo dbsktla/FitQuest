@@ -30,6 +30,22 @@
 		background-color: white !important;
 		padding-bottom: 50px;
 	}
+	.label,
+	.card-title,
+	.fst-italic,
+	.col-lg-9,
+	.form-label,
+	.col-form-label {
+		color: black !important;
+	}
+	
+	.form-label,
+	.col-form-label {
+		font-weight: bold !important;
+	}
+	#imgBtn{
+		margin-left: 10px;
+	}
 }
 </style>
 
@@ -419,7 +435,7 @@ $(document).ready(function(){
 					</div>
 					<div class = "col-12">
 						<input type = "submit" class = "btn btn-warning" id = "sub" value = "수정">
-						<input type = "reset" class = "btn btn-primary" value = "초기화">
+						<input type = "reset" class = "btn btn-secondary" value = "초기화">
 					</div>
                   </form:form>
                 </div>
@@ -444,7 +460,7 @@ $(document).ready(function(){
                     <div class="col-12">
                       <label for="purpose" class="form-label">운동 목적</label> <br>
                       <c:forEach var="pur" items="체지방 감소,근육량 증가,재활,체력 강화">
-                      	<label for="${ pur }">
+                      	<label for="${ pur }"  class="label">
                       	<input type="checkbox" name="purpose" id="${pur}" value="${pur}" <c:if test="${ trainerBean.purpose.contains(pur) }">checked</c:if>>
                       	${ pur } 
                       </label>
@@ -463,7 +479,7 @@ $(document).ready(function(){
                     
                     <div class = "col-12">
 						<input type = "submit" class = "btn btn-warning" id = "trSub" value = "수정">
-						<input type = "reset" class = "btn btn-primary" value = "초기화">
+						<input type = "reset" class = "btn btn-secondary" value = "초기화">
 					</div>
 					</form>
                 </div>
@@ -496,7 +512,7 @@ $(document).ready(function(){
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary" id = "pwSub">수정</button>
+                      <button type="submit" class="btn btn-secondary" id = "pwSub">수정</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
