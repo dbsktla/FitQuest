@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../common/adminTop.jsp" %>
+<style>
+	main{
+		height: 100%;
+	}
+	.tab-content{
+		margin-top: 50px !important;
+	}
+</style>
  <main id="main" class="main">
     <div class="pagetitle">
       <h1>접수 내역</h1>
@@ -90,4 +98,4 @@
 			</div>
     
 </main>
-<%@ include file="../common/adminBottom.jsp" %>
+<%@ include file="../common/bottom.jsp" %>

@@ -9,6 +9,19 @@
 	.about{
 		padding: 0px !important;
 	}
+	.section-header-first{
+		padding-top: 200px !important;
+		font-size: 38px;
+		font-weight: 700;
+		color: #262626;
+		text-align: center;
+		margin: auto;
+		padding-bottom: 40px
+	}
+	.section-header p{
+		color: #262626 !important;
+		padding-top: 80px !important;
+	}
 </style>
 
 <body>
@@ -17,7 +30,6 @@
  	 <div class="main-non-member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
   </c:if>
   <c:if test="${memberBean != null}">
-  d
  	 <div class="main-member d-flex align-items-center" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0"></div>
   </c:if>
 
@@ -28,7 +40,7 @@
 
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
-        <header class="section-header">
+        <header class="section-header-first">
           <p>What's FitQuest</p>
         </header>
 
@@ -507,8 +519,8 @@
 
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
-        <header class="section-header">
-          <p>자주 묻는 질문</p>
+        <header class="section-header" style="font-size: 20px !important;">
+          <p style="font-size: 30px !important;">자주 묻는 질문</p>
         </header>
 
         <div class="row">
