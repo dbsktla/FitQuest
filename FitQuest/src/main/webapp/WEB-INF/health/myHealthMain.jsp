@@ -297,7 +297,7 @@
 							<!-- 선택한 날짜, 00 트레이너와 00일쨰 00중 -->
 							<c:if test="${not empty mainHealthList}">
 								<c:forEach var="hlist" items="${mainHealthList}">
-									<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate}</b>일째 <b>${hlist.ptype} ${hlist.tactivity}</b> 중<br>
+									<b>${hlist.tname}</b> 트레이너와 <b>${hlist.hdate + 1}</b>일째 <b>${hlist.ptype} ${hlist.tactivity}</b> 중<br>
 								</c:forEach>
 							</c:if>
 						</div><!-- ps-3 -->

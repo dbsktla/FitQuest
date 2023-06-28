@@ -107,6 +107,8 @@
 							</div>
 						</div><!-- 시스템 관련 문의 내역 -->
 						
+						
+						<c:if test="${loginInfo.mtype eq 'generic'}">
 						<!-- 트레이너 이메일 문의 -->
 						<div class="card" style="width: 70%; margin: auto; margin-top: 5%;">
 							<div class="card-body">
@@ -143,6 +145,7 @@
 								</table>
 							</div>
 						</div><!-- 트레이너 이메일 문의 -->
+						</c:if>
 						
 					</div>
 				</div>

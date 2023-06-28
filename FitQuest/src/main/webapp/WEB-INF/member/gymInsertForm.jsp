@@ -178,7 +178,7 @@ $(document).ready(function(){
                     	<button type="submit" id="sub" class="btn btn-warning w-100">헬스장 등록</button>
                     </div>
                     <div class="col-12">
-                      <p class="small mb-0">이미 헬스장이 있다면? <a href="insertT.mb">트레이너 회원가입</a></p>
+                      <p class="small mb-0">이미 헬스장이 있다면? <a href="trainerInsert.mb">트레이너 회원가입</a></p>
                     </div>
                   </form:form>
 
