@@ -205,7 +205,7 @@
 				msg += '<div class="col-lg-8" style="color: black;">'; // start 상세조회
 				msg += '<h5 class="card-title">상세 정보</h5>';
 				msg += '<div id="healthDetail">';
-				msg += '<span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span>';
+				msg += '<span style="margin: auto;"><font color="black">좌측 운동 목록에서 날짜를 클릭하세요.</font></span>';
 				msg += '</div>';
 				msg += '</div>';// end 상세조회
 				msg += '</div>';

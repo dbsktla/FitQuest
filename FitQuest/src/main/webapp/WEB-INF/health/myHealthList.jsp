@@ -197,7 +197,7 @@
 	function listup() {
 		$('#showbutton').css("display","none");
 		$("#healthDetail").empty();
-		$("#healthDetail").append('<span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span>');
+		$("#healthDetail").append('<span style="margin: auto;"><font color="black">좌측 운동 목록에서 날짜를 클릭하세요.</font></span>');
 		
 		var tid = $('#tid').val();
 		//alert(tid);
@@ -342,7 +342,7 @@
 										<button type="button" onclick="updateHnum()" class="btn btn-warning rounded-pill btn-sm" style="float: right; margin-right: 10;">수정</button>
 										</span>
 									</h5>
-									<div id="healthDetail"><span style="margin: auto;">좌측 운동 목록에서 날짜를 클릭하세요.</span></div>
+									<div id="healthDetail"><span style="margin: auto;"><font color="black">좌측 운동 목록에서 날짜를 클릭하세요.</font></span></div>
 									
 									</form>
 								</div><!-- card body -->

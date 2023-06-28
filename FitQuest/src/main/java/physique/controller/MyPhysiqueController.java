@@ -41,6 +41,7 @@ public class MyPhysiqueController {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		session.setAttribute("menubar", "myPhysique");
+		session.setAttribute("topmenu", "healthList");
 		ModelAndView mav = new ModelAndView();
 		
 		Calendar cal = Calendar.getInstance();
