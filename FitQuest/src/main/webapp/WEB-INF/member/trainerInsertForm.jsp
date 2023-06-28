@@ -87,7 +87,6 @@
     }
     
     function selectGym(){
-    	alert(1);
     	//var openWin = window.open("gymInsert.mb", "_blank", "width=500, height=500, left=300");
     	var openWin = window.open("gymList.mb", "_blank", "width=500, height=500, left=300");
     }
