@@ -1053,8 +1053,6 @@
 		<div id="memberDetail" class="col-lg-12">
 		</div><!-- 회원클릭시 상세정보 -->
 
-		<!-- 상단 회원 간략 정보 -->
-		<div class="col-lg-12" style="margin: 20px 0px;">신규 회원 유효 회원 만료 회원</div>
 		<!-- 회원 간략 정보  -->
 
 		<div class="col-lg-12">

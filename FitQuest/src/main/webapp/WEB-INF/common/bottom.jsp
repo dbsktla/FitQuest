@@ -21,78 +21,38 @@
 	
 	
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer" style="margin-left: 0;">
-
-
-    <!-- <div class="footer-top">
+  <footer id="footer" class="footer" style="margin: 0;">
+	
+	<div class="row col-8" style="margin: auto;">
+    <div class="footer-top">
       <div class="container">
-        <div class="row gy-4">
+        <div class="row gy-2" style="justify-content: space-between;">
           <div class="col-lg-5 col-md-12 footer-info">
-            <a href="index.html" class="logo d-flex align-items-center">
-              <img src="assets/img/logo.png" alt="">
-              <span>FlexStart</span>
+            <a href="main.go" class="logo d-flex align-items-center"> 
+              <img src="<%= request.getContextPath() %>/resources/Image/MainImage/FitQuest_Logo.png" width="100px" alt="FitQuest">
             </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
-            <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            <div style="text-align: left;">
+              <strong>대표번호:</strong> +82 5589 5548<br> 
+              <strong>Email:</strong> fitquest1470@gmail.com <br>
+              <strong>주소:</strong> 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층<br><br>
+              &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved<br>
+		      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
             </div>
           </div>
-
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Useful Links</h4>
+          <div class="col-lg-3 col-6 footer-links">
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#" style="color: gray; font-weight: bold;">이용약관</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#" style="color: gray; font-weight: bold;">운영정책</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#" style="color: gray; font-weight: bold;">개인정보처리방침</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-
-          </div>
 
         </div>
       </div>
-    </div> -->
-
-    <div class="container" >
-      <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
     </div>
-  </footer><!-- End Footer -->
-
+    </div>
+  </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
