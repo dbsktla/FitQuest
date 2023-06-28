@@ -20,7 +20,6 @@
 		margin-bottom: 50px;
 	}
 	.btn-warning{
-		padding: 11px 18px !important;
 	}
 </style>
 <body style="background-color : #FEF9E7;">
