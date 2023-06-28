@@ -55,8 +55,8 @@
 			        </div>
 					</div>
 					<div class="btn-group btns-cart">
-		                <button type="button" class="btn btn-warning" onClick = "location.href='main.go'"><i class="fa fa-arrow-circle-left">홈페이지</i></button>
-		                <button type="button" class="btn btn-warning" onClick = "location.href='viewMyOrderList.od'"><i class="fa fa-arrow-circle-left"></i>구매관리</button>
+		                <button type="button" class="btn btn-warning" onClick = "location.href='main.go'">홈페이지</button>
+		                <button type="button" class="btn btn-warning" onClick = "location.href='viewMyOrderList.od'">구매관리</button>
 		            </div>
 			</div>
 			</article>

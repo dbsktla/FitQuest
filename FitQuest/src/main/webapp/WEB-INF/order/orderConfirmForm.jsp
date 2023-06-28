@@ -53,7 +53,7 @@ $(document).ready(function(){
 			if (rsp.success) {
 				//msg += '결제가 완료되었습니다.\n';
 				//msg += '결제 금액 : ' + rsp.paid_amount + '원';
-				$('#myform').submit();
+				$('#myform2').submit();
 			} else {
 				//msg += '결제에 실패하였습니다.\n';
 				msg += rsp.error_msg;
@@ -82,7 +82,7 @@ $(document).ready(function(){
 				console.log(rsp);
 				var msg = '';
 			if (rsp.success) {
-				$('#myform').submit();
+				$('#myform2').submit();
 			} else {
 				//msg += '결제에 실패하였습니다.\n';
 				msg += rsp.error_msg;
@@ -107,7 +107,7 @@ $(document).ready(function(){
    			 <div class="col-lg-12">
    			 		
 			        <div class="col-lg-12 col-sm-12 hero-feature">
-			            <form action = "cartCalculate.od" name = "myform" id="myform">
+			            <form action = "cartCalculate.od" name = "myform" id="myform2">
 			            <div class="table-responsive">
 			                <table class="table table-bordered tbl-cart">
 			                    <thead>
