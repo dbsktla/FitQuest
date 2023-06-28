@@ -16,6 +16,9 @@
 		width: 70% !important;
 		margin: 5px !important;
 	}
+	.card-title{
+		border: none !important;
+	}
 </style>
 
 <script type="text/javascript">
