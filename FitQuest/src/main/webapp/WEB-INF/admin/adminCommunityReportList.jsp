@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/adminTop.jsp" %>
+<style>
+	main{
+		height: 100%;
+	}
+	.tab-content{
+		margin-top: 50px !important;
+	}
+</style>
  <main id="main" class="main">
     <div class="pagetitle">
       <h1>게시글 신고</h1>
@@ -123,4 +131,4 @@
 			</div>
     
 </main>
-<%@ include file="../common/adminBottom.jsp" %>
+<%@ include file="../common/bottom.jsp" %>
