@@ -56,6 +56,7 @@ public class MyHealthListController {
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		session.setAttribute("menubar", "myHealth");
+		session.setAttribute("topmenu", "healthList");
 		
 		
 		// 로그인 정보 확인

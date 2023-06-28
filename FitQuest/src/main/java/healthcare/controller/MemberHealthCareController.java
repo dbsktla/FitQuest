@@ -41,6 +41,7 @@ public class MemberHealthCareController {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		session.setAttribute("menubar", "memberHealthCare");
+		session.setAttribute("topmenu", "trainerMember");
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		ModelAndView mav = new ModelAndView();
 		

@@ -41,6 +41,7 @@ public class MyNutritionController {
 		
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		session.setAttribute("menubar", "myNutrition");
+		session.setAttribute("topmenu", "healthList");
 		
 		// 로그인 정보 확인
 		if(memberBean == null) { 
