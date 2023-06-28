@@ -146,19 +146,24 @@
 	
 	function inputCheck() {
 		$('.errmsg').empty();
+		var checkdata = false;
 		
 		if($('#nudate').val() == ""){
 			$('.derrmsg').append('일자를 선택하세요');
-			return false;
+			checkdata = true;
 		}
 		
 		if($('input[name=mealtype]:checked').length == 0){
 			$('.merrmsg').append('분류를 선택하세요');
-			return false;
+			checkdata = true;
 		}
 		
 		if($('input[name=fname]').val() == undefined){
 			$('.ferrmsg').append('음식을 하나 이상 선택하세요');
+			checkdata = true;
+		}
+		
+		if(checkdata){
 			return false;
 		}
 		
