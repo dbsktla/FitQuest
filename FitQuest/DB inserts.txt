@@ -125,6 +125,7 @@ insert into trainer values('parkjay', 6, '필라테스', '체지방 감소,근�
 insert into review(renum, mid, tid, rating, rtitle, rcontent, rdate, hasReview) 
 values(rvseq.nextval, 'moonlow', 'moon', 4, '추천합니다', '굳', sysdate, 'Y');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'park', 'N');
+insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'lee', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'jin', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'shin', 'N');
 insert into review(renum, mid, tid, hasReview) values(rvseq.nextval, 'admin', 'kang2', 'N');
