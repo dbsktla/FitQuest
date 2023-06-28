@@ -21,6 +21,12 @@
 	.notification-item{
 		width: 300px;
 	}
+	*{
+		font-family: 'Noto Sans KR', sans-serif, Circular,spotify-circular,Helvetica,Arial,sans-serif;
+	}	
+	.btn{
+		font-weight: bold !important;
+	}
 </style>
 <head>
   <meta charset="utf-8">
