@@ -41,6 +41,16 @@ public class TrainerBean {
 	private String timage;
 	
 	private MultipartFile upload;
+	
+	private String eCheck;
+
+	public String geteCheck() {
+		return eCheck;
+	}
+
+	public void seteCheck(String eCheck) {
+		this.eCheck = eCheck;
+	}
 
 	public String getGender() {
 		return gender;

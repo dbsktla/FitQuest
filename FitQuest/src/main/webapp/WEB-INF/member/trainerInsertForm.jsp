@@ -85,12 +85,18 @@
             }
         }).open();
     }
+    
+    function selectGym(){
+    	alert(1);
+    	//var openWin = window.open("gymInsert.mb", "_blank", "width=500, height=500, left=300");
+    	var openWin = window.open("gymList.mb", "_blank", "width=500, height=500, left=300");
+    }
 </script>
 
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var use,nuse;
+	var use,nuse,euse = "missing";
 	var isCheck = false, isCheckN = false;	
 	
 	$('#idCheck').click(function(){
@@ -147,40 +153,48 @@ $(document).ready(function(){
 		}); 
 	});
 	
-	$('#emailCheck').click(function() {
-		const email = $('#email').val(); 
-		console.log('완성된 이메일 : ' + email); 
-		const checkInput = $('#emailCode') 
-		
-		$.ajax({
-			type : 'get',
-			url : 'email_check.mb?email='+email, 
-			success : function (data) {
-				console.log("data : " +  data);
-				checkInput.attr('disabled',false);
-				code = data;
-				alert('인증번호가 전송되었습니다.')
-			}			
+	if($("input[name=eCheck]").val() == 'true'){
+		$('#emailCheck').attr('disabled',true);
+		$('#email').attr('readonly',true);
+		euse = "possible";
+	}
+	else{
+		$('#emailCheck').click(function() {
+			const email = $('#email').val(); 
+			console.log('완성된 이메일 : ' + email); 
+			const checkInput = $('#emailCode') 
+			
+			$.ajax({
+				type : 'get',
+				url : 'email_check.mb?email='+email, 
+				success : function (data) {
+					console.log("data : " +  data);
+					checkInput.attr('disabled',false);
+					code = data;
+					alert('인증번호가 전송되었습니다.')
+				}			
+			}); 
 		}); 
-	}); 
-	
-	$('#emailCode').blur(function () {
-		const inputCode = $(this).val();
-		const $resultMsg = $('#mailMessage');
 		
-		if(inputCode === code){
-			$resultMsg.html('인증번호가 일치합니다.');
-			$resultMsg.css('color','green');
-			$('#emailCheck').attr('disabled',true);
-			$('#email').attr('readonly',true);
-			euse = "possible";
-		}else{
-			$resultMsg.html('인증번호가 불일치 합니다.');
-			$resultMsg.css('color','red');
-			euse = "impossible";
-		}
-	});
-	
+		$('#emailCode').blur(function () {
+			const inputCode = $(this).val();
+			const $resultMsg = $('#mailMessage');
+			
+			if(inputCode === code){
+				$resultMsg.html('인증번호가 일치합니다.');
+				$resultMsg.css('color','green');
+				$('#emailCheck').attr('disabled',true);
+				$('#email').attr('readonly',true);
+				euse = "possible";
+				$("input[name=eCheck]").attr('value','true');
+				//alert($("input[name=eCheck]").val());
+			}else{
+				$resultMsg.html('인증번호가 불일치 합니다.');
+				$resultMsg.css('color','red');
+				euse = "impossible";
+			}
+		});
+	}
 	$('#sub').click(function(){
 		if(use == "missing"){
 			alert("입력 누락되었습니다.");
@@ -219,6 +233,11 @@ $(document).ready(function(){
 		} else if(euse == "impossible"){
 			alert("인증번호를 다시 확인해주세요.");
 			$("#emailMessage").select();
+			return false;
+		}
+		
+		if($("input[name=upload]").val() == ""){
+			alert("사진을 올려주세요.");
 			return false;
 		}
 	}); 
@@ -290,8 +309,9 @@ $(document).ready(function(){
                     <div class="col-12">
                       <label for="email" class="form-label">이메일</label>
                       <button type="button" id="emailCheck" class="btn btn-warning btn-sm">인증하기</button>
-                      <input type="email" name="email" class="form-control" id="email" value="${ memberBean.email }" placeholder="ex) fitness@fitquest.com" required>
+                      <input type="email" name="email" class="form-control" id="email" value="${ trainerBean.email }" placeholder="ex) fitness@fitquest.com" required>
                       <input class="form-control" id="emailCode" placeholder="인증번호 6자리" disabled="disabled" maxlength="6">
+                      <input id="eCheck" type="hidden" name="eCheck" value="${ trainerBean.eCheck }">
                       <div class="invalid-feedback">이메일 형식에 맞게 작성해 주세요.</div>
                        <div id="mailMessage"></div>
                     </div>
@@ -328,13 +348,16 @@ $(document).ready(function(){
 					
                     <div class="col-12">
                       <label for="yourGym" class="form-label">헬스장</label>
-                       <button type="button" class="btn btn-warning btn-sm" onclick="location.href='gymInsert.mb'">등록하기</button>
-                      <select class="form-select" name="gnum" id="yourGym">
+                      <!--  <button type="button" class="btn btn-warning btn-sm" onclick="location.href='gymInsert.mb'">등록하기</button> -->
+                       <button type="button" class="btn btn-warning btn-sm" onclick="selectGym()">선택</button>
+                       <input type="hidden" id="gnum" name="gnum" placeholder="헬스장">
+                       <input type="text" id="gname" placeholder="헬스장" class="form-control">
+                      <%-- <select class="form-select" name="gnum" id="yourGym">
                       	<option value="">선택</option>
 	                    <c:forEach var="gymBean" items="${ glist }">
 	                    	<option value="${ gymBean.gnum }" <c:if test="${ trainerBean.gnum eq gymBean.gnum }">selected</c:if>>${ gymBean.gname }</option>  
 	                    </c:forEach>
-                      </select>
+                      </select> --%>
                       <form:errors cssClass="err" path="gnum"/>
                     </div>
                     

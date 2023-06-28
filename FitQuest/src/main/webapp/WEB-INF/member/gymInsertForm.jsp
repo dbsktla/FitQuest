@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
-<%@ include file="../common/top.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
 
 <style>
@@ -149,7 +148,7 @@ $(document).ready(function(){
                   <form:form commandName="gymBean" action="gymInsert.mb" method="post" class="row g-3 needs-validation" novalidate="novalidate">
                     <div class="col-12">
                       <label for="yourName" class="form-label">헬스장 이름</label>
-                      <button type="button" id="GnameCheck" class="btn btn-outline-warning btn-sm">중복확인</button>
+                      <button type="button" id="GnameCheck" class="btn btn-warning btn-sm">중복확인</button>
                       <input type="text" name="gname" class="form-control" id="yourName" value="${ gymBean.gname }" required>
                       <div id="gnamemessage"></div>
                       <div class="invalid-feedback">헬스장을 입력해 주세요.</div>
@@ -177,21 +176,11 @@ $(document).ready(function(){
                     <div class="col-12">
                     	<button type="submit" id="sub" class="btn btn-warning w-100">헬스장 등록</button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">이미 헬스장이 있다면? <a href="trainerInsert.mb">트레이너 회원가입</a></p>
-                    </div>
                   </form:form>
 
                 </div>
               </div>
 
-              <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
 
             </div>
           </div>
@@ -202,5 +191,3 @@ $(document).ready(function(){
     </div>
   </main>
 </body>
-<%@ include file="../common/bottom.jsp" %>  
-<%@ include file="../common/adminBootBottom.jsp" %>  
