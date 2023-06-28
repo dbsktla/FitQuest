@@ -156,7 +156,9 @@
 						<tr align="left" style="border: white;">
 							<th>댓글</th>
 							<td colspan="7" align="right">
-								<input type="button" value="추가" class="btn btn-warning btn-sm" onclick="bcommentInsert()">
+								<c:if test="${ sessionScope.loginInfo != null }">
+									<input type="button" value="추가" class="btn btn-outline-warning btn-sm" onclick="bcommentInsert()">
+								</c:if>	
 							</td>
 						</tr>
 						<c:forEach var="bcomment" items="${ bcommentList }"> 

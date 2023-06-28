@@ -34,20 +34,23 @@ public class BcommentInsertController {
 	@RequestMapping(command)
 	public String insert(HttpSession session, BcommentBean bcommentBean, @RequestParam("btype") String btype, HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
+		System.out.println("btype : " + btype);
 		if(btype.equals("자유")) {
 			session.setAttribute("destination", "redirect:/freeBoardDetail.co?bnum=" + bcommentBean.getBnum());
 		}
 		else {
 			session.setAttribute("destination", "redirect:/healthBoardDetail.co?bnum=" + bcommentBean.getBnum());
 		}
+		System.out.println(session.getAttribute("destination"));
 		if(session.getAttribute("loginInfo") == null) {
 			try {
-				response.getWriter().print("<script>alert('로그인이 필요합니다.');</script>");
+				response.getWriter().print("<script>alert('로그인이 필요합니다.');location.href='login.mb';</script>");
 				response.getWriter().flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return "forward:/login.mb";
+			return "";
+//			return "forward:/login.mb";
 		}
 		else {
 			MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
