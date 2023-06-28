@@ -350,7 +350,7 @@ $(document).ready(function(){
                       <!--  <button type="button" class="btn btn-warning btn-sm" onclick="location.href='gymInsert.mb'">등록하기</button> -->
                        <button type="button" class="btn btn-warning btn-sm" onclick="selectGym()">선택</button>
                        <input type="hidden" id="gnum" name="gnum" placeholder="헬스장">
-                       <input type="text" id="gname" placeholder="헬스장" class="form-control">
+                       <input type="text" id="gname" placeholder="헬스장" class="form-control" readonly="readonly">
                       <%-- <select class="form-select" name="gnum" id="yourGym">
                       	<option value="">선택</option>
 	                    <c:forEach var="gymBean" items="${ glist }">
