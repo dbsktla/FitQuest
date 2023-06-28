@@ -35,6 +35,8 @@ public class TrainerReservationController {
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request, CalendarBean dateData,
 			HttpSession session) {
+		session.setAttribute("topmenu", "trainerCalendar");
+		
 		//달력 띄우기
 		Calendar cal = Calendar.getInstance();
 		CalendarBean calendarData;

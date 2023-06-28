@@ -30,7 +30,7 @@ public class GenericStateListController {
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request,HttpSession session) {
-		
+		session.setAttribute("topmenu", "genericCalendar");
 		LocalDate today = LocalDate.now();
         
 		String mid = ((MemberBean)session.getAttribute("loginInfo")).getId();

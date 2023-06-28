@@ -1,6 +1,5 @@
 package reservation.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +29,7 @@ public class TrainerStateListController {
 	
 	@RequestMapping(value=command,method = RequestMethod.GET)
 	public String doAction(Model model, HttpServletRequest request,HttpSession session) {
-		
-		LocalDate today = LocalDate.now();
+		session.setAttribute("topmenu", "trainerCalendar");
         
 		String tid = ((MemberBean)session.getAttribute("loginInfo")).getId();
 		List<ReservationBean> aList = reservationDao.getReservationAllListByTid(tid);
