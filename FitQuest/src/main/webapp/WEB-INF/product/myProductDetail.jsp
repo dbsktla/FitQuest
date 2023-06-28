@@ -31,12 +31,12 @@
 			return false;
 		}
 		if($('input[name=pcount]').val() == ""){
-			alert("회원권 사용갯수를 입력하세요");
+			alert("회원권 사용개수를 입력하세요");
 			$('input[name=pcount]').focus();
 			return false;
 		}
 		if(isNaN($('input[name=pcount]').val())){
-			alert("사용갯수를 숫자로 입력하세요");
+			alert("사용개수를 숫자로 입력하세요");
 			$('input[name=pcount]').select();
 			return false;
 		}
@@ -45,12 +45,12 @@
 			return false;
 		}
 		if($('input[name=people]').val() == ""){
-			alert("수업참여 회원 갯수를 입력하세요");
+			alert("수업참여 회원 개수를 입력하세요");
 			$('input[name=people]').focus();
 			return false;
 		}
 		if(isNaN($('input[name=people]').val())){
-			alert("수업참여 회원 갯수는 숫자로 입력하세요");
+			alert("수업참여 회원 개수는 숫자로 입력하세요");
 			$('input[name=people]').select();
 			return false;
 		}
@@ -115,7 +115,7 @@ section{
               <div class="tab-content pt-2" id="myTabContent">
               <!-- 상품 정보 탭 부분 -->
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-				<h5 class="card-title">총 구매 갯수 : ${ orderCount }</h5>
+				<h5 class="card-title">총 구매 개수 : ${ orderCount }</h5>
              	 <div class="reply-form">
                 <form action="">
                   <div class="row" style = "margin-bottom:20px;">
@@ -123,7 +123,7 @@ section{
                       <input name="email" type="text" class="form-control" value = "회원권 사용기간 :  ${productBean.months}개월" disabled>
                     </div>
                      <div class="col-md-6 form-group">
-                      <input name="email" type="text" class="form-control" value = "회원권 사용갯수 :  레슨 ${productBean.pcount}회" disabled>
+                      <input name="email" type="text" class="form-control" value = "회원권 사용개수 :  레슨 ${productBean.pcount}회" disabled>
                     </div>
                   </div>
                   <div class = "row" style = "margin-bottom:20px;">
@@ -156,7 +156,7 @@ section{
 	                      <input name="months" type="text" class="form-control" placeholder = "${productBean.months}개월" value = "${productBean.months }">
 	                    </div>
 	                     <div class="col-md-6 form-group">
-	                    	<span>회원권 사용갯수</span>
+	                    	<span>회원권 사용개수</span>
 	                      <input name="pcount" type="text" class="form-control" placeholder = "레슨 ${productBean.pcount}회" value = "${productBean.pcount }">
 	                    </div>
                     </div>	
@@ -178,7 +178,7 @@ section{
                       </select>
                     </div>
                   <div class="col-md-6 form-group">
-                       	<span>수업참여 회원 갯수</span>
+                       	<span>수업참여 회원 개수</span>
                       <input name="people" type="text" class="form-control" placeholder = "${ productBean.people }" onkeyup="numCheck()" value = "${productBean.people }">
                     </div>
                   </div>
@@ -191,7 +191,7 @@ section{
                   </div>	
                   <div class = "" style = "margin-bottom: 20px;">
                   		<input type = "submit" class = "btn btn-warning" value = "수정" onClick = "return checkData()">
-                  		<input type = "reset" class = "btn btn-primary" value = "초기화">
+                  		<input type = "reset" class = "btn btn-secondary" value = "초기화">
                   </div>
                 </form>
                 </div>

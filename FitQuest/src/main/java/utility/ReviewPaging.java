@@ -8,7 +8,7 @@ public class ReviewPaging {
 	private int pageSize = 0 ; //한 페이지에 보여줄 건수
 	private int beginRow = 0 ; //현재 페이지의 시작 행
 	private int endRow = 0 ; //현재 페이지의 끝 행
-	private int pageCount = 3 ; // 한 화면에 보여줄 페이지 링크 수 (페이지 갯수) [1][2][3] [다음] 이런거
+	private int pageCount = 3 ; // 한 화면에 보여줄 페이지 링크 수 (페이지 개수) [1][2][3] [다음] 이런거
 	private int beginPage = 0 ; //페이징 처리 시작 페이지 번호
 	private int endPage = 0 ; //페이징 처리 끝 페이지 번호
 	private int offset = 0 ;
@@ -204,11 +204,11 @@ public class ReviewPaging {
 		this.pageNumber = Integer.parseInt( _pageNumber ) ; 
 
 		if( _pageSize == null || _pageSize.equals("null") || _pageSize.equals("") ){
-			_pageSize = "3" ; // 한 페이지에 보여줄 레코드 갯수 -> 여기서 수정해도 되고 컨트롤러에서 생성자부를때 해도 ㄱㅊ
+			_pageSize = "3" ; // 한 페이지에 보여줄 레코드 개수 -> 여기서 수정해도 되고 컨트롤러에서 생성자부를때 해도 ㄱㅊ
 		}		
 		this.pageSize = Integer.parseInt( _pageSize ) ;
 		
-		this.limit = pageSize ; // 한 페이지에 보여줄 레코드 갯수
+		this.limit = pageSize ; // 한 페이지에 보여줄 레코드 개수
 
 		this.totalCount = totalCount ; 
 

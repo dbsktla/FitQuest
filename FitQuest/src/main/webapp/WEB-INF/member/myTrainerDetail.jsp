@@ -433,7 +433,7 @@ $(document).ready(function(){
 						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목">
 						<span id="guide" style="color:#999;display:none"></span>
 					</div>
-					<div class = "col-12">
+					<div class = "col-12" style="text-align: center;">
 						<input type = "submit" class = "btn btn-warning" id = "sub" value = "수정">
 						<input type = "reset" class = "btn btn-secondary" value = "초기화">
 					</div>
@@ -477,7 +477,7 @@ $(document).ready(function(){
                       <textarea id="exp" name="exp" class="form-control" style="height: 100px">${ trainerBean.exp }</textarea>
                     </div>
                     
-                    <div class = "col-12">
+                    <div class = "col-12" style="text-align: center;">
 						<input type = "submit" class = "btn btn-warning" id = "trSub" value = "수정">
 						<input type = "reset" class = "btn btn-secondary" value = "초기화">
 					</div>

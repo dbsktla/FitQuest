@@ -175,8 +175,8 @@ CREATE TABLE product (
    ID varchar2(100) references MEMBER(ID) on delete cascade, -- 트레이너 아이디 
    price   number   NOT NULL, --상품 가격 (1이면 1만원이라는 뜻!) 
    months   number   NOT NULL, --회원권 사용기간
-   pcount   number   NOT NULL, --회원권 사용갯수
-   people   number   NOT NULL, --수업 참여 회원 갯수
+   pcount   number   NOT NULL, --회원권 사용개수
+   people   number   NOT NULL, --수업 참여 회원 개수
    ptype   varchar2(15)   NOT NULL check(ptype in('개인', '그룹')) --개인, 그룹 수업 구분 "group"/"ind"
 );
 
