@@ -11,7 +11,7 @@
 <%@ include file="../common/myMemberTop.jsp"%>
 </c:if>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
 	  var buttons = document.querySelectorAll(".title-button");
 	  var selectedButtonId = localStorage.getItem("selectedButtonId");
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	    defaultButton.classList.add("selected-board");
 	  }
 	});
-</script>
+</script> -->
 <body style="background-color: #FEF9E7; ">
 <!-- 	<main id="main" class="main" style="margin-top: 5px"> -->
 <!-- 		<main> -->
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 							<div class="card-body">
 								<div align="right"></div>
 								<h5 class="card-title"  style="text-align: center;"> 내 글 보기</h5>
-								<div class="col-md-12" align="center" style="margin-bottom: 20px; padding-bottom: 15px;">  
+								<%-- <div class="col-md-12" align="center" style="margin-bottom: 20px; padding-bottom: 15px;">  
 									<button id="button1" onClick="window.location.href='myBoardList.co?&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }'" class="title-button">
 										전체
 									</button>
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
 									<button id="button3" onClick="window.location.href='myBoardList.co?bcategory=건강&pageNumber=1&whatColumn=${ param.whatColumn }&keyword=${ param.keyword }'" class="title-button">
 										건강 정보
 									</button>
-								 </div>
+								 </div> --%>
 								<div class="col-md-5" align="left"></div>
 								<table class="table table-hover">
 									<tr align="center">
