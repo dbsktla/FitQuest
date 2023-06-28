@@ -33,7 +33,7 @@ $(document).ready(function(){
 		    	}
 
 		    	if(rbyte <= size){
-		    	    rlen = i+1;                                          //return할 문자열 갯수
+		    	    rlen = i+1;                                          //return할 문자열 개수
 		    	}
 		    }
 		    

@@ -10,13 +10,13 @@ $(document).ready(function(){
 });
 	function graphA() {
 		$('#my-graph').empty();
-		$('#my-graph').html('<h5 class="card-title">회원권 구매 갯수(최근 7일)</h5><div id="lineChart3"></div>');
+		$('#my-graph').html('<h5 class="card-title">회원권 구매 개수(최근 7일)</h5><div id="lineChart3"></div>');
 		getGraphDays();
 	}
 	
 	function graphB() {
 		$('#my-graph').empty();
-		$('#my-graph').html('<h5 class="card-title">회원권 구매 갯수(최근 6개월)</h5><div id="lineChart3"></div>');
+		$('#my-graph').html('<h5 class="card-title">회원권 구매 개수(최근 6개월)</h5><div id="lineChart3"></div>');
 		getGraphMonthly();
 	}
 function getGraphDays(){
@@ -188,8 +188,8 @@ section{
 						<li class="dropdown-header text-start">
 							<h6>필터선택</h6>
 						</li>
-						<li><a class="dropdown-item" href="javascript:graphA()">회원권 구매 갯수(최근 7일)</a></li>
-						<li><a class="dropdown-item" href="javascript:graphB()">회원권 구매 갯수(최근 6개월)</a></li>
+						<li><a class="dropdown-item" href="javascript:graphA()">회원권 구매 개수(최근 7일)</a></li>
+						<li><a class="dropdown-item" href="javascript:graphB()">회원권 구매 개수(최근 6개월)</a></li>
 					</ul>
 				</div>
 				

@@ -7,29 +7,33 @@
 <script type = "text/javascript">
 </script>
 <style>
-section{
-	padding: 0px !important;
-}
-.btn:checked{
-	background-color: #ffc107 !important;
-}
-.btn:hover {
+	section{
+		padding: 0px !important;
+	}
+	.btn:checked{
+		background-color: #ffc107 !important;
+	}
+	.btn:hover {
 		background-color:#FAC710 !important;
 	}
-.btn-check{
-	border-radius:20px !important;
-}
-.btn-check + &:hover {
-    // override for the checkbox/radio buttons
-    background-color: #ffc107 !important;
-  }
-.td{
-	text-align:center;
-}
-.header{
+	.btn-check{
+		border-radius:20px !important;
+	}
+	.btn-check + &:hover {
+	    // override for the checkbox/radio buttons
+	    background-color: #ffc107 !important;
+	}
+	.td{
+		text-align:center;
+	}
+	.header{
 		background-color: white !important;
 		padding-bottom: 50px;
-}
+	}
+	#insert{
+		padding: 6px 12px !important;
+		height: 40px;
+	}
 </style>
 <body style="background-color : #FEF9E7;">
     <section class="section"  style = "height: 80%;">
@@ -43,15 +47,15 @@ section{
           <div class="card">
             <div class="card-body">
             	<div style = "display:flex; justify-content: space-between;">
-            	<h4 class="comments-count">수업 회원권 : </h4><br>
-            	<input type = "button" class = "btn btn-warning" value = "상품 등록하기" onClick = "location.href='insertProduct.pd'">
+	            	<h4 class="card-title">수업 회원권</h4><br>
+	            	<input type = "button" class = "btn btn-warning" id="insert" value = "상품 등록하기" onClick = "location.href='insertProduct.pd'">
             	</div>
             <c:if test = "${not empty pList  }">
              <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">사용기간</th>
-                    <th scope="col">사용 갯수</th>
+                    <th scope="col">사용 개수</th>
                     <th scope="col">개인 / 그룹</th>
                     <th scope="col">자세히 보기</th>
                   </tr>

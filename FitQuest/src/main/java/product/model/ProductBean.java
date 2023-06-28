@@ -11,7 +11,7 @@ public class ProductBean {
 	private int months; 
 	@NotBlank(message = "사용횟수 입력하세요")
 	private int pcount;
-	@NotBlank(message = "수업 참여 가능한 회원 갯수 입력하세요")
+	@NotBlank(message = "수업 참여 가능한 회원 개수 입력하세요")
 	private int people;
 	@NotBlank(message = "개인/그룹 중 하나 선택하세요")
 	private String ptype;

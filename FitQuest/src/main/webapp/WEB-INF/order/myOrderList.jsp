@@ -336,7 +336,7 @@ $(document).ready(function(){
                   <tr>
                     <th scope="col">주문 번호</th>
                     <th scope="col">주문 날짜</th>
-                    <th scope="col">상품 갯수</th>
+                    <th scope="col">상품 개수</th>
                     <th scope="col">총 가격</th>
                     <th scope="col">자세히 보기</th>
                   </tr>
