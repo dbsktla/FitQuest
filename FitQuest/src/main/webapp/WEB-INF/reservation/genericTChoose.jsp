@@ -39,12 +39,18 @@
 	.member{
 		height: 500px !important;
 	}
+	.empty-text{
+		font-size: 15px;
+		font-weight: 600;
+	}
 </style>
 
 
 <section id="team" class="team">
       <div class="container" data-aos="fade-up">
         <div class="row gy-4 justify-content-center">
+        
+         <c:if test="${not empty tList}">
 		  <c:forEach var = "titem" items = "${tList}">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
@@ -69,6 +75,14 @@
             </div>
           </div>	
 		  </c:forEach>
+		 </c:if>
+		 <c:if test="${empty tList}">
+		  <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member" style="height: 150px !important; display: flex; justify-content: center; align-items: center; padding: 0px 20px; border-radius: 10px;">
+            	<span class="empty-text">구매하신 사용권이 존재하지 않습니다.</span>
+            </div>
+           </div>
+		 </c:if>
         </div>	
       </div>
 </section>

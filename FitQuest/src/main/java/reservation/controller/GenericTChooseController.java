@@ -48,7 +48,8 @@ public class GenericTChooseController {
 
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String doAction(Model model, HttpSession session) {
-
+		session.setAttribute("topmenu", "genericCalendar");
+		
 		// 트레이너 목록에 쓸 아이디 갖고오기(사용권이 존재하는)
 		String mid = ((MemberBean) session.getAttribute("loginInfo")).getId();
 		List<UsageBean> tidList = usageDao.getTListByMid(mid);
