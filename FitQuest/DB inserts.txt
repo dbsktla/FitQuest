@@ -237,21 +237,27 @@ insert into tschedule values('kim','sat','13:00~14:00,14:00~15:00,15:00~16:00','
 		-- cancel = 예약 취소
 		-- complete = 운동 완료(3회 이상 완료시 리뷰 작성 가능하게 하기 위함)
 
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-10','10:00~11:00','false');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-7-15','11:00~12:00','false');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-1','13:00~14:00','false');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-7-12','14:00~15:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',1,1,1,'2023-7-10','10:00~11:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',1,1,1,'2023-7-15','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',2,2,4,'2023-7-1','13:00~14:00','false');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',2,2,4,'2023-7-12','14:00~15:00','false');
 
-insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-10','11:00~12:00','false');
-insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',3,3,1,'2023-7-15','12:00~13:00','false');
-insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-1','14:00~15:00','false');
-insert into reservation values(reseq.nextval,'jkim','kim','홍길동','홍길동',4,4,4,'2023-7-12','15:00~16:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','일반 회원','트레이너 회원',3,3,1,'2023-7-10','11:00~12:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','일반 회원','트레이너 회원',3,3,1,'2023-7-15','12:00~13:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','일반 회원','트레이너 회원',4,4,4,'2023-7-1','14:00~15:00','false');
+insert into reservation values(reseq.nextval,'jkim','kim','일반 회원','트레이너 회원',4,4,4,'2023-7-12','15:00~16:00','false');
+
+--pt예약 완료 테이블
+insert into complete values(cpseq.nextval,'kim','2023-7-10','10:00~11:00',1);
+insert into complete values(cpseq.nextval,'kim','2023-7-10','11:00~12:00',1);
+insert into complete values(cpseq.nextval,'kim','2023-7-15','11:00~12:00',1);
+insert into complete values(cpseq.nextval,'kim','2023-7-15','12:00~13:00',1);
 
 --리뷰 조건을 위해 추가:
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-5-10','10:00~11:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',1,1,1,'2023-5-15','11:00~12:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-5-1','13:00~14:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍길동','홍길동',2,2,4,'2023-5-12','14:00~15:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',1,1,1,'2023-5-10','10:00~11:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',1,1,1,'2023-5-15','11:00~12:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',2,2,4,'2023-5-1','13:00~14:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','일반 회원','트레이너 회원',2,2,4,'2023-5-12','14:00~15:00','complete');
 
 --상품
 insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인');
