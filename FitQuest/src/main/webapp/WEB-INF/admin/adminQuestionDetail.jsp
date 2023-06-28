@@ -127,5 +127,4 @@
     
 </main>
 
-
-<%@ include file="../common/adminBottom.jsp"%>
+<%@ include file="../common/bottom.jsp" %>

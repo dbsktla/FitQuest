@@ -7,6 +7,14 @@
 	}
 </script>    
     
+<style>
+	main{
+		height: 100%;
+	}
+	.tab-content{
+		margin-top: 50px !important;
+	}
+</style>
 <%@ include file="../common/adminTop.jsp" %>
  <main id="main" class="main">
     <div class="pagetitle">
@@ -100,4 +108,4 @@
 			</div>
     
 </main>
-<%@ include file="../common/adminBottom.jsp" %>
+<%@ include file="../common/bottom.jsp" %>
