@@ -19,6 +19,12 @@
 	input[type=radio]{
 		accent-color : #FAC710;
 	}
+	.card-title{
+		border: none !important;
+	}
+	.form-label{
+		font-weight: bold !important;
+	}
 }
 </style>
 

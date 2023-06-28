@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
 <%@ include file="../common/adminBootTop.jsp" %>
-
+<style>
+	.card-title{
+		border: none !important;
+	}
+</style>
 <script type="text/javascript" src="resources/js/jquery.js" ></script>
 <script type="text/javascript">
 $(document).ready(function(){
