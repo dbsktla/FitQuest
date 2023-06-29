@@ -274,10 +274,10 @@ insert into complete values(cpseq.nextval,'kim','2023-7-15','11:00~12:00',1);
 insert into complete values(cpseq.nextval,'kim','2023-7-15','12:00~13:00',1);
 
 --리뷰 조건을 위해 추가:
-insert into reservation values(reseq.nextval,'hong','kim','홍회원','김회원',1,1,1,'2023-5-10','10:00~11:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍회원','김회원',1,1,1,'2023-5-15','11:00~12:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍회원','김회원',2,2,4,'2023-5-1','13:00~14:00','complete');
-insert into reservation values(reseq.nextval,'hong','kim','홍회원','김회원',2,2,4,'2023-5-12','14:00~15:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍회원','김피티',1,1,1,'2023-5-10','10:00~11:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍회원','김피티',1,1,1,'2023-5-15','11:00~12:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍회원','김피티',2,2,4,'2023-5-1','13:00~14:00','complete');
+insert into reservation values(reseq.nextval,'hong','kim','홍회원','김피티',2,2,4,'2023-5-12','14:00~15:00','complete');
 
 --상품
 insert into product values(pseq.nextval, 'kim', 10, 1, 10, 1, '개인');
