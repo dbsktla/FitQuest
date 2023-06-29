@@ -13,6 +13,7 @@ $(document).ready(function(){
 	var euse = "missing";
 	$('#emailCheck').click(function() {
 		const email = $('#email').val(); 
+		const id = $('#id').val(); 
 		if(email == ''){
 			alert('이메일을 입력해 주세요.');
 			return;
@@ -22,12 +23,23 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : 'get',
-			url : 'email_check.mb?email='+email, 
+			url : 'findpw_check.mb?email=' + email +'&id=' + id, 
 			success : function (data) {
 				console.log("data : " +  data);
-				checkInput.attr('disabled',false);
-				code = data;
-				alert('인증번호가 전송되었습니다.')
+				if($.trim(data) == "false"){
+					alert('회원가입시 입력한 이메일과 일치하지 않습니다.');
+					$('#email').attr('value','');
+				}
+				else if($.trim(data) == "no"){
+					alert('없는 아이디입니다.');
+					$('#id').attr('value','');
+					$('#email').attr('value','');
+				}
+				else{
+					checkInput.attr('disabled',false);
+					code = data;
+					alert('인증번호가 전송되었습니다.');
+				}	
 			}			
 		}); 
 	}); 
