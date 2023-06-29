@@ -79,7 +79,7 @@ public class GenericCancelController {
 			String recName = memberDao.getName(recId); //따라서 수신자 이름
 			String sendId = rb.getMid(); //보내는 회원 - 예약을 했었던 회원.
 			String sendName = memberDao.getName(sendId);
-			String request = "trainerReservation.rv"; //알림 클릭 하면 보내는 페이지 : 예약 내역 페이지.
+			String request = "trainerStateList.rv"; //알림 클릭 하면 보내는 페이지 : 예약 내역 페이지.
 			String notifContent = sendName + " 회원님이 " + recName + " 선생님의 수업 신청을 취소했습니다.";
 			NotificationBean notifBean = new NotificationBean();
 			notifBean.setRecId(recId);
