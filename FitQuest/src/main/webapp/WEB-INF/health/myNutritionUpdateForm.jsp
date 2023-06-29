@@ -73,7 +73,7 @@
 			<!-- Default Card -->
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">식단등록 </h5>
+					<h5 class="card-title">식단수정 </h5>
 					
 					<form name="phyForm" action="myNutritionUpdate.ht" method="post" enctype="multipart/form-data">
 						<input type='hidden' name='delfnum' value='-1'>
