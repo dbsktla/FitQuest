@@ -31,12 +31,12 @@ public class MemberFindIdController {
 		try {
 			memberBean = memberDao.selectMemberByNameAndEmail(memberBean);
 			if(memberBean == null) {
-				response.getWriter().print("<script>alert('가입하지 않은 회원입니다.');window.close();</script>");
+				response.getWriter().print("<script>alert('가입하지 않은 회원입니다.\\n회원가입을 이용해 주세요.');window.close();</script>");
 				response.getWriter().flush();
 			}
 			else {
 				if(memberBean.getId().indexOf("kakao") != -1 || memberBean.getId().indexOf("naver") != -1) {
-					response.getWriter().print("<script>alert('소셜 회원가입된 아이디입니다.');window.close();</script>");
+					response.getWriter().print("<script>alert('소셜 회원가입된 아이디입니다.\\n소셜 로그인을 이용해 주세요.');window.close();</script>");
 					response.getWriter().flush();
 				}
 				else {
