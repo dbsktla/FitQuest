@@ -110,7 +110,7 @@
 		join member on member.id = trainer.ID
 		where trainer.ID = #{tid} and usage.mid = #{mid} and usage.tid = #{tid}
 	</select>
-	<select id="ReservationDetailBean" resultType = "composite.model.ReservationDetailBean">
+	<select id="GetReservationDetail" resultType = "composite.model.ReservationDetailBean">
 		select r.rdate, r.rtime, r.people, m.id, m.birth,m.mphone,m.email,m.name from reservation r,member m
 		where r.mid = m.id and r.tid = #{tid} and r.rdate = #{rdate} and r.rtime = #{rtime} and r.people = #{people}
 	</select>
