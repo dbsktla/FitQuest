@@ -39,6 +39,8 @@ public class GenericReviewListController {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo"); 
 		response.setContentType("text/html; charset=utf-8");
 		session.setAttribute("menubar", "myReviewMain");
+		session.setAttribute("topmenu", "genericMember");
+
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/viewMyReviewList.mb");
 			try {
