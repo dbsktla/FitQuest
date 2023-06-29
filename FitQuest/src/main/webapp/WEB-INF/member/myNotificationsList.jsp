@@ -18,7 +18,7 @@
 		font-weight: bold;
 	}
 </style>
-<body style="background-color : #FEF9E7;">
+<body style="background-color : #FEF9E7; min-height: 100%;">
     <section class="section">
 	 <div class="pagetitle" style ="text-align:center; margin-bottom: 50px;">
       <h1>모든 알림</h1>
@@ -29,6 +29,7 @@
 		
           	<div class="row" style = "height:100%;">
 	          <ul class="list-group" style = "height:100%;">
+	          <c:if test = "${ not empty notifList  }">
 	          <c:forEach var = "notif" items = "${notifList }">
           		<fmt:parseDate value="${notif.notifDate }" var = "date" pattern="YYYY-mm-dd"/>
           		<fmt:formatDate value="${date }" var = "date" pattern = "YYYY-mm-dd"/>
@@ -38,6 +39,12 @@
 				  </li>
 	          	</a>
 	          </c:forEach>
+	          </c:if>
+	          <c:if test = "${empty notifList }">
+	          	<div style = "text-align: center;">
+	          		알림이 없습니다.
+	          	</div>
+	          </c:if>
 			  </ul>
 	            
           	</div>
@@ -46,7 +53,9 @@
       </div>
       
       <div style = "margin-top: 30px; text-align:center;">
+      	          <c:if test = "${ not empty notifList  }">
       <input type = "button" onclick = "location.href='clearMyNotifications.mb'" class = "btn btn-warning" value = "모든 알림삭제">
+      	          </c:if>
       </div>
       
 </section>
