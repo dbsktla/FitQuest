@@ -26,7 +26,7 @@ public class ProductDeleteController {
 		response.setContentType("text/html; charset=utf-8");
 		if(cnt > 0) {
 			try {
-				response.getWriter().print("<script>alert('상품 삭제됬습니다.');</script>");
+				response.getWriter().print("<script>alert('상품 삭제됐습니다.');</script>");
 				response.getWriter().flush();
 			} catch (IOException e) {
 				e.printStackTrace();

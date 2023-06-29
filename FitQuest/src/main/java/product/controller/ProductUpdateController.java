@@ -30,7 +30,7 @@ public class ProductUpdateController {
 		response.setContentType("text/html; charset=utf-8");
 		if(cnt > 0) {
 			try {
-				response.getWriter().print("<script>alert('상품 수정됬습니다.');</script>");
+				response.getWriter().print("<script>alert('상품 수정됐습니다.');</script>");
 				response.getWriter().flush();
 			} catch (IOException e) {
 				e.printStackTrace();
