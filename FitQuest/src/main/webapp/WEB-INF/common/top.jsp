@@ -328,6 +328,7 @@
           </li>
           
         </ul>
+        <i class="bi mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
