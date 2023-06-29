@@ -17,11 +17,21 @@
 		height: 60px;
 		font-weight: bold;
 	}
+	main{
+		margin-bottom : 360px;
+	}
+	.member{
+		height: 500px !important;
+	}
+	.empty-text{
+		font-size: 15px;
+		font-weight: 600;
+	}
 </style>
-<body style="background-color : #FEF9E7; min-height: 100%;">
+<body style="background-color : #FEF9E7; min-height: 500px;">
     <section class="section">
 	 <div class="pagetitle" style ="text-align:center; margin-bottom: 50px;">
-      <h1>모든 알림</h1>
+      <h1>모든 알림<br><br></h1>
     </div><!-- End Page Title -->
       <div class="row">
       	<div class = "col-xl-3"></div>
@@ -40,18 +50,25 @@
 	          	</a>
 	          </c:forEach>
 	          </c:if>
-	          <c:if test = "${empty notifList }">
-	          	<div style = "text-align: center;">
-	          		알림이 없습니다.
-	          	</div>
-	          </c:if>
 			  </ul>
 	            
           	</div>
         </div>
       	<div class = "col-xl-3"></div>
       </div>
-      
+      <c:if test = "${empty notifList }">
+      <section id="team" class="team" style = "background-color: #FEF9E7;">
+      <div class="container" data-aos="fade-up">
+        <div class="row gy-4 justify-content-center">
+      	   <div class="col-lg-3 col-md-6 d-flex align-items-stretch" style = "justify-content: center;" data-aos="fade-up" data-aos-delay="100">
+            <div class="member" style="height: 150px !important; display: flex; justify-content: center; align-items: center; padding: 0px 50px; border-radius: 10px;">
+            	<span class="empty-text">알림이 없습니다.</span>
+            </div>
+           </div>
+         </div>
+        </div>
+       </section>  
+      </c:if>
       <div style = "margin-top: 30px; text-align:center;">
       	          <c:if test = "${ not empty notifList  }">
       <input type = "button" onclick = "location.href='clearMyNotifications.mb'" class = "btn btn-warning" value = "모든 알림삭제">
