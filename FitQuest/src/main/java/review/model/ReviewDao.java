@@ -137,4 +137,11 @@ public class ReviewDao {
 		int cnt = sqlSessionTemplate.selectOne(namespace + ".GetReportCount", renum);
 		return cnt;
 	}
+	public ReviewBean getReviewExist(String mid, String trainerId) {
+		ReviewBean rb = new ReviewBean();
+		rb.setMid(mid);
+		rb.setTid(trainerId);
+		ReviewBean reviewBean = sqlSessionTemplate.selectOne(namespace + ".GetReviewExist",rb);
+		return reviewBean;
+	}
 }
