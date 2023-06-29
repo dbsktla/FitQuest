@@ -49,7 +49,6 @@
 	</div>
 <section id="blog" class="blog">
 	<div class="container" data-aos="fade-up">
-
         <div class="row" style = "justify-contents: center;">
           <div class="col-lg-12 entries" style = "padding: 0px;background-color: white;">
    			<article class="entry entry-single" style = "margin:0px;">
