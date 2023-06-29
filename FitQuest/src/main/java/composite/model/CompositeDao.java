@@ -53,7 +53,7 @@ public class CompositeDao {
 		rb.setRtime(time);
 		rb.setPeople(people);
 		List<ReservationDetailBean> rList = new ArrayList<ReservationDetailBean>();
-		rList = sqlSessionTemplate.selectList(namespace+".ReservationDetailBean",rb);
+		rList = sqlSessionTemplate.selectList(namespace+".GetReservationDetail",rb);
 		return rList;
 	}
 	public List<SalesBean> getWeeklySales(String id) {

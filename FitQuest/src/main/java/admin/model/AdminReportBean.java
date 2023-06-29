@@ -11,7 +11,15 @@ public class AdminReportBean {
 	private String name;
 	private String bsubject;
 	private String ccontent;
+	private String btype;
 	
+	
+	public String getBtype() {
+		return btype;
+	}
+	public void setBtype(String btype) {
+		this.btype = btype;
+	}
 	public int getRpnum() {
 		return rpnum;
 	}

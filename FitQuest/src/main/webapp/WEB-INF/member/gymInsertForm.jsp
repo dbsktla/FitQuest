@@ -117,7 +117,18 @@ $(document).ready(function(){
 			alert("헬스장 중복확인 필수입니다.");
 			return false;
 		}
-		
+		/* if(isNaN($("input[name=gphone]").val())){
+			alert('전화번호는 숫자로 입력하세요.');
+			return false;
+		}
+		if($("input[name=gaddr1]").val() == ''){
+			alert('주소는 필수 항목입니다.');
+			return false;
+		}
+		if($("input[name=gaddr2]").val() == ''){
+			alert('주소는 필수 항목입니다.');
+			return false;
+		} */
 	}); 
 	
 	$("input[name=gname]").keydown(function(){ 
@@ -164,7 +175,9 @@ $(document).ready(function(){
                     	 <label for="yourAddr" class="form-label">주소</label>
 						<input type="button" id="yourAddr" class="btn btn-light rounded-pill btn-sm" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
 						<input type="text" name="gaddr1" class="form-control" id="sample4_jibunAddress" value="${ gymBean.gaddr1 }" placeholder="지번주소">
+						 <form:errors cssClass="err" path="gaddr1"/>
 						<input type="text" name="gaddr2" class="form-control" id="sample4_detailAddress" value="${ gymBean.gaddr2 }" placeholder="상세주소">
+						 <form:errors cssClass="err" path="gaddr2"/>
 						
 	                    <input type="hidden" id="sample4_postcode" placeholder="우편번호">
 						<input type="hidden" id="sample4_roadAddress" placeholder="도로명주소">

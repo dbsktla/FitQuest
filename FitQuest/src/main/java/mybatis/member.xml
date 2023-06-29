@@ -45,7 +45,7 @@
 	
 	<select id="SelectMemberByNameAndEmail" resultType="member.model.MemberBean">
 		select * from member
-		where name = #{name} and email = #{email}
+		where name = #{name} and email = #{email} and id not like 'kakao%' and id not like 'naver%'
 	</select>
 	
 	<select id="SelectMemberByIdAndEmail" resultType="member.model.MemberBean">

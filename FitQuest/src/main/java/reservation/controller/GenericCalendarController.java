@@ -26,6 +26,8 @@ import member.model.MemberBean;
 import reservation.model.CalendarBean;
 import reservation.model.ReservationBean;
 import reservation.model.ReservationDao;
+import review.model.ReviewBean;
+import review.model.ReviewDao;
 import usage.model.UsageDao;
 
 @Controller
@@ -44,6 +46,9 @@ public class GenericCalendarController {
 	
 	@Autowired
 	CompleteDao completeDao;
+	
+	@Autowired
+	ReviewDao reviewDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.GET)
 	public String calendar(Model model, HttpServletRequest request, CalendarBean dateData,
@@ -151,6 +156,9 @@ public class GenericCalendarController {
 			        System.out.println(trainerId + " (" + trainerName + ") : 3번 이상");
 			        model.addAttribute("reviewTid",trainerId);
 			        model.addAttribute("reviewTname",trainerName);
+			        //리뷰 썼나 확인
+					ReviewBean reviewBean = reviewDao.getReviewExist(mid,trainerId);
+					model.addAttribute("reviewBean",reviewBean);
 			    } else {
 			        System.out.println(trainerId + " : " + count + "번");
 			    }
@@ -164,6 +172,8 @@ public class GenericCalendarController {
 			//전체 예약 내역
 			List<ReservationBean> rAList = reservationDao.getReservationAllList(mid);
 			model.addAttribute("rAList",rAList);
+			
+			
 		}
 		return getPage; 
 	}

@@ -6,8 +6,8 @@
 
 <mapper namespace="admin.model.Admin">
 	<select id="GetReportBoardList" resultType="admin.model.AdminReportBean">
-		select rpnum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name
-		from(select rpnum,bcnum, report.id, rtype, status, rcontent, board.bsubject
+		select rpnum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name, btype
+		from(select rpnum,bcnum, report.id, rtype, status, rcontent, board.bsubject, btype
 		from report inner join board
 		on report.bcnum = board.bnum
 		where rtype='board' order by status, rpnum) rb inner join member
@@ -16,8 +16,8 @@
 	</select>
 	
 	<select id="GetReportBCommnerList" resultType="admin.model.AdminReportBean">
-		select rpnum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name
-		from(select rpnum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject
+		select rpnum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name, btype
+		from(select rpnum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject, btype
 		from(select rpnum, bcnum, report.id, rtype, status, rcontent, bcomment.bnum, ccontent
 		from report inner join bcomment
 		on report.bcnum = bcomment.cnum
@@ -28,8 +28,8 @@
 	</select>
 	
 	<select id="GetMainReportBoardList" resultType="admin.model.AdminReportBean">
-		select rpnum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name
-		from(select rpnum,bcnum, report.id, rtype, status, rcontent, board.bsubject
+		select rpnum, bcnum, rb.id, rtype, status, rcontent, rb.bsubject, member.name, btype
+		from(select rpnum,bcnum, report.id, rtype, status, rcontent, board.bsubject, btype
 		from report inner join board
 		on report.bcnum = board.bnum
 		where rtype='board' and status = '신고 접수' order by status, rpnum) rb inner join member
@@ -38,8 +38,8 @@
 	</select>
 	
 	<select id="GetMainReportBCommnerList" resultType="admin.model.AdminReportBean">
-		select rpnum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name
-		from(select rpnum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject
+		select rpnum, bcnum, rbc.id, rtype, status, rcontent, rbc.bnum, ccontent, bsubject, name, btype
+		from(select rpnum, bcnum, rc.id, rtype, status, rcontent, rc.bnum, ccontent, bsubject, btype
 		from(select rpnum, bcnum, report.id, rtype, status, rcontent, bcomment.bnum, ccontent
 		from report inner join bcomment
 		on report.bcnum = bcomment.cnum

@@ -115,7 +115,7 @@ public class ProductReviewInsertController {
 			if(cnt > 0) {
 				System.out.println("REVIEW INSERT SUCCESS");
 				reviewDao.deleteBaseValue(id);
-				response.getWriter().print("<script>alert('리뷰 작성 됬습니다.');</script>");
+				response.getWriter().print("<script>alert('리뷰 작성 됐습니다.');</script>");
 				response.getWriter().flush();
 			}
 		}

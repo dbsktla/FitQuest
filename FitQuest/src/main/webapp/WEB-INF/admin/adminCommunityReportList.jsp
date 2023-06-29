@@ -65,7 +65,14 @@
 											varStatus="status">
 											<tr align="center">
 												<th scope="row">${ status.count }</th>
-												<td>${ report.bsubject }</td>
+												<td>
+													<c:if test="${ report.btype eq '자유' }">
+														<a href="freeBoardDetail.co?bnum=${ report.bcnum }">${ report.bsubject }</a>
+													</c:if>	
+													<c:if test="${ report.btype eq '건강' }">
+														<a href="healthBoardDetail.co?bnum=${ report.bcnum }">${ report.bsubject }</a>
+													</c:if>	
+												</td>
 												<td>${ report.rcontent }</td>
 												<td>${ report.name }</td>
 												<td>${ report.status }</td>
@@ -111,13 +118,22 @@
 											varStatus="status">
 											<tr align="center">
 												<th scope="row">${ status.count }</th>
-												<td>${ report.ccontent }</td>
+												<td>
+													<c:if test="${ report.btype eq '자유' }">
+														<a href="freeBoardDetail.co?bnum=${ report.bnum }">${ report.ccontent }</a>
+													</c:if>	
+													<c:if test="${ report.btype eq '건강' }">
+														<a href="healthBoardDetail.co?bnum=${ report.bnum }">${ report.ccontent }</a>
+													</c:if>	
+												</td>
 												<td>${ report.rcontent }</td>
 												<td>${ report.name }</td>
 												<td>${ report.status }</td>
 												<td>
-													<input type="button" value="신고거절" class="btn btn-danger btn-sm" onclick="location.href='adminCommunityReportUpdate.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
-													<input type="button" value="처리완료" class="btn btn-success btn-sm" onclick="location.href='adminCommunityReportDelete.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
+													<c:if test="${ report.status != '처리 완료' && report.status != '신고 거절' }">
+														<input type="button" value="신고거절" class="btn btn-danger btn-sm" onclick="location.href='adminCommunityReportUpdate.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
+														<input type="button" value="처리완료" class="btn btn-success btn-sm" onclick="location.href='adminCommunityReportDelete.ad?rpnum=${ report.rpnum }&rtype=${ report.rtype }&bcnum=${ report.bcnum }'">
+													</c:if>	
 												</td>
 											</tr>
 										</c:forEach>
