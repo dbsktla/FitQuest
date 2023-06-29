@@ -101,7 +101,14 @@
 								<c:if test="${ status.index < 5 }">
 									<tr align="center">
 										<th scope="row">${ status.count }</th>
-										<td>${ report.bsubject }</td>
+										<td>
+											<c:if test="${ report.btype eq '자유' }">
+												<a href="freeBoardDetail.co?bnum=${ report.bcnum }">${ report.bsubject }</a>
+											</c:if>	
+											<c:if test="${ report.btype eq '건강' }">
+												<a href="healthBoardDetail.co?bnum=${ report.bcnum }">${ report.bsubject }</a>
+											</c:if>	
+										</td>
 										<td>${ report.rcontent }</td>
 										<td>${ report.name }</td>
 										<td>${ report.status }</td>
@@ -147,7 +154,14 @@
 								varStatus="status">
 								<tr align="center">
 									<th scope="row">${ status.count }</th>
-									<td>${ report.ccontent }</td>
+									<td>
+										<c:if test="${ report.btype eq '자유' }">
+											<a href="freeBoardDetail.co?bnum=${ report.bnum }">${ report.ccontent }</a>
+										</c:if>	
+										<c:if test="${ report.btype eq '건강' }">
+											<a href="healthBoardDetail.co?bnum=${ report.bnum }">${ report.ccontent }</a>
+										</c:if>	
+									</td>
 									<td>${ report.rcontent }</td>
 									<td>${ report.name }</td>
 									<td>${ report.status }</td>
