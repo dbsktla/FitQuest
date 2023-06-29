@@ -68,6 +68,8 @@ public class OrderCartListController {
 			int totalAmount = 0;
 			int minPrice = 9999;
 			int maxPrice = 0;
+			int minpnum = 0;
+			int maxpnum = 0;
 			for(int pnum : pnumList) {
 				String tid = productDao.getIdByPnum(pnum);
 				TrainerBean trainerBean = trainerDao.getTrainer(tid);
@@ -99,11 +101,17 @@ public class OrderCartListController {
 				sList.add(msBean);
 				totalAmount += productBean.getPrice();
 				
-				int currPrice = productBean.getPrice();
+				int currPrice = (int)(((double)productBean.getPrice()/(double)productBean.getPcount())*10000);
+				
+				System.out.println("getPrice : " + productBean.getPrice());
+				System.out.println("getPcount : " + productBean.getPcount());
+				System.out.println("currPrice : " + currPrice);
 				if(currPrice > maxPrice) {
+					minpnum = productBean.getPnum();
 					maxPrice = currPrice;
 				} 
 				if(currPrice < minPrice) {
+					maxpnum = productBean.getPnum();
 					minPrice = currPrice;
 				}
 			}
@@ -112,6 +120,8 @@ public class OrderCartListController {
 			model.addAttribute("totalAmount", totalAmount);
 			model.addAttribute("minPrice", minPrice);
 			model.addAttribute("maxPrice", maxPrice);
+			model.addAttribute("maxpnum", maxpnum);
+			model.addAttribute("minpnum", minpnum);
 		}
 		return getPage;
 	}
