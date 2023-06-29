@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.model.MemberBean;
+import member.model.MemberDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import physique.model.PhysiqueBean;
@@ -29,6 +30,9 @@ public class MyPhysiqueDetailController {
 	
 	@Autowired
 	PhysiqueDao physiqueDao;
+	
+	@Autowired
+	MemberDao memberDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.POST,  produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -68,6 +72,7 @@ public class MyPhysiqueDetailController {
 			
 			PhysiqueBean physiqueBean = physiqueDao.getOnePhysique(map);
 			
+			
 			System.out.println("physiqueBean : " + physiqueBean);
 			
 			if(physiqueBean == null) {
@@ -75,7 +80,7 @@ public class MyPhysiqueDetailController {
 				return jsObject.toString();
 			}else {
 				
-				jsObject.put("name", memberBean.getName());
+				jsObject.put("name", memberDao.getName(mid));
 				jsObject.put("id", physiqueBean.getId());
 				jsObject.put("phnum", physiqueBean.getPhnum());
 				jsObject.put("height", physiqueBean.getHeight());
