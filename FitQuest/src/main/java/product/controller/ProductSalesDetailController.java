@@ -44,6 +44,7 @@ public class ProductSalesDetailController {
 		
 		//사이드 바 코드 추가
 		session.setAttribute("menubar", "mySalesMain");
+		session.setAttribute("topmenu", "trainerMember");
 		response.setContentType("text/html; charset=utf-8");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/trainerDetail.mb");
