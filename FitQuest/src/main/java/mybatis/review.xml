@@ -255,4 +255,8 @@
 		select count(report) from review
 		where renum = #{renum}
 	</select>
+	<select id="GetReviewExist" resultType="review.model.ReviewBean">
+		select * from review
+		where mid = #{mid} and tid = #{tid}
+	</select>
 </mapper>

@@ -82,7 +82,7 @@
 <div class="calendar-button-container">
    <div class="calendar-button-div">
   	  <div class="left">
-  	  <c:if test="${not empty reviewTname}">
+  	  <c:if test="${not empty reviewTname and empty reviewBean}">
   	  	<input type="button" class="btn btn-warning" onClick="location.href='reviewWrite.pd?id=${reviewTid}'" value="${reviewTname} 트레이너님 리뷰 작성 가능!">
   	  </c:if>
   	  </div> 
