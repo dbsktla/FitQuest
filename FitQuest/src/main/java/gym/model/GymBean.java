@@ -2,10 +2,16 @@ package gym.model;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class GymBean {
 	private int gnum;
 	private String gname;
+	
+	@NotBlank(message = "주소는 필수 항목입니다.")
 	private String gaddr1;
+	
+	@NotBlank(message = "상세주소는 필수 항목입니다.")
 	private String gaddr2;
 	
 	@Pattern(regexp = "^[0-9]+$", message = "숫자만 입력하세요.")
