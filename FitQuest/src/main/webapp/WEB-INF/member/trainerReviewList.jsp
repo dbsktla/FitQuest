@@ -38,7 +38,7 @@
 		background-color: white !important;
 		padding-bottom: 50px;
 	}
-	.btn-warning{
+	#submit{ 
 		padding: 11px 18px !important;
 	}
 </style>
@@ -108,7 +108,7 @@
             		"${ keyword }"
             		</c:if>
             		class="search-box">
-            		<button type="submit" class="btn btn-warning" style = "background-color: #FAC710; border: none; margin-bottom:3px;">
+            		<button type="submit" id="submit" class="btn btn-warning" style = "background-color: #FAC710; border: none; margin-bottom:3px;">
 					  <i class="bi bi-search"></i>
 					</button>
             		</div>
