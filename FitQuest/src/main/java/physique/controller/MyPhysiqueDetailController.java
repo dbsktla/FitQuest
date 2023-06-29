@@ -62,12 +62,16 @@ public class MyPhysiqueDetailController {
 			
 			String selectDate = selectYear + "-" + selectMon + "-" + selectDay;
 			
+			String name = "";
+			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("phdate", selectDate);
 			if(mid != null) {
 				map.put("id", mid);
+				name = memberDao.getName(mid);
 			}else {
 				map.put("id", memberBean.getId());
+				name = memberBean.getName();
 			}
 			
 			PhysiqueBean physiqueBean = physiqueDao.getOnePhysique(map);
@@ -80,7 +84,7 @@ public class MyPhysiqueDetailController {
 				return jsObject.toString();
 			}else {
 				
-				jsObject.put("name", memberDao.getName(mid));
+				jsObject.put("name", name);
 				jsObject.put("id", physiqueBean.getId());
 				jsObject.put("phnum", physiqueBean.getPhnum());
 				jsObject.put("height", physiqueBean.getHeight());
