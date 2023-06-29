@@ -19,26 +19,31 @@
 	var dataCheck = false;
 
 	function inputCheck() {
+		$('.errmsg').empty();
 		
+		var dataCheck2 = false;
 		
 		if($('#height').val() == "" || $('#height').val() == 0.0){
 			dataCheck = false;
 			$('.herrmsg').append("키를 입력하세요");
-			return false;
+			dataCheck2 = true;
 		}
 		if($('#weight').val() == "" || $('#weight').val() == 0.0){
 			dataCheck = false;
 			$('.werrmsg').append("몸무게를 입력하세요");
-			return false;
+			dataCheck2 = true;
 		}
 		if($('#phdate').val() == ""){
 			$('.pherrmsg').append("측정 일자를 선택하세요");
-			return false;
+			dataCheck2 = true;
 		}
 		
 		// 측정일 데이터 체크
 		if(!dataCheck){
 			alert('입력값을 확인하세요');
+			return false;
+		}
+		if(dataCheck2){
 			return false;
 		}
 		
@@ -159,7 +164,6 @@
 								<label for="inbodyImage" class="col-form-label col-md-3 col-lg-2 col-form-label">인바디 이미지</label>
 								<div class="col-md-8 col-lg-4">
 									<input type="file" class="form-control" id="inbodyImage" name="upload" style="width: 100%;">
-								<span class="errmsg"></span>
 								</div>
 								
 								<label for="phdate" class="col-form-label col-md-3 col-lg-2 col-form-label">측정일</label>
@@ -173,13 +177,13 @@
 						
 						<div class="row mb-3">
 							<div class="row mb-3">
-								<label for="height" class="col-form-label col-md-3 col-lg-2 col-form-label">신장(cm)</label>
+								<label for="height" class="col-form-label col-md-3 col-lg-2 col-form-label">*신장(cm)</label>
 								<div class="col-md-8 col-lg-4">
 									<input name="height" type="text" class="form-control" id="height" value="0.0"  style="width: 100%;" onkeyup="calbmi()">
 									<span class="errmsg herrmsg"></span>
 								</div>
 							
-								<label for="weight" class="col-form-label col-md-3 col-lg-2 col-form-label">체중(kg)</label>
+								<label for="weight" class="col-form-label col-md-3 col-lg-2 col-form-label">*체중(kg)</label>
 								<div class="col-md-8 col-lg-4">
 									<input name="weight" type="text" class="form-control" id="weight" value="0.0"  onkeyup="calbmi()">
 									<span class="errmsg werrmsg"></span>

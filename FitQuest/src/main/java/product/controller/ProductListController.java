@@ -28,6 +28,7 @@ public class ProductListController {
 						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		session.setAttribute("menubar", "myProductMain");
+		session.setAttribute("topmenu", "trainerMember");
 		response.setContentType("text/html; charset=utf-8");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/trainerDetail.mb");

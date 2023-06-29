@@ -42,6 +42,7 @@ public class ReviewListController {
 						   HttpServletResponse response) {
 		MemberBean memberBean = (MemberBean)session.getAttribute("loginInfo");
 		session.setAttribute("menubar", "myReviewMain");
+		session.setAttribute("topmenu", "trainerMember");
 		response.setContentType("text/html; charset=utf-8");
 		if(memberBean == null) {
 			session.setAttribute("destination", "redirect:/trainerReviewList.mb");

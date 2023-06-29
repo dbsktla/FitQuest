@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import member.model.MemberBean;
+import member.model.MemberDao;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import physique.model.PhysiqueBean;
@@ -29,6 +30,9 @@ public class MyPhysiqueDetailController {
 	
 	@Autowired
 	PhysiqueDao physiqueDao;
+	
+	@Autowired
+	MemberDao memberDao;
 	
 	@RequestMapping(value = command, method = RequestMethod.POST,  produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -58,15 +62,20 @@ public class MyPhysiqueDetailController {
 			
 			String selectDate = selectYear + "-" + selectMon + "-" + selectDay;
 			
+			String name = "";
+			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("phdate", selectDate);
 			if(mid != null) {
 				map.put("id", mid);
+				name = memberDao.getName(mid);
 			}else {
 				map.put("id", memberBean.getId());
+				name = memberBean.getName();
 			}
 			
 			PhysiqueBean physiqueBean = physiqueDao.getOnePhysique(map);
+			
 			
 			System.out.println("physiqueBean : " + physiqueBean);
 			
@@ -75,7 +84,7 @@ public class MyPhysiqueDetailController {
 				return jsObject.toString();
 			}else {
 				
-				jsObject.put("name", memberBean.getName());
+				jsObject.put("name", name);
 				jsObject.put("id", physiqueBean.getId());
 				jsObject.put("phnum", physiqueBean.getPhnum());
 				jsObject.put("height", physiqueBean.getHeight());
