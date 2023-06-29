@@ -216,19 +216,19 @@ values(rpseq.nextval,1,'hong','bcomment','처리 준비','글의 내용이 부�
 --사용권 usage 
 
 insert into usage values(useq.nextval,1,1,1,'kim','hong',10,'available');
-insert into usage values(useq.nextval,6,2,4,'kim','hong',10,'available');
-insert into usage values(useq.nextval,1,3,1,'kim','jkim',10,'available');
+insert into usage values(useq.nextval,6,2,4,'kim','hong',5,'available');
+insert into usage values(useq.nextval,1,3,1,'kim','jkim',8,'available');
 insert into usage values(useq.nextval,6,4,4,'kim','jkim',10,'available');
-insert into usage values(useq.nextval,1,20,1,'kim','mistermoon',10,'available');
-insert into usage values(useq.nextval,1,30,1,'kim','starwars',10,'available');
+insert into usage values(useq.nextval,1,20,1,'kim','mistermoon',0,'unavailable');
+insert into usage values(useq.nextval,1,30,1,'kim','starwars',7,'available');
 insert into usage values(useq.nextval,1,40,1,'kim','beepbeep',10,'available');
-insert into usage values(useq.nextval,1,50,1,'kim','hwangpro',10,'available');
+insert into usage values(useq.nextval,1,50,1,'kim','hwangpro',3,'available');
 insert into usage values(useq.nextval,1,60,1,'kim','kimseo',10,'available');
-insert into usage values(useq.nextval,1,70,1,'kim','sky',10,'available');
-insert into usage values(useq.nextval,1,80,1,'kim','junha',10,'available');
-insert into usage values(useq.nextval,1,90,1,'kim','moonlow',10,'available');
-insert into usage values(useq.nextval,1,100,1,'kim','daon',10,'available');
-insert into usage values(useq.nextval,1,110,1,'kim','jihyo',10,'available');
+insert into usage values(useq.nextval,1,70,1,'kim','sky',8,'available');
+insert into usage values(useq.nextval,1,80,1,'kim','junha',2,'available');
+insert into usage values(useq.nextval,1,90,1,'kim','moonlow',0,'unavailable');
+insert into usage values(useq.nextval,1,100,1,'kim','daon',4,'available');
+insert into usage values(useq.nextval,1,110,1,'kim','jihyo',6,'available');
 
 --tschedule 트레이너 스케줄
 
