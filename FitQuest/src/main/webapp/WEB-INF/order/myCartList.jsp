@@ -76,7 +76,7 @@
 										<input class="form-check-input checkItem" type="checkbox" value="${item.pnum }" name = "pnum">
 										</td>
 			                            <td class="text-center" valign = "middle" align = "center">
-			                                <a href="cartDelete.pd?pnum=${item.pnum }" class="remove_cart" rel="2">
+			                                <a href="cartDelete.od?pnum=${item.pnum }" class="remove_cart" rel="2">
 			                                    <i class="fa bi-trash"></i>
 			                                </a>
 			                            </td>
@@ -105,11 +105,11 @@
 			                            </td>
 			                            <td class="price" valign = "middle" align = "center">
 			                            <c:if test = "${minPrice != maxPrice }">
-				                            <c:if test="${item.price == minPrice}">
-				                            <span style = "color:red; font-style:italic;">최저가!</span><br>
+				                            <c:if test="${item.pnum == minpnum}">
+				                            <span style = "color:red; font-style:italic;">최저가!(회당 ${minPrice}원)</span><br>
 				                            </c:if>
-				                            <c:if test="${item.price == maxPrice}">
-				                            <span style = "color:red; font-style:italic;">최대가!</span><br>
+				                            <c:if test="${item.pnum == maxpnum}">
+				                            <span style = "color:red; font-style:italic;">최대가!(회당 ${maxPrice}원)</span><br>
 				                            </c:if>
 			                            </c:if>
 			                            <b>&#8361;${item.price }만원</b>
