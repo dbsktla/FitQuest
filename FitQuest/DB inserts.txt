@@ -56,7 +56,7 @@ insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,mad
 --일반 회원
 
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('hong','generic','홍회원','qwerty1!','홍시','1996-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
+		values('hong','generic','홍회원','1234','홍시','1996-09-09','01090909090','hong@fitquest.com','서울 중구 북창동 136','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('mistermoon','generic','문종원','1234','문맨','1991-03-11','01085492154','mistermoon@fitquest.com','서울 중구 북창동 136','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
@@ -82,9 +82,9 @@ insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,mad
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
 		values('jihae','generic','이지혜','1234','craycray','1990-03-11','01077778888','jihae@fitquest.com','서울 중구 북창동 136','1층','여자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('hwanglow','generic','황로건','1234','tekken','1990-03-11','01090909090','hwanglow@fitquest.com','서울 중구 북창동 136','1층','남자');
+		values('hwanglow','generic','황로건','1234','tekken','1990-03-11','01048885647','hwanglow@fitquest.com','서울 중구 북창동 136','1층','남자');
 insert into member(id,mtype,name,password,nickname,birth,mphone,email,maddr1,maddr2,gender)
-		values('hwangpro2','generic','황조은','1234','ryse','1990-03-11','01090909090','hwangpro2@fitquest.com','서울 중구 북창동 136','1층','남자');
+		values('hwangpro2','generic','황조은','1234','ryse','1990-03-11','01077789888','hwangpro2@fitquest.com','서울 중구 북창동 136','1층','남자');
 
 
 --gym
