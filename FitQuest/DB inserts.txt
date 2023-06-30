@@ -267,11 +267,17 @@ insert into reservation values(reseq.nextval,'jkim','kim','김윤정','김피티
 insert into reservation values(reseq.nextval,'mistermoon','kim','문종원','김피티',4,4,4,'2023-7-1','13:00~14:00','true');
 insert into reservation values(reseq.nextval,'beepbeep','kim','강하림','김피티',4,4,4,'2023-7-1','13:00~14:00','true');
 
+insert into reservation values(reseq.nextval,'jkim','kim','김윤정','김피티',2,2,4,'2023-7-8','14:00~15:00','true');
+insert into reservation values(reseq.nextval,'jkim','kim','김윤정','김피티',2,2,4,'2023-7-8','14:00~15:00','true');
+insert into reservation values(reseq.nextval,'jkim','kim','김윤정','김피티',2,2,4,'2023-7-8','14:00~15:00','true');
+insert into reservation values(reseq.nextval,'jkim','kim','김윤정','김피티',2,2,4,'2023-7-8','14:00~15:00','true');
+
 --pt예약 완료 테이블
 insert into complete values(cpseq.nextval,'kim','2023-7-10','10:00~11:00',1);
 insert into complete values(cpseq.nextval,'kim','2023-7-10','11:00~12:00',1);
 insert into complete values(cpseq.nextval,'kim','2023-7-15','11:00~12:00',1);
 insert into complete values(cpseq.nextval,'kim','2023-7-15','12:00~13:00',1);
+insert into complete values(cpseq.nextval,'kim','2023-7-8','14:00~15:00',4);
 
 --리뷰 조건을 위해 추가:
 insert into reservation values(reseq.nextval,'hong','kim','홍회원','김피티',1,1,1,'2023-5-10','10:00~11:00','complete');
